@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜お問い合わせ ページ v2（自動化「一本集中」版）
+  ------------------------------------------------------------
+  ★ フォームの送信先について ★
+  Formspree（https://formspree.io/f/mwvdggyz）経由で送信されます。
+  送信完了後は thanks.html （_next で指定）に遷移します。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ｜アイツイン（自動化）</title>
+  <meta name="description" content="アイツイン（i-TWIN）へのお問い合わせ・デモ（3Dスキャン）のご依頼はこちらから。自動化のご相談を承ります。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="index.html#issues">課題</a>
+        <a href="index.html#digital-twin">デジタルツイン</a>
+        <a href="index.html#steps">進め方</a>
+        <a href="index.html#goal">めざす姿</a>
+        <a href="index.html#trial">デモ</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>お問い合わせ</span></div>
+      <h1>お問い合わせ</h1>
+      <p class="catch">まずは、お気軽に。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <!-- 左：相談の流れ＋会社情報 -->
+        <div class="contact-info">
+          <h3>ご相談の流れ</h3>
+          <ul class="flow">
+            <li>このフォームから、お問い合わせ内容をお送りください。</li>
+            <li>担当より、内容を確認のうえご連絡いたします。</li>
+            <li>御社の状況をうかがい、最適なご提案・お見積りをいたします。</li>
+            <li>デモ（3Dスキャン）のご依頼も、このフォームから承ります。</li>
+          </ul>
+
+          <h3>会社情報</h3>
+          <div class="company-box">
+            <dl>
+              <dt>会社名</dt><dd>アイツイン（i-TWIN）</dd>
+              <dt>所在地</dt><dd>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</dd>
+              <dt>受付時間</dt><dd>平日 9:00–18:00</dd>
+            </dl>
+          </div>
+        </div>
+
+        <!-- 右：フォーム -->
+        <div class="form-card">
+          <!-- 送信完了メッセージ（送信処理を設定後、?sent=1 で表示） -->
+          <div id="sent-banner" class="sent-banner" hidden>
+            送信ありがとうございました。担当より折り返しご連絡いたします。
+          </div>
+
+          <!-- ▼ Formspree 経由で送信。送信完了後は _next の thanks.html へ遷移します。 -->
+          <form id="contact-form" action="https://formspree.io/f/mwvdggyz" method="POST">
+            <input type="hidden" name="_next" value="https://i-twin.co.jp/thanks.html">
+            <!-- ボット除け（ハニーポット）：人は入力しない隠し項目。Formspreeが自動で無視します -->
+            <input type="text" name="_gotcha" style="display:none">
+            <div class="field">
+              <label for="company">会社名 <span class="req">必須</span></label>
+              <input type="text" id="company" name="会社名" required placeholder="株式会社○○製作所">
+            </div>
+            <div class="field">
+              <label for="name">お名前 <span class="req">必須</span></label>
+              <input type="text" id="name" name="お名前" required placeholder="山口 太郎">
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス <span class="req">必須</span></label>
+              <input type="email" id="email" name="email" required placeholder="taro@example.com">
+            </div>
+            <div class="field">
+              <label for="tel">電話番号</label>
+              <input type="tel" id="tel" name="電話番号" placeholder="0835-00-0000">
+            </div>
+            <div class="field">
+              <label for="topic">ご相談の種類</label>
+              <select id="topic" name="ご相談の種類">
+                <option value="demo">デモ（3Dスキャン）を依頼したい</option>
+                <option value="auto">自動化の相談</option>
+                <option value="scan">3Dスキャン・現状データ化の相談</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">お問い合わせ内容</label>
+              <textarea id="message" name="お問い合わせ内容" placeholder="ご相談内容をご記入ください。"></textarea>
+            </div>
+            <button type="submit" class="btn btn--fill" style="width:100%;">送信する</button>
+            <p class="form-note">※ は必須項目です。いただいた個人情報はお問い合わせ対応のみに使用します。</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">デモ</a></li>
+              <li><a href="index.html#profile">プロフィール</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップから渡された「ご相談の種類」をフォームへ自動反映（?topic=...） -->
+  <script>
+  (function () {
+    try {
+      var p = new URLSearchParams(location.search);
+      var topic = p.get("topic");
+      if (topic) {
+        var sel = document.getElementById("topic");
+        if (sel) {
+          for (var i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === topic) { sel.selectedIndex = i; break; }
+          }
+        }
+      }
+      if (p.get("sent") === "1") {
+        var banner = document.getElementById("sent-banner");
+        if (banner) { banner.hidden = false; banner.scrollIntoView({ behavior: "smooth", block: "center" }); }
+      }
+    } catch (e) {}
+  })();
+  </script>
+
+  <!-- かんたん編集モード（右下の「✎ 編集」ボタン） -->
+  <script src="edit.js" defer></script>
+</body>
+</html>
