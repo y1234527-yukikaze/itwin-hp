@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜お悩みチェックリスト ページ v2
+  ------------------------------------------------------------
+  ・index.html の課題セクション（#issues）から独立させた、
+    チェックボックス付きの詳細版お悩みリストです。
+  ・チェックした項目は「当社に相談してみる」ボタンから
+    contact-v2.html のお問い合わせ内容欄に自動転記されます。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>こんなお悩み、ありませんか？｜アイツイン（自動化）</title>
+  <meta name="description" content="アイツイン（i-TWIN）が中小製造業の現場でよく伺うお悩みのチェックリストです。気になる項目にチェックを入れて、そのままご相談いただけます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="index.html#issues">課題</a>
+        <a href="checklist.html">診断</a>
+        <a href="index.html#digital-twin">デジタルツイン</a>
+        <a href="index.html#steps">進め方</a>
+        <a href="index.html#goal">めざす姿</a>
+        <a href="index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>お悩みチェックリスト</span></div>
+      <h1>こんなお悩み、ありませんか？</h1>
+      <p class="catch">気になる項目にチェックを入れてみてください。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：お悩みチェックリスト -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- ◆お悩みチェックリスト（ひとつでも当てはまれば当社へ） -->
+      <div class="checklist" style="margin-top:0;">
+        <p class="check-lead">気になる項目にチェックを入れてみてください。<strong>ひとつでも当てはまれば、それは改善できるサインです。</strong></p>
+        <div class="check-grid">
+
+          <div class="check-card ch-a">
+            <div class="ch-head">
+              <span class="ch-badge">A</span><h3>人・モノの詰まり</h3>
+              <small>流れが止まっている</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">歩いている時間が長い</label>
+              <label class="chk"><input type="checkbox">探し物が多い</label>
+              <label class="chk"><input type="checkbox">段取り替えで毎回止まる</label>
+              <label class="chk"><input type="checkbox">手待ちが出る</label>
+              <label class="chk"><input type="checkbox">仮置き・渋滞が増えた</label>
+              <label class="chk"><input type="checkbox">作業が属人化している</label>
+              <label class="chk"><input type="checkbox">危険・重量作業から人を外したい</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-b">
+            <div class="ch-head">
+              <span class="ch-badge">B</span><h3>メンテの詰まり</h3>
+              <small>止まると復旧が遅い</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">止まるとベテラン待ち</label>
+              <label class="chk"><input type="checkbox">原因がすぐわからない</label>
+              <label class="chk"><input type="checkbox">直ったか確認に時間がかかる</label>
+              <label class="chk"><input type="checkbox">同じ不具合が再発する</label>
+              <label class="chk"><input type="checkbox">点検や記録がバラバラ</label>
+              <label class="chk"><input type="checkbox">アラームが生かせていない</label>
+              <label class="chk"><input type="checkbox">部品・工具の段取りに時間</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-c">
+            <div class="ch-head">
+              <span class="ch-badge">C</span><h3>エネルギーの詰まり</h3>
+              <small>ムダがコストになっている</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">電気代が上がった</label>
+              <label class="chk"><input type="checkbox">夜間・休日も動いている</label>
+              <label class="chk"><input type="checkbox">過剰に供給している気がする</label>
+              <label class="chk"><input type="checkbox">エアや油の漏れ・圧が不安定</label>
+              <label class="chk"><input type="checkbox">空圧・油圧の管理が大変</label>
+              <label class="chk"><input type="checkbox">電動化したいが効果が読めない</label>
+              <label class="chk"><input type="checkbox">使っていない設備が動き続ける</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-d">
+            <div class="ch-head">
+              <span class="ch-badge">D</span><h3>事務・情報の詰まり</h3>
+              <small>手作業がボトルネック</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">納品書・伝票の入力が手作業</label>
+              <label class="chk"><input type="checkbox">同じ内容を何度も転記している</label>
+              <label class="chk"><input type="checkbox">写真や紙の記録が探せない</label>
+              <label class="chk"><input type="checkbox">報告書づくりに時間がかかる</label>
+              <label class="chk"><input type="checkbox">在庫・受発注の管理がバラバラ</label>
+              <label class="chk"><input type="checkbox">二重入力・確認作業が多い</label>
+              <label class="chk"><input type="checkbox">問い合わせ対応に追われる</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="checklist-cta">
+          <p>当てはまる項目はありましたか？　その「詰まり」、私たちが一緒にほどきます。</p>
+          <a id="checklist-go" class="btn btn--fill" href="contact-v2.html?topic=hearing">当社に相談してみる</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- チェックした項目をお問い合わせフォームへ引き継ぐ -->
+  <script>
+  (function () {
+    var btn = document.getElementById("checklist-go");
+    if (!btn) return;
+    btn.addEventListener("click", function (e) {
+      var checked = Array.prototype.slice.call(
+        document.querySelectorAll(".checklist input[type=checkbox]:checked"));
+      if (!checked.length) return; // 未チェックなら通常遷移（?topic=hearing）
+      e.preventDefault();
+      var items = checked.map(function (cb) {
+        return (cb.parentNode.textContent || "").trim();
+      });
+      // チェックした項目がある場合は「現場のお悩み・課題相談」を自動選択
+      location.href = "contact-v2.html?topic=issues&items=" +
+        encodeURIComponent(items.join("\n"));
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="index.html#profile">プロフィール</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
