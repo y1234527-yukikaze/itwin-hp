@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  アイツイン｜コラム 記事一覧ページ
+  アイツイン (i-TWIN)  トップページ v2（自動化「一本集中」版）
   ------------------------------------------------------------
-  ・記事を追加する手順：
-    1. column/articles/template.html をコピーし、分かりやすいファイル名に変更
-       （例：column/articles/digital-twin-first-step.html）
-    2. コピーしたファイル内のタイトル・本文・meta情報・JSON-LDを書き換える
-    3. このファイル（column/index.html）内の「◆記事データ」ブロックに、
-       新しい記事のカードを1つ追加する（既存カードをコピーして書き換えるだけでOK）
-    4. ルートの sitemap.xml にも新しい記事のURLを1行追加する
-  ・記事データは下の「◆記事データ」ブロック1箇所にまとまっているため、
-    将来的にJSON化してJSで動的にカードを生成する形に変更しやすい構成にしています。
+  ・このサイトは「自動化」の提案1本に絞った別バージョンです。
+    3Dスキャンは“入口・手段”、最終ゴールは「完全デジタルツイン（考える工場）」。
+  ・既存サイト（index.html 等）とは別ファイルで、互いに影響しません。
+  ・本文・見出しはこのHTML内のテキストを直接書き換えてください。
+  ・現在イラストは未使用です（必要になれば .img-frame の枠スタイルで追加できます）。
   ============================================================
 -->
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>コラム｜アイツイン（i-TWIN）</title>
-  <meta name="description" content="アイツイン（i-TWIN）のコラム。デジタルツイン・自動化・中小製造業の現場改善に関する情報をお届けします。">
-  <link rel="canonical" href="https://i-twin.co.jp/column/index.html">
+  <title>アイツイン｜中小製造業に、おどろきと、わくわくを。｜デジタルツインで自動化</title>
+  <meta name="description" content="アイツイン（i-TWIN）は、3Dスキャンで現場をデータ化し、デジタルツインで試し、自動化をご提案します。3ヶ月単位の伴走で、工場を段階的に「考える工場」へ。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style-v2.css">
-  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
 </head>
 <body>
 
@@ -33,18 +28,18 @@
   <header class="site-header">
     <div class="wrap">
       <div class="brand-wrap">
-        <a class="brand" href="../index.html"><img src="../itwin-logo.png" alt="アイツイン"></a>
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
       </div>
       <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
       <nav class="nav">
-        <a href="../index.html#issues">課題</a>
-        <a href="../checklist.html">診断</a>
-        <a href="../index.html#digital-twin">デジタルツイン</a>
-        <a href="../index.html#steps">進め方</a>
-        <a href="../index.html#goal">めざす姿</a>
-        <a href="../index.html#trial">無料相談</a>
-        <a href="index.html">コラム</a>
-        <a class="btn btn--fill" href="../contact-v2.html">お問い合わせ</a>
+        <a href="#issues">課題</a>
+        <a href="checklist.html">診断</a>
+        <a href="#digital-twin">デジタルツイン</a>
+        <a href="#steps">進め方</a>
+        <a href="#goal">めざす姿</a>
+        <a href="#trial">無料相談</a>
+        <a href="column/index.html">コラム</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
       </nav>
     </div>
   </header>
@@ -60,52 +55,311 @@
   })();
   </script>
 
-  <!-- ◆下層ヒーロー -->
-  <section class="subhero">
+  <!-- ◆ヒーロー -->
+  <section class="hero">
     <div class="wrap">
-      <div class="breadcrumb"><a href="../index.html">ホーム</a> ／ <span>コラム</span></div>
-      <h1>コラム</h1>
-      <p class="catch">デジタルツイン・自動化・現場改善に関する情報をお届けします。</p>
+      <div class="hero-inner">
+        <h1>中小製造業に、<br><span class="accent">おどろき</span>と、<br><span class="accent">わくわく</span>を。</h1>
+        <p class="lead">
+          アイツインは、中小製造業の自動化・効率化を伴走支援します。
+          未来につながる「考える工場」づくりも、一緒に目指していきます。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn--fill" href="#trial">無料ヒアリングを申し込む</a>
+          <a class="btn btn--ghost" href="contact-v2.html">お問い合わせ</a>
+          <a class="btn btn--ghost" href="checklist.html">お悩みチェック</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ◆本体：記事一覧 -->
-  <section class="section">
+  <!-- ◆課題セクション -->
+  <section class="section" id="issues">
     <div class="wrap">
-
-      <!-- ◆記事データ（ここに記事カードをまとめる。将来のJSON化を想定した1ブロック） -->
-      <div class="column-grid">
-
-        <!-- 記事2：省人化ではなく省力化を -->
-        <div class="column-card">
-          <img class="img-frame" src="articles/syoryokuka-genba-thumb.jpg" alt="省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは">
-          <div class="column-card-body">
-            <p class="column-date">2026.07.18</p>
-            <h3><a href="articles/syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
-            <p class="column-excerpt">
-              ロボットによる自動化には「向いている現場の条件」があり、多くの現場ではその条件を満たせません。
-              人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩となる「作業の洗い出し」について解説します。
-            </p>
-            <a class="column-more" href="articles/syoryokuka-genba.html">続きを読む ›</a>
-          </div>
+      <div class="section-head">
+        <span class="eyebrow">ISSUES</span>
+        <h2>こんな課題は、ありませんか。</h2>
+        <p>人手不足のいま、多くの現場が同じ壁にぶつかっています。</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="num">01</span>
+          <h3>人が足りず、受注を断っている</h3>
+          <p>本当はもっと受けられるのに、回す人がいない。せっかくの注文を、見送るしかない日がある。</p>
         </div>
-
-        <!-- 記事1：デジタルツインとは？ -->
-        <div class="column-card">
-          <img class="img-frame" src="articles/digital-twin-basics-thumb.jpg" alt="デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法">
-          <div class="column-card-body">
-            <p class="column-date">2026.07.13</p>
-            <h3><a href="articles/digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
-            <p class="column-excerpt">
-              デジタルツインの導入率は中小企業でわずか3%。壁になっているのは技術ではなく「最初の一歩」の分かりにくさです。
-              iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、現実的な始め方をまとめました。
-            </p>
-            <a class="column-more" href="articles/digital-twin-basics.html">続きを読む ›</a>
-          </div>
+        <div class="card">
+          <span class="num">02</span>
+          <h3>同じ作業に、人手と時間がかかりすぎている</h3>
+          <p>毎日のくり返し作業に追われ、付加価値の高い仕事に手が回らない。ムダがどこにあるかも見えにくい。</p>
         </div>
+        <div class="card">
+          <span class="num">03</span>
+          <h3>何を、どう自動化すればいいか分からない</h3>
+          <p>「自動化したい」けれど、どこから手をつけるべきか、効果が出るのか、判断材料がない。</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px;">
+        <a class="btn btn--outline" href="checklist.html">詳しいお悩みチェックリストを見る ›</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- ◆デジタルツインとは？ -->
+  <section class="section section--soft" id="digital-twin">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">DIGITAL TWIN</span>
+        <h2>デジタルツインとは？</h2>
       </div>
 
+      <p class="lead-center">
+        デジタルツインとは、<strong>現実の工場や設備を、デジタル空間に“双子（ツイン）”のように再現する技術</strong>です。
+        ふつうの3Dモデルや、決まった条件で動かすシミュレーションとは違い、
+        現場につけた小さな計測器（IoTセンサー）からの<strong>リアルタイムのデータ</strong>で常に最新の状態に更新され、
+        現実とデジタルが<strong>双方向でデータをやり取り</strong>するのが特徴です。
+      </p>
+
+      <p class="flow-note">いわば、<span class="accent">「現場のリアルを、そのまま映すデジタル版」</span>。</p>
+
+      <div class="grid grid-2" style="margin-top:34px;">
+        <div class="card">
+          <span class="tw-tag tw-tag--old">ふつうの3Dモデル・シミュレーション</span>
+          <ul class="tw-list">
+            <li>過去のデータや「仮の条件」をもとに動く</li>
+            <li>一度つくったら、基本はそのまま</li>
+            <li>試して終わり（現実には返らない・一方向）</li>
+          </ul>
+        </div>
+        <div class="card card--twin">
+          <span class="tw-tag tw-tag--new">デジタルツイン</span>
+          <ul class="tw-list">
+            <li>現場の<strong>リアルタイムなデータ</strong>で動く</li>
+            <li>常に<strong>最新の状態</strong>へ自動で更新</li>
+            <li>分かったことを<strong>現場へ返す</strong>（双方向）</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="stairs-foot" style="margin-top:30px;">
+        「生きた」データが行き来するからこそ、机上の空論ではなく、<strong>現実に効く改善</strong>につながります。
+      </p>
+
+      <h3 class="solutions-subhead" style="margin-top:44px;">デジタルツインでできること</h3>
+      <div class="grid grid-3">
+        <div class="card"><h3>品質の予測・不良防止</h3><p>完成する前に品質を予測し、不良を未然に防げます。</p></div>
+        <div class="card"><h3>電気代のムダを見える化</h3><p>設備ごとの電力消費を可視化し、ムダな稼働やピークを抑えられます。</p></div>
+        <div class="card"><h3>安全リスクの事前確認</h3><p>危険な作業やレイアウトを、実際に試す前にシミュレーションで確認できます。</p></div>
+        <div class="card"><h3>離れた場所からの現場把握</h3><p>複数拠点の状況を、移動せずにリアルタイムでまとめて確認できます。</p></div>
+        <div class="card"><h3>トラブル原因を素早く特定</h3><p>記録されたデータから、不具合の原因を数分で特定できます。</p></div>
+        <div class="card"><h3>生産計画の自動最適化</h3><p>納期・稼働率・在庫などを踏まえた生産計画を、自動で組み立てられます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆アイツインはどうしていくのか（伴走の進め方＋できること） -->
+  <section class="section" id="flow">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">OUR APPROACH</span>
+        <h2>アイツインは、どうしていくのか。</h2>
+        <p>デジタルツインを使って、御社の現場を最適化します。一度きりで終わらない、伴走型のご支援です。</p>
+      </div>
+
+      <p class="lead-center">
+        アイツインは、デジタルツインを活用して<strong>現場の最適化</strong>を進めます。
+        御社が描く<strong>最終目標を一緒に達成する</strong>ために、方向性決めから実行・ふりかえりまで伴走します。
+      </p>
+
+      <div class="flow-path">
+        <div class="flow-step">
+          <div class="fp-no">1</div>
+          <h3><small>はじめに</small>ヒアリングで方向性を決める</h3>
+          <p>まず御社のお困りごと・目標をうかがい、どこから・どう進めるかの方向性を一緒に決めます。</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step">
+          <div class="fp-no">2</div>
+          <h3><small>毎月</small>レポート＆進捗報告会</h3>
+          <p>月1回、進み具合をレポートにまとめ、報告会で共有。次の一手を一緒に確認しながら進めます。</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-step">
+          <div class="fp-no">3</div>
+          <h3><small>ゴールまで</small>最終目標へ伴走</h3>
+          <p>御社が描く最終目標を一緒に達成すべく、一段ずつ、長くお付き合いしながら伴走支援します。</p>
+        </div>
+      </div>
+
+      <h3 class="solutions-subhead" style="margin-top:48px;">アイツインができること</h3>
+      <div class="grid grid-3">
+        <div class="card"><h3>現場の見える化</h3><p>動線・ムダ・滞留を、データで「見える」かたちに。</p></div>
+        <div class="card"><h3>レイアウト・自動化の検証</h3><p>変更案を、現場を止めずにデジタル上で事前検証。</p></div>
+        <div class="card"><h3>設備の予兆検知</h3><p>振動・電流などの変化から、止まる前に気づく。</p></div>
+        <div class="card"><h3>工程全体の最適化</h3><p>部分ではなく工場全体で、ムダの少ない流れへ。</p></div>
+        <div class="card"><h3>省力化・効率化の提案</h3><p>人手と時間のかかる作業を、数字を根拠に減らす。</p></div>
+        <div class="card"><h3>投資判断の根拠づくり</h3><p>効果を数字で示し、安心して進められる材料に。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆伴走ストーリー＝階段（#steps）★このサイトの核 -->
+  <section class="section section--soft" id="steps">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">STEP UP</span>
+        <h2>続けるほど、工場は強くなる。</h2>
+      </div>
+      <p class="lead-center">
+        アイツインは、<strong>3ヶ月＝1クール・全4クール（1年間）の年間計画</strong>で、一緒に工場を育てていく伴走型です。
+        自動化・デジタルツインの導入を、ヒアリングから始まる<strong>PDCA運用</strong>として一段ずつ積み重ねていきます。
+      </p>
+
+      <div class="stairs">
+        <div class="stair">
+          <span class="st-no">STEP 1</span>
+          <h3>年間目標ヒアリング（1クール目）</h3>
+          <p>「工場がどうなりたいか」という目指す姿と、1年後の目標をヒアリングし共有。方針・スケジュールを各クールに分解し、方針に沿って現場対応（3Dスキャン・人とモノの数値化・IoTセンサー設置など）を行います。</p>
+          <div class="gain"><b>得られるもの</b>1年後の目標と、3ヶ月ごとの実行計画</div>
+          <p class="clue">▶ 月次レポート・進捗報告会を2回実施 → 1クール最終報告会（3ヶ月目）で成果物を提出し、次クールへの更新可否を決めます。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 2</span>
+          <h3>現場対応を継続（2クール目）</h3>
+          <p>1クールの現場対応を継続（必要な場合）。方針に沿って測定・改善を進めます。</p>
+          <div class="gain"><b>得られるもの</b>積み重なるデータと、着実な改善の進捗</div>
+          <p class="clue">▶ 月次レポートを経て、2クール最終報告会で成果物を提出します。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 3</span>
+          <h3>現場対応を継続（3クール目）</h3>
+          <p>2クールまでの現場対応を継続（必要な場合）。同じサイクルで、着実に前進します。</p>
+          <div class="gain"><b>得られるもの</b>さらに積み上がる改善実績</div>
+          <p class="clue">▶ 月次レポートを経て、3クール最終報告会で成果物を提出します。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 4</span>
+          <h3>現場対応を継続・総仕上げ（4クール目）</h3>
+          <p>3クールまでの現場対応を継続（必要な場合）。1年間の集大成として、成果を形にします。</p>
+          <div class="gain"><b>得られるもの</b>1年間の年間計画の完了と、その後の展望</div>
+          <p class="clue">▶ 月次レポートを経て、4クール最終報告会で成果物を提出します。</p>
+        </div>
+      </div>
+
+      <p class="stairs-foot">
+        成果物は、自動化の場合は<strong>レポートと簡易設計図</strong>、デジタルツイン化の場合は<strong>IoTセンサーや値のダッシュボード</strong>を提出します。<br>
+        各クールの内容や順番は決めつけません。御社へのヒアリングをもとに一緒に組み立て、
+        「この工程から先に進めたい」といったご要望にも<strong>柔軟に対応</strong>します。まずは STEP 1 から、無理なく始められます。<br>
+        ※ 遠方の場合や、作業内容によっては交通費・宿泊費を別途申し受けます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ◆めざす姿＝完全デジタルツイン（#goal） -->
+  <section class="section dt" id="goal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">OUR GOAL</span>
+        <h2>続けていくと、工場は「自分で考える」ようになる。</h2>
+        <p>データが回り続けることで、工場はだんだん「自分で気づく」ようになります。</p>
+      </div>
+
+      <div class="loop">
+        <div class="loop-node">
+          <span class="ln-no">01</span>
+          <h3>リアルタイムでデータが入る</h3>
+          <p>現場の設備の状態が、そのままデジタルツインへ。</p>
+        </div>
+        <div class="loop-arrow" aria-hidden="true">→</div>
+        <div class="loop-node">
+          <span class="ln-no">02</span>
+          <h3>予知保全・シミュレーション</h3>
+          <p>異常を先読みし、改善案をデジタル上で試す。</p>
+        </div>
+        <div class="loop-arrow" aria-hidden="true">→</div>
+        <div class="loop-node">
+          <span class="ln-no">03</span>
+          <h3>現場へフィードバック</h3>
+          <p>分かったことを現場に返し、また良くしていく。</p>
+        </div>
+      </div>
+      <p class="loop-return">↺ そして、<span class="accent">またデータが入る</span>。このループが回り続ける工場を、一緒に目指します。</p>
+    </div>
+  </section>
+
+  <!-- ◆無料ヒアリング（#trial） -->
+  <section class="section section--soft" id="trial">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">FREE HEARING</span>
+        <h2>まずは、無料ヒアリングから。</h2>
+        <p>Web会議で、御社の現場や課題、目指す姿をお伺いします。</p>
+      </div>
+      <div class="trial-banner">
+        <div class="t-text">
+          <span class="tag">まずはお話から</span>
+          <h3>無料ヒアリングを<br>実施します。</h3>
+          <p>御社の現場や課題を、Web会議でじっくりお伺いします。自動化・デジタルツインで何ができるか、御社に合わせた具体的なイメージをお伝えします。</p>
+          <p class="trial-note">※ 基本はオンライン（Web会議）でのご相談です。日程はお気軽にご相談ください。</p>
+        </div>
+        <div class="trial-actions">
+          <a class="btn btn--fill" href="contact-v2.html?topic=hearing">無料ヒアリングを申し込む</a>
+          <a class="btn btn--ghost" href="contact-v2.html?topic=auto">まずはお問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆データは外に出ない（安心） -->
+  <section class="section assure">
+    <div class="wrap">
+      <h2>御社の技術を、<span class="accent">外に出さない</span>という選択。</h2>
+      <p>
+        IoTセンサーで取得したデータは、御社にご用意いただくPCに取り込み、現場（社内）だけで処理する運用が可能です。
+        このPCを完全にローカル環境でご利用いただく場合、大切なノウハウや図面、現場の情報を外部に預けることなく、
+        自社の資産としてデータを積み上げていけます。<br>
+        一方で、内容によっては計算結果のデータを暗号化したうえでクラウドを活用する場合もあります。
+        御社の状況やご要望に合わせて、最適な形をご提案します。
+      </p>
+    </div>
+  </section>
+
+  <!-- ◆プロフィール -->
+  <section class="section section--soft" id="profile">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">PROFILE</span>
+        <h2>プロフィール</h2>
+        <p>現場の隣に、いつも。</p>
+      </div>
+      <div class="profile">
+        <!-- 写真エリア -->
+        <div class="profile-photo">
+          <img src="profile.jpg" alt="代表者の写真">
+        </div>
+        <div class="profile-body">
+          <p class="role">代表</p>
+          <h2>加瀬部 裕紀</h2>
+          <p class="name-en">Yuki Kasebe</p>
+          <p>私は高校卒業後、製造業に14年間在籍してきました。設備の保全としてメンテナンスに携わり、また設計士としてモノづくりに取り組むなかで、ものづくりを「守る側」と「生み出す側」の両方を経験してきました。</p>
+          <p>設備が止まり、いつ復旧するか分からない焦り。納期に追われながら練り上げた設計。触れて、感じて、考えて、直して、作る。その繰り返しのなかで、「どうすればもっと効率化できるのか」をいつも考えていました。</p>
+          <p>「アイツイン」という社名は、デジタルツインに由来します。仮想空間で工場を再現し、シミュレーションができる。私はこの技術に、効率化の大きな可能性を感じています。これまでは図面を引き、モノを作り、設置するという流れが当たり前でしたが、デジタルツイン上で事前に試せることで、その工数を大きく減らせるようになりました。</p>
+          <p>デジタルツインは、大企業だけのものではありません。この技術を中小企業へ広め、伝えていくことが、私の使命だと考えています。</p>
+          <p>私の原点は、ものづくりの経験にあります。だからこそ、机上の空論ではなく、つくる人と同じ目線で課題に向き合えると自負しています。現場に潜む課題を、作業者の目線で解いていきたい。その想いから、アイツインを立ち上げました。</p>
+          <blockquote class="quote">
+            「中小製造業に、おどろきと、わくわくを。」<br>
+            現場が前を向ける、その瞬間をつくりたい。
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>まずは、お気軽にご相談ください。</h2>
+      <p>「何ができるのか知りたい」だけでも大歓迎です。御社の現場に合わせてご提案します。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=hearing">お問い合わせ・無料ヒアリング</a>
     </div>
   </section>
 
@@ -121,19 +375,19 @@
           <div>
             <h4>サイトメニュー</h4>
             <ul>
-              <li><a href="../index.html#issues">課題</a></li>
-              <li><a href="../index.html#flow">進め方</a></li>
-              <li><a href="../index.html#steps">続けるほど強くなる</a></li>
-              <li><a href="../index.html#goal">めざす姿</a></li>
+              <li><a href="#issues">課題</a></li>
+              <li><a href="#flow">進め方</a></li>
+              <li><a href="#steps">続けるほど強くなる</a></li>
+              <li><a href="#goal">めざす姿</a></li>
             </ul>
           </div>
           <div>
             <h4>ご案内</h4>
             <ul>
-              <li><a href="../index.html#trial">無料相談</a></li>
-              <li><a href="../index.html#profile">プロフィール</a></li>
-              <li><a href="index.html">コラム</a></li>
-              <li><a href="../contact-v2.html">お問い合わせ</a></li>
+              <li><a href="#trial">無料相談</a></li>
+              <li><a href="#profile">プロフィール</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
             </ul>
           </div>
           <div>
