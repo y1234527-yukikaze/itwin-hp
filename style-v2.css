@@ -865,8 +865,8 @@ section[id] { scroll-margin-top: 84px; }
 .acc-sub { color: var(--ink-soft); font-size: 0.86rem; line-height: 1.4; }
 .acc-mark { flex: 0 0 auto; color: var(--orange); font-size: 1.4rem; font-weight: 700; transition: transform .2s ease; }
 .acc-item.open .acc-mark { transform: rotate(45deg); }
-.acc-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
-.acc-item.open .acc-body { max-height: 720px; }
+.acc-body { max-height: 0; overflow: hidden; }
+.acc-item.open .acc-body { max-height: 2000px; }
 .acc-inner { padding: 2px 20px 18px; }
 .cap-hint {
   font-size: 0.82rem;

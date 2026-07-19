@@ -21,6 +21,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style-v2.css">
   <link rel="icon" href="favicon.png">
+
+  <!-- ◆構造化データ（Organization）：会社の実体をAI・検索エンジンに正しく認識させる -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "アイツイン",
+    "legalName": "株式会社アイツイン",
+    "url": "https://i-twin.co.jp/",
+    "logo": "https://i-twin.co.jp/itwin-logo.png",
+    "description": "中小製造業向けに、3Dスキャン・デジタルツイン・自動化を活用した現場改善を伴走支援する企業。",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "小郡令和１丁目１番１号 維新ホール１F Megriba",
+      "addressLocality": "山口市",
+      "addressRegion": "山口県",
+      "addressCountry": "JP"
+    },
+    "telephone": "+81-835-57-0969",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+81-835-57-0969",
+      "contactType": "customer service",
+      "areaServed": "JP",
+      "availableLanguage": "Japanese"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（FAQPage）：本文の「よくあるご質問」セクションと内容を一致させること -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "何から始めればいいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "まずは無料のオンラインヒアリングで、現場の状況やお困りごとをお伺いします。「何が課題か分からない」という状態でも問題ありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "小さな工場でも対応してもらえますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。デジタルツインは大企業だけのものではありません。中小製造業の現場規模に合わせて対応します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "図面がない古い設備でも大丈夫ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "3Dスキャンなどで現物から直接データ化するため、図面が残っていない設備でも対応可能です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "費用はどれくらいかかりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "現場の状況やご要望によって異なります。まずは無料ヒアリングで内容をお伺いしたうえで、具体的にご提案します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "データが外部に漏れる心配はありませんか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "取得したデータは、ご希望に応じて社内のPCだけで処理する運用も可能です。外部に預けることなく、自社の資産として積み上げていただけます。"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -323,6 +401,106 @@
     </div>
   </section>
 
+  <!-- ◆よくあるご質問（#faq） -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="accordion" id="faq-accordion">
+
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-num">Q</span>
+            <span class="acc-label"><span class="acc-title">何から始めればいいですか？</span></span>
+            <span class="acc-mark">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <p>まずは無料のオンラインヒアリングで、現場の状況やお困りごとをお伺いします。「何が課題か分からない」という状態でも問題ありません。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-num">Q</span>
+            <span class="acc-label"><span class="acc-title">小さな工場でも対応してもらえますか？</span></span>
+            <span class="acc-mark">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <p>はい。デジタルツインは大企業だけのものではありません。中小製造業の現場規模に合わせて対応します。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-num">Q</span>
+            <span class="acc-label"><span class="acc-title">図面がない古い設備でも大丈夫ですか？</span></span>
+            <span class="acc-mark">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <p>3Dスキャンなどで現物から直接データ化するため、図面が残っていない設備でも対応可能です。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-num">Q</span>
+            <span class="acc-label"><span class="acc-title">費用はどれくらいかかりますか？</span></span>
+            <span class="acc-mark">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <p>現場の状況やご要望によって異なります。まずは無料ヒアリングで内容をお伺いしたうえで、具体的にご提案します。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-num">Q</span>
+            <span class="acc-label"><span class="acc-title">データが外部に漏れる心配はありませんか？</span></span>
+            <span class="acc-mark">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <p>取得したデータは、ご希望に応じて社内のPCだけで処理する運用も可能です。外部に預けることなく、自社の資産として積み上げていただけます。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQアコーディオンの開閉（グループ内で1つだけ開く） -->
+  <script>
+  (function () {
+    var acc = document.getElementById('faq-accordion');
+    if (!acc) return;
+    acc.querySelectorAll('.acc-item').forEach(function (item) {
+      var head = item.querySelector('.acc-head');
+      head.addEventListener('click', function () {
+        var wasOpen = item.classList.contains('open');
+        acc.querySelectorAll('.acc-item.open').forEach(function (o) {
+          o.classList.remove('open');
+          o.querySelector('.acc-head').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          head.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+  </script>
+
   <!-- ◆プロフィール -->
   <section class="section section--soft" id="profile">
     <div class="wrap">
@@ -379,6 +557,7 @@
               <li><a href="#flow">進め方</a></li>
               <li><a href="#steps">続けるほど強くなる</a></li>
               <li><a href="#goal">めざす姿</a></li>
+              <li><a href="#faq">よくあるご質問</a></li>
             </ul>
           </div>
           <div>
