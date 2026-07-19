@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：省人化ではなく省力化を
+  （template.html から複製・記事データは syoryokuka-genba.md より）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは｜アイツイン コラム</title>
+  <meta name="description" content="ロボットによる自動化には「向いている現場の条件」があります。多くの現場ではその条件を満たせません。人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩となる「作業の洗い出し」について解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/syoryokuka-genba.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは",
+    "description": "ロボットによる自動化には「向いている現場の条件」があります。多くの現場ではその条件を満たせません。人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩となる「作業の洗い出し」について解説します。",
+    "image": "https://i-twin.co.jp/hero-main.png",
+    "datePublished": "2026-07-18",
+    "dateModified": "2026-07-18",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/syoryokuka-genba.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../../index.html#issues">課題</a>
+        <a href="../../checklist.html">診断</a>
+        <a href="../../index.html#digital-twin">デジタルツイン</a>
+        <a href="../../index.html#steps">進め方</a>
+        <a href="../../index.html#goal">めざす姿</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a href="../index.html">コラム</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</span>
+      </div>
+      <h1>省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</h1>
+      <p class="catch">公開日：2026年7月18日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">省人化・自動化</span>公開日：2026.07.18</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <p>
+          製造現場の効率化を検討する際、どこから手をつければよいのか分からないという声をよく耳にします。本記事では、現場で設計に携わってきた経験をもとに、効率化の最初の一歩について解説します。
+        </p>
+
+        <p><strong>この記事のポイント</strong></p>
+        <ol>
+          <li>ロボットによる自動化には「向いている現場の条件」があり、多くの現場はその条件に当てはまらない</li>
+          <li>目指すべきは、人を減らす「省人化」ではなく、今いる人の負担を軽くする「省力化」</li>
+          <li>省力化の第一歩は、機械の導入でもシステムの検討でもなく、現場にどんな作業があるかを洗い出すこと</li>
+        </ol>
+
+        <h2>「省人化」と「省力化」の違い</h2>
+        <p>
+          搬送の自動化アイテムの発掘から稟議書の作成、機械設計までを一気通貫で担当してきた経験から感じるのは、人は無意識のうちに非常に多くの作業をこなしているということです。ロボットを導入し、ラインを組み替え、人の作業を機械に置き換える過程で、そのことを強く実感します。
+        </p>
+        <p>
+          現場を観察する中で確信したのは、多くの製造現場に必要なのは大がかりな「省人化」ではなく、「省力化」ではないかということです。言葉は似ていますが、意味は異なります。
+        </p>
+        <blockquote><p><strong>省人化（しょうじんか）</strong> とは、同じ仕事をより少ない人数で回すことです。目的は人員数の削減であり、固定費を下げる文脈で使われます。</p></blockquote>
+        <blockquote><p><strong>省力化（しょうりょくか）</strong> とは、少ない労力で同等以上の成果を出すことです。人数は減らさず、今いる人の負担を軽くする取り組みを指します。重い物の運搬を機械に任せる、といったイメージです。</p></blockquote>
+        <p>
+          なお、行政では「省人化」という言葉はあまり使われません。「人を減らす」と公言すると雇用不安を招く恐れがあるためで、代わりに「効率化」という表現が使われる傾向にあります。
+        </p>
+
+        <h2>ロボットによる自動化が向いている現場の条件</h2>
+        <p>
+          現場経験から見えてきたのは、搬送の自動化、特にロボットによる自動化には「向いている現場の条件」があるということです。
+        </p>
+        <ul>
+          <li>製造組立ラインを持っている</li>
+          <li>作業が4歩以内で完結する</li>
+          <li>組み付ける部品が持ちやすく、取り出しやすい</li>
+          <li>取り出す部品が整然と並んでいる</li>
+          <li>圧入や締め付けなどの工程が、すでに自動化されている</li>
+          <li>作業内容が、部品をセットするだけである</li>
+          <li>同じ作業の繰り返しである</li>
+        </ul>
+        <p>
+          これらの条件が揃って初めて、ロボットによる自動化はコストに見合います。例えば部品が取り出しにくい場合、部品箱の構造自体を変更する必要が出てきます。多くの現場では、中の部品が隙間なく収められた状態が「良い状態」とされますが、ロボットが取り出すにはある程度の隙間が必要です。
+        </p>
+        <p>
+          こうした条件をクリアするための試作・調整には膨大な工数がかかり、結果としてコストは「省力化」よりも「省人化」の方が大きくなりやすい傾向があります。
+        </p>
+        <p>
+          多くの現場は、こうした条件に当てはまりません。毎回異なる製品を、小ロットで作っているケースが多いためです。段取り替えが頻繁で、品目が変わるたびに設定を見直す必要があり、同じ動作の繰り返しにならないため、ロボットを導入しても人が付きっきりで設定変更に追われることになります。せっかく自動化しても、人手が離れられないのでは意味がありません。大企業のライン自動化の発想が、そのまま多品種少量生産の現場に合うとは限らないのです。
+        </p>
+
+        <h2>目指すべきは「省力化」</h2>
+        <p>
+          多品種少量生産が中心となる現場が向かうべきは、人を減らすことではなく、今いる人の負担を軽くすることです。
+        </p>
+        <p>
+          人数の少ない現場では、一人が担う作業の幅が広くなる傾向があります。材料の運搬、加工、検査などを同じ人が受け持つことも珍しくありません。その中で、体に負担のかかる作業や、時間を取られる作業が必ず出てきます。そこを機械やデータの力で軽くすることが、省力化の考え方です。
+        </p>
+        <p>
+          経済産業省の2026年版中小企業白書では、省力化投資に取り組んだ企業のうち49.1%が、従業員数の伸び以上に付加価値を伸ばす「効率的成長型」へ移行したというデータが示されています。一方、未実施の企業では34.3%にとどまっており、取り組んだ企業の方が成果につながりやすい傾向が見えます。
+        </p>
+
+        <h2>省力化の第一歩は「作業の洗い出し」</h2>
+        <p>
+          一方で、同じ白書では、省力化に踏み切れない理由として最も多かったのが「どこを・どう省力化すればいいかイメージできない」で63.4%という結果も示されています。効果は理解していても、着手点が見えずに止まっているケースが多いということです。
+        </p>
+        <p>
+          だからこそ、最初の一歩は「作業の洗い出し」にあります。現場にどんな作業があるのかを一つひとつ書き出し、以下を問いかけてみることが有効です。
+        </p>
+        <ul>
+          <li>どの作業がきついか</li>
+          <li>どの作業が敬遠されがちか</li>
+          <li>作業者自身が気づいていない「ルーティン」はないか</li>
+          <li>自動化してほしい作業はどこか</li>
+        </ul>
+        <p>
+          特に重要なのが3つ目です。毎日繰り返している作業は当たり前になりすぎて、本人が負担だと気づいていないことが多くあります。体が覚えているため、無意識のうちに行われてしまうのです。「そういえば、これ毎回やっていますね」という作業は、洗い出しの過程で必ず出てきます。
+        </p>
+        <p>
+          この洗い出し作業自体には、機械もコストも必要ありません。必要なのは、現場に足を運び、作業者の声を直接聞くことです。
+        </p>
+        <p>
+          なお、自動化の対象を選ぶ際、やりやすい作業から着手すると現場の反発を招くことがあります。「なぜ大変なところを後回しにして、ここを自動化するのか」「自動化しやすいところしかやらない」と受け止められてしまうためです。逆に、誰もが避けたがる作業から着手すると、現場の理解が得られやすくなります。自動化の対象を選定する際は、この点を意識することが重要です。
+        </p>
+
+        <h2>現場での気づき</h2>
+        <p>
+          自動化に携わった中で、特に印象に残っている場面があります。
+        </p>
+        <p>
+          しゃがんで手を伸ばし、部品を回転させる。作業内容としてはそれだけのものでしたが、これを自動化した際に「この作業は本当に大変だった、ありがとう」と言われたことが強く記憶に残っています。
+        </p>
+        <p>
+          洗浄機の前で部品をセットする作業では、作業者が常に洗浄液で汚れる環境に置かれていました。作業服が汚れないよう、ビニールを防護服のように工夫している様子を見て、この作業は必ず自動化すべきだと感じたこともあります。
+        </p>
+        <p>
+          見積もりが想定を超える場合には、チームで案を出し合い、コストを抑える方法を検討することもありました。こうした経験の積み重ねが、どこから着手すべきかを判断する力につながっています。
+        </p>
+        <p>
+          現場で実際に使い続けるのは、そこで働く作業者です。作業の様子を繰り返し観察し、ヒアリングを重ね、現場が納得できる形に仕上げていく。そうした地道な観察こそが、省力化の出発点になると考えています。
+        </p>
+
+        <h2>まとめ</h2>
+        <p>
+          省人化には「向いている現場の条件」があり、多品種少量生産が中心の現場では、その条件を満たすことが難しいケースが少なくありません。目指すべきは、人を減らす省人化ではなく、今いる人の負担を軽くする省力化です。そしてその第一歩は、設備投資でもシステム導入でもなく、現場の作業を丁寧に洗い出すことにあります。
+        </p>
+
+        <div class="article-cta">
+          アイツインでは、現場の作業洗い出しから、省力化の対象選定、IoTやデジタルツインを活用した改善提案まで、現場に伴走しながら支援しています。導入のご相談はお気軽にお問い合わせください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.13</p>
+                <h3><a href="digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
+                <p class="column-excerpt">デジタルツインの導入率は中小企業でわずか3%。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、現実的な始め方をまとめました。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">プロフィール</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：デジタルツインとは？
+  （template.html から複製・記事データは digital-twin-basics.md より）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法｜アイツイン コラム</title>
+  <meta name="description" content="デジタルツインの仕組みを現場目線で解説。中小製造業の導入率はわずか3%。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、具体的な始め方を紹介します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/digital-twin-basics.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法",
+    "description": "デジタルツインの仕組みを現場目線で解説。中小製造業の導入率はわずか3%。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、具体的な始め方を紹介します。",
+    "image": "https://i-twin.co.jp/hero-main.png",
+    "datePublished": "2026-07-13",
+    "dateModified": "2026-07-13",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/digital-twin-basics.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../../index.html#issues">課題</a>
+        <a href="../../checklist.html">診断</a>
+        <a href="../../index.html#digital-twin">デジタルツイン</a>
+        <a href="../../index.html#steps">進め方</a>
+        <a href="../../index.html#goal">めざす姿</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a href="../index.html">コラム</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</span>
+      </div>
+      <h1>デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</h1>
+      <p class="catch">公開日：2026年7月13日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">デジタルツイン／省人化・自動化</span>公開日：2026.07.13</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <p>
+          デジタルツインという言葉をご存知でしょうか。製造業に携わる方の間でも、まだ十分に知られているとは言えないのが現状です。
+          本記事では、中小製造業がデジタルツインに取り組む際の入口となる考え方と、具体的な導入方法を解説します。
+        </p>
+
+        <h2>デジタルツインとは何か</h2>
+        <p>
+          デジタルツインとは、現実の工場と常にデータでつながる「生きたデジタルレプリカ」のことです。パソコンの中に、現場とほぼ同じ状態の世界を再現するイメージに近いものです。
+        </p>
+        <p>
+          この仮想空間では、人の動線をシミュレーションしたり、レイアウトを変更した際の影響を事前に検証したりすることができます。NVIDIAが提供する「Omniverse」では、重力・衝突・流体・気流・光・材質などをリアルに再現する物理シミュレーションが可能で、以下のような用途に活用されています。
+        </p>
+        <ul>
+          <li>ロボットの動作検証</li>
+          <li>自動運転の環境シミュレーション</li>
+          <li>工場ラインの挙動確認</li>
+          <li>建築物の構造・日照・空調シミュレーション</li>
+        </ul>
+        <p>
+          重要なのは、現場の状態が変われば、デジタル側の情報も更新され、デジタル側で試した結果を現実の改善に反映できるという「双方向のつながり」です。この仕組みこそがデジタルツインの本質であり、今後の日本の製造業にとって強力な武器になり得る技術だと考えています。
+        </p>
+
+        <h2>現場が抱える「答えられない」問題</h2>
+        <p>
+          製造現場では、設備が突然停止した際、原因究明に時間を要する一方で、後工程からは納期の催促が入ります。「いつ直るのか」にすぐ答えられない時間は、現場にとって大きな負担です。
+        </p>
+        <p>
+          故障の予兆は、多くの場合、実際に修理が終わった後になって初めて気づくものです。過去の修理履歴や現場オペレーターの声といった情報を、日頃からきちんと収集しておくことの重要性は、保全業務の中で強く実感されるポイントです。
+        </p>
+        <p>
+          また設計段階では、図面上の寸法と実際の設備の寸法が一致していないケースも珍しくありません。事前工事の確認で数センチの差異が判明し、急遽仕様を変更するといった対応が必要になることもあります。こうした「現物と情報のズレ」を解消することも、デジタルツインが解決しうる課題のひとつです。
+        </p>
+
+        <h2>導入済みはわずか3%。壁は技術ではなく「入口」</h2>
+        <p>
+          国内調査によると、デジタルツインの導入済み企業は中小企業でわずか3%、大企業でも18%にとどまっています。一方で「関心がある」と回答した中小企業は35%にのぼります。
+        </p>
+        <p>
+          関心は高いにもかかわらず導入が進まない背景には、主に3つの壁があります。
+        </p>
+        <ol>
+          <li><strong>予算の壁</strong> — 初期投資が年間IT予算を超えてしまう</li>
+          <li><strong>人材の壁</strong> — 社内に推進できる人材がいない</li>
+          <li><strong>情報の壁</strong> — 何から手をつければよいか分からない</li>
+        </ol>
+        <p>
+          つまり、デジタルツイン導入を阻んでいるのは技術的な難しさではなく、「最初の一歩」の分かりにくさにあります。
+        </p>
+
+        <h2>入口は3Dスキャン。図面がなくても始められる</h2>
+        <p>
+          デジタルツインの構成要素は、大きく分けて4つです。現実の設備、その3Dモデル、両者をつなぐデータ、そして分析です。
+        </p>
+        <p>
+          最初の一歩となるのが、3Dスキャンによる現状のデータ化です。スキャナーで現場を撮影すると、床・配管・設備が無数の点の集まり（点群）として取り込まれます。図面が存在しない設備でも、現物さえあればモデル化できるという点が大きな特長です。従来、現物を採寸して図面を起こしていた作業を、まるごと置き換えるイメージに近いものです。
+        </p>
+        <p>
+          本格的な3Dスキャナーは高価で、簡単に導入できるものではありません。しかし、比較的安価に代用できる手段があります。それが<strong>iPhone Pro</strong>です。
+        </p>
+        <p>
+          iPhone 12以降のPro／Pro Maxシリーズには、標準でLiDAR（ライダー）が搭載されています。LiDARはレーザー光を対象物に当て、反射して戻るまでの時間から距離を測定する技術で、これを活用することで低コストに設備や工程の3Dスキャンが可能になります。中古のiPhone 12 Proであれば比較的安価に入手でき、Scaniverse（スキャニバース）やPolycam（ポリカム）といったアプリを使えば、専門知識がなくても撮影・データ化を行えます。
+        </p>
+
+        <h2>デジタルツインでできること：段取り検証と予知保全</h2>
+        <p>
+          点群データからデジタルツインを構築すると、以下のような活用が現実的になります。
+        </p>
+
+        <h3>レイアウト変更・設備移設の干渉チェック</h3>
+        <p>
+          iPhoneのLiDARを活用する場合、以下の手順で検証が可能です。
+        </p>
+        <ol>
+          <li>設備ごとに個別にスキャンする</li>
+          <li>検証に必要な分をそろえてスキャンする</li>
+          <li>CloudCompareなどのフリーソフトに読み込む</li>
+          <li>個別オブジェクトとして平行移動・回転させながらレイアウトを検討する</li>
+        </ol>
+        <p>
+          この方法であれば、大きなコストをかけずにレイアウト変更の事前検証が行えます。ただし、iPhone LiDARの精度は±1〜2cm程度のため、あくまで検証・シミュレーション用途として活用することが前提です。
+        </p>
+
+        <h3>予知保全への活用</h3>
+        <p>
+          設備に振動センサーを設置し、生波形データを取得・演算することで、たとえばベアリングの劣化を振動の変化として数週間前から検知できるようになります。実際に、予知保全の導入によって突発故障を85%削減した事例も報告されています。
+        </p>
+        <p>
+          設備のIoT化は、デジタルツイン実現の重要な入口となります。ここで焦点となるのが「どのように設備データを取得するか」です。
+        </p>
+        <p>
+          一般的な手法としては、安価なセンサーとマイコン（ESP32やArduinoなど）、またはシングルボードコンピューター（Raspberry Pi、Jetsonなど）を組み合わせる方法があります。
+        </p>
+        <p><strong>代表的なセンサーの種類</strong></p>
+        <ul>
+          <li>振動センサー</li>
+          <li>温度・湿度センサー</li>
+          <li>電流センサー</li>
+          <li>そのほか環境系・計測系・位置/動き系・光/画像系・電気系・音/振動系など多岐にわたる</li>
+        </ul>
+        <p><strong>接続方式</strong></p>
+        <ul>
+          <li>デジタル：I2C、SPI、GPIO</li>
+          <li>アナログ：4-20mA（ADC/IOモジュール経由が必須）</li>
+          <li>産業用：Modbus、PLC連携</li>
+        </ul>
+        <p><strong>参考構成例（Raspberry Pi 4B + 各種センサー3種の場合）</strong></p>
+        <table>
+          <thead>
+            <tr><th>項目</th><th>概算費用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Raspberry Pi 4B（2GB）</td><td>8,000〜10,000円</td></tr>
+            <tr><td>ADC/4-20mA入力基板</td><td>3,000〜8,000円</td></tr>
+            <tr><td>振動センサー</td><td>3,000〜10,000円</td></tr>
+            <tr><td>温度センサー</td><td>1,000〜3,000円</td></tr>
+            <tr><td>電流センサー（CTクランプ）</td><td>2,000〜5,000円</td></tr>
+            <tr><td>ケース・配線・電源</td><td>2,000〜3,000円</td></tr>
+            <tr><td><strong>合計目安</strong></td><td><strong>19,000〜39,000円 / 1設備</strong></td></tr>
+          </tbody>
+        </table>
+        <p>
+          シングルボードコンピューターやマイコンの活用にはプログラミングが必要になりますが、近年はAIの普及によってその敷居は下がっています。こうした構成から設備のIoT化を進めることが、デジタルツイン実現の第一歩です。「壊れてから直す」保全から、「止まる前に手を打つ」保全への転換が可能になります。
+        </p>
+
+        <h2>小さく始めて、数字で判断する</h2>
+        <p>
+          デジタルツインの導入は、いきなり工場全体で行う必要はありません。まずは一区画・一工程をスキャンし、ボトルネックを数値として可視化することから始められます。効果を確認したうえで次のステップに進めば、投資判断を勘に頼らずに行うことができます。
+        </p>
+        <p>
+          DXの取り組みが「分析して終わり」になってしまう最大の原因は、最初の一歩の対象範囲を大きく設定しすぎることにあります。まずは現状を測ることから着手するのが、図面のない工場でも今日から始められる現実的なアプローチです。
+        </p>
+
+        <h2>まとめ</h2>
+        <p>
+          デジタルツインは、決して大企業だけのものではありません。iPhoneのLiDARや安価なIoTセンサーの組み合わせなど、比較的低コストな構成からでも始めることができます。中小製造業においても、「測る」ことから着手し、小さな成果を積み重ねていくことで、着実に導入を進めることが可能です。
+        </p>
+
+        <div class="article-cta">
+          アイツインでは、中小製造業向けに3Dスキャンによる現状データ化から、IoTセンサーによる予知保全、デジタルツインの構築まで、現場に伴走しながら支援しています。導入のご相談はお気軽にお問い合わせください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.18</p>
+                <h3><a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+                <p class="column-excerpt">ロボットによる自動化には「向いている現場の条件」があり、多くの現場ではその条件を満たせません。今いる人の負担を軽くする省力化という考え方を解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">プロフィール</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

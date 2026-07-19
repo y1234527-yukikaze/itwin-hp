@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム 記事一覧ページ
+  ------------------------------------------------------------
+  ・記事を追加する手順：
+    1. column/articles/template.html をコピーし、分かりやすいファイル名に変更
+       （例：column/articles/digital-twin-first-step.html）
+    2. コピーしたファイル内のタイトル・本文・meta情報・JSON-LDを書き換える
+    3. このファイル（column/index.html）内の「◆記事データ」ブロックに、
+       新しい記事のカードを1つ追加する（既存カードをコピーして書き換えるだけでOK）
+    4. ルートの sitemap.xml にも新しい記事のURLを1行追加する
+  ・記事データは下の「◆記事データ」ブロック1箇所にまとまっているため、
+    将来的にJSON化してJSで動的にカードを生成する形に変更しやすい構成にしています。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コラム｜アイツイン（i-TWIN）</title>
+  <meta name="description" content="アイツイン（i-TWIN）のコラム。デジタルツイン・自動化・中小製造業の現場改善に関する情報をお届けします。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/index.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style-v2.css">
+  <link rel="icon" href="../favicon.png">
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../index.html"><img src="../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../index.html#issues">課題</a>
+        <a href="../checklist.html">診断</a>
+        <a href="../index.html#digital-twin">デジタルツイン</a>
+        <a href="../index.html#steps">進め方</a>
+        <a href="../index.html#goal">めざす姿</a>
+        <a href="../index.html#trial">無料相談</a>
+        <a href="index.html">コラム</a>
+        <a class="btn btn--fill" href="../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">ホーム</a> ／ <span>コラム</span></div>
+      <h1>コラム</h1>
+      <p class="catch">デジタルツイン・自動化・現場改善に関する情報をお届けします。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事一覧 -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- ◆記事データ（ここに記事カードをまとめる。将来のJSON化を想定した1ブロック） -->
+      <div class="column-grid">
+
+        <!-- 記事2：省人化ではなく省力化を -->
+        <div class="column-card">
+          <img class="img-frame" src="articles/syoryokuka-genba-thumb.jpg" alt="省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは">
+          <div class="column-card-body">
+            <p class="column-date">2026.07.18</p>
+            <h3><a href="articles/syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+            <p class="column-excerpt">
+              ロボットによる自動化には「向いている現場の条件」があり、多くの現場ではその条件を満たせません。
+              人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩となる「作業の洗い出し」について解説します。
+            </p>
+            <a class="column-more" href="articles/syoryokuka-genba.html">続きを読む ›</a>
+          </div>
+        </div>
+
+        <!-- 記事1：デジタルツインとは？ -->
+        <div class="column-card">
+          <img class="img-frame" src="articles/digital-twin-basics-thumb.jpg" alt="デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法">
+          <div class="column-card-body">
+            <p class="column-date">2026.07.13</p>
+            <h3><a href="articles/digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
+            <p class="column-excerpt">
+              デジタルツインの導入率は中小企業でわずか3%。壁になっているのは技術ではなく「最初の一歩」の分かりにくさです。
+              iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、現実的な始め方をまとめました。
+            </p>
+            <a class="column-more" href="articles/digital-twin-basics.html">続きを読む ›</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../index.html#issues">課題</a></li>
+              <li><a href="../index.html#flow">進め方</a></li>
+              <li><a href="../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../index.html#trial">無料相談</a></li>
+              <li><a href="../index.html#profile">プロフィール</a></li>
+              <li><a href="index.html">コラム</a></li>
+              <li><a href="../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事テンプレート（このファイル自体が1つ目のサンプル記事です）
+  ------------------------------------------------------------
+  ★ 新しい記事を追加する手順 ★
+  1. このファイルをコピーし、分かりやすいファイル名に変更する
+     （例：digital-twin-first-step.html。半角英数字とハイフンのみ推奨）
+  2. <head> 内の <title> / meta description / canonical / JSON-LD を書き換える
+     （JSON-LD内の headline・description・datePublished・url も忘れずに）
+  3. パンくずの「記事タイトル」、<h1>、公開日、本文（h2 で見出しを区切る）を書き換える
+  4. 目次は本文中の <h2> から自動生成されます（JS部分の変更は不要）
+  5. 「関連記事」欄に、他の記事へのリンクを追加する
+  6. ../index.html（記事一覧）に、この記事のカードを1つ追加する
+  7. ルートの sitemap.xml に、この記事のURLを1行追加する
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【サンプル記事】デジタルツインは、何から始めればいいのか｜アイツイン コラム</title>
+  <meta name="description" content="デジタルツインを導入したいが、何から着手すればいいか分からないという方向けに、最初の一歩の考え方をまとめました。（サンプル記事）">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/template.html">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD）※記事ごとに書き換えてください -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "【サンプル記事】デジタルツインは、何から始めればいいのか",
+    "description": "デジタルツインを導入したいが、何から着手すればいいか分からないという方向けに、最初の一歩の考え方をまとめました。（サンプル記事）",
+    "image": "https://i-twin.co.jp/hero-main.png",
+    "datePublished": "2026-07-18",
+    "dateModified": "2026-07-18",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/template.html"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../../index.html#issues">課題</a>
+        <a href="../../checklist.html">診断</a>
+        <a href="../../index.html#digital-twin">デジタルツイン</a>
+        <a href="../../index.html#steps">進め方</a>
+        <a href="../../index.html#goal">めざす姿</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a href="../index.html">コラム</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>デジタルツインは、何から始めればいいのか</span>
+      </div>
+      <h1>【サンプル記事】デジタルツインは、何から始めればいいのか</h1>
+      <p class="catch">公開日：2026年7月18日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta">公開日：2026.07.18　／　このページはサンプル記事です（本文はダミーテキストです）</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <p>
+          「デジタルツインを導入したい」というご相談をいただいたとき、多くの方が最初につまずくのが
+          「結局、何から手をつければいいのか分からない」という点です。ここではダミーテキストを用いて、
+          記事のレイアウト（見出し・本文・目次・関連記事）を確認するためのサンプルを表示しています。
+        </p>
+
+        <h2>まず「測る」ことから始める</h2>
+        <p>
+          ダミーテキストです。実際の記事では、3Dスキャンなどで現場をデータ化する重要性について解説します。
+          ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト。
+        </p>
+
+        <h2>小さく試して、効果を確かめる</h2>
+        <p>
+          ダミーテキストです。実際の記事では、デジタルツイン上でレイアウト変更や自動化案を検証する流れについて解説します。
+          ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト。
+        </p>
+
+        <h2>まとめ</h2>
+        <p>
+          ダミーテキストです。実際の記事では、まとめと次のアクション（無料ヒアリングへの誘導など）を記載します。
+          ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト。
+        </p>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <!-- ◆関連記事枠（記事が増えたら、ここにカードを追加してください） -->
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">準備中</p>
+                <h3>関連記事はこちらに表示されます</h3>
+                <p class="column-excerpt">記事が増えましたら、関連するコラムへのリンクをここに追加します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">プロフィール</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
