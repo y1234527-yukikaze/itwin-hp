@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  アイツイン (i-TWIN) サイトマップ
+  ============================================================
+  ・記事を追加したら、このファイルの末尾（closing urlset タグの直前）に
+    url ブロックを1つコピーして追加してください（下の例を参照）。
+  ・thanks.html（送信完了ページ）は noindex のため意図的に含めていません。
+  ============================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://i-twin.co.jp/index.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/contact-v2.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/checklist.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/index.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ◆記事URL一覧（新しい記事を追加したら、この下に1ブロックずつ追加） -->
+  <!-- 注：column/articles/template.html はひな形専用ファイルのため noindex とし、サイトマップには含めていません -->
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-basics.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/syoryokuka-genba.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 例：新しい記事を追加する場合はこの形式でコピーして増やしてください
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-first-step.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  -->
+
+</urlset>
