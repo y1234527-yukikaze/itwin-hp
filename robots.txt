@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://i-twin.co.jp/sitemap.xml
