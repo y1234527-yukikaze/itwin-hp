@@ -1064,6 +1064,16 @@ img.img-frame { object-fit: contain; }
 .lead-center { text-align: center; max-width: 760px; margin: -28px auto 40px; color: var(--ink-soft); }
 .dt .lead-center { color: #cdd9ea; }
 
+/* 文中の強調リンク（例：「デジタルツイン」から該当セクションへジャンプ） */
+.inline-link { color: var(--orange); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.inline-link:hover { color: var(--orange-dark); }
+
+/* セクション内の「詳しくはこちら」導線（コラム記事へのショートカット） */
+.section-more { text-align: center; margin-top: 30px; }
+.section-more a { color: var(--orange); font-weight: 700; }
+.section-more a:hover { text-decoration: underline; }
+.dt .section-more a { color: #ffb072; }
+
 /* ---- 一本道フロー（測る → 試す → 提案する） ---- */
 .flow-path {
   display: flex; align-items: stretch; justify-content: center;

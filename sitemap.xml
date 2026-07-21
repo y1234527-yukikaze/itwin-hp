@@ -33,7 +33,7 @@
 
   <url>
     <loc>https://i-twin.co.jp/column/</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -50,6 +50,13 @@
   <url>
     <loc>https://i-twin.co.jp/column/articles/syoryokuka-genba</loc>
     <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/factory-that-thinks</loc>
+    <lastmod>2026-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
