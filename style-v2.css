@@ -1068,11 +1068,22 @@ img.img-frame { object-fit: contain; }
 .inline-link { color: var(--orange); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .inline-link:hover { color: var(--orange-dark); }
 
-/* セクション内の「詳しくはこちら」導線（コラム記事へのショートカット） */
+/* セクション内の「詳しくはこちら」導線（コラム記事へのショートカット・ボタン表示） */
 .section-more { text-align: center; margin-top: 30px; }
-.section-more a { color: var(--orange); font-weight: 700; }
-.section-more a:hover { text-decoration: underline; }
-.dt .section-more a { color: #ffb072; }
+
+/* カード内の小さいボタン（コラム記事へのショートカット） */
+.card-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 16px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--orange);
+  color: var(--orange);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background .15s ease, color .15s ease;
+}
+.card-link:hover { background: var(--orange); color: #fff; }
 
 /* ---- 一本道フロー（測る → 試す → 提案する） ---- */
 .flow-path {
