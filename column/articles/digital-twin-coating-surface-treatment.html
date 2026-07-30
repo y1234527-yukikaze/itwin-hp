@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事（業種別）：塗装・表面処理
+  （template.html から複製・記事データは digital-twin-coating-surface-treatment.md より）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>塗装・表面処理の現場に、デジタルツイン・IoTはどう役立つか｜アイツイン コラム</title>
+  <meta name="description" content="中小規模の塗装・表面処理工場では、膜厚や乾燥条件の管理が品質を左右します。実例をもとに、IoT活用がこの現場にどう役立つかを解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="塗装・表面処理の現場に、デジタルツイン・IoTはどう役立つか">
+  <meta property="og:description" content="中小規模の塗装・表面処理工場では、膜厚や乾燥条件の管理が品質を左右します。実例をもとに、IoT活用がこの現場にどう役立つかを解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment">
+  <meta property="og:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-07-30">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="塗装・表面処理の現場に、デジタルツイン・IoTはどう役立つか">
+  <meta name="twitter:description" content="中小規模の塗装・表面処理工場では、膜厚や乾燥条件の管理が品質を左右します。実例をもとに、IoT活用がこの現場にどう役立つかを解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/hero-main.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "塗装・表面処理の現場に、デジタルツイン・IoTはどう役立つか",
+    "description": "中小規模の塗装・表面処理工場では、膜厚や乾燥条件の管理が品質を左右します。実例をもとに、IoT活用がこの現場にどう役立つかを解説します。",
+    "image": "https://i-twin.co.jp/hero-main.png",
+    "datePublished": "2026-07-30",
+    "dateModified": "2026-07-30",
+    "inLanguage": "ja",
+    "articleSection": "業種別活用事例",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "業種別活用事例", "item": "https://i-twin.co.jp/column/industries/" },
+      { "@type": "ListItem", "position": 4, "name": "塗装・表面処理", "item": "https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../../index.html#issues">課題</a>
+        <a href="../../checklist.html">診断</a>
+        <a href="../../index.html#flow">進め方</a>
+        <a href="../../index.html#digital-twin">デジタルツイン</a>
+        <a href="../../index.html#goal">めざす姿</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../industries/index.html">業種別活用事例</a> ／
+        <span>塗装・表面処理</span>
+      </div>
+      <h1>塗装・表面処理の現場に、デジタルツイン・IoTはどう役立つか</h1>
+      <p class="catch">公開日：2026年7月30日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">デジタルツイン／業種別活用</span>公開日：2026.07.30</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <p>
+          塗装・表面処理は、化学品を扱いながらも、大規模プラントとは異なる中小規模の工場が数多く存在する業種です。この記事では、現場特有の課題と、IoT活用の方向性を解説します。
+        </p>
+
+        <h2>塗装・表面処理現場が抱えやすい課題</h2>
+        <h3>膜厚・乾燥条件の管理が経験頼み</h3>
+        <p>
+          塗装の仕上がりは、塗布量、乾燥温度・時間といった条件に大きく左右されます。これらの条件調整の多くが、担当者の経験と勘に基づいて行われている現場は少なくありません。
+        </p>
+        <h3>気候・季節による品質のばらつき</h3>
+        <p>
+          塗装工程は、気温・湿度といった環境条件の影響を強く受けます。同じ手順で作業しても、季節によって仕上がりに差が出ることがあり、この変動要因を管理しきれていないケースが見られます。
+        </p>
+        <h3>設備の稼働・在庫状況の把握</h3>
+        <p>
+          塗装ブースや乾燥炉の稼働状況、使用する塗料の在庫状況を正確に把握できていないと、非効率な段取りや欠品による作業停止が起きやすくなります。
+        </p>
+
+        <h2>IoT活用でできること</h2>
+        <p>
+          実際に、中小規模の塗装会社がIoT・デジタル化に取り組み、業務効率化を進めている事例が公的機関の支援事例として紹介されています。 具体的には、以下のような取り組みが有効です。
+        </p>
+        <h3>環境データの記録</h3>
+        <p>
+          温度・湿度をセンサーで継続的に記録し、過去の条件と仕上がりを突き合わせることで、季節によるばらつきの要因を把握しやすくなります。
+        </p>
+        <h3>塗装条件のデータ蓄積</h3>
+        <p>
+          膜厚や乾燥時間といった条件を記録・蓄積しておくことで、類似案件での条件出しにかかる時間を短縮できます。
+        </p>
+        <h3>稼働状況の可視化</h3>
+        <p>
+          塗装ブース・乾燥炉の稼働状況をセンサーで捉え、可視化することで、非効率な段取りを見直しやすくなります。
+        </p>
+
+        <h2>小さく始める</h2>
+        <p>
+          すべての工程を一度にデータ化する必要はありません。まずは仕上がりのばらつきが気になる一つのラインから、環境データの記録を始めるのが現実的です。
+        </p>
+
+        <h2>まとめ</h2>
+        <p>
+          塗装・表面処理の現場は、経験に頼った条件管理と、気候による品質のばらつきという課題を抱えています。環境データや条件データの記録・蓄積は、これらの課題を数値に基づいて捉え直す手段になります。
+        </p>
+
+        <div class="article-cta">
+          アイツインでは、塗装・表面処理現場の環境データ記録から、稼働状況の可視化まで、現場に伴走しながら支援しています。導入のご相談はお気軽にお問い合わせください。
+        </div>
+
+        <div class="article-refs">
+          <h3>参考</h3>
+          <ul>
+            <li>埼玉県DX推進支援ネットワーク「中小企業のデジタル化・DX事例」</li>
+          </ul>
+        </div>
+
+        <!-- ◆記事下部：まとめページ／一覧へ戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p>
+            <a class="btn btn--outline" href="../industries/index.html">← 業種別まとめページに戻る</a>
+          </p>
+          <p style="margin-top:12px;">
+            <a class="column-more" href="../index.html">コラム一覧をすべて見る ›</a>
+          </p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.13</p>
+                <h3><a href="digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
+                <p class="column-excerpt">デジタルツインの導入率は中小企業でわずか3%。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、現実的な始め方をまとめました。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.18</p>
+                <h3><a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+                <p class="column-excerpt">ロボットによる自動化には「向いている現場の条件」があります。今いる人の負担を軽くする省力化という考え方を解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+              <li><a href="../../index.html#faq">よくあるご質問</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">プロフィール</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../industries/index.html">業種別活用事例</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

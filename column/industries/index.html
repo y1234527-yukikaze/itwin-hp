@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜業種別デジタルツイン活用事例（まとめページ）
+  ------------------------------------------------------------
+  ・業種カードのデータは下の「◆業種カードデータ」ブロック1箇所にまとまっています。
+    新しい業種を追加するときは、既存カードを1つコピーして書き換えるだけでOKです。
+  ・まだ記事が無い業種を置きたい場合は、a要素を div に変え、
+    class に is-soon を追加してください（グレーアウト＋準備中ラベルが付きます）。
+    例： div class="industry-card is-soon" ... と書き、末尾に
+         span class="industry-soon" で 準備中 と表示する
+  ============================================================
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>業種別デジタルツイン活用事例｜株式会社アイツイン</title>
+  <meta name="description" content="中小製造業向けに、デジタルツイン・IoTの活用方法を業種別（工程・技術別）に整理しました。金属加工・樹脂成形・食品・電子部品・木工・印刷・繊維・塗装の8分野の事例を紹介します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/industries/">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="業種別デジタルツイン活用事例｜株式会社アイツイン">
+  <meta property="og:description" content="中小製造業向けに、デジタルツイン・IoTの活用方法を業種別（工程・技術別）に整理しました。金属加工・樹脂成形・食品・電子部品・木工・印刷・繊維・塗装の8分野の事例を紹介します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/industries/">
+  <meta property="og:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="業種別デジタルツイン活用事例｜株式会社アイツイン">
+  <meta name="twitter:description" content="中小製造業向けに、デジタルツイン・IoTの活用方法を業種別（工程・技術別）に整理しました。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/hero-main.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "業種別活用事例", "item": "https://i-twin.co.jp/column/industries/" }
+    ]
+  }
+  </script>
+
+  <!-- ◆構造化データ（CollectionPage + ItemList）※業種を追加したらこの一覧にも1行追加してください -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "業種別デジタルツイン活用事例",
+    "description": "中小製造業向けに、デジタルツイン・IoTの活用方法を業種別（工程・技術別）に整理したまとめページ。",
+    "url": "https://i-twin.co.jp/column/industries/",
+    "inLanguage": "ja",
+    "isPartOf": { "@type": "WebSite", "name": "アイツイン（i-TWIN）", "url": "https://i-twin.co.jp/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "金属加工（切削・プレス・板金・溶接）", "url": "https://i-twin.co.jp/column/articles/digital-twin-metal-processing" },
+        { "@type": "ListItem", "position": 2, "name": "樹脂・プラスチック成形", "url": "https://i-twin.co.jp/column/articles/digital-twin-plastic-molding" },
+        { "@type": "ListItem", "position": 3, "name": "食品製造・加工", "url": "https://i-twin.co.jp/column/articles/digital-twin-food-manufacturing" },
+        { "@type": "ListItem", "position": 4, "name": "電子部品・基板実装", "url": "https://i-twin.co.jp/column/articles/digital-twin-electronics-assembly" },
+        { "@type": "ListItem", "position": 5, "name": "木工・建具・家具", "url": "https://i-twin.co.jp/column/articles/digital-twin-woodworking-furniture" },
+        { "@type": "ListItem", "position": 6, "name": "印刷・パッケージ", "url": "https://i-twin.co.jp/column/articles/digital-twin-printing-packaging" },
+        { "@type": "ListItem", "position": 7, "name": "繊維・縫製", "url": "https://i-twin.co.jp/column/articles/digital-twin-textile-sewing" },
+        { "@type": "ListItem", "position": 8, "name": "塗装・表面処理", "url": "https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment" }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <a href="../../index.html#issues">課題</a>
+        <a href="../../checklist.html">診断</a>
+        <a href="../../index.html#flow">進め方</a>
+        <a href="../../index.html#digital-twin">デジタルツイン</a>
+        <a href="../../index.html#goal">めざす姿</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>業種別活用事例</span>
+      </div>
+      <h1>業種別デジタルツイン活用事例</h1>
+      <p class="catch">御社の現場に近い業種から探せます。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：業種一覧 -->
+  <section class="section">
+    <div class="wrap">
+
+      <p class="lead-center">
+        ひとくちに製造業といっても、抱えている課題も、デジタルツインやIoTの活かし方も業種によって異なります。
+        そこで中小企業の実態に合わせ、大きな業界区分ではなく<strong>工程・技術別</strong>に整理しました。
+        御社の現場に近いものからご覧ください。
+      </p>
+
+      <!-- ◆業種カードデータ（追加・修正はこのブロック内だけでOK） -->
+      <div class="industry-grid">
+
+        <a class="industry-card ind-1" href="../articles/digital-twin-metal-processing.html">
+          <div class="industry-head"><span class="industry-no">01</span><h2>金属加工</h2><small>切削・プレス・板金・溶接</small></div>
+          <div class="industry-body">
+            <p>「稼働率が分からない」「故障か設計の問題か切り分けられない」という悩みに、稼働監視と3Dスキャンでどう向き合うか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-2" href="../articles/digital-twin-plastic-molding.html">
+          <div class="industry-head"><span class="industry-no">02</span><h2>樹脂・プラスチック成形</h2><small>射出成形など</small></div>
+          <div class="industry-body">
+            <p>設定条件が「紙」と「経験と勘」に依存しがちな射出成形の現場で、IoT・デジタルツインをどう活かすか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-3" href="../articles/digital-twin-food-manufacturing.html">
+          <div class="industry-head"><span class="industry-no">03</span><h2>食品製造・加工</h2><small>温度管理・衛生管理</small></div>
+          <div class="industry-body">
+            <p>多くの工程が熟練技術者の「カン・コツ」に支えられている食品現場。温度管理の自動化が品質と負担に何をもたらすか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-4" href="../articles/digital-twin-electronics-assembly.html">
+          <div class="industry-head"><span class="industry-no">04</span><h2>電子部品・基板実装</h2><small>微細作業・トレーサビリティ</small></div>
+          <div class="industry-body">
+            <p>微細な作業精度とトレーサビリティが問われる現場で、IoT・デジタルツインが品質管理と技術継承にどう役立つか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-5" href="../articles/digital-twin-woodworking-furniture.html">
+          <div class="industry-head"><span class="industry-no">05</span><h2>木工・建具・家具</h2><small>天然素材・職人技</small></div>
+          <div class="industry-body">
+            <p>天然素材ゆえのばらつきと、熟練職人の技に支えられてきた業界。デジタルツイン・IoTをどう活かせるか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-6" href="../articles/digital-twin-printing-packaging.html">
+          <div class="industry-head"><span class="industry-no">06</span><h2>印刷・パッケージ</h2><small>色管理・多品種小ロット</small></div>
+          <div class="industry-body">
+            <p>色管理と多品種小ロットへの対応が課題になりやすい業種で、IoT・デジタルツインをどう活かせるか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-7" href="../articles/digital-twin-textile-sewing.html">
+          <div class="industry-head"><span class="industry-no">07</span><h2>繊維・縫製</h2><small>労働集約・省人化</small></div>
+          <div class="industry-body">
+            <p>労働集約的で、省人化・省力化のニーズが特に強い業種。IoT・デジタルツインをこの現場にどう活かせるか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-8" href="../articles/digital-twin-coating-surface-treatment.html">
+          <div class="industry-head"><span class="industry-no">08</span><h2>塗装・表面処理</h2><small>膜厚・乾燥条件の管理</small></div>
+          <div class="industry-body">
+            <p>膜厚や乾燥条件の管理が品質を左右する塗装・表面処理工場で、IoT活用がどう役立つか。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-more">
+        <a class="btn btn--outline" href="../index.html">コラム一覧をすべて見る ›</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>人手不足を、今いる人で乗り越える。<br>自動化を、現場目線でご提案します。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+              <li><a href="../../index.html#faq">よくあるご質問</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">プロフィール</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="index.html">業種別活用事例</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
