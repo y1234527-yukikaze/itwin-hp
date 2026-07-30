@@ -17,6 +17,20 @@
 - [使い続けるほど、工場は「自分で考える」ようになる](https://i-twin.co.jp/column/articles/factory-that-thinks): デジタルツインとIoTセンサーがデータの蓄積によって異常検知・未来予測・改善提案までできるようになる仕組みを解説。
 - [コラム一覧](https://i-twin.co.jp/column/)
 
+## 業種別デジタルツイン活用事例
+
+中小企業の実態に合わせ、大きな業界区分ではなく工程・技術別に整理した業種別の解説記事。
+
+- [業種別活用事例まとめ](https://i-twin.co.jp/column/industries/): 8つの工程・技術分野への入口となるまとめページ。
+- [金属加工（切削・プレス・板金・溶接）](https://i-twin.co.jp/column/articles/digital-twin-metal-processing): 「稼働率が分からない」「故障か設計の問題か切り分けられない」という悩みに対し、稼働監視・振動センサーによる予兆検知・3Dスキャンによる設備データ化を解説。
+- [樹脂・プラスチック成形](https://i-twin.co.jp/column/articles/digital-twin-plastic-molding): 射出成形で設定条件が紙と経験に依存する課題に対し、温度・圧力・スクリュー動作データの蓄積と品種切り替え時の条件出し短縮を解説。
+- [食品製造・加工](https://i-twin.co.jp/column/articles/digital-twin-food-manufacturing): 熟練者の「カン・コツ」依存とHACCP対応の温度記録作業の負担に対し、温度データの自動記録と稼働可視化を解説。
+- [電子部品・基板実装](https://i-twin.co.jp/column/articles/digital-twin-electronics-assembly): 出荷後のトレーサビリティと微細作業のばらつき管理に対し、製造情報の記録・検査データの傾向分析を解説。
+- [木工・建具・家具](https://i-twin.co.jp/column/articles/digital-twin-woodworking-furniture): 天然素材のばらつきと職人技への依存に対し、3Dスキャンによる造作・建具のデータ化と含水率・温湿度のセンサー管理を解説。
+- [印刷・パッケージ](https://i-twin.co.jp/column/articles/digital-twin-printing-packaging): 色管理の属人化と多品種小ロットの段取り替え負担に対し、色設定データの蓄積と稼働状況の可視化を解説。
+- [繊維・縫製](https://i-twin.co.jp/column/articles/digital-twin-textile-sewing): 労働集約的な工程と人手不足に対し、作業の洗い出しと工程の見える化による省力化を解説。
+- [塗装・表面処理](https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment): 膜厚・乾燥条件の経験依存と気候による品質ばらつきに対し、環境データ・塗装条件の記録蓄積を解説。
+
 ## 会社情報
 
 - 会社名: 株式会社アイツイン（アイツイン / i-TWIN）
