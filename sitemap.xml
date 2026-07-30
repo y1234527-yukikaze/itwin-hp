@@ -33,7 +33,7 @@
 
   <url>
     <loc>https://i-twin.co.jp/column/</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -60,6 +60,70 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/industries/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-metal-processing</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-plastic-molding</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-food-manufacturing</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-electronics-assembly</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-woodworking-furniture</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-printing-packaging</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-textile-sewing</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-coating-surface-treatment</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- 例：新しい記事を追加する場合はこの形式でコピーして増やしてください（拡張子 .html は付けない＝Cloudflareのクリーンurlに合わせる）
   <url>
     <loc>https://i-twin.co.jp/column/articles/digital-twin-first-step</loc>
