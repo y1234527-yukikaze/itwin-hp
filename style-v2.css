@@ -541,6 +541,9 @@ section[id] { scroll-margin-top: 84px; }
 }
 .assure h2 .accent { color: #ffb072; }
 .assure p { color: #cdd9ea; max-width: 720px; margin: 0 auto; }
+/* 手動改行はPC表示専用（単語の途中で折り返さないための調整）。
+   スマホ幅では非表示にし、ブラウザ標準の自動折り返しに戻す。 */
+@media (max-width: 700px) { .assure-br { display: none; } }
 
 /* ===========================================================
    CTAバンド
