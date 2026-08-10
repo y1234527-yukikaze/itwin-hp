@@ -15,6 +15,7 @@
 - [デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法](https://i-twin.co.jp/column/articles/digital-twin-basics): デジタルツインの仕組み、中小企業での低い導入率とその壁、iPhoneのLiDARを使った低コスト3Dスキャンの始め方を解説。
 - [省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは](https://i-twin.co.jp/column/articles/syoryokuka-genba): ロボットによる自動化に向いている現場の条件、省人化と省力化の違い、作業の洗い出しという第一歩について解説。
 - [使い続けるほど、工場は「自分で考える」ようになる](https://i-twin.co.jp/column/articles/factory-that-thinks): デジタルツインとIoTセンサーがデータの蓄積によって異常検知・未来予測・改善提案までできるようになる仕組みを解説。
+- [搬送作業の省人化、参考値は1,000万円〜2,000万円。ロボット本体は全体の3割です](https://i-twin.co.jp/column/articles/hansou-shoujinka-cost): 搬送作業を産業用ロボットで省人化する場合の費用感を、実際の項目ごとに解説。ロボット本体は全体の3割にすぎず、残り7割は制御盤・カメラ・安全対策・工事・設計などの周辺費用であることを説明。
 - [コラム一覧](https://i-twin.co.jp/column/)
 
 ## 業種別デジタルツイン活用事例
