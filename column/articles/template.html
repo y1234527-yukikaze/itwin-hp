@@ -6,7 +6,7 @@
   ★ 新しい記事を追加する手順 ★
   1. このファイルをコピーし、分かりやすいファイル名に変更する
      （例：digital-twin-first-step.html。半角英数字とハイフンのみ推奨）
-  2. <head> 内の <title> / meta description / canonical / JSON-LD を書き換える
+  2. head内の <title> / meta description / canonical / JSON-LD を書き換える
      （JSON-LD内の headline・description・datePublished・url も忘れずに）
   3. パンくずの「記事タイトル」、<h1>、公開日、本文（h2 で見出しを区切る）を書き換える
   4. 目次は本文中の <h2> から自動生成されます（JS部分の変更は不要）
@@ -17,6 +17,15 @@
 -->
 <html lang="ja">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>【サンプル記事】デジタルツインは、何から始めればいいのか｜アイツイン コラム</title>
