@@ -543,6 +543,17 @@ section[id] { scroll-margin-top: 84px; }
   font-family: "Shippori Mincho", serif; margin-bottom: 20px;
 }
 
+/* 補助金検討者向けの控えめな案内枠（チェックリスト直下） */
+.checklist-hint {
+  max-width: 640px; margin: 40px auto 0;
+  background: var(--paper-soft); border: 1px solid var(--line);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius); padding: 20px 24px;
+}
+.checklist-hint-title { font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.checklist-hint p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 8px; }
+.checklist-hint p.checklist-hint-title { font-size: 0.97rem; color: var(--navy); }
+
 /* ===========================================================
    省力化・省人化 診断シミュレーター（checklist.html）
    =========================================================== */
