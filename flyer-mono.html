@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン (i-TWIN)  A4両面チラシ（表＋裏の2ページ）
+  ------------------------------------------------------------
+  ・1ページ目＝表面 ／ 2ページ目＝裏面（両面印刷用）
+  ・印刷: ブラウザで開いて Ctrl+P →「A4」
+    「背景のグラフィック: ON」「余白: なし」
+  ・文章・料金の編集: 右下の「✎ 編集」ボタン → 直接クリックして
+    書き換え → 「書き出し」でHTML保存（元ファイル差し替え）
+  ・このファイルはモノクロ省インク版（flyer.html から自動生成）。
+    文章の編集は flyer.html 側で行い、再生成してください。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アイツイン｜A4チラシ（両面・モノクロ省インク版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <style>
+    :root{
+      --navy:#0d2b4e;
+      --navy2:#1d4d80;
+      --orange:#e8731c;
+      --orange-deep:#d4691a;
+      --yellow:#ffd23e;
+      --ink:#1d2630;
+      --sub:#5a6573;
+      --line:#dfe4ea;
+      --soft:#f4f7fa;
+      --mincho:'Shippori Mincho', serif;
+      --gothic:'Zen Kaku Gothic New', sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      font-family:var(--gothic);color:var(--ink);background:#646c78;line-height:1.65;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+    @page{size:A4;margin:0;}
+
+    .page{
+      width:210mm;height:297mm;background:#fff;margin:0 auto;
+      padding:10mm 11mm;position:relative;overflow:hidden;
+      page-break-after:always;break-after:page;
+      display:flex;flex-direction:column;
+    }
+    .page:last-child{page-break-after:auto;break-after:auto;}
+    @media screen{
+      body{padding:24px 0;}
+      .page{margin:0 auto 24px;box-shadow:0 6px 28px rgba(0,0,0,.35);}
+    }
+    @media print{
+      body{background:#fff;}
+      .page{margin:0;box-shadow:none;}
+    }
+
+    h1,h2,h3{font-family:var(--mincho);color:var(--navy);margin:0;}
+    p{margin:0 0 5px;font-size:11px;}
+    .small{font-size:9.5px;color:var(--sub);}
+
+    /* ====== 表面ヒーロー（大きく・目を引く） ====== */
+    .hero{
+      position:relative;
+      background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 75%,#2a629c 100%);
+      border-radius:14px;color:#fff;
+      padding:9mm 12mm 7mm;margin-bottom:5.5mm;
+    }
+    .hero .logo-chip{
+      display:inline-block;background:#fff;border-radius:9px;padding:5px 12px;margin-bottom:7mm;
+    }
+    .hero .logo-chip img{height:26px;display:block;}
+    .hero h1{
+      color:#fff;font-size:34px;line-height:1.42;letter-spacing:.02em;font-weight:800;
+    }
+    .hero h1 .marker{
+      color:var(--yellow);
+    }
+    .hero .hero-sub{
+      margin:5mm 0 0;font-size:13.5px;color:#eaf2fb;font-weight:700;
+    }
+    .hero .hero-sub strong{
+      background:var(--orange);color:#fff;border-radius:5px;padding:1px 8px;margin:0 2px;
+    }
+    /* 無料体験バッジ（円形・回転） */
+    .burst{
+      position:absolute;top:-6mm;right:-4mm;width:37mm;height:37mm;border-radius:50%;
+      background:var(--orange);color:#fff;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;text-align:center;
+      transform:rotate(9deg);box-shadow:0 4px 14px rgba(0,0,0,.3);
+      border:3px dashed rgba(255,255,255,.75);
+    }
+    .burst p{margin:0;line-height:1.3;}
+    .burst .b1{font-size:10px;font-weight:700;}
+    .burst .b2{font-family:var(--mincho);font-size:14.5px;font-weight:800;}
+    .burst .b3{font-size:9px;font-weight:700;color:var(--yellow);}
+
+    /* ====== 見出し（チラシ風タブ） ====== */
+    .h-tab{
+      display:flex;align-items:center;gap:9px;margin-bottom:4mm;
+    }
+    .h-tab .q{
+      flex:0 0 auto;background:var(--orange);color:#fff;font-family:var(--mincho);font-weight:800;
+      font-size:15px;border-radius:999px;padding:2px 14px;letter-spacing:.05em;
+    }
+    .h-tab h2{font-size:18.5px;letter-spacing:.02em;}
+
+    .sec{margin-bottom:4mm;}
+
+    /* ====== デジタルツインとは？（図解） ====== */
+    .dt-visual{
+      display:grid;grid-template-columns:1fr 34px 1fr;align-items:stretch;gap:0;
+      margin-bottom:3mm;
+    }
+    .dt-side{
+      border:2.5px solid var(--navy);border-radius:11px;padding:7px 11px;text-align:center;background:#fff;
+    }
+    .dt-side.right{background:var(--soft);border-style:dashed;}
+    .dt-side h3{font-size:13.5px;margin-bottom:2px;}
+    .dt-side p{font-size:9.8px;margin:0;color:var(--sub);}
+    .dt-arrow{
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;color:var(--orange);font-weight:900;
+    }
+    .dt-merits{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+    .dt-merit{
+      background:var(--navy);color:#fff;border-radius:9px;padding:6px 9px;text-align:center;
+    }
+    .dt-merit h3{color:var(--yellow);font-size:11.5px;margin-bottom:1px;}
+    .dt-merit p{color:#dbe7f4;font-size:9.3px;margin:0;}
+
+    /* ====== お悩みチェック ====== */
+    .checks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+    .chk-item{
+      border:2px solid var(--line);border-radius:10px;padding:7px 10px 6px;background:#fff;
+      position:relative;
+    }
+    .chk-item .chk-mark{
+      font-size:15px;color:var(--orange);font-weight:900;margin-right:4px;
+    }
+    .chk-item h3{display:inline;font-size:12.5px;}
+    .chk-item p{font-size:9.6px;color:var(--sub);margin:3px 0 0;}
+    .checks-cta{
+      margin-top:3mm;text-align:center;background:var(--yellow);border-radius:999px;
+      padding:4px 10px;font-family:var(--mincho);font-weight:800;font-size:13px;color:var(--navy);
+    }
+
+    /* ====== サービス3カード（表面） ====== */
+    .svc3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+    .svc3 .card{
+      border-top:5px solid var(--c,var(--orange));border:2px solid var(--line);
+      border-top:5px solid var(--c,var(--orange));
+      border-radius:10px;padding:7px 10px;background:#fff;
+    }
+    .svc3 .card h3{font-size:12.5px;margin-bottom:2px;}
+    .svc3 .card p{font-size:9.6px;color:var(--sub);margin:0;}
+
+    .front-foot{
+      margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;
+      background:var(--navy);color:#fff;border-radius:10px;padding:7px 13px;
+    }
+    .front-foot p{margin:0;}
+    .front-foot .l{font-family:var(--mincho);font-size:11.5px;font-weight:700;}
+    .front-foot .r{font-family:var(--mincho);font-size:13px;font-weight:800;color:var(--yellow);white-space:nowrap;}
+
+    /* ====== 裏面 ====== */
+    .back-head{
+      background:var(--navy);color:#fff;border-radius:12px;text-align:center;
+      padding:6px 10px;margin-bottom:5mm;
+    }
+    .back-head h2{color:#fff;font-size:19px;letter-spacing:.06em;}
+    .back-head p{color:#bcd0e6;font-size:10px;margin:2px 0 0;}
+
+    .svc{margin-bottom:4mm;border:2px solid var(--line);border-radius:11px;overflow:hidden;}
+    .svc-head{
+      display:flex;align-items:center;gap:9px;
+      background:var(--c,var(--orange));color:#fff;padding:4px 12px;
+    }
+    .svc-head .no{
+      font-family:var(--mincho);font-weight:800;font-size:15px;color:#fff;opacity:.85;
+    }
+    .svc-head h2{color:#fff;font-size:14.5px;letter-spacing:.03em;}
+    .svc-head .en{margin-left:auto;font-size:8.5px;letter-spacing:.18em;color:rgba(255,255,255,.8);font-weight:700;}
+    .svc-body{padding:6px 12px 7px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;}
+    .svc-body p{font-size:10.2px;margin:0;}
+    .price{
+      flex:0 0 auto;text-align:center;background:var(--soft);border:2px dashed var(--orange);
+      border-radius:9px;padding:4px 12px;min-width:36mm;
+    }
+    .price dt{font-size:9px;color:var(--sub);font-weight:700;margin:0;}
+    .price dd{
+      margin:0;font-family:var(--mincho);font-weight:800;color:var(--orange-deep);font-size:15px;line-height:1.25;
+    }
+    .price p{font-size:8px;color:var(--sub);margin:1px 0 0;}
+
+    /* 無料体験（裏面・大きく） */
+    .trial{
+      background:var(--orange);color:#fff;border-radius:12px;padding:8px 14px;margin-bottom:4mm;
+      display:flex;align-items:center;gap:12px;
+    }
+    .trial .t-badge{
+      flex:0 0 auto;background:#fff;color:var(--orange-deep);font-family:var(--mincho);font-weight:800;
+      border-radius:999px;padding:5px 13px;font-size:13.5px;
+    }
+    .trial h2{color:#fff;font-size:15.5px;margin-bottom:1px;}
+    .trial p{color:#fff3e7;font-size:9.8px;margin:0;}
+
+    .contact{
+      margin-top:auto;background:var(--navy);color:#fff;border-radius:12px;padding:9px 14px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+    }
+    .contact h2{color:#fff;font-size:14px;margin-bottom:2px;}
+    .contact p{color:#dbe7f4;font-size:9.3px;margin:0;}
+    .contact .mail{
+      flex:0 0 auto;text-align:center;background:#fff;border-radius:9px;padding:5px 13px;
+    }
+    .contact .mail p{color:var(--sub);font-size:8.5px;margin:0;}
+    .contact .mail dd{margin:0;font-family:var(--mincho);font-weight:800;color:var(--navy);font-size:13px;}
+    .note-line{font-size:8.8px;color:var(--sub);margin:3mm 0 0;text-align:center;}
+
+    /* ===== かんたん編集モード（画面のみ・印刷では非表示） ===== */
+    #edit-bar{
+      position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;gap:6px;align-items:center;
+      background:#fff;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.2);
+      border-radius:10px;padding:8px 10px;font-family:var(--gothic);
+    }
+    #edit-bar button{
+      font-family:var(--gothic);font-size:13px;border:1px solid var(--navy);background:#fff;color:var(--navy);
+      border-radius:6px;padding:6px 10px;cursor:pointer;
+    }
+    #edit-bar #ed-toggle{background:var(--navy);color:#fff;}
+    #edit-bar #ed-msg{font-size:11px;color:var(--sub);max-width:14em;}
+    body.edit-on [contenteditable="true"]{outline:1px dashed var(--orange);outline-offset:2px;cursor:text;}
+    body.edit-on [contenteditable="true"]:hover{background:rgba(212,105,26,.06);}
+    @media print{ #edit-bar{display:none !important;} }
+
+    /* ============================================================
+       モノクロ省インク版（body.mono で適用）
+       flyer-mono.html は <body class="mono"> になっています
+       ============================================================ */
+    body.mono{
+      --navy:#1a1a1a;--navy2:#1a1a1a;--orange:#444;--orange-deep:#333;
+      --yellow:#e8e8e8;--ink:#111;--sub:#555;--line:#aaa;--soft:#f2f2f2;
+    }
+    body.mono img{filter:grayscale(100%);}
+    body.mono .hero{background:#fff;border:3px solid #1a1a1a;color:#111;}
+    body.mono .hero h1{color:#111;}
+    body.mono .hero h1 .marker{color:#111;background:#e8e8e8;border-radius:4px;padding:0 3px;}
+    body.mono .hero .hero-sub{color:#333;}
+    body.mono .hero .hero-sub strong{background:#1a1a1a;color:#fff;}
+    body.mono .hero .logo-chip{border:1px solid #ccc;}
+    body.mono .burst{background:#fff;color:#111;border:2.5px dashed #1a1a1a;box-shadow:none;}
+    body.mono .burst .b3{color:#111;}
+    body.mono .dt-merit{background:#f2f2f2;border:1.5px solid #1a1a1a;}
+    body.mono .dt-merit h3{color:#111;}
+    body.mono .dt-merit p{color:#444;}
+    body.mono .h-tab .q{background:#1a1a1a;}
+    body.mono .checks-cta{background:#e8e8e8;color:#111;}
+    body.mono .svc3 .card{border-top-color:#444;}
+    body.mono .front-foot{background:#fff;border:2px solid #1a1a1a;color:#111;}
+    body.mono .front-foot .l{color:#111;}
+    body.mono .front-foot .r{color:#111;}
+    body.mono .back-head{background:#fff;border:2.5px solid #1a1a1a;}
+    body.mono .back-head h2{color:#111;}
+    body.mono .back-head p{color:#444;}
+    body.mono .svc-head{background:#f2f2f2;border-bottom:1.5px solid #aaa;}
+    body.mono .svc-head h2,body.mono .svc-head .no{color:#111;}
+    body.mono .svc-head .en{color:#666;}
+    body.mono .trial{background:#fff;border:2.5px solid #1a1a1a;}
+    body.mono .trial h2{color:#111;}
+    body.mono .trial p{color:#444;}
+    body.mono .trial .t-badge{background:#1a1a1a;color:#fff;}
+    body.mono .contact{background:#fff;border:2.5px solid #1a1a1a;}
+    body.mono .contact h2{color:#111;}
+    body.mono .contact p{color:#444;}
+    body.mono .contact .mail{border:1.5px solid #aaa;}
+    body.mono .contact .mail dd{color:#111;}
+    body.mono .price dd{color:#111;}
+  </style>
+</head>
+<body class="mono">
+
+  <!-- ============ 表面 ============ -->
+  <section class="page">
+
+    <!-- ヒーロー＋無料体験バッジ -->
+    <div class="hero">
+      <span class="logo-chip"><img src="itwin-logo.png" alt="アイツイン"></span>
+      <h1>その改善、<br><span class="marker">デジタルで試してから</span>、<br>決めませんか？</h1>
+      <p class="hero-sub">アイツインは<strong>デジタルツイン</strong>で、中小製造業の<strong>自動化・効率化</strong>をご提案します。</p>
+      <div class="burst">
+        <p class="b1">3M×3M</p>
+        <p class="b2">無料体験</p>
+        <p class="b3">実施中！</p>
+      </div>
+    </div>
+
+    <!-- アイツインとは？ -->
+    <div class="sec">
+      <div class="h-tab"><span class="q">Q</span><h2>アイツインとは？</h2></div>
+      <p>山口県のものづくり支援企業です。製造業14年の現場経験をもとに、「中小製造業に、おどろきと、わくわくを。」を合言葉に、現場のいまをまるごとデジタル化。ラインを止めずに改善を試し、数字で次の一手を決めるお手伝いをします。</p>
+    </div>
+
+    <!-- デジタルツインとは？ -->
+    <div class="sec">
+      <div class="h-tab"><span class="q">Q</span><h2>デジタルツインとは？</h2></div>
+      <div class="dt-visual">
+        <div class="dt-side"><h3>現実の工場</h3><p>機械の配置・人の動き・工程の流れ</p></div>
+        <div class="dt-arrow">⇄</div>
+        <div class="dt-side right"><h3>デジタルの工場（双子）</h3><p>そっくりそのまま、もう一つ再現</p></div>
+      </div>
+      <p style="margin-bottom:7px;">現実の工場を、デジタル空間に<strong>“双子（ツイン）”</strong>としてそっくり再現する技術です。デジタル側で「もし、こう変えたら？」を何度でも試せるから――</p>
+      <div class="dt-merits">
+        <div class="dt-merit"><h3>止めずに試せる</h3><p>ラインを止めずにレイアウト変更・工程改善を検証</p></div>
+        <div class="dt-merit"><h3>数字で決められる</h3><p>効果を数値で見える化。勘ではなくデータで判断</p></div>
+        <div class="dt-merit"><h3>失敗しない投資</h3><p>導入前に効果を確認。補助金の活用根拠にも</p></div>
+      </div>
+    </div>
+
+    <!-- こんなお悩みありませんか？ -->
+    <div class="sec">
+      <div class="h-tab"><span class="q">？</span><h2>こんなお悩み、ありませんか？</h2></div>
+      <div class="checks">
+        <div class="chk-item"><span class="chk-mark">✔</span><h3>ベテラン頼みの現場</h3><p>大事な技が熟練者の頭の中だけ。その人がいないと回らない。</p></div>
+        <div class="chk-item"><span class="chk-mark">✔</span><h3>人が増やせない</h3><p>限られた人数で、これまで以上の成果を求められている。</p></div>
+        <div class="chk-item"><span class="chk-mark">✔</span><h3>DXの一歩が出ない</h3><p>何から始めればいいか分からない。大きな投資は怖い。</p></div>
+      </div>
+      <p class="checks-cta">ひとつでも当てはまったら、裏面へ！　小さく始める方法があります →</p>
+    </div>
+
+    <!-- 3つのサービス -->
+    <div class="sec">
+      <div class="h-tab"><span class="q">＋</span><h2>デジタルツインを軸に、3つのサービス</h2></div>
+      <div class="svc3">
+        <div class="card" style="--c:#e8731c;"><h3>ワザノコシ</h3><p>熟練の技をデータで残し、誰でも使える手順に。技術伝承を支援。</p></div>
+        <div class="card" style="--c:#2e9e6b;"><h3>ゲンバ3Dスキャン</h3><p>図面のない部品・古い設備・建物まで、現実をそのまま3Dデータに。</p></div>
+        <div class="card" style="--c:#2f6fb0;"><h3>AIによる改善・業務効率化</h3><p>AI-OCR・ナレッジ検索・業務自動化。考える時間を取り戻す。</p></div>
+      </div>
+    </div>
+
+    <!-- 表面フッター -->
+    <div class="front-foot">
+      <p class="l">御社の技術は、外に出さない運用も可能です。― 状況に応じて最適な形をご提案 ―</p>
+      <p class="r">サービス内容・料金は裏面へ →</p>
+    </div>
+  </section>
+
+  <!-- ============ 裏面 ============ -->
+  <section class="page">
+
+    <div class="back-head">
+      <h2>サービスと料金のご案内</h2>
+      <p>すべて「小さく始めて、効果を確かめてから広げる」進め方です。</p>
+    </div>
+
+    <!-- 01 ワザノコシ -->
+    <div class="svc">
+      <div class="svc-head" style="--c:#e8731c;"><span class="no">01</span><h2>ワザノコシ（技術伝承）</h2><span class="en">WAZANOKOSHI</span></div>
+      <div class="svc-body">
+        <p>ベテランの手の動き・段取り・判断のコツを記録し、誰でも使える手順に整えます。教える側の負担を減らし、品質のばらつきをおさえます。製造・飲食・建設・整備・農業など、業種を問わずご相談いただけます。</p>
+        <dl class="price"><dt>料金の目安</dt><dd>○○万円〜</dd><p>※ 内容・規模によりお見積り</p></dl>
+      </div>
+    </div>
+
+    <!-- 02 ゲンバ3Dスキャン -->
+    <div class="svc">
+      <div class="svc-head" style="--c:#2e9e6b;"><span class="no">02</span><h2>ゲンバ3Dスキャン</h2><span class="en">GENBA 3D SCAN</span></div>
+      <div class="svc-body">
+        <p>現実を、そのままデータに。図面のない部品、古い設備、建物や店舗まで、現場を「3D」でまるごとデジタル化。レイアウト検討・記録共有・3Dプリンターでの試作まで活用できます。</p>
+        <dl class="price"><dt>料金の目安</dt><dd>○○万円〜</dd><p>※ 対象物の大きさ・点数による</p></dl>
+      </div>
+    </div>
+
+    <!-- 03 自動化・省人化・効率化 -->
+    <div class="svc">
+      <div class="svc-head" style="--c:#8a4fb0;"><span class="no">03</span><h2>自動化・省人化・効率化</h2><span class="en">AUTOMATION</span></div>
+      <div class="svc-body">
+        <p>デジタルツインで効果を確かめてから、自動化・省人化に踏み出せます。人・モノの動線のムダ取り、危険・重量作業からの人離れ、設備投資の事前検証まで。「やってみないと分からない」をなくします。</p>
+        <dl class="price"><dt>料金の目安</dt><dd>○○万円〜</dd><p>※ 現状の見える化からご提案</p></dl>
+      </div>
+    </div>
+
+    <!-- 04 AIによる改善・業務効率化 -->
+    <div class="svc">
+      <div class="svc-head" style="--c:#2f6fb0;"><span class="no">04</span><h2>AIによる改善・業務効率化</h2><span class="en">AI SOLUTION</span></div>
+      <div class="svc-body">
+        <p>考える時間を、取り戻す。AI-OCR・書類のデータ化、社内ナレッジ検索、業務自動化・見える化、ホームページ・専用アプリ・独自LLMの開発まで。御社専用に、小さく始めて広げられます。</p>
+        <dl class="price"><dt>料金の目安</dt><dd>○○万円〜</dd><p>※ 月額のご相談も可能</p></dl>
+      </div>
+    </div>
+
+    <!-- 無料体験 -->
+    <div class="trial">
+      <span class="t-badge">無料</span>
+      <div>
+        <h2>3M×3M デジタルツイン無料体験、実施中。</h2>
+        <p>3メートル四方の小さな一区画から、あなたの現場が動き出す様子をご覧いただけます。まずはオンライン相談からお気軽に。※ 遠方での現地体験は別途交通費を申し受けます。</p>
+      </div>
+    </div>
+
+    <!-- 問い合わせ -->
+    <div class="contact">
+      <div>
+        <h2>まずは、お気軽にご相談ください。</h2>
+        <p>株式会社アイツイン（i-TWIN）　受付：平日 9:00–18:00</p>
+        <p>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</p>
+      </div>
+      <div class="mail"><p>お問い合わせはメールで</p><dd>mono.shin@outlook.com</dd></div>
+    </div>
+    <p class="note-line">※ 料金はすべて目安です。内容・規模によりお見積りいたします。<br>※ ３Dスキャンで取得したデータの取り扱いは、契約時に双方で取り決めます。</p>
+  </section>
+
+  <!-- かんたん編集モード（右下の「✎ 編集」ボタン）。印刷時は自動で非表示になります。 -->
+  <script src="edit.js" defer></script>
+</body>
+</html>

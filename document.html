@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン (i-TWIN)  会社・サービスご紹介資料（A4縦・全8ページ）
+  ------------------------------------------------------------
+  ・印刷／PDF化前提のレイアウトです。ブラウザの印刷（Ctrl+P）で
+    「用紙：A4」「余白：なし（または既定）」「背景のグラフィック：ON」
+    にすると、画面どおりの色で書き出せます。
+  ・本文はこのHTML内のテキストを直接書き換えてください。
+  ・1ページ＝1つの section.page です。並べ替え・増減も section 単位で。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アイツイン｜会社・サービスご紹介資料</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <style>
+    :root{
+      --navy:#0d2b4e;
+      --navy-soft:#173e69;
+      --orange:#d4691a;
+      --ink:#222b36;
+      --sub:#5a6573;
+      --line:#dfe4ea;
+      --soft:#f5f7fa;
+      --mincho:'Shippori Mincho', serif;
+      --gothic:'Zen Kaku Gothic New', sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      font-family:var(--gothic);
+      color:var(--ink);
+      background:#646c78;
+      line-height:1.8;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+
+    /* ===== A4 ページ ===== */
+    .page{
+      width:210mm;
+      min-height:297mm;
+      background:#fff;
+      margin:0 auto;
+      padding:18mm 16mm 16mm;
+      position:relative;
+      overflow:hidden;
+      page-break-after:always;
+      break-after:page;
+    }
+    .page:last-child{page-break-after:auto;break-after:auto;}
+
+    @media screen{
+      body{padding:28px 0;}
+      .page{margin:0 auto 26px;box-shadow:0 6px 28px rgba(0,0,0,.35);}
+    }
+    @media print{
+      body{background:#fff;}
+      .page{margin:0;box-shadow:none;}
+    }
+
+    /* ===== 共通：ページ上部の見出し帯 ===== */
+    .p-head{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      border-bottom:2px solid var(--navy);
+      padding-bottom:6px;margin-bottom:18px;
+    }
+    .p-head .brandline{font-size:11px;letter-spacing:.18em;color:var(--sub);font-weight:700;}
+    .p-head .brandline b{color:var(--navy);}
+    .p-no{font-size:11px;color:var(--sub);letter-spacing:.1em;}
+
+    .eyebrow{
+      display:inline-block;font-size:11px;letter-spacing:.22em;font-weight:700;
+      color:var(--orange);margin:0 0 6px;
+    }
+    h2.sec{
+      font-family:var(--mincho);font-weight:800;color:var(--navy);
+      font-size:26px;line-height:1.4;margin:0 0 4px;
+    }
+    .sec-sub{color:var(--sub);font-size:13px;margin:0 0 18px;}
+    h3{
+      font-family:var(--mincho);font-weight:700;color:var(--navy);
+      font-size:15px;margin:0 0 6px;
+    }
+    p{margin:0 0 10px;font-size:13px;}
+    .small{font-size:11.5px;color:var(--sub);}
+
+    /* ページ下のフッター */
+    .p-foot{
+      position:absolute;left:16mm;right:16mm;bottom:10mm;
+      display:flex;justify-content:space-between;align-items:center;
+      border-top:1px solid var(--line);padding-top:6px;
+      font-size:10px;color:var(--sub);letter-spacing:.04em;
+    }
+
+    /* ===== カード／リスト部品 ===== */
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+    .box{
+      border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:#fff;
+    }
+    .box.soft{background:var(--soft);}
+    .box .num{
+      font-family:var(--mincho);color:var(--orange);font-weight:800;font-size:13px;
+      margin-right:6px;
+    }
+    ul.ticks{list-style:none;margin:6px 0 0;padding:0;}
+    ul.ticks li{position:relative;padding:3px 0 3px 18px;font-size:12.5px;}
+    ul.ticks li::before{
+      content:"";position:absolute;left:2px;top:10px;width:7px;height:7px;
+      background:var(--orange);border-radius:2px;
+    }
+    .val{display:flex;gap:10px;margin:0 0 10px;}
+    .val .k{
+      flex:0 0 auto;font-family:var(--mincho);font-weight:800;color:var(--navy);
+      font-size:13px;min-width:8.5em;
+    }
+    .val .v{font-size:12.5px;color:var(--ink);}
+
+    .lead{
+      font-size:14px;color:var(--ink);line-height:1.9;
+      border-left:4px solid var(--orange);padding:2px 0 2px 14px;margin:0 0 18px;
+    }
+
+    .ribbon{
+      background:var(--soft);color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--orange);
+      border-radius:10px;padding:16px 18px;margin-top:14px;
+    }
+    .ribbon h3{color:var(--navy);}
+    .ribbon p{color:var(--sub);}
+
+    /* 業種カラーバー */
+    .ind{border-left:5px solid var(--c,#d4691a);}
+    .ind h3 small{color:var(--sub);font-weight:500;font-size:11px;margin-left:8px;}
+
+    /* ===== P1 表紙（インク節約：白地） ===== */
+    .cover{
+      background:#fff;color:var(--ink);display:flex;flex-direction:column;
+      padding:24mm 18mm;border-top:8px solid var(--navy);
+    }
+    .cover .logo-chip{display:inline-flex;align-self:flex-start;}
+    .cover .logo-chip img{height:38px;display:block;}
+    .cover .doc-kind{
+      margin-top:30mm;font-size:12px;letter-spacing:.3em;color:var(--orange);font-weight:700;
+    }
+    .cover h1{
+      font-family:var(--mincho);font-weight:800;font-size:40px;line-height:1.5;
+      color:var(--navy);margin:10px 0 0;
+    }
+    .cover h1 .ac{color:var(--orange);}
+    .cover .tag{
+      margin-top:14px;padding-top:14px;border-top:3px solid var(--orange);
+      display:inline-block;align-self:flex-start;
+      font-size:15px;color:var(--sub);letter-spacing:.04em;
+    }
+    .cover .spacer{flex:1 1 auto;}
+    .cover .meta{
+      background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:16px 18px;
+      display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;color:var(--sub);
+    }
+    .cover .meta .co{font-family:var(--mincho);font-size:18px;font-weight:700;color:var(--navy);}
+
+    /* ===== P8 CTA（インク節約：グレー地） ===== */
+    .cta-final{
+      background:var(--soft);color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--orange);
+      border-radius:12px;padding:20px 22px;margin-top:16px;text-align:center;
+    }
+    .cta-final h3{color:var(--navy);font-size:18px;margin-bottom:6px;}
+    .cta-final p{color:var(--sub);}
+    .cta-final .mail{font-family:var(--mincho);font-size:17px;color:var(--orange);margin-top:8px;}
+
+    /* ===== プロフィール ===== */
+    .prof-role{font-size:12px;color:var(--orange);font-weight:700;letter-spacing:.12em;margin:0 0 2px;}
+    .prof-name{font-family:var(--mincho);font-size:22px;color:var(--navy);margin:0 0 16px;}
+    .prof-name span{font-size:12px;color:var(--sub);font-weight:500;margin-left:12px;letter-spacing:.08em;}
+    .prof p{font-size:13px;line-height:1.95;margin:0 0 10px;}
+    .prof blockquote{
+      margin:16px 0 0;background:var(--soft);border:1px solid var(--line);border-left:5px solid var(--orange);
+      border-radius:8px;padding:14px 18px;font-family:var(--mincho);font-size:15px;color:var(--navy);line-height:1.85;
+    }
+
+    /* ===== かんたん編集モード（画面のみ・印刷では非表示） ===== */
+    #edit-bar{
+      position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;gap:6px;align-items:center;
+      background:#fff;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.2);
+      border-radius:10px;padding:8px 10px;font-family:var(--gothic);
+    }
+    #edit-bar button{
+      font-family:var(--gothic);font-size:13px;border:1px solid var(--navy);background:#fff;color:var(--navy);
+      border-radius:6px;padding:6px 10px;cursor:pointer;
+    }
+    #edit-bar #ed-toggle{background:var(--navy);color:#fff;}
+    #edit-bar #ed-msg{font-size:11px;color:var(--sub);max-width:14em;}
+    body.edit-on [contenteditable="true"]{outline:1px dashed var(--orange);outline-offset:2px;cursor:text;}
+    body.edit-on [contenteditable="true"]:hover{background:rgba(212,105,26,.06);}
+    @media print{ #edit-bar{display:none !important;} }
+    @media screen{ #edit-bar{display:flex;} }
+  </style>
+</head>
+<body>
+
+  <!-- ============ P1 表紙 ============ -->
+  <section class="page cover">
+    <span class="logo-chip"><img src="itwin-logo.png" alt="アイツイン"></span>
+
+    <div class="doc-kind">COMPANY &amp; SERVICE GUIDE ／ 会社・サービスご紹介</div>
+    <h1>中小製造業に、<br><span class="ac">おどろき</span>と、<span class="ac">わくわく</span>を。</h1>
+    <p class="tag">～ デジタルツインで自動化・効率化を提案します ～</p>
+
+    <div class="spacer"></div>
+
+    <div class="meta">
+      <div>
+        <div class="co">アイツイン（i-TWIN）</div>
+        <div>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba　／　受付：平日 9:00–18:00</div>
+      </div>
+      <div style="text-align:right;">2026<br>会社・サービス資料</div>
+    </div>
+  </section>
+
+  <!-- ============ P2 課題 ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">02 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">ISSUES</span>
+    <h2 class="sec">こんなお悩み、ありませんか？</h2>
+    <p class="sec-sub">多くの中小製造業が、同じ「詰まり」にぶつかっています。ひとつでも当てはまれば、それは改善できるサインです。</p>
+
+    <div class="grid2">
+      <div class="box ind" style="--c:#d4691a">
+        <h3>A. 人・モノの詰まり <small>流れが止まっている</small></h3>
+        <ul class="ticks">
+          <li>歩いている時間・探し物が多い</li>
+          <li>段取り替えで毎回止まる／手待ちが出る</li>
+          <li>作業が特定の人に頼っている（属人化）</li>
+          <li>危険・重量作業から人を外したい</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#2e9e6b">
+        <h3>B. メンテの詰まり <small>止まると復旧が遅い</small></h3>
+        <ul class="ticks">
+          <li>止まるとベテラン待ち／原因がすぐ分からない</li>
+          <li>同じ不具合が再発する</li>
+          <li>点検・記録がバラバラ</li>
+          <li>部品・工具の段取りに時間がかかる</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#2f6fb0">
+        <h3>C. エネルギーの詰まり <small>ムダがコストに</small></h3>
+        <ul class="ticks">
+          <li>電気代が上がった／夜間・休日も動いている</li>
+          <li>過剰に供給している気がする</li>
+          <li>漏れ・圧の不安定で管理が大変</li>
+          <li>使っていない設備が動き続ける</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#8a4fb0">
+        <h3>D. 事務・情報の詰まり <small>手作業がボトルネック</small></h3>
+        <ul class="ticks">
+          <li>伝票・書類の入力が手作業／二重入力が多い</li>
+          <li>写真や紙の記録が探せない</li>
+          <li>報告書づくりに時間がかかる</li>
+          <li>在庫・受発注の管理がバラバラ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ribbon">
+      <h3>その「詰まり」、私たちが一緒にほどきます。</h3>
+      <p class="small">大がかりな投資の前に。まずは現場のいまを「見える化」し、効果を確かめながら小さく始められます。</p>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.02</span></div>
+  </section>
+
+  <!-- ============ P3 デジタルツイン ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">03 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">CORE TECHNOLOGY</span>
+    <h2 class="sec">デジタルツイン</h2>
+    <p class="sec-sub">私たちの中核となる技術です。</p>
+
+    <p class="lead">現実の工場を、そっくりそのままデジタル空間に再現する技術です。ラインを止めずに「もし、こう変えたら？」を何度でも試し、数字で next の一手を決められます。</p>
+
+    <div class="grid3" style="margin-bottom:14px;">
+      <div class="box soft"><h3>止めずに試す</h3><p class="small">レイアウト変更や工程の入れ替えを、現場を止めずに何通りも検証。失敗のコストを下げます。</p></div>
+      <div class="box soft"><h3>数字で決める</h3><p class="small">勘や経験だけに頼らず、動線・時間・ムダを数値で比較。投資判断の根拠になります。</p></div>
+      <div class="box soft"><h3>未来を見せる</h3><p class="small">改善後の姿を関係者で共有。「やってみないと分からない」を、見える形に変えます。</p></div>
+    </div>
+
+    <h3>デジタルツインでできること（一例）</h3>
+    <div class="grid2">
+      <div class="box"><ul class="ticks">
+        <li>人・モノの動線をまるごと再現し、ムダを発見</li>
+        <li>工程ごとの時間・ボトルネックを数値化</li>
+      </ul></div>
+      <div class="box"><ul class="ticks">
+        <li>レイアウト変更の効果を事前にシミュレーション</li>
+        <li>自動化・省力化の投資効果を、導入前に検討</li>
+      </ul></div>
+    </div>
+
+    <div class="ribbon">
+      <h3>「やってみないと分からない」を、なくす。</h3>
+      <p class="small">3M×3M の小さな範囲から、デジタルツインを無料で体験いただけます（P.7 参照）。</p>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.03</span></div>
+  </section>
+
+  <!-- ============ P4 ワザノコシ ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">04 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">WAZANOKOSHI ／ 技ノコシ</span>
+    <h2 class="sec">熟練の技を、データで残し継ぐ。</h2>
+    <p class="sec-sub">「あの人がいないと回らない」を、しくみで解消します。</p>
+
+    <p class="lead">ベテランの手の動き・段取り・判断のコツを記録し、誰でも使える手順に整えます。教える側の負担を減らし、品質のばらつきもおさえます。業種を問わずご相談いただけます。</p>
+
+    <div class="grid2">
+      <div class="box ind" style="--c:#d4691a">
+        <h3>製造</h3>
+        <ul class="ticks">
+          <li>組立・加工のコツを手順化</li>
+          <li>段取り替えの標準化</li>
+          <li>検査・目視判断の引き継ぎ</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#2e9e6b">
+        <h3>飲食</h3>
+        <ul class="ticks">
+          <li>調理手順・盛り付けの標準化</li>
+          <li>仕込み・段取りの見える化</li>
+          <li>新人教育の時間短縮</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#2f6fb0">
+        <h3>建設</h3>
+        <ul class="ticks">
+          <li>定期的に行う作業の手順化</li>
+          <li>工具の取り扱い・メンテ手順</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#8a4fb0">
+        <h3>整備</h3>
+        <ul class="ticks">
+          <li>点検・分解組立の手順化</li>
+          <li>不具合の見分け方を共有</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box ind" style="--c:#c79a2a;margin-top:12px;">
+      <h3>農業</h3>
+      <ul class="ticks">
+        <li>作業のタイミング・コツの記録と共有　／　収穫・選別の判断を引き継ぎ</li>
+      </ul>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.04</span></div>
+  </section>
+
+  <!-- ============ P5 ゲンバ3Dスキャン ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">05 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">GENBA 3D SCAN ／ ゲンバ3Dスキャン</span>
+    <h2 class="sec">現実を、そのままデータに。</h2>
+    <p class="sec-sub">現場を「3D」でまるごとデジタル化します。</p>
+
+    <p class="lead">図面のない部品、古い設備、建物や店舗まで。現実をそのままデータにすることで、保全・改善・提案など、さまざまな課題を解決します。製造業にとどまりません。</p>
+
+    <div class="grid2">
+      <div class="box"><h3>図面のない部品も</h3><p class="small">現物から形状をデータ化。古い設備の部品づくりや、置き換えの検討に活かせます。</p></div>
+      <div class="box"><h3>設備・建物・店舗を丸ごと</h3><p class="small">現場の3Dデータで、レイアウト検討や打ち合わせを、現地に行かずに進められます。</p></div>
+      <div class="box"><h3>記録・共有がかんたん</h3><p class="small">現場の「いま」を正確に残し、関係者・遠方の拠点とそのまま共有できます。</p></div>
+      <div class="box"><h3>3Dプリンター活用</h3><p class="small">データを元に試作・部品づくり。食品サンプルのカラー印刷などのご相談も可能です。</p></div>
+    </div>
+
+    <div class="ribbon">
+      <h3>「現物しかない」「図面が残っていない」を、データに。</h3>
+      <p class="small">何を3Dにしたいか決まっていなくても大丈夫。お困りごとからご相談ください。</p>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.05</span></div>
+  </section>
+
+  <!-- ============ P6 AI ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">06 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">AI SOLUTION ／ AIによる改善・業務効率化</span>
+    <h2 class="sec">考える時間を、取り戻す。</h2>
+    <p class="sec-sub">現場の改善から日々の業務まで、AIを活かして効率化します。</p>
+
+    <p class="lead">ものづくりの視点を活かし、「人にしかできないこと」に時間を使えるようにします。むずかしい設定はおまかせ。御社に合わせて、導入から定着まで伴走します。</p>
+
+    <div class="grid2" style="margin-bottom:14px;">
+      <div class="box soft"><h3>専門知識はいりません</h3><p class="small">むずかしい設定や運用はおまかせ。御社に合わせて導入から定着まで伴走します。</p></div>
+      <div class="box soft"><h3>御社専用につくる</h3><p class="small">既製品の押し付けではなく、現場の業務に合わせたAI・アプリ・仕組みを用意します。</p></div>
+      <div class="box soft"><h3>小さく始めて、広げる</h3><p class="small">まずは一つの業務から。効果を確かめながら、無理なく範囲を広げられます。</p></div>
+      <div class="box soft"><h3>散らばった情報を、活かす</h3><p class="small">紙やバラバラのデータを、「探せる・使える」会社の資産に変えます。</p></div>
+    </div>
+
+    <div class="grid2">
+      <div class="box ind" style="--c:#d4691a">
+        <h3>Web・アプリ・AI開発</h3>
+        <ul class="ticks">
+          <li>ホームページ作成・支援</li>
+          <li>専用アプリケーション開発</li>
+          <li>独自LLM開発（自社専用の対話AIづくり）</li>
+        </ul>
+      </div>
+      <div class="box ind" style="--c:#2e9e6b">
+        <h3>業務効率化・データ活用</h3>
+        <ul class="ticks">
+          <li>AI-OCR・書類のデータ化</li>
+          <li>社内ナレッジ検索（聞くだけで探せる）</li>
+          <li>業務自動化・データの見える化</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.06</span></div>
+  </section>
+
+  <!-- ============ P7 無料体験／できること ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">07 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">FREE TRIAL ／ まずは、試してみてください</span>
+    <h2 class="sec">3M×3M デジタルツイン 無料体験</h2>
+    <p class="sec-sub">いきなり大きく始めなくて大丈夫。小さな範囲から、効果を体感いただけます。</p>
+
+    <p class="lead">3メートル×3メートルの範囲を対象に、デジタルツインを無料でお試しいただけます。「自社で何ができるか」を、コストをかけずに確かめられます。</p>
+
+    <h3>ご相談の流れ</h3>
+    <div class="grid2" style="margin-bottom:14px;">
+      <div class="box soft"><p class="small"><span class="num">01</span>まずはオンライン相談・面談でお悩みをお聞きします。</p></div>
+      <div class="box soft"><p class="small"><span class="num">02</span>対象範囲・目的をすり合わせ、体験内容を決めます。</p></div>
+      <div class="box soft"><p class="small"><span class="num">03</span>3M×3M でデジタルツインを体験。効果を一緒に確認。</p></div>
+      <div class="box soft"><p class="small"><span class="num">04</span>結果をもとに、次の改善プランをご提案します。</p></div>
+    </div>
+
+    <div class="grid2">
+      <div class="box"><h3>オンライン相談から</h3><p class="small">遠方の方もまずはオンラインで。画面を見ながら、お悩みと進め方をご相談いただけます。</p></div>
+      <div class="box"><h3>できることは、まだまだ</h3><p class="small">自動化・省力化・効率化、AIによる業務改善まで。「こんなことできる？」をそのままお寄せください。</p></div>
+    </div>
+
+    <div class="ribbon">
+      <h3>気になる項目が、ひとつでもあれば。</h3>
+      <p class="small">それは改善できるサインです。まずはオンライン相談から、お気軽にお問い合わせください。<br>※ 遠方での現地体験は、別途交通費をいただく場合があります。まずはオンライン相談をおすすめします。</p>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.07</span></div>
+  </section>
+
+  <!-- ============ P8 代表プロフィール ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">08 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">PROFILE</span>
+    <h2 class="sec">プロフィール</h2>
+    <p class="sec-sub">現場の隣に、いつも。</p>
+
+    <div class="prof">
+      <p class="prof-role">代表</p>
+      <h3 class="prof-name">加瀬部 裕紀<span>Yuki Kasebe</span></h3>
+      <p>私は高校卒業後、製造業に14年間在籍してきました。設備の保全としてメンテナンスに携わり、また設計士としてモノづくりに取り組むなかで、ものづくりを「守る側」と「生み出す側」の両方を経験してきました。</p>
+      <p>設備が止まり、いつ復旧するか分からない焦り。納期に追われながら練り上げた設計。触れて、感じて、考えて、直して、作る。その繰り返しのなかで、「どうすればもっと効率化できるのか」をいつも考えていました。</p>
+      <p>「アイツイン」という社名は、デジタルツインに由来します。仮想空間で工場を再現し、シミュレーションができる。私はこの技術に、効率化の大きな可能性を感じています。これまでは図面を引き、モノを作り、設置するという流れが当たり前でしたが、デジタルツイン上で事前に試せることで、その工数を大きく減らせるようになりました。</p>
+      <p>デジタルツインは、大企業だけのものではありません。この技術を中小企業へ広め、伝えていくことが、私の使命だと考えています。</p>
+      <p>私の原点は、ものづくりの経験にあります。だからこそ、机上の空論ではなく、つくる人と同じ目線で課題に向き合えると自負しています。ITやAIといった技術も取り入れながら、現場に潜む課題を、作業者の目線で解いていきたい。その想いから、アイツインを立ち上げました。</p>
+      <blockquote>「中小製造業に、おどろきと、わくわくを。」<br>現場が前を向ける、その瞬間をつくりたい。</blockquote>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）会社・サービスご紹介</span><span>P.08</span></div>
+  </section>
+
+  <!-- ============ P9 会社概要・お問い合わせ ============ -->
+  <section class="page">
+    <div class="p-head">
+      <div class="brandline"><b>アイツイン</b>　i-TWIN</div>
+      <div class="p-no">09 ／ 09</div>
+    </div>
+
+    <span class="eyebrow">COMPANY &amp; CONTACT</span>
+    <h2 class="sec">会社概要・お問い合わせ</h2>
+    <p class="sec-sub">中小製造業に、おどろきと、わくわくを。</p>
+
+    <h3>会社概要</h3>
+    <div class="box" style="margin-bottom:16px;">
+      <div class="val"><span class="k">会社名</span><span class="v">アイツイン（i-TWIN）</span></div>
+      <div class="val"><span class="k">所在地</span><span class="v">山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</span></div>
+      <div class="val"><span class="k">受付時間</span><span class="v">平日 9:00–18:00</span></div>
+      <div class="val"><span class="k">事業内容</span><span class="v">デジタルツインによる現場改善支援／ワザノコシ（技術伝承）／ゲンバ3Dスキャン／AIによる改善・業務効率化</span></div>
+    </div>
+
+    <div class="cta-final">
+      <h3>まずは、お気軽に。</h3>
+      <p class="small">オンライン相談・3M×3M 無料体験のお申し込み、現場のお悩みのご相談まで。</p>
+      <p class="mail">お問い合わせ：mono.shin@outlook.com</p>
+      <p class="small" style="margin-top:8px;">受付：平日 9:00–18:00　／　山口県防府市・山口市エリアを中心に対応</p>
+    </div>
+
+    <p class="small" style="margin-top:14px;border-top:1px solid var(--line);padding-top:8px;">
+      ※ 本契約または無料体験を通じて取得・生成されたデータは、当社サービスの提供・改善に活用させていただくものとし、これらに関する権利は当社に帰属するものといたします。
+    </p>
+
+    <div class="p-foot"><span>© 2026 株式会社アイツイン（i-TWIN）</span><span>P.09</span></div>
+  </section>
+
+  <!-- かんたん編集モード（右下の「✎ 編集」ボタン）。印刷時は自動で非表示になります。 -->
+  <script src="edit.js" defer></script>
+</body>
+</html>

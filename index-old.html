@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン (i-TWIN) コーポレートサイト  トップページ
+  ------------------------------------------------------------
+  ★ 文章の編集方法 ★
+  本文・見出しはこのHTML内のテキストを直接書き換えてください。
+  各セクションの始まりに「◆セクション名」のコメント見出しを
+  付けています。色やレイアウトは style.css で調整します。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アイツイン｜中小製造業に、おどろきと、わくわくを。</title>
+  <meta name="description" content="アイツイン（i-TWIN）は、デジタルツインで中小製造業の現場改善を支援します。山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba。3M×3Mデジタルツイン無料体験を実施中。">
+  <!-- Google Fonts: 本文 Zen Kaku Gothic New / 見出し Shippori Mincho -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html">
+          <img src="itwin-logo.png" alt="アイツイン">
+        </a>
+        <span class="brand-tag">～ デジタルツインで自動化・効率化を提案します ～</span>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')">
+        <span></span>
+      </button>
+      <nav class="nav">
+        <a href="index.html">ホーム</a>
+        <a href="#issues">課題</a>
+        <a href="#digital-twin">デジタルツイン</a>
+        <a href="#tech">技術</a>
+        <a href="#wazanokoshi">ワザノコシ</a>
+        <a href="#capabilities">3Dスキャン</a>
+        <a href="#ai-solution">AI</a>
+        <a href="#profile">プロフィール</a>
+        <a class="btn btn--fill" href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  })();
+  </script>
+
+  <!-- ◆ヒーロー -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <h1>中小製造業に、<br><span class="accent">おどろき</span>と、<span class="accent">わくわく</span>を。</h1>
+        <p class="lead">
+          現場のいまを、まるごとデジタルに。<br>
+          ラインを止めずに改善を試し、数字で次の一手を決める。
+          アイツインは、デジタルツインで中小製造業の未来づくりをお手伝いします。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn--fill" href="contact.html?topic=trial">3M×3M 無料体験を申し込む</a>
+          <a class="btn btn--ghost" href="contact.html?topic=online">お問い合わせ</a>
+          <a class="btn btn--ghost" href="#digital-twin">デジタルツインとは ›</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆課題セクション -->
+  <section class="section" id="issues">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">ISSUES</span>
+        <h2>こんなお悩み、ありませんか？</h2>
+        <p>多くの中小製造業が、同じ壁にぶつかっています。</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>ベテラン頼みの現場</h3>
+          <p>大事な作業が一部の熟練者の頭の中だけにあり、その人がいないと回らない。技や判断が引き継げないまま時間だけが過ぎていく。</p>
+        </div>
+        <div class="card">
+          <h3>人が増やせない</h3>
+          <p>採用も育成も思うように進まない。限られた人数で、これまで以上の成果を出すことを求められている。</p>
+        </div>
+        <div class="card">
+          <h3>DXの一歩が踏み出せない</h3>
+          <p>「何から始めればいいか分からない」。大がかりな投資は怖いし、効果が見えないものに踏み出せない。</p>
+        </div>
+      </div>
+
+      <!-- ◆お悩みチェックリスト（ひとつでも当てはまれば当社へ） -->
+      <div class="checklist">
+        <p class="check-lead">気になる項目にチェックを入れてみてください。<strong>ひとつでも当てはまれば、それは改善できるサインです。</strong></p>
+        <div class="check-grid">
+
+          <div class="check-card ch-a">
+            <div class="ch-head">
+              <span class="ch-badge">A</span><h3>人・モノの詰まり</h3>
+              <small>流れが止まっている</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">歩いている時間が長い</label>
+              <label class="chk"><input type="checkbox">探し物が多い</label>
+              <label class="chk"><input type="checkbox">段取り替えで毎回止まる</label>
+              <label class="chk"><input type="checkbox">手待ちが出る</label>
+              <label class="chk"><input type="checkbox">仮置き・渋滞が増えた</label>
+              <label class="chk"><input type="checkbox">作業が属人化している</label>
+              <label class="chk"><input type="checkbox">危険・重量作業から人を外したい</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-b">
+            <div class="ch-head">
+              <span class="ch-badge">B</span><h3>メンテの詰まり</h3>
+              <small>止まると復旧が遅い</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">止まるとベテラン待ち</label>
+              <label class="chk"><input type="checkbox">原因がすぐわからない</label>
+              <label class="chk"><input type="checkbox">直ったか確認に時間がかかる</label>
+              <label class="chk"><input type="checkbox">同じ不具合が再発する</label>
+              <label class="chk"><input type="checkbox">点検や記録がバラバラ</label>
+              <label class="chk"><input type="checkbox">アラームが生かせていない</label>
+              <label class="chk"><input type="checkbox">部品・工具の段取りに時間</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-c">
+            <div class="ch-head">
+              <span class="ch-badge">C</span><h3>エネルギーの詰まり</h3>
+              <small>ムダがコストになっている</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">電気代が上がった</label>
+              <label class="chk"><input type="checkbox">夜間・休日も動いている</label>
+              <label class="chk"><input type="checkbox">過剰に供給している気がする</label>
+              <label class="chk"><input type="checkbox">エアや油の漏れ・圧が不安定</label>
+              <label class="chk"><input type="checkbox">空圧・油圧の管理が大変</label>
+              <label class="chk"><input type="checkbox">電動化したいが効果が読めない</label>
+              <label class="chk"><input type="checkbox">使っていない設備が動き続ける</label>
+            </div>
+          </div>
+
+          <div class="check-card ch-d">
+            <div class="ch-head">
+              <span class="ch-badge">D</span><h3>事務・情報の詰まり</h3>
+              <small>手作業がボトルネック</small>
+            </div>
+            <div class="ch-body">
+              <label class="chk"><input type="checkbox">納品書・伝票の入力が手作業</label>
+              <label class="chk"><input type="checkbox">同じ内容を何度も転記している</label>
+              <label class="chk"><input type="checkbox">写真や紙の記録が探せない</label>
+              <label class="chk"><input type="checkbox">報告書づくりに時間がかかる</label>
+              <label class="chk"><input type="checkbox">在庫・受発注の管理がバラバラ</label>
+              <label class="chk"><input type="checkbox">二重入力・確認作業が多い</label>
+              <label class="chk"><input type="checkbox">問い合わせ対応に追われる</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="checklist-cta">
+          <p>当てはまる項目はありましたか？　その「詰まり」、私たちが一緒にほどきます。</p>
+          <a id="checklist-go" class="btn btn--fill" href="contact.html">当社に相談してみる</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆デジタルツイン（最重要・最大枠） -->
+  <section class="section dt" id="digital-twin">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">CORE TECHNOLOGY</span>
+        <h2>デジタルツイン</h2>
+        <p>
+          現実の工場を、そっくりそのままデジタル空間に再現する技術です。<br>
+          ラインを止めずに「もし、こう変えたら？」を何度でも試せて、<br>
+          計画やシミュレーションを、現場に入る前に進められます。
+        </p>
+      </div>
+
+      <div class="grid grid-3 dt-points">
+        <div class="dt-point">
+          <h3>現場をまるごと再現</h3>
+          <p>機械の配置も、人の動きも、工程の流れも。あなたの工場をデジタルの中にもう一つつくります。</p>
+        </div>
+        <div class="dt-point">
+          <h3>止めずに試せる</h3>
+          <p>現実のラインを止めることなく、レイアウト変更や工程改善を試行。現場に入る前に「正解」を出してから動けます。</p>
+        </div>
+        <div class="dt-point">
+          <h3>数字で意思決定</h3>
+          <p>省人化・省力化の効果を数値で見える化。補助金の活用根拠としても使える、確かなデータが手に入ります。</p>
+        </div>
+      </div>
+
+      <!-- 無料体験バナー -->
+      <div class="trial-banner">
+        <div class="t-text">
+          <span class="tag">期間限定・無料</span>
+          <h3>3M×3M（3メートル四方）の<br>デジタルツイン無料体験、実施中。</h3>
+          <p>まずは小さな一区画から。あなたの現場が動き出す様子を、その目でご覧ください。</p>
+          <p class="trial-note">※ まずはオンラインでのご相談・お打ち合わせから承っています。現地での体験をご希望で遠方の場合は、別途交通費を申し受けます。</p>
+        </div>
+        <div class="trial-actions">
+          <a class="btn btn--fill" href="contact.html?topic=online">まずはオンラインで相談</a>
+          <a class="btn btn--ghost" href="contact.html?topic=trial">無料体験を申し込む</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆データは外に出ない（安心セクション） -->
+  <section class="section cta-band" id="data-safety" style="border-top:4px solid var(--orange);">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:0;">
+        <span class="eyebrow">SECURITY</span>
+        <h2 style="color:#fff;">御社の技術は、外に出ません。</h2>
+        <p style="color:#cdd9ea;max-width:760px;margin-left:auto;margin-right:auto;">データの処理は、すべて現場（社内）で完結します。大切なノウハウや図面、現場の情報を外部に預ける必要はありません。安心して、自社の資産としてデータを積み上げていけます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆技術ティザー -->
+  <section class="section section--soft" id="tech">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">SOLUTIONS</span>
+        <h2>現場を支える、技術とサービス</h2>
+        <p>デジタルツインを軸に、現場の困りごとへ幅広くお応えします。</p>
+      </div>
+      <!-- 循環ダイアグラム（設計図イメージ：そのまま画像で配置） -->
+      <img class="cycle-img" src="cycle-diagram.jpg"
+           alt="技術①ワザノコシ→技術②ゲンバ3Dスキャン→基盤デジタルツインが循環し、中央の自動化が育つ設計図">
+
+      <h3 class="solutions-subhead">提供する技術・サービス</h3>
+      <div class="grid grid-2">
+        <div class="tech-card">
+          <span class="label">WAZANOKOSHI</span>
+          <h3>ワザノコシ</h3>
+          <p class="catch">技を、残す。</p>
+          <p>ベテランの動きを見える形にして、若手に伝わる手順として残す。技能継承を、属人化から仕組みへ。</p>
+        </div>
+        <div class="tech-card">
+          <span class="label">GENBA 3D SCAN</span>
+          <h3>ゲンバ3Dスキャン</h3>
+          <p class="catch">現実を、そのままデータに。</p>
+          <p>図面のない部品や古い設備、建物まで。現実を点群で3Dデータ化し、リバースエンジニアリングから現況の3D化まで幅広く活用できます。</p>
+        </div>
+        <div class="tech-card">
+          <span class="label">AUTOMATION</span>
+          <h3>自動化・省人化・効率化</h3>
+          <p class="catch">人の手を、もっと軽く。</p>
+          <p>手間のかかる作業や繰り返しの工程を見直し、自動化・省力化・効率化や省人化を支援。限られた人数でも回る現場づくりをお手伝いします。</p>
+        </div>
+        <div class="tech-card">
+          <span class="label">AI SOLUTION</span>
+          <h3>AIによる改善・業務効率化</h3>
+          <p class="catch">考える時間を、取り戻す。</p>
+          <p>現場の改善から日々の業務まで、AIを活かして効率化。「人にしかできないこと」に時間を使えるようにします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆ワザノコシ詳細（旧 wazanokoshi.html を統合） -->
+  <section class="section section--soft" id="wazanokoshi">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">WAZANOKOSHI ／ ワザノコシ</span>
+        <h2>技を、残す。</h2>
+        <p>
+          長年つちかってきた熟練者の技。その多くは、本人も言葉にできないまま、頭と手の中に眠っています。
+          ワザノコシは、その動きを見える形にして、若手にも伝わる手順へと変えていきます。
+          「あの人にしかできない」を、「みんなができる」へ。
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <div class="feature">
+          <div><h3>作業ポイントの可視化</h3><p>熟練者がどこを見て、どう手を動かしているか。大事なポイントを目に見える形で取り出します。</p></div>
+        </div>
+        <div class="feature">
+          <div><h3>差を数字で把握</h3><p>ベテランと若手の違いを数値で比較。どこを直せば近づけるのかが、感覚ではなくデータで分かります。</p></div>
+        </div>
+        <div class="feature">
+          <div><h3>そのまま使える手順に</h3><p>取り出した技を、現場ですぐ使える手順書として整えます。教える側の負担も大きく減ります。</p></div>
+        </div>
+        <div class="feature">
+          <div><h3>補助金活用も相談可</h3><p>導入にあたっての補助金の活用についても、根拠となるデータづくりからご相談いただけます。</p></div>
+        </div>
+      </div>
+
+      <h3 class="solutions-subhead" style="margin-top:48px;">製造業だけじゃない。技のある現場すべてへ。</h3>
+      <div class="accordion accordion--ind">
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">製造業</span><span class="acc-sub">ノウハウ・段取り系</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・製造業】設備が止まったときの対応・復旧手順"><span>設備が止まったときの対応・復旧手順</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・製造業】段取り替え・治具セットの手順とコツ"><span>段取り替え・治具セットの手順とコツ</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・製造業】加工条件の勘どころ（材料・刃物・送り速度などの判断）"><span>加工条件の勘どころ（材料・刃物・送り速度などの判断）</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・製造業】異音・異常の「いつもと違う」の気づき方"><span>異音・異常の「いつもと違う」の気づき方</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">飲食</span><span class="acc-sub">レシピの数値化・動き系</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・飲食】レシピを分量・時間・温度で数値マニュアル化"><span>レシピを分量・時間・温度で数値マニュアル化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・飲食】火加減・揚げ時間など「見て覚える」工程の基準化"><span>火加減・揚げ時間など「見て覚える」工程の基準化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・飲食】仕込み・盛り付けの手順と段取り"><span>仕込み・盛り付けの手順と段取り</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">建設</span><span class="acc-sub">知識・場数のノウハウ系</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・建設】定期的に行う作業の手順化"><span>定期的に行う作業の手順化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・建設】工具の取り扱いやメンテナンス手順"><span>工具の取り扱いやメンテナンス手順</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・建設】現場ごとの納まり・施工の勘どころ"><span>現場ごとの納まり・施工の勘どころ</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・建設】安全確認・危険予知のポイント"><span>安全確認・危険予知のポイント</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・建設】天候・地盤など状況に応じた判断"><span>天候・地盤など状況に応じた判断</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">整備</span><span class="acc-sub">機種別の手順・経験系</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・整備】機種ごとの点検・整備手順"><span>機種ごとの点検・整備手順</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・整備】故障診断の進め方（症状からの切り分け）"><span>故障診断の進め方（症状からの切り分け）</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・整備】過去の不具合事例の蓄積と参照"><span>過去の不具合事例の蓄積と参照</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">農業</span><span class="acc-sub">手順＋環境数値系</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・農業】作業手順・段取りの標準化"><span>作業手順・段取りの標準化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・農業】温度・湿度・濃度などの管理基準の数値化"><span>温度・湿度・濃度などの管理基準の数値化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・農業】水やり・施肥・収穫の見極めタイミング"><span>水やり・施肥・収穫の見極めタイミング</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【ワザノコシ・農業】病害虫の早期発見のポイント"><span>病害虫の早期発見のポイント</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <h3 class="solutions-subhead" style="margin-top:48px;">導入の流れ</h3>
+      <div class="steps" style="max-width:760px;margin:0 auto;">
+        <div class="step">
+          <div class="step-no"></div>
+          <div><h3>ご相談・現場の確認</h3><p>残したい技や、いま困っていることをお聞かせください。現場に合わせて進め方をご提案します。</p></div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div><h3>技の記録と見える化</h3><p>熟練者の作業を記録し、ポイントを取り出して分かりやすい形に整えます。</p></div>
+        </div>
+        <div class="step">
+          <div class="step-no"></div>
+          <div><h3>手順として現場へ</h3><p>誰でも使える手順としてお渡しし、現場での定着までサポートします。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆アイツインにできること（＝ゲンバ3Dスキャンでできること・アコーディオン：1つだけ開く） -->
+  <section class="section" id="capabilities">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">GENBA 3D SCAN ／ ゲンバ3Dスキャン</span>
+        <h2>現実を、そのままデータに。</h2>
+        <p>
+          現場を「3D」でまるごとデジタル化する技術は、製造業にとどまりません。
+          図面のない部品、古い設備、建物、店舗まで。現実をそのままデータにすることで、さまざまな課題を解決します。
+        </p>
+      </div>
+
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">1</span>
+            <span class="acc-label"><span class="acc-title">リバースエンジニアリング代行</span><span class="acc-sub">図面のない部品を、スキャンしてデータ化・再製作</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="図面がない部品をスキャンしてCAD化"><span>図面がない部品をスキャンしてCAD化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="古い設備の部品の再製作"><span>古い設備の部品の再製作</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="交換部品の再現"><span>交換部品の再現</span></label></li>
+            </ul>
+            <p class="acc-note">※ お客様が正当に保有・使用する設備の部品を対象とします。</p>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">2</span>
+            <span class="acc-label"><span class="acc-title">設備・工場の現況3D化</span><span class="acc-sub">現実の工場をそのままデータにし、変更を事前に検証</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="工場レイアウト変更の検討"><span>工場レイアウト変更の検討</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="設備移設の干渉チェック（ぶつからないかを事前確認）"><span>設備移設の干渉チェック（ぶつからないかを事前確認）</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="図面がない古い工場の現況モデル化"><span>図面がない古い工場の現況モデル化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="プラントの配管・ダクトの3D化"><span>プラントの配管・ダクトの3D化</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">3</span>
+            <span class="acc-label"><span class="acc-title">建築・土木の現況スキャン</span><span class="acc-sub">建物やインフラを、現況のままデータに</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="既存建物の現況モデル化"><span>既存建物の現況モデル化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="改修工事の図面作成"><span>改修工事の図面作成</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="施工の進捗・出来ばえの記録・管理（出来形管理）"><span>施工の進捗・出来ばえの記録・管理（出来形管理）</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">4</span>
+            <span class="acc-label"><span class="acc-title">不動産のバーチャル内覧制作</span><span class="acc-sub">物件を、Webで歩いて見られる形に</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="物件をスキャンしてWeb内覧化"><span>物件をスキャンしてWeb内覧化</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">5</span>
+            <span class="acc-label"><span class="acc-title">文化財・美術品のデジタルアーカイブ</span><span class="acc-sub">かたちを未来へ残す</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="文化財の保存用データ化"><span>文化財の保存用データ化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="展示用3Dモデルの制作"><span>展示用3Dモデルの制作</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">6</span>
+            <span class="acc-label"><span class="acc-title">製品の3Dビューア制作</span><span class="acc-sub">自社製品を、Webで回して見せる</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="営業・展示会向けの3Dモデル制作"><span>営業・展示会向けの3Dモデル制作</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="Webで操作できる製品ビューア"><span>Webで操作できる製品ビューア</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">7</span>
+            <span class="acc-label"><span class="acc-title">3Dプリンターの活用</span><span class="acc-sub">食品サンプルや試作品を、立体で出力</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="食品サンプルのカラー印刷"><span>食品サンプルのカラー印刷</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="自社製品の3D印刷（試作・小ロット）"><span>自社製品の3D印刷（試作・小ロット）</span></label></li>
+            </ul>
+            <p class="acc-note">※ カラー印刷は外注対応となります。</p>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">8</span>
+            <span class="acc-label"><span class="acc-title">飲食店向け</span><span class="acc-sub">製造業で培った技術を、店舗の現場へ</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner"><p class="cap-hint">気になる項目に<strong>チェック</strong>を入れると、下のバーからそのまま<strong>お問い合わせ</strong>できます。</p>
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="厨房の動線改善・事前シミュレーション"><span>厨房の動線改善・事前シミュレーション</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="人・モノの動きの事前検証"><span>人・モノの動きの事前検証</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="日替わりレシピ・調理の動きのマニュアル化（ワザノコシ系）"><span>日替わりレシピ・調理の動きのマニュアル化（ワザノコシ系）</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="食品サンプルの3Dデータ化"><span>食品サンプルの3Dデータ化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="店舗のバーチャル内覧制作"><span>店舗のバーチャル内覧制作</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆AIによる改善・業務効率化（こんなことができる・⑨を軸に新設） -->
+  <section class="section section--soft" id="ai-solution">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">AI SOLUTION ／ AIによる改善・業務効率化</span>
+        <h2>考える時間を、取り戻す。</h2>
+        <p>
+          現場の改善から日々の業務まで、AIを活かして効率化。
+          ものづくりの視点を活かし、「人にしかできないこと」に時間を使えるようにします。
+        </p>
+      </div>
+      <div class="grid grid-2" style="margin-bottom:40px;">
+        <div class="feature"><div><h3>専門知識はいりません</h3><p>むずかしい設定や運用はおまかせ。御社に合わせて、導入から定着まで伴走します。</p></div></div>
+        <div class="feature"><div><h3>御社専用につくる</h3><p>既製品の押し付けではなく、現場の業務に合わせたAI・アプリ・仕組みを用意します。</p></div></div>
+        <div class="feature"><div><h3>小さく始めて、広げる</h3><p>まずは一つの業務から。効果を確かめながら、無理なく範囲を広げられます。</p></div></div>
+        <div class="feature"><div><h3>散らばった情報を、活かす</h3><p>紙やバラバラのデータをデジタル化し、「探せる・使える」会社の資産に変えます。</p></div></div>
+      </div>
+      <div class="accordion accordion--ind">
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">Web・アプリ・AI開発</span><span class="acc-sub">つくって、支える</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】ホームページ作成・支援"><span>ホームページ作成・支援</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】専用アプリケーション開発"><span>専用アプリケーション開発</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】独自LLM開発（自社専用の対話AIづくり）"><span>独自LLM開発（自社専用の対話AIづくり）</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-label"><span class="acc-title">業務効率化・データ活用</span><span class="acc-sub">手間を減らす、見える化する</span></span>
+            <span class="acc-mark" aria-hidden="true">＋</span>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】AI-OCR・書類のデータ化"><span>AI-OCR・書類のデータ化</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】社内ナレッジ検索（マニュアルや図面を、聞くだけで探せる）"><span>社内ナレッジ検索（マニュアルや図面を、聞くだけで探せる）</span></label></li>
+              <li><label class="cap-chk"><input type="checkbox" value="【AI】業務自動化・データの見える化"><span>業務自動化・データの見える化</span></label></li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アコーディオン開閉（各アコーディオン内で常に1つだけ開く） -->
+  <script>
+  (function () {
+    document.querySelectorAll('.accordion').forEach(function (acc) {
+      acc.querySelectorAll('.acc-head').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var item = btn.closest('.acc-item');
+          var willOpen = !item.classList.contains('open');
+          acc.querySelectorAll('.acc-item.open').forEach(function (o) {
+            o.classList.remove('open');
+            o.querySelector('.acc-head').setAttribute('aria-expanded', 'false');
+          });
+          if (willOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+        });
+      });
+    });
+  })();
+  </script>
+
+  <!-- できること 選択バー（チェックした項目をまとめて問い合わせ） -->
+  <div id="cap-bar" class="cap-bar" hidden aria-live="polite">
+    <div class="wrap cap-bar-inner">
+      <div class="cap-bar-main">
+        <div class="cap-bar-title">気になる項目 <span id="cap-count">0</span> 件を選択中</div>
+        <div id="cap-chips" class="cap-chips"></div>
+      </div>
+      <div class="cap-bar-actions">
+        <button type="button" id="cap-clear" class="cap-clear">クリア</button>
+        <a id="cap-go" class="btn btn--fill" href="contact.html">この内容で問い合わせる ›</a>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var CAP_TARGET = 'form'; /* onefileビルド時に mailto へ置換 */
+    var bar = document.getElementById('cap-bar');
+    if (!bar) return;
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('.cap-chk input[type=checkbox]'));
+    var chips = document.getElementById('cap-chips');
+    var countEl = document.getElementById('cap-count');
+    function selected() { return boxes.filter(function (b) { return b.checked; }); }
+    function render() {
+      var sel = selected();
+      countEl.textContent = sel.length;
+      chips.innerHTML = '';
+      sel.forEach(function (b) {
+        var lab = b.nextElementSibling;
+        var c = document.createElement('span'); c.className = 'cap-chip';
+        c.textContent = lab ? lab.textContent : b.value;
+        var x = document.createElement('button'); x.type = 'button'; x.className = 'cap-chip-x';
+        x.setAttribute('aria-label', '削除'); x.textContent = '×';
+        x.addEventListener('click', function () { b.checked = false; render(); });
+        c.appendChild(x); chips.appendChild(c);
+      });
+      bar.hidden = sel.length === 0;
+      document.body.classList.toggle('cap-bar-open', sel.length > 0);
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', render); });
+    document.getElementById('cap-clear').addEventListener('click', function () {
+      boxes.forEach(function (b) { b.checked = false; }); render();
+    });
+    document.getElementById('cap-go').addEventListener('click', function (e) {
+      e.preventDefault();
+      var items = selected().map(function (b) { return b.value; });
+      if (!items.length) return;
+      if (CAP_TARGET === 'mailto') {
+        var body = '【気になっている「できること」】\n' + items.map(function (s) { return '・' + s; }).join('\n') + '\n\n（上記についてご相談したいです）';
+        var addr = 'mono.shin' + '@' + 'outlook.com'; /* スパム対策：アドレスを分割して結合 */
+        location.href = 'mailto:' + addr + '?subject=' + encodeURIComponent('【アイツインHP】できることのご相談') + '&body=' + encodeURIComponent(body);
+      } else {
+        location.href = 'contact.html?topic=capabilities&items=' + encodeURIComponent(items.join('\n'));
+      }
+    });
+  })();
+  </script>
+
+  <!-- ◆プロフィール（旧 profile.html を統合） -->
+  <section class="section" id="profile">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">PROFILE</span>
+        <h2>プロフィール</h2>
+        <p>現場の隣に、いつも。</p>
+      </div>
+      <div class="profile">
+        <!-- 写真エリア -->
+        <div class="profile-photo">
+          <!--
+            ▼▼ 写真を追加する手順 ▼▼
+            1) 顔写真を「profile.jpg」という名前でこのフォルダに置く
+            2) すぐ下の img タグを囲っているコメント記号を外して有効にする
+            3) その下の ph-note ブロックは丸ごと削除する
+          -->
+          <!-- 写真を表示するには、次の行のコメントを外してください ↓ -->
+          <!-- <img src="profile.jpg" alt="代表者の写真"> -->
+
+          <!-- ↓ 写真を追加したら、この ph-note ブロックは削除してください ↓ -->
+          <div class="ph-note">
+            写真はこちらに入ります<br>
+            （後で profile.jpg を追加）
+          </div>
+        </div>
+        <!-- 本文エリア（シンプル構成：役職・名前・紹介文・ひとこと） -->
+        <div class="profile-body">
+          <p class="role">代表</p>
+          <h2>加瀬部 裕紀</h2>
+          <p class="name-en">Yuki Kasebe</p>
+          <p>私は高校卒業後、製造業に14年間在籍してきました。設備の保全としてメンテナンスに携わり、また設計士としてモノづくりに取り組むなかで、ものづくりを「守る側」と「生み出す側」の両方を経験してきました。</p>
+          <p>設備が止まり、いつ復旧するか分からない焦り。納期に追われながら練り上げた設計。触れて、感じて、考えて、直して、作る。その繰り返しのなかで、「どうすればもっと効率化できるのか」をいつも考えていました。</p>
+          <p>「アイツイン」という社名は、デジタルツインに由来します。仮想空間で工場を再現し、シミュレーションができる。私はこの技術に、効率化の大きな可能性を感じています。これまでは図面を引き、モノを作り、設置するという流れが当たり前でしたが、デジタルツイン上で事前に試せることで、その工数を大きく減らせるようになりました。</p>
+          <p>デジタルツインは、大企業だけのものではありません。この技術を中小企業へ広め、伝えていくことが、私の使命だと考えています。</p>
+          <p>私の原点は、ものづくりの経験にあります。だからこそ、机上の空論ではなく、つくる人と同じ目線で課題に向き合えると自負しています。ITやAIといった技術も取り入れながら、現場に潜む課題を、作業者の目線で解いていきたい。その想いから、アイツインを立ち上げました。</p>
+          <blockquote class="quote">
+            「中小製造業に、おどろきと、わくわくを。」<br>
+            現場が前を向ける、その瞬間をつくりたい。
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>まずは、お気軽にご相談ください。</h2>
+      <p>「何ができるのか知りたい」だけでも大歓迎です。御社の現場に合わせてご提案します。</p>
+      <a class="btn btn--fill" href="contact.html?topic=trial">お問い合わせ・無料体験申込</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">株式会社アイツイン</p>
+          <p>中小製造業に、おどろきと、わくわくを。<br>デジタルツインで現場の未来をつくります。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="#issues">課題</a></li>
+              <li><a href="#digital-twin">デジタルツイン</a></li>
+              <li><a href="#profile">プロフィール</a></li>
+              <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>技術</h4>
+            <ul>
+              <li><a href="#wazanokoshi">ワザノコシ</a></li>
+              <li><a href="#capabilities">ゲンバ3Dスキャン</a></li>
+              <li><a href="#ai-solution">AIによる改善・業務効率化</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–18:00</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（i-TWIN）
+      </div>
+    </div>
+  </footer>
+
+  <!-- チェックした項目をお問い合わせフォームへ引き継ぐ -->
+  <script>
+  (function () {
+    var btn = document.getElementById("checklist-go");
+    if (!btn) return;
+    btn.addEventListener("click", function (e) {
+      var checked = Array.prototype.slice.call(
+        document.querySelectorAll(".checklist input[type=checkbox]:checked"));
+      if (!checked.length) return; // 未チェックなら通常遷移
+      e.preventDefault();
+      var items = checked.map(function (cb) {
+        return (cb.parentNode.textContent || "").trim();
+      });
+      location.href = "contact.html?topic=onsite&items=" +
+        encodeURIComponent(items.join("\n"));
+    });
+  })();
+  </script>
+
+  <!-- かんたん編集モード（右下の「✎ 編集」ボタン） -->
+  <script src="edit.js" defer></script>
+</body>
+</html>

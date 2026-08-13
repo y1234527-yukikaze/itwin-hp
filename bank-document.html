@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン (i-TWIN)  事業概要（金融機関ご提出用）A4・全6ページ
+  ------------------------------------------------------------
+  ・印刷／PDF化前提。Ctrl+P →「用紙：A4」「余白：なし（または既定）」
+    「背景のグラフィック：ON」推奨。
+  ・インク節約のため全面グレースケール（濃いベタ塗りなし・最大でも薄グレー）。
+  ・本文・数字は右下「✎ 編集」で直接書き換え →「書き出し」で保存できます。
+  ・最新サイト（index-v2.html＝デジタルツイン/自動化）の内容に基づきます。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アイツイン｜事業概要（金融機関ご提出用）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png">
+  <style>
+    :root{
+      --ink:#1a1a1a;      /* 本文（ほぼ黒） */
+      --strong:#000;      /* 見出し強調 */
+      --sub:#555;         /* 補助テキスト */
+      --mid:#777;         /* ラベル */
+      --line:#bdbdbd;     /* 罫線 */
+      --line2:#dcdcdc;    /* 細い罫線 */
+      --soft:#f2f2f2;     /* 薄グレー面 */
+      --mincho:'Shippori Mincho', serif;
+      --gothic:'Zen Kaku Gothic New', sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      font-family:var(--gothic);color:var(--ink);background:#6b6b6b;line-height:1.65;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+      filter:grayscale(100%);   /* 念のため全体グレースケール */
+    }
+    @page{size:A4;margin:0;}
+
+    .page{
+      width:210mm;height:297mm;background:#fff;margin:0 auto;
+      padding:14mm 15mm 12mm;position:relative;overflow:hidden;
+      page-break-after:always;break-after:page;display:flex;flex-direction:column;
+    }
+    .page:last-child{page-break-after:auto;break-after:auto;}
+    @media screen{
+      body{padding:26px 0;}
+      .page{margin:0 auto 24px;box-shadow:0 5px 22px rgba(0,0,0,.4);}
+    }
+    @media print{ body{background:#fff;} .page{margin:0;box-shadow:none;} }
+
+    h1,h2,h3{font-family:var(--mincho);color:var(--strong);margin:0;}
+    p{margin:0 0 7px;font-size:13.3px;}
+    .small{font-size:11.4px;color:var(--sub);}
+
+    /* ページ見出し帯 */
+    .p-head{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      border-bottom:2px solid var(--strong);padding-bottom:6px;margin-bottom:14px;
+    }
+    .p-head .bl{font-size:12.4px;letter-spacing:.16em;color:var(--mid);font-weight:700;}
+    .p-head .bl b{color:var(--strong);}
+    .p-no{font-size:11.8px;color:var(--mid);letter-spacing:.1em;}
+    .p-foot{
+      position:absolute;left:15mm;right:15mm;bottom:8mm;
+      display:flex;justify-content:space-between;border-top:1px solid var(--line2);
+      padding-top:5px;font-size:9px;color:var(--mid);
+    }
+
+    .eyebrow{font-size:11.3px;letter-spacing:.2em;font-weight:700;color:var(--mid);display:block;margin-bottom:3px;}
+    h2.sec{font-size:18px;color:var(--strong);line-height:1.35;margin-bottom:3px;}
+    .sec-sub{font-size:12.4px;color:var(--sub);margin-bottom:12px;}
+    .block{margin-bottom:22px;}
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+    .box{border:1px solid var(--line);border-radius:7px;padding:10px 12px;background:#fff;}
+    .box.soft{background:var(--soft);}
+    .box h3{font-size:14.2px;margin-bottom:3px;color:var(--strong);}
+    .box p{font-size:11.8px;margin:0;color:var(--ink);}
+    .box .n{font-family:var(--mincho);font-weight:800;font-size:14.2px;color:var(--mid);margin-right:5px;}
+
+    ul.ticks{list-style:none;margin:4px 0 0;padding:0;}
+    ul.ticks li{position:relative;padding:2px 0 2px 15px;font-size:12.3px;}
+    ul.ticks li::before{content:"";position:absolute;left:1px;top:8px;width:6px;height:6px;background:var(--mid);border-radius:1px;}
+
+    .lead{
+      font-size:13.6px;border-left:4px solid var(--mid);padding:2px 0 2px 12px;
+      margin-bottom:12px;color:var(--ink);
+    }
+    .val{display:flex;gap:10px;margin:0 0 7px;}
+    .val .k{flex:0 0 auto;font-family:var(--mincho);font-weight:800;color:var(--strong);font-size:13px;min-width:7.5em;}
+    .val .v{font-size:12.6px;}
+
+    .gain{background:var(--soft);border:1px solid var(--line2);border-left:4px solid var(--mid);border-radius:6px;padding:7px 10px;font-size:11.8px;}
+    .gain b{display:block;font-size:9px;letter-spacing:.08em;color:var(--mid);margin-bottom:2px;}
+
+    /* 比較テーブル（デジタルツインとは） */
+    table.cmp{width:100%;border-collapse:collapse;font-size:11.8px;margin-top:4px;}
+    table.cmp th,table.cmp td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top;}
+    table.cmp th{background:var(--soft);font-family:var(--mincho);color:var(--strong);font-weight:700;width:24%;}
+    table.cmp td.tw{font-weight:700;}
+
+    /* STEP 行 */
+    .step{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:start;
+      border-top:1px solid var(--line2);padding:8px 0;}
+    .step:first-of-type{border-top:none;}
+    .step .sn{font-family:var(--mincho);font-weight:800;font-size:13px;color:var(--strong);
+      border:1.5px solid var(--strong);border-radius:5px;padding:3px 8px;white-space:nowrap;height:fit-content;}
+    .step h3{font-size:14.8px;margin-bottom:2px;}
+    .step p{font-size:11.8px;margin:0;color:var(--sub);}
+    .step .g{font-size:11.4px;background:var(--soft);border:1px solid var(--line2);border-radius:5px;
+      padding:5px 9px;max-width:46mm;color:var(--ink);}
+    .step .g b{display:block;font-size:8.4px;color:var(--mid);letter-spacing:.06em;margin-bottom:1px;}
+
+    /* ループ（めざす姿） */
+    .loop{display:flex;align-items:stretch;gap:8px;}
+    .loop .node{flex:1;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:#fff;}
+    .loop .node h3{font-size:13px;margin-bottom:2px;}
+    .loop .node p{font-size:9.4px;margin:0;color:var(--sub);}
+    .loop .arr{display:flex;align-items:center;font-size:15px;color:var(--mid);font-weight:700;}
+
+    /* 表紙 */
+    .cover{padding:24mm 18mm;border-top:8px solid var(--strong);}
+    .cover .logo img{height:40px;display:block;}
+    .cover .kind{margin-top:26mm;font-size:13px;letter-spacing:.28em;color:var(--mid);font-weight:700;}
+    .cover h1{font-size:36px;line-height:1.5;color:var(--strong);margin:8px 0 0;}
+    .cover .tag{margin-top:14px;padding-top:12px;border-top:3px solid var(--strong);display:inline-block;
+      font-size:14px;color:var(--sub);}
+    .cover .spacer{flex:1;}
+    .cover .meta{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--sub);}
+    .cover .meta .co{font-family:var(--mincho);font-size:17px;font-weight:700;color:var(--strong);margin-bottom:4px;}
+
+    /* 空欄になった枠は非表示（画面・印刷とも）。編集モード中は表示して再入力可 */
+    .x-empty{display:none !important;}
+    body.edit-on .x-empty{display:block !important;outline:1px dashed var(--line);}
+
+    /* 編集モード（画面のみ） */
+    #edit-bar{position:fixed;right:16px;bottom:16px;z-index:9999;display:flex;gap:6px;align-items:center;
+      background:#fff;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.25);border-radius:10px;padding:8px 10px;font-family:var(--gothic);}
+    #edit-bar button{font-family:var(--gothic);font-size:13px;border:1px solid var(--strong);background:#fff;color:var(--strong);border-radius:6px;padding:6px 10px;cursor:pointer;}
+    #edit-bar #ed-toggle{background:var(--strong);color:#fff;}
+    #edit-bar #ed-msg{font-size:13px;color:var(--sub);max-width:14em;}
+    body.edit-on [contenteditable="true"]{outline:1px dashed var(--mid);outline-offset:2px;cursor:text;}
+    @media print{ #edit-bar{display:none !important;} }
+  </style>
+</head>
+<body>
+
+  <!-- ============ P1 表紙 ============ -->
+  <section class="page cover">
+    <span class="logo"><img src="itwin-logo.png" alt="アイツイン"></span>
+    <div class="kind">COMPANY OVERVIEW ／ 事業概要（金融機関ご提出用）</div>
+    <h1>中小製造業に、<br>おどろきと、わくわくを。</h1>
+    <p class="tag">デジタルツインで、現場の「自動化」を。</p>
+    <div class="spacer"></div>
+    <div class="meta">
+      <div class="co">アイツイン（i-TWIN）</div>
+      <div>代表：加瀬部 裕紀　／　所在地：山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</div>
+      <div>受付：平日 9:00–18:00　／　2026年</div>
+    </div>
+  </section>
+
+  <!-- ============ P2 事業概要・市場背景・課題 ============ -->
+  <section class="page">
+    <div class="p-head"><div class="bl"><b>アイツイン</b>　事業概要</div><div class="p-no">02 ／ 06</div></div>
+
+    <div class="block">
+      <span class="eyebrow">BUSINESS</span>
+      <h2 class="sec">事業概要</h2>
+      <p class="lead">“PCの中のもう一つの現場”（デジタルツイン）をつくり、<strong>改善が回る運用</strong>を提供します。中小製造業の現場の「止まる・待つ・戻る・溜まる」という“詰まり”を短期間で特定し、投資判断と改善実行を前に進める<strong>診断・分析・運用レポート</strong>を、<strong>3ヶ月単位の伴走</strong>で提供。効率化・自動化・省力化を、人手不足の現実に即して実用レベルまで分解して提案します。</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">MARKET</span>
+      <h2 class="sec">市場環境と政策支援</h2>
+      <p>人手不足・賃上げ・老朽設備の更新・品質トレーサビリティ要求を背景に、中小製造業の<strong>DX・自動化への投資意欲</strong>が高まっています。2026年度は<strong>中小企業省力化投資補助金（最大1,500万円）</strong>、<strong>デジタル化・AI導入補助金（最大450万円）</strong>など政策支援も本格化しています。</p>
+      <div class="grid2" style="margin-top:6px;">
+        <div class="box soft"><p style="font-size:11.8px;">Fictiv「2026 State of Manufacturing Report」では、製造業リーダーの<b>95％が「AIは将来の成功に不可欠」</b>と回答する一方、<b>中小製造業の約95％がAI・DX未導入</b>。停滞の本質は「AI導入には巨額投資が必要」という思い込み＝“誤認”と指摘されています。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;">日本工業大学大学院の論考は、技能が失われる真因を<b>「AIに渡す前にデータ化できていないこと」</b>と断じます。これは技能に限らず、設備の状態も人とモノの流れも同じ。<b>“まずデータ化”</b>が、改善の出発点です。</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">ISSUES</span>
+      <h2 class="sec">中小製造業が抱える課題</h2>
+      <div class="grid3">
+        <div class="box"><h3><span class="n">01</span>受注を断っている</h3><p>人が足りず、受けられる仕事を見送る日がある。</p></div>
+        <div class="box"><h3><span class="n">02</span>時間がかかりすぎ</h3><p>同じ作業に人手と時間を取られ、付加価値の高い仕事に手が回らない。</p></div>
+        <div class="box"><h3><span class="n">03</span>何を自動化すべきか</h3><p>「自動化したい」が、どこから・効果は、の判断材料がない。</p></div>
+      </div>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）事業概要（金融機関ご提出用）</span><span>P.02</span></div>
+  </section>
+
+  <!-- ============ P3 デジタルツインとは・進め方 ============ -->
+  <section class="page">
+    <div class="p-head"><div class="bl"><b>アイツイン</b>　事業概要</div><div class="p-no">03 ／ 06</div></div>
+
+    <div class="block">
+      <span class="eyebrow">DIGITAL TWIN</span>
+      <h2 class="sec">デジタルツインとは</h2>
+      <p class="lead">現実の工場や設備を、デジタル空間に<strong>“双子（ツイン）”</strong>として再現する技術です。3Dモデルや静的なシミュレーションと違い、現場の計測器（IoTセンサー）からの<strong>リアルタイムデータで常に最新の状態</strong>に更新され、現実とデジタルが<strong>双方向でやり取り</strong>します。いわば「現場のリアルを、そのまま映すデジタル版」です。</p>
+      <table class="cmp">
+        <tr><th></th><th>従来のシミュレーション</th><th>デジタルツイン</th></tr>
+        <tr><th>データ</th><td>過去データ・仮の条件</td><td class="tw">現場のリアルタイムデータ</td></tr>
+        <tr><th>更新</th><td>単発・たまに</td><td class="tw">常に・自動で最新</td></tr>
+        <tr><th>やりとり</th><td>一方向（試すだけ）</td><td class="tw">双方向（現場へ返す）</td></tr>
+      </table>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">OUR APPROACH</span>
+      <h2 class="sec">アイツインの進め方（伴走型）</h2>
+      <p class="sec-sub">デジタルツインで現場を最適化し、一度きりで終わらせない伴走型のご支援です。</p>
+      <div class="grid3">
+        <div class="box"><h3><span class="n">1</span>はじめに</h3><p>ヒアリングで、どこから・どう進めるかの方向性を一緒に決めます。</p></div>
+        <div class="box"><h3><span class="n">2</span>毎月</h3><p>月1回、進捗をレポートにまとめ、報告会で共有。次の一手を確認しながら進めます。</p></div>
+        <div class="box"><h3><span class="n">3</span>ゴールまで</h3><p>御社が描く最終目標まで、一段ずつ長くお付き合いしながら伴走します。</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">CAN DO</span>
+      <h2 class="sec">アイツインができること</h2>
+      <div class="grid3">
+        <div class="box soft"><p style="font-size:11.8px;"><b>現場の見える化</b>／動線・ムダ・滞留をデータに。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>レイアウト・自動化の検証</b>／現場を止めず事前に。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>設備の予兆検知</b>／止まる前に気づく。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>工程全体の最適化</b>／部分最適のムダを解消。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>省力化・効率化の提案</b>／数字を根拠に。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>投資判断の根拠づくり</b>／効果を数字で提示。</p></div>
+      </div>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）事業概要（金融機関ご提出用）</span><span>P.03</span></div>
+  </section>
+
+  <!-- ============ P4 STEP・めざす姿 ============ -->
+  <section class="page">
+    <div class="p-head"><div class="bl"><b>アイツイン</b>　事業概要</div><div class="p-no">04 ／ 06</div></div>
+
+    <div class="block">
+      <span class="eyebrow">STEP UP</span>
+      <h2 class="sec">続けるほど、工場は強くなる（3ヶ月ごとに一段）</h2>
+      <div class="step">
+        <span class="sn">STEP 1</span>
+        <div><h3>現状を知る（測る）</h3><p>3Dスキャンで対象の工程・現場をデータ化し、ムダ・動線・滞留を見える化。</p></div>
+        <div class="g"><b>得られるもの</b>自社の現状が、客観的な数字で分かる</div>
+      </div>
+      <div class="step">
+        <span class="sn">STEP 2</span>
+        <div><h3>試す（シミュレーション）</h3><p>デジタルツイン上で自動化・レイアウト案を、現場を止めずに検証。</p></div>
+        <div class="g"><b>得られるもの</b>失敗のない改善計画と、投資判断の根拠</div>
+      </div>
+      <div class="step">
+        <span class="sn">STEP 3</span>
+        <div><h3>つなぐ・先回りする（リアルタイム化）</h3><p>設備の数値（振動・電流等）をデジタルツインへ反映し、異常の予兆を先読み。</p></div>
+        <div class="g"><b>得られるもの</b>止まる前に気づける現場把握</div>
+      </div>
+      <div class="step">
+        <span class="sn">STEP 4</span>
+        <div><h3>工場全体のデジタルツイン化（最終形）</h3><p>入荷から出荷まで工場まるごとを再現し、全体最適で「考える工場」へ。</p></div>
+        <div class="g"><b>得られるもの</b>工場全体が一つのデジタルツインに</div>
+      </div>
+      <p class="small" style="margin-top:8px;">※ 各STEPの内容や順番は決めつけず、御社へのヒアリングをもとに一緒に組み立て、「この工程から先に」といったご要望にも柔軟に対応します。</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">OUR GOAL</span>
+      <h2 class="sec">めざす姿｜工場が、自分で考える</h2>
+      <div class="loop">
+        <div class="node"><h3>リアルタイムでデータが入る</h3><p>現場の状態が、そのままデジタルツインへ。</p></div>
+        <div class="arr">→</div>
+        <div class="node"><h3>予知保全・シミュレーション</h3><p>異常を先読みし、改善案をデジタル上で試す。</p></div>
+        <div class="arr">→</div>
+        <div class="node"><h3>現場へフィードバック</h3><p>分かったことを現場に返し、また良くしていく。</p></div>
+      </div>
+      <p class="small" style="margin-top:7px;">↺ そして、またデータが入る。この<strong>ループが回り続ける工場</strong>が、私たちの最終ゴールです。</p>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）事業概要（金融機関ご提出用）</span><span>P.04</span></div>
+  </section>
+
+  <!-- ============ P5 商品・特徴・料金・集客 ============ -->
+  <section class="page">
+    <div class="p-head"><div class="bl"><b>アイツイン</b>　事業概要</div><div class="p-no">05 ／ 06</div></div>
+
+    <div class="block">
+      <span class="eyebrow">PRODUCTS</span>
+      <h2 class="sec">商品・サービス（3つの柱）</h2>
+      <div class="grid3">
+        <div class="box"><h3>柱1｜デジタルツイン現場最適化（主力）</h3><p>3Dスキャン→デジタルツインで検証→診断・分析・運用レポート→3ヶ月伴走。<b>年額／買い切り</b>。完全ローカル。</p></div>
+        <div class="box"><h3>柱2｜3Dスキャン（入口・単発）</h3><p>現場・設備・部品をまるごと3Dデータ化（図面のない部品・古い設備もOK）。</p></div>
+        <div class="box"><h3>柱3｜スポット診断・分析</h3><p>現場ヒアリング診断、作業動画の動線・工程分析。小さく試して継続運用へ。</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">STRENGTH</span>
+      <h2 class="sec">事業の特徴｜“作って終わり”にしない</h2>
+      <p>多くのDXが「分析して終わり」「導入して終わり」になるなか、当社は<strong>実行と運用まで伴走</strong>し、改善が回り続ける運用に定着させます。装置の工事・施工は抱え込まず、身軽に“改善の定着”へ集中。全システムは<strong>完全閉域ネットワーク内で動作し、データは一切外部に出ません</strong>。月次レポートで効果検証・標準化し、<strong>改善を属人化させない</strong>——ここが他社にない強みです。</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">PRICING</span>
+      <h2 class="sec">料金体系</h2>
+      <p>月額ではなく<strong>年額プラン</strong>と<strong>買い切りプラン</strong>で提供。IT導入補助金・ものづくり補助金・省力化投資補助金などの政策支援を<strong>活用しやすい料金設計</strong>とし、クライアントの初期負担を最小化します。</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">ACQUISITION</span>
+      <h2 class="sec">集客｜無料体験・診断（紹介経由）</h2>
+      <div class="grid3">
+        <div class="box soft"><p style="font-size:11.8px;"><b>現場ヒアリング診断</b>／困りごとを聞き取り、御社専用のチューニング提案書を作成。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>作業動画診断</b>／1工程を撮影し、動線・工程分析レポートを即日提供。</p></div>
+        <div class="box soft"><p style="font-size:11.8px;"><b>デモ体験</b>／当社のデモを3Dスキャンし、デジタルツイン化の様子をその場でお見せ。</p></div>
+      </div>
+    </div>
+
+    <div class="p-foot"><span>アイツイン（i-TWIN）事業概要（金融機関ご提出用）</span><span>P.05</span></div>
+  </section>
+
+  <!-- ============ P6 プロフィール・会社概要 ============ -->
+  <section class="page">
+    <div class="p-head"><div class="bl"><b>アイツイン</b>　事業概要</div><div class="p-no">06 ／ 06</div></div>
+
+    <div class="block">
+      <span class="eyebrow">PROFILE</span>
+      <h2 class="sec">代表プロフィール</h2>
+      <p style="font-size:13px;"><strong>加瀬部 裕紀（Yuki Kasebe）／代表</strong></p>
+      <p>大手製造業で14年の実務経験を持つ技術者。設備保全では、構造の理解と故障予兆の見極め——振動や電流といった<strong>“機械の声”の読み取り</strong>を、設計では、<strong>自動化アイテムの選定・投資判断・機械電気設計・部品加工（旋盤・フライス等）</strong>まで一貫して習得しました。ものづくりを「守る側（保全）」と「生み出す側（設計）」の両面から経験しています。</p>
+      <p>AIは独学で2年。<strong>「買うより作る」</strong>姿勢で、故障しかけのQRリーダーを数万円台で自作して本番運用に載せ、安価なカメラとAIで品質検査システムを構築し現場へ導入。並行して、小型コンピュータを用いた社内AI教育・内製化支援にも従事してきました。机上ではなく、つくる人と同じ目線で「現場に効く」かたちに落とし込めることが強みです。社名「アイツイン」も、現実の工場をデジタル空間に再現する〈デジタルツイン〉に由来します。</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">COMPANY</span>
+      <h2 class="sec">会社概要</h2>
+      <div class="box">
+        <div class="val"><span class="k">会社名</span><span class="v">アイツイン（i-TWIN）</span></div>
+        <div class="val"><span class="k">代表者</span><span class="v">加瀬部 裕紀</span></div>
+        <div class="val"><span class="k">所在地</span><span class="v">山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</span></div>
+        <div class="val"><span class="k">受付時間</span><span class="v">平日 9:00–18:00</span></div>
+        <div class="val"><span class="k">事業内容</span><span class="v">デジタルツインによる中小製造業の現場最適化・自動化支援（診断・分析・運用レポート／3Dスキャン／継続伴走）</span></div>
+        <div class="val"><span class="k">お問い合わせ</span><span class="v">mono.shin@outlook.com</span></div>
+      </div>
+    </div>
+
+    <p class="small" style="margin-top:6px;border-top:1px solid var(--line2);padding-top:7px;">
+      ※ 本資料の市場データ・補助金額・引用（Fictivレポート、日本工業大学大学院論考等）は出典どおりに記載しており、最新の公募要領・出典は別途ご確認ください。　※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。
+    </p>
+
+    <div class="p-foot"><span>© 2026 アイツイン（i-TWIN）</span><span>P.06</span></div>
+  </section>
+
+  <!-- かんたん編集モード（この資料専用・全テキスト編集可／空欄の枠は自動で非表示）。印刷時は編集バー非表示。 -->
+  <script>
+  (function () {
+    "use strict";
+    /* この資料内の“文字を持つ要素”をすべて編集対象にする（表・会社概要・STEPラベル・得られるもの欄・表紙なども含む） */
+    var EDITABLE = "h1,h2,h3,h4,p,li,td,th,.k,.v,.sn,.g,.gain,.kind,.co,.tag,.eyebrow,.small,.bl,.p-no,.meta>div,.p-foot span";
+    var EXCLUDE = "#edit-bar";
+    var VERSION = 1;
+    var KEY = "itwin_bankdoc_edits";   /* 旧 edit.js とは別キー */
+    /* 空になったら隠す“枠”の候補 */
+    var FRAMES = ".box,.step,.val,.loop .node,.block";
+
+    function nodes(){
+      return Array.prototype.slice.call(document.querySelectorAll(EDITABLE))
+        .filter(function (el){ return !el.closest(EXCLUDE); });
+    }
+    function hideEmpty(){
+      Array.prototype.forEach.call(document.querySelectorAll(FRAMES), function (el){
+        el.classList.toggle("x-empty", el.textContent.replace(/\s/g, "") === "");
+      });
+    }
+    function restore(){
+      var raw;
+      try { raw = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e){ raw = null; }
+      if (raw && raw.__v === VERSION && raw.data){
+        nodes().forEach(function (el, i){ if (raw.data[i] != null) el.innerHTML = raw.data[i]; });
+      }
+      hideEmpty();
+    }
+    function save(){
+      var data = nodes().map(function (el){ return el.innerHTML; });
+      try { localStorage.setItem(KEY, JSON.stringify({ __v: VERSION, data: data })); flash("保存しました（この端末）"); }
+      catch (e){ flash("保存に失敗しました"); }
+      hideEmpty();
+    }
+    function reset(){
+      if (!confirm("この端末の編集を取り消して、元に戻します。よろしいですか？")) return;
+      localStorage.removeItem(KEY); location.reload();
+    }
+    function setEdit(on){
+      document.body.classList.toggle("edit-on", on);
+      nodes().forEach(function (el){ el.contentEditable = on ? "true" : "false"; });
+      document.getElementById("ed-actions").hidden = !on;
+      document.getElementById("ed-toggle").textContent = on ? "✎ 編集中" : "✎ 編集";
+      if (!on) hideEmpty();   /* 編集終了時に空枠を隠す（編集中は表示して再入力可） */
+    }
+    function exportHTML(){
+      var clone = document.documentElement.cloneNode(true);
+      var bar = clone.querySelector("#edit-bar"); if (bar) bar.parentNode.removeChild(bar);
+      Array.prototype.forEach.call(clone.querySelectorAll("[contenteditable]"), function (e){ e.removeAttribute("contenteditable"); });
+      var body = clone.querySelector("body"); if (body) body.classList.remove("edit-on");
+      var html = "<!DOCTYPE html>\n" + clone.outerHTML + "\n";
+      var name = location.pathname.split("/").pop() || "bank-document.html";
+      var blob = new Blob([html], { type: "text/html;charset=utf-8" });
+      var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      flash("「" + name + "」を書き出しました");
+    }
+    var msgTimer;
+    function flash(text){ var m = document.getElementById("ed-msg"); if (!m) return; m.textContent = text; clearTimeout(msgTimer); msgTimer = setTimeout(function (){ m.textContent = ""; }, 4000); }
+    function buildBar(){
+      var bar = document.createElement("div"); bar.id = "edit-bar";
+      bar.innerHTML =
+        '<button id="ed-toggle" type="button">✎ 編集</button>' +
+        '<span id="ed-actions" hidden>' +
+          '<button id="ed-save" type="button">保存</button>' +
+          '<button id="ed-export" type="button">書き出し</button>' +
+          '<button id="ed-reset" type="button">取消</button>' +
+          '<button id="ed-exit" type="button">終了</button>' +
+        '</span><span id="ed-msg"></span>';
+      document.body.appendChild(bar);
+      document.getElementById("ed-toggle").addEventListener("click", function (){ setEdit(!document.body.classList.contains("edit-on")); });
+      document.getElementById("ed-save").addEventListener("click", save);
+      document.getElementById("ed-export").addEventListener("click", exportHTML);
+      document.getElementById("ed-reset").addEventListener("click", reset);
+      document.getElementById("ed-exit").addEventListener("click", function (){ setEdit(false); });
+    }
+    function init(){ restore(); buildBar(); }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+  })();
+  </script>
+</body>
+</html>
