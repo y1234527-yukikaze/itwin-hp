@@ -291,13 +291,14 @@
           <div class="sim-hero">
             <span class="sim-hero-label">削減額目安（年間）</span>
             <span class="sim-hero-value" id="sim-saving-value">¥0〜¥0</span>
+            <span class="sim-hero-note">※<span id="sim-hero-type-name">省力化</span>の目安（<span id="sim-hero-rate-range">30〜50%</span>）で概算</span>
           </div>
 
           <p class="sim-sub-line" id="sim-cost-line">その作業の年間実質コスト（社会保険料込み）：¥0</p>
 
-          <p class="sim-sub-line" id="sim-budget-line">
-            投資予算の目安（<span id="sim-budget-years">1</span>年で回収する場合）：
-            <strong id="sim-budget-selected-value">¥0〜</strong>
+          <p class="sim-sub-line sim-budget-line">
+            <span class="sim-budget-condition" id="sim-budget-condition">1日1人・夜勤なし・1シフト60分・月22日稼働で、1年で回収する場合</span><br>
+            投資予算の目安：<strong class="sim-budget-amount" id="sim-budget-selected-value">¥0〜</strong>（<span id="sim-budget-type-name">省力化</span>の場合）
           </p>
 
           <details class="sim-details">
@@ -325,10 +326,13 @@
     var els = {
       costLine: document.getElementById("sim-cost-line"),
       savingValue: document.getElementById("sim-saving-value"),
-      budgetYears: document.getElementById("sim-budget-years"),
+      budgetCondition: document.getElementById("sim-budget-condition"),
       budgetSelectedValue: document.getElementById("sim-budget-selected-value"),
+      budgetTypeName: document.getElementById("sim-budget-type-name"),
       typeName: document.getElementById("sim-type-name"),
       rateRange: document.getElementById("sim-rate-range"),
+      heroTypeName: document.getElementById("sim-hero-type-name"),
+      heroRateRange: document.getElementById("sim-hero-rate-range"),
       cta: document.getElementById("sim-cta"),
       minutes: document.getElementById("sim-minutes"),
       minutesVal: document.getElementById("sim-minutes-val"),
@@ -442,12 +446,22 @@
       els.savingValue.textContent = fmtYen(savingLow) + "〜" + fmtYen(savingHigh);
       els.costLine.textContent = "その作業の年間実質コスト（" + (state.insurance ? "社会保険料込み" : "額面のみ") + "）：" + fmtYen(annualCost);
 
-      els.budgetYears.textContent = state.years;
       var budgetSelected = state.type === "light" ? budgetLight : budgetUnmanned;
       els.budgetSelectedValue.textContent = fmtYen(budgetSelected) + "〜";
+      els.budgetTypeName.textContent = rates.label;
+      els.budgetCondition.textContent =
+        "1日" + state.people + "人・夜勤" + (state.shift === 2 ? "あり" : "なし") +
+        "・1シフト" + fmtMinutes(state.minutes) + "・月" + state.days + "日稼働で、" +
+        state.years + "年で回収する場合";
+      // 金額が更新されたことに気づきやすいよう、一瞬ハイライトさせる
+      els.budgetSelectedValue.classList.remove("sim-pulse");
+      void els.budgetSelectedValue.offsetWidth; // reflow でアニメーションを再トリガー
+      els.budgetSelectedValue.classList.add("sim-pulse");
 
       els.typeName.textContent = rates.label;
       els.rateRange.textContent = rates.rangeText;
+      els.heroTypeName.textContent = rates.label;
+      els.heroRateRange.textContent = rates.rangeText;
 
       var summary = [
         "作業条件：1日" + state.people + "人・夜勤" + (state.shift === 2 ? "あり" : "なし") +
