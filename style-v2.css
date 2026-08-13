@@ -588,31 +588,32 @@ section[id] { scroll-margin-top: 84px; }
 .sim-check-row { display: flex; align-items: center; gap: 9px; font-size: 0.88rem; color: var(--ink); cursor: pointer; }
 .sim-check-row input { width: 16px; height: 16px; accent-color: var(--orange); flex: 0 0 auto; }
 
-.sim-result-row {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 12px 0; border-bottom: 1px solid var(--line); gap: 12px;
+/* 結果パネル：削減額を主役に、他は補足情報として控えめに */
+.sim-hero {
+  text-align: center; background: rgba(212, 105, 26, .07);
+  border-radius: var(--radius); padding: 20px 16px; margin-bottom: 18px;
 }
-.sim-result-label { font-size: 0.83rem; color: var(--ink-soft); }
-.sim-result-value {
-  font-size: 1.12rem; font-weight: 700; color: var(--navy);
-  font-family: "Shippori Mincho", serif; white-space: nowrap;
+.sim-hero-label { display: block; font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 6px; }
+.sim-hero-value {
+  display: block; font-size: 1.7rem; font-weight: 700; color: var(--orange);
+  font-family: "Shippori Mincho", serif; line-height: 1.3;
 }
-.sim-result-row--accent {
-  background: rgba(212, 105, 26, .07); margin: 4px -10px; padding: 12px 10px;
-  border-radius: 8px; border-bottom: none;
-}
-.sim-result-row--accent .sim-result-value { color: var(--orange); font-size: 1.28rem; }
 
-.sim-budget { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); }
-.sim-budget-title { font-size: 0.83rem; color: var(--ink-soft); margin-bottom: 10px; }
-.sim-budget-row {
-  display: flex; justify-content: space-between; padding: 6px 0;
-  font-size: 0.9rem; color: var(--ink-soft); transition: color .15s ease;
+.sim-sub-line {
+  font-size: 0.85rem; color: var(--ink-soft); padding: 8px 0;
+  border-top: 1px solid var(--line);
 }
-.sim-budget-row span:last-child { font-family: "Shippori Mincho", serif; font-variant-numeric: tabular-nums; }
-.sim-budget-row.is-selected { color: var(--orange); font-weight: 700; }
+.sim-sub-line strong { color: var(--navy); font-family: "Shippori Mincho", serif; font-weight: 700; }
 
-.sim-disclaimer { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; margin-top: 20px; }
+.sim-details { margin-top: 4px; border-top: 1px solid var(--line); padding-top: 10px; }
+.sim-details summary {
+  font-size: 0.8rem; color: var(--ink-soft); cursor: pointer;
+  list-style: none; user-select: none;
+}
+.sim-details summary::-webkit-details-marker { display: none; }
+.sim-details summary::before { content: "▸ "; color: var(--orange); }
+.sim-details[open] summary::before { content: "▾ "; }
+.sim-disclaimer { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; margin-top: 10px; }
 
 @media (max-width: 900px) {
   .sim { grid-template-columns: 1fr; }

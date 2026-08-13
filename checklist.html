@@ -288,33 +288,29 @@
         </div>
 
         <div class="sim-result">
-          <div class="sim-result-row">
-            <span class="sim-result-label" id="sim-cost-label">その作業の年間実質コスト</span>
-            <span class="sim-result-value" id="sim-cost-value">¥0</span>
-          </div>
-          <div class="sim-result-row sim-result-row--accent">
-            <span class="sim-result-label">削減額目安（年間）</span>
-            <span class="sim-result-value" id="sim-saving-value">¥0〜¥0</span>
+          <div class="sim-hero">
+            <span class="sim-hero-label">削減額目安（年間）</span>
+            <span class="sim-hero-value" id="sim-saving-value">¥0〜¥0</span>
           </div>
 
-          <div class="sim-budget">
-            <p class="sim-budget-title">投資予算の目安（<span id="sim-budget-years">1</span>年で回収する場合）</p>
-            <div class="sim-budget-row" id="sim-budget-light">
-              <span>省力化予算</span><span id="sim-budget-light-value">¥0〜</span>
-            </div>
-            <div class="sim-budget-row" id="sim-budget-unmanned">
-              <span>省人化予算</span><span id="sim-budget-unmanned-value">¥0〜</span>
-            </div>
-          </div>
+          <p class="sim-sub-line" id="sim-cost-line">その作業の年間実質コスト（社会保険料込み）：¥0</p>
 
-          <p class="sim-disclaimer">
-            削減率は<span id="sim-type-name">省力化</span>における一般的な目安（<span id="sim-rate-range">30〜50%</span>）で概算しています。
-            夜勤ありの場合は昼夜2シフト分で計算しています。社会保険料は会社負担分を額面の1.3倍として概算しています。
-            投資予算は年間削減額（下限）×回収年数で算出しています。実際の効果・料率・導入コストは現場の状況により異なります。
-            正確な試算は無料の現場診断でご案内します。
+          <p class="sim-sub-line" id="sim-budget-line">
+            投資予算の目安（<span id="sim-budget-years">1</span>年で回収する場合）：
+            <strong id="sim-budget-selected-value">¥0〜</strong>
           </p>
 
-          <div style="text-align:center;margin-top:24px;">
+          <details class="sim-details">
+            <summary>計算の前提を見る</summary>
+            <p class="sim-disclaimer">
+              削減率は<span id="sim-type-name">省力化</span>における一般的な目安（<span id="sim-rate-range">30〜50%</span>）で概算しています。
+              夜勤ありの場合は昼夜2シフト分で計算しています。社会保険料は会社負担分を額面の1.3倍として概算しています。
+              投資予算は年間削減額（下限）×回収年数で算出しています。実際の効果・料率・導入コストは現場の状況により異なります。
+              正確な試算は無料の現場診断でご案内します。
+            </p>
+          </details>
+
+          <div style="text-align:center;margin-top:22px;">
             <a id="sim-cta" class="btn btn--fill" href="contact-v2.html?topic=simulator">現場診断を申し込む</a>
           </div>
         </div>
@@ -327,14 +323,10 @@
   <script>
   (function () {
     var els = {
-      costLabel: document.getElementById("sim-cost-label"),
-      costValue: document.getElementById("sim-cost-value"),
+      costLine: document.getElementById("sim-cost-line"),
       savingValue: document.getElementById("sim-saving-value"),
       budgetYears: document.getElementById("sim-budget-years"),
-      budgetLightRow: document.getElementById("sim-budget-light"),
-      budgetUnmannedRow: document.getElementById("sim-budget-unmanned"),
-      budgetLightValue: document.getElementById("sim-budget-light-value"),
-      budgetUnmannedValue: document.getElementById("sim-budget-unmanned-value"),
+      budgetSelectedValue: document.getElementById("sim-budget-selected-value"),
       typeName: document.getElementById("sim-type-name"),
       rateRange: document.getElementById("sim-rate-range"),
       cta: document.getElementById("sim-cta"),
@@ -447,15 +439,12 @@
       var budgetLight = annualCost * RATES.light.low * state.years;
       var budgetUnmanned = annualCost * RATES.unmanned.low * state.years;
 
-      els.costLabel.textContent = "その作業の年間実質コスト（" + (state.insurance ? "社会保険料込み" : "額面のみ") + "）";
-      els.costValue.textContent = fmtYen(annualCost);
       els.savingValue.textContent = fmtYen(savingLow) + "〜" + fmtYen(savingHigh);
+      els.costLine.textContent = "その作業の年間実質コスト（" + (state.insurance ? "社会保険料込み" : "額面のみ") + "）：" + fmtYen(annualCost);
 
       els.budgetYears.textContent = state.years;
-      els.budgetLightValue.textContent = fmtYen(budgetLight) + "〜";
-      els.budgetUnmannedValue.textContent = fmtYen(budgetUnmanned) + "〜";
-      els.budgetLightRow.classList.toggle("is-selected", state.type === "light");
-      els.budgetUnmannedRow.classList.toggle("is-selected", state.type === "unmanned");
+      var budgetSelected = state.type === "light" ? budgetLight : budgetUnmanned;
+      els.budgetSelectedValue.textContent = fmtYen(budgetSelected) + "〜";
 
       els.typeName.textContent = rates.label;
       els.rateRange.textContent = rates.rangeText;
