@@ -25,8 +25,15 @@
   </url>
 
   <url>
+    <loc>https://i-twin.co.jp/simulator</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://i-twin.co.jp/checklist</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -156,20 +156,31 @@ section[id] { scroll-margin-top: 84px; }
   letter-spacing: 0.01em;
 }
 
+/* ---- グローバルナビ（大分類＋ドロップダウン） ----------------------
+   PC・タブレット：大分類にカーソルを置くと中分類が開く（CSSのみ）
+   スマホ（900px以下）：ホバーが存在しないため、タップで開くアコーディオンに切替
+   ------------------------------------------------------------------ */
 .nav {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.nav a {
+.nav > a,
+.nav-trigger {
+  font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--ink);
   position: relative;
   padding: 6px 0;
   white-space: nowrap;   /* 各項目を1行に固定（折り返し禁止） */
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-.nav a:not(.btn)::after {
+.nav-trigger { display: inline-flex; align-items: center; gap: 6px; }
+.nav > a:not(.btn)::after,
+.nav-trigger::after {
   content: "";
   position: absolute;
   left: 0; bottom: 0;
@@ -177,9 +188,11 @@ section[id] { scroll-margin-top: 84px; }
   background: var(--orange);
   transition: width .2s ease;
 }
-.nav a:not(.btn):hover::after { width: 100%; }
+.nav > a:not(.btn):hover::after,
+.nav-group:hover .nav-trigger::after,
+.nav-group:focus-within .nav-trigger::after { width: 100%; }
 /* ナビ項目の区切り線（各項目の間に薄い縦線） */
-.nav a:not(.btn):not(:first-child)::before {
+.nav > *:not(.btn):not(:first-child)::before {
   content: "";
   position: absolute;
   left: -7px; top: 50%;
@@ -189,7 +202,53 @@ section[id] { scroll-margin-top: 84px; }
 }
 .nav .btn { padding: 9px 16px; font-size: 0.85rem; }
 /* 「コラム」はページ内アンカーではなく別ページへの導線のため、文字色で区別する */
-.nav a.nav-column { color: var(--orange); font-weight: 700; }
+.nav > a.nav-column { color: var(--orange); font-weight: 700; }
+
+/* 大分類（ドロップダウンの親） */
+.nav-group { position: relative; }
+.nav-caret {
+  width: 6px; height: 6px; flex: none;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .2s ease;
+}
+/* 中分類パネル */
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 210px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .15s ease, visibility .15s ease;
+  z-index: 200;
+}
+/* 大分類とパネルの間の余白を横切るときに閉じないよう、透明な「橋」を渡す */
+.nav-menu::before {
+  content: "";
+  position: absolute;
+  top: -14px; left: 0; right: 0; height: 14px;
+}
+.nav-group:hover .nav-menu,
+.nav-group:focus-within .nav-menu { opacity: 1; visibility: visible; }
+.nav-menu a {
+  display: block;
+  padding: 9px 12px;
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background .15s ease, color .15s ease;
+}
+.nav-menu a:hover { background: var(--paper-soft); color: var(--orange-dark); }
 
 /* モバイル開閉 */
 .nav-toggle {
@@ -1103,11 +1162,37 @@ body.cap-bar-open { padding-bottom: 120px; }  /* 固定バーで本文末尾が�
     box-shadow: -10px 0 30px rgba(0,0,0,0.06);
   }
   .nav.open { transform: translateX(0); }
-  .nav a { width: 100%; padding: 12px 4px; border-bottom: 1px solid var(--line); }
-  .nav a:not(.btn)::after { display: none; }
-  .nav a:not(.btn)::before { display: none; }   /* 縦積み時は区切り線を非表示（下線がその役割を果たす） */
+  .nav > a { width: 100%; padding: 12px 4px; border-bottom: 1px solid var(--line); }
+  .nav > a:not(.btn)::after { display: none; }
+  .nav > *:not(.btn)::before { display: none; }   /* 縦積み時は区切り線を非表示（下線がその役割を果たす） */
   .nav .btn { margin-top: 12px; width: 100%; }
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+
+  /* スマホ：大分類はタップで開閉するアコーディオン（ホバーが無いため） */
+  .nav-group { width: 100%; }
+  .nav-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .nav-trigger::after { display: none; }
+  .nav-menu {
+    position: static;
+    transform: none;
+    display: none;            /* 閉じた状態。ホバーでは開かない */
+    opacity: 1; visibility: visible;
+    min-width: 0;
+    background: transparent;
+    border: none; border-radius: 0; box-shadow: none;
+    padding: 2px 0 8px 14px;
+  }
+  .nav-menu::before { display: none; }
+  .nav-group.open .nav-menu { display: block; }
+  .nav-group.open .nav-caret { transform: rotate(-135deg) translate(-2px, -2px); }
+  .nav-menu a { padding: 11px 6px; border-radius: 0; border-bottom: 1px solid var(--line); }
+  .nav-menu a:last-child { border-bottom: none; }
 }
 
 @media (max-width: 560px) {
