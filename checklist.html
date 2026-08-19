@@ -56,25 +56,66 @@
       </div>
       <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
       <nav class="nav">
-        <a href="index.html#issues">課題</a>
-        <a href="checklist.html">診断</a>
-        <a href="index.html#flow">進め方</a>
-        <a href="index.html#digital-twin">デジタルツイン</a>
-        <a href="index.html#goal">めざす姿</a>
-        <a href="index.html#trial">無料相談</a>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#digital-twin">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
         <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="index.html#trial">無料相談</a>
         <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
       </nav>
     </div>
   </header>
 
-  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
   <script>
   (function () {
     var nav = document.querySelector('.nav');
     if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
     nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { nav.classList.remove('open'); });
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
     });
   })();
   </script>
@@ -202,291 +243,23 @@
   })();
   </script>
 
-  <!-- ◆概算シミュレーション：省力化・省人化 診断シミュレーター -->
-  <section class="section section--soft" id="simulator">
+  <!-- ◆概算シミュレーションへの導線（定性の診断 → 定量の試算） -->
+  <section class="section section--soft">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">SIMULATION</span>
-        <h2>概算シミュレーション：どれくらいの投資で、どれくらい削減できるか</h2>
-        <p>いくつか選ぶだけで、その作業にかかる年間コストと削減効果の目安がすぐにわかります。</p>
+      <div class="section-head" style="margin-bottom:28px;">
+        <span class="eyebrow">NEXT STEP</span>
+        <h2>その課題、いくらの負担になっているか。</h2>
+        <p>チェックが付いた工程は、金額に置き換えるとより判断しやすくなります。</p>
       </div>
-
-      <div class="sim">
-        <div class="sim-panel">
-
-          <div class="sim-field">
-            <label class="sim-label">1. 同一工程に1日で何人入るか</label>
-            <div class="sim-btns" id="sim-people">
-              <button type="button" class="sim-btn is-active" data-value="1" aria-pressed="true">1人</button>
-              <button type="button" class="sim-btn" data-value="2" aria-pressed="false">2人</button>
-              <button type="button" class="sim-btn" data-value="3" aria-pressed="false">3人</button>
-              <button type="button" class="sim-btn" data-value="4" aria-pressed="false">4人</button>
-              <button type="button" class="sim-btn" data-value="5" aria-pressed="false">5人</button>
-              <button type="button" class="sim-btn" data-value="6" aria-pressed="false">6人+</button>
-            </div>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label">2. 夜勤の有無</label>
-            <div class="sim-btns" id="sim-shift">
-              <button type="button" class="sim-btn is-active" data-value="1" aria-pressed="true">なし（昼勤のみ）</button>
-              <button type="button" class="sim-btn" data-value="2" aria-pressed="false">あり（昼夜2交代）</button>
-            </div>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label" for="sim-minutes">3. 1人あたり、1シフトでその作業にかかる時間</label>
-            <div class="sim-slider-row">
-              <input type="range" id="sim-minutes" min="5" max="480" step="5" value="60">
-              <span class="sim-slider-val" id="sim-minutes-val">60分</span>
-            </div>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label" for="sim-days">4. 月間の稼働日数</label>
-            <div class="sim-slider-row">
-              <input type="range" id="sim-days" min="10" max="26" step="1" value="22">
-              <span class="sim-slider-val" id="sim-days-val">22日</span>
-            </div>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label" for="sim-wage">5. 時給（額面）</label>
-            <div class="sim-slider-row">
-              <input type="range" id="sim-wage" min="900" max="3000" step="50" value="1200">
-              <span class="sim-slider-val" id="sim-wage-val">¥1,200</span>
-            </div>
-            <div class="sim-btns sim-btns--salary" id="sim-salary">
-              <button type="button" class="sim-btn" data-value="100">年収100万</button>
-              <button type="button" class="sim-btn" data-value="200">年収200万</button>
-              <button type="button" class="sim-btn" data-value="400">年収400万</button>
-              <button type="button" class="sim-btn" data-value="600">年収600万</button>
-            </div>
-            <p class="sim-note-inline">年収から換算する場合はボタンをクリック（年収 ÷ 2,000時間の目安で概算）</p>
-            <p class="sim-note-inline sim-note-hint" id="sim-salary-hint" hidden>※額面の時給に変換しました。会社負担の保険料は下のチェックで加算されます。</p>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-check-row">
-              <input type="checkbox" id="sim-insurance" checked>
-              6. 会社負担の社会保険料を含める（時給×1.3で計算）
-            </label>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label">7. 投資回収の目標年数</label>
-            <div class="sim-btns" id="sim-years">
-              <button type="button" class="sim-btn is-active" data-value="1" aria-pressed="true">1年</button>
-              <button type="button" class="sim-btn" data-value="2" aria-pressed="false">2年</button>
-              <button type="button" class="sim-btn" data-value="3" aria-pressed="false">3年</button>
-            </div>
-            <p class="sim-note-inline">かけて投資金額を回収する</p>
-          </div>
-
-          <div class="sim-field">
-            <label class="sim-label">8. 診断のタイプ</label>
-            <div class="sim-btns" id="sim-type">
-              <button type="button" class="sim-btn is-active" data-value="light" aria-pressed="true">
-                <strong>省力化</strong><small>楽に・早く・安全に作業できる</small>
-              </button>
-              <button type="button" class="sim-btn" data-value="unmanned" aria-pressed="false">
-                <strong>省人化</strong><small>人がいなくても回る仕組み</small>
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="sim-result">
-          <div class="sim-hero">
-            <span class="sim-hero-label">削減額目安（年間）</span>
-            <span class="sim-hero-value" id="sim-saving-value">¥0〜¥0</span>
-            <span class="sim-hero-note">※<span id="sim-hero-type-name">省力化</span>の目安（<span id="sim-hero-rate-range">30〜50%</span>）で概算</span>
-          </div>
-
-          <p class="sim-sub-line" id="sim-cost-line">その作業の年間実質コスト（社会保険料込み）：¥0</p>
-
-          <p class="sim-sub-line sim-budget-line">
-            <span class="sim-budget-condition" id="sim-budget-condition">1日1人・夜勤なし・1シフト60分・月22日稼働で、1年で回収する場合</span><br>
-            投資予算の目安：<strong class="sim-budget-amount" id="sim-budget-selected-value">¥0〜</strong>（<span id="sim-budget-type-name">省力化</span>の場合）
-          </p>
-
-          <details class="sim-details">
-            <summary>計算の前提を見る</summary>
-            <p class="sim-disclaimer">
-              削減率は<span id="sim-type-name">省力化</span>における一般的な目安（<span id="sim-rate-range">30〜50%</span>）で概算しています。
-              夜勤ありの場合は昼夜2シフト分で計算しています。社会保険料は会社負担分を額面の1.3倍として概算しています。
-              投資予算は年間削減額（下限）×回収年数で算出しています。実際の効果・料率・導入コストは現場の状況により異なります。
-              正確な試算は無料の現場診断でご案内します。
-            </p>
-          </details>
-
-          <div style="text-align:center;margin-top:22px;">
-            <a id="sim-cta" class="btn btn--fill" href="contact-v2.html?topic=simulator">現場診断を申し込む</a>
-          </div>
-        </div>
+      <p class="check-lead" style="margin-bottom:26px;">
+        人数・作業時間・時給などを選ぶだけで、<strong>その作業にかかる年間コスト</strong>と、
+        省力化・省人化で<strong>どれだけ削減できるか</strong>の目安がその場でわかります。
+      </p>
+      <div style="text-align:center;">
+        <a class="btn btn--fill" href="simulator.html">概算シミュレーションを試す ›</a>
       </div>
-
     </div>
   </section>
-
-  <!-- シミュレーター：入力→即時再計算 -->
-  <script>
-  (function () {
-    var els = {
-      costLine: document.getElementById("sim-cost-line"),
-      savingValue: document.getElementById("sim-saving-value"),
-      budgetCondition: document.getElementById("sim-budget-condition"),
-      budgetSelectedValue: document.getElementById("sim-budget-selected-value"),
-      budgetTypeName: document.getElementById("sim-budget-type-name"),
-      typeName: document.getElementById("sim-type-name"),
-      rateRange: document.getElementById("sim-rate-range"),
-      heroTypeName: document.getElementById("sim-hero-type-name"),
-      heroRateRange: document.getElementById("sim-hero-rate-range"),
-      cta: document.getElementById("sim-cta"),
-      minutes: document.getElementById("sim-minutes"),
-      minutesVal: document.getElementById("sim-minutes-val"),
-      days: document.getElementById("sim-days"),
-      daysVal: document.getElementById("sim-days-val"),
-      wage: document.getElementById("sim-wage"),
-      wageVal: document.getElementById("sim-wage-val"),
-      insurance: document.getElementById("sim-insurance")
-    };
-    if (!els.cta) return; // シミュレーターが存在しないページでは何もしない
-
-    var RATES = {
-      light: { low: 0.30, high: 0.50, label: "省力化", rangeText: "30〜50%" },
-      unmanned: { low: 0.80, high: 0.90, label: "省人化", rangeText: "80〜90%" }
-    };
-
-    var state = { people: 1, shift: 1, minutes: 60, days: 22, wage: 1200, insurance: true, years: 1, type: "light" };
-
-    function fmtYen(n) {
-      return "¥" + Math.round(n).toLocaleString("ja-JP");
-    }
-
-    function fmtMinutes(m) {
-      if (m < 60) return m + "分";
-      var h = Math.floor(m / 60);
-      var r = m % 60;
-      return r === 0 ? h + "時間" : h + "時間" + r + "分";
-    }
-
-    function wireButtonGroup(containerId, stateKey, parseFn) {
-      var container = document.getElementById(containerId);
-      if (!container) return;
-      var buttons = Array.prototype.slice.call(container.querySelectorAll(".sim-btn"));
-      buttons.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          buttons.forEach(function (b) {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-pressed", "false");
-          });
-          btn.classList.add("is-active");
-          btn.setAttribute("aria-pressed", "true");
-          state[stateKey] = parseFn ? parseFn(btn.dataset.value) : btn.dataset.value;
-          recompute();
-        });
-      });
-    }
-
-    wireButtonGroup("sim-people", "people", Number);
-    wireButtonGroup("sim-shift", "shift", Number);
-    wireButtonGroup("sim-years", "years", Number);
-    wireButtonGroup("sim-type", "type");
-
-    // 年収→時給の目安ボタン（年収 ÷ 2,000時間で概算し、時給スライダーへ反映）
-    var salaryGroup = document.getElementById("sim-salary");
-    var salaryHint = document.getElementById("sim-salary-hint");
-    if (salaryGroup) {
-      var salaryButtons = Array.prototype.slice.call(salaryGroup.querySelectorAll(".sim-btn"));
-      var settingWageFromPreset = false;
-      salaryButtons.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          salaryButtons.forEach(function (b) { b.classList.remove("is-active"); });
-          btn.classList.add("is-active");
-          var manYen = Number(btn.dataset.value);
-          var hourly = Math.round((manYen * 10000 / 2000) / 50) * 50;
-          hourly = Math.min(Number(els.wage.max), Math.max(Number(els.wage.min), hourly));
-          els.wage.value = hourly;
-          settingWageFromPreset = true;
-          els.wage.dispatchEvent(new Event("input"));
-          if (salaryHint) salaryHint.hidden = false;
-        });
-      });
-      // スライダーを手動で動かしたときだけ、年収ボタンの選択状態とヒントを解除する
-      els.wage.addEventListener("input", function () {
-        if (settingWageFromPreset) { settingWageFromPreset = false; return; }
-        salaryButtons.forEach(function (b) { b.classList.remove("is-active"); });
-        if (salaryHint) salaryHint.hidden = true;
-      });
-    }
-
-    els.minutes.addEventListener("input", function () {
-      state.minutes = Number(els.minutes.value);
-      els.minutesVal.textContent = fmtMinutes(state.minutes);
-      recompute();
-    });
-    els.days.addEventListener("input", function () {
-      state.days = Number(els.days.value);
-      els.daysVal.textContent = state.days + "日";
-      recompute();
-    });
-    els.wage.addEventListener("input", function () {
-      state.wage = Number(els.wage.value);
-      els.wageVal.textContent = fmtYen(state.wage);
-      recompute();
-    });
-    els.insurance.addEventListener("change", function () {
-      state.insurance = els.insurance.checked;
-      recompute();
-    });
-
-    function recompute() {
-      var effectiveWage = state.insurance ? state.wage * 1.3 : state.wage;
-      var annualCost = state.people * state.shift * (state.minutes / 60) * effectiveWage * state.days * 12;
-
-      var rates = RATES[state.type];
-      var savingLow = annualCost * rates.low;
-      var savingHigh = annualCost * rates.high;
-
-      var budgetLight = annualCost * RATES.light.low * state.years;
-      var budgetUnmanned = annualCost * RATES.unmanned.low * state.years;
-
-      els.savingValue.textContent = fmtYen(savingLow) + "〜" + fmtYen(savingHigh);
-      els.costLine.textContent = "その作業の年間実質コスト（" + (state.insurance ? "社会保険料込み" : "額面のみ") + "）：" + fmtYen(annualCost);
-
-      var budgetSelected = state.type === "light" ? budgetLight : budgetUnmanned;
-      els.budgetSelectedValue.textContent = fmtYen(budgetSelected) + "〜";
-      els.budgetTypeName.textContent = rates.label;
-      els.budgetCondition.textContent =
-        "1日" + state.people + "人・夜勤" + (state.shift === 2 ? "あり" : "なし") +
-        "・1シフト" + fmtMinutes(state.minutes) + "・月" + state.days + "日稼働で、" +
-        state.years + "年で回収する場合";
-      // 金額が更新されたことに気づきやすいよう、一瞬ハイライトさせる
-      els.budgetSelectedValue.classList.remove("sim-pulse");
-      void els.budgetSelectedValue.offsetWidth; // reflow でアニメーションを再トリガー
-      els.budgetSelectedValue.classList.add("sim-pulse");
-
-      els.typeName.textContent = rates.label;
-      els.rateRange.textContent = rates.rangeText;
-      els.heroTypeName.textContent = rates.label;
-      els.heroRateRange.textContent = rates.rangeText;
-
-      var summary = [
-        "作業条件：1日" + state.people + "人・夜勤" + (state.shift === 2 ? "あり" : "なし") +
-          "・1シフト" + state.minutes + "分・月" + state.days + "日稼働・時給" + fmtYen(state.wage) +
-          "（社会保険料" + (state.insurance ? "込み" : "別") + "）",
-        "年間実質コストの目安：" + fmtYen(annualCost),
-        "削減額目安（" + rates.label + "）：" + fmtYen(savingLow) + "〜" + fmtYen(savingHigh),
-        "投資予算の目安（" + state.years + "年回収）：省力化 " + fmtYen(budgetLight) + "〜／省人化 " + fmtYen(budgetUnmanned) + "〜"
-      ].join("\n");
-      els.cta.href = "contact-v2.html?topic=simulator&items=" + encodeURIComponent(summary);
-    }
-
-    recompute();
-  })();
-  </script>
 
   <!-- ◆フッター -->
   <footer class="site-footer">
