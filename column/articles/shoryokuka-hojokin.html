@@ -96,25 +96,66 @@
       </div>
       <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
       <nav class="nav">
-        <a href="../../index.html#issues">課題</a>
-        <a href="../../checklist.html">診断</a>
-        <a href="../../index.html#flow">進め方</a>
-        <a href="../../index.html#digital-twin">デジタルツイン</a>
-        <a href="../../index.html#goal">めざす姿</a>
-        <a href="../../index.html#trial">無料相談</a>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#digital-twin">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
         <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
         <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
       </nav>
     </div>
   </header>
 
-  <!-- スマホ：メニュー項目をタップしたらサイドメニューを自動で閉じる -->
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
   <script>
   (function () {
     var nav = document.querySelector('.nav');
     if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
     nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { nav.classList.remove('open'); });
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
     });
   })();
   </script>
@@ -199,10 +240,11 @@
           「自社の現場は対象になりそうか」を考える前に、まずどこに省力化・省人化の余地があるかを整理してみましょう。
         </p>
         <p>
-          以下の自己診断チェックリストと概算シミュレーションで、気になる項目・削減できそうな金額感を確認できます。
+          以下の自己診断チェックリストで気になる項目を洗い出し、概算シミュレーションで削減できそうな金額感を確認できます。
         </p>
-        <p>
-          <a class="btn btn--outline" href="../../checklist.html">▼ 自己診断チェックリスト・概算シミュレーションはこちら</a>
+        <p style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn--outline" href="../../checklist.html">自己診断チェックリスト ›</a>
+          <a class="btn btn--outline" href="../../simulator.html">概算シミュレーション ›</a>
         </p>
 
         <h2>対象になりそうな箇所が見つかったら</h2>
