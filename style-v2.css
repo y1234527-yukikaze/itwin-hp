@@ -599,11 +599,22 @@ section[id] { scroll-margin-top: 84px; }
   padding: 6px 0; cursor: pointer; line-height: 1.4;
   letter-spacing: 0;
 }
-.chk input { margin-top: 3px; }
-.chk input {
-  width: 15px; height: 15px;
-  accent-color: var(--orange); flex: 0 0 auto;
+.chk input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 16px; height: 16px; flex: 0 0 auto; margin: 2px 0 0;
+  border: 1.5px solid var(--line); border-radius: 4px;
+  background: #fff; position: relative; cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
 }
+.chk input[type="checkbox"]:hover { border-color: var(--orange); }
+.chk input[type="checkbox"]:checked { background: var(--orange); border-color: var(--orange); }
+.chk input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 5px; top: 2px;
+  width: 4px; height: 8px;
+  border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.chk input[type="checkbox"]:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .ch-a .ch-head { background: var(--orange); }
 .ch-b .ch-head { background: #0f766e; }
 .ch-c .ch-head { background: #3f7d3f; }
@@ -1536,10 +1547,22 @@ html { overflow-x: hidden; }
   padding: 6px 0; cursor: pointer; line-height: 1.4;
   letter-spacing: 0;
 }
-.chk input {
-  width: 15px; height: 15px; margin-top: 3px;
-  accent-color: var(--orange); flex: 0 0 auto;
+.chk input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 16px; height: 16px; flex: 0 0 auto; margin: 2px 0 0;
+  border: 1.5px solid var(--line); border-radius: 4px;
+  background: #fff; position: relative; cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
 }
+.chk input[type="checkbox"]:hover { border-color: var(--orange); }
+.chk input[type="checkbox"]:checked { background: var(--orange); border-color: var(--orange); }
+.chk input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 5px; top: 2px;
+  width: 4px; height: 8px;
+  border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.chk input[type="checkbox"]:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .ch-a .ch-head { background: var(--orange); }
 .ch-b .ch-head { background: #0f766e; }
 .ch-c .ch-head { background: #3f7d3f; }
