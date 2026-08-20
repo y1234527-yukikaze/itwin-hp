@@ -312,9 +312,11 @@ section[id] { scroll-margin-top: 84px; }
 .hero-actions {
   margin-top: 38px;
   display: flex;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
+/* 3ボタンを横一列に収めるため、ヒーロー内のボタンだけ少しコンパクトに */
+.hero-actions .btn { padding: 14px 20px; font-size: 0.94rem; }
 
 /* 下層ページ用コンパクトヒーロー */
 .subhero {
