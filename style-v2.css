@@ -412,6 +412,17 @@ section[id] { scroll-margin-top: 84px; }
 .card .card-ic svg { display: block; }
 .card .card-ic img { display: block; width: 56px; height: 56px; margin: 0 auto; }
 
+/* 印鑑風：アイコンをカードの左上からはみ出させて配置する */
+.card--stamp { position: relative; overflow: visible; padding-top: 76px; }
+.card-ic--stamp {
+  position: absolute;
+  top: -14px; left: -14px;
+  margin: 0;
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 6px 10px rgba(13, 43, 78, 0.22));
+}
+.card.card--stamp .card-ic--stamp img { margin: 0; width: 76px; height: 76px; }
+
 /* ===========================================================
    デジタルツイン（最重要セクション）
    =========================================================== */
