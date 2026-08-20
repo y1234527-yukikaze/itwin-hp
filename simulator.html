@@ -300,6 +300,16 @@
 
     var state = { people: 1, shift: 1, minutes: 60, days: 22, wage: 1200, insurance: true, years: 1, type: "light" };
 
+    // GA4：実際に入力を操作した最初の1回だけ「使われた」ことを計測する（初期表示時の自動計算では発火しない）
+    var interactionTracked = false;
+    function trackInteractionOnce() {
+      if (interactionTracked) return;
+      interactionTracked = true;
+      if (typeof gtag === "function") {
+        gtag("event", "simulator_used", { event_category: "engagement", event_label: "diagnostic_simulator" });
+      }
+    }
+
     function fmtYen(n) {
       return "¥" + Math.round(n).toLocaleString("ja-JP");
     }
@@ -324,6 +334,7 @@
           btn.classList.add("is-active");
           btn.setAttribute("aria-pressed", "true");
           state[stateKey] = parseFn ? parseFn(btn.dataset.value) : btn.dataset.value;
+          trackInteractionOnce();
           recompute();
         });
       });
@@ -349,6 +360,7 @@
           hourly = Math.min(Number(els.wage.max), Math.max(Number(els.wage.min), hourly));
           els.wage.value = hourly;
           settingWageFromPreset = true;
+          trackInteractionOnce();
           els.wage.dispatchEvent(new Event("input"));
           if (salaryHint) salaryHint.hidden = false;
         });
@@ -364,21 +376,37 @@
     els.minutes.addEventListener("input", function () {
       state.minutes = Number(els.minutes.value);
       els.minutesVal.textContent = fmtMinutes(state.minutes);
+      trackInteractionOnce();
       recompute();
     });
     els.days.addEventListener("input", function () {
       state.days = Number(els.days.value);
       els.daysVal.textContent = state.days + "日";
+      trackInteractionOnce();
       recompute();
     });
     els.wage.addEventListener("input", function () {
       state.wage = Number(els.wage.value);
       els.wageVal.textContent = fmtYen(state.wage);
+      trackInteractionOnce();
       recompute();
     });
     els.insurance.addEventListener("change", function () {
       state.insurance = els.insurance.checked;
+      trackInteractionOnce();
       recompute();
+    });
+
+    // GA4：現場診断への申し込みボタンが押された瞬間を計測（選択中の診断タイプ・回収年数つき）
+    els.cta.addEventListener("click", function () {
+      if (typeof gtag === "function") {
+        gtag("event", "simulator_cta_click", {
+          event_category: "engagement",
+          event_label: "diagnostic_simulator",
+          diagnosis_type: state.type,
+          recovery_years: state.years
+        });
+      }
     });
 
     function recompute() {
