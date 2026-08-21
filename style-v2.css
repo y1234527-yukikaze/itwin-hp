@@ -546,6 +546,16 @@ section[id] { scroll-margin-top: 84px; }
   margin: 6px 0 28px;
 }
 
+/* デジタルツインの概念図（現場 ⇄ デジタル空間） */
+.dt-figure { margin: 0 auto 34px; max-width: 860px; text-align: center; }
+.dt-figure img {
+  width: 100%; height: auto; display: block;
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.dt-figure figcaption {
+  margin-top: 12px; font-size: 0.86rem; color: var(--ink-soft);
+}
+
 /* デジタルツインの2つの役割（①設備を見る／②人とモノの動きを試す） */
 .dt-role-head {
   display: flex; align-items: flex-start; gap: 16px;
