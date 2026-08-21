@@ -546,6 +546,28 @@ section[id] { scroll-margin-top: 84px; }
   margin: 6px 0 28px;
 }
 
+/* デジタルツインの2つの役割（①設備を見る／②人とモノの動きを試す） */
+.dt-role-head {
+  display: flex; align-items: flex-start; gap: 16px;
+  max-width: 760px; margin: 0 auto 24px;
+}
+.dt-role-no {
+  flex: 0 0 auto;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--orange); color: #fff;
+  font-family: "Shippori Mincho", serif; font-size: 1.15rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.dt-role-head h4 {
+  color: var(--navy); font-size: 1.22rem; margin: 6px 0 8px;
+  font-family: "Shippori Mincho", serif;
+}
+.dt-role-head p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; line-height: 1.8; }
+@media (max-width: 560px) {
+  .dt-role-head { gap: 12px; }
+  .dt-role-no { width: 34px; height: 34px; font-size: 1rem; }
+}
+
 /* ===========================================================
    お悩みチェックリスト（当てはまれば当社へ）
    =========================================================== */
