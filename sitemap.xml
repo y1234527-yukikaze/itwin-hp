@@ -45,6 +45,20 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://i-twin.co.jp/privacy-policy</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/terms</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <!-- ◆記事URL一覧（新しい記事を追加したら、この下に1ブロックずつ追加） -->
   <!-- 注：column/articles/template.html はひな形専用ファイルのため noindex とし、サイトマップには含めていません -->
   <url>

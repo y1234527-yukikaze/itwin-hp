@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜利用規約
+  ------------------------------------------------------------
+  ・既存の利用規約ページは存在しなかったため新規作成（2026-08-21）。
+  ・LINE公式アカウント「アイツイン現場シミュレーション」の利用条項（診断結果は
+    参考値であり正式見積りではないこと・算出結果に基づく損害について責任を
+    負わない旨）を含む。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>利用規約｜アイツイン（i-TWIN）</title>
+  <meta name="description" content="アイツイン（i-TWIN）の公式サイトおよびLINE公式アカウント「アイツイン現場シミュレーション」のご利用規約です。">
+  <link rel="canonical" href="https://i-twin.co.jp/terms">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="利用規約｜アイツイン（i-TWIN）">
+  <meta property="og:description" content="アイツイン（i-TWIN）の公式サイトおよびLINE公式アカウント「アイツイン現場シミュレーション」のご利用規約です。">
+  <meta property="og:url" content="https://i-twin.co.jp/terms">
+  <meta property="og:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="利用規約｜アイツイン（i-TWIN）">
+  <meta name="twitter:description" content="アイツイン（i-TWIN）の公式サイトおよびLINE公式アカウント「アイツイン現場シミュレーション」のご利用規約です。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/hero-main.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "利用規約", "item": "https://i-twin.co.jp/terms" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#digital-twin">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>利用規約</span></div>
+      <h1>利用規約</h1>
+      <p class="catch">本サイト・LINE公式アカウントのご利用にあたって</p>
+    </div>
+  </section>
+
+  <!-- ◆本体 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p>
+          本規約は、株式会社アイツイン（以下「当社」）が運営するウェブサイト「アイツイン公式サイト」（https://i-twin.co.jp/、以下「本サイト」）、および
+          LINE公式アカウント「アイツイン現場シミュレーション」（以下「本Bot」）のご利用条件を定めるものです。本サイトまたは本Botをご利用いただいた時点で、本規約にご同意いただいたものとみなします。
+        </p>
+
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <h2>1. 適用範囲</h2>
+        <p>
+          本規約は、本サイトおよび本Botのすべてのご利用に適用されます。個別のページやサービスについて、本規約と別に定めがある場合は、その定めが優先されます。
+        </p>
+
+        <h2>2. LINE公式アカウント「アイツイン現場シミュレーション」のご利用について</h2>
+        <ol>
+          <li>本Botは、搬送作業の省人化・省力化に関する概算診断を提供するものです。</li>
+          <li>本Botが算出する金額（設備費・設計費・合計額・補助金活用時の目安額を含みます）は、あくまで概算の参考値であり、正式なお見積りではありません。実際の費用は、現場の状況により異なります。</li>
+          <li>本Botの算出結果に基づいて利用者が行った判断、または算出結果に起因して生じた損害について、当社は一切の責任を負わないものとします。</li>
+          <li>正確なお見積りをご希望の場合は、<a href="contact-v2.html">お問い合わせフォーム</a>より無料の現場診断をお申し込みください。</li>
+        </ol>
+
+        <h2>3. 個人情報の取り扱い</h2>
+        <p>
+          本サイトおよび本Botのご利用にあたって取得する個人情報の取り扱いについては、別途定める<a class="inline-link" href="privacy-policy.html">プライバシーポリシー</a>に従います。
+        </p>
+
+        <h2>4. 禁止事項</h2>
+        <p>本サイトおよび本Botのご利用にあたり、以下の行為を禁止します。</p>
+        <ul>
+          <li>法令または公序良俗に反する行為</li>
+          <li>当社または第三者の権利を侵害する行為</li>
+          <li>本サイトおよび本Botの運営を妨げる行為</li>
+          <li>その他、当社が不適切と判断する行為</li>
+        </ul>
+
+        <h2>5. 免責事項</h2>
+        <p>
+          当社は、本サイトおよび本Botに掲載する情報について、可能な限り正確な内容の掲載に努めますが、その正確性・完全性・有用性等を保証するものではありません。
+        </p>
+
+        <h2>6. 規約の変更</h2>
+        <p>
+          当社は、必要と判断した場合には、利用者への事前の通知なく本規約の内容を変更できるものとします。変更後の規約は、本ページに掲載した時点から効力を生じるものとします。
+        </p>
+
+        <h2>7. 準拠法・管轄裁判所</h2>
+        <p>
+          本規約の解釈にあたっては、日本法を準拠法とします。本サイトおよび本Botに関して当社と利用者との間で紛争が生じた場合には、当社の本店所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。
+        </p>
+
+        <h2>8. 制定日</h2>
+        <ul>
+          <li>制定日：2026年8月21日</li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc');
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="index.html#profile">会社概要</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1058,6 +1058,9 @@ section[id] { scroll-margin-top: 84px; }
   color: #8499b5;
   padding-top: 24px;
 }
+.legal-links { margin-top: 10px; font-size: 0.78rem; }
+.legal-links a { color: #8499b5; }
+.legal-links a:hover { color: #fff; }
 .copyright .data-note {
   max-width: 780px;
   margin: 0 auto 14px;
