@@ -1097,8 +1097,8 @@ section[id] { scroll-margin-top: 84px; }
 .footer-line { text-align: left; }
 .footer-line-qr { display: inline-block; }
 .footer-line-qr img {
-  width: 88px; height: 88px;
-  background: #fff; border-radius: 8px; padding: 5px; display: block;
+  width: 152px; height: 152px;
+  background: #fff; border-radius: 8px; padding: 7px; display: block;
 }
 .footer-line-caption { margin: 10px 0 0; font-size: 0.82rem; color: #aebfd4; line-height: 1.6; }
 .copyright .data-note {
