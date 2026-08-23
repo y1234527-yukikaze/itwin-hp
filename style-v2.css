@@ -1061,6 +1061,46 @@ section[id] { scroll-margin-top: 84px; }
 .legal-links { margin-top: 10px; font-size: 0.78rem; }
 .legal-links a { color: #8499b5; }
 .legal-links a:hover { color: #fff; }
+
+/* ===========================================================
+   公式LINEアカウント導線
+   =========================================================== */
+/* ◆ページ内カード（simulator / checklist / contact-v2 に設置） */
+.line-cta {
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  background: #f0fbf4;
+  border: 1px solid #bfe8cd;
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin: 40px 0;
+}
+.line-cta-body { flex: 1; min-width: 240px; }
+.line-cta-eyebrow { font-size: 0.8rem; color: #1a9e4e; font-weight: 700; letter-spacing: .02em; margin-bottom: 6px; }
+.line-cta-body h3 { font-family: "Shippori Mincho", serif; font-size: 1.2rem; color: var(--navy); margin: 0 0 8px; }
+.line-cta-desc { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; }
+.line-cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #06C755; color: #fff; font-weight: 700; font-size: 0.95rem;
+  padding: 12px 26px; border-radius: 999px; text-decoration: none;
+}
+.line-cta-btn:hover { background: #05a648; }
+.line-cta-icon { width: 20px; height: 20px; flex: 0 0 auto; }
+.line-cta-qr { flex: 0 0 auto; text-align: center; }
+.line-cta-qr img { width: 116px; height: 116px; border-radius: 8px; border: 1px solid var(--line); background: #fff; padding: 6px; display: block; margin: 0 auto; }
+.line-cta-qr p { font-size: 0.82rem; color: var(--ink-soft); font-weight: 700; margin: 0 0 10px; }
+@media (max-width: 560px) {
+  .line-cta { padding: 22px 20px; }
+  .line-cta-qr { margin: 0 auto; }
+}
+
+/* ◆フッター内・公式LINE QRコード欄（footer-nav の4カラム目） */
+.footer-line { text-align: left; }
+.footer-line-qr { display: inline-block; }
+.footer-line-qr img {
+  width: 88px; height: 88px;
+  background: #fff; border-radius: 8px; padding: 5px; display: block;
+}
+.footer-line-caption { margin: 10px 0 0; font-size: 0.82rem; color: #aebfd4; line-height: 1.6; }
 .copyright .data-note {
   max-width: 780px;
   margin: 0 auto 14px;
