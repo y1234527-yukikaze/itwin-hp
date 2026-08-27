@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：デジタルツイン実践編、大企業の事例から中小製造業が学べること
+  （template.html から複製・記事データはユーザー提供原稿より・2026-08-27）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デジタルツイン実践編、大企業の事例から中小製造業が学べること｜アイツイン コラム</title>
+  <meta name="description" content="ダイキン工業・日立製作所・旭化成のデジタルツイン活用事例から、中小製造業が取り入れられる考え方を整理します。多品種少量生産の工場でも、成果は出せます。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/digital-twin-case-studies">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="デジタルツイン実践編、大企業の事例から中小製造業が学べること">
+  <meta property="og:description" content="ダイキン工業・日立製作所・旭化成のデジタルツイン活用事例から、中小製造業が取り入れられる考え方を整理します。多品種少量生産の工場でも、成果は出せます。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/digital-twin-case-studies">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-digital-twin-jissen.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-08-27">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="デジタルツイン実践編、大企業の事例から中小製造業が学べること">
+  <meta name="twitter:description" content="ダイキン工業・日立製作所・旭化成のデジタルツイン活用事例から、中小製造業が取り入れられる考え方を整理します。多品種少量生産の工場でも、成果は出せます。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-digital-twin-jissen.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "デジタルツイン実践編、大企業の事例から中小製造業が学べること",
+    "description": "ダイキン工業・日立製作所・旭化成のデジタルツイン活用事例から、中小製造業が取り入れられる考え方を整理します。多品種少量生産の工場でも、成果は出せます。",
+    "image": "https://i-twin.co.jp/img/column-digital-twin-jissen.jpg",
+    "datePublished": "2026-08-27",
+    "dateModified": "2026-08-27",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/digital-twin-case-studies"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "デジタルツイン実践編、大企業の事例から中小製造業が学べること", "item": "https://i-twin.co.jp/column/articles/digital-twin-case-studies" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#digital-twin">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>デジタルツイン実践編、大企業の事例から中小製造業が学べること</span>
+      </div>
+      <h1>デジタルツイン実践編、大企業の事例から中小製造業が学べること</h1>
+      <p class="catch">公開日：2026年8月27日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">デジタルツイン／事例紹介</span>公開日：2026.08.27</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <p>
+          実際に成果を出している大企業のデジタルツイン活用事例を見ながら、そこから中小製造業が取り入れられる考え方を整理します。
+        </p>
+        <p>
+          大企業のデジタルツイン活用は、すでに「生産ロス6割削減」レベルまで進んでいます。その中には、多品種少量生産、つまり中小製造業と同じ条件の工場も含まれています。規模の大きさに気後れする必要はありません。学べる部分は、確かにあります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-digital-twin-jissen.jpg" alt="大企業のデジタルツイン活用事例（生産ロス6割削減）から、中小製造業が今すぐ真似できるヒント（データの見える化・IoT活用・スモールスタート）への応用イメージ" width="1408" height="768" loading="lazy">
+          <figcaption>大企業の事例から、中小製造業が今すぐ真似できる部分を抽出する</figcaption>
+        </figure>
+
+        <h2>ダイキン工業、生産ロスを6割減らした工場</h2>
+        <p>
+          ダイキン工業の堺製作所臨海工場では、2020年頃からデジタルツインを本格的に活用しています。
+        </p>
+        <p>
+          工場内の設備にセンサーやカメラを取り付け、部品の流れや組み立て、塗装、プレスといった工程の状況を、逐次デジタル空間に再現する仕組みです。
+        </p>
+        <p>
+          最初からうまくいったわけではないようです。故障を予知する仕組みは、当初は誤報も多かったと報告されています。それでも保全チームが運用を継続し、実際に発生すれば半日ほどラインが止まってしまうような大きな設備故障を、事前に検出できるようになっていきました。
+        </p>
+        <p>
+          その結果、2024年度の実績では、生産ロスを全体で6割削減。設備故障に由来する生産ロスに限れば、8割の削減を達成しています。
+        </p>
+        <p>
+          ここで注目したいのは、最初から完璧だったわけではないという点です。見える化して、予測して、外れたら直す。このサイクルを回し続けたことが、成果につながっています。
+        </p>
+
+        <h2>日立製作所、多品種少量生産でもリードタイムを半減</h2>
+        <p>
+          もう一つ、日立製作所の大みか事業所の事例です。
+        </p>
+        <p>
+          この工場は、電力や鉄道、上下水道といった社会インフラ向けの制御盤を作っています。約8万個のRFIDタグと450台のリーダーを使い、人とモノの動きをきめ細かく把握する仕組みを構築しました。
+        </p>
+        <p>
+          この事例が中小製造業にとって示唆的なのは、大量生産のラインではないという点です。この工場は多品種少量生産、つまり毎回違う仕様の製品を、一つひとつ作っています。
+        </p>
+        <p>
+          多くの中小製造業は、毎回違うものを、少しずつ作るという条件のもとにあります。大量生産のラインを持つ大企業の話は、遠く感じられることもあると思います。
+        </p>
+        <p>
+          しかし日立の事例は、まさにその条件でも成果を出せることを示しています。結果として、代表製品の生産リードタイムを50%短縮しています。
+        </p>
+
+        <h2>旭化成、熟練者の技をどこにいても再現する</h2>
+        <p>
+          技術継承という観点でも、参考になる事例があります。
+        </p>
+        <p>
+          旭化成は、化学プラントごとに製造する製品が異なり、それぞれに専門知識を持った熟練者が必要な業種です。各プラントに配置できるベテラン技術者は、30人の技術者に対して2、3人という水準にとどまっているといいます。
+        </p>
+        <p>
+          ベテランが出張中や退社後に、設備の異常が起きることもあります。そこで旭化成は、ベテランが現場にいなくても、遠隔からあたかもその場にいるかのように対応できる仕組みとして、化学プラントのデジタルツインを構築しました。
+        </p>
+        <p>
+          これは単なる効率化ではなく、少数の熟練者の技を、限られた人数のまま、より広い範囲に届けるという発想です。技は人に宿るものですが、その技が発揮される「場」を、デジタルツインが広げてくれる。そこに大きな可能性があります。
+        </p>
+
+        <h2>中小製造業が、ここから借りられるもの</h2>
+        <p>
+          大企業と同じ規模の投資はできません。それでも、考え方は借りられます。
+        </p>
+
+        <h3>①「見える化・予測・改善」のサイクルという発想</h3>
+        <p>
+          ダイキンの取り組みの核は、高価なシステムそのものより、このサイクルを回し続けたことにあります。規模を問わず取り入れられる考え方です。
+        </p>
+
+        <h3>②誤報から始めても構わない、という姿勢</h3>
+        <p>
+          最初から完璧な予測はできません。まず測り始めて、外れたら直す。この前提を持っておくだけで、導入のハードルは下がります。
+        </p>
+
+        <h3>③多品種少量生産でも、デジタルツインは機能する</h3>
+        <p>
+          日立の事例が示す通り、「毎回違うものを作っているから無理だ」という理由は成立しません。むしろ、ばらつきの大きい現場ほど、感覚に頼っていた部分を数値化する価値は大きくなります。
+        </p>
+
+        <h3>④技は、人に宿ったまま広げられる</h3>
+        <p>
+          旭化成の事例は、熟練者を増やす話ではありません。今いる熟練者の技を、より広い範囲で活かす話です。中小製造業でも、一人のベテランの判断基準を記録し、共有できる形にするだけで、同じような効果が期待できます。
+        </p>
+
+        <h2>まずは、小さく始めること</h2>
+        <p>
+          大企業の事例は、規模の大きさに気後れしてしまうかもしれません。
+        </p>
+        <p>
+          ですが、いずれの企業も最初は一つの工程、一台の設備から始めています。省力化の第一歩は、機械選びではなく、現場の作業を洗い出すことです。まず現状を見える化し、そこから予測し、改善する。このサイクルの入り口に、大きな投資は必要ありません。
+        </p>
+        <p>
+          大企業の実践から学べるのは、規模ではなく順番です。
+        </p>
+
+        <blockquote>
+          <p>アイツインは、中小企業をデジタルツインで最適な状態に仕上げ、確かな技を未来へつなぎ、関わるすべての現場を笑顔にしていきます。</p>
+        </blockquote>
+
+        <div class="article-cta">
+          自社のどの工程から着手できそうか、現場診断も承っております。お気軽にご相談ください。
+        </div>
+
+        <h3 style="margin-top:36px;">参考</h3>
+        <ul class="article-refs">
+          <li>
+            ダイキン工業「止まらない工場」の取り組み（ITmedia Virtual EXPO 2025 夏 講演内容より）<br>
+            <a href="https://monoist.itmedia.co.jp/mn/articles/2510/23/news002.html" target="_blank" rel="noopener noreferrer">https://monoist.itmedia.co.jp/mn/articles/2510/23/news002.html</a>
+          </li>
+          <li>
+            日立製作所 大みか事業所の生産革新<br>
+            <a href="https://www.hitachi.com/ja-jp/press/articles/2016/10/1025/" target="_blank" rel="noopener noreferrer">https://www.hitachi.com/ja-jp/press/articles/2016/10/1025/</a>
+          </li>
+          <li>
+            旭化成 化学プラントのデジタルツイン（日経クロステック、会員限定記事）<br>
+            <a href="https://xtech.nikkei.com/atcl/nxt/column/18/01970/030200006/" target="_blank" rel="noopener noreferrer">https://xtech.nikkei.com/atcl/nxt/column/18/01970/030200006/</a>
+          </li>
+        </ul>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.13</p>
+                <h3><a href="digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
+                <p class="column-excerpt">デジタルツインの仕組みを現場目線で解説。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、具体的な始め方を紹介します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.21</p>
+                <h3><a href="factory-that-thinks.html">使い続けるほど、工場は「自分で考える」ようになる</a></h3>
+                <p class="column-excerpt">データを蓄積し続けることで、工場は異常の原因を突き止め、未来を予測し、次に何をすべきかまで提案してくれるようになります。その仕組みを解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
