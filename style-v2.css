@@ -1745,6 +1745,15 @@ a.column-card { cursor: pointer; }
 }
 .article-category { display:inline-block; font-size:0.78rem; color:var(--orange); font-weight:700; letter-spacing:.05em; margin-right:10px; }
 
+/* 記事本文内の図版・参考リンク */
+.article-figure { margin: 8px 0 30px; text-align: center; }
+.article-figure img { width: 100%; height: auto; display: block; border-radius: var(--radius); box-shadow: var(--shadow); }
+.article-figure figcaption { margin-top: 12px; font-size: 0.84rem; color: var(--ink-soft); }
+.article-refs { margin: 0 0 18px 22px; font-size: 0.86rem; color: var(--ink-soft); }
+.article-refs li { margin-bottom: 10px; line-height: 1.7; }
+.article-refs a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.article-refs a:hover { color: var(--orange); }
+
 /* ===========================================================
    業種別デジタルツイン活用事例（/column/industries/）
    ・カードは色帯＋番号で識別（絵文字アイコンは使わない方針）

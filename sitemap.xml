@@ -159,6 +159,13 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/digital-twin-case-studies</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- 例：新しい記事を追加する場合はこの形式でコピーして増やしてください（拡張子 .html は付けない＝Cloudflareのクリーンurlに合わせる）
   <url>
     <loc>https://i-twin.co.jp/column/articles/digital-twin-first-step</loc>
