@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：レガシー装置からデータを取得する3つの方法
+  （template.html から複製・記事データは自社note記事より・2026-09-06）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-legacy-equipment.jpg
+  （本文冒頭の figure / OGP / JSON-LD / column/index.html のサムネイルで共用）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法｜アイツイン コラム</title>
+  <meta name="description" content="通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、専用機器と自作マイコンそれぞれの現実的な始め方を解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/legacy-equipment-data">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法">
+  <meta property="og:description" content="通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、現実的な始め方を解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/legacy-equipment-data">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-legacy-equipment.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-09-06">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法">
+  <meta name="twitter:description" content="通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、現実的な始め方を解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-legacy-equipment.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法",
+    "description": "通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、専用機器と自作マイコンそれぞれの現実的な始め方を解説します。",
+    "image": "https://i-twin.co.jp/img/column-legacy-equipment.jpg",
+    "datePublished": "2026-09-06",
+    "dateModified": "2026-09-06",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/legacy-equipment-data"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法", "item": "https://i-twin.co.jp/column/articles/legacy-equipment-data" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#digital-twin">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</span>
+      </div>
+      <h1>レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</h1>
+      <p class="catch">公開日：2026年9月6日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">デジタルツイン／予知保全</span>公開日：2026.09.06</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <figure class="article-figure">
+          <img src="../../img/column-legacy-equipment.jpg" alt="古いプレス機に外付けセンサーを取り付け、そこから取得したデータをモニターのグラフとして可視化するイメージ" width="1408" height="768" loading="lazy">
+          <figcaption>配線をいじらずに、外側からデータを取る</figcaption>
+        </figure>
+
+        <p>
+          「うちの機械は古いから、データなんて取れない」
+        </p>
+        <p>
+          現場でよく思ったことです。
+        </p>
+        <p>
+          私自身、制御盤を開けてリレー制御を見た瞬間、固まった記憶があります。ラダー図もなく、電気図面とにらめっこして配線を目で追うしかない。通信機能もセンサーもなく、図面すら残っていない。今でも、どう動いているかをすべて把握するのは簡単ではないと考えています。
+        </p>
+        <p>
+          そんなレガシー装置を前にすると、データを取得するなんて、と諦めてしまいそうになります。
+        </p>
+        <p>
+          ですが、<strong>配線を一切いじらなくても、レガシー装置からデータは取れます。</strong>今回は、その方法を整理したいと思います。
+        </p>
+
+        <h2>外側から取れる情報は3種類ある</h2>
+        <p>
+          レガシー装置からデータを取る方法は、大きく3系統に分かれます。
+        </p>
+
+        <h3>①電流値</h3>
+        <p>
+          モーターや分電盤に、クランプ式のセンサーを挟むだけで取得できます。配線を切る必要はありません。
+        </p>
+        <p>
+          電流には、設備の負荷状態が現れます。切削中なのか、空転しているのか、異常な負荷がかかっているのか。電流の波形パターンを見ることで、こうした状態が読み取れます。
+        </p>
+
+        <h3>②振動</h3>
+        <p>
+          モーターやベアリング付近に、外付けの加速度センサーを貼り付けます。
+        </p>
+        <p>
+          振動には、回転体の劣化が現れます。軸受けの摩耗、アンバランス、芯ズレ。これらは壊れる前に、振動の波形に変化として出てきます。
+        </p>
+
+        <h3>③信号灯・ランプの横取り</h3>
+        <p>
+          レガシー装置の多くは、リレー制御が中心です。「起動ランプが点く」「加工完了ランプが点く」といった動きの連続で動いています。
+        </p>
+        <p>
+          この信号線を、被覆の外からクランプするだけで、ON/OFFの情報を取り出せます。配線を切ったり、制御盤を改造したりする必要はありません。
+        </p>
+
+        <h2>初めて外付けのセンサーを付けるなら</h2>
+        <p>
+          3種類の中でも、最初の一歩として扱いやすいのが振動センサーです。
+        </p>
+        <p>
+          入り口として使いやすいのが、ifmの振動センサーだと思っています。専用のソフトウェアがオプションで用意されていて、使っているベアリングの型式を入力するだけで、監視すべき周波数を自動で計算してくれます。振動診断の専門知識がなくても、型式さえ分かれば設定できるのが強みです。もちろん、自身で調べて入力することもできます。
+        </p>
+        <p>
+          さらに、振動診断増幅器「VSE100」を組み合わせると、入力範囲が0〜10mA、IEPE、4〜20mAに対応しているため、振動センサーだけでなく、電流値や温度・湿度といった信号も同じ機器で取り込めます。1台で複数の情報を扱えるので、先ほど挙げた3種類のうち、<strong>電流と振動をまとめて任せることもできます。</strong>
+        </p>
+        <p>
+          カタログ価格は15万1,900円でした（2026年9月時点）。詳細は
+          <a class="inline-link" href="https://www.ifm.com/jp/ja/product?tab=documents&amp;pn=VSE100" target="_blank" rel="noopener noreferrer">メーカーの製品ページ</a>
+          をご確認ください。
+        </p>
+
+        <h2>もっと安く、という場合</h2>
+        <p>
+          もう少し予算を抑えたいという場合は、自作のマイコンという道もあります。Raspberry PiやArduinoに、市販の振動センサーや電流センサーを繋ぐ方法です。
+        </p>
+        <p>
+          解析の中身は自分でプログラムを書く必要がありますが、部品代だけなら数千円から始められます。専用機器のように「型式を入力するだけ」とはいきません。ですが、<strong>「何が測れて、何が分かるのか」を自分の手で確かめられるのは、自作ならではの利点</strong>だとも思います。
+        </p>
+        <p>
+          大事なのは、最初から完璧な仕組みを作ろうとしないことだと思います。
+        </p>
+
+        <h2>デジタルツインの土台になる</h2>
+        <p>
+          ここまで集めたデータは、そのままデジタルツインの材料になります。
+        </p>
+        <p>
+          設備の3Dモデルの上に、いつ動いたか、そのとき電流や振動はどうだったかを重ねて表示する。すると、画面を見るだけで「この設備は今、正常に動いている」「この時間帯だけ振動が大きい」といったことが一目で分かるようになります。
+        </p>
+        <p>
+          これまでは、ベテランが音や振動を体で感じ取って判断していたことだと思います。それを、外付けのセンサーが代わりに拾ってくれます。
+        </p>
+        <p>
+          そしてこのデータが蓄積されていくと、単なる異常検知にとどまりません。正常な状態のパターンが分かれば、そこからのズレを早い段階で捉えられるようになります。壊れてから直すのではなく、壊れる前に気づく。これが予知保全です。
+        </p>
+        <p>
+          デジタルツインの価値は、まさにここにあります。センサーが拾った現在のデータと、これまで蓄積してきた過去のデータを重ねて見ることで、<strong>「いつもと違う」を数字で判断できるようになる</strong>からです。
+        </p>
+
+        <h2>さいごに</h2>
+        <p>
+          ベテランの勘は、長年の経験の蓄積です。センサーとデジタルツインがやっていることも、実は同じ構造なんだと思います。
+        </p>
+        <p>
+          データを蓄積し、そこからのズレを察知する。ベテランの頭の中にあった判断基準を、外に取り出して、誰でも見られる形にする。それが、レガシー装置から始める予知保全、デジタルツインだと私は考えています。
+        </p>
+        <p>
+          古い設備だからと諦めるのではなく、まずはデータを取ってみる。その一歩を後押しできたら嬉しいです。
+        </p>
+
+        <blockquote>
+          <p>アイツインは、中小企業をデジタルツインで最適な状態に仕上げ、確かな技を未来へつなぎ、関わるすべての現場を笑顔にしていきます。</p>
+        </blockquote>
+
+        <div class="article-cta">
+          どの設備から手をつけるべきか、どのセンサーが自社の工程に合うか。現場診断も承っておりますので、お気軽にご相談ください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.13</p>
+                <h3><a href="digital-twin-basics.html">デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</a></h3>
+                <p class="column-excerpt">デジタルツインの仕組みを現場目線で解説。iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、具体的な始め方を紹介します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.21</p>
+                <h3><a href="factory-that-thinks.html">使い続けるほど、工場は「自分で考える」ようになる</a></h3>
+                <p class="column-excerpt">データを蓄積し続けることで、工場は異常の原因を突き止め、未来を予測し、次に何をすべきかまで提案してくれるようになります。その仕組みを解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
