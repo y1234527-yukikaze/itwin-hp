@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか
+  （template.html から複製・記事データは自社note記事より・2026-09-13）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-temperature-control.jpg
+  （本文冒頭の figure / OGP / JSON-LD / column/index.html のサムネイルで共用）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか｜アイツイン コラム</title>
+  <meta name="description" content="飲食チェーンの味のばらつきを解決するため、卵焼きの温度をAIで管理する装置を試作しました。技術的には動いたものの採用に至らなかった理由から、現場課題との向き合い方を考えます。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/temperature-control-lesson">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか">
+  <meta property="og:description" content="飲食チェーンの味のばらつきを解決するため、卵焼きの温度をAIで管理する装置を試作しました。技術的には動いたものの採用に至らなかった理由から、現場課題との向き合い方を考えます。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/temperature-control-lesson">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-temperature-control.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-09-13">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか">
+  <meta name="twitter:description" content="飲食チェーンの味のばらつきを解決するため、卵焼きの温度をAIで管理する装置を試作しました。技術的には動いたものの採用に至らなかった理由から、現場課題との向き合い方を考えます。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-temperature-control.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか",
+    "description": "飲食チェーンの味のばらつきを解決するため、卵焼きの温度をAIで管理する装置を試作しました。技術的には動いたものの採用に至らなかった理由から、現場課題との向き合い方を考えます。",
+    "image": "https://i-twin.co.jp/img/column-temperature-control.jpg",
+    "datePublished": "2026-09-13",
+    "dateModified": "2026-09-13",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/temperature-control-lesson"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか", "item": "https://i-twin.co.jp/column/articles/temperature-control-lesson" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../index.html#profile">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#digital-twin">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか</span>
+      </div>
+      <h1>ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか</h1>
+      <p class="catch">公開日：2026年9月13日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body">
+
+        <p class="article-meta"><span class="article-category">IoT導入／現場の学び</span>公開日：2026.09.13</p>
+
+        <!-- ◆目次（本文中の h2 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <figure class="article-figure">
+          <img src="../../img/column-temperature-control.jpg" alt="サーモグラフィで卵焼きの温度を計測し、基準温度との差をAIが音声で知らせる試作装置のイメージ" width="1376" height="768" loading="lazy">
+          <figcaption>技術は動いた。それでも、課題には届かなかった。</figcaption>
+        </figure>
+
+        <p>
+          以前、飲食チェーンの「味のばらつき」を解決するシステムを試作したことがあります。結果は不採用でしたが、その理由が大きな学びになったので共有します。
+        </p>
+
+        <h2>発端は、信用金庫で聞いた雑談</h2>
+        <p>
+          職人の技が受け継がれないまま消えていく。信用金庫の方とそんな話をしていたときでした。「そういえば最近こんなことを言われたのですが」と、ひとつ話が出てきました。地方で複数店舗を展開している飲食チェーンからの声だといいます。
+        </p>
+        <p>
+          「人が入れ替わるたびに、味を揃えるのが難しい」。同じレシピを渡し、同じ材料を仕入れ、同じ手順書もある。それでも、作り手が変われば仕上がりに差が出てしまう。なかでも難しいのが日替わりメニューだといいます。定番メニューなら繰り返すうちに体が覚えますが、日替わりは今日初めて作るものを手順書だけを頼りに仕上げなければならず、慣れる時間がありません。お客さんはどの店に入っても同じ味を期待しているからこそ、経営する側は常にそこに気を配っています。
+        </p>
+        <p>
+          聞いているうちに、作れそうな形が頭に浮かびました。面白そうだ、作ってみたいとワクワクし、気が付いたら「案があるので、試しに作ってみてもいいですか」と申し出ていました。
+        </p>
+
+        <h2>「中火で3分」では、何も指定していない</h2>
+        <p>
+          最初はマニュアルをもっと丁寧にすれば解決すると考えました。写真を増やす、手順を細かく割る。しかしいくら丁寧にしても越えられない壁がありました。
+        </p>
+        <p>
+          「中火で3分」という指示は、一見具体的に見えて、実はほとんど何も指定していません。コンロが違えば中火の強さは違い、鍋の厚みや室温でも変わります。文字のレシピは「その人が、その環境で作ったときの再現手順」でしかなく、別の人が別の厨房で読んで同じ結果になる保証はどこにもないのです。
+        </p>
+        <p>
+          そこで発想を変えました。人によって解釈が変わる言葉ではなく、誰が見ても同じ値になるもので指示を出せないか。「中火で3分」ではなく「180度になったら卵を入れる」なら、環境が違っても同じ状態を再現できます。手をかざして確かめている「いい感じ」を、数字に置き換えられるかもしれない。そう考えました。
+        </p>
+        <p>
+          実際、フライヤーの油温や揚げ物・焼き物の中心温度を非接触のサーモグラフィカメラで常時モニタリングし、設定温度から外れると警告を出す仕組みが、大手チェーンの一部ではすでに導入されているといいます。
+        </p>
+
+        <h2>卵焼きで検証した</h2>
+        <p>
+          検証する料理には卵焼きを選びました。作りやすく、何度も試作しやすいこと。そして調べていくうちに、卵焼きは温度管理の精度が仕上がりに直結する料理だと分かったためです。温度が高すぎれば固くなり、低すぎれば水っぽくなる。「温度で味を揃える」という仮説を確かめるには、うってつけの題材でした。
+        </p>
+        <p>
+          装置は手元にあったもので組みました。手のひらに乗る小型デバイス（M5Stack CoreS3）に、オプションのサーモグラフィユニットを取り付け、調理器具の表面温度を触れずに測る仕組みです。正直、厨房の環境を細かく検討して選んだわけではなく、必要な機能が手元に揃っていたからという理由でした。実際に店舗へ導入するなら、画面が大きく扱いやすいタブレットの方が向いているとは思いますが、検証にはこれで十分でした（大手チェーンでは、手順通りに作業したかを確認する調理工程チェックも、タブレットのアプリに置き換わりつつあるようです）。
+        </p>
+        <p>
+          作った機能はシンプルです。画面に調理の手順が出て、同時に今のフライパンの温度と、あるべき基準温度が並んで表示される。数字が近づけば、正しい状態に向かっているのが分かります。ただそれだけだと、調理中ずっと画面を見続けることになり、手の塞がっている人間には現実的ではありません。そこでAIを組み合わせ、温度が基準から外れると「火が強すぎます」といった短い言葉を音声と表示で知らせるようにしました。職人の勘を、数字で直す。そういう装置を作ってみたかったのです。
+        </p>
+
+        <h2>返ってきた言葉で気づいたこと</h2>
+        <p>
+          自宅の台所でデモ動画を撮影し、限定公開のYouTube経由で先方に届けてもらいました。しばらくして返ってきたのは、こんな言葉でした。
+        </p>
+        <p>
+          「これは、日替わりには対応できないのではないか」
+        </p>
+        <p>
+          あらためて振り返って気づきました。もともとの課題は「日替わりメニューの味のばらつき」でした。それなのに、作り込んでいくうちに、私が作っていたのは「卵焼きをふわふわに焼く装置」になっていたのです。「誰が料理しても同様の味が提供できる」仕組みを作るはずが、いつの間にか課題そのものが書き換わっていることに、まったく気が付きませんでした。
+        </p>
+        <p>
+          仮説検証のために卵焼きを選んだところまでは間違っていませんでした。ですが作り込んでいくうちに、卵焼きをうまく焼くこと自体が目的になっていったのです。作りたいという気持ちが先行してしまったからこそ、作りたいものだけを作ってしまいました。作っている最中はまったく気づかず、むしろ、うまく動くたびに手応えを感じていたくらいです。指摘をもらって、ようやく自分がどこに向かっていたのかが見えました。
+        </p>
+
+        <h2>この経験から</h2>
+        <p>
+          もともと採用されればラッキーくらいの気持ちで始めた話だったので、落ち込みはありませんでした。それより、この気づきをもらえたことの方が収穫だったと今は思っています。
+        </p>
+        <p>
+          現場目線で考えられる設計者だと自負していましたが、今回は自分が作りたいものを作ってしまいました。作る前に、もっと現場を知る。当たり前のようで、自分から手を挙げた高揚感の中ではすっぽり抜け落ちてしまうのだと痛感しました。
+        </p>
+        <p>
+          この経験は、今の現場診断でも大切にしている姿勢につながっています。デジタルツインやIoTの導入では、技術的に面白いものを作ること自体が目的化しないよう、まず現場の本当の課題を丁寧に確認することを心がけています。
+        </p>
+
+        <div class="article-cta">
+          自社のどの工程から着手できそうか、現場診断も承っております。お気軽にご相談ください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.09.06</p>
+                <h3><a href="legacy-equipment-data.html">レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</a></h3>
+                <p class="column-excerpt">通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.30</p>
+                <h3><a href="digital-twin-food-manufacturing.html">食品製造・加工の現場に、デジタルツイン・IoTは何をもたらすか</a></h3>
+                <p class="column-excerpt">熟練技術者の「カン・コツ」に支えられている食品製造の現場に、温度管理の自動化やIoTセンサーがどう影響するかを解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 を拾ってリンクを作る） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2')).filter(function (h) {
+      return !h.closest('.article-toc'); // 目次自身の見出しは除外
+    });
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../index.html#profile">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
