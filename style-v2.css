@@ -278,8 +278,16 @@ section[id] { scroll-margin-top: 84px; }
   position: relative;
   color: #fff;
   background:
-    linear-gradient(120deg, rgba(8,30,56,0.94) 0%, rgba(13,43,78,0.82) 55%, rgba(13,43,78,0.55) 100%),
-    url("hero-main.png") center/cover no-repeat;
+    linear-gradient(120deg, rgba(8,30,56,0.92) 0%, rgba(13,43,78,0.68) 45%, rgba(13,43,78,0.12) 100%),
+    url("hero-map.jpg") right center/cover no-repeat;
+}
+/* スマホは横長画像だと地図が判別できないため、縦長版に差し替える */
+@media (max-width: 700px) {
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(8,30,56,0.86) 0%, rgba(13,43,78,0.52) 45%, rgba(13,43,78,0.42) 100%),
+      url("hero-map-mobile.jpg") center center/cover no-repeat;
+  }
 }
 /* 薄いグリッド模様（工業感） */
 .hero::before {
@@ -297,6 +305,17 @@ section[id] { scroll-margin-top: 84px; }
   padding-bottom: 110px;
 }
 .hero-inner { max-width: 720px; }
+/* ヒーロー見出しの上に置く小見出し（誰向けか・何の会社かを先に示す） */
+.hero-eyebrow {
+  font-family: "Shippori Mincho", serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.22em;
+  color: #9fb8d4;
+  margin-bottom: 16px;
+}
+@media (max-width: 560px) {
+  .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.14em; margin-bottom: 12px; }
+}
 .hero h1 {
   font-size: clamp(2.1rem, 5.4vw, 3.5rem);
   line-height: 1.4;
