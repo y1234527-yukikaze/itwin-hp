@@ -80,6 +80,11 @@ section[id] { scroll-margin-top: 84px; }
   color: var(--ink-soft);
   font-size: 1.02rem;
 }
+/* 略語の意味などを、本文より小さく添える注釈（#flow の FDE 説明で使用） */
+.fde-note {
+  display: inline-block; margin-top: 8px;
+  font-size: 0.8rem; color: var(--ink-soft); opacity: .85;
+}
 
 /* ---- ボタン（塗り / 枠線 / 白抜き の3種） ---- */
 .btn {
@@ -403,6 +408,8 @@ section[id] { scroll-margin-top: 84px; }
   font-size: 1.2rem; color: var(--navy); margin-bottom: 12px;
   position: relative; display: inline-block;
 }
+/* 本文を持たず見出しで終わるカード（#issues など）で、下に余分な余白が残らないようにする */
+.card h3:last-child { margin-bottom: 0; }
 .card h3::after {
   content: "";
   position: absolute;
@@ -1411,6 +1418,10 @@ img.img-frame { object-fit: contain; }
 
 /* セクション内の「詳しくはこちら」導線（コラム記事へのショートカット・ボタン表示） */
 .section-more { text-align: center; margin-top: 30px; }
+@media (max-width: 560px) {
+  /* 「詳しく見る」系の長いラベルは、狭い画面だと .btn の nowrap のせいで画面をはみ出すため折り返しを許可する */
+  .section-more .btn { white-space: normal; max-width: 100%; text-align: center; line-height: 1.4; }
+}
 
 /* カード内の小さいボタン（コラム記事へのショートカット） */
 .card-link {
@@ -1472,7 +1483,7 @@ img.img-frame { object-fit: contain; }
 
 /* ---- 階段セクション（伴走・3ヶ月ごとに一段ずつ） ---- */
 .stairs {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);   /* 段数に合わせること（下の nth-child も揃える） */
   gap: 16px; align-items: start; margin-top: 26px;
 }
 .stair {
@@ -1480,6 +1491,9 @@ img.img-frame { object-fit: contain; }
   border-top: 5px solid var(--orange); border-radius: var(--radius);
   padding: 22px 20px; box-shadow: var(--shadow); position: relative;
 }
+/* 段差は「段数 −1」×44px から始めて、最後の段が0になるよう44pxずつ減らす。
+   段数を増減したら grid-template-columns（上）とこの並びを必ず揃えること。
+   2026-09-15：トップから annual-plan.html へ移設。現在この階段は annual-plan.html のみで使用（4段） */
 .stairs .stair:nth-child(1) { margin-top: 132px; }
 .stairs .stair:nth-child(2) { margin-top: 88px; }
 .stairs .stair:nth-child(3) { margin-top: 44px; }
@@ -1508,6 +1522,40 @@ img.img-frame { object-fit: contain; }
   padding: 2px 9px; border-radius: 999px; margin-bottom: 8px;
 }
 .stairs-foot { text-align: center; margin-top: 38px; color: var(--ink-soft); font-size: 0.96rem; }
+
+/* ◆年間計画の図（annual-plan.html で使用。背景透過PNGのため、どの背景色にも馴染む） */
+.plan-figure { max-width: 900px; margin: 26px auto 0; }
+.plan-figure img { width: 100%; height: auto; display: block; }
+
+/* ◆4クールのラベル（index.html の #steps で使用。図はトップには置かず詳細ページへ） */
+.plan-steps {
+  list-style: none; max-width: 1000px; margin: 34px auto 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+}
+.plan-steps li {
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 20px;
+}
+.plan-steps .ps-no {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  font-family: "Shippori Mincho", serif; font-size: 0.9rem; font-weight: 700;
+  margin-bottom: 10px;
+}
+.plan-steps b { display: block; color: var(--navy); font-size: 1.05rem; margin-bottom: 6px; }
+.plan-steps .ps-desc { display: block; color: var(--ink-soft); font-size: 0.86rem; line-height: 1.7; }
+@media (max-width: 700px) {
+  .plan-steps { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 420px) {
+  .plan-steps { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 900px) {
   .stairs { grid-template-columns: repeat(2, 1fr); }
   .stairs .stair { margin-top: 0 !important; }

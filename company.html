@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜会社概要（専用ページ）
+  ------------------------------------------------------------
+  ・2026-09-15、index.html の #profile セクションから分離して新設。
+    トップページには会社情報の表と代表の要約のみを残し、
+    代表メッセージ本文（6段落）はこのページへ移設している。
+  ・トップの該当セクションを編集するときは、このページとの重複・矛盾に注意すること。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要・代表メッセージ｜株式会社アイツイン（i-TWIN）</title>
+  <meta name="description" content="株式会社アイツイン（山口県山口市）の会社概要と代表メッセージ。製造業15年、設備保全と設計の両方を経験した代表が、デジタルツインを中小製造業へ広めるために起業した理由をお伝えします。">
+  <link rel="canonical" href="https://i-twin.co.jp/company">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="会社概要・代表メッセージ｜株式会社アイツイン">
+  <meta property="og:description" content="製造業15年、設備保全と設計の両方を経験した代表が、デジタルツインを中小製造業へ広めるために起業した理由をお伝えします。">
+  <meta property="og:url" content="https://i-twin.co.jp/company">
+  <meta property="og:image" content="https://i-twin.co.jp/hero-map.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="会社概要・代表メッセージ｜株式会社アイツイン">
+  <meta name="twitter:description" content="製造業15年、設備保全と設計の両方を経験した代表が、デジタルツインを中小製造業へ広めるために起業した理由をお伝えします。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/hero-map.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+
+  <!-- ◆構造化データ（Organization / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "株式会社アイツイン",
+    "alternateName": "アイツイン / i-TWIN",
+    "url": "https://i-twin.co.jp/",
+    "logo": "https://i-twin.co.jp/itwin-logo.png",
+    "founder": {
+      "@type": "Person",
+      "name": "加瀬部 裕紀"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "山口県",
+      "addressLocality": "山口市",
+      "streetAddress": "小郡令和１丁目１番１号 維新ホール１F Megriba",
+      "addressCountry": "JP"
+    },
+    "telephone": "0835-57-0969",
+    "description": "アイツインは、中小企業をデジタルツインで最適な状態に仕上げ、確かな技を未来へつなぎ、関わるすべての現場を笑顔にしていきます。"
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "会社概要", "item": "https://i-twin.co.jp/company" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>会社概要</span></div>
+      <h1>会社概要</h1>
+      <p class="catch">現場の隣に、いつも。</p>
+    </div>
+  </section>
+
+  <!-- ◆会社情報 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="company-box" style="max-width:680px;margin:0 auto;">
+        <dl>
+          <dt>会社名</dt><dd>株式会社アイツイン</dd>
+          <dt>所在地</dt><dd>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</dd>
+          <dt>代表者</dt><dd>加瀬部 裕紀</dd>
+          <dt>TEL</dt><dd>0835-57-0969</dd>
+          <dt>受付時間</dt><dd>平日 9:00–17:00</dd>
+          <dt>事業内容</dt><dd>デジタルツインの導入支援／自動化・省力化・省人化の調査・立案・提案／3Dスキャンによる現場のデータ化</dd>
+          <dt>理念</dt><dd>アイツインは、中小企業をデジタルツインで最適な状態に仕上げ、確かな技を未来へつなぎ、関わるすべての現場を笑顔にしていきます。</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆代表メッセージ -->
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">MESSAGE</span>
+        <h2>代表メッセージ</h2>
+        <p>なぜ、デジタルツインなのか。</p>
+      </div>
+
+      <div class="profile">
+        <!-- 写真エリア -->
+        <div class="profile-photo">
+          <img src="profile.jpg" alt="代表者の写真">
+        </div>
+        <div class="profile-body">
+          <p class="role">代表</p>
+          <h2>加瀬部 裕紀</h2>
+          <p class="name-en">Yuki Kasebe</p>
+          <p>私は高校卒業後、製造業に15年間在籍してきました。設備の保全としてメンテナンスに携わり、また設計士としてモノづくりに取り組むなかで、ものづくりを「守る側」と「生み出す側」の両方を経験してきました。</p>
+          <p>設備が止まり、いつ復旧するか分からない焦り。納期に追われながら練り上げた設計。触れて、感じて、考えて、直して、作る。その繰り返しのなかで、「どうすればもっと効率化できるのか」をいつも考えていました。</p>
+          <p>その答えとしてたどり着いたのが、<a class="inline-link" href="digital-twin.html">デジタルツイン</a>でした。「アイツイン」という社名も、この技術に由来します。仮想空間で工場を再現し、シミュレーションができる。これまでは図面を引き、モノを作り、設置するという流れが当たり前でしたが、デジタルツイン上で事前に試せることで、その工数を大きく減らせるようになりました。</p>
+          <p>デジタルツインは、大企業だけのものではありません。この技術を中小企業へ広め、伝えていくことが、私の使命だと考えています。</p>
+          <p>現場では、繰り返しの作業や重い物の上げ下ろしなど、人の負担が大きい仕事を数多く見てきました。搬送の自動化に取り組むなかで実感したのは、本当に必要なのは人を減らすことではなく、今いる人の負担を軽くすることだということです。省力化・省人化・自動化は、デジタルツインで見えたことを現場に返すための、具体的な手段だと考えています。</p>
+          <p>私の原点は、ものづくりの経験にあります。だからこそ、机上の空論ではなく、つくる人と同じ目線で課題に向き合えると自負しています。現場に潜む課題を、作業者の目線で解いていきたい。その想いから、アイツインを立ち上げました。</p>
+          <blockquote class="quote">
+            「中小製造業に、おどろきと、わくわくを。」<br>
+            現場が前を向ける、その瞬間をつくりたい。
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>まずは、お気軽にご相談ください。</h2>
+      <p>「何ができるのか知りたい」だけでも大歓迎です。御社の現場に合わせてご提案します。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=hearing">お問い合わせ・無料ヒアリング</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜年間計画の進め方（専用ページ）
+  ------------------------------------------------------------
+  ・2026-09-15、index.html の #steps セクションから分離して新設。
+    トップページには図＋4クールの短いラベルのみを残し、
+    各クールの詳細（得られるもの・報告会の流れ）はこのページへ移設している。
+  ・トップの該当セクションを編集するときは、このページとの重複・矛盾に注意すること。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>年間計画の進め方｜3ヶ月×4クールで工場を育てる伴走型支援｜アイツイン</title>
+  <meta name="description" content="アイツインは3ヶ月＝1クール・全4クール（1年間）の年間計画で、中小製造業の現場改善に伴走します。各クールで何を行い、何が得られるのか、月次レポートと報告会の流れとあわせて解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/annual-plan">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="年間計画の進め方｜3ヶ月×4クールで工場を育てる伴走型支援">
+  <meta property="og:description" content="3ヶ月＝1クール・全4クール（1年間）の年間計画で現場改善に伴走します。各クールで何を行い、何が得られるのかを解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/annual-plan">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="年間計画の進め方｜3ヶ月×4クールで工場を育てる伴走型支援">
+  <meta name="twitter:description" content="3ヶ月＝1クール・全4クール（1年間）の年間計画で現場改善に伴走します。各クールで何を行い、何が得られるのかを解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "年間計画の進め方", "item": "https://i-twin.co.jp/annual-plan" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>年間計画の進め方</span></div>
+      <h1>年間計画の進め方</h1>
+      <p class="catch">続けるほど、工場は強くなる。</p>
+    </div>
+  </section>
+
+  <!-- ◆続けるほど、工場は強くなる -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">STEP UP</span>
+        <h2>続けるほど、工場は強くなる。</h2>
+        <p>アイツインは、3ヶ月＝1クール・全4クール（1年間）の年間計画で、一緒に工場を育てていく伴走型です。自動化・デジタルツインの導入を、ヒアリングから始まるPDCA運用として一段ずつ積み重ねていきます。</p>
+      </div>
+
+      <div class="stairs">
+        <div class="stair">
+          <span class="st-no">STEP 1</span>
+          <h3>年間目標ヒアリング（1クール目）</h3>
+          <p>「工場がどうなりたいか」という目指す姿と、1年後の目標をヒアリングし共有。方針・スケジュールを各クールに分解し、方針に沿って現場対応（3Dスキャン・人とモノの数値化・IoTセンサー設置など）を行います。</p>
+          <div class="gain"><b>得られるもの</b>1年後の目標と、3ヶ月ごとの実行計画</div>
+          <p class="clue">▶ 月次レポート・進捗報告会を2回実施 → 1クール最終報告会（3ヶ月目）で成果物を提出し、次クールへの更新可否を決めます。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 2</span>
+          <h3>現場対応を継続（2クール目）</h3>
+          <p>1クールの現場対応を継続（必要な場合）。方針に沿って測定・改善を進めます。</p>
+          <div class="gain"><b>得られるもの</b>積み重なるデータと、着実な改善の進捗</div>
+          <p class="clue">▶ 月次レポートを経て、2クール最終報告会で成果物を提出します。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 3</span>
+          <h3>現場対応を継続（3クール目）</h3>
+          <p>2クールまでの現場対応を継続（必要な場合）。同じサイクルで、着実に前進します。</p>
+          <div class="gain"><b>得られるもの</b>さらに積み上がる改善実績</div>
+          <p class="clue">▶ 月次レポートを経て、3クール最終報告会で成果物を提出します。</p>
+        </div>
+        <div class="stair">
+          <span class="st-no">STEP 4</span>
+          <h3>現場対応を継続・総仕上げ（4クール目）</h3>
+          <p>3クールまでの現場対応を継続（必要な場合）。1年間の集大成として、成果を形にします。</p>
+          <div class="gain"><b>得られるもの</b>1年間の年間計画の完了と、その後の展望</div>
+          <p class="clue">▶ 月次レポートを経て、4クール最終報告会で成果物を提出します。</p>
+        </div>
+      </div>
+
+      <p class="stairs-foot">
+        成果物は、自動化の場合は<strong>レポートと簡易設計図</strong>、デジタルツイン化の場合は<strong>IoTセンサーや値のダッシュボード</strong>を提出します。<br>
+        各クールの内容や順番は決めつけません。御社へのヒアリングをもとに一緒に組み立て、
+        「この工程から先に進めたい」といったご要望にも<strong>柔軟に対応</strong>します。まずは STEP 1 から、無理なく始められます。<br>
+        ※ 遠方の場合や、作業内容によっては交通費・宿泊費を別途申し受けます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>まずは、無料ヒアリングから。</h2>
+      <p>「何から始めればいいか分からない」という状態でも問題ありません。現場の状況をお聞きするところから始めます。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=hearing">お問い合わせ・無料ヒアリング</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
