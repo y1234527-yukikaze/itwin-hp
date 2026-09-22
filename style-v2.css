@@ -1649,9 +1649,13 @@ html { overflow-x: hidden; }
   background: var(--paper-soft);
   border-left: 3px solid var(--orange);
   border-radius: 6px;
+}
+.chk-encourage p {
+  margin: 0;
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--navy);
+  line-height: 1.5;
 }
 .chk-encourage.is-visible { display: block; }
 
@@ -1662,6 +1666,7 @@ html { overflow-x: hidden; }
 }
 .chk-other-wrap.is-visible { display: block; }
 .chk-other-text {
+  display: block;
   width: 100%;
   max-width: 280px;
   padding: 7px 10px;
@@ -1672,6 +1677,14 @@ html { overflow-x: hidden; }
   color: var(--ink);
   background: #fcfdfe;
 }
+
+/* 深掘り／その他から、そのままお問い合わせへ飛べる小さな導線 */
+.chk-inline-cta {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.76rem;
+}
+.chk-encourage .chk-inline-cta { margin-top: 8px; }
 .chk-other-text:focus {
   outline: none;
   border-color: var(--orange);
