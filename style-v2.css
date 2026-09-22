@@ -1655,6 +1655,29 @@ html { overflow-x: hidden; }
 }
 .chk-encourage.is-visible { display: block; }
 
+/* 「その他」：深掘り項目に無い内容も相談できることを示す逃げ道 */
+.chk-other-wrap {
+  display: none;
+  margin: 2px 0 10px 22px;
+}
+.chk-other-wrap.is-visible { display: block; }
+.chk-other-text {
+  width: 100%;
+  max-width: 280px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: var(--ink);
+  background: #fcfdfe;
+}
+.chk-other-text:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(212,105,26,0.12);
+}
+
 .checklist-cta { text-align: center; margin-top: 38px; }
 .checklist-cta p {
   font-size: 1.1rem; color: var(--navy);
