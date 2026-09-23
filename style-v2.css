@@ -609,8 +609,7 @@ section[id] { scroll-margin-top: 84px; }
       「お悩みチェックリスト（checklist.html 専用ページ用）」に集約 */
 .checklist-hint {
   max-width: 640px; margin: 40px auto 0;
-  background: var(--paper-soft); border: 1px solid var(--line);
-  border-left: 4px solid var(--orange);
+  background: var(--paper-soft); border: 1px solid var(--orange);
   border-radius: var(--radius); padding: 20px 24px;
 }
 .checklist-hint-title { font-weight: 700; color: var(--navy); margin-bottom: 8px; }
@@ -881,8 +880,8 @@ section[id] { scroll-margin-top: 84px; }
    =========================================================== */
 .contact-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 48px;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 40px;
   align-items: start;
 }
 .contact-info h3 { color: var(--navy); font-size: 1.2rem; margin: 24px 0 12px; }
@@ -952,7 +951,63 @@ section[id] { scroll-margin-top: 84px; }
   box-shadow: 0 0 0 3px rgba(212,105,26,0.12);
 }
 .field textarea { min-height: 140px; resize: vertical; }
+
+/* お問い合わせ内容：上段＝自動反映のプレビュー（グレー）、下段＝自由記述（通常色）を
+   ひとつの枠にまとめて、見た目は1つの入力欄に見せる */
+.message-block {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fcfdfe;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.message-block:focus-within {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(212,105,26,0.12);
+}
+.message-preview {
+  padding: 13px 15px 4px;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+.message-preview .mp-value { color: var(--ink-soft); }
+.message-preview .mp-section-label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.message-preview #mp-items { white-space: pre-wrap; }
+.message-other-label {
+  margin: 8px 15px 0;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 0.92rem;
+}
+.message-other-label[hidden] { display: none; }
+.message-block textarea {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  padding: 8px 15px 15px;
+  border: none;
+  border-radius: 0 0 10px 10px;
+  outline: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  resize: vertical;
+}
 .form-note { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; }
+.form-encourage {
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--orange);
+  margin: -6px 0 16px;
+}
 
 /* 送信完了メッセージ */
 .sent-banner {
@@ -1557,6 +1612,12 @@ html { overflow-x: hidden; }
    お悩みチェックリスト（checklist.html 専用ページ用）
    =========================================================== */
 .checklist { margin-top: 56px; }
+.checklist-intro {
+  text-align: center;
+  color: var(--navy);
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
 .check-lead {
   text-align: center;
   color: var(--ink-soft);
@@ -1564,7 +1625,7 @@ html { overflow-x: hidden; }
 }
 .check-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 .check-card {
@@ -1626,6 +1687,8 @@ html { overflow-x: hidden; }
 .ch-b .ch-head { background: #0f766e; }
 .ch-c .ch-head { background: #3f7d3f; }
 .ch-d .ch-head { background: var(--navy); }
+.ch-e .ch-head { background: #6b4fa0; }
+.ch-f .ch-head { background: #2b6cb0; }
 
 /* チェックすると出てくる、より具体的な深掘り項目 */
 .chk-group { margin: 0; }
@@ -1640,6 +1703,14 @@ html { overflow-x: hidden; }
   color: var(--ink-soft);
 }
 .chk-sub.is-visible { display: flex; }
+
+/* 深掘り項目のうち、関連するコラム・シミュレーターへの導線があるものだけに表示 */
+.chk-related {
+  display: none;
+  margin: 2px 0 8px 22px;
+  font-size: 0.78rem;
+}
+.chk-related.is-visible { display: block; }
 
 /* 深掘り項目にチェックが入ると出る、お問い合わせへの後押し文 */
 .chk-encourage {
