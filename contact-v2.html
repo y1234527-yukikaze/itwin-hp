@@ -61,7 +61,7 @@
             <a href="index.html#issues">課題</a>
             <a href="index.html#flow">進め方</a>
             <a href="index.html#goal">めざす姿</a>
-            <a href="index.html#profile">会社概要</a>
+            <a href="company.html">会社概要</a>
           </div>
         </div>
         <div class="nav-group">
@@ -193,9 +193,23 @@
               </select>
             </div>
             <div class="field">
-              <label for="message">お問い合わせ内容</label>
-              <textarea id="message" name="お問い合わせ内容" placeholder="ご相談内容をご記入ください。"></textarea>
+              <label for="message-other">お問い合わせ内容</label>
+              <div class="message-block">
+                <div class="message-preview" aria-hidden="true">
+                  <div>会社名：<span class="mp-value" id="mp-company"></span></div>
+                  <div>お名前：<span class="mp-value" id="mp-name"></span></div>
+                  <div>メールアドレス：<span class="mp-value" id="mp-email"></span></div>
+                  <div id="mp-items-block" hidden>
+                    <div class="mp-section-label">【問い合わせ内容】</div>
+                    <div class="mp-value" id="mp-items"></div>
+                  </div>
+                </div>
+                <label id="message-other-label" for="message-other" class="message-other-label" hidden>【そのほか、ご入力ください】</label>
+                <textarea id="message-other" placeholder="ご相談内容をご記入ください。"></textarea>
+              </div>
+              <input type="hidden" id="message" name="お問い合わせ内容">
             </div>
+            <p class="form-encourage">内容は箇条書きのままで大丈夫です。まずは、お気軽に送ってみてください。</p>
             <button type="submit" class="btn btn--fill" style="width:100%;">送信する</button>
             <p class="form-note">※ は必須項目です。いただいた個人情報はお問い合わせ対応のみに使用します。</p>
           </form>
@@ -227,7 +241,7 @@
             <h4>ご案内</h4>
             <ul>
               <li><a href="index.html#trial">無料相談</a></li>
-              <li><a href="index.html#profile">会社概要</a></li>
+              <li><a href="company.html">会社概要</a></li>
               <li><a href="column/index.html">コラム</a></li>
               <li><a href="contact-v2.html">お問い合わせ</a></li>
             </ul>
@@ -259,7 +273,78 @@
 
   <!-- トップから渡された「ご相談の種類」「気になっている項目」をフォームへ自動反映（?topic=...&items=...） -->
   <script>
+  // チェックした項目を、箇条書きではなく「読めばそのまま送れる」文章にまとめる。
+  // 項目が少ないときはそのまま、多いときは代表例＋件数でまとめ、長い羅列にしない。
+  function buildMessageFromItems(items) {
+    if (items.length === 1) {
+      return items[0];
+    }
+    var MAX_QUOTE = 4;
+    var quoted = items.slice(0, MAX_QUOTE).map(function (s) {
+      return "「" + s.replace(/。+$/, "") + "」";
+    });
+    var joined = quoted.length === 1
+      ? quoted[0]
+      : quoted.slice(0, -1).join("、") + "、" + quoted[quoted.length - 1];
+    if (items.length > MAX_QUOTE) {
+      return joined + "など、計" + items.length + "件の点が気になっています。";
+    }
+    return joined + "といった点が気になっています。";
+  }
+
   (function () {
+    var companyInput = document.getElementById("company");
+    var nameInput = document.getElementById("name");
+    var emailInput = document.getElementById("email");
+    var mpCompany = document.getElementById("mp-company");
+    var mpName = document.getElementById("mp-name");
+    var mpEmail = document.getElementById("mp-email");
+    var itemsBlock = document.getElementById("mp-items-block");
+    var mpItems = document.getElementById("mp-items");
+    var otherLabel = document.getElementById("message-other-label");
+    var otherTa = document.getElementById("message-other");
+    var hiddenField = document.getElementById("message");
+    var form = document.getElementById("contact-form");
+
+    var itemsSummary = "";
+    var hasItems = false;
+
+    // 必須項目（会社名・お名前・メール）を入力すると、プレビューの「：」の続きに反映
+    function syncPreview() {
+      if (mpCompany) mpCompany.textContent = companyInput ? companyInput.value : "";
+      if (mpName) mpName.textContent = nameInput ? nameInput.value : "";
+      if (mpEmail) mpEmail.textContent = emailInput ? emailInput.value : "";
+    }
+    [companyInput, nameInput, emailInput].forEach(function (el) {
+      if (el) el.addEventListener("input", syncPreview);
+    });
+    syncPreview();
+
+    // 送信直前に、プレビュー＋チェックリスト内容＋自由記述をまとめて、実際に送信される隠しフィールドへ書き込む
+    function buildFinalMessage() {
+      var lines = [];
+      lines.push("会社名：" + (companyInput ? companyInput.value : ""));
+      lines.push("お名前：" + (nameInput ? nameInput.value : ""));
+      lines.push("メールアドレス：" + (emailInput ? emailInput.value : ""));
+      lines.push("");
+      if (hasItems) {
+        lines.push("【問い合わせ内容】");
+        lines.push(itemsSummary);
+        lines.push("");
+        lines.push("【そのほか、ご入力ください】");
+        lines.push(otherTa ? otherTa.value : "");
+      } else {
+        lines.push("【問い合わせ内容】");
+        lines.push(otherTa ? otherTa.value : "");
+      }
+      return lines.join("\n");
+    }
+    if (form) {
+      form.addEventListener("submit", function () {
+        if (hiddenField) hiddenField.value = buildFinalMessage();
+      });
+    }
+
     try {
       var p = new URLSearchParams(location.search);
       var topic = p.get("topic");
@@ -273,11 +358,14 @@
       }
       var items = p.get("items"); // URLSearchParams が自動でデコード
       if (items) {
-        var ta = document.getElementById("message");
-        if (ta) {
-          var list = items.split("\n").filter(Boolean)
-            .map(function (s) { return "・" + s; }).join("\n");
-          ta.value = "【気になっている項目】\n" + list + "\n\n（上記についてご相談したいです）\n";
+        var list = items.split("\n").filter(Boolean);
+        if (list.length) {
+          hasItems = true;
+          itemsSummary = buildMessageFromItems(list);
+          if (itemsBlock) itemsBlock.hidden = false;
+          if (mpItems) mpItems.textContent = itemsSummary;
+          if (otherLabel) otherLabel.hidden = false;
+          if (otherTa) otherTa.placeholder = "そのほか気になる点があれば、ご自由にご記入ください（空欄でも送信できます）。";
         }
       }
       if (p.get("sent") === "1") {
