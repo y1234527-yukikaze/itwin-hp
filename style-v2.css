@@ -75,6 +75,19 @@ section[id] { scroll-margin-top: 84px; }
   font-size: clamp(1.6rem, 3.4vw, 2.3rem);
   color: var(--navy);
 }
+.h2-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+/* 見出しの下に説明文が無いセクションは、下線のすぐ下の余白が広く空きすぎるため、
+   他の見出し（下線＋説明文で約16px）に合わせて縮める */
+#issues .section-head,
+#digital-twin .section-head,
+#faq .section-head {
+  margin-bottom: 20px;
+}
 .section-head p {
   margin-top: 16px;
   color: var(--ink-soft);
