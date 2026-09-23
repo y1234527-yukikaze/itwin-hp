@@ -1718,7 +1718,7 @@ html { overflow-x: hidden; }
   margin: 4px 0 8px 22px;
   padding: 8px 10px;
   background: var(--paper-soft);
-  border-left: 3px solid var(--orange);
+  border: 1px solid var(--orange);
   border-radius: 6px;
 }
 .chk-encourage p {
