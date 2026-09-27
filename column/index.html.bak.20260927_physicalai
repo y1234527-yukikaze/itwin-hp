@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム 記事一覧ページ
+  ------------------------------------------------------------
+  ・記事を追加する手順：
+    1. column/articles/template.html をコピーし、分かりやすいファイル名に変更
+       （例：column/articles/digital-twin-first-step.html）
+    2. コピーしたファイル内のタイトル・本文・meta情報・JSON-LDを書き換える
+    3. このファイル（column/index.html）内の「◆記事データ」ブロックに、
+       新しい記事のカードを1つ追加する（既存カードをコピーして書き換えるだけでOK）
+    4. ルートの sitemap.xml にも新しい記事のURLを1行追加する
+  ・記事データは下の「◆記事データ」ブロック1箇所にまとまっているため、
+    将来的にJSON化してJSで動的にカードを生成する形に変更しやすい構成にしています。
+  ------------------------------------------------------------
+  ★ 業種別の記事について ★
+  業種別デジタルツイン活用事例（金属加工・樹脂成形など）は、
+  このページには載せず、column/industries/index.html にまとめています。
+  業種別の記事を追加するときは、industries/index.html のカードだけを増やしてください。
+  （このページ上部の「業種別で探す」バナーから、そちらへ誘導しています）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コラム｜アイツイン（i-TWIN）</title>
+  <meta name="description" content="アイツイン（i-TWIN）のコラム。デジタルツイン・自動化・中小製造業の現場改善に関する情報をお届けします。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="コラム｜アイツイン（i-TWIN）">
+  <meta property="og:description" content="アイツイン（i-TWIN）のコラム。デジタルツイン・自動化・中小製造業の現場改善に関する情報をお届けします。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/">
+  <meta property="og:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="コラム｜アイツイン（i-TWIN）">
+  <meta name="twitter:description" content="アイツイン（i-TWIN）のコラム。デジタルツイン・自動化・中小製造業の現場改善に関する情報をお届けします。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/hero-main.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style-v2.css">
+  <link rel="icon" href="../favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../index.html"><img src="../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../index.html#issues">課題</a>
+            <a href="../index.html#flow">進め方</a>
+            <a href="../index.html#goal">めざす姿</a>
+            <a href="../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../digital-twin.html">デジタルツインとは</a>
+            <a href="industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../checklist.html">お悩みチェックリスト</a>
+            <a href="../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="index.html">コラム</a>
+        <a href="../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">ホーム</a> ／ <span>コラム</span></div>
+      <h1>コラム</h1>
+      <p class="catch">デジタルツイン・自動化・現場改善に関する情報をお届けします。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事一覧 -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- ◆業種別まとめページへの誘導バナー -->
+      <div class="industry-banner">
+        <div class="industry-banner-text">
+          <h2>業種別で探す</h2>
+          <p>金属加工・樹脂成形・食品・電子部品など、工程・技術別に活用事例を整理しています。</p>
+        </div>
+        <a class="btn btn--fill" href="industries/index.html">業種別活用事例を見る ›</a>
+      </div>
+
+      <!-- ◆記事データ（ここに記事カードをまとめる。将来のJSON化を想定した1ブロック） -->
+      <div class="column-grid">
+
+        <!-- 記事9：デジタルツインの特許調査 -->
+        <a class="column-card" href="articles/digital-twin-patent-research.html">
+          <img class="img-frame" src="../img/column-patent-research.jpg" alt="デジタルツインの特許を調べてみた。大企業の本気と、中小製造業が狙える場所">
+          <div class="column-card-body">
+            <p class="column-date">2026.09.22</p>
+            <h3>デジタルツインの特許を調べてみた。大企業の本気と、中小製造業が狙える場所</h3>
+            <p class="column-excerpt">
+              J-PlatPatでデジタルツイン関連の特許を調査。ソフトバンクや富士通など大企業の出願動向と、
+              製造業系企業の具体的な出願から、中小製造業がどこを狙えるかを現場目線で考えます。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事8：温度管理装置の試作から学んだこと -->
+        <a class="column-card" href="articles/temperature-control-lesson.html">
+          <img class="img-frame" src="../img/column-temperature-control.jpg" alt="ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか">
+          <div class="column-card-body">
+            <p class="column-date">2026.09.13</p>
+            <h3>ふわふわ卵焼きの温度管理装置は、なぜ採用されなかったのか</h3>
+            <p class="column-excerpt">
+              飲食チェーンの味のばらつきを解決するため、卵焼きの温度をAIで管理する装置を試作しました。
+              技術的には動いたものの採用に至らなかった理由から、現場課題との向き合い方を考えます。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事7：レガシー装置からのデータ取得 -->
+        <a class="column-card" href="articles/legacy-equipment-data.html">
+          <img class="img-frame" src="../img/column-legacy-equipment.jpg" alt="レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法">
+          <div class="column-card-body">
+            <p class="column-date">2026.09.06</p>
+            <h3>レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</h3>
+            <p class="column-excerpt">
+              通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。
+              電流・振動・信号灯という3つの入口と、専用機器と自作マイコンそれぞれの現実的な始め方を解説します。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事6：デジタルツイン実践編（大企業の事例） -->
+        <a class="column-card" href="articles/digital-twin-case-studies.html">
+          <img class="img-frame" src="../img/column-digital-twin-jissen.jpg" alt="デジタルツイン実践編、大企業の事例から中小製造業が学べること">
+          <div class="column-card-body">
+            <p class="column-date">2026.08.27</p>
+            <h3>デジタルツイン実践編、大企業の事例から中小製造業が学べること</h3>
+            <p class="column-excerpt">
+              ダイキン工業・日立製作所・旭化成のデジタルツイン活用事例から、中小製造業が取り入れられる考え方を整理します。
+              多品種少量生産の工場でも、成果は出せます。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事5：省力化投資補助金 -->
+        <a class="column-card" href="articles/shoryokuka-hojokin.html">
+          <img class="img-frame" src="../hero-main.png" alt="中小企業省力化投資補助金、自社の工場は何が対象になる？現場目線で解説">
+          <div class="column-card-body">
+            <p class="column-date">2026.08.13</p>
+            <h3>中小企業省力化投資補助金、自社の工場は何が対象になる？現場目線で解説</h3>
+            <p class="column-excerpt">
+              カタログ注文型と一般型の違いを整理し、「自社の現場のどこが対象になりそうか」という技術的な視点から
+              判断のヒントをお伝えします。対象になりやすい現場の特徴も解説します。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事4：搬送作業の省人化にかかる費用 -->
+        <a class="column-card" href="articles/hansou-shoujinka-cost.html">
+          <img class="img-frame" src="articles/hansou-shoujinka-cost-thumb.jpg" alt="搬送作業の省人化、参考値は1,000万円〜2,000万円。ロボット本体は全体の3割です">
+          <div class="column-card-body">
+            <p class="column-date">2026.08.10</p>
+            <h3>搬送作業の省人化、参考値は1,000万円〜2,000万円。ロボット本体は全体の3割です</h3>
+            <p class="column-excerpt">
+              搬送作業を産業用ロボットで省人化する場合の費用感を、実際の項目ごとに解説します。
+              ロボット本体は全体のおよそ3割にすぎず、残り7割は制御盤・カメラ・安全対策・工事・設計などの周辺費用です。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+
+
+
+
+
+
+
+        <!-- 記事3：使い続けるほど、工場は「自分で考える」ようになる -->
+        <a class="column-card" href="articles/factory-that-thinks.html">
+          <img class="img-frame" src="articles/factory-that-thinks-thumb.jpg" alt="使い続けるほど、工場は「自分で考える」ようになる">
+          <div class="column-card-body">
+            <p class="column-date">2026.07.21</p>
+            <h3>使い続けるほど、工場は「自分で考える」ようになる</h3>
+            <p class="column-excerpt">
+              デジタルツインの価値は「見える化」だけではありません。データを蓄積し続けることで、工場は異常の原因を突き止め、
+              未来を予測し、次に何をすべきかまで提案してくれるようになります。その仕組みと考え方を解説します。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事2：省人化ではなく省力化を -->
+        <a class="column-card" href="articles/syoryokuka-genba.html">
+          <img class="img-frame" src="articles/syoryokuka-genba-thumb.jpg" alt="省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは">
+          <div class="column-card-body">
+            <p class="column-date">2026.07.18</p>
+            <h3>省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</h3>
+            <p class="column-excerpt">
+              ロボットによる自動化には「向いている現場の条件」があり、多くの現場ではその条件を満たせません。
+              人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩となる「作業の洗い出し」について解説します。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+        <!-- 記事1：デジタルツインとは？ -->
+        <a class="column-card" href="articles/digital-twin-basics.html">
+          <img class="img-frame" src="articles/digital-twin-basics-thumb.jpg" alt="デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法">
+          <div class="column-card-body">
+            <p class="column-date">2026.07.13</p>
+            <h3>デジタルツインとは？中小製造業における導入方法とiPhoneを使った低コスト3Dスキャン活用法</h3>
+            <p class="column-excerpt">
+              デジタルツインの導入率は中小企業でわずか3%。壁になっているのは技術ではなく「最初の一歩」の分かりにくさです。
+              iPhoneのLiDARを使った低コスト3Dスキャンから、IoTセンサーによる予知保全まで、現実的な始め方をまとめました。
+            </p>
+            <span class="column-more">続きを読む ›</span>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../index.html#issues">課題</a></li>
+              <li><a href="../index.html#flow">進め方</a></li>
+              <li><a href="../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../index.html#trial">無料相談</a></li>
+              <li><a href="../company.html">会社概要</a></li>
+              <li><a href="index.html">コラム</a></li>
+              <li><a href="../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../privacy-policy.html">プライバシーポリシー</a>　<a href="../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
