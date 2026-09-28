@@ -384,6 +384,7 @@ section[id] { scroll-margin-top: 84px; }
   font-size: 1.05rem;
   color: #cdd9ea;
 }
+.subhero .catch .date-item { display: inline-block; }   /* 公開日・更新日を途中で折り返さない */
 
 /* ===========================================================
    汎用カード / グリッド
