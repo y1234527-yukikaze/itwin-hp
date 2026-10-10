@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：製造業のシステム連携とは？
+  （コラム制作キット E:/ClaudeCode/itwinHP_column_kit の template-rich.html から作成・2026-10-10）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-system-integration.jpg（1376×768・ナノバナナで生成して差し替え）
+  本文イラスト：img/column-system-integration-divided.jpg / -support.jpg（ナノバナナで生成して差し替え）
+  図：img/column-system-integration-overview / merits / order / worktime / steps .jpg（figs_system_integration.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説｜アイツイン コラム</title>
+  <meta name="description" content="製造業のシステム連携とは何かを、現場目線で解説します。システムがつながらない理由、連携のメリットと3つの方法、つまずきやすい課題、進め方までを整理。これからシステム連携に取り組む製造業の方に向けて、わかりやすくまとめました。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/manufacturing-system-integration">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説">
+  <meta property="og:description" content="製造業のシステム連携とは何かを、現場目線で解説します。システムがつながらない理由、連携のメリットと3つの方法、つまずきやすい課題、進め方までを整理。これからシステム連携に取り組む製造業の方に向けて、わかりやすくまとめました。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/manufacturing-system-integration">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-system-integration.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-10">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説">
+  <meta name="twitter:description" content="製造業のシステム連携とは何かを、現場目線で解説します。システムがつながらない理由、連携のメリットと3つの方法、つまずきやすい課題、進め方までを整理。これからシステム連携に取り組む製造業の方に向けて、わかりやすくまとめました。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-system-integration.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説",
+    "description": "製造業のシステム連携とは何かを、現場目線で解説します。システムがつながらない理由、連携のメリットと3つの方法、つまずきやすい課題、進め方までを整理。これからシステム連携に取り組む製造業の方に向けて、わかりやすくまとめました。",
+    "image": "https://i-twin.co.jp/img/column-system-integration.jpg",
+    "datePublished": "2026-10-10",
+    "dateModified": "2026-10-10",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/manufacturing-system-integration"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説", "item": "https://i-twin.co.jp/column/articles/manufacturing-system-integration" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説</span>
+      </div>
+      <h1>製造業のシステム連携とは？メリット・方法・進め方を、現場目線でわかりやすく解説</h1>
+      <p class="catch">公開日：2026年10月10日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">システム連携・データ活用</span>公開日：2026.10.10</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration.jpg" alt="製造業のシステム連携。ばらばらだった受注・生産・在庫・設備のデータが一本の流れでつながるイメージ" width="1376" height="768">
+          <figcaption>ばらばらの記録を、ひとつの流れにつなげる。</figcaption>
+        </figure>
+
+        <p>
+          「同じ数字を、受注の画面にも、生産の表にも、在庫の表にも打ち込んでいる」「在庫が今いくつあるのか、倉庫まで見に行かないと分からない」。こうした手間の多くは、社内の仕組みどうしがつながっていないことから生まれています。
+        </p>
+        <p>
+          本記事では、<strong class="mk">製造業のシステム連携</strong>とは何かを整理したうえで、つながらない理由、メリット、連携の方法、つまずきやすい点、そして進め方を解説します。後半では、「AIを入れたい」と考えたときに、なぜ先にシステム連携が必要になるのか、中小の製造現場ではどこから始めればよいのかもご紹介します。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>製造業のシステム連携の全体像と、つながらない4つの理由</li>
+            <li>システム連携の4つのメリット、3つの方法、4つの課題</li>
+            <li>AIの前に連携が必要な理由と、中小製造業の進め方4ステップ</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1. システム連携とは -->
+        <h2>製造業のシステム連携とは</h2>
+        <p>
+          はじめに、システム連携という言葉が何を指すのか、製造業では何と何をつなぐのかを整理します。
+        </p>
+
+        <h3>ばらばらの仕組みを、ひとつの流れにすること</h3>
+        <p>
+          システム連携とは、別々に動いているシステムや設備のあいだで、データが自動で受け渡されるようにすることです。英語ではシステムインテグレーション（System Integration）と呼ばれ、略して「SI」と書かれることもあります。設備の自動化を請け負う会社を「SIer（エスアイヤー）」と呼びますが、そのSIも同じ言葉です。
+        </p>
+        <p>
+          たとえば、受注の内容が自動で生産の計画に反映される。現場で入力した実績が、そのまま在庫や原価の計算に使われる。<strong class="mk">人が打ち直したり、書き写したりしなくても、情報が次の工程へ流れていく状態</strong>をつくるのが、システム連携の目的です。
+        </p>
+
+        <h3>製造業でつなぐのは「経営・事務」「工場の管理」「現場」の3つの層</h3>
+        <p>
+          製造業の情報は、大きく3つの層に分けて考えると整理しやすくなります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-overview.jpg" alt="製造業のシステム連携は3つの層をつなぐ。経営・事務（受注・購買・在庫・会計）、工場の管理（生産計画・進み具合・品質）、現場（設備・センサー・人の作業）のあいだを、計画・指示と実績・状況が行き来する" width="1376" height="768" loading="lazy">
+          <figcaption>上からは計画と指示が、下からは実績と状況が流れる</figcaption>
+        </figure>
+
+        <table>
+          <tr><th>層</th><th>主な仕組み</th></tr>
+          <tr><td style="white-space:nowrap">経営・事務</td><td>統合基幹業務システム（ERP）、販売管理、会計ソフト</td></tr>
+          <tr><td style="white-space:nowrap">工場の管理</td><td>生産管理システム、製造実行システム（MES）</td></tr>
+          <tr><td style="white-space:nowrap">現場</td><td>設備・センサー、作業日報、検査記録</td></tr>
+        </table>
+        <p>
+          上の層から下の層へは「何を、いつまでに、いくつ作るか」という計画と指示が流れます。下の層から上の層へは「実際にいくつできたか、どれだけ時間がかかったか」という実績が戻ります。<strong>この上下の流れが途切れずにつながっていること</strong>が、システム連携ができている状態です。
+        </p>
+
+        <h3>「経営の数字」と「現場の動き」は、時間の細かさが違う</h3>
+        <p>
+          つなぐときに知っておきたいのが、層によって扱う時間の細かさが違うことです。経営や事務では、日や月の単位でまとめた数字を見ることが多くあります。一方、現場の設備は、秒やそれより短い単位で動いています。受注や在庫のように、経営・事務の側でもすぐに反映したい情報もあります。細かさの違う情報をそのまま流し込むと、上の層は情報の量に埋もれ、下の層は必要な指示が届くのが遅れます。<strong class="mk">「どの情報を、どの細かさで、どのタイミングで渡すか」を決めること</strong>が、連携の設計の中心になります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>システム連携とは、データが人の手を介さずに次の工程へ流れる状態をつくること</li>
+            <li>製造業では「経営・事務」「工場の管理」「現場」の3つの層をつなぐ</li>
+            <li>層ごとに時間の細かさが違うため、渡す情報とタイミングを決める必要がある</li>
+          </ul>
+        </div>
+
+        <!-- ◆2. つながらない理由 -->
+        <h2>製造業でシステムがつながらない4つの理由</h2>
+        <p>
+          経済産業省・厚生労働省・文部科学省の「2026年版ものづくり白書」によると、製造プロセスのデータを何らかの目的で取得している事業者は7割弱にのぼります。しかし、<strong class="mk">取得したデータを活用して効果が得られた事業者は約4割</strong>にとどまっています。企業と企業のあいだのデータ連携も、2年前からほとんど進んでいません。データは取れているのに、つながっていない。その背景には、次の4つの理由があります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-divided.jpg" alt="受注・生産・在庫・設備の記録がそれぞれ別の島のように分かれ、人が紙やExcelを持って行き来している様子のイラスト" width="1376" height="768" loading="lazy">
+          <figcaption>つながっていない部分は、人が歩いて、打ち直して、埋めている</figcaption>
+        </figure>
+
+        <h3>理由1：部門ごとに、別々の時期に、別々の仕組みを入れてきた</h3>
+        <p>
+          営業は販売管理、製造は生産管理、経理は会計ソフト。多くの会社では、それぞれの部門が必要になったときに、その部門に合う仕組みを入れてきました。一つひとつは役に立っていても、<strong>全体でデータを受け渡すことは最初から想定されていない</strong>ことがほとんどです。
+        </p>
+
+        <h3>理由2：工場や拠点ごとに、やり方と仕組みが違う</h3>
+        <p>
+          同じ会社でも、工場が違えば品番の付け方や記録の取り方が異なることがあります。同じ部品に、第一工場と第二工場で別の番号が付いている。こうした違いがあると、仕組みをつないでも、データ同士が同じものを指していると判断できません。
+        </p>
+
+        <h3>理由3：古い設備からは、データが出てこない</h3>
+        <p>
+          長く使われている設備には、通信の機能がないものも多くあります。動いているか止まっているかさえ、人が見に行かないと分かりません。現場の層からデータが出てこなければ、上の層とつなぎようがない、というのが実情です。その結果、設備の稼働時間や停止の回数は、作業者が紙に書いた記録だけが頼りになります。書きもれや思い違いが混ざるため、あとから集計しても実態とずれてしまいます。
+        </p>
+
+        <h3>理由4：すき間を、紙とExcelと人の手で埋めている</h3>
+        <p>
+          仕組みと仕組みのあいだは、多くの場合、人が埋めています。受注の内容を見ながら生産の表に打ち込む。紙の日報をExcelに入力する。月末にいくつもの表を集めて集計する。<strong class="mk">この「つなぎの作業」が当たり前になりすぎて、負担として意識されにくい</strong>ことも、連携が進まない理由の一つです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>データを取得している事業者は7割弱、効果が得られたのは約4割（2026年版ものづくり白書）</li>
+            <li>部門別・拠点別に仕組みが分かれ、古い設備からはデータが出にくい</li>
+            <li>すき間は、紙とExcelと人の手で埋められている</li>
+          </ul>
+        </div>
+
+        <!-- ◆3. メリット -->
+        <h2>システム連携の4つのメリット</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-merits.jpg" alt="システム連携の4つのメリット。入力・転記がなくなる、今の状況がすぐ分かる、納期と原価が正確になる、データ活用の土台になる" width="1376" height="768" loading="lazy">
+          <figcaption>手間が減るだけでなく、判断の速さと正確さが変わる</figcaption>
+        </figure>
+
+        <h3>メリット1：入力と転記の手間がなくなる</h3>
+        <p>
+          同じ数字を何度も打ち込む作業がなくなります。打ち間違いや入力もれも減り、その確認にかけていた時間も不要になります。<strong>人手が限られる中小の現場ほど、この効果は大きく</strong>表れます。入力のためだけに残業していた時間や、月末にまとめて行っていた集計の作業を、本来の仕事に回せるようになります。
+        </p>
+
+        <h3>メリット2：在庫や進み具合が、その場で分かる</h3>
+        <p>
+          現場の実績がすぐに反映されるため、在庫の数や工程の進み具合を、見に行かなくても確認できるようになります。「あの注文、今どこまで進んでいる？」という問い合わせに、電話や現場への確認なしで答えられます。
+        </p>
+
+        <h3>メリット3：納期の回答と原価の計算が正確になる</h3>
+        <p>
+          受注、生産、在庫の情報がつながっていれば、今の負荷と在庫をもとに、根拠のある納期を答えられます。実際にかかった時間や材料がそのまま原価の計算に使われるため、<strong class="mk">「この製品は本当に利益が出ているのか」を、感覚ではなく実績で確かめられる</strong>ようになります。
+        </p>
+
+        <h3>メリット4：データ活用やAIの土台になる</h3>
+        <p>
+          つながったデータは、一か所にまとまって、同じ形式でたまっていきます。これは、不良の原因を分析したり、設備の故障を予測したりするための材料になります。この点は、後半の「AIを入れたい、の前に」の章で詳しく説明します。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>入力・転記の手間とミスが減る</li>
+            <li>在庫や進み具合がその場で分かり、納期と原価が正確になる</li>
+            <li>つながったデータは、分析やAI活用の土台になる</li>
+          </ul>
+        </div>
+
+        <!-- ◆4. 方法 -->
+        <h2>システム連携の3つの方法</h2>
+        <p>
+          仕組みどうしをつなぐ方法のうち、現場でよく使われる3つを紹介します。どれが優れているということではなく、つなぎたい相手と、求める速さに合わせて選びます。
+        </p>
+
+        <table>
+          <tr><th>方法</th><th>向いている場面</th></tr>
+          <tr><td>ファイルの受け渡し</td><td>1日1回など、決まった時刻にまとめて渡せば足りるとき</td></tr>
+          <tr><td>API連携</td><td>受注や在庫など、変化をすぐに反映したいとき</td></tr>
+          <tr><td>連携ツール</td><td>つなぐ相手が多く、個別につなぐと管理しきれないとき</td></tr>
+        </table>
+
+        <h3>方法1：ファイルの受け渡しでつなぐ</h3>
+        <p>
+          もっとも手軽な方法です。多くの仕組みは、表形式のファイルを出したり読み込んだりする機能を持っています。この出し入れを自動で動かすだけでも、人が打ち直す作業はなくせます。ただし、反映されるのは受け渡しのタイミングごとなので、<strong>「今この瞬間」の情報が必要な用途には向きません</strong>。
+        </p>
+
+        <h3>方法2：APIでつなぐ</h3>
+        <p>
+          API（エーピーアイ）とは、ある仕組みが、ほかの仕組みと機能やデータをやり取りするために用意している窓口のことです。受注が入った瞬間に生産側へ伝える、といった即時の連携ができます。相手の仕組みがこの窓口を用意していることが前提で、古い仕組みでは使えないこともあります。
+        </p>
+
+        <h3>方法3：連携ツールを使ってつなぐ</h3>
+        <p>
+          つなぐ相手が増えてくると、1対1の連携が網の目のように増え、どこを変えるとどこに影響するのか分からなくなります。こうしたときは、あいだに連携専用のツールを置き、受け渡しを一か所で管理する方法が有効です。連携ツールは、ファイルの受け渡しやAPIに代わるものではなく、それらをまとめて動かし、形式の変換などを助ける役割を持ちます。<strong class="mk">最初から大がかりな基盤を入れる必要はなく、つなぐ数が増えてきた段階で検討すれば十分</strong>です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>よく使われるのは「ファイルの受け渡し」「API連携」と、それらをまとめる「連携ツール」</li>
+            <li>求める速さと、つなぐ相手の数で選ぶ</li>
+            <li>はじめは手軽な方法から。基盤づくりは、つなぐ数が増えてからでよい</li>
+          </ul>
+        </div>
+
+        <!-- ◆5. 課題 -->
+        <h2>システム連携でつまずきやすい4つの課題</h2>
+        <p>
+          システム連携は、技術よりも手前の部分でつまずくことが多い取り組みです。代表的な4つを挙げます。
+        </p>
+
+        <h3>課題1：品番やコードがそろっていない</h3>
+        <p>
+          同じ製品を、営業は商品名で、製造は図面番号で、倉庫は棚の番号で呼んでいる。こうした状態では、仕組みをつないでもデータ同士が結びつきません。<strong class="mk">連携の前に、品番・取引先・工程などの呼び方をそろえる作業が欠かせません</strong>。地味ですが、ここが連携の成否をもっとも左右します。すべてを一度にそろえようとすると進まなくなるため、つなぐ予定の範囲から順にそろえていくのが現実的です。
+        </p>
+
+        <h3>課題2：渡すタイミングと細かさが合っていない</h3>
+        <p>
+          現場のデータをすべて上の層に送ると、量が多すぎて使いこなせません。逆に、1日1回しか渡さないと、急な変更に対応できません。何のために使う情報なのかを先に決め、それに合わせて細かさと頻度を決める必要があります。
+        </p>
+
+        <h3>課題3：部門ごとに仕事の進め方が違う</h3>
+        <p>
+          営業は受注を早く確定させたい。製造は計画を頻繁に変えられたくない。部門ごとに優先することが違うため、データの入力のしかたや締めのタイミングもそろいません。システムをつなぐことは、<strong>部門のあいだの仕事の進め方を見直すこと</strong>でもあります。
+        </p>
+
+        <h3>課題4：入れたあとの運用が決まっていない</h3>
+        <p>
+          連携が止まったとき、誰が気づき、誰が直すのか。品番が増えたとき、誰が登録するのか。こうした決まりがないと、いつのまにか元の手入力に戻ってしまいます。仕組みを入れることよりも、使い続けられる形にすることの方が難しい、というのが多くの現場の実感です。担当者を1人に任せきりにせず、止まったときの連絡先と手順を紙1枚にまとめておくだけでも、定着のしやすさは変わります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>品番やコードの呼び方をそろえることが、最初の関門</li>
+            <li>渡す情報の細かさと頻度は、使い道から決める</li>
+            <li>部門間の進め方と、導入後の運用まで決めておく</li>
+          </ul>
+        </div>
+
+        <!-- ◆6. AIの前に -->
+        <h2>「AIを入れたい」の前に、システム連携が先になる理由</h2>
+        <p>
+          ここからは、少し視点を変えます。最近は「AIを導入したい」という声をよく耳にします。しかし製造業、とくに中小の現場では、AIよりも先にシステム連携に取り組んだ方が、早く成果につながります。
+        </p>
+
+        <h3>AIは「考える技術」、システム連携は「つなげる仕事」</h3>
+        <p>
+          AIは、データを分析して判断や予測を行う技術です。不良品を画像で見分ける、設備の故障を予測する、といったことができます。ただし、AIだけでは何もできません。<strong class="mk">いわば頭脳だけがある状態で、考えるための材料が届かなければ働けない</strong>のです。
+        </p>
+        <p>
+          一方のシステム連携は、材料であるデータを集め、流れるようにする仕事です。たとえるなら、AIが優秀な作業者だとすれば、システム連携は工場全体のラインの設計にあたります。どれほど優秀な作業者がいても、材料が届かないラインでは力を発揮できません。
+        </p>
+
+        <h3>よくある勘違い：データがばらばらのまま、AIを入れようとする</h3>
+        <p>
+          実際に現場を見ると、AIを動かすためのデータがばらばらに存在しているケースがとても多くあります。Excelの表、紙の図面、生産管理の仕組み、在庫の仕組み、会計ソフト。これらがすべて別々に置かれています。この状態でAIを入れても、効果は出ません。<strong>読み込ませるデータが、そもそもつながっていない</strong>からです。
+        </p>
+
+        <h3>順番は「集める → つなげる → 活用する」</h3>
+        <p>
+          必要な順番は、次の3つです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-order.jpg" alt="AIの前に、つなげるが先。1.データを集める、2.システムをつなげる、3.AIを活用する、の順番" width="1376" height="768" loading="lazy">
+          <figcaption>AIが力を発揮するのは、3番目</figcaption>
+        </figure>
+
+        <p>
+          まず、設備や作業の記録を集める。次に、ばらばらの記録をひとつの流れにつなげる。そのうえで、AIを活用する。話題になっているのは3番目ですが、<strong class="mk">中小の製造業で先に価値を生むのは、1番目と2番目</strong>です。どれも地味な作業ですが、この積み重ねがなければ、AIを入れても動きません。遠くの大きな話よりも、自社のExcelと生産管理がつながっているかどうか。こちらの方が、差し迫った問題だと考えています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>AIは考える技術、システム連携は材料を届ける仕事</li>
+            <li>データがばらばらのままAIを入れても、効果は出ない</li>
+            <li>順番は「集める → つなげる → 活用する」</li>
+          </ul>
+        </div>
+
+        <!-- ◆7. 進め方 -->
+        <h2>中小製造業のシステム連携の進め方4ステップ</h2>
+        <p>
+          では、何から始めればよいのでしょうか。大きな仕組みを一度に入れ替えるのではなく、次の4つのステップで小さく進めるのがおすすめです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-steps.jpg" alt="システム連携の進め方4ステップ。転記を洗い出す、時間を測る、1か所からつなぐ、入れる前に試す" width="1376" height="768" loading="lazy">
+          <figcaption>「どのシステムを入れるか」ではなく「どの転記をなくすか」から考える</figcaption>
+        </figure>
+
+        <h3>STEP1：入力・転記の作業を洗い出す</h3>
+        <p>
+          まず、社内で行われている「打ち直し」「書き写し」「集計」を一つずつ書き出します。受注から出荷までの流れを追いながら、どこで人が情報を運んでいるかを確かめましょう。<strong>システムの一覧ではなく、人の作業の一覧をつくる</strong>のがポイントです。
+        </p>
+
+        <h3>STEP2：それぞれに何分かかっているかを測る</h3>
+        <p>
+          次に、洗い出した作業にかかっている時間を測ります。書き出してみると、次の図のように、1日の中でかなりの時間を占めていることがあります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-worktime.jpg" alt="1日の入力・転記の時間のイメージ。受注内容を生産管理へ入力20分、作業日報をExcelへ入力30分、在庫を数えて入力25分、検査記録を書き写す15分、集計・報告書づくり10分で、合計1時間40分" width="1376" height="768" loading="lazy">
+          <figcaption>入力・転記にかかる時間のイメージ（数値は説明のための例です）</figcaption>
+        </figure>
+
+        <p>
+          この例では、入力と転記だけで1日に1時間40分かかっています。月に20日働くとすると、約33時間です。<strong class="mk">数字にすることで、「どこからつなげば一番効くか」がはっきりします</strong>。
+        </p>
+
+        <h3>STEP3：効果の大きい1か所からつなぐ</h3>
+        <p>
+          時間がかかっている作業、ミスが起きやすい作業から、1か所だけ選んでつなぎます。最初はファイルの受け渡しのような手軽な方法で十分です。たとえば「紙の日報をExcelに打ち直す」作業をなくすだけでも、毎日の負担は目に見えて変わります。1か所でも「打ち直しがなくなった」という実感があると、次に進めるときの現場の協力が得やすくなります。
+        </p>
+
+        <h3>STEP4：入れる前に試し、効果を確かめてから広げる</h3>
+        <p>
+          つなぐ範囲を広げるときや、新しい仕組みを入れるときは、いきなり本番に入れず、小さく試して効果を確かめます。つなぐ前とあとで、作業時間がどれだけ変わったかを数字で比べましょう。効果が確かめられたら、次の1か所へ広げていきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>システムではなく、人が行っている入力・転記の作業を洗い出す</li>
+            <li>かかっている時間を測り、効果の大きい1か所からつなぐ</li>
+            <li>小さく試して、効果を数字で確かめてから広げる</li>
+          </ul>
+        </div>
+
+        <!-- ◆8. アイツインの支援 -->
+        <h2>アイツインのシステム連携の支援</h2>
+        <p>
+          アイツインは、中小製造業のシステム連携を、<strong class="mk">現場に入り込んで一緒に進める伴走型</strong>で支援しています。特定の製品を売ることが目的ではないため、「何をつなぐと現場が楽になるか」から一緒に考えます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-system-integration-support.jpg" alt="エンジニアが製造現場で作業者と一緒に、紙の日報とタブレットの画面を見比べながら、情報の流れを確認しているイラスト" width="1376" height="768" loading="lazy">
+          <figcaption>現場で、情報がどこで止まっているかを一緒に確かめる</figcaption>
+        </figure>
+
+        <h3>「なくす転記」を一緒に見つける短期プログラム</h3>
+        <p>
+          「どこから手をつければよいか分からない」という段階からご相談いただけます。エンジニアが現場にうかがい、受注から出荷までの情報の流れを追って、人が運んでいる情報を洗い出します。どこに時間がかかっているかを数字で整理する、課題発見の短期プログラムをご用意しています。本格的に進める場合も3か月単位で、成果を確かめながら続けるかどうかをご判断いただけます。
+        </p>
+
+        <h3>古い設備や紙の記録も、つなげる対象にする</h3>
+        <p>
+          通信の機能がない古い設備でも、配線に手を加えずに、外側から稼働の状況を取り出す方法があります（詳しくは<a href="legacy-equipment-data.html">古い設備からデータを取る方法を解説したコラム</a>をご覧ください）。紙の日報や検査記録も、入力の手間を減らしながらデータに変えていきます。<strong>「うちは古いから無理」という現場こそ、つなげる効果が大きい</strong>と考えています。
+        </p>
+
+        <h3>つなぐ前に、効果を試して確かめる</h3>
+        <p>
+          現場の作業時間や情報の流れをデータにして、つなぐ前とあとの違いを事前に確かめます。現場をデジタル上で再現し、「作る前に試せる」ので、大きな投資で失敗するリスクを抑えられます。集めてつなげたデータは、その先のAI活用の土台にもなります。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          本記事では、製造業のシステム連携の全体像と、つながらない理由、メリット、方法、課題、進め方を解説しました。
+        </p>
+        <p>
+          システム連携というと、大がかりな仕組みの入れ替えを思い浮かべがちです。しかし、中小の製造現場で最初に考えたいのは、<strong class="mk">「どのシステムを入れるか」ではなく「どの転記をなくすか」</strong>です。人が運んでいる情報を洗い出し、効果の大きい1か所からつなげる。その積み重ねが、手間を減らし、判断を速くし、やがてAIを活かせる土台になります。まずは、社内の入力と転記の作業を書き出すところから、始めてみてはいかがでしょうか。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://www.meti.go.jp/report/whitepaper/mono/2026/pdf/gaiyo.pdf" target="_blank" rel="noopener">経済産業省・厚生労働省・文部科学省「2026年版ものづくり白書 概要」（経済産業省）</a>
+        </p>
+
+        <div class="article-cta">
+          同じ数字を何度も打ち込んでいる。どこからつなげばよいか分からない。無料相談で、現場に合ったシステム連携の進め方を一緒に整理しませんか。お気軽にご相談ください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.09.06</p>
+                <h3><a href="legacy-equipment-data.html">レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</a></h3>
+                <p class="column-excerpt">通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、現実的な始め方を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.09.30</p>
+                <h3><a href="manufacturing-labor-shortage.html">製造業の人手不足対策とは？原因・影響から、人を増やさず現場を回す方法まで解説</a></h3>
+                <p class="column-excerpt">製造業の人手不足はなぜ解消しないのか。最新データで現状を整理し、5つの原因と現場への影響、採用・定着・省力化の3つの方向から取り組むべき対策を解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
