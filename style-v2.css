@@ -2035,3 +2035,13 @@ a.industry-card { cursor: pointer; }
 /* H3：左の縦線＋下線で L字にする（2026-10-02） */
 .article-rich h3 { padding-bottom: 8px; border-bottom: 2px solid var(--orange); }
 .article-rich .article-footer-nav h3 { padding-bottom: 0; border-bottom: 0; }
+
+/* 計算式の枠（2026-10-12・技術コラム用）：式と数値を1行ずつ並べる */
+.article-rich .calc {
+  background: #f8f8f6; border: 1px solid var(--line);
+  padding: 12px 16px; margin: 0 0 18px;
+  font-size: 0.92rem; line-height: 1.95; color: var(--ink);
+  font-variant-numeric: tabular-nums; overflow-wrap: anywhere;
+}
+.article-rich .calc b { color: var(--navy); }
+.article-rich .need-check { font-size: 0.82rem; color: var(--orange); font-weight: 700; white-space: nowrap; }
