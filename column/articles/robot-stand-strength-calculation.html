@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：ロボット架台の強度計算の方法
+  （コラム制作キットの template-rich.html から作成・2026-10-12）
+  計算例の数値は C:/Users/PC/AppData/Local/Temp/kadai/calc.py で検算（キットに robot_stand_calc.py として保存）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-robot-stand.jpg／本文イラスト：img/column-robot-stand-brace.jpg（ナノバナナで生成して差し替え）
+  図：img/column-robot-stand-model.jpg / -result.jpg（figs_robot_stand.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例｜アイツイン コラム</title>
+  <meta name="description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/robot-stand-strength-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例">
+  <meta property="og:description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/robot-stand-strength-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-robot-stand.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例">
+  <meta name="twitter:description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-robot-stand.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例",
+    "description": "ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。",
+    "image": "https://i-twin.co.jp/img/column-robot-stand.jpg",
+    "datePublished": "2026-10-12",
+    "dateModified": "2026-10-12",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例", "item": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</span>
+      </div>
+      <h1>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</h1>
+      <p class="catch">公開日：2026年10月12日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.12</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-robot-stand.jpg" alt="ロボット架台の強度計算。門型架台に天吊りされたロボットが急に止まり、架台に横向きの力がかかるイメージ" width="1376" height="768">
+          <figcaption>ロボットが急に止まるとき、架台には自重とは別の力がかかる。</figcaption>
+        </figure>
+
+        <p>
+          ロボットの重さに耐える部材を選んだのに、動かしてみると架台が揺れる。原因の多くは、<strong class="mk">ロボット架台の強度計算</strong>を自重だけで済ませていることにあります。本記事では、非常停止時の慣性力をどう扱うかを中心に、架台の強度計算の方法を、仮想モデルの計算例つきで解説します。
+        </p>
+        <p>
+          記事中の数値は、すべて説明用の仮想モデルのものです。一般論にとどまる値には「要確認」と記しています。実際の設計では、メーカーの資料とご自身の条件で確認してください。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>非常停止時に架台へ入る力の整理と、慣性力の求め方</li>
+            <li>仮想モデルでの計算例（応力・たわみ・アンカー）</li>
+            <li>よくある失敗と、架台の強度計算書に残す項目</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>なぜ静荷重だけの強度計算では足りないのか</h2>
+        <p>
+          ロボットは、質量のあるアームを高速で動かし、短い時間で止めます。止めるときには「質量×加速度」の慣性力が生じ、その反力が架台に伝わります。この力は自重と違い、<strong>横向きにも、ねじる向きにもかかります</strong>。
+        </p>
+        <p>
+          柱は、縦に押される力には強い一方、横から押される力には弱い部材です。自重（鉛直、つまり上下方向の力）だけで部材を決めると、横向きの力に対する強さと剛性が足りなくなります。これが「計算上は持つのに揺れる」理由です。
+        </p>
+
+
+        <!-- ◆2 -->
+        <h2>非常停止時にロボット架台へ入る力</h2>
+        <p>
+          強度計算で扱う力は、次の4つに整理できます。
+        </p>
+        <table>
+          <tr><th>力</th><th>向き</th><th>内容</th></tr>
+          <tr><td style="white-space:nowrap">自重</td><td>鉛直</td><td>ロボット本体、ハンド、ワーク、架台自身の重さ</td></tr>
+          <tr><td style="white-space:nowrap">慣性力</td><td>水平・鉛直</td><td>減速時に「質量×加速度」で生じる力。動く向きによって方向が変わる</td></tr>
+          <tr><td style="white-space:nowrap">モーメント</td><td>倒す・ねじる</td><td>力の作用点と取付面が離れているために生じる。「力×距離」</td></tr>
+          <tr><td style="white-space:nowrap">繰り返し</td><td>－</td><td>通常運転の加減速が何百万回もかかることによる疲労</td></tr>
+        </table>
+        <p>
+          見落とされやすいのがモーメントです。アームを水平に伸ばすと、止まっているだけでも「重さ×腕の長さ」のモーメントがかかり、非常停止ではこれに慣性力の分が上乗せされます。
+        </p>
+        <p>
+          疲労の視点も欠かせません。非常停止は回数が少ない一方、通常の加減速は稼働中ずっと繰り返されます。<strong>最大荷重での確認とは別に、通常運転の荷重で溶接部の疲労を確認</strong>します。評価方法は、鋼構造の疲労設計の指針類を参照してください<span class="need-check">（要確認）</span>。
+        </p>
+
+
+        <!-- ◆3 -->
+        <h2>慣性力の求め方｜架台の強度計算の方法</h2>
+
+        <h3>第一の方法：メーカー資料の「据付面にかかる力」を使う</h3>
+        <p>
+          多くのロボットメーカーは、取扱説明書などに、据付面に作用する力とモーメントを、停止時・加減速時・非常停止時などに分けて載せています<span class="need-check">（要確認）</span>。<strong class="mk">入手できる場合は、この値を使うのが基本</strong>です。読むときは、次の点を確かめます。
+        </p>
+        <ul>
+          <li>力とモーメントの向き（鉛直・水平、どの軸まわりか）</li>
+          <li>どの動作条件の値か（通常の加減速か、非常停止か）</li>
+          <li>最大可搬質量・最大速度での値か</li>
+        </ul>
+
+        <h3>第二の方法：減速時間から自分で計算する</h3>
+        <p>
+          構想段階で資料がない場合は、自分で概算します。
+        </p>
+        <p class="calc">
+          加速度 a ＝ 速度 v ÷ 停止時間 t<br>
+          慣性力 F ＝ 動く質量 m × 加速度 a<br>
+          モーメント M ＝ 慣性力 F × 取付面からの距離
+        </p>
+        <p>
+          停止時間は、メーカーが公開している停止時間・停止距離の資料から読み取ります<span class="need-check">（要確認）</span>。アームは先端ほど速いため、質量を「先端のワーク」と「アーム」に分け、それぞれの重心の速度で計算します。自分で出した値は概算です。詳細設計では、メーカーの値で確かめ直します。
+        </p>
+
+        <h3>安全率の置き方と、根拠の示し方</h3>
+        <p>
+          安全率は、「何に対する」「いくつ」を、出典とともに書きます。本記事の計算例では、鋼の引張強さを基準にした経験的な目安（アンウィンの安全率。鋼では静荷重3、片振りの繰り返し5、両振り8、衝撃12）から、5を使います<span class="need-check">（要確認）</span>。降伏点を基準に、より小さい安全率で許容応力を決める会社も多くあります。どちらを採るかで合否が変わるため、社内基準や客先の指定を優先し、採用した基準を明記します。</p>
+        <p>
+          また、自分で概算した慣性力は2倍して扱います。急に加わる力には、静かに加えた場合の最大2倍の応答が生じうるためです。<strong>メーカーが公表する値を使う場合は、この2倍は掛けず、メーカーの指示に従います</strong>。
+        </p>
+
+
+        <!-- ◆4 -->
+        <h2>仮想モデルでのロボット架台の強度計算例</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-robot-stand-model.jpg" alt="計算モデル。スパン2,000mm、柱高さ2,500mmの門型架台の梁の中央に、本体250kg・可搬50kgのロボットを天吊りする。横から見ると、水平力とモーメントを柱だけで支える形になる" width="1376" height="768" loading="lazy">
+          <figcaption>門型架台は、横から見た向き（面外）の力を柱だけで支える</figcaption>
+        </figure>
+
+        <h3>前提条件</h3>
+        <table>
+          <tr><th>項目</th><th>値</th></tr>
+          <tr><td>ロボット</td><td>本体 250kg、可搬 50kg（ハンド含む）、最大リーチ 1,400mm</td></tr>
+          <tr><td>架台</td><td>門型、スパン L＝2,000mm、柱高さ h＝2,500mm、梁の中央に天吊り</td></tr>
+          <tr><td>部材（仮）</td><td>角パイプ □100×100×6、SS400（市販の角形鋼管はSTKR400が一般的。引張強さと降伏点の下限は同じ・要確認）</td></tr>
+          <tr><td>断面性能</td><td>A＝2,163mm²、I＝3.11×10⁶mm⁴、Z＝62.3×10³mm³、i＝37.9mm、17.0kg/m<span class="need-check">（JISの断面性能表の値・要確認）</span></td></tr>
+          <tr><td>材料</td><td>引張強さ 400MPa、降伏点 245MPa、ヤング率 E＝205,000MPa</td></tr>
+          <tr><td>許容応力</td><td>400 ÷ 5 ＝ 80MPa（降伏点245MPaに対しては約3倍の余裕）</td></tr>
+          <tr><td>仮定</td><td>手先速度 2.0m/s、停止時間 0.2s、動く部分の質量は本体の6割（150kg）で重心はリーチの半分。残りの100kgは取付部にあり動かない<span class="need-check">（すべて仮定・要確認）</span></td></tr>
+        </table>
+
+        <h3>荷重の算出</h3>
+        <p class="calc">
+          <b>自重</b>　Vs ＝ (250＋50)×9.81 ＝ 2,943 N<br>
+          <b>自重によるモーメント</b>（アームを水平に伸ばした姿勢）<br>
+          　Ms ＝ 50×9.81×1.4 ＋ 150×9.81×0.7 ＝ 1,717 N·m<br>
+          <b>加速度</b>　手先 a ＝ 2.0÷0.2 ＝ 10 m/s²、アーム重心はその半分で 5 m/s²<br>
+          <b>慣性力</b>　F ＝ 50×10 ＋ 150×5 ＝ 1,250 N　→ 2倍して 2,500 N<br>
+          　（下降中に止まれば鉛直に、旋回中に止まれば水平にかかる）<br>
+          <b>慣性力によるモーメント</b><br>
+          　Md ＝ (50×10×1.4 ＋ 150×5×0.7)×2 ＝ 2,450 N·m
+        </p>
+        <p>
+          鉛直と水平の慣性力が同時に最大になることはありませんが、ここでは安全側に、両方が同時にかかるものとして扱います。鉛直力は「自重＋鉛直の慣性力」、水平力は「水平の慣性力」で、向きの違う力を足し合わせてはいません。
+        </p>
+        <table>
+          <tr><th>設計に使う荷重</th><th>値</th><th>内訳</th></tr>
+          <tr><td>鉛直力 V</td><td>5,443 N</td><td>自重 2,943＋鉛直の慣性力 2,500</td></tr>
+          <tr><td>水平力 H</td><td>2,500 N</td><td>水平の慣性力</td></tr>
+          <tr><td>モーメント M</td><td>4,167 N·m</td><td>自重 1,717＋慣性力 2,450</td></tr>
+        </table>
+
+        <h3>梁の応力</h3>
+        <p>
+          梁は、アームを梁と同じ向きに伸ばした姿勢で確認します。このときモーメントは梁を曲げる向きに働きます。両端を単純支持とみなして安全側に計算します。中央に鉛直力とモーメントが作用し、梁の自重（17.0kg/m×9.81＝166.8N/m）が等分布でかかります。
+        </p>
+        <p class="calc">
+          鉛直力　V×L÷4 ＝ 5,443×2,000÷4 ＝ 2,721,500 N·mm<br>
+          モーメント　M÷2 ＝ 4,166,750÷2 ＝ 2,083,375 N·mm<br>
+          自重　w×L²÷8 ＝ 166.8×2.0²÷8 ＝ 83.4 N·m ＝ 83,400 N·mm<br>
+          合計　Mb ＝ 4,888,275 N·mm<br>
+          <b>応力　σ ＝ Mb÷Z ＝ 4,888,275÷62,300 ＝ 78.5 MPa ＜ 80 MPa</b>
+        </p>
+
+        <h3>柱1本あたりの軸力・せん断力・曲げモーメント</h3>
+        <p>
+          柱は、アームを梁と直角の向きに伸ばした姿勢で確認します。門型架台は、横から見た向き（面外）には柱が片持ち梁として働くため、この向きが最も厳しくなります。左右対称として、水平力は柱2本で半分ずつ受け、モーメントは梁のねじりを通じて柱の上端に半分ずつ伝わるものと単純化します。
+        </p>
+        <p class="calc">
+          せん断力　Q ＝ H÷2 ＝ 1,250 N<br>
+          軸力　N ＝ 5,443÷2 ＋ 梁の半分 167 ＋ 柱 417 ＝ 3,305 N<br>
+          曲げモーメント（柱脚）<br>
+          　Mc ＝ Q×h ＋ M÷2 ＝ 1,250×2,500 ＋ 2,083,375 ＝ 5,208,375 N·mm<br>
+          曲げ応力　σb ＝ 5,208,375÷62,300 ＝ 83.6 MPa<br>
+          圧縮応力　σc ＝ 3,305÷2,163 ＝ 1.5 MPa<br>
+          <b>合計　σ ＝ 85.1 MPa ＞ 80 MPa（不合格）</b>
+        </p>
+        <p>
+          座屈も確かめます。面外は上端が自由な柱として、座屈長さを高さの2倍とします。
+        </p>
+        <p class="calc">
+          細長比　λ ＝ 5,000÷37.9 ＝ 132<br>
+          座屈荷重　Pcr ＝ π²×E×I÷Lk² ＝ π²×205,000×3.11×10⁶÷5,000² ＝ 約252,000 N<br>
+          軸力 3,305 N に対して約76倍の余裕
+        </p>
+        <p>
+          この姿勢では、梁にねじりも生じます。角パイプを薄肉の閉じた断面とみなすと、次のとおりです（Am は板厚の中心線で囲まれる面積、t は板厚）。
+        </p>
+        <p class="calc">
+          ねじりモーメント　T ＝ M÷2 ＝ 2,083,375 N·mm<br>
+          せん断応力　τ ＝ T÷(2×Am×t) ＝ 2,083,375÷(2×94×94×6) ＝ 約19.6 MPa
+        </p>
+
+        <h3>判定</h3>
+        <table>
+          <tr><th>部位</th><th>発生応力</th><th>許容応力</th><th>判定</th></tr>
+          <tr><td>梁</td><td>78.5 MPa</td><td>80 MPa</td><td>合格（余裕 2％）</td></tr>
+          <tr><td>柱</td><td>85.1 MPa</td><td>80 MPa</td><td>不合格（6％超過）</td></tr>
+          <tr><td>柱の座屈</td><td>3,305 N</td><td>約252,000 N</td><td>余裕あり</td></tr>
+        </table>
+        <p>
+          仮の部材では、柱が許容応力を超えました（降伏点を基準に許容応力を決める場合は、判定が変わります）。<strong class="mk">鉛直の自重だけを見れば、柱の応力は約1MPa（軸力2,055N÷2,163mm²）で、まったく問題がないように見えます</strong>。差を生んでいるのは、水平力とモーメントです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>柱は、面外の水平力とモーメントによる曲げで決まる</li>
+            <li>仮の部材では、梁は余裕2％、柱は6％超過</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>剛性（たわみ）の確認｜強度が足りても精度が出ない理由</h2>
+        <p>
+          応力が許容値に収まっても、架台がたわめば手先はその分ずれます。同じ荷重で、梁の高さでの横方向の変位を求めます。
+        </p>
+        <p class="calc">
+          水平力による変位　Q×h³÷(3EI) ＝ 1,250×2,500³÷(3×205,000×3.11×10⁶) ＝ 10.2 mm<br>
+          モーメントによる変位　(M÷2)×h²÷(2EI) ＝ 2,083,375×2,500²÷(2×205,000×3.11×10⁶) ＝ 10.2 mm<br>
+          <b>合計　約 20.4 mm</b>
+        </p>
+        <p>
+          これは柱脚と接合部を完全な固定とした単純なモデルの値です。実物は接合部がわずかに動くため、これより大きくなると考えます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-robot-stand-result.jpg" alt="計算結果。梁の応力78.5MPaで合格（余裕2％）、柱の応力85.1MPaで不合格（6％超過）、梁の高さでの横ゆれは非常停止時に20.4mm" width="1376" height="768" loading="lazy">
+          <figcaption>部材を決めているのは、強度よりも剛性</figcaption>
+        </figure>
+
+        <h3>繰り返し位置決め精度と、架台のたわみの関係</h3>
+        <p>
+          非常停止時だけではありません。アームを伸ばした姿勢では、自重によるモーメント（1,717N·m）だけで梁の高さが約4.2mm動き、柱の上端が約0.0034rad傾きます。取付面から1m下の手先では、合わせて約7.6mmのずれになり、姿勢を変えるたびにこの量が変わります。
+        </p>
+        <p>
+          ロボット単体の繰り返し位置決め精度は、0.1mm以下の機種が多くあります<span class="need-check">（機種ごとに要確認）</span>。<strong class="mk">架台がミリ単位で動けば、ロボットの精度は活かせません</strong>。横方向のばね定数（約245N/mm）と質量（約350kg）から単純に求めた固有振動数は約4Hzと低く、停止後の揺れも長く残ります。
+        </p>
+
+        <h3>たわみの目安値をどう決めるか</h3>
+        <p>
+          たわみに一律の基準はありません。<strong>作業に必要な位置精度から逆算</strong>し、たとえば必要精度の数分の一以下を架台の許容変位とします<span class="need-check">（社内基準・要確認）</span>。メーカーが架台の剛性や固有振動数の推奨値を示している場合は、それに従います。
+        </p>
+        <p>
+          参考までに、柱を □150×150×6（I＝11.5×10⁶mm⁴、Z＝153×10³mm³・要確認）に上げると、柱の応力は約34MPa、変位は約5.5mmになります。強度は満たしますが、変位はまだミリ単位です。部材を太くするだけでは限界があり、形そのものの見直しが必要です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>非常停止時の変位は約20mm、姿勢の変化だけでも手先が約7.6mmずれる</li>
+            <li>許容たわみは、必要な位置精度から逆算して決める</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>アンカーの検討｜引き抜き力とせん断</h2>
+        <p>
+          柱脚の曲げモーメントは、アンカーボルトの引き抜き力として床に伝わります。ボルトの間隔 d を150mmと仮定し、圧縮側のボルト列を回転の中心として、引張側の2本で受けるものとして概算します。軸力は柱の中心（回転の中心から d÷2）に働き、引き抜きを打ち消す向きに効きます。
+        </p>
+        <p class="calc">
+          引き抜き力（1本）　T ＝ (Mc － N×d÷2)÷(d×2)<br>
+          　＝ (5,208,375 － 3,305×75)÷(150×2) ＝ 約16,500 N<br>
+          せん断力（1本）　1,250÷4 ＝ 約313 N
+        </p>
+        <p>
+          支配的なのは引き抜きです。コンクリート側の破壊で決まることが多いため、<strong>アンカーメーカーの技術資料にある許容引張荷重と比べて判定</strong>します。許容値は、アンカーの種類、埋め込み深さ、コンクリートの強度、へりあき、施工の状態で大きく変わります<span class="need-check">（要確認）</span>。本記事では判定しません。あと施工アンカーの設計と施工は、資格や指針が関わるため、専門家に確認してください。
+        </p>
+
+
+        <!-- ◆7 -->
+        <h2>ロボット架台の強度計算でよくある失敗</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-robot-stand-brace.jpg" alt="門型のままの架台と、筋かいを入れて4本脚にした架台を並べたイラスト。筋かいのある架台は横に揺れにくい" width="1376" height="768" loading="lazy">
+          <figcaption>筋かいや奥行きのある脚で、横向きの力を軸力で受ける形にする</figcaption>
+        </figure>
+
+        <h3>静荷重だけで部材を決める</h3>
+        <p>
+          鉛直の自重だけでは、柱の応力は約1MPaです。水平力とモーメントを入れて、初めて実態が見えます。
+        </p>
+
+        <h3>溶接部・ボルト接合部を剛結と仮定してしまう</h3>
+        <p>
+          計算では接合部を「完全に固定」と置きがちですが、実際にはわずかな回転やすべりがあります。変位には余裕を見ておきます。
+        </p>
+
+        <h3>ブレース（筋かい）を入れずに門型のまま使う</h3>
+        <p>
+          門型は、面外の力を柱の曲げだけで受けます。筋かいを入れる、門型を2組並べて4本脚にするなど、<strong class="mk">力を部材の曲げではなく軸力で受ける形</strong>にすると、同じ部材でも剛性は大きく上がります。
+        </p>
+
+        <h3>床の支持力を確認していない</h3>
+        <p>
+          床が薄い、ひび割れがある、目地の近くにアンカーを打つ、といった条件では、床が先に負けます。床の厚さと状態は、設計の前に確かめます。
+        </p>
+
+
+        <!-- ◆8 -->
+        <h2>架台の強度計算書として残すべき項目</h2>
+        <p>
+          客先や元請に提出する架台の強度計算書には、結果だけでなく、前提と根拠を残します。条件が変わったときに、どこを計算し直すかが分かるためです。
+        </p>
+        <ul>
+          <li>対象と適用範囲（ロボットの仕様、ハンドとワークの質量、設置形態）</li>
+          <li>荷重条件とその出典（メーカー資料の名称と版、または仮定した値）</li>
+          <li>計算モデル（支持条件、荷重の向き、単純化した点）</li>
+          <li>部材の断面性能、材料の強度と出典</li>
+          <li>安全率と許容応力の決め方</li>
+          <li>応力・たわみ・座屈・アンカーの計算と判定</li>
+          <li>接合部（溶接、ボルト、ベースプレート、ロボット取付部）の確認</li>
+          <li>未確認の事項と、計算の前提が成り立つ条件</li>
+        </ul>
+        <p>
+          本記事の計算例は、溶接部、ベースプレートの曲げ、ロボット取付部、鋼管の局部的な変形を確認していません。実際の計算書では、これらも対象に含めます。
+        </p>
+        <p>
+          ロボットの設置には、労働安全衛生に関する法令や規格が関わります。安全柵やリスクアセスメントを含む全体の適合性は本記事の範囲外です。専門家に確認してください。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          ロボット架台の強度計算では、非常停止時の慣性力とモーメントを扱います。仮想モデルでは、鉛直の自重だけなら約1MPaだった柱の応力が、水平力とモーメントを入れると85MPaになりました。強度を満たしても、たわみが残れば精度は出ません。<strong class="mk">「力の向き」と「剛性」まで確かめること</strong>が、揺れない架台の条件です。
+        </p>
+        <p>
+          社内で計算が難しい場合は、構造計算に対応できる設計会社や架台メーカー、ロボットのシステムインテグレータに相談する方法もあります。製作の前に動作と荷重の条件を整理しておくと、手戻りを減らせます。アイツインでも、設備導入の前の検討についてご相談を受け付けています。
+        </p>
+
+        <div class="article-cta">
+          架台を作る前に、動きと荷重の条件を整理しておきたい。無料相談で、検討の進め方を一緒に整理しませんか。お気軽にご相談ください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.08.10</p>
+                <h3><a href="hansou-shoujinka-cost.html">搬送作業の省人化、参考値は1,000万円〜2,000万円。ロボット本体は全体の3割です</a></h3>
+                <p class="column-excerpt">搬送作業を産業用ロボットで省人化する場合の費用感を、項目ごとに解説します。ロボット本体は全体のおよそ3割にすぎず、残り7割は周辺費用です。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.18</p>
+                <h3><a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+                <p class="column-excerpt">ロボットによる自動化には「向いている現場の条件」があります。人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩を解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
