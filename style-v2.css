@@ -2070,3 +2070,10 @@ a.industry-card { cursor: pointer; }
 .calc-out .judge { font-size: 0.8rem; font-weight: 700; margin-left: 8px; color: var(--ink-soft); }
 .calc-reset { font: inherit; font-size: 0.82rem; margin-top: 12px; padding: 5px 14px; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; cursor: pointer; color: var(--ink); }
 @media (max-width: 700px) { .calc-in { grid-template-columns: 1fr; } .calc-out th { width: 50%; } }
+
+/* 記事内の線画イラスト（inline SVG）と、計算ツールの中の図（2026-10-13） */
+.article-figure svg { width: 100%; height: auto; display: block; background: #f4f7fa; border: 1px solid var(--line); }
+.article-figure svg text, .calc-fig svg text { font-family: "Zen Kaku Gothic New", "Yu Gothic", sans-serif; font-weight: 700; }
+.calc-fig { margin: 0 0 6px; }
+.calc-fig svg { width: 100%; height: auto; display: block; background: #f4f7fa; border: 1px solid var(--line); }
+.calc-fig-note { font-size: 0.8rem; color: var(--ink-soft); margin: 4px 0 0 !important; line-height: 1.6 !important; }
