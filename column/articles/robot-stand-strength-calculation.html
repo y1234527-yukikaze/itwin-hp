@@ -57,7 +57,7 @@
     "description": "ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。",
     "image": "https://i-twin.co.jp/img/column-robot-stand.jpg",
     "datePublished": "2026-10-12",
-    "dateModified": "2026-10-12",
+    "dateModified": "2026-10-13",
     "inLanguage": "ja",
     "author": {
       "@type": "Organization",
@@ -203,6 +203,7 @@
             <li>非常停止時に架台へ入る力の整理と、慣性力の求め方</li>
             <li>仮想モデルでの計算例（応力・たわみ・アンカー）</li>
             <li>よくある失敗と、架台の強度計算書に残す項目</li>
+            <li>自分の条件を入れて試せる、概算の計算ツール</li>
           </ul>
         </div>
 
@@ -409,7 +410,7 @@
           たわみに一律の基準はありません。<strong>作業に必要な位置精度から逆算</strong>し、たとえば必要精度の数分の一以下を架台の許容変位とします<span class="need-check">（社内基準・要確認）</span>。メーカーが架台の剛性や固有振動数の推奨値を示している場合は、それに従います。
         </p>
         <p>
-          参考までに、柱を □150×150×6（I＝11.5×10⁶mm⁴、Z＝153×10³mm³・要確認）に上げると、柱の応力は約34MPa、変位は約5.5mmになります。強度は満たしますが、変位はまだミリ単位です。部材を太くするだけでは限界があり、形そのものの見直しが必要です。
+          参考までに、柱を □150×150×6（I＝11.5×10⁶mm⁴、Z＝153×10³mm³・要確認）に上げると、柱の応力は約35MPa、変位は約5.5mmになります。強度は満たしますが、変位はまだミリ単位です。部材を太くするだけでは限界があり、形そのものの見直しが必要です。
         </p>
 
         <div class="chapter-sum">
@@ -434,6 +435,146 @@
           支配的なのは引き抜きです。コンクリート側の破壊で決まることが多いため、<strong>アンカーメーカーの技術資料にある許容引張荷重と比べて判定</strong>します。許容値は、アンカーの種類、埋め込み深さ、コンクリートの強度、へりあき、施工の状態で大きく変わります<span class="need-check">（要確認）</span>。本記事では判定しません。あと施工アンカーの設計と施工は、資格や指針が関わるため、専門家に確認してください。
         </p>
 
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ） -->
+        <h2>自分の条件で試す｜ロボット架台の強度計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。数値を動かすと、結果がその場で変わります。初期値は、本記事の仮想モデルと同じです。
+        </p>
+
+        <div class="calc-tool" id="rs-tool">
+          <p class="calc-tool-title">門型架台・天吊りロボットの概算</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（梁は両端単純支持、柱は面外方向の片持ち梁、慣性力は2倍、鉛直と水平の慣性力は同時に作用）による概算です。溶接部、ベースプレート、床は計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、メーカーの資料と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <h4>ロボットの条件</h4>
+          <div class="calc-in">
+            <label>本体の質量<span class="row"><input type="range" data-k="mb" min="50" max="1000" step="10"><input type="number" data-k="mb" min="50" max="1000" step="10"><span class="unit">kg</span></span></label>
+            <label>可搬質量（ハンド含む）<span class="row"><input type="range" data-k="mp" min="5" max="300" step="5"><input type="number" data-k="mp" min="5" max="300" step="5"><span class="unit">kg</span></span></label>
+            <label>最大リーチ<span class="row"><input type="range" data-k="R" min="500" max="3000" step="50"><input type="number" data-k="R" min="500" max="3000" step="50"><span class="unit">mm</span></span></label>
+            <label>動く部分の割合（本体のうち）<span class="row"><input type="range" data-k="ratio" min="30" max="80" step="5"><input type="number" data-k="ratio" min="30" max="80" step="5"><span class="unit">％</span></span></label>
+            <label>手先の速度<span class="row"><input type="range" data-k="v" min="0.5" max="5" step="0.1"><input type="number" data-k="v" min="0.5" max="5" step="0.1"><span class="unit">m/s</span></span></label>
+            <label>停止時間<span class="row"><input type="range" data-k="t" min="0.05" max="1" step="0.01"><input type="number" data-k="t" min="0.05" max="1" step="0.01"><span class="unit">s</span></span></label>
+          </div>
+
+          <h4>架台の条件</h4>
+          <div class="calc-in">
+            <label>スパン<span class="row"><input type="range" data-k="L" min="1000" max="4000" step="100"><input type="number" data-k="L" min="1000" max="4000" step="100"><span class="unit">mm</span></span></label>
+            <label>柱の高さ<span class="row"><input type="range" data-k="h" min="1000" max="4000" step="100"><input type="number" data-k="h" min="1000" max="4000" step="100"><span class="unit">mm</span></span></label>
+            <label>アンカーボルトの間隔<span class="row"><input type="range" data-k="d" min="80" max="400" step="10"><input type="number" data-k="d" min="80" max="400" step="10"><span class="unit">mm</span></span></label>
+            <label>許容応力<span class="row"><input type="range" data-k="sa" min="40" max="200" step="1"><input type="number" data-k="sa" min="40" max="200" step="1"><span class="unit">MPa</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:12px 0 0 !important;">部材（柱・梁とも角パイプ）</p>
+          <div class="calc-btns" id="rs-sec">
+            <button type="button" data-sec="100">□100×100×6</button>
+            <button type="button" data-sec="125">□125×125×6</button>
+            <button type="button" data-sec="150">□150×150×6</button>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方</p>
+          <div class="calc-btns" id="rs-sa">
+            <button type="button" data-sa="80">引張強さ400÷5＝80MPa</button>
+            <button type="button" data-sa="163">降伏点245÷1.5＝163MPa</button>
+          </div>
+
+          <h4>設計に使う荷重</h4>
+          <table class="calc-out">
+            <tr><th>鉛直力 V（自重＋鉛直の慣性力）</th><td><b data-o="V"></b> N</td></tr>
+            <tr><th>水平力 H（水平の慣性力）</th><td><b data-o="H"></b> N</td></tr>
+            <tr><th>モーメント M（自重＋慣性力）</th><td><b data-o="M"></b> N·m</td></tr>
+          </table>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr data-j="beam"><th>梁の応力</th><td><b data-o="sb"></b> MPa<span class="judge" data-o="jb"></span></td></tr>
+            <tr data-j="col"><th>柱の応力</th><td><b data-o="sc"></b> MPa<span class="judge" data-o="jc"></span></td></tr>
+            <tr><th>柱の座屈荷重に対する余裕</th><td>約 <b data-o="bk"></b> 倍</td></tr>
+            <tr><th>梁のねじりによるせん断応力</th><td><b data-o="tau"></b> MPa</td></tr>
+            <tr><th>横ゆれ（非常停止時・梁の高さ）</th><td><b data-o="dl"></b> mm</td></tr>
+            <tr><th>姿勢の変化による手先のずれ（取付面から1m下）</th><td><b data-o="dh"></b> mm</td></tr>
+            <tr><th>横方向の固有振動数（単純なモデル）</th><td>約 <b data-o="fn"></b> Hz</td></tr>
+            <tr><th>アンカー1本の引き抜き力</th><td><b data-o="T"></b> N</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="rs-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('rs-tool');
+          if (!root) return;
+          // 角パイプの断面性能（JIS G 3466 の断面性能表の値。A:mm2, I:mm4, Z:mm3, i:mm, w:kg/m, b:外形mm, t:板厚mm）
+          var SEC = {
+            '100': { A: 2163, I: 3.11e6, Z: 62.3e3, i: 37.9, w: 17.0, b: 100, t: 6 },
+            '125': { A: 2763, I: 6.41e6, Z: 103e3,  i: 48.2, w: 21.7, b: 125, t: 6 },
+            '150': { A: 3363, I: 11.5e6, Z: 153e3,  i: 58.4, w: 26.4, b: 150, t: 6 }
+          };
+          var DEF = { mb: 250, mp: 50, R: 1400, ratio: 60, v: 2.0, t: 0.2, L: 2000, h: 2500, d: 150, sa: 80, sec: '100' };
+          var S = {}, used = false, g = 9.81, E = 205000;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            root.querySelectorAll('#rs-sec button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.sec === S.sec); });
+            root.querySelectorAll('#rs-sa button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.sa) === Number(S.sa)); });
+          }
+          function calc() {
+            var p = SEC[S.sec], R = S.R / 1000, L = S.L, h = S.h;
+            var mm = S.mb * S.ratio / 100;                       // 動く部分の質量
+            var Vs = (S.mb + S.mp) * g;                          // 自重
+            var Ms = S.mp * g * R + mm * g * R / 2;              // 自重によるモーメント N·m
+            var a = S.v / S.t;                                   // 手先の加速度
+            var F = 2 * (S.mp * a + mm * a / 2);                 // 慣性力（2倍）
+            var Md = 2 * (S.mp * a * R + mm * (a / 2) * (R / 2)); // 慣性力によるモーメント N·m
+            var V = Vs + F, H = F, M = Ms + Md, Mmm = M * 1000;
+            var wN = p.w * g / 1000;                             // 梁の自重 N/mm
+            var Mb = V * L / 4 + Mmm / 2 + wN * L * L / 8;       // 梁の曲げ
+            var sb = Mb / p.Z;
+            var Q = H / 2;
+            var N = V / 2 + p.w * (L / 1000) * g / 2 + p.w * (h / 1000) * g;
+            var Mc = Q * h + Mmm / 2;
+            var sc = Mc / p.Z + N / p.A;
+            var Pcr = Math.PI * Math.PI * E * p.I / Math.pow(2 * h, 2);
+            var Am = (p.b - p.t) * (p.b - p.t);
+            var tau = (Mmm / 2) / (2 * Am * p.t);
+            var dl = Q * Math.pow(h, 3) / (3 * E * p.I) + (Mmm / 2) * h * h / (2 * E * p.I);
+            var Mt = Ms * 1000 / 2;
+            var dh = Mt * h * h / (2 * E * p.I) + (Mt * h / (E * p.I)) * 1000;
+            var k = 2 * 3 * E * p.I / Math.pow(h, 3) * 1000;     // N/m
+            var mass = S.mb + S.mp + p.w * (L / 1000) + 0.25 * 2 * p.w * (h / 1000);
+            var fn = Math.sqrt(k / mass) / (2 * Math.PI);
+            var T = (Mc - N * S.d / 2) / (S.d * 2);
+            out('V', fmt(V)); out('H', fmt(H)); out('M', fmt(M));
+            out('sb', fmt(sb, 1)); out('sc', fmt(sc, 1)); out('bk', fmt(Pcr / N));
+            out('tau', fmt(tau, 1)); out('dl', fmt(dl, 1)); out('dh', fmt(dh, 1)); out('fn', fmt(fn, 1)); out('T', fmt(Math.max(T, 0)));
+            function judge(key, val, row) {
+              var over = val > S.sa;
+              out(key, over ? '許容応力 ' + S.sa + 'MPa を超過（' + fmt(val / S.sa * 100) + '％）' : '許容応力 ' + S.sa + 'MPa 以下（' + fmt(val / S.sa * 100) + '％）');
+              root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+            }
+            judge('jb', sb, 'beam'); judge('jc', sc, 'col');
+            out('eq', '加速度 ' + fmt(a, 1) + ' m/s²、動く部分の質量 ' + fmt(mm) + ' kg。柱脚の曲げモーメント ＝ ' + fmt(Q) + '×' + fmt(h) + ' ＋ ' + fmt(Mmm / 2) + ' ＝ ' + fmt(Mc) + ' N·mm、柱の軸力 ' + fmt(N) + ' N。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'robot_stand' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              v = Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max));
+              set(e.dataset.k, v);
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('#rs-sec button').forEach(function (b) { b.addEventListener('click', function () { set('sec', b.dataset.sec); }); });
+          root.querySelectorAll('#rs-sa button').forEach(function (b) { b.addEventListener('click', function () { set('sa', Number(b.dataset.sa)); }); });
+          document.getElementById('rs-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
 
         <!-- ◆7 -->
         <h2>ロボット架台の強度計算でよくある失敗</h2>
