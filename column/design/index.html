@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜特集「自動化設備の設計ノート」（まとめページ・2026-10-13 作成）
+  ------------------------------------------------------------
+  ・記事カードは下の「◆記事カードデータ」ブロック1箇所にまとまっています（業種別まとめページと同じ作り）。
+  ・まだ記事が無いテーマは、div にして class に is-soon を付け、準備中ラベルを表示しています。
+    記事を公開したら a 要素に変え、href を付け、is-soon と準備中ラベルを外してください。
+  ・記事を追加したら、head の構造化データ（ItemList）にも1行追加してください。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動化設備の設計ノート｜強度計算・選定の方法と計算ツール｜株式会社アイツイン</title>
+  <meta name="description" content="自動化設備の設計で必要になる計算を、計算例と計算ツールつきでまとめました。架台の強度計算、溶接、アンカーボルト、エアシリンダの選定、コンベアのモーター選定などを順に解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/design/">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="自動化設備の設計ノート｜強度計算・選定の方法と計算ツール｜株式会社アイツイン">
+  <meta property="og:description" content="自動化設備の設計で必要になる計算を、計算例と計算ツールつきでまとめました。架台の強度計算、溶接、アンカーボルト、エアシリンダの選定、コンベアのモーター選定などを順に解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/design/">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-stand-strength.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="自動化設備の設計ノート｜強度計算・選定の方法と計算ツール｜株式会社アイツイン">
+  <meta name="twitter:description" content="自動化設備の設計で必要になる計算を、計算例と計算ツールつきでまとめました。架台の強度計算、溶接、アンカーボルト、エアシリンダの選定、コンベアのモーター選定などを順に解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-stand-strength.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" }
+    ]
+  }
+  </script>
+
+  <!-- ◆構造化データ（CollectionPage + ItemList）※記事を追加したらこの一覧にも1行追加してください -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "自動化設備の設計ノート",
+    "description": "自動化設備の設計で必要になる計算を、計算例と計算ツールつきでまとめたページ。",
+    "url": "https://i-twin.co.jp/column/design/",
+    "inLanguage": "ja",
+    "isPartOf": { "@type": "WebSite", "name": "アイツイン（i-TWIN）", "url": "https://i-twin.co.jp/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "架台の強度計算の方法と例", "url": "https://i-twin.co.jp/column/articles/stand-strength-calculation" },
+        { "@type": "ListItem", "position": 2, "name": "ロボット架台の強度計算の方法", "url": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation" }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>自動化設備の設計ノート</span>
+      </div>
+      <h1>自動化設備の設計ノート</h1>
+      <p class="catch">強度計算と選定の方法を、計算例と計算ツールつきで。</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：業種一覧 -->
+  <section class="section">
+    <div class="wrap">
+
+      <p class="lead-center">
+        ロボットや搬送設備を入れるときには、架台、溶接、アンカー、シリンダ、モーターなど、さまざまな計算が必要になります。
+        このページでは、現場で設計に携わってきた経験をもとに、<strong>計算の方法を計算例つき</strong>で順にまとめています。
+        各記事には、ご自身の条件を入れて試せる計算ツールがあります。
+      </p>
+
+      <!-- ◆記事カードデータ（追加・修正はこのブロック内だけでOK） -->
+      <div class="industry-grid">
+
+        <a class="industry-card ind-1" href="../articles/stand-strength-calculation.html">
+          <div class="industry-head"><span class="industry-no">01</span><h2>架台の強度計算の方法と例</h2><small>角パイプ・アングル・溝形鋼</small></div>
+          <div class="industry-body">
+            <p>梁の曲げとたわみ、柱の座屈、水平力。500kgの設備をのせる架台の計算例と、部材ごとの違いを解説します。計算ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <a class="industry-card ind-8" href="../articles/robot-stand-strength-calculation.html">
+          <div class="industry-head"><span class="industry-no">02</span><h2>ロボット架台の強度計算</h2><small>非常停止時の慣性力</small></div>
+          <div class="industry-body">
+            <p>ロボットが急に止まるとき、架台には横向きの力とモーメントがかかります。慣性力の求め方と計算例。計算ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <div class="industry-card ind-2 is-soon">
+          <div class="industry-head"><span class="industry-no">03</span><h2>溶接の強度計算</h2><small>すみ肉溶接・のど厚</small></div>
+          <div class="industry-body">
+            <p>溶接部にかかる力と、のど厚・溶接長さから応力を求める方法を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-3 is-soon">
+          <div class="industry-head"><span class="industry-no">04</span><h2>ベースプレートとアンカーボルト</h2><small>引き抜き力・せん断</small></div>
+          <div class="industry-body">
+            <p>柱脚にかかる力から、アンカーボルトの引き抜き力とベースプレートの確認までを解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-4 is-soon">
+          <div class="industry-head"><span class="industry-no">05</span><h2>エアシリンダの選定と推力</h2><small>内径・負荷率</small></div>
+          <div class="industry-body">
+            <p>必要な推力から内径を決める手順と、見落としやすい確認項目を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-5 is-soon">
+          <div class="industry-head"><span class="industry-no">06</span><h2>コンベアのモーター選定</h2><small>ベルト・ローラー</small></div>
+          <div class="industry-body">
+            <p>搬送物の質量と速度から、必要な動力を求める手順を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-6 is-soon">
+          <div class="industry-head"><span class="industry-no">07</span><h2>ロボットハンドの把持力と真空パッド</h2><small>把持力・吸着力</small></div>
+          <div class="industry-body">
+            <p>ワークを落とさないために必要な把持力と吸着力の求め方を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-7 is-soon">
+          <div class="industry-head"><span class="industry-no">08</span><h2>タクトタイムとサイクルタイム</h2><small>必要数と設備の能力</small></div>
+          <div class="industry-body">
+            <p>必要な生産数から、設備に求められる速さを求める方法を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-1 is-soon">
+          <div class="industry-head"><span class="industry-no">09</span><h2>アルミフレームの強度とたわみ</h2><small>たわみ・ブラケット</small></div>
+          <div class="industry-body">
+            <p>アルミフレームのたわみの計算と、接合部の考え方を解説します。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-more">
+        <a class="btn btn--outline" href="../index.html">コラム一覧をすべて見る ›</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+              <li><a href="../../index.html#faq">よくあるご質問</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="index.html">業種別活用事例</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

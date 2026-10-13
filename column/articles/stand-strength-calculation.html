@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：架台の強度計算の方法と例（特集「自動化設備の設計ノート」01・親記事）
+  （コラム制作キットの template-rich.html から作成・2026-10-13）
+  計算例の検算：キットの stand_calc.py／計算ツール：キットの tool_stand.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-stand-strength.jpg／本文イラスト：img/column-stand-strength-brace.jpg（ナノバナナで生成して差し替え）
+  モデル図・アングルの軸・溝形鋼の向き・ツール内の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで｜アイツイン コラム</title>
+  <meta name="description" content="架台の強度計算の方法を、500kgの設備をのせる架台の計算例で解説します。梁の曲げとたわみ、柱の座屈、水平力の計算手順と、角パイプ・アングル・溝形鋼の違いを整理。条件を入れて試せる計算ツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/stand-strength-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで">
+  <meta property="og:description" content="架台の強度計算の方法を、500kgの設備をのせる架台の計算例で解説します。梁の曲げとたわみ、柱の座屈、水平力の計算手順と、角パイプ・アングル・溝形鋼の違いを整理。条件を入れて試せる計算ツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/stand-strength-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-stand-strength.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-13">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで">
+  <meta name="twitter:description" content="架台の強度計算の方法を、500kgの設備をのせる架台の計算例で解説します。梁の曲げとたわみ、柱の座屈、水平力の計算手順と、角パイプ・アングル・溝形鋼の違いを整理。条件を入れて試せる計算ツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-stand-strength.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで",
+    "description": "架台の強度計算の方法を、500kgの設備をのせる架台の計算例で解説します。梁の曲げとたわみ、柱の座屈、水平力の計算手順と、角パイプ・アングル・溝形鋼の違いを整理。条件を入れて試せる計算ツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-stand-strength.jpg",
+    "datePublished": "2026-10-13",
+    "dateModified": "2026-10-13",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/stand-strength-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで", "item": "https://i-twin.co.jp/column/articles/stand-strength-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</span>
+      </div>
+      <h1>架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</h1>
+      <p class="catch">公開日：2026年10月13日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.13</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-stand-strength.jpg" alt="架台の強度計算。設備をのせた4本脚の架台と、梁の曲げ・たわみ・柱の座屈を確認するイメージ" width="1376" height="768">
+          <figcaption>梁の曲げ、たわみ、柱の座屈。架台の強度計算は、この3つから始まる。</figcaption>
+        </figure>
+
+        <p>
+          設備をのせる架台を自分で設計するとき、「この部材で持つのか」をどう確かめればよいのでしょうか。本記事では、<strong class="mk">架台の強度計算の方法</strong>を、500kgの設備をのせる架台の計算例で解説します。角パイプ、アングル、溝形鋼で結果がどう変わるかも比べます。
+        </p>
+        <p>
+          記事の後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。実際の設計では、使用する鋼材の資料とご自身の条件で確認してください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、梁と柱を単純な形に置き換えて、基本の計算方法を説明するものです。実際の架台の安全性を保証するものではありません</li>
+            <li>実際の設計では、荷重のかかる位置、接合部、柱脚とアンカー、架台全体の横向きの剛性と安定、局部的な変形、ねじり、動く荷重や振動を、使用条件と適用する規準に応じて確認してください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>架台の強度計算で確認する4つのことと、計算の手順</li>
+            <li>500kgの設備をのせる架台の計算例（梁・柱・水平力）</li>
+            <li>角パイプ・アングル・溝形鋼の違いと、見落としやすい「弱い軸」</li>
+            <li>自分の条件を入れて試せる、概算の計算ツール</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>架台の強度計算で確認する4つのこと</h2>
+        <p>
+          架台の強度計算は、複雑に見えますが、確認することは4つに整理できます。
+        </p>
+
+        <h3>1. 梁の曲げ：折れたり、曲がったままになったりしないか</h3>
+        <p>
+          物をのせた梁には、曲げる力がかかります。梁に生じる応力が、材料の許容応力を超えないことを確かめます。
+        </p>
+
+        <h3>2. 梁のたわみ：下がりすぎないか</h3>
+        <p>
+          折れなくても、大きくたわめば、のせた設備が傾いたり、位置がずれたりします。<strong>強度が足りていても、たわみで使えない</strong>ことがあるため、応力とは別に確かめます。
+        </p>
+
+        <h3>3. 柱の座屈：急に横へ曲がらないか</h3>
+        <p>
+          細長い柱は、材料がつぶれるよりずっと小さな力で、急に横へ曲がります。これを座屈（ざくつ）と呼びます。定規を両手で縦に押すと、つぶれる前に横へしなるのと同じ現象です。柱は「圧縮に耐えるか」ではなく、<strong class="mk">「座屈しないか」で決まる</strong>ことがほとんどです。
+        </p>
+
+        <h3>4. 接合部と床：力を最後まで伝えられるか</h3>
+        <p>
+          梁と柱が十分でも、溶接、ボルト、ベースプレート、アンカー、床のどこかが弱ければ、そこから壊れます。本記事では梁と柱を中心に扱い、接合部は別の記事で取り上げます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>確認するのは、梁の曲げ・梁のたわみ・柱の座屈・接合部と床の4つ</li>
+            <li>強度（応力）とたわみは、別々に確かめる</li>
+            <li>柱は、圧縮ではなく座屈で決まる</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>荷重の整理と、許容応力の決め方</h2>
+
+        <h3>のせる物の重さと、架台の自重</h3>
+        <p>
+          最初に、架台にかかる力を書き出します。のせる設備の質量に、治具やワーク、配管など、あとから増える分も含めます。設備の上に人が乗って作業する場合は、その重さも見込みます。質量（kg）に9.81を掛けると、力（N）になります。架台自身の重さも加えます。重さがどの梁に、どのようにかかるか（中央に集中するのか、全体に均等なのか）も、この段階で決めておきます。
+        </p>
+
+        <h3>水平力は「重さ×係数」で見込む</h3>
+        <p>
+          止まっている設備でも、地震や、人や台車がぶつかる力で、横向きの力がかかります。架台の計算では、<strong>重さに係数を掛けた力が横からかかる</strong>ものとして扱うのが一般的です。係数の値は、設置場所や客先の指定、適用する基準によって変わります<span class="need-check">（要確認）</span>。本記事の計算例では、仮に0.3とします。
+        </p>
+
+        <h3>安全率と許容応力は、基準を決めて明記する</h3>
+        <p>
+          許容応力は、材料の強さを安全率で割って決めます。決め方には、引張強さを基準にする方法と、降伏点を基準にする方法があり、どちらを採るかで合否が変わります。本記事の計算例では、鋼の引張強さ400MPaを安全率5で割った<strong>80MPa</strong>を使います<span class="need-check">（要確認）</span>。社内基準や客先の指定がある場合は、そちらを優先し、採用した基準を計算書に書いておきます。
+        </p>
+
+        <h3>たわみの目安</h3>
+        <p>
+          たわみに一律の基準はありません。建築の規準では、一般の梁の参考値としてスパンの1/300以下が示されています<span class="need-check">（要確認）</span>。本記事ではこれを目安に使いますが、機械の架台すべてに当てはまる値ではありません。精度や芯出しが必要な設備をのせる場合は、設備側が求める水平度や位置精度から逆算して、より小さい値を決めます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>力は「のせる物＋あとから増える分＋自重」で書き出す</li>
+            <li>水平力は、重さに係数を掛けて見込む</li>
+            <li>許容応力とたわみの目安は、基準を決めて計算書に明記する</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>架台の強度計算の方法｜使う式は3つ</h2>
+        <p>
+          手計算で使う式は、多くありません。梁の式、たわみの式、柱の式の3つです。
+        </p>
+
+        <h3>梁の式：曲げモーメントを断面係数で割る</h3>
+        <p class="calc">
+          曲げ応力 σ ＝ 曲げモーメント M ÷ 断面係数 Z<br>
+          中央に集中する荷重 P の場合　M ＝ P×L÷4<br>
+          全体に均等にかかる荷重 P（合計）の場合　M ＝ P×L÷8
+        </p>
+        <p>
+          L は梁のスパンです。同じ重さでも、中央に集中してかかる方が、曲げモーメントは2倍になります。のせ方が分からないときは、厳しい側の「中央に集中」で計算します。
+        </p>
+
+        <h3>たわみの式：断面二次モーメントが効く</h3>
+        <p class="calc">
+          中央に集中する荷重の場合　δ ＝ P×L³ ÷ (48×E×I)<br>
+          全体に均等にかかる荷重の場合　δ ＝ 5×P×L³ ÷ (384×E×I)
+        </p>
+        <p>
+          E は材料のヤング率（鋼は205,000MPa）、I は断面二次モーメントです。<strong class="mk">たわみはスパンの3乗に比例する</strong>ため、スパンを2倍にすると、たわみは8倍になります。
+        </p>
+
+        <h3>柱の式：細長比から、許容圧縮応力を求める</h3>
+        <p class="calc">
+          細長比 λ ＝ 座屈長さ Lk ÷ 断面二次半径 i<br>
+          圧縮応力 σc ＝ 軸力 N ÷ 断面積 A　≦　許容圧縮応力 fc
+        </p>
+        <p>
+          細長比が大きい（細長い）柱ほど、許容圧縮応力は小さくなります。許容圧縮応力は、鋼構造の設計規準にある式で、細長比から求めます<span class="need-check">（要確認）</span>。座屈長さは、柱の両端の支え方で変わります。筋かいがなく、上端が横に動ける柱は、高さの2倍とするのが安全側です。
+        </p>
+
+        <h3>断面性能表の読み方</h3>
+        <table>
+          <tr><th>記号</th><th>名前</th><th>使う場面</th></tr>
+          <tr><td style="white-space:nowrap">A</td><td>断面積</td><td>柱の圧縮応力</td></tr>
+          <tr><td style="white-space:nowrap">Z</td><td>断面係数</td><td>梁の曲げ応力（強さ）</td></tr>
+          <tr><td style="white-space:nowrap">I</td><td>断面二次モーメント</td><td>梁のたわみ（かたさ）</td></tr>
+          <tr><td style="white-space:nowrap">i</td><td>断面二次半径</td><td>柱の座屈</td></tr>
+        </table>
+        <p>
+          これらの値は、鋼材の規格やメーカーの断面性能表に載っています。表の単位はcmで書かれていることが多いので、計算に入れる前にmmへそろえます。同じ外形でも、板厚が変わると値は変わります。必ず、使う寸法と板厚の行を読みます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>梁の強さは断面係数 Z、たわみは断面二次モーメント I で決まる</li>
+            <li>たわみはスパンの3乗に比例する</li>
+            <li>柱は、細長比から許容圧縮応力を求めて確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>架台の強度計算の例｜500kgの設備をのせる4本脚の架台</h2>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 380" role="img" aria-label="計算モデル。梁のスパン1,000ミリ、柱の高さ800ミリの4本脚の架台に、500キログラムの設備をのせる。重さは下向きに、水平力は横向きにかかる">
+            <defs>
+              <marker id="m-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+              <marker id="m-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+            </defs>
+            <text x="20" y="34" font-size="22" fill="#0d2b4e">正面から見た図</text>
+            <line x1="60" y1="318" x2="580" y2="318" stroke="#8a96a3" stroke-width="5"/>
+            <rect x="150" y="150" width="18" height="168" fill="#6f8aa6"/><rect x="472" y="150" width="18" height="168" fill="#6f8aa6"/>
+            <rect x="150" y="134" width="340" height="18" fill="#6f8aa6"/>
+            <rect x="230" y="58" width="180" height="76" fill="#0d2b4e"/>
+            <text x="320" y="104" font-size="22" fill="#ffffff" text-anchor="middle">設備 500kg</text>
+            <line x1="320" y1="158" x2="320" y2="230" stroke="#0d2b4e" stroke-width="7" marker-end="url(#m-an)"/>
+            <text x="344" y="206" font-size="20" fill="#0d2b4e">重さ（下向き）</text>
+            <line x1="60" y1="143" x2="136" y2="143" stroke="#d4691a" stroke-width="7" marker-end="url(#m-ao)"/>
+            <text x="20" y="122" font-size="20" fill="#d4691a">水平力（横向き）</text>
+            <line x1="150" y1="346" x2="490" y2="346" stroke="#1f2d3d" stroke-width="2"/><line x1="150" y1="338" x2="150" y2="354" stroke="#1f2d3d" stroke-width="2"/><line x1="490" y1="338" x2="490" y2="354" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="320" y="370" font-size="20" fill="#1f2d3d" text-anchor="middle">梁のスパン 1,000mm</text>
+            <line x1="530" y1="150" x2="530" y2="318" stroke="#1f2d3d" stroke-width="2"/><line x1="522" y1="150" x2="538" y2="150" stroke="#1f2d3d" stroke-width="2"/><line x1="522" y1="318" x2="538" y2="318" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="544" y="228" font-size="20" fill="#1f2d3d">柱</text><text x="544" y="254" font-size="20" fill="#1f2d3d">800mm</text>
+          </svg>
+          <figcaption>重さは下向きに、水平力は梁の高さに横向きにかかるものとする</figcaption>
+        </figure>
+
+        <h3>前提条件</h3>
+        <table>
+          <tr><th>項目</th><th>値</th></tr>
+          <tr><td>のせる物</td><td>質量 500kg の設備。重さは 500×9.81 ＝ 4,905 N</td></tr>
+          <tr><td>架台</td><td>4本脚。梁のスパン L＝1,000mm、柱の高さ h＝800mm。筋かいなし</td></tr>
+          <tr><td>重さの受け方</td><td>2本の梁が半分ずつ受け、それぞれ中央に集中してかかるものとする</td></tr>
+          <tr><td>部材</td><td>角パイプ □50×50×3.2（柱・梁とも）。A＝572.7mm²、I＝20.4×10⁴mm⁴、Z＝8.16×10³mm³、i＝18.9mm、4.50kg/m<span class="need-check">（断面性能表の値・要確認）</span></td></tr>
+          <tr><td>許容応力</td><td>曲げ 80MPa（引張強さ400÷5）、ヤング率 E＝205,000MPa</td></tr>
+          <tr><td>水平力</td><td>重さ×0.3 ＝ 1,472 N<span class="need-check">（係数は仮定）</span></td></tr>
+        </table>
+
+        <h3>梁の計算</h3>
+        <p class="calc">
+          梁1本が受ける重さ　P ＝ 4,905÷2 ＝ 2,453 N<br>
+          曲げモーメント　M ＝ P×L÷4 ＋ 自重分 ＝ 613,125 ＋ 5,518 ＝ 618,643 N·mm<br>
+          <b>曲げ応力　σ ＝ 618,643÷8,160 ＝ 75.8 MPa ＜ 80 MPa</b><br>
+          <b>たわみ　δ ＝ 2,453×1,000³÷(48×205,000×204,000) ＋ 自重分 ＝ 1.24 mm（スパンの1/809）</b>
+        </p>
+        <p>
+          応力は許容値の95％で、余裕はわずかです。たわみは、目安の1/300（3.3mm）に収まっています。
+        </p>
+
+        <h3>柱の計算</h3>
+        <p class="calc">
+          軸力　N ＝ 設備 4,905÷4 ＋ 梁の自重 4.50×9.81×1.0 ＋ 柱の自重 4.50×9.81×0.8<br>
+          　　　　＝ 1,226 ＋ 44 ＋ 35 ＝ 1,306 N<br>
+          座屈長さ　Lk ＝ 800×2 ＝ 1,600 mm（筋かいなし）<br>
+          細長比　λ ＝ 1,600÷18.9 ＝ 85<br>
+          許容圧縮応力　fc ＝ 102.6 MPa（細長比85のとき）<br>
+          <b>圧縮応力　σc ＝ 1,306÷572.7 ＝ 2.3 MPa ＜ 102.6 MPa</b>
+        </p>
+
+        <h3>水平力の計算</h3>
+        <p>
+          水平力は4本の柱が均等に受け、柱は床に固定された片持ち柱として計算します。均等に分かれることと、柱脚が固定として働くことは、どちらも仮定です。成り立つかどうかは、接合部と柱脚で決まります。
+        </p>
+        <p class="calc">
+          柱1本の水平力　Q ＝ 1,472÷4 ＝ 368 N<br>
+          柱脚の曲げモーメント　M ＝ 368×800 ＝ 294,300 N·mm<br>
+          曲げ応力　σb ＝ 294,300÷8,160 ＝ 36.1 MPa<br>
+          横ゆれ（梁の高さ）　368×800³÷(3×205,000×204,000) ＝ 1.5 mm<br>
+          <b>圧縮と曲げの組合せ　2.3÷102.6 ＋ 36.1÷80 ＝ 0.47 ＜ 1.0</b>
+        </p>
+
+        <h3>判定</h3>
+        <table>
+          <tr><th>確認項目</th><th>結果</th><th>目安</th></tr>
+          <tr><td>梁の曲げ応力</td><td>75.8 MPa</td><td>80 MPa 以下</td></tr>
+          <tr><td>梁のたわみ</td><td>1.24 mm（1/809）</td><td>スパンの1/300 以下</td></tr>
+          <tr><td>柱の圧縮応力</td><td>2.3 MPa</td><td>102.6 MPa 以下</td></tr>
+          <tr><td>圧縮と曲げの組合せ</td><td>0.47</td><td>1.0 以下</td></tr>
+        </table>
+        <p>
+          この条件では、いちばん余裕が小さいのは梁の曲げでした。梁を □75×75×3.2 に上げると、応力は30.9MPa、たわみは0.34mmまで下がります。重さは1mあたり4.50kgから7.01kgに増えますが、応力は半分以下になります。逆に、スパンを1,000mmから1,500mmに広げると、同じ □50×50×3.2 では応力もたわみも大きく増えます。部材を決める前に、柱の位置を見直してスパンを短くできないかを考えるのも、有効な方法です。
+        </p>
+
+        <h3>この計算例で確認していないもの</h3>
+        <p>
+          ここまでの計算は、部材ごとの基本の確認です。架台全体として成り立つかは、次の項目を別に確かめる必要があります。
+        </p>
+        <ul>
+          <li>梁と柱の接合部（溶接、ボルト）と、想定した固定の度合い</li>
+          <li>柱脚、ベースプレート、アンカーボルト（柱脚の曲げモーメント 294,300 N·mm を受けられるか）</li>
+          <li>設備の重心の偏りと、脚の位置による荷重の片寄り</li>
+          <li>鋼管の壁や、溝形鋼の板の局部的な変形</li>
+          <li>架台全体の転倒とすべり</li>
+          <li>起動・停止や振動など、動く荷重</li>
+        </ul>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>500kgを □50×50×3.2 の梁（スパン1,000mm）で受けると、応力は許容値の95％</li>
+            <li>柱は圧縮だけなら余裕が大きいが、水平力による曲げが加わる</li>
+            <li>いちばん余裕の小さい項目を見つけて、そこから部材を見直す</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>角パイプ・アングル・溝形鋼で比べる｜同じ重さでも強さは違う</h2>
+        <p>
+          同じ計算例で、部材だけを変えて比べます。1mあたりの重さが近い3種類です。
+        </p>
+        <table>
+          <tr><th>部材</th><th>重さ</th><th>梁の応力</th><th>梁のたわみ</th><th>柱の細長比</th></tr>
+          <tr><td>角パイプ □50×50×3.2</td><td>4.50 kg/m</td><td>75.8 MPa</td><td>1.24 mm</td><td>85</td></tr>
+          <tr><td>アングル L-50×50×6</td><td>4.43 kg/m</td><td>174.2 MPa</td><td>2.00 mm</td><td>166</td></tr>
+          <tr><td>溝形鋼 [-75×40（強い向き）</td><td>6.92 kg/m</td><td>30.9 MPa</td><td>0.34 mm</td><td>137</td></tr>
+          <tr><td>溝形鋼 [-75×40（弱い向き）</td><td>6.92 kg/m</td><td>139.1 MPa</td><td>2.08 mm</td><td>137</td></tr>
+        </table>
+        <p>
+          重さがほぼ同じ角パイプとアングルで、<strong class="mk">梁の応力は2倍以上違います</strong>。アングルは許容値の80MPaを大きく超えました。溝形鋼は、向きを変えるだけで応力が4倍以上変わります。
+        </p>
+
+        <h3>アングルは、斜めの軸がいちばん弱い</h3>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 340" role="img" aria-label="アングルの断面と3つの軸。辺に平行なx軸とy軸の断面二次モーメントは12.6、斜めのv軸は5.23で、v軸がいちばん弱い">
+            <path d="M90,60 L122,60 L122,238 L300,238 L300,270 L90,270 Z" fill="#6f8aa6"/>
+            <line x1="50" y1="212" x2="330" y2="212" stroke="#0d2b4e" stroke-width="2.5" stroke-dasharray="9 6"/><text x="334" y="206" font-size="20" fill="#0d2b4e">x軸</text>
+            <line x1="148" y1="30" x2="148" y2="300" stroke="#0d2b4e" stroke-width="2.5" stroke-dasharray="9 6"/><text x="156" y="46" font-size="20" fill="#0d2b4e">y軸</text>
+            <line x1="52" y1="116" x2="246" y2="310" stroke="#d4691a" stroke-width="4" stroke-dasharray="10 6"/><text x="250" y="322" font-size="22" fill="#d4691a">v軸</text>
+            <circle cx="148" cy="212" r="6" fill="#d4691a"/>
+            <text x="380" y="80" font-size="20" fill="#0d2b4e">L-50×50×6 の例</text>
+            <text x="380" y="124" font-size="20" fill="#0d2b4e">x軸・y軸のまわり</text>
+            <text x="380" y="152" font-size="24" fill="#0d2b4e">I ＝ 12.6 cm⁴</text>
+            <text x="380" y="204" font-size="20" fill="#d4691a">v軸のまわり（斜め）</text>
+            <text x="380" y="232" font-size="24" fill="#d4691a">I ＝ 5.23 cm⁴</text>
+            <text x="380" y="282" font-size="20" fill="#d4691a">半分以下。柱はこの軸で</text>
+            <text x="380" y="308" font-size="20" fill="#d4691a">座屈する</text>
+          </svg>
+          <figcaption>アングルの柱は、辺に平行な向きではなく、斜めの向きに曲がる</figcaption>
+        </figure>
+
+        <p>
+          断面性能表のアングルの欄には、辺に平行な軸（x軸・y軸）の値と、斜めの軸（u軸・v軸）の値が載っています。<strong class="mk">柱の座屈は、いちばん弱い v軸の値で計算します</strong>。なお、アングルは開いた断面のため、取り付け方や力のかかる位置によっては、中心からずれた圧縮（偏心）や、ねじりを伴う座屈も問題になります。v軸の確認は、最低限の確認と考えてください。
+        </p>
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">ワンポイント</p>
+          <ul>
+            <li>L-50×50×6 の柱（座屈長さ1,600mm）を x軸の値で計算すると、細長比は107、許容圧縮応力は79.1MPa</li>
+            <li>正しく v軸の値で計算すると、細長比は166、許容圧縮応力は33.8MPa</li>
+            <li>x軸の値を使うと、柱の強さを2倍以上に見積もってしまう</li>
+          </ul>
+        </div>
+        <p>
+          また、アングルの梁は、上から押すと、まっすぐ下ではなく斜めにたわみ、ねじれも生じます。上の表の応力は、辺に平行な軸まわりの単純な曲げとして求めた値で、実際はこれより厳しくなります。アングルを梁に使うときは、余裕を大きく取ります。
+        </p>
+
+        <h3>溝形鋼は、向きで強さが大きく変わる</h3>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 330" role="img" aria-label="溝形鋼の2つの向き。立てて使う強い向きは断面二次モーメント75.3、寝かせて使う弱い向きは12.2で、約6倍の差がある">
+            <defs><marker id="c-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker></defs>
+            <text x="160" y="36" font-size="22" fill="#0d2b4e" text-anchor="middle">強い向き（立てて使う）</text>
+            <line x1="160" y1="50" x2="160" y2="92" stroke="#0d2b4e" stroke-width="6" marker-end="url(#c-an)"/>
+            <path d="M120,104 L200,104 L200,120 L136,120 L136,224 L200,224 L200,240 L120,240 Z" fill="#6f8aa6"/>
+            <line x1="70" y1="172" x2="250" y2="172" stroke="#0d2b4e" stroke-width="2.5" stroke-dasharray="9 6"/>
+            <text x="160" y="278" font-size="24" fill="#0d2b4e" text-anchor="middle">I ＝ 75.3 cm⁴</text>
+            <text x="160" y="308" font-size="18" fill="#0d2b4e" text-anchor="middle">（[-75×40 の例）</text>
+            <line x1="320" y1="50" x2="320" y2="310" stroke="#d9dee4" stroke-width="2"/>
+            <text x="480" y="36" font-size="22" fill="#d4691a" text-anchor="middle">弱い向き（寝かせて使う）</text>
+            <line x1="480" y1="50" x2="480" y2="118" stroke="#0d2b4e" stroke-width="6" marker-end="url(#c-an)"/>
+            <path d="M412,150 L428,150 L428,214 L532,214 L532,150 L548,150 L548,230 L412,230 Z" fill="#6f8aa6"/>
+            <line x1="390" y1="204" x2="570" y2="204" stroke="#d4691a" stroke-width="2.5" stroke-dasharray="9 6"/>
+            <text x="480" y="278" font-size="24" fill="#d4691a" text-anchor="middle">I ＝ 12.2 cm⁴</text>
+            <text x="480" y="308" font-size="18" fill="#d4691a" text-anchor="middle">約6分の1</text>
+          </svg>
+          <figcaption>同じ溝形鋼でも、力に対する向きで、かたさが約6倍変わる</figcaption>
+        </figure>
+
+        <p>
+          溝形鋼は、背の高い向きに力を受けると強く、寝かせると弱くなります。梁には、必ず立てた向きで使います。
+        </p>
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">ワンポイント</p>
+          <ul>
+            <li>柱に使うときは、向きを選べない。座屈は弱い向きで決まる</li>
+            <li>溝形鋼は開いた断面で、ねじれの中心（せん断中心）が断面の外側にある。力の作用する線がそこからずれると、たわむと同時にねじれる</li>
+            <li>2本を背中合わせにして使うと、ねじれを抑えやすい</li>
+          </ul>
+        </div>
+
+        <h3>迷ったら、角パイプから検討する</h3>
+        <p>
+          角パイプは、どの向きにも同じ強さを持ち、ねじれにも強い「閉じた断面」です。向きの間違いが起きず、座屈の計算も単純です。アングルや溝形鋼は、軽くて加工しやすい反面、<strong>向きと弱い軸を理解して使う</strong>必要があります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>同じ重さでも、角パイプとアングルで梁の応力は2倍以上違う</li>
+            <li>アングルの柱は斜めの軸、溝形鋼の柱は弱い向きで座屈を計算する</li>
+            <li>迷ったら、向きの間違いが起きない角パイプから検討する</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。図は入力に合わせて切り替わる） -->
+        <h2>自分の条件で試す｜架台の強度計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。数値や部材を変えると、図と結果がその場で変わります。初期値は、本記事の計算例と同じです。
+        </p>
+
+        <div class="calc-tool" id="st-tool">
+          <p class="calc-tool-title">4本脚の架台の概算</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（のせる物の重さは2本の梁が半分ずつ受ける、梁は両端単純支持、筋かいがない場合の柱は上端が自由な片持ち柱）による概算です。溶接部、ボルト、ベースプレート、アンカー、床は計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、使用する鋼材の資料と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <div class="calc-fig">
+            <svg viewBox="0 0 640 300" role="img" aria-label="入力した条件での、力のかかり方と部材の断面の図">
+              <defs>
+                <marker id="st-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+                <marker id="st-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <!-- 正面から見た架台 -->
+              <text x="16" y="28" font-size="17" fill="#0d2b4e">正面から見た図</text>
+              <line x1="30" y1="262" x2="390" y2="262" stroke="#8a96a3" stroke-width="4"/>
+              <rect x="80" y="120" width="14" height="142" fill="#6f8aa6"/><rect x="326" y="120" width="14" height="142" fill="#6f8aa6"/>
+              <rect x="80" y="108" width="260" height="14" fill="#6f8aa6"/>
+              <g data-g="brace"><line x1="94" y1="258" x2="326" y2="124" stroke="#d4691a" stroke-width="5"/><line x1="94" y1="124" x2="326" y2="258" stroke="#d4691a" stroke-width="5"/><text x="210" y="286" font-size="15" fill="#d4691a" text-anchor="middle">筋かい</text></g>
+              <g data-g="point"><line x1="210" y1="44" x2="210" y2="98" stroke="#0d2b4e" stroke-width="6" marker-end="url(#st-an)"/><text x="222" y="62" font-size="16" fill="#0d2b4e">重さ（中央に集中）</text></g>
+              <g data-g="dist"><line x1="110" y1="60" x2="110" y2="98" stroke="#0d2b4e" stroke-width="4" marker-end="url(#st-an)"/><line x1="160" y1="60" x2="160" y2="98" stroke="#0d2b4e" stroke-width="4" marker-end="url(#st-an)"/><line x1="210" y1="60" x2="210" y2="98" stroke="#0d2b4e" stroke-width="4" marker-end="url(#st-an)"/><line x1="260" y1="60" x2="260" y2="98" stroke="#0d2b4e" stroke-width="4" marker-end="url(#st-an)"/><line x1="310" y1="60" x2="310" y2="98" stroke="#0d2b4e" stroke-width="4" marker-end="url(#st-an)"/><text x="210" y="48" font-size="16" fill="#0d2b4e" text-anchor="middle">重さ（全体に均等）</text></g>
+              <g data-g="horiz"><line x1="20" y1="115" x2="70" y2="115" stroke="#d4691a" stroke-width="6" marker-end="url(#st-ao)"/><text x="16" y="98" font-size="16" fill="#d4691a">水平力</text></g>
+              <path data-g="sag" d="M94,124 Q210,150 326,124" stroke="#0d2b4e" stroke-width="2" fill="none" stroke-dasharray="6 5"/>
+              <text x="210" y="168" font-size="14" fill="#0d2b4e" text-anchor="middle" data-g="sagt">たわみ</text>
+              <!-- 部材の断面 -->
+              <line x1="410" y1="20" x2="410" y2="285" stroke="#d9dee4" stroke-width="2"/>
+              <text x="424" y="28" font-size="17" fill="#0d2b4e">梁の断面と、力の向き</text>
+              <line x1="520" y1="44" x2="520" y2="84" stroke="#0d2b4e" stroke-width="5" marker-end="url(#st-an)"/>
+              <g data-g="s-pipe"><rect x="470" y="100" width="100" height="100" fill="none" stroke="#6f8aa6" stroke-width="12"/><line x1="440" y1="150" x2="600" y2="150" stroke="#0d2b4e" stroke-width="2" stroke-dasharray="7 5"/><text x="520" y="236" font-size="15" fill="#0d2b4e" text-anchor="middle">どの向きも同じ強さ</text></g>
+              <g data-g="s-angle"><path d="M470,100 L486,100 L486,184 L570,184 L570,200 L470,200 Z" fill="#6f8aa6"/><line x1="440" y1="170" x2="600" y2="170" stroke="#0d2b4e" stroke-width="2" stroke-dasharray="7 5"/><line x1="450" y1="122" x2="548" y2="220" stroke="#d4691a" stroke-width="3" stroke-dasharray="7 5"/><text x="424" y="246" font-size="15" fill="#d4691a">斜めの軸がいちばん弱い</text><text x="424" y="266" font-size="14" fill="#0d2b4e">（柱の座屈はここで決まる）</text></g>
+              <g data-g="s-chs"><path d="M480,95 L560,95 L560,109 L494,109 L494,191 L560,191 L560,205 L480,205 Z" fill="#6f8aa6"/><line x1="440" y1="150" x2="600" y2="150" stroke="#0d2b4e" stroke-width="2" stroke-dasharray="7 5"/><text x="520" y="240" font-size="15" fill="#0d2b4e" text-anchor="middle">強い向き（立てて使う）</text></g>
+              <g data-g="s-chw"><path d="M465,120 L479,120 L479,176 L561,176 L561,120 L575,120 L575,190 L465,190 Z" fill="#6f8aa6"/><line x1="440" y1="166" x2="600" y2="166" stroke="#d4691a" stroke-width="2" stroke-dasharray="7 5"/><text x="520" y="232" font-size="15" fill="#d4691a" text-anchor="middle">弱い向き（寝かせて使う）</text></g>
+            </svg>
+            <p class="calc-fig-note">紺の矢印は重さ、オレンジの矢印は水平力です。右は梁を切った断面で、点線のまわりに曲がります。</p>
+          </div>
+
+          <h4>のせる物と寸法</h4>
+          <div class="calc-in">
+            <label>のせる物の質量<span class="row"><input type="range" data-k="m" min="50" max="3000" step="10"><input type="number" data-k="m" min="50" max="3000" step="10"><span class="unit">kg</span></span></label>
+            <label>梁のスパン<span class="row"><input type="range" data-k="L" min="300" max="3000" step="50"><input type="number" data-k="L" min="300" max="3000" step="50"><span class="unit">mm</span></span></label>
+            <label>柱の高さ<span class="row"><input type="range" data-k="h" min="300" max="2500" step="50"><input type="number" data-k="h" min="300" max="2500" step="50"><span class="unit">mm</span></span></label>
+            <label>水平力の係数（重さに対する割合）<span class="row"><input type="range" data-k="kh" min="0" max="1" step="0.05"><input type="number" data-k="kh" min="0" max="1" step="0.05"><span class="unit"></span></span></label>
+            <label>許容応力（曲げ）<span class="row"><input type="range" data-k="sa" min="40" max="200" step="1"><input type="number" data-k="sa" min="40" max="200" step="1"><span class="unit">MPa</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:12px 0 0 !important;">重さのかかり方</p>
+          <div class="calc-btns" data-b="load"><button type="button" data-v="point">中央に集中</button><button type="button" data-v="dist">全体に均等</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">部材の種類（柱・梁とも同じ部材）</p>
+          <div class="calc-btns" data-b="type"><button type="button" data-v="pipe">角パイプ</button><button type="button" data-v="angle">アングル</button><button type="button" data-v="chs">溝形鋼（強い向き）</button><button type="button" data-v="chw">溝形鋼（弱い向き）</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">サイズ</p>
+          <div class="calc-btns" data-b="size"></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">筋かい</p>
+          <div class="calc-btns" data-b="brace"><button type="button" data-v="0">なし</button><button type="button" data-v="1">あり</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方</p>
+          <div class="calc-btns" data-b="sap"><button type="button" data-v="80">引張強さ400÷5＝80MPa</button><button type="button" data-v="163">降伏点245÷1.5＝163MPa</button></div>
+
+          <h4>梁</h4>
+          <table class="calc-out">
+            <tr><th>梁1本が受ける重さ</th><td><b data-o="P"></b> N</td></tr>
+            <tr data-j="sb"><th>梁の曲げ応力</th><td><b data-o="sb"></b> MPa<span class="judge" data-o="jsb"></span></td></tr>
+            <tr data-j="dl"><th>梁のたわみ</th><td><b data-o="dl"></b> mm<span class="judge" data-o="jdl"></span></td></tr>
+          </table>
+          <h4>柱</h4>
+          <table class="calc-out">
+            <tr data-j="lam"><th>細長比（いちばん弱い軸）</th><td><b data-o="lam"></b><span class="judge" data-o="jlam"></span></td></tr>
+            <tr><th>許容圧縮応力</th><td><b data-o="fc"></b> MPa</td></tr>
+            <tr><th>柱の圧縮応力</th><td><b data-o="sc"></b> MPa</td></tr>
+            <tr><th>水平力による柱の曲げ応力</th><td><b data-o="sbc"></b> MPa</td></tr>
+            <tr><th>水平力による横ゆれ（梁の高さ）</th><td><b data-o="sway"></b> mm</td></tr>
+            <tr data-j="comb"><th>圧縮と曲げの組合せ（1.0以下が目安）</th><td><b data-o="comb"></b><span class="judge" data-o="jcomb"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="st-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('st-tool');
+          if (!root) return;
+          // 断面性能（角形鋼管：鋼管メーカー公表の JIS G 3466 の表／山形鋼・溝形鋼：JIS G 3192 の表）
+          // A:mm2, I・Z:梁に使う値(mm4, mm3), imin:座屈に使ういちばん小さい断面二次半径(mm), w:kg/m, Zh・Ih:水平力の曲げに使う値
+          var SEC = {
+            pipe: [
+              { n: '□50×50×3.2',   A: 572.7, I: 20.4e4, Z: 8.16e3, imin: 18.9, w: 4.50 },
+              { n: '□60×60×3.2',   A: 700.7, I: 36.9e4, Z: 12.3e3, imin: 23.0, w: 5.50 },
+              { n: '□75×75×3.2',   A: 892.7, I: 75.5e4, Z: 20.1e3, imin: 29.1, w: 7.01 },
+              { n: '□100×100×3.2', A: 1213,  I: 187e4,  Z: 37.5e3, imin: 39.3, w: 9.52 }
+            ],
+            angle: [
+              { n: 'L-50×50×6', A: 564.4, I: 12.6e4, Z: 3.55e3, imin: 9.63, w: 4.43 },
+              { n: 'L-65×65×6', A: 752.7, I: 29.4e4, Z: 6.26e3, imin: 12.7, w: 5.91 },
+              { n: 'L-75×75×6', A: 872.7, I: 46.1e4, Z: 8.47e3, imin: 14.8, w: 6.85 },
+              { n: 'L-75×75×9', A: 1269,  I: 64.4e4, Z: 12.1e3, imin: 14.5, w: 9.96 }
+            ],
+            ch: [
+              { n: '[-75×40',  A: 881.8, Ix: 75.3e4, Iy: 12.2e4, Zx: 20.1e3, Zy: 4.47e3, imin: 11.7, w: 6.92 },
+              { n: '[-100×50', A: 1192,  Ix: 188e4,  Iy: 26.0e4, Zx: 37.6e3, Zy: 7.52e3, imin: 14.8, w: 9.36 },
+              { n: '[-125×65', A: 1711,  Ix: 424e4,  Iy: 61.8e4, Zx: 67.8e3, Zy: 13.4e3, imin: 19.0, w: 13.4 }
+            ]
+          };
+          var DEF = { m: 500, L: 1000, h: 800, kh: 0.3, sa: 80, load: 'point', type: 'pipe', size: 0, brace: '0' };
+          var S = {}, used = false, g = 9.81, E = 205000, F = 235;
+          var LAM = Math.sqrt(Math.PI * Math.PI * E / (0.6 * F));
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function show(k, on) { root.querySelectorAll('[data-g="' + k + '"]').forEach(function (e) { e.style.display = on ? '' : 'none'; }); }
+          function list() { return SEC[S.type === 'chs' || S.type === 'chw' ? 'ch' : S.type]; }
+          function sec() {
+            var s = list()[S.size];
+            if (S.type === 'chs') return { n: s.n, A: s.A, I: s.Ix, Z: s.Zx, imin: s.imin, w: s.w, Zh: s.Zy, Ih: s.Iy };
+            if (S.type === 'chw') return { n: s.n, A: s.A, I: s.Iy, Z: s.Zy, imin: s.imin, w: s.w, Zh: s.Zy, Ih: s.Iy };
+            return { n: s.n, A: s.A, I: s.I, Z: s.Z, imin: s.imin, w: s.w, Zh: s.Z, Ih: s.I };
+          }
+          function fc(lam) {
+            var r = lam / LAM;
+            if (lam <= LAM) return F * (1 - 0.4 * r * r) / (1.5 + (2 / 3) * r * r);
+            return 0.277 * F / (r * r);
+          }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            var box = root.querySelector('[data-b="size"]');
+            box.innerHTML = '';
+            list().forEach(function (s, i) {
+              var b = document.createElement('button'); b.type = 'button'; b.textContent = s.n; b.dataset.v = i;
+              b.addEventListener('click', function () { set('size', i); });
+              box.appendChild(b);
+            });
+            [['load', S.load], ['type', S.type], ['size', String(S.size)], ['brace', S.brace], ['sap', String(S.sa)]].forEach(function (p) {
+              root.querySelectorAll('[data-b="' + p[0] + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === p[1]); });
+            });
+            show('point', S.load === 'point'); show('dist', S.load === 'dist');
+            show('brace', S.brace === '1'); show('horiz', S.kh > 0);
+            show('s-pipe', S.type === 'pipe'); show('s-angle', S.type === 'angle'); show('s-chs', S.type === 'chs'); show('s-chw', S.type === 'chw');
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var s = sec(), L = S.L, h = S.h, dist = S.load === 'dist', brace = S.brace === '1';
+            var P = S.m * g / 2;                                   // 梁1本が受ける重さ
+            var wN = s.w * g / 1000;                               // 梁の自重 N/mm
+            var Mb = (dist ? P * L / 8 : P * L / 4) + wN * L * L / 8;
+            var sb = Mb / s.Z;
+            var dl = (dist ? 5 * P * Math.pow(L, 3) / (384 * E * s.I) : P * Math.pow(L, 3) / (48 * E * s.I)) + 5 * wN * Math.pow(L, 4) / (384 * E * s.I);
+            var N = S.m * g / 4 + s.w * g * L / 1000 + s.w * g * h / 1000;
+            var Lk = brace ? h : 2 * h, lam = Lk / s.imin, f = fc(lam), sc = N / s.A;
+            var Q = brace ? 0 : S.kh * S.m * g / 4, Mc = Q * h, sbc = Mc / s.Zh;
+            var sway = Q * Math.pow(h, 3) / (3 * E * s.Ih);
+            var comb = sc / f + sbc / S.sa;
+            out('P', fmt(P)); out('sb', fmt(sb, 1)); out('dl', fmt(dl, 2)); out('lam', fmt(lam));
+            out('fc', fmt(f, 1)); out('sc', fmt(sc, 2)); out('sbc', fmt(sbc, 1)); out('sway', fmt(sway, 2)); out('comb', fmt(comb, 2));
+            judge('jsb', 'sb', sb > S.sa, '許容応力 ' + S.sa + 'MPa 以下（' + fmt(sb / S.sa * 100) + '％）', '許容応力 ' + S.sa + 'MPa を超過（' + fmt(sb / S.sa * 100) + '％）');
+            judge('jdl', 'dl', dl > L / 300, 'スパンの1/' + fmt(L / dl) + '（目安 1/300 以下）', 'スパンの1/' + fmt(L / dl) + '（目安 1/300 を超過）');
+            judge('jlam', 'lam', lam > 200, lam > LAM ? '細長い柱（座屈しやすい範囲）' : '', '200を超過（柱として細すぎる）');
+            judge('jcomb', 'comb', comb > 1, '1.0 以下', '1.0 を超過');
+            out('eq', s.n + '（' + fmt(s.w, 2) + ' kg/m）。梁の曲げモーメント ' + fmt(Mb) + ' N·mm、柱の軸力 ' + fmt(N) + ' N、座屈長さ ' + fmt(Lk) + ' mm' + (brace ? '（筋かいあり：筋かいが両方向に効き、水平力をすべて受けると仮定して、柱の曲げを0としています。実際の効果は配置と接合で変わります）' : '（筋かいなし：柱の高さの2倍）') + '。');
+          }
+          function set(k, v) {
+            if (k === 'type') { S.size = 0; }
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'stand' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          ['load', 'type', 'brace'].forEach(function (k) {
+            root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.addEventListener('click', function () { set(k, b.dataset.v); }); });
+          });
+          root.querySelectorAll('[data-b="sap"] button').forEach(function (b) { b.addEventListener('click', function () { set('sa', Number(b.dataset.v)); }); });
+          document.getElementById('st-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆エクセル -->
+        <h2>架台の強度計算をエクセルで行うときの組み方</h2>
+        <p>
+          同じ形の架台をくり返し設計する場合は、エクセルに計算をまとめておくと便利です。式は本記事のとおりなので、特別な機能は要りません。大切なのは、<strong class="mk">あとから見た人が、前提と根拠を追える形にしておくこと</strong>です。
+        </p>
+
+        <h3>シートを「入力・断面性能・計算・判定」に分ける</h3>
+        <ul>
+          <li><strong>入力</strong>：のせる物の質量、スパン、柱の高さ、水平力の係数、許容応力。色を付けて、入力する欄だと分かるようにする</li>
+          <li><strong>断面性能</strong>：使う部材の A・Z・I・i を、規格やメーカーの表から書き写す。出典と単位も書いておく</li>
+          <li><strong>計算</strong>：1行に1つの式を書き、横に式の意味を日本語で添える</li>
+          <li><strong>判定</strong>：応力・たわみ・細長比・組合せを、目安の値と並べて表示する</li>
+        </ul>
+
+        <h3>単位をそろえ、最初に検算する</h3>
+        <p>
+          計算の間違いでいちばん多いのは、単位の取り違えです。断面性能表の cm⁴ や cm³ を、mm⁴ や mm³ に直してから使います（1cm⁴＝10,000mm⁴、1cm³＝1,000mm³）。シートを作ったら、本記事の計算例と同じ条件を入れて、同じ結果（梁の応力75.8MPa、たわみ1.24mm）になるかを確かめます。上の計算ツールの結果と見比べる方法も使えます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>入力・断面性能・計算・判定に分け、出典と単位を書いておく</li>
+            <li>cm と mm の取り違えに注意する</li>
+            <li>作ったシートは、計算例と同じ条件で検算する</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>架台の強度計算でよくある失敗</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-stand-strength-brace.jpg" alt="筋かいのない架台が横に揺れる様子と、筋かいを入れた架台が安定している様子を並べたイラスト" width="1376" height="768" loading="lazy">
+          <figcaption>筋かいを入れると、横向きの力を柱の曲げではなく、筋かいで受けられる</figcaption>
+        </figure>
+
+        <h3>梁だけを計算して、柱と横向きの力を見ていない</h3>
+        <p>
+          重さを受ける梁は計算しても、柱の座屈と水平力を確かめていない例は少なくありません。計算例でも、柱の応力の大半は、重さではなく水平力によるものでした。
+        </p>
+
+        <h3>アングルの座屈を、辺に平行な軸の値で計算する</h3>
+        <p>
+          前の章のとおり、柱の強さを2倍以上に見積もってしまいます。断面性能表で、いちばん小さい断面二次半径を使います。
+        </p>
+
+        <h3>応力だけを見て、たわみを確かめていない</h3>
+        <p>
+          たわみはスパンの3乗に比例します。スパンが長い架台では、応力に余裕があっても、たわみが先に目安を超えます。
+        </p>
+
+        <h3>筋かいを入れず、接合部と床を確かめていない</h3>
+        <p>
+          筋かいのない架台は、横向きの力を柱の曲げだけで受けるため、揺れやすく、柱脚に大きな力がかかります。<strong class="mk">適切に配置して接合した筋かいは、架台の横への動きを抑え、水平力を床へ伝えます</strong>。座屈長さを短くできるかどうかは、筋かいが拘束する向きによって変わるため、向きごとに確かめます。あわせて、溶接部、ベースプレート、アンカー、床の確認も欠かせません。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>柱の座屈と水平力まで計算する</li>
+            <li>座屈は、いちばん弱い軸の値で計算する</li>
+            <li>たわみを確かめ、筋かい・接合部・床まで見る</li>
+          </ul>
+        </div>
+
+        <!-- ◆8 -->
+        <h2>動く設備をのせる架台は、別の計算が必要</h2>
+        <p>
+          ここまでは、止まっている設備をのせる架台の計算でした。ロボットのように、質量のある部分が動いて止まる設備をのせる場合は、止まるときの慣性力とモーメントが加わります。考え方と計算例は、<a href="robot-stand-strength-calculation.html">ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</a>で解説しています。客先に提出する強度計算書に残す項目も、同じ記事にまとめています。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          架台の強度計算で確認するのは、梁の曲げ、梁のたわみ、柱の座屈、そして接合部と床です。使う式は3つで、必要な値は断面性能表に載っています。
+        </p>
+        <p>
+          そのうえで結果を左右するのは、<strong class="mk">部材の「向き」と「いちばん弱い軸」を正しく選べているか</strong>です。同じ重さの部材でも、形と向きで強さは数倍変わります。まずは計算ツールで、ご自身の条件を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://www.jisf.or.jp/business/standard/jis/documents/docs_kouzai004_jis02G3192_20201202.pdf" target="_blank" rel="noopener">日本鉄鋼連盟「JIS G 3192 熱間圧延形鋼の形状、寸法、質量及びその許容差」関連資料（山形鋼・溝形鋼の断面性能）</a><br>
+          ・<a href="https://www.araya-kk.co.jp/kokan/product/general-square.html" target="_blank" rel="noopener">一般構造用角形鋼管（JIS G 3466）の断面性能表（鋼管メーカー公表値）</a><br>
+          ・許容圧縮応力の式：日本建築学会「鋼構造許容応力度設計規準」（基準強度 F＝235MPa として計算）
+        </p>
+
+        <div class="article-cta">
+          架台の強度計算や、設備の設計でお困りのことはありませんか。計算の考え方の整理から、設計のご相談まで承ります。お気軽にお問い合わせください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.12</p>
+                <h3><a href="robot-stand-strength-calculation.html">ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</a></h3>
+                <p class="column-excerpt">ロボットが急に止まるとき、架台には横向きの力とモーメントがかかります。慣性力の求め方から、応力・たわみ・アンカーの確認までを計算例つきで解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">特集</p>
+                <h3><a href="../design/index.html">自動化設備の設計ノート｜強度計算・選定の方法と計算ツール</a></h3>
+                <p class="column-excerpt">架台、溶接、アンカー、エアシリンダ、コンベアなど、自動化設備の設計で必要になる計算を、計算例と計算ツールつきでまとめています。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
