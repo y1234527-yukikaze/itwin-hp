@@ -2045,3 +2045,28 @@ a.industry-card { cursor: pointer; }
 }
 .article-rich .calc b { color: var(--navy); }
 .article-rich .need-check { font-size: 0.82rem; color: var(--orange); font-weight: 700; white-space: nowrap; }
+
+/* 記事内の計算ツール（2026-10-13・特集「自動化設備の設計ノート」用）
+   利用者が自分で数値を動かして結果を確かめる欄。自動で動く演出は入れない */
+.calc-tool { border: 1px solid var(--navy); background: var(--paper); padding: 20px 22px 16px; margin: 20px 0 26px; }
+.calc-tool-title { font-family: "Shippori Mincho", serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; margin: 0 0 4px !important; }
+.calc-tool-note { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 14px !important; line-height: 1.7 !important; }
+.calc-tool h4 { font-size: 0.92rem; color: var(--navy); margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+.calc-in { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; }
+.calc-in label { display: block; font-size: 0.86rem; color: var(--ink); }
+.calc-in .row { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+.calc-in input[type="range"] { flex: 1; min-width: 0; accent-color: var(--orange); }
+.calc-in input[type="number"] { width: 5.6em; padding: 4px 6px; border: 1px solid var(--line); border-radius: 4px; font: inherit; font-size: 0.9rem; text-align: right; font-variant-numeric: tabular-nums; }
+.calc-in .unit { width: 2.6em; font-size: 0.8rem; color: var(--ink-soft); }
+.calc-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 2px; }
+.calc-btns button { font: inherit; font-size: 0.86rem; padding: 6px 14px; border: 1px solid var(--navy); background: var(--paper); color: var(--navy); border-radius: 999px; cursor: pointer; }
+.calc-btns button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.calc-out { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0 !important; }
+.calc-out th, .calc-out td { border: 1px solid var(--line); padding: 6px 10px; }
+.calc-out th { width: 44%; background: var(--paper-soft); color: var(--navy); font-family: inherit; font-weight: 700; text-align: left; }
+.calc-out td { font-variant-numeric: tabular-nums; }
+.calc-out b { font-size: 1.05rem; color: var(--navy); }
+.calc-out .over b, .calc-out .over .judge { color: var(--orange); }
+.calc-out .judge { font-size: 0.8rem; font-weight: 700; margin-left: 8px; color: var(--ink-soft); }
+.calc-reset { font: inherit; font-size: 0.82rem; margin-top: 12px; padding: 5px 14px; border: 1px solid var(--line); background: var(--paper-soft); border-radius: 4px; cursor: pointer; color: var(--ink); }
+@media (max-width: 700px) { .calc-in { grid-template-columns: 1fr; } .calc-out th { width: 50%; } }
