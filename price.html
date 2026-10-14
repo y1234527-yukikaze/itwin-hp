@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜料金の目安（専用ページ）
+  ------------------------------------------------------------
+  ・2026-10-14 新設。イプロスに載せた料金・サービス案内PDF（3本）と同じ価格を載せている。
+  ・価格を変えるときは、イプロスのPDFと登録内容も同時に直すこと（作り直しはキットの ipros_price.py）。
+  ・伴走支援の価格は、年間計画のページ（annual-plan.html）には書かず、このページへのリンクだけにしている。
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>料金の目安｜部品図作成・強度検証・3Dスキャン・伴走支援｜アイツイン</title>
+  <meta name="description" content="部品図作成（図面のバラシ）、架台・治具の強度検証、設備・部品の3Dスキャン、3ヶ月単位の伴走支援の料金の目安です。発注の流れと、ご依頼時にご用意いただく情報もまとめています。">
+  <link rel="canonical" href="https://i-twin.co.jp/price">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="料金の目安｜部品図作成・強度検証・3Dスキャン・伴走支援">
+  <meta property="og:description" content="部品図作成、架台・治具の強度検証、設備・部品の3Dスキャン、3ヶ月単位の伴走支援の料金の目安です。">
+  <meta property="og:url" content="https://i-twin.co.jp/price">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="料金の目安｜部品図作成・強度検証・3Dスキャン・伴走支援">
+  <meta name="twitter:description" content="部品図作成、架台・治具の強度検証、設備・部品の3Dスキャン、3ヶ月単位の伴走支援の料金の目安です。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="icon" href="favicon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "料金の目安", "item": "https://i-twin.co.jp/price" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="price.html">料金</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>料金の目安</span></div>
+      <h1>料金の目安</h1>
+      <p class="catch">ご依頼の前に、おおよその費用をご確認いただけます。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap price-doc">
+
+      <p class="price-intro">
+        設計・図面、3Dスキャン、伴走支援の料金の目安です。表の価格は「〜」のついた最低価格で、実際の金額は内容をうかがってからお見積りします。表示価格はすべて税別です。
+      </p>
+
+      <ul class="price-toc">
+        <li><a href="#design">設計・図面／強度検証</a></li>
+        <li><a href="#scan">3Dスキャン</a></li>
+        <li><a href="#partner">伴走支援プログラム</a></li>
+        <li><a href="#order">発注の流れ</a></li>
+      </ul>
+
+      <!-- ◆設計・図面／強度検証 -->
+      <section id="design" class="price-block">
+        <h2>設計・図面／強度検証</h2>
+        <p>
+          組立図やポンチ絵から、製作できる部品図に起こします（図面のバラシ）。社内の設計者が本来の仕事に集中できるよう、図面を描く工程だけを切り出してお引き受けします。架台・治具の強度検証も承ります。ロボットが急に止まるときの力のように、動く荷重を含めた検証にも対応します。
+        </p>
+        <table class="price-table">
+          <thead><tr><th>内容</th><th>価格</th></tr></thead>
+          <tbody>
+            <tr><td>部品図作成 1〜10点</td><td>50,000円〜</td></tr>
+            <tr><td>部品図作成 11〜30点</td><td>80,000円〜</td></tr>
+            <tr><td>部品図作成 31点以上</td><td>個別見積</td></tr>
+            <tr><td>ポンチ絵・現物からの起こし</td><td>上記＋割増</td></tr>
+            <tr><td>強度検証（手計算・計算書付き）</td><td>70,000円〜</td></tr>
+            <tr><td>強度検証（FEM解析込み・荷重1ケース）</td><td>150,000円〜</td></tr>
+            <tr><td>荷重ケース追加</td><td>1ケースあたり 30,000円〜</td></tr>
+            <tr><td>3Dモデルがない場合のCAD化</td><td>別途見積</td></tr>
+          </tbody>
+        </table>
+        <p class="price-note">FEM解析は、形を細かく分けて、コンピューターで応力を計算する方法です。</p>
+        <p>
+          図面が残っていない設備・架台でも、3Dスキャンから3Dモデルを作って、強度計算ができます。
+        </p>
+
+        <h3>省人化・省力化の設計、新しい機械の設計</h3>
+        <p>
+          装置・治具の新規設計も承ります。搬送の省人化、作業の省力化を目的とした機構の設計から、今ある設備に追加する機構の設計まで対応します。現場でどの作業に時間がかかっているかをつかんでから設計に入るので、「作ったが使われない」設備になりにくいと考えています。内容によって工数が大きく変わるため、ご相談のうえ個別にお見積りします。
+        </p>
+
+        <h3>強度検証をご依頼いただく前に</h3>
+        <ul class="price-list">
+          <li>計算は設計判断の参考資料です。最終的に採用するかどうかは、発注者様にてご判断ください。</li>
+          <li>荷重の条件、材質、溶接の仕様、接合の条件などの前提は、計算書に書きます。</li>
+          <li>前提条件は、ご提供いただいた情報にもとづきます。実物と違う場合は、結果が変わります。</li>
+          <li>法令上、資格を持つ人の設計・確認が必要な範囲は対象外です。</li>
+        </ul>
+        <p class="price-more">計算の考え方は、コラム「<a href="column/design/index.html">自動化設備の設計ノート</a>」で紹介しています。</p>
+      </section>
+
+      <!-- ◆3Dスキャン -->
+      <section id="scan" class="price-block">
+        <h2>3Dスキャン</h2>
+        <p>
+          設備・治具・部品を計測して、実寸のデータとしてお渡しします。図面が残っていない設備や、現物しか手がかりのない部品にも対応します。一度データにしておけば、設備を入れ替えるときの干渉の確認、改造の検討、部品の作り直しのたびに、現地へ採寸に行く必要がなくなります。
+        </p>
+        <table class="price-table">
+          <thead><tr><th>内容</th><th>価格</th></tr></thead>
+          <tbody>
+            <tr><td>部品・治具のスキャン</td><td>30,000円〜</td></tr>
+            <tr><td>設備単体のスキャン（2m×2m程度）</td><td>150,000円〜</td></tr>
+            <tr><td>点群からのCAD化</td><td>個別見積</td></tr>
+          </tbody>
+        </table>
+        <p class="price-note">上記は、スキャン（点群データの納品）までの価格です。CAD化は、対象物の形によって工数が大きく変わるため、個別にお見積りします。</p>
+        <p>
+          スキャンから、3Dモデル化、図面化、強度計算まで、同じ窓口で承ります。工程ごとに別の会社へ頼む手間がかかりません。
+        </p>
+      </section>
+
+      <!-- ◆伴走支援プログラム -->
+      <section id="partner" class="price-block">
+        <h2>伴走支援プログラム</h2>
+        <p>
+          現場の「止まる・待つ・戻る・溜まる」を見つけ、改善の実行と定着まで一緒に進めます。デジタルツインづくり、IoTセンサーによる予知保全、省人化・省力化の提案を、現場の課題に合わせて組み合わせます。3ヶ月を1クールとし、クールの終わりに成果物をお渡しします。続けるかどうかはクールごとにご判断いただけるので、使うか分からない顧問料をお支払いいただく必要はありません。
+        </p>
+        <table class="price-table">
+          <thead><tr><th>内容</th><th>価格</th></tr></thead>
+          <tbody>
+            <tr><td>1クール目（3ヶ月）</td><td>600,000円〜</td></tr>
+            <tr><td>2クール目以降（3ヶ月）</td><td>400,000円〜</td></tr>
+          </tbody>
+        </table>
+        <p class="price-note">1クール目は、現状の把握と最初の構築があるため作業が多くなります。2クール目からは、たまったデータを使うため価格を抑えています。</p>
+
+        <h3>成果物</h3>
+        <p>
+          省人化・自動化の場合はレポートと簡易設計図、デジタルツイン化の場合はIoTセンサーの値を見られる画面をお渡しします。現場をデータにして、画面の上でレイアウト変更や自動化の案を何度でも試せるので、現場を止めずに効果と費用対効果を数字で確かめられます。
+        </p>
+        <h3>データの扱い</h3>
+        <p>
+          システムは外のネットワークから切り離した中で動かすため、工場のデータは社外に出ません。
+        </p>
+        <p class="price-more">各クールの進め方は「<a href="annual-plan.html">年間計画の進め方</a>」をご覧ください。</p>
+      </section>
+
+      <!-- ◆共通事項 -->
+      <section class="price-block price-common">
+        <h2>3つのサービスに共通すること</h2>
+        <ul class="price-list">
+          <li>現地での作業がある場合、交通費・宿泊費は実費を別にいただきます。</li>
+          <li>表示価格は税別です。</li>
+          <li>データは当社の中で処理し、外部のクラウドなどへは送りません。</li>
+        </ul>
+      </section>
+
+      <!-- ◆発注の流れ -->
+      <section id="order" class="price-block">
+        <h2>発注の流れ</h2>
+        <ol class="price-steps">
+          <li><b>お問い合わせ</b>オンラインでも、現場への訪問でもかまいません。</li>
+          <li><b>ヒアリングと概算のご提示</b>内容をうかがい、おおよその金額をお伝えします。</li>
+          <li><b>お見積り・ご発注</b></li>
+          <li><b>作業</b>現地でのスキャン、作図、計算を行います。</li>
+          <li><b>納品・ご説明</b></li>
+        </ol>
+
+        <h3>ご依頼のときに、あると助かる情報</h3>
+        <p>揃っていなくても大丈夫です。ヒアリングのうえ、進め方をご提案します。</p>
+        <div class="price-checks">
+          <div>
+            <h4>図面のバラシ・部品図作成</h4>
+            <ul>
+              <li>組立図（PDF・DXF・紙のどれでも可）</li>
+              <li>材質・板厚のご指定（未定ならご相談ください）</li>
+              <li>想定している加工先・加工方法（あれば）</li>
+              <li>希望の納期</li>
+            </ul>
+          </div>
+          <div>
+            <h4>強度検証</h4>
+            <ul>
+              <li>対象物の図面または3Dモデル（なければスキャンで対応）</li>
+              <li>荷重の条件（載せる物の質量、動く速さ、止まるまでの時間など）</li>
+              <li>材質・部材のサイズ</li>
+              <li>接合の方法（溶接の脚長、ボルトの径・本数）</li>
+              <li>床・基礎の条件（厚さ、アンカーの種類・本数）</li>
+              <li>計算書の提出先（客先に出すかどうか）</li>
+            </ul>
+          </div>
+          <div>
+            <h4>3Dスキャン</h4>
+            <ul>
+              <li>対象物のおおよその寸法と写真</li>
+              <li>置いてある場所（屋内か屋外か、まわりの状況）</li>
+              <li>作業できる時間帯（稼働中かどうか）</li>
+              <li>必要な精度と、データの使いみち</li>
+              <li>納品の形（点群だけか、CAD化までか）</li>
+            </ul>
+          </div>
+          <div>
+            <h4>伴走支援プログラム</h4>
+            <ul>
+              <li>対象にする工程・ラインの範囲</li>
+              <li>いま分かっている課題（分かる範囲でかまいません）</li>
+              <li>1年以内に達成したい目標</li>
+              <li>現場でとれているデータがあるかどうか</li>
+              <li>稼働時間と、訪問できる時間帯</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>金額のご相談だけでも、どうぞ。</h2>
+      <p>「この内容だといくらくらいか」というご質問だけでもかまいません。図面や写真があれば、お見積りが早くなります。</p>
+      <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="price.html">料金</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
