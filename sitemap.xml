@@ -168,9 +168,16 @@
 
   <url>
     <loc>https://i-twin.co.jp/column/design/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/weld-strength-calculation</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
   <url>
