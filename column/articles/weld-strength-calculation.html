@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：溶接の強度計算の方法と例（特集「自動化設備の設計ノート」03）
+  （コラム制作キットの template-rich.html から作成・2026-10-14）
+  計算例の検算：キットの weld_calc.py／計算ツール：キットの tool_weld.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-weld-strength.jpg／本文イラスト：img/column-weld-strength-rib.jpg（ナノバナナで生成して差し替え）
+  のど厚・有効長さ・曲げを受ける溶接・ツール内の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで｜アイツイン コラム</title>
+  <meta name="description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。のど厚と有効長さの求め方、製造業で使える許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順を整理。条件を入れて試せる計算ツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/weld-strength-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで">
+  <meta property="og:description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。のど厚と有効長さの求め方、製造業で使える許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順を整理。条件を入れて試せる計算ツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/weld-strength-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-weld-strength.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-14">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで">
+  <meta name="twitter:description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。のど厚と有効長さの求め方、製造業で使える許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順を整理。条件を入れて試せる計算ツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-weld-strength.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで",
+    "description": "溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。のど厚と有効長さの求め方、製造業で使える許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順を整理。条件を入れて試せる計算ツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-weld-strength.jpg",
+    "datePublished": "2026-10-14",
+    "dateModified": "2026-10-14",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/weld-strength-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで", "item": "https://i-twin.co.jp/column/articles/weld-strength-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../index.html#trial">無料相談</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで</span>
+      </div>
+      <h1>溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで</h1>
+      <p class="catch">公開日：2026年10月14日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.14</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-weld-strength.jpg" alt="溶接の強度計算。架台の柱の根元のすみ肉溶接と、のど厚を示すイメージ" width="1376" height="768">
+          <figcaption>溶接の強さは、見た目の大きさではなく「のど厚」と「力のかかり方」で決まる。</figcaption>
+        </figure>
+
+        <p>
+          架台やブラケットを設計するとき、部材の強さは計算しても、溶接は「全周を溶接しておけば大丈夫」と済ませていないでしょうか。本記事では、<strong class="mk">溶接の強度計算の方法</strong>を、すみ肉溶接を中心に、計算例つきで解説します。ずらす力を受ける溶接だけでなく、架台の柱の根元のように<strong>曲げを受ける溶接</strong>まで扱います。
+        </p>
+        <p>
+          後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、すみ肉溶接を単純な形に置き換えて、基本の計算方法を説明するものです。実際の溶接部の安全性を保証するものではありません</li>
+            <li>溶接の計算の決まり（許容応力、有効長さ、サイズの制限）は、建築・橋・圧力容器・機械といった分野ごとの規準で違います。本記事の値は一例で、分野共通の決まりではありません</li>
+            <li>実際の設計では、適用する規準を決めたうえで、溶接の品質と検査、くり返しの力による疲労、母材側の強さ、熱によるひずみを確認してください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>溶接の強度計算で使う3つの寸法（サイズ・のど厚・有効長さ）</li>
+            <li>製造業で使える、溶接の許容応力の決め方</li>
+            <li>ずらす力を受ける溶接と、曲げを受ける溶接の計算例</li>
+            <li>自分の条件を入れて試せる、概算の計算ツール</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>溶接の強度計算で使う3つの寸法</h2>
+        <p>
+          すみ肉溶接は、直角に合わせた2枚の板のすみを、三角形の断面で埋める溶接です。板を加工せずにそのまま溶接できるため、架台やブラケットの溶接の多くは、このすみ肉溶接です。強度計算で使う寸法は、サイズ、のど厚、有効長さの3つです。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 330" role="img" aria-label="すみ肉溶接の断面。直角の2辺の長さがサイズS、直角の角から斜辺までのいちばん短い距離がのど厚aで、のど厚はサイズの0.7倍">
+            <rect x="80" y="40" width="40" height="240" fill="#b8c6d6"/><rect x="80" y="240" width="360" height="40" fill="#b8c6d6"/>
+            <path d="M120,240 L120,100 L260,240 Z" fill="#d4691a"/>
+            <line x1="120" y1="240" x2="190" y2="170" stroke="#0d2b4e" stroke-width="5"/>
+            <circle cx="120" cy="240" r="5" fill="#0d2b4e"/>
+            <line x1="120" y1="296" x2="260" y2="296" stroke="#1f2d3d" stroke-width="2"/><line x1="120" y1="288" x2="120" y2="304" stroke="#1f2d3d" stroke-width="2"/><line x1="260" y1="288" x2="260" y2="304" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="190" y="322" font-size="20" fill="#1f2d3d" text-anchor="middle">サイズ S</text>
+            <line x1="62" y1="100" x2="62" y2="240" stroke="#1f2d3d" stroke-width="2"/><line x1="54" y1="100" x2="70" y2="100" stroke="#1f2d3d" stroke-width="2"/><line x1="54" y1="240" x2="70" y2="240" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="46" y="176" font-size="20" fill="#1f2d3d" text-anchor="middle">S</text>
+            <text x="330" y="90" font-size="22" fill="#0d2b4e">のど厚 a</text>
+            <text x="330" y="124" font-size="24" fill="#0d2b4e">＝ サイズ × 0.7</text>
+            <line x1="326" y1="100" x2="196" y2="164" stroke="#0d2b4e" stroke-width="1.5"/>
+            <text x="330" y="176" font-size="20" fill="#d4691a">強さを決めるのは、</text>
+            <text x="330" y="204" font-size="20" fill="#d4691a">いちばん薄いこの部分</text>
+          </svg>
+          <figcaption>すみ肉溶接を切った断面。力は、いちばん薄い「のど」で受ける</figcaption>
+        </figure>
+
+        <h3>サイズ（脚長）：三角形の直角をはさむ辺の長さ</h3>
+        <p>
+          図面で指示するのが、このサイズです。実際にできた溶接の辺の長さを脚長と呼びます。サイズは、<strong>薄い方の板厚以下</strong>を目安にします。板より大きな溶接を盛っても、先に板の方が負け、熱で板が溶け落ちたり、ひずんだりしやすくなるためです。サイズの上限と下限は規準によって決め方が違うので、適用する規準で確かめます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>のど厚：強さを決める、いちばん薄い部分</h3>
+        <p>
+          三角形の直角の角から、斜めの辺までのいちばん短い距離が、のど厚です。2辺が同じ長さのすみ肉溶接では、<strong class="mk">のど厚 ＝ サイズ × 0.7</strong> になります（正確には1÷√2で、約0.707倍です）。2辺の長さが違う場合は、この式をそのまま使えません。サイズ6mmなら、のど厚は4.2mmです。溶接の強さは、見た目の幅ではなく、こののど厚で計算します。
+        </p>
+
+        <h3>有効長さ：両端を除いた、計算に入れる長さ</h3>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 220" role="img" aria-label="溶接の有効長さ。全長の両端からサイズの分ずつを除いた長さを、計算に使う">
+            <rect x="60" y="92" width="520" height="30" fill="#f1d9c4"/>
+            <rect x="110" y="92" width="420" height="30" fill="#d4691a"/>
+            <text x="85" y="80" font-size="18" fill="#6b7785" text-anchor="middle">S</text><text x="555" y="80" font-size="18" fill="#6b7785" text-anchor="middle">S</text>
+            <line x1="60" y1="150" x2="580" y2="150" stroke="#1f2d3d" stroke-width="2"/><line x1="60" y1="142" x2="60" y2="158" stroke="#1f2d3d" stroke-width="2"/><line x1="580" y1="142" x2="580" y2="158" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="320" y="176" font-size="20" fill="#1f2d3d" text-anchor="middle">溶接の全長 L</text>
+            <line x1="110" y1="50" x2="530" y2="50" stroke="#d4691a" stroke-width="2"/><line x1="110" y1="42" x2="110" y2="58" stroke="#d4691a" stroke-width="2"/><line x1="530" y1="42" x2="530" y2="58" stroke="#d4691a" stroke-width="2"/>
+            <text x="320" y="38" font-size="22" fill="#d4691a" text-anchor="middle">有効長さ ＝ L − 2×S</text>
+            <text x="320" y="208" font-size="18" fill="#6b7785" text-anchor="middle">始めと終わりは、溶け込みが不足しやすいので数えない</text>
+          </svg>
+          <figcaption>両端のサイズ分は、計算に入れない</figcaption>
+        </figure>
+
+        <p>
+          溶接の始めと終わりは、溶け込みが足りなかったり、くぼみができたりしやすい部分です。そのため、建築の規準では、全長から両端のサイズ分を引いた長さを、有効長さとして計算に使います。本記事もこの方法で計算します。ただし、有効長さの決め方は規準によって違います。クレーンの鋼構造の計算基準（JIS）では、有効長さを「完全なのど厚をもつ溶接の長さ」とし、角を回り込む部分（回し溶接）は長さに含めないとしています<span class="need-check">（旧版で確認・現行版は要確認）</span>。角パイプのまわりを途切れずに一周する全周溶接は、本記事では端がないものとして、長さを引かずに計算します。ただし、全周溶接にも、溶接の始めと終わりが重なるつなぎ目があり、そこは品質が落ちやすい部分です。長さを引かない計算は、強さをわずかに多く見積もる側になるため、余裕が小さいときは注意します。</p>
+        <p>
+          短すぎる溶接は、強さが安定しません。有効長さの最小の目安は、建築の規準ではサイズの10倍以上かつ40mm以上、橋の規準ではサイズの10倍以上かつ80mm以上と、分野で違います。本記事では、建築の値を目安に使います<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>図面には、サイズと長さを数字で指示する</h3>
+        <p>
+          計算で決めたサイズと長さは、図面の溶接記号に数字で書きます。「全周溶接」とだけ書いて、サイズを指示しない図面では、できあがる溶接の大きさが作業者によって変わります。<strong>計算で使ったサイズが、図面に書かれているか</strong>を確かめます。とびとびに溶接する場合（断続溶接）は、1か所の長さと間隔も指示します。計算では、実際に溶接する部分の有効長さだけを数えます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>サイズは、薄い方の板厚以下にする</li>
+            <li>のど厚 ＝ サイズ × 0.7。強さはのど厚で計算する</li>
+            <li>有効長さ ＝ 全長 − 2×サイズ（建築の規準の方法。決め方は規準で違う）</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>溶接の許容応力の決め方｜製造業で使える基準</h2>
+        <p>
+          溶接の許容応力は、分野によって決め方が違います。インターネットで見つかる解説の多くは、建築の規準にもとづいています。ここでは、機械の構造物を対象にした基準を中心に整理します。
+        </p>
+
+        <h3>機械の構造物の例：クレーンの構造規格</h3>
+        <p>
+          クレーンの鋼構造を対象にした国の構造規格は、溶接部の許容応力を式で定めています。この規格はクレーンの構造部分が対象で、一般の機械の架台やブラケットに一律に当てはまる基準ではありません。ここでは、<strong>機械の構造物での考え方の例</strong>として紹介します。SS400（板厚16mm以下）の場合、次のようになります。
+        </p>
+        <p class="calc">
+          基本の許容応力　σa ＝ 降伏点 245÷1.5 と 引張強さ 400÷1.8 の小さい方 ＝ 163.3 MPa<br>
+          許容せん断応力　τ ＝ σa÷√3 ＝ 94.3 MPa<br>
+          <b>すみ肉溶接の許容応力　＝ 94.3 × 0.8 ＝ 75.4 MPa</b>
+        </p>
+        <p>
+          この規格では、すみ肉溶接は、許容せん断応力に係数を掛けて許容応力を求めます。係数は鋼材の種類で決まり、SS400は0.8です（規格に名前が挙げられた鋼材では0.84。SS400や、一般的な角形鋼管のSTKR400は挙げられていません）。本記事の計算例は、この75.4MPaを使います。実際の設計では、設備の用途、力のかかり方、くり返しの有無、適用される法令や規格を確かめて、基準を選びます。なお、溶接の強さは、母材だけでなく溶接材料（溶接棒やワイヤ）の強さでも決まります。母材に合った溶接材料を使うことが前提です。
+        </p>
+
+        <h3>建築の規準の値と、目安としての比率</h3>
+        <table>
+          <tr><th>決め方</th><th>SS400のすみ肉溶接</th><th>備考</th></tr>
+          <tr><td>機械の構造物の規格の例</td><td>75.4 MPa</td><td>本記事で使う値</td></tr>
+          <tr><td>建築の法令（長期）</td><td>90.5 MPa</td><td>基準強度235÷(1.5×√3)。短期はこの1.5倍</td></tr>
+        </table>
+        <p>
+          建築の値は、建築基準法の施行令で定められたものです。溶接の専門団体の解説では、すみ肉溶接継手の許容応力は、突合せ継手の引張の許容応力の0.6〜0.7倍程度にとるのが普通とされています。同じ解説は、許容応力は構造の規格や安全の考え方によって違う、とも述べています。圧力容器のように、継手の形ごとに「継手効率」という係数を定めている分野もありますが、これはその分野の決まりで、一般の機械にそのまま使える値ではありません。どの値を使うにしても、<strong class="mk">採用した基準を計算書に書いておく</strong>ことが大切です。くり返し力がかかる部分は、ここで示した値より大きく下げる必要があります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>機械の構造物の規格の例では、SS400のすみ肉溶接は75.4MPa</li>
+            <li>建築の法令では90.5MPa。分野で値が違う</li>
+            <li>採用した基準を明記する。くり返しの力には別の確認が要る</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>溶接の強度計算の方法｜基本の式と計算例1</h2>
+        <p class="calc">
+          のど厚 a ＝ 0.7 × S<br>
+          のど断面の面積 A ＝ a × 有効長さ × 本数<br>
+          応力 ＝ 力 P ÷ A　≦　溶接の許容応力
+        </p>
+        <p>
+          すみ肉溶接は、引っ張る力も、ずらす力も、のど断面で受けるせん断として計算するのが、安全側の考え方です。
+        </p>
+
+        <h3>計算例1：ずらす力を受ける、両側2本の溶接</h3>
+        <p>
+          重ねた2枚の板を、両側2本のすみ肉溶接（サイズ6mm、長さ100mm）で止め、30,000N（約3トン）の力で引く場合です。
+        </p>
+        <p class="calc">
+          のど厚　a ＝ 0.7×6 ＝ 4.2 mm<br>
+          有効長さ　100 − 2×6 ＝ 88 mm<br>
+          面積　A ＝ 4.2×88×2 ＝ 739.2 mm²<br>
+          <b>応力　30,000÷739.2 ＝ 40.6 MPa ＜ 75.4 MPa（許容値の54％）</b><br>
+          この溶接が受けられる力　739.2×75.4 ＝ 約55,700 N
+        </p>
+
+        <h3>必要な溶接の長さを、逆算する</h3>
+        <p>
+          設計では、力が先に決まっていて、必要な溶接の長さを知りたい場面が多くあります。式を逆にたどれば求められます。同じ30,000Nを、サイズ6mmの両側2本で受ける場合です。
+        </p>
+        <p class="calc">
+          必要な面積　30,000÷75.4 ＝ 398 mm²<br>
+          1本あたりの有効長さ　398÷(4.2×2) ＝ 47.4 mm<br>
+          強さから必要な溶接の長さ　47.4 ＋ 2×6 ＝ 59.4 mm<br>
+          <b>有効長さの目安（サイズの10倍＝60mm）を満たす長さ　60 ＋ 2×6 ＝ 72 mm 以上</b>
+        </p>
+        <p>
+          有効長さに、両端のサイズ分を足し戻すのを忘れないようにします。この例では、強さから求めた有効長さ47.4mmが、最小の目安である60mm（サイズの10倍）を下回りました。このような場合は、目安の方を採ります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>応力 ＝ 力 ÷（のど厚 × 有効長さ × 本数）</li>
+            <li>引っ張る力も、ずらす力も、のど断面のせん断として計算する</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>曲げを受ける溶接の計算｜計算例2</h2>
+        <p>
+          ここからが本題です。ブラケットや柱の根元のように、溶接から離れた位置に力がかかると、溶接には曲げがかかります。このとき、<strong class="mk">力を面積で割るだけの計算では、応力を大きく見誤ります</strong>。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 340" role="img" aria-label="曲げを受ける溶接。ブラケットの先に下向きの力がかかると、溶接の上の端は引っ張られ、下の端は押される。応力は上と下の端でいちばん大きい">
+            <defs><marker id="b-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+            <marker id="b-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="150" y="40" width="30" height="260" fill="#b8c6d6"/>
+            <path d="M180,90 L470,90 L470,150 L180,250 Z" fill="#6f8aa6"/>
+            <line x1="183" y1="90" x2="183" y2="250" stroke="#d4691a" stroke-width="9"/>
+            <line x1="430" y1="30" x2="430" y2="80" stroke="#0d2b4e" stroke-width="7" marker-end="url(#b-an)"/>
+            <text x="446" y="52" font-size="22" fill="#0d2b4e">力 P</text>
+            <line x1="183" y1="282" x2="430" y2="282" stroke="#1f2d3d" stroke-width="2"/><line x1="183" y1="274" x2="183" y2="290" stroke="#1f2d3d" stroke-width="2"/><line x1="430" y1="274" x2="430" y2="290" stroke="#1f2d3d" stroke-width="2"/>
+            <text x="306" y="308" font-size="20" fill="#1f2d3d" text-anchor="middle">腕の長さ e</text>
+            <path d="M140,90 L60,90 L140,170 Z" fill="#f1d9c4"/><path d="M140,250 L60,250 L140,170 Z" fill="#f1d9c4"/>
+            <line x1="132" y1="98" x2="76" y2="98" stroke="#d4691a" stroke-width="4" marker-end="url(#b-ao)"/>
+            <line x1="76" y1="242" x2="132" y2="242" stroke="#d4691a" stroke-width="4" marker-end="url(#b-ao)"/>
+            <text x="20" y="76" font-size="19" fill="#d4691a">上の端：引っ張られる</text>
+            <text x="20" y="282" font-size="19" fill="#d4691a">下の端：押される</text>
+            <text x="496" y="190" font-size="20" fill="#d4691a">応力は</text><text x="496" y="218" font-size="20" fill="#d4691a">上と下の端で</text><text x="496" y="246" font-size="20" fill="#d4691a">いちばん大きい</text>
+          </svg>
+          <figcaption>曲げを受ける溶接は、真ん中ではなく、いちばん外側がきつい</figcaption>
+        </figure>
+
+        <h3>溶接を「線」とみなして、断面係数を求める</h3>
+        <p>
+          曲げを受ける溶接は、溶接を太さのない線とみなし、梁と同じように断面係数を求めて計算する方法があります。のど厚1mmあたりの断面係数（Zw）を求め、のど厚を掛けます。下の表の式は、のど厚が一様で、溶接が途切れずにつながっていると仮定して、形から導いたものです。
+        </p>
+        <table>
+          <tr><th>溶接の形</th><th>のど厚1mmあたりの断面係数 Zw</th></tr>
+          <tr><td>縦に2本（長さ d）</td><td>d² ÷ 3</td></tr>
+          <tr><td>上下に2本（長さ b、間隔 d）</td><td>b × d</td></tr>
+          <tr><td>四角く一周（幅 b、高さ d）</td><td>b × d ＋ d² ÷ 3</td></tr>
+        </table>
+        <p class="calc">
+          曲げによる応力 ＝ 曲げモーメント M ÷（a × Zw）<br>
+          合わせた応力 ＝ √（曲げによる応力² ＋ 力を面積で割った応力²）
+        </p>
+        <p>
+          本記事では、曲げによる応力も、力を面積で割った応力も、すべてのど断面にかかる応力として合わせ、すみ肉溶接の許容応力と比べます。これは、手計算で使われる簡易な一次評価の方法です。溶接の端や角に集まる力、片側だけの溶接で生じる偏り、母材の局部的な破壊、疲労は、この計算では評価できません。応力の合わせ方と、何と比べるかは、規準によって式が違います。適用する規準がある場合は、その式に従います<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>計算例2：先端に力がかかるブラケット</h3>
+        <p>
+          板のブラケットを、縦2本のすみ肉溶接（サイズ6mm、長さ150mm）で止め、溶接から200mm離れた位置に5,000N（約500kg）の力がかかる場合です。
+        </p>
+        <p class="calc">
+          有効長さ　150 − 2×6 ＝ 138 mm<br>
+          面積　A ＝ 4.2×138×2 ＝ 1,159.2 mm²<br>
+          曲げモーメント　M ＝ 5,000×200 ＝ 1,000,000 N·mm<br>
+          溶接線の断面係数　Zw ＝ 138²÷3 ＝ 6,348 mm²<br>
+          曲げによる応力　1,000,000÷(4.2×6,348) ＝ 37.5 MPa<br>
+          力を面積で割った応力　5,000÷1,159.2 ＝ 4.3 MPa<br>
+          <b>合わせた応力　√(37.5² ＋ 4.3²) ＝ 37.8 MPa ＜ 75.4 MPa（許容値の50％）</b>
+        </p>
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">ワンポイント</p>
+          <ul>
+            <li>力を面積で割るだけなら 4.3MPa。曲げを入れると 37.8MPa で、約9倍になる</li>
+            <li>腕の長さを2倍にすると、曲げによる応力も2倍になる</li>
+            <li>溶接を縦に長くすると、長さの2乗で効く。150mmを200mmにすると、応力は約半分になる</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>溶接から離れた位置に力がかかると、溶接は曲げを受ける</li>
+            <li>溶接を線とみなして断面係数を求め、のど厚を掛けて計算する</li>
+            <li>応力は、いちばん外側の端で最大になる</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>架台の柱の根元を計算する｜計算例3・4</h2>
+        <p>
+          架台の柱とベースプレートは、多くの場合、柱のまわりを一周するすみ肉溶接で止めます。この特集の前の2本の記事で求めた柱の根元の力を使って、溶接を確かめます。
+        </p>
+
+        <h3>計算例3：設備をのせる架台の柱脚</h3>
+        <p>
+          <a href="stand-strength-calculation.html">架台の強度計算の方法と例</a>の計算例です。角パイプ □50×50×3.2 の柱を、サイズ3mmの全周溶接で止めます。柱脚の曲げモーメントは 294,300 N·mm、横向きの力は368N、軸力は1,306Nでした。
+        </p>
+        <p class="calc">
+          のど厚　a ＝ 0.7×3 ＝ 2.1 mm<br>
+          溶接線の長さ　50×4 ＝ 200 mm（途切れない全周溶接として、端は引かない）<br>
+          溶接線の断面係数　Zw ＝ 50×50 ＋ 50²÷3 ＝ 3,333 mm²<br>
+          曲げによる応力　294,300÷(2.1×3,333) ＝ 42.0 MPa<br>
+          軸力による応力　1,306÷(2.1×200) ＝ 3.1 MPa<br>
+          <b>合わせた応力　45.2 MPa ＜ 75.4 MPa（許容値の60％）</b>
+        </p>
+
+        <p>
+          溶接線の寸法には、柱の外形の50mmを使い、角の丸みは無視しています。実際の角パイプは角が丸く、溶接線はこれより少し短くなるため、応力はこの値より大きくなります。初めの見積もりには使えますが、余裕が小さいときは、実際の形で確かめます。
+        </p>
+
+        <h3>計算例4：ロボット架台の柱脚</h3>
+        <p>
+          <a href="robot-stand-strength-calculation.html">ロボット架台の強度計算</a>の計算例です。角パイプ □100×100×6 の柱を、サイズ6mmの全周溶接で止めます。柱脚の曲げモーメントは 5,208,375 N·mm でした。
+        </p>
+        <p class="calc">
+          のど厚　a ＝ 4.2 mm<br>
+          溶接線の断面係数　Zw ＝ 100×100 ＋ 100²÷3 ＝ 13,333 mm²<br>
+          曲げによる応力　5,208,375÷(4.2×13,333) ＝ 93.0 MPa<br>
+          軸力による応力　3,305÷(4.2×400) ＝ 2.0 MPa<br>
+          <b>合わせた応力　95.0 MPa ＞ 75.4 MPa（許容値の126％）</b>
+        </p>
+        <p>
+          ロボット架台の記事で「確認していない」とした溶接部は、<strong class="mk">本記事で使っている許容応力75.4MPaと比べると、超えていました</strong>。どの基準で判定するかは設計者が決めることですが、少なくとも「全周を溶接したから大丈夫」とは言えない結果です。サイズは板厚の6mmより大きくできないため、溶接を太くする方法では解決できません。柱を □150×150×6 に上げると、溶接線が長くなり、応力は42.7MPaまで下がります。リブを足して溶接線を外へ広げる、筋かいを入れて柱脚の曲げそのものを減らす、といった方法も有効です。
+        </p>
+
+        <h3>柱の根元で、溶接のほかに確かめること</h3>
+        <p>
+          溶接の応力だけでは、柱の根元全体が成り立つかは判断できません。次の項目も確かめます。
+        </p>
+        <ul>
+          <li>ベースプレートが曲がらないか（薄いと、溶接とアンカーに力が集まる）</li>
+          <li>角パイプの板そのものが、溶接のきわで破れたり、つぶれたりしないか</li>
+          <li>力がくり返しかかる場合の、疲労</li>
+          <li>アンカーボルトと床が、引き抜きとせん断に耐えるか</li>
+          <li>角パイプの外側だけの溶接（片側溶接）になることによる、力の偏り</li>
+        </ul>
+        <p>
+          ロボットのように力がくり返しかかる設備では、疲労の確認を最優先にします。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>柱脚の全周溶接は、柱脚の曲げモーメントで決まる</li>
+            <li>部材が合格でも、溶接が先に許容値を超えることがある</li>
+            <li>サイズを上げられないときは、溶接線を外へ広げるか、曲げを減らす</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。図は選んだ形に合わせて切り替わる） -->
+        <h2>自分の条件で試す｜溶接の強度計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。溶接の形を選ぶと、図と入力する項目が切り替わります。初期値は、本記事の計算例2（曲げを受けるブラケット）と同じです。
+        </p>
+
+        <div class="calc-tool" id="wd-tool">
+          <p class="calc-tool-title">すみ肉溶接の概算</p>
+          <p class="calc-tool-note">
+            等脚のすみ肉溶接を対象に、のど厚をサイズの0.7倍、有効長さを全長からサイズの2倍を引いた長さとし、のど断面の応力をすべて合わせて許容応力と比べる、簡易な概算です。角パイプは外形の寸法を使い、角の丸みを無視しています（実際の応力は少し大きくなります）。決め方は規準によって違います。曲げは、溶接線を「線」とみなして計算します。溶接の品質、くり返しの力による疲労、母材側の強さ、熱によるひずみは計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、適用する規準と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <p style="font-size:0.86rem;margin:0 !important;">溶接の形と、力のかかり方</p>
+          <div class="calc-btns" data-b="mode"><button type="button" data-v="side">ずらす力（両側2本）</button><button type="button" data-v="bracket">曲げ（ブラケット・縦2本）</button><button type="button" data-v="tube">曲げ（角パイプの全周）</button></div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 300" role="img" aria-label="選んだ溶接の形での、溶接の位置と力の向きの図">
+              <defs>
+                <marker id="wd-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+              </defs>
+              <!-- ずらす力：重ねた板を両側のすみ肉で止める（上から見た図） -->
+              <g data-g="side">
+                <text x="16" y="28" font-size="17" fill="#0d2b4e">上から見た図</text>
+                <rect x="10" y="80" width="230" height="150" fill="#b8c6d6"/>
+                <rect x="120" y="115" width="220" height="80" fill="#6f8aa6"/>
+                <line x1="120" y1="115" x2="240" y2="115" stroke="#d4691a" stroke-width="8"/><line x1="120" y1="195" x2="240" y2="195" stroke="#d4691a" stroke-width="8"/>
+                <line x1="344" y1="155" x2="388" y2="155" stroke="#0d2b4e" stroke-width="6" marker-end="url(#wd-an)"/>
+                <text x="350" y="138" font-size="16" fill="#0d2b4e">力 P</text>
+                <text x="180" y="104" font-size="15" fill="#d4691a" text-anchor="middle">溶接（長さ L）</text>
+                <text x="180" y="222" font-size="15" fill="#d4691a" text-anchor="middle">溶接（長さ L）</text>
+                <text x="16" y="262" font-size="14" fill="#0d2b4e">力と同じ向きの溶接2本で、ずれを止める</text>
+              </g>
+              <!-- 曲げ：ブラケット（横から見た図） -->
+              <g data-g="bracket">
+                <text x="16" y="28" font-size="17" fill="#0d2b4e">横から見た図</text>
+                <rect x="60" y="50" width="26" height="220" fill="#b8c6d6"/>
+                <path d="M86,95 L330,95 L330,150 L86,225 Z" fill="#6f8aa6"/>
+                <line x1="88" y1="95" x2="88" y2="225" stroke="#d4691a" stroke-width="8"/>
+                <line x1="300" y1="40" x2="300" y2="86" stroke="#0d2b4e" stroke-width="6" marker-end="url(#wd-an)"/>
+                <text x="312" y="58" font-size="16" fill="#0d2b4e">力 P</text>
+                <line x1="88" y1="252" x2="300" y2="252" stroke="#1f2d3d" stroke-width="1.5"/><line x1="88" y1="246" x2="88" y2="258" stroke="#1f2d3d" stroke-width="1.5"/><line x1="300" y1="246" x2="300" y2="258" stroke="#1f2d3d" stroke-width="1.5"/>
+                <text x="194" y="272" font-size="15" fill="#1f2d3d" text-anchor="middle">腕の長さ e</text>
+                <text x="100" y="84" font-size="15" fill="#d4691a">溶接（長さ d・両面）</text>
+                <line x1="96" y1="100" x2="130" y2="100" stroke="#d4691a" stroke-width="3"/><line x1="96" y1="220" x2="130" y2="220" stroke="#d4691a" stroke-width="3"/>
+                <text x="136" y="126" font-size="14" fill="#ffffff">溶接の上と下の端が</text><text x="136" y="144" font-size="14" fill="#ffffff">いちばんきつい</text>
+              </g>
+              <!-- 曲げ：角パイプの柱脚（横から見た図） -->
+              <g data-g="tube">
+                <text x="16" y="28" font-size="17" fill="#0d2b4e">横から見た図</text>
+                <rect x="60" y="244" width="280" height="18" fill="#b8c6d6"/>
+                <rect x="170" y="60" width="60" height="184" fill="#6f8aa6"/>
+                <path d="M158,244 L170,244 L170,232 Z" fill="#d4691a"/><path d="M242,244 L230,244 L230,232 Z" fill="#d4691a"/>
+                <line x1="92" y1="78" x2="160" y2="78" stroke="#0d2b4e" stroke-width="6" marker-end="url(#wd-an)"/>
+                <text x="92" y="62" font-size="16" fill="#0d2b4e">力 P</text>
+                <line x1="290" y1="78" x2="290" y2="244" stroke="#1f2d3d" stroke-width="1.5"/><line x1="284" y1="78" x2="296" y2="78" stroke="#1f2d3d" stroke-width="1.5"/><line x1="284" y1="244" x2="296" y2="244" stroke="#1f2d3d" stroke-width="1.5"/>
+                <text x="300" y="166" font-size="15" fill="#1f2d3d">高さ e</text>
+                <text x="250" y="228" font-size="15" fill="#d4691a">溶接（全周）</text>
+                <text x="60" y="286" font-size="14" fill="#0d2b4e">柱の根元を一周、すみ肉で止める</text>
+              </g>
+              <!-- のど厚（共通） -->
+              <line x1="410" y1="20" x2="410" y2="285" stroke="#d9dee4" stroke-width="2"/>
+              <text x="424" y="28" font-size="17" fill="#0d2b4e">溶接を切った断面</text>
+              <rect x="440" y="60" width="26" height="170" fill="#b8c6d6"/><rect x="440" y="204" width="180" height="26" fill="#b8c6d6"/>
+              <path d="M466,204 L466,124 L546,204 Z" fill="#d4691a"/>
+              <line x1="466" y1="204" x2="506" y2="164" stroke="#0d2b4e" stroke-width="3"/>
+              <text x="512" y="150" font-size="15" fill="#0d2b4e">のど厚 a</text><text x="512" y="170" font-size="14" fill="#0d2b4e">＝サイズ×0.7</text>
+              <line x1="474" y1="246" x2="546" y2="246" stroke="#1f2d3d" stroke-width="1.5"/><text x="510" y="266" font-size="15" fill="#1f2d3d" text-anchor="middle">サイズ S</text>
+            </svg>
+            <p class="calc-fig-note">オレンジが溶接、紺の矢印が力です。右は溶接を切った断面で、強さはのど厚で決まります。</p>
+          </div>
+
+          <h4>溶接と力</h4>
+          <div class="calc-in">
+            <label>サイズ S（脚長）<span class="row"><input type="range" data-k="S" min="2" max="12" step="0.5"><input type="number" data-k="S" min="2" max="12" step="0.5"><span class="unit">mm</span></span></label>
+            <label>薄い方の板厚<span class="row"><input type="range" data-k="t" min="1.6" max="25" step="0.1"><input type="number" data-k="t" min="1.6" max="25" step="0.1"><span class="unit">mm</span></span></label>
+            <label data-m="side">溶接の長さ L（1本）<span class="row"><input type="range" data-k="L" min="20" max="600" step="5"><input type="number" data-k="L" min="20" max="600" step="5"><span class="unit">mm</span></span></label>
+            <label data-m="bracket">溶接の長さ d（縦・1本）<span class="row"><input type="range" data-k="d" min="30" max="600" step="5"><input type="number" data-k="d" min="30" max="600" step="5"><span class="unit">mm</span></span></label>
+            <label data-m="tube">角パイプの外形<span class="row"><input type="range" data-k="b" min="30" max="300" step="5"><input type="number" data-k="b" min="30" max="300" step="5"><span class="unit">mm</span></span></label>
+            <label>力 P<span class="row"><input type="range" data-k="P" min="100" max="100000" step="100"><input type="number" data-k="P" min="100" max="100000" step="10"><span class="unit">N</span></span></label>
+            <label data-m="bracket tube">腕の長さ・力の高さ e<span class="row"><input type="range" data-k="e" min="0" max="3000" step="10"><input type="number" data-k="e" min="0" max="3000" step="10"><span class="unit">mm</span></span></label>
+            <label data-m="tube">柱の軸力（押す向き）<span class="row"><input type="range" data-k="N" min="0" max="50000" step="100"><input type="number" data-k="N" min="0" max="50000" step="1"><span class="unit">N</span></span></label>
+            <label data-m="tube">別に加わるモーメント<span class="row"><input type="range" data-k="M0" min="0" max="10000" step="10"><input type="number" data-k="M0" min="0" max="10000" step="1"><span class="unit">N·m</span></span></label>
+            <label>溶接の許容応力<span class="row"><input type="range" data-k="fw" min="30" max="120" step="0.1"><input type="number" data-k="fw" min="30" max="120" step="0.1"><span class="unit">MPa</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方（SS400の場合）</p>
+          <div class="calc-btns" data-b="fwp"><button type="button" data-v="75.4">機械の規格の例 75.4MPa</button><button type="button" data-v="90.5">建築の法令 90.5MPa</button></div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr data-j="size"><th>のど厚 a</th><td><b data-o="a"></b> mm<span class="judge" data-o="jsize"></span></td></tr>
+            <tr data-j="len"><th data-o="lenname">有効長さ（1本）</th><td><b data-o="le"></b> mm<span class="judge" data-o="jlen"></span></td></tr>
+            <tr><th>のど断面の面積</th><td><b data-o="A"></b> mm²</td></tr>
+            <tr data-m="bracket tube"><th>曲げによる応力（いちばん外側）</th><td><b data-o="sb"></b> MPa</td></tr>
+            <tr data-m="tube"><th>軸力による応力</th><td><b data-o="sn"></b> MPa</td></tr>
+            <tr><th>力 P を面積で割った応力</th><td><b data-o="ts"></b> MPa</td></tr>
+            <tr data-j="r"><th>合わせた応力</th><td><b data-o="r"></b> MPa<span class="judge" data-o="jr"></span></td></tr>
+            <tr data-m="side"><th>この溶接が受けられる力</th><td><b data-o="cap"></b> N</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="wd-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('wd-tool');
+          if (!root) return;
+          var DEF = { mode: 'bracket', S: 6, t: 6, L: 100, d: 150, b: 100, P: 5000, e: 200, N: 0, M0: 0, fw: 75.4 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            root.querySelectorAll('[data-b="mode"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === S.mode); });
+            root.querySelectorAll('[data-b="fwp"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(S.fw)); });
+            root.querySelectorAll('[data-g]').forEach(function (e) { e.style.display = e.dataset.g === S.mode ? '' : 'none'; });
+            root.querySelectorAll('[data-m]').forEach(function (e) { e.style.display = e.dataset.m.split(' ').indexOf(S.mode) >= 0 ? '' : 'none'; });
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var a = 0.7 * S.S, A, le, sb = 0, sn = 0, ts, r, eq;
+            if (S.mode === 'side') {
+              le = Math.max(S.L - 2 * S.S, 0); A = a * le * 2; ts = S.P / A; r = ts;
+              out('lenname', '有効長さ（1本）');
+              eq = '有効長さ ＝ ' + fmt(S.L) + ' − 2×' + S.S + ' ＝ ' + fmt(le, 1) + ' mm。面積 ＝ ' + fmt(a, 1) + '×' + fmt(le, 1) + '×2本。';
+              out('cap', fmt(A * S.fw));
+            } else if (S.mode === 'bracket') {
+              le = Math.max(S.d - 2 * S.S, 0); A = a * le * 2;
+              var Zw = 2 * le * le / 6, M = S.P * S.e;
+              sb = M / (a * Zw); ts = S.P / A; r = Math.sqrt(sb * sb + ts * ts);
+              out('lenname', '有効長さ（1本）');
+              eq = '曲げモーメント ＝ ' + fmt(S.P) + '×' + fmt(S.e) + ' ＝ ' + fmt(M) + ' N·mm。溶接線の断面係数（のど厚1mmあたり）＝ 2×' + fmt(le, 1) + '²÷6 ＝ ' + fmt(Zw) + ' mm²。';
+            } else {
+              le = 4 * S.b; A = a * le;
+              var Zt = S.b * S.b + S.b * S.b / 3, Mt = S.P * S.e + S.M0 * 1000;
+              sb = Mt / (a * Zt); sn = S.N / A; ts = S.P / A; r = Math.sqrt((sb + sn) * (sb + sn) + ts * ts);
+              out('lenname', '溶接線の長さ（全周）');
+              eq = '曲げモーメント ＝ ' + fmt(S.P) + '×' + fmt(S.e) + ' ＋ ' + fmt(S.M0 * 1000) + ' ＝ ' + fmt(Mt) + ' N·mm。溶接線の断面係数（のど厚1mmあたり）＝ b×b ＋ b²÷3 ＝ ' + fmt(Zt) + ' mm²。全周溶接は端がないため、有効長さの差し引きはしていません。';
+            }
+            out('a', fmt(a, 1)); out('le', fmt(le, 1)); out('A', fmt(A, 1));
+            out('sb', fmt(sb, 1)); out('sn', fmt(sn, 1)); out('ts', fmt(ts, 1)); out('r', fmt(r, 1));
+            judge('jsize', 'size', S.S > S.t, 'サイズは板厚以下', 'サイズが薄い方の板厚を超えている（目安）');
+            var short = S.mode !== 'tube' && (le < 10 * S.S || le < 40);
+            judge('jlen', 'len', short, '', '短すぎる（建築の規準の目安：サイズの10倍以上、かつ40mm以上）');
+            judge('jr', 'r', r > S.fw, '許容応力 ' + S.fw + 'MPa 以下（' + fmt(r / S.fw * 100) + '％）', '許容応力 ' + S.fw + 'MPa を超過（' + fmt(r / S.fw * 100) + '％）');
+            out('eq', eq);
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'weld' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b="mode"] button').forEach(function (b) { b.addEventListener('click', function () { set('mode', b.dataset.v); }); });
+          root.querySelectorAll('[data-b="fwp"] button').forEach(function (b) { b.addEventListener('click', function () { set('fw', Number(b.dataset.v)); }); });
+          document.getElementById('wd-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆7 -->
+        <h2>溶接の強度計算でよくある失敗</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-weld-strength-rib.jpg" alt="柱の根元の溶接。リブのない柱脚と、リブを足して溶接線を外へ広げた柱脚を並べたイラスト" width="1376" height="768" loading="lazy">
+          <figcaption>リブを足すと、溶接線が外へ広がり、曲げに強くなる</figcaption>
+        </figure>
+
+        <h3>力を面積で割るだけで、曲げを見ていない</h3>
+        <p>
+          計算例2のとおり、曲げを入れると応力は約9倍になりました。溶接から力の位置までの距離があるときは、必ず曲げを計算します。
+        </p>
+
+        <h3>サイズを大きくすれば強くなると考える</h3>
+        <p>
+          サイズを板厚より大きくしても、板が先に負けます。大きな溶接は熱も多く入り、ひずみや割れの原因にもなります。強くしたいときは、溶接を太くするより、<strong>長くする、外へ広げる</strong>方が効きます。
+        </p>
+
+        <h3>片側だけの溶接に、開く向きの力をかける</h3>
+        <p>
+          板の片側だけを溶接した継手では、力の線と溶接の位置がずれて、余分な曲げが生じます。溶接の根元を開く向きに力がかかると、根元に力が集まり、のど断面の平均の応力だけでは強さを評価できません。曲げがかかる板は、両側を溶接するのが基本です。
+        </p>
+
+        <h3>有効長さを引かずに、全長で計算する</h3>
+        <p>
+          短い溶接ほど、両端を引く影響は大きくなります。長さ50mm、サイズ6mmの溶接では、有効長さは38mmで、全長の4分の3ほどです。全長で計算すると、強さを3割ほど多く見積もってしまいます。
+        </p>
+
+        <h3>くり返しの力を、止まっている力と同じに扱う</h3>
+        <p>
+          溶接部は、くり返しの力に弱い部分です。ロボットや往復する装置のように、力が何度もかかる場合は、本記事の許容応力をそのまま使えません。疲労を考えた確認が別に必要です<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>力の位置が離れているときは、曲げを計算する</li>
+            <li>太くするより、長くする・外へ広げる</li>
+            <li>片側溶接の開く向きの曲げと、くり返しの力に注意する</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算書 -->
+        <h2>溶接の強度計算書に残す項目</h2>
+        <p>
+          溶接の計算を計算書に残すときは、あとから条件が変わっても見直せるように、次の項目を書いておきます。
+        </p>
+        <ul>
+          <li>溶接の種類と形（すみ肉・突合せ、両側・片側・全周）</li>
+          <li>サイズ、のど厚、溶接の長さと有効長さ</li>
+          <li>溶接にかかる力と、その求め方（力の大きさ、向き、溶接からの距離）</li>
+          <li>母材の材質と板厚</li>
+          <li>許容応力の値と、採用した基準の名前</li>
+          <li>応力の計算と、許容値との比較</li>
+          <li>計算に含めていないもの（くり返しの力、溶接の検査の方法など）</li>
+        </ul>
+
+        <!-- ◆8 -->
+        <h2>突合せ溶接との違い</h2>
+        <p>
+          板と板を突き合わせ、板厚の全体を溶かしてつなぐ溶接を、突合せ溶接（完全溶込み溶接）と呼びます。のど厚が板厚と同じになるため、母材に近い強さが得られます。先に示した機械の構造物の規格の例では、母材の許容応力に0.8（鋼材によって0.84）を掛けた値を使います。すみ肉溶接より強い反面、開先の加工と溶接の手間がかかります。<strong>大きな曲げや、くり返しの力がかかる重要な部分は突合せ溶接、それ以外はすみ肉溶接</strong>、という使い分けが一般的です。
+        </p>
+
+        <!-- ◆質問 -->
+        <h2>溶接の強度計算でよくある質問</h2>
+
+        <h3>全周を溶接しておけば、計算しなくても大丈夫ですか</h3>
+        <p>
+          大丈夫とは言えません。計算例4のように、全周を溶接していても、曲げが大きいと許容値を超えます。全周溶接は「溶接線がいちばん長くなる形」であって、強さを保証するものではありません。
+        </p>
+
+        <h3>ステンレスやアルミでも、同じ式で計算できますか</h3>
+        <p>
+          のど厚と有効長さから面積を求める考え方は同じです。ただし、許容応力は材料ごとに違います。特にアルミは、溶接の熱で母材の強さが下がるため、鋼と同じ感覚では計算できません。材料ごとの基準を確認してください<span class="need-check">（要確認）</span>。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          溶接の強度計算は、のど厚と有効長さから面積を求め、力を割るのが基本です。そのうえで、力の位置が溶接から離れているときは、曲げを計算に入れます。架台の柱の根元では、部材より先に溶接が許容値を超えることがあります。
+        </p>
+        <p>
+          溶接を強くする方法は、太くすることではなく、<strong class="mk">長くすること、外へ広げること、そして曲げを減らすこと</strong>です。まずは計算ツールで、ご自身の条件を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://www.mhlw.go.jp/web/t_doc?dataId=74022010&dataType=0&pageNo=1" target="_blank" rel="noopener">厚生労働省「クレーン構造規格」（鋼材の許容応力、溶接部の許容応力）</a><br>
+          ・<a href="https://www-it.jwes.or.jp/qa/details.jsp?pg_no=0040020040" target="_blank" rel="noopener">日本溶接協会 溶接情報センター「溶接継手の許容応力はどのくらいにすればよいですか」</a><br>
+          ・建築の値：建築基準法施行令 第92条（溶接部の許容応力度）と、基準強度を定めた国の告示（基準強度 F＝235MPa として計算）
+        </p>
+
+        <div class="article-cta">
+          溶接部の強度計算や、架台・ブラケットの設計でお困りのことはありませんか。計算の考え方の整理から、設計のご相談まで承ります。お気軽にお問い合わせください。
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.13</p>
+                <h3><a href="stand-strength-calculation.html">架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</a></h3>
+                <p class="column-excerpt">梁の曲げとたわみ、柱の座屈、水平力。500kgの設備をのせる架台の計算例と、部材ごとの違いを解説します。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.12</p>
+                <h3><a href="robot-stand-strength-calculation.html">ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</a></h3>
+                <p class="column-excerpt">ロボットが急に止まるとき、架台には横向きの力とモーメントがかかります。慣性力の求め方から、応力・たわみ・アンカーの確認までを解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
