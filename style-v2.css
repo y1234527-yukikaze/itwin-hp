@@ -2133,3 +2133,10 @@ a.industry-card { cursor: pointer; }
 .sim-price-link { margin-top: 14px; font-size: 0.92rem; color: var(--ink-soft); }
 /* ボタンが2つ並ぶときの間隔（スマホで縦に並んでもくっつかないように） */
 .section-more { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+/* 料金ページ：よくあるご質問（2026-10-19） */
+.price-faq { margin: 0; }
+.price-faq dt { font-weight: 700; color: var(--navy); padding-top: 16px; border-top: 1px solid var(--line); }
+.price-faq dt:first-child { border-top: 0; padding-top: 4px; }
+.price-faq dt::before { content: "Q. "; color: var(--orange); }
+.price-faq dd { margin: 6px 0 16px; padding-left: 1.7em; }
