@@ -275,6 +275,9 @@
         <p>
           許容応力は、材料の強さを安全率で割って決めます。決め方には、引張強さを基準にする方法と、降伏点を基準にする方法があり、どちらを採るかで合否が変わります。本記事の計算例では、鋼の引張強さ400MPaを安全率5で割った<strong>80MPa</strong>を使います<span class="need-check">（要確認）</span>。社内基準や客先の指定がある場合は、そちらを優先し、採用した基準を計算書に書いておきます。
         </p>
+        <p>
+          機械の構造物の規格の例として、クレーン構造規格（厚生労働省告示）では、許容応力を「降伏点÷1.5」と「引張強さ÷1.8」の小さい方とします。SS400（板厚16mm以下）では163MPaです。特集の「<a href="weld-strength-calculation.html">溶接の強度計算</a>」は、この規格の考え方を使っています。本記事の80MPaは、くり返しの力も見込んで、さらに余裕をとった値です。計算ツールでは、どちらの基準でも試せます。
+        </p>
 
         <h3>たわみの目安</h3>
         <p>
@@ -607,7 +610,7 @@
           <p style="font-size:0.86rem;margin:10px 0 0 !important;">筋かい</p>
           <div class="calc-btns" data-b="brace"><button type="button" data-v="0">なし</button><button type="button" data-v="1">あり</button></div>
           <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方</p>
-          <div class="calc-btns" data-b="sap"><button type="button" data-v="80">引張強さ400÷5＝80MPa</button><button type="button" data-v="163">降伏点245÷1.5＝163MPa</button></div>
+          <div class="calc-btns" data-b="sap"><button type="button" data-v="80">引張強さ400÷5＝80MPa</button><button type="button" data-v="163">機械の構造物の規格の例 163MPa</button></div>
 
           <h4>梁</h4>
           <table class="calc-out">

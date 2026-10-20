@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：アンカーボルトの引き抜き計算の方法と例（特集「自動化設備の設計ノート」04）
+  （溶接の記事を土台に、キットの build_anchor.py で組み立て・2026-10-20）
+  計算例の検算：キットの anchor_calc.py／計算ツール：キットの tool_anchor.html／本文：キットの anchor_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-anchor-bolt.jpg（ナノバナナで生成して差し替え）
+  それ以外の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで｜アイツイン コラム</title>
+  <meta name="description" content="アンカーボルトの引き抜き計算の方法を、計算例つきで解説します。設備が倒れる場合と柱の根元が曲げを受ける場合の求め方、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さの決め方まで。計算ツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/anchor-bolt-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで">
+  <meta property="og:description" content="アンカーボルトの引き抜き計算の方法を、計算例つきで解説します。設備が倒れる場合と柱の根元が曲げを受ける場合の求め方、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さの決め方まで。計算ツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/anchor-bolt-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-anchor-bolt.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-20">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで">
+  <meta name="twitter:description" content="アンカーボルトの引き抜き計算の方法を、計算例つきで解説します。設備が倒れる場合と柱の根元が曲げを受ける場合の求め方、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さの決め方まで。計算ツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-anchor-bolt.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで",
+    "description": "アンカーボルトの引き抜き計算の方法を、計算例つきで解説します。設備が倒れる場合と柱の根元が曲げを受ける場合の求め方、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さの決め方まで。計算ツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-anchor-bolt.jpg",
+    "datePublished": "2026-10-20",
+    "dateModified": "2026-10-20",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/anchor-bolt-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで", "item": "https://i-twin.co.jp/column/articles/anchor-bolt-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで</span>
+      </div>
+      <h1>アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで</h1>
+      <p class="catch">公開日：2026年10月20日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.20</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-anchor-bolt.jpg" alt="アンカーボルトの引き抜き計算。架台の柱の根元のベースプレートと、床に打ったアンカーボルトのイメージ" width="1376" height="768">
+          <figcaption>柱の根元の曲げは、アンカーボルトを床から引き抜く力になる。</figcaption>
+        </figure>
+
+        <p>
+          架台や設備を床に固定するアンカーボルトは、「M12を4本」と決まった形で選ばれがちです。しかし、柱の根元に曲げがかかると、アンカーボルトには思った以上の引き抜き力がかかります。本記事では、<strong class="mk">アンカーボルトの引き抜き計算の方法</strong>を、計算例つきで解説します。あわせて、<strong>ベースプレートの厚さの決め方</strong>までを扱います。
+        </p>
+        <p>
+          特集の「<a href="stand-strength-calculation.html">架台の強度計算</a>」「<a href="robot-stand-strength-calculation.html">ロボット架台の強度計算</a>」「<a href="weld-strength-calculation.html">溶接の強度計算</a>」の続きです。前の記事で求めた柱の根元の力を使って、床までの力の流れを確かめます。後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、アンカーボルトとベースプレートを単純な形に置き換えて、基本の計算方法を説明するものです。実際の固定部の安全性を保証するものではありません</li>
+            <li>アンカーの耐力の式と許容値の決め方は、建築・土木・設備といった分野ごとの指針や、アンカーメーカーの資料で違います。本記事の値は一例です</li>
+            <li>本記事で紹介する建築設備の耐震計算の式、建物の耐震改修のためのアンカーの指針、クレーンの構造規格は、考え方の例です。一般の機械の架台に、そのまま当てはまる決まりではありません</li>
+            <li>実際の設計では、使うアンカーの技術資料の値、床のコンクリートの強度と厚さ、施工の条件を確かめ、専門家の確認を受けてください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>アンカーボルト1本にかかる引き抜き力とせん断力の求め方（2つの方法）</li>
+            <li>あと施工アンカーの3つの壊れ方と、耐力の式</li>
+            <li>式の値と、メーカーの技術資料の値の使い分け</li>
+            <li>ベースプレートの厚さの決め方と、自分の条件で試せる計算ツール</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>アンカーボルトの計算で確かめる4つのこと</h2>
+        <p>
+          架台の柱にかかった力は、溶接を通ってベースプレートに伝わり、アンカーボルトから床のコンクリートへ流れていきます。柱の根元（柱脚）で確かめることは、次の4つです。溶接は「<a href="weld-strength-calculation.html">溶接の強度計算</a>」で扱ったので、本記事ではその先を扱います。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 400" role="img" aria-label="柱の根元を横から見た図。柱の根元に曲げがかかると、右側のアンカーボルトは上に引き抜かれ、左側ではベースプレートが床を押す。横向きの力はアンカーボルトをずらす向きにかかる">
+            <defs>
+              <marker id="an1" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+              <marker id="an1o" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+            </defs>
+            <rect x="20" y="268" width="600" height="112" fill="#d9dee4"/>
+            <text x="34" y="368" font-size="17" fill="#5a6573">床のコンクリート</text>
+            <rect x="200" y="54" width="70" height="196" fill="#6f8aa6"/>
+            <rect x="140" y="250" width="190" height="18" fill="#0d2b4e"/>
+            <rect x="158" y="226" width="10" height="110" fill="#5a6573"/><rect x="302" y="226" width="10" height="110" fill="#5a6573"/>
+            <rect x="150" y="238" width="26" height="12" fill="#5a6573"/><rect x="294" y="238" width="26" height="12" fill="#5a6573"/>
+            <path d="M118,88 A92,92 0 0 1 270,40" stroke="#0d2b4e" stroke-width="5" fill="none" marker-end="url(#an1)"/>
+            <text x="64" y="72" font-size="18" fill="#0d2b4e">曲げ M</text>
+            <line x1="120" y1="150" x2="190" y2="150" stroke="#0d2b4e" stroke-width="5" marker-end="url(#an1)"/>
+            <text x="50" y="140" font-size="17" fill="#0d2b4e">横の力 Q</text>
+            <line x1="307" y1="226" x2="307" y2="168" stroke="#d4691a" stroke-width="6" marker-end="url(#an1o)"/>
+            <text x="318" y="182" font-size="18" fill="#d4691a">① 引き抜き</text>
+            <text x="318" y="204" font-size="15" fill="#d4691a">（引張側のボルト）</text>
+            <path d="M152,274 L152,300 M176,274 L176,300 M200,274 L200,300" stroke="#0d2b4e" stroke-width="3" marker-end="url(#an1)"/>
+            <text x="34" y="318" font-size="16" fill="#0d2b4e">④ 床を押す</text>
+            <text x="352" y="244" font-size="16" fill="#0d2b4e">③ プレートの曲げ</text>
+            <line x1="140" y1="342" x2="196" y2="342" stroke="#0d2b4e" stroke-width="3" marker-end="url(#an1)"/>
+            <text x="206" y="348" font-size="16" fill="#0d2b4e">② せん断</text>
+          </svg>
+          <figcaption>柱の根元の曲げは、片側のアンカーボルトを引き抜き、反対側では床を押す力になる。</figcaption>
+        </figure>
+
+        <ul>
+          <li><strong>① アンカーボルトの引き抜き</strong>：柱の根元の曲げで、引張側のボルトが床から引き抜かれる力</li>
+          <li><strong>② アンカーボルトのせん断</strong>：横向きの力で、ボルトが横にずらされる力</li>
+          <li><strong>③ ベースプレートの曲げ</strong>：ボルトに引っ張られて、板が曲がる力</li>
+          <li><strong>④ 床のコンクリートが押される力</strong>：反対側で、プレートが床を押す力</li>
+        </ul>
+        <p>
+          架台の場合、いちばん厳しくなりやすいのは①の引き抜きです。横向きの力そのものより、<strong class="mk">横向きの力が柱の高さで生む曲げが、引き抜き力になる</strong>ためです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>柱の根元では、引き抜き・せん断・プレートの曲げ・床が押される力の4つを確かめる</li>
+            <li>架台では、柱の根元の曲げから生まれる引き抜きが厳しくなりやすい</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>アンカーボルトの引き抜き計算｜1本にかかる力の求め方</h2>
+        <p>
+          アンカーボルト1本にかかる力の求め方は、設備や架台の形で2つに分かれます。設備や、筋かいで固めた架台のように、全体が一つのかたまりとして倒れようとする場合と、筋かいのない架台のように、柱の根元ごとに曲げを受ける場合です。
+        </p>
+
+        <h3>設備が一体で倒れようとする場合｜設備の耐震計算の式</h3>
+        <p>
+          制御盤や、筋かいで固めた架台の上の設備は、地震などの横向きの力で、全体が一つのかたまりとして倒れようとします。建物に据え付ける設備の耐震計算では、次の式で、アンカーボルト1本の引き抜き力を求めます<span class="need-check">（建築設備の耐震設計の指針の考え方・要確認）</span>。倒そうとするモーメントから、重さが倒れを止める分を引き、ボルトの間隔と本数で割る形です。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 380" role="img" aria-label="設備が一体で倒れようとする場合の図。重心の高さhGに横向きの力Fhがかかり、左下の角を中心に倒れようとする。右側のボルトに引き抜き力がかかる。重さは倒れを止める向きに効く">
+            <defs>
+              <marker id="an2" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+              <marker id="an2o" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+            </defs>
+            <rect x="20" y="300" width="600" height="60" fill="#d9dee4"/>
+            <rect x="200" y="60" width="200" height="240" fill="#b8c6d6"/>
+            <circle cx="300" cy="170" r="10" fill="#0d2b4e"/>
+            <text x="314" y="166" font-size="16" fill="#0d2b4e">重心</text>
+            <line x1="110" y1="170" x2="286" y2="170" stroke="#0d2b4e" stroke-width="5" marker-end="url(#an2)"/>
+            <text x="40" y="160" font-size="17" fill="#0d2b4e">横の力 Fh</text>
+            <line x1="300" y1="186" x2="300" y2="250" stroke="#0d2b4e" stroke-width="5" marker-end="url(#an2)"/>
+            <text x="310" y="236" font-size="16" fill="#0d2b4e">重さ</text>
+            <rect x="214" y="288" width="8" height="40" fill="#5a6573"/><rect x="378" y="288" width="8" height="40" fill="#5a6573"/>
+            <line x1="382" y1="288" x2="382" y2="236" stroke="#d4691a" stroke-width="6" marker-end="url(#an2o)"/>
+            <text x="420" y="270" font-size="17" fill="#d4691a">引き抜き Rb</text>
+            <circle cx="218" cy="300" r="7" fill="#ffffff" stroke="#0d2b4e" stroke-width="3"/>
+            <text x="120" y="290" font-size="15" fill="#0d2b4e">倒れの中心</text>
+            <line x1="448" y1="170" x2="448" y2="300" stroke="#1f2d3d" stroke-width="1.5"/><line x1="440" y1="170" x2="456" y2="170" stroke="#1f2d3d" stroke-width="1.5"/>
+            <text x="462" y="240" font-size="17" fill="#1f2d3d">高さ hG</text>
+            <line x1="218" y1="346" x2="382" y2="346" stroke="#1f2d3d" stroke-width="1.5"/><line x1="218" y1="338" x2="218" y2="354" stroke="#1f2d3d" stroke-width="1.5"/><line x1="382" y1="338" x2="382" y2="354" stroke="#1f2d3d" stroke-width="1.5"/>
+            <text x="300" y="374" font-size="16" fill="#1f2d3d" text-anchor="middle">ボルトの間隔 ℓ（重心まで ℓG）</text>
+          </svg>
+          <figcaption>横の力は重心の高さで倒そうとし、重さは倒れを止める向きに効く。</figcaption>
+        </figure>
+
+        <p class="calc">
+          横の力　Fh ＝ 質量 W × 重力加速度 g × 係数 Kh<br>
+          縦の力　Fv ＝ Fh ÷ 2（縦の揺れを横の半分とする）<br>
+          <b>引き抜き力（1本）　Rb ＝ ｛Fh × hG −（W × g − Fv）× ℓG｝÷（ℓ × nt）</b><br>
+          せん断力（1本）　Q ＝ Fh ÷ n
+        </p>
+        <p>
+          W は設備の質量（kg）で、重力加速度 g を掛けて重さ（N）にしてから使います。hG は床から重心までの高さ、ℓ は倒れる向きに見たボルトの間隔、ℓG はボルトから重心までの水平の距離です。nt は片側（引き抜かれる側）のボルトの本数、n はボルトの総本数です。</p>
+        <p>
+          係数 Kh は、設置する階、地域、設備の種類や耐震の重要度に応じて決めます<span class="need-check">（要確認）</span>。縦の力を横の半分とするのは、建築設備の耐震計算での決め方で、どの機械にも成り立つ決まりではありません。せん断力は、横の力をすべてのボルトが均等に受けるとした簡易な仮定です。プレートの変形や、ボルト穴のすき間によっては、均等になりません。
+        </p>
+
+        <h3>計算例1：背の高い制御盤</h3>
+        <p>
+          重さ300kg、重心の高さ1,000mm、奥行き方向のボルトの間隔500mm、重心はその中央、ボルトは4本（片側2本）とします。係数 Kh は仮に0.6とします。
+        </p>
+        <p class="calc">
+          Fh ＝ 300 × 9.81 × 0.6 ＝ 1,765 N<br>
+          Fv ＝ 1,765 ÷ 2 ＝ 883 N<br>
+          Rb ＝ ｛1,765 × 1,000 −（2,942 − 883）× 250｝÷（500 × 2）<br>
+          　＝（1,765,200 − 514,850）÷ 1,000 ＝ <b>約1,250 N</b><br>
+          Q ＝ 1,765 ÷ 4 ＝ <b>約441 N</b>
+        </p>
+        <p>
+          式の中で、重さは倒れを止める向きに効いています。背が低く、ボルトの間隔が広い設備では、計算すると引き抜き力がマイナスになり、引き抜きは生じないことがあります。その場合も、せん断の確認は必要です。
+        </p>
+
+        <h3>柱の根元が曲げを受ける場合｜筋かいのない架台</h3>
+        <p>
+          筋かいのない架台では、横向きの力を柱の曲げで受けるため、柱の根元ごとに曲げモーメントがかかります。この曲げを、アンカーボルトの引き抜き力に置き換えます。ここでは、ロボット架台の記事と同じく、<strong>圧縮側のボルトの列を回転の中心</strong>とみなし、引張側のボルトで曲げを受けるものとして概算します。柱の軸力は、柱の中心（回転の中心からボルトの間隔の半分）に働き、引き抜きを打ち消す向きに効きます。
+        </p>
+        <p class="calc">
+          <b>引き抜き力（1本）　T ＝（M − N × d ÷ 2）÷（d × nt）</b><br>
+          せん断力（1本）　Q ＝ 柱の根元の横の力 ÷ ボルトの本数
+        </p>
+        <p>
+          M は柱の根元の曲げモーメント、N は柱の軸力（押す向き）、d は引張側と圧縮側のボルトの列の間隔、nt は引張側のボルトの本数です。押す力がまとまって圧縮側のボルトの列の位置に働く、と仮定した式です。実際は、プレートの下の押す力は広がって分布し、ボルトの伸びやプレートの変形で、力の分かれ方も変わります。そのため、これは簡易な一次評価です<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>計算例2：設備をのせる架台の柱脚</h3>
+        <p>
+          「<a href="stand-strength-calculation.html">架台の強度計算</a>」の計算例（500kgの設備、柱 □50×50×3.2）の柱脚です。ボルトは4本、間隔100mmとします。
+        </p>
+        <p class="calc">
+          M ＝ 294,300 N·mm、N ＝ 1,306 N、横の力 368 N<br>
+          T ＝（294,300 − 1,306 × 50）÷（100 × 2）＝ <b>約1,145 N</b><br>
+          Q ＝ 368 ÷ 4 ＝ <b>約92 N</b>
+        </p>
+
+        <h3>計算例3：ロボット架台の柱脚</h3>
+        <p>
+          「<a href="robot-stand-strength-calculation.html">ロボット架台の強度計算</a>」の計算例（柱 □100×100×6、非常停止時の慣性力を含む）の柱脚です。ボルトは4本、間隔150mmとします。
+        </p>
+        <p class="calc">
+          M ＝ 5,208,375 N·mm、N ＝ 3,305 N、横の力 1,250 N<br>
+          T ＝（5,208,375 − 3,305 × 75）÷（150 × 2）＝ <b>約16,500 N</b><br>
+          Q ＝ 1,250 ÷ 4 ＝ <b>約313 N</b>
+        </p>
+        <p>
+          同じ「柱の根元のボルト4本」でも、<strong class="mk">引き抜き力は計算例2の約14倍</strong>になりました。力の高さと、動く力の大きさの差です。せん断力に比べて、引き抜き力がはるかに大きいことにも注目してください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>一体で倒れる設備は、倒そうとするモーメントから重さの効きを引いて求める</li>
+            <li>筋かいのない架台は、柱の根元の曲げをボルトの間隔で割って求める</li>
+            <li>同じボルト4本でも、引き抜き力は条件で10倍以上変わる</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>アンカーボルトの強さ｜あと施工アンカーの3つの壊れ方</h2>
+        <p>
+          工場の床に架台を固定するときは、床ができあがったあとに穴をあけて打つ「あと施工アンカー」がほとんどです。穴の中で金属を広げて固定する<strong>金属拡張アンカー</strong>と、樹脂で固める<strong>接着系アンカー</strong>に大きく分かれます。どちらも、引き抜かれるときの壊れ方は、主に次の3つです。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 350" role="img" aria-label="アンカーの3つの壊れ方。左はボルトそのものが伸びて切れる。中央はコンクリートが円すいの形に抜ける。右は樹脂とコンクリートの間がはがれて抜ける（接着系だけ）">
+            <defs><marker id="an3" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="10" y="110" width="620" height="170" fill="#d9dee4"/>
+            <rect x="96" y="70" width="12" height="70" fill="#5a6573"/><rect x="96" y="160" width="12" height="100" fill="#5a6573"/>
+            <path d="M96,140 L108,146 L96,152 L108,158" stroke="#d4691a" stroke-width="3" fill="none"/>
+            <line x1="102" y1="66" x2="102" y2="26" stroke="#d4691a" stroke-width="6" marker-end="url(#an3)"/>
+            <text x="102" y="306" font-size="17" fill="#0d2b4e" text-anchor="middle">① ボルトが</text><text x="102" y="330" font-size="17" fill="#0d2b4e" text-anchor="middle">切れる</text>
+            <path d="M232,110 L318,110 L332,250 L312,250 Z" fill="#b8c6d6"/>
+            <path d="M232,110 L320,240 L408,110" fill="#f3d3bb" stroke="#d4691a" stroke-width="2"/>
+            <rect x="314" y="40" width="12" height="210" fill="#5a6573"/>
+            <line x1="320" y1="36" x2="320" y2="4" stroke="#d4691a" stroke-width="6" marker-end="url(#an3)"/>
+            <text x="320" y="306" font-size="17" fill="#0d2b4e" text-anchor="middle">② コンクリートが</text><text x="320" y="330" font-size="17" fill="#0d2b4e" text-anchor="middle">円すい状に抜ける</text>
+            <rect x="524" y="70" width="12" height="190" fill="#5a6573"/>
+            <rect x="516" y="130" width="8" height="130" fill="#d4691a"/><rect x="536" y="130" width="8" height="130" fill="#d4691a"/>
+            <line x1="530" y1="66" x2="530" y2="26" stroke="#d4691a" stroke-width="6" marker-end="url(#an3)"/>
+            <text x="530" y="306" font-size="17" fill="#0d2b4e" text-anchor="middle">③ 接着が</text><text x="530" y="330" font-size="17" fill="#0d2b4e" text-anchor="middle">はがれる</text>
+          </svg>
+          <figcaption>ボルトが強くても、コンクリートや接着が先に負けることがある。③は接着系アンカーだけの壊れ方。</figcaption>
+        </figure>
+
+        <h3>国の指針にある、引張の耐力の式</h3>
+        <p>
+          国土交通省の「あと施工アンカー・連続繊維補強設計・施工指針」では、あと施工アンカー1本の引張の耐力を、3つの壊れ方の式で求め、いちばん小さい値をとります。
+        </p>
+        <p class="calc">
+          ① ボルトで決まる　Ta1 ＝ ボルトの降伏点 × 断面積<br>
+          ② コンクリートで決まる　Ta2 ＝ 0.23 × √σB × Ac、Ac ＝ π × le ×（le ＋ da）<br>
+          ③ 付着で決まる（接着系だけ）　Ta3 ＝ 10 × √（σB ÷ 21）× π × da × le<br>
+          <b>引張の耐力　Ta ＝ ①②③のうち最も小さい値</b><br>
+          短期許容引張力　Tas ＝ Ta（①で決まる場合）、2/3 × Ta（②か③で決まる場合）
+        </p>
+        <p>
+          σB はコンクリートの圧縮強度、le は有効埋め込み深さ、da はアンカーの直径、Ac は円すいを床の上から見た面積です。Ac ＝ π × le ×（le ＋ da）は、アンカーが1本で、床の端からも十分離れている場合の面積です。<strong>Ta は壊れるときの力（耐力）で、許容値ではありません</strong>。指針では、短い期間にかかる力（地震など）に対する許容値 Tas を、上のように Ta から求めます。有効埋め込み深さには、床の上に塗ったモルタルなどの仕上げの厚さは含めません。
+        </p>
+        <p>
+          ただし、この指針は建物の耐震改修のためのもので、<strong class="mk">いつもかかり続ける力（長期の力）にあと施工アンカーを使うことは、対象外</strong>としています。架台の重さや、くり返し動く設備の力は、長期の力です。長期の力には、次に紹介するメーカーの技術資料の値を使います。
+        </p>
+
+        <h3>計算例：M12の接着系アンカー</h3>
+        <p>
+          ボルトは SS400 の全ねじ（径16mm以下の降伏点245MPa、ねじ部の有効断面積84.3mm²）、有効埋め込み深さ110mm、コンクリートの圧縮強度21MPaとします<span class="need-check">（断面積と埋め込み深さは製品ごとの決まりに従う・要確認）</span>。
+        </p>
+        <p class="calc">
+          ① Ta1 ＝ 245 × 84.3 ＝ 約20,700 N<br>
+          ② Ac ＝ π × 110 ×（110 ＋ 12）＝ 約42,160 mm²、Ta2 ＝ 0.23 × √21 × 42,160 ＝ 約44,400 N<br>
+          ③ Ta3 ＝ 10 × √（21 ÷ 21）× π × 12 × 110 ＝ 約41,500 N<br>
+          <b>Ta ＝ 約20,700 N（ボルトで決まる）</b>、短期許容引張力 Tas ＝ 約20,700 N
+        </p>
+        <p>
+          この条件では、コンクリートと付着は約4万N、ボルトは約2万Nで、ボルトが先に負けます。埋め込みが浅い、コンクリートが弱い、床の端に近いといった条件では、コンクリート側が先に負けるようになります。これは式の計算例で、製品の許容荷重や、施工したアンカーの強さをそのまま示すものではありません。
+        </p>
+
+        <h3>メーカーの技術資料の値と比べる</h3>
+        <p>
+          メーカーの技術資料には、アンカー1本の許容引張荷重が、長期と短期に分けて載っています。ある接着系アンカーの資料（M12相当、穿孔の深さ110mm、コンクリート強度21MPa）では、<strong>長期13.7kN、短期20.6kN</strong>で、コンクリートの破壊で決まる値とされていました<span class="need-check">（製品ごとに違う・要確認）</span>。同じ資料には、ボルト側の許容荷重と比べて、小さい方を使うよう書かれています。
+        </p>
+        <p>
+          上の③の値41,500Nと比べると、この例では長期はおよそ1/3、短期はおよそ1/2にあたります。ただし、製品の許容荷重と式の耐力は、評価の条件も定義も違うため、<strong>この比率を一般的な換算の係数として使うことはできません</strong>。製品の値は、製品ごとの施工条件（穴の径と深さなど）で決まっています。このように、<strong class="mk">同じ太さのアンカーでも、基準や製品によって許容値が変わります</strong>。設計では、使う製品の技術資料の値を、その施工条件のとおりに使い、どの基準の値かを計算書に書きます。
+        </p>
+        <p>
+          ボルト側の長期の許容値を、本特集で使っている機械の構造物の規格の例で求めます。クレーン構造規格の考え方では、許容応力は「降伏点÷1.5」と「引張強さ÷1.8」の小さい方で、SS400（径16mm以下、降伏点245MPa、引張強さ400MPa）では163MPaです。163 × 84.3 ＝ 約13,700 N で、このM12では、製品の長期の値とほぼ同じになりました。なお、この規格はクレーンの構造部分のためのもので、一般の機械のボルトの許容値を決めるものではありません。どの基準を使うかは、設計者が決めて明記します<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>へりあきと、アンカーどうしの間隔</h3>
+        <p>
+          コンクリートの円すいは、埋め込み深さと同じくらいの半径で広がります。床の端に近い（へりあきが小さい）と円すいが欠け、アンカーどうしが近いと円すいが重なって、どちらも耐力が下がります。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 300" role="img" aria-label="ワンポイント。上から見た図。アンカー2本の間隔が狭いと、コンクリートの円すいの面積が重なり、1本あたりの耐力が下がる。床の端に近いと、円すいが欠ける">
+            <rect x="12" y="10" width="616" height="280" fill="#ffffff" stroke="#d9dee4" stroke-width="2"/>
+            <text x="30" y="40" font-size="18" fill="#d4691a">ワンポイント</text>
+            <text x="30" y="64" font-size="16" fill="#0d2b4e">上から見た、円すいの広がり</text>
+            <circle cx="150" cy="175" r="80" fill="#f3d3bb" fill-opacity="0.7" stroke="#d4691a" stroke-width="2"/>
+            <circle cx="230" cy="175" r="80" fill="#f3d3bb" fill-opacity="0.7" stroke="#d4691a" stroke-width="2"/>
+            <circle cx="150" cy="175" r="7" fill="#0d2b4e"/><circle cx="230" cy="175" r="7" fill="#0d2b4e"/>
+            <text x="190" y="280" font-size="16" fill="#0d2b4e" text-anchor="middle">間隔が狭い → 重なる</text>
+            <rect x="380" y="80" width="230" height="190" fill="#d9dee4"/>
+            <circle cx="440" cy="175" r="80" fill="#f3d3bb" fill-opacity="0.7" stroke="#d4691a" stroke-width="2"/>
+            <rect x="340" y="90" width="40" height="170" fill="#ffffff"/>
+            <path d="M380,124 A80,80 0 0 0 380,226" fill="none" stroke="#d4691a" stroke-width="2" stroke-dasharray="5 5"/>
+            <line x1="380" y1="80" x2="380" y2="270" stroke="#0d2b4e" stroke-width="3"/>
+            <circle cx="440" cy="175" r="7" fill="#0d2b4e"/>
+            <text x="495" y="64" font-size="16" fill="#0d2b4e" text-anchor="middle">床の端が近い → 欠ける</text>
+          </svg>
+          <figcaption>アンカーを近づけて本数を増やしても、円すいが重なると、本数ほどには強くならない。</figcaption>
+        </figure>
+
+        <p>
+          技術資料には、所定の耐力を出せるへりあきと間隔の条件が書かれています。条件を満たせない場合は、資料にある低減の方法で耐力を下げて計算します<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>あと施工アンカーは、ボルト・コンクリート・付着の3つの壊れ方で、いちばん弱いもので決まる</li>
+            <li>国の指針は耐震改修向けで、長期の力は対象外。長期はメーカーの技術資料の値を使う</li>
+            <li>同じアンカーでも、基準によって許容値が違う。ボルト側とアンカー側の小さい方を使う</li>
+            <li>へりあきが小さい、間隔が狭いと、耐力は下がる</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>アンカーボルトの判定｜計算例の続き</h2>
+        <p>
+          第2章で求めた引き抜き力を、M12のアンカーの長期の許容引張荷重13.7kN（技術資料の例とボルト側の値の小さい方）と比べます。
+        </p>
+        <table>
+          <tr><th>計算例</th><th>引き抜き力（1本）</th><th>13.7kN に対して</th></tr>
+          <tr><td>1 制御盤</td><td>約1,250 N</td><td>9％</td></tr>
+          <tr><td>2 設備をのせる架台</td><td>約1,145 N</td><td>8％</td></tr>
+          <tr class="ng"><td>3 ロボット架台</td><td>約16,500 N</td><td>121％（超過）</td></tr>
+        </table>
+        <p>
+          ロボット架台の柱脚では、M12は長期の許容値を超えました。対策は、次の3つです。
+        </p>
+        <ul>
+          <li><strong>アンカーを太くする</strong>：M16にすると、技術資料の例で長期22.2kN、ボルト側は163 × 157 ＝ 約25,600 N。小さい方の22.2kNに対して74％になります</li>
+          <li><strong>ボルトの間隔を広げる</strong>：間隔を150mmから250mmにすると、T ＝（5,208,375 − 3,305 × 125）÷（250 × 2）＝ 約9,590 N で、M12でも70％です。その分、ベースプレートは大きくなります</li>
+          <li><strong>柱の根元の曲げを減らす</strong>：筋かいを入れる、柱を太くするなど、架台の側で曲げを減らします</li>
+        </ul>
+        <p>
+          非常停止は、めったに起きない力なので短期の値で判定したくなります。しかし、ロボットは通常の運転でも加速と減速をくり返します。<strong>通常の運転、非常停止、地震を分けて力を求め、それぞれに合った許容値で確かめます</strong>。本記事では、非常停止の力を含めた値を、余裕を見て長期の許容値と比べました。くり返しの力については、疲労も別に確かめます<span class="need-check">（要確認）</span>。せん断力は、この例ではどれも引き抜きよりずっと小さい値でした。引き抜きとせん断が同時にかかるときの確かめ方は、技術資料に従います。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>設備や静かな架台では、M12でも余裕が大きい</li>
+            <li>ロボット架台の柱脚では、M12は長期の許容値を超えた</li>
+            <li>対策は、アンカーを太くする、間隔を広げる、柱の根元の曲げを減らすの3つ</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>ベースプレートの厚さの決め方</h2>
+        <p>
+          引張側のアンカーボルトは、ベースプレートを上に引っ張ります。板は、柱の面を根元とする片持ちの板のように曲がります。この曲げから、必要な厚さを求めます。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 300" role="img" aria-label="ベースプレートの曲げの図。柱の面から、ボルトまでの距離eの位置で、ボルトが板を上に引っ張る。板は柱の面を根元として片持ちに曲がる">
+            <defs><marker id="an5" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="20" y="210" width="600" height="70" fill="#d9dee4"/>
+            <rect x="200" y="40" width="120" height="150" fill="#6f8aa6"/>
+            <path d="M150,190 L320,190 L320,208 L150,208 Z" fill="#0d2b4e"/>
+            <path d="M320,190 Q400,184 470,172 L470,190 Q400,202 320,208 Z" fill="#0d2b4e"/>
+            <rect x="424" y="150" width="10" height="110" fill="#5a6573"/>
+            <line x1="429" y1="146" x2="429" y2="96" stroke="#d4691a" stroke-width="6" marker-end="url(#an5)"/>
+            <text x="440" y="112" font-size="17" fill="#d4691a">ボルトの力 T</text>
+            <line x1="320" y1="236" x2="429" y2="236" stroke="#1f2d3d" stroke-width="1.5"/><line x1="320" y1="228" x2="320" y2="244" stroke="#1f2d3d" stroke-width="1.5"/><line x1="429" y1="228" x2="429" y2="244" stroke="#1f2d3d" stroke-width="1.5"/>
+            <text x="374" y="264" font-size="17" fill="#1f2d3d" text-anchor="middle">e</text>
+            <text x="220" y="120" font-size="16" fill="#ffffff">柱</text>
+            <text x="40" y="160" font-size="16" fill="#0d2b4e">柱の面が</text><text x="40" y="180" font-size="16" fill="#0d2b4e">曲げの根元</text>
+          </svg>
+          <figcaption>柱の面からボルトまでの距離 e が長いほど、板の曲げは大きくなる。</figcaption>
+        </figure>
+
+        <p class="calc">
+          柱の面からボルトまでの距離　e ＝（ボルトの間隔 d − 柱の幅 D）÷ 2<br>
+          板の曲げモーメント　Mp ＝ 引張側のボルトの本数 × T × e<br>
+          板の曲げ応力　σ ＝ 6 × Mp ÷（B × t²）　（B：プレートの幅、t：厚さ）<br>
+          <b>必要な厚さ　t ＝ √｛6 × Mp ÷（B × 許容応力）｝</b>
+        </p>
+        <p>
+          この式は、次のように仮定した簡易な計算です。柱の面を、板が固定された根元とみなします。引張側のボルトの力は、すべて同じ腕の長さ e で働くとします。プレートの幅 B は、そのまま曲げに効く幅（有効幅）とします。実際は、リブの有無、ボルトの配置、床との当たり方で板の支え方が変わり、有効幅は全幅より狭くなることがあります。ボルト穴のまわりの変形や、ボルト自体の曲げも、この計算には含みません<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>計算例：ロボット架台のベースプレート</h3>
+        <p>
+          柱の幅100mm、ボルトの間隔150mm、プレートの幅220mmとします。許容応力は、溶接の記事と同じ機械の構造物の規格の例（SS400で163MPa）を使います。
+        </p>
+        <p class="calc">
+          e ＝（150 − 100）÷ 2 ＝ 25 mm<br>
+          Mp ＝ 2 × 16,535 × 25 ＝ 826,750 N·mm<br>
+          t ＝ √｛6 × 826,750 ÷（220 × 163）｝＝ <b>約11.8 mm → 12mm以上</b>
+        </p>
+        <p>
+          許容応力を80MPa（引張強さ400÷5）とすると、約16.8mmで、19mmの板が必要になります。どちらの基準を使うかで、選ぶ板厚が変わります。
+        </p>
+        <p>
+          設備をのせる架台（計算例2）で同じ計算をすると、必要な厚さは約3.7mmです。ただし、計算上は薄くてよくても、溶接のサイズ（板厚以下が目安）や、ボルトを締めたときのゆがみを考えると、実際にはもっと厚い板を選びます<span class="need-check">（目安は社内基準による・要確認）</span>。
+        </p>
+        <p>
+          板が柔らかいと、板の端が床に当たって「てこ」のように働き、ボルトにかかる力が計算より大きくなることがあります（てこ作用）。どのくらい大きくなるかは、板の厚さ、ボルトの配置、柱やリブの硬さで変わります。この計算は、てこ作用を含んでいません。<strong>ベースプレートは、計算上の必要な厚さより、余裕をもった厚さにする</strong>のが基本です。
+        </p>
+
+        <h3>床のコンクリートが押される力</h3>
+        <p>
+          反対側では、プレートが床を押します。第2章の式と同じ仮定（押す力がまとまって働く）で、押す力を引張側のボルトの合計と柱の軸力の和とみなすと、計算例3では約36,400Nです。これを、プレートの端から柱の面までの帯（220×60mm）で受けると仮定すると、約2.8MPaになります。実際に床に当たる面積と押す力の分布は、プレートの変形で変わるため、これは概算です。床のコンクリートの許容値、床の厚さ、端からの距離、ひび割れは、別に確かめます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ベースプレートは、柱の面を根元とする片持ちの板として、必要な厚さを求める</li>
+            <li>ボルトを柱から離すほど、板の曲げは大きくなる</li>
+            <li>板が薄いと「てこ」の力でボルトの力が増える。計算より余裕をもった厚さにする</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。図は選んだ形に合わせて切り替わる） -->
+        <h2>自分の条件で試す｜アンカーボルトとベースプレートの計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。力のかかり方を選ぶと、図と入力する項目が切り替わります。初期値は、本記事の計算例3（ロボット架台の柱脚）と同じです。
+        </p>
+
+        <div class="calc-tool" id="an-tool">
+          <p class="calc-tool-title">アンカーボルトとベースプレートの概算</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（柱の根元の曲げは、圧縮側のボルトの列を回転の中心とする。一体で倒れる場合は、建築設備の耐震計算の式。ベースプレートは柱の面を根元とする片持ちの板）による概算です。アンカーの許容引張荷重は、使う製品の技術資料の値と、ボルト側の値の小さい方を入れてください。初期値の13,700Nは、本記事のM12の例です。へりあき・間隔による低減、引き抜きとせん断の組み合わせ、てこの力、くり返しの力による疲労、施工の品質は計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、製品の技術資料と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <p style="font-size:0.86rem;margin:0 !important;">力のかかり方</p>
+          <div class="calc-btns" data-b="mode"><button type="button" data-v="base">柱の根元の曲げ（筋かいのない架台）</button><button type="button" data-v="over">一体で倒れる（設備・制御盤）</button></div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 320" role="img" aria-label="選んだ力のかかり方での、アンカーボルトにかかる力の向きの図">
+              <defs>
+                <marker id="at-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+                <marker id="at-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <rect x="10" y="232" width="620" height="78" fill="#d9dee4"/>
+              <!-- 柱の根元の曲げ -->
+              <g data-g="base">
+                <text x="16" y="28" font-size="17" fill="#0d2b4e">横から見た図</text>
+                <rect x="240" y="50" width="90" height="164" fill="#6f8aa6"/>
+                <rect x="170" y="214" width="230" height="18" fill="#0d2b4e"/>
+                <rect x="192" y="196" width="10" height="70" fill="#5a6573"/><rect x="368" y="196" width="10" height="70" fill="#5a6573"/>
+                <path d="M150,100 A96,96 0 0 1 300,46" stroke="#0d2b4e" stroke-width="5" fill="none" marker-end="url(#at-an)"/>
+                <text x="70" y="86" font-size="18" fill="#0d2b4e">曲げ M</text>
+                <line x1="373" y1="196" x2="373" y2="138" stroke="#d4691a" stroke-width="6" marker-end="url(#at-ao)"/>
+                <text x="386" y="150" font-size="17" fill="#d4691a">引き抜き</text>
+                <text x="386" y="172" font-size="17" fill="#d4691a"><tspan data-o="figT"></tspan> N</text>
+                <line x1="197" y1="282" x2="373" y2="282" stroke="#1f2d3d" stroke-width="1.5"/><line x1="197" y1="274" x2="197" y2="290" stroke="#1f2d3d" stroke-width="1.5"/><line x1="373" y1="274" x2="373" y2="290" stroke="#1f2d3d" stroke-width="1.5"/>
+                <text x="285" y="308" font-size="16" fill="#1f2d3d" text-anchor="middle">ボルトの間隔 d ＝ <tspan data-o="figd"></tspan> mm</text>
+                <line x1="330" y1="246" x2="373" y2="246" stroke="#d4691a" stroke-width="2"/>
+                <text x="436" y="252" font-size="16" fill="#d4691a">e ＝ <tspan data-o="fige"></tspan> mm</text>
+                <text x="70" y="226" font-size="15" fill="#0d2b4e">回転の中心</text>
+                <circle cx="197" cy="232" r="6" fill="#ffffff" stroke="#0d2b4e" stroke-width="3"/>
+              </g>
+              <!-- 一体で倒れる -->
+              <g data-g="over">
+                <text x="16" y="28" font-size="17" fill="#0d2b4e">横から見た図</text>
+                <rect x="220" y="40" width="170" height="192" fill="#b8c6d6"/>
+                <circle cx="305" cy="130" r="9" fill="#0d2b4e"/>
+                <line x1="120" y1="130" x2="292" y2="130" stroke="#0d2b4e" stroke-width="5" marker-end="url(#at-an)"/>
+                <text x="40" y="118" font-size="17" fill="#0d2b4e">横の力 <tspan data-o="figF"></tspan> N</text>
+                <rect x="232" y="220" width="8" height="46" fill="#5a6573"/><rect x="370" y="220" width="8" height="46" fill="#5a6573"/>
+                <line x1="374" y1="218" x2="374" y2="166" stroke="#d4691a" stroke-width="6" marker-end="url(#at-ao)"/>
+                <text x="404" y="172" font-size="17" fill="#d4691a">引き抜き</text>
+                <text x="404" y="194" font-size="17" fill="#d4691a"><tspan data-o="figR"></tspan> N</text>
+                <line x1="452" y1="130" x2="452" y2="232" stroke="#1f2d3d" stroke-width="1.5"/>
+                <text x="462" y="226" font-size="16" fill="#1f2d3d">hG ＝ <tspan data-o="fighG"></tspan> mm</text>
+                <line x1="236" y1="282" x2="374" y2="282" stroke="#1f2d3d" stroke-width="1.5"/><line x1="236" y1="274" x2="236" y2="290" stroke="#1f2d3d" stroke-width="1.5"/><line x1="374" y1="274" x2="374" y2="290" stroke="#1f2d3d" stroke-width="1.5"/>
+                <text x="305" y="308" font-size="16" fill="#1f2d3d" text-anchor="middle">ボルトの間隔 ℓ ＝ <tspan data-o="figL"></tspan> mm</text>
+                <circle cx="236" cy="232" r="6" fill="#ffffff" stroke="#0d2b4e" stroke-width="3"/>
+                <text x="100" y="226" font-size="15" fill="#0d2b4e">倒れの中心</text>
+              </g>
+            </svg>
+            <p class="calc-fig-note">オレンジの矢印が、アンカーボルト1本にかかる引き抜き力です。入力に合わせて数値が変わります。</p>
+          </div>
+
+          <h4>柱の根元にかかる力と、ボルトの配置</h4>
+          <div class="calc-in">
+            <label data-m="base">柱の根元の曲げモーメント M<span class="row"><input type="range" data-k="M" min="0" max="20000" step="1"><input type="number" data-k="M" min="0" max="20000" step="0.001"><span class="unit">N·m</span></span></label>
+            <label data-m="base">柱の軸力 N（押す向き）<span class="row"><input type="range" data-k="N" min="0" max="50000" step="10"><input type="number" data-k="N" min="0" max="50000" step="1"><span class="unit">N</span></span></label>
+            <label data-m="base">柱の根元の横の力<span class="row"><input type="range" data-k="H" min="0" max="20000" step="10"><input type="number" data-k="H" min="0" max="20000" step="1"><span class="unit">N</span></span></label>
+            <label data-m="base">ボルトの間隔 d（曲げの向き）<span class="row"><input type="range" data-k="d" min="50" max="600" step="5"><input type="number" data-k="d" min="50" max="600" step="1"><span class="unit">mm</span></span></label>
+            <label data-m="over">重さ W<span class="row"><input type="range" data-k="W" min="10" max="5000" step="10"><input type="number" data-k="W" min="10" max="5000" step="1"><span class="unit">kg</span></span></label>
+            <label data-m="over">重心の高さ hG<span class="row"><input type="range" data-k="hG" min="100" max="3000" step="10"><input type="number" data-k="hG" min="100" max="3000" step="1"><span class="unit">mm</span></span></label>
+            <label data-m="over">ボルトの間隔 ℓ（倒れる向き）<span class="row"><input type="range" data-k="L" min="100" max="3000" step="10"><input type="number" data-k="L" min="100" max="3000" step="1"><span class="unit">mm</span></span></label>
+            <label data-m="over">ボルトから重心までの距離 ℓG<span class="row"><input type="range" data-k="LG" min="0" max="1500" step="5"><input type="number" data-k="LG" min="0" max="1500" step="1"><span class="unit">mm</span></span></label>
+            <label data-m="over">横の力の係数 Kh<span class="row"><input type="range" data-k="kh" min="0.1" max="2" step="0.05"><input type="number" data-k="kh" min="0.1" max="2" step="0.05"><span class="unit">倍</span></span></label>
+            <label>引張側のボルトの本数 nt<span class="row"><input type="range" data-k="nt" min="1" max="6" step="1"><input type="number" data-k="nt" min="1" max="6" step="1"><span class="unit">本</span></span></label>
+            <label>ボルトの総本数 n<span class="row"><input type="range" data-k="n" min="2" max="12" step="1"><input type="number" data-k="n" min="2" max="12" step="1"><span class="unit">本</span></span></label>
+            <label>アンカー1本の許容引張荷重<span class="row"><input type="range" data-k="Ta" min="1000" max="60000" step="100"><input type="number" data-k="Ta" min="1000" max="60000" step="10"><span class="unit">N</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容引張荷重の例（本記事の長期の値）</p>
+          <div class="calc-btns" data-b="tap"><button type="button" data-v="13700">M12の例 13,700N</button><button type="button" data-v="22200">M16の例 22,200N</button></div>
+
+          <h4 data-m="base">ベースプレート</h4>
+          <div class="calc-in" data-m="base">
+            <label>柱の幅 D<span class="row"><input type="range" data-k="D" min="30" max="300" step="5"><input type="number" data-k="D" min="30" max="300" step="1"><span class="unit">mm</span></span></label>
+            <label>プレートの幅 B<span class="row"><input type="range" data-k="B" min="60" max="600" step="5"><input type="number" data-k="B" min="60" max="600" step="1"><span class="unit">mm</span></span></label>
+            <label>プレートの厚さ t<span class="row"><input type="range" data-k="t" min="3" max="40" step="1"><input type="number" data-k="t" min="3" max="40" step="0.5"><span class="unit">mm</span></span></label>
+            <label>プレートの許容応力<span class="row"><input type="range" data-k="fb" min="50" max="200" step="0.1"><input type="number" data-k="fb" min="50" max="200" step="0.1"><span class="unit">MPa</span></span></label>
+          </div>
+          <div class="calc-btns" data-b="fbp" data-m="base"><button type="button" data-v="163">機械の構造物の規格の例 163MPa</button><button type="button" data-v="80">引張強さ400÷5＝80MPa</button></div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr data-m="over"><th>横の力 Fh ／ 縦の力 Fv</th><td><b data-o="Fh"></b> N ／ <b data-o="Fv"></b> N</td></tr>
+            <tr data-j="T"><th>アンカー1本の引き抜き力</th><td><b data-o="T"></b> N<span class="judge" data-o="jT"></span></td></tr>
+            <tr><th>アンカー1本のせん断力</th><td><b data-o="Q"></b> N</td></tr>
+            <tr data-m="base"><th>柱の面からボルトまで e</th><td><b data-o="e"></b> mm</td></tr>
+            <tr data-m="base"><th>プレートの曲げモーメント</th><td><b data-o="Mp"></b> N·mm</td></tr>
+            <tr data-m="base" data-j="t"><th>プレートの必要な厚さ</th><td><b data-o="treq"></b> mm<span class="judge" data-o="jt"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="an-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('an-tool');
+          if (!root) return;
+          var DEF = { mode: 'base', M: 5208.375, N: 3305, H: 1250, d: 150, W: 300, hG: 1000, L: 500, LG: 250, kh: 0.6, nt: 2, n: 4, Ta: 13700, D: 100, B: 220, t: 12, fb: 163 };
+          var OVER = { nt: 2, n: 4 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            root.querySelectorAll('[data-b="mode"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === S.mode); });
+            root.querySelectorAll('[data-b="tap"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(S.Ta)); });
+            root.querySelectorAll('[data-b="fbp"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(S.fb)); });
+            root.querySelectorAll('[data-g]').forEach(function (e) { e.style.display = e.dataset.g === S.mode ? '' : 'none'; });
+            root.querySelectorAll('[data-m]').forEach(function (e) { e.style.display = e.dataset.m === S.mode ? '' : 'none'; });
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var T, Q, eq;
+            if (S.mode === 'base') {
+              var M = S.M * 1000;
+              T = (M - S.N * S.d / 2) / (S.d * S.nt);
+              Q = S.H / S.n;
+              eq = 'T ＝（' + fmt(M) + ' − ' + fmt(S.N) + '×' + fmt(S.d) + '÷2）÷（' + fmt(S.d) + '×' + S.nt + '）。';
+              var e = (S.d - S.D) / 2;
+              out('e', fmt(e, 1)); out('fige', fmt(Math.max(e, 0), 1));
+              if (e <= 0) {
+                out('Mp', '−'); out('treq', '−');
+                judge('jt', 't', false, 'ボルトが柱の幅の内側にあるため、この方法では計算しない', '');
+              } else if (T <= 0) {
+                out('Mp', '0'); out('treq', '0');
+                judge('jt', 't', false, '引き抜きが生じないため、この曲げはない', '');
+              } else {
+                var Mp = S.nt * T * e, treq = Math.sqrt(6 * Mp / (S.B * S.fb));
+                out('Mp', fmt(Mp)); out('treq', fmt(treq, 1));
+                judge('jt', 't', S.t < treq, '入力の ' + S.t + 'mm で足りる（' + fmt(treq / S.t * 100) + '％）', '入力の ' + S.t + 'mm では足りない（' + fmt(treq / S.t * 100) + '％）');
+                eq += ' プレートは e ＝（' + fmt(S.d) + ' − ' + fmt(S.D) + '）÷2、必要な厚さ ＝ √｛6×' + fmt(Mp) + '÷（' + fmt(S.B) + '×' + S.fb + '）｝。てこの力が働くと、ボルトの力は大きくなります。';
+              }
+              out('figd', fmt(S.d));
+            } else {
+              var g = 9.80665, Fh = S.kh * S.W * g, Fv = Fh / 2;
+              T = (Fh * S.hG - (S.W * g - Fv) * S.LG) / (S.L * S.nt);
+              Q = Fh / S.n;
+              out('Fh', fmt(Fh)); out('Fv', fmt(Fv)); out('figF', fmt(Fh)); out('fighG', fmt(S.hG)); out('figL', fmt(S.L));
+              eq = 'Rb ＝｛' + fmt(Fh) + '×' + fmt(S.hG) + ' −（' + fmt(S.W * g) + ' − ' + fmt(Fv) + '）×' + fmt(S.LG) + '｝÷（' + fmt(S.L) + '×' + S.nt + '）。縦の力は横の力の半分としています。';
+            }
+            var Tp = Math.max(T, 0);
+            out('T', fmt(Tp)); out('Q', fmt(Q)); out('figT', fmt(Tp)); out('figR', fmt(Tp));
+            if (T <= 0) judge('jT', 'T', false, '引き抜きは生じない（せん断は確認する）', '');
+            else judge('jT', 'T', T > S.Ta, '許容引張荷重 ' + fmt(S.Ta) + 'N 以下（' + fmt(T / S.Ta * 100) + '％）', '許容引張荷重 ' + fmt(S.Ta) + 'N を超過（' + fmt(T / S.Ta * 100) + '％）');
+            out('eq', eq);
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'anchor' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b="mode"] button').forEach(function (b) {
+            b.addEventListener('click', function () {
+              if (b.dataset.v === 'over') { S.nt = OVER.nt; S.n = OVER.n; }
+              set('mode', b.dataset.v);
+            });
+          });
+          root.querySelectorAll('[data-b="tap"] button').forEach(function (b) { b.addEventListener('click', function () { set('Ta', Number(b.dataset.v)); }); });
+          root.querySelectorAll('[data-b="fbp"] button').forEach(function (b) { b.addEventListener('click', function () { set('fb', Number(b.dataset.v)); }); });
+          document.getElementById('an-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆6 -->
+        <h2>アンカーボルトの計算でよくある失敗</h2>
+
+        <h3>床の仕上げの厚さまで、埋め込み深さに入れる</h3>
+        <p>
+          床の上にモルタルなどの仕上げがあると、穴の深さは同じでも、コンクリートに効いている深さは浅くなります。有効埋め込み深さは、コンクリートの部分だけで数えます。
+        </p>
+
+        <h3>床の端や、目地・ひび割れの近くに打つ</h3>
+        <p>
+          円すいが欠けて、耐力が大きく下がります。架台の柱を床の端や、伸縮目地のすぐそばに置く場合は、配置を先に見直します。
+        </p>
+
+        <h3>長期の力に、短期の許容値を使う</h3>
+        <p>
+          本記事で紹介した製品の例では、短期の許容値は長期の約1.5倍でした（比率は製品ごとに違います）。架台の重さや、くり返し動く設備の力に短期の値を使うと、余裕を大きく見誤ります。
+        </p>
+
+        <h3>穴あけで、床の鉄筋に当たる</h3>
+        <p>
+          鉄筋に当たったまま浅く打つ、鉄筋を切って打つ、といったことが起きがちです。床の鉄筋の位置が分からない場合は、探査してから位置を決めます。
+        </p>
+
+        <h3>くり返しの力で、ナットがゆるむ</h3>
+        <p>
+          振動やくり返しの力がかかる設備では、ナットがゆるんだり、アンカーが少しずつ抜けたりすることがあります。ゆるみ止めの方法と、定期的な点検を決めておきます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>有効埋め込み深さは、床の仕上げを除いて数える</li>
+            <li>床の端・目地・ひび割れの近くは避ける</li>
+            <li>長期の力には、長期の許容値を使う</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算書 -->
+        <h2>アンカーボルトの計算書に残す項目</h2>
+        <ul>
+          <li>アンカーの種類、径、本数、配置（間隔、へりあき）</li>
+          <li>有効埋め込み深さと、床の仕上げの厚さ</li>
+          <li>床のコンクリートの強度と厚さ（設計の値か、調べた値か）</li>
+          <li>引き抜き力とせん断力の求め方（式、係数、力の高さ）</li>
+          <li>許容値とその出典（製品の技術資料、長期か短期か）</li>
+          <li>ベースプレートの寸法と厚さ、許容応力の基準</li>
+          <li>計算に含めていないもの（くり返しの力による疲労、施工の品質など）</li>
+        </ul>
+
+        <!-- ◆質問 -->
+        <h2>アンカーボルトの計算でよくある質問</h2>
+
+        <h3>床の厚さは、どのくらい必要ですか</h3>
+        <p>
+          アンカーの技術資料に、使える床の厚さの条件が書かれています。埋め込み深さに対して床が薄いと、裏側まで割れが届くおそれがあるため、条件を満たさない場合は、アンカーの種類か配置を見直します<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>アンカーの施工に、資格は必要ですか</h3>
+        <p>
+          あと施工アンカーには、業界団体による施工者の資格制度があります。すべての工事に法律で一律に求められる資格ではありませんが、発注者の仕様や、製品の条件によって、資格者による施工を求められることがあります<span class="need-check">（要確認）</span>。計算どおりの強さは、決められた穴の径と深さ、穴の清掃、硬化時間などを守って、はじめて出ます。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          アンカーボルトの引き抜き計算は、柱の根元の曲げを、ボルトの間隔で割るのが基本です。設備が一体で倒れる場合は、重さが倒れを止める効きも入れます。求めた力は、使う製品の技術資料の許容値と、ボルト側の許容値の小さい方と比べます。
+        </p>
+        <p>
+          強くする方法は、<strong class="mk">アンカーを太くすること、ボルトの間隔を広げること、そして柱の根元の曲げを減らすこと</strong>です。ベースプレートは、計算した厚さより余裕をもって選びます。まずは計算ツールで、ご自身の条件を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://www.mlit.go.jp/jutakukentiku/build/anchor/060707sisin.pdf" target="_blank" rel="noopener">国土交通省「あと施工アンカー・連続繊維補強設計・施工指針」（引張耐力の式、短期許容引張力）</a><br>
+          ・設備が一体で倒れる場合の式：建築設備の耐震設計・施工の指針（日本建築センター）の考え方<br>
+          ・許容応力の基準（163MPa）：<a href="https://www.mhlw.go.jp/web/t_doc?dataId=74022010&dataType=0&pageNo=1" target="_blank" rel="noopener">厚生労働省「クレーン構造規格」</a>
+        </p>
+
+        <div class="article-cta">
+          アンカーボルトやベースプレートの計算、架台の柱脚の設計でお困りのことはありませんか。計算の考え方の整理から、計算書の作成まで承ります。お気軽にお問い合わせください。
+          <span class="cta-price">強度検証・設計のご依頼の料金は、「<a href="../../price.html#design">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.14</p>
+                <h3><a href="weld-strength-calculation.html">溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで</a></h3>
+                <p class="column-excerpt">のど厚と有効長さの求め方、製造業で使える許容応力の決め方、曲げを受ける溶接の計算例。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.12</p>
+                <h3><a href="robot-stand-strength-calculation.html">ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</a></h3>
+                <p class="column-excerpt">ロボットが急に止まるとき、架台には横向きの力とモーメントがかかります。慣性力の求め方から、応力・たわみ・アンカーの確認までを解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
