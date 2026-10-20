@@ -2141,3 +2141,35 @@ a.industry-card { cursor: pointer; }
 .price-faq dt:first-child { border-top: 0; padding-top: 4px; }
 .price-faq dt::before { content: "Q. "; color: var(--orange); }
 .price-faq dd { margin: 6px 0 16px; padding-left: 1.7em; }
+
+/* トップ：すぐにご依頼いただけること（2026-10-20）。カードやアイコンは使わず、細い線で区切る */
+.quick-order { background: #fff; padding: 34px 0 30px; border-bottom: 1px solid var(--line); }
+.qo-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px 20px; flex-wrap: wrap; margin-bottom: 14px; }
+.qo-head h2 { font-size: clamp(1.15rem, 2.4vw, 1.4rem); color: var(--navy); }
+.qo-head p { color: var(--ink-soft); font-size: 0.92rem; }
+.qo-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--navy); border-bottom: 1px solid var(--line); }
+.qo-list li { padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.qo-list li + li { border-left: 1px solid var(--line); }
+.qo-list b { color: var(--navy); font-size: 1rem; }
+.qo-list span { color: var(--orange-dark); font-weight: 700; font-size: 1.1rem; }
+.qo-note { margin-top: 14px; font-size: 0.93rem; color: var(--ink); }
+.qo-note a { color: var(--navy); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; margin-left: 6px; white-space: nowrap; }
+@media (max-width: 700px) {
+  .qo-list { grid-template-columns: 1fr; }
+  .qo-list li { flex-direction: row; justify-content: space-between; align-items: baseline; padding: 12px 4px; }
+  .qo-list li + li { border-left: 0; border-top: 1px solid var(--line); }
+}
+/* トップ：めざす姿を「続けるほど」の章の中へ（明るい背景用の色） */
+.goal-inline { margin-top: 48px; }
+.goal-title { text-align: center; color: var(--navy); font-family: "Shippori Mincho", serif; font-size: clamp(1.15rem, 2.4vw, 1.4rem); margin-bottom: 18px; }
+.loop--light .loop-node { background: #fff; border: 1px solid var(--line); }
+.loop--light .loop-node .ln-no { color: var(--orange); }
+.loop--light .loop-node h3 { color: var(--navy); }
+.loop--light .loop-node p { color: var(--ink-soft); }
+.loop--light .loop-arrow { color: var(--orange); }
+.goal-inline .loop-return { color: var(--orange-dark); }
+.goal-inline .loop-return .accent { color: var(--navy); }
+.goal-inline .loop-return a { font-family: "Zen Kaku Gothic New", sans-serif; font-size: 0.92rem; color: var(--navy); text-decoration: underline; text-underline-offset: 4px; margin-left: 8px; white-space: nowrap; }
+/* 料金ページ：強みの一文 */
+.price-strong { background: var(--paper-soft); padding: 12px 16px; border-radius: 6px; }
+.price-strong b { color: var(--navy); }
