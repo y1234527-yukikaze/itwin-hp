@@ -2173,3 +2173,33 @@ a.industry-card { cursor: pointer; }
 /* 料金ページ：強みの一文 */
 .price-strong { background: var(--paper-soft); padding: 12px 16px; border-radius: 6px; }
 .price-strong b { color: var(--navy); }
+
+/* 特集の印（コラム一覧のバナーの左上）と、いちばん新しい記事の「New‼」（2026-10-21） */
+.industry-banner { position: relative; margin-top: 14px; }
+.feature-tag {
+  position: absolute; top: -13px; left: 22px;
+  background: var(--orange); color: #fff; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.12em;
+  padding: 3px 14px; border-radius: 4px; line-height: 1.6;
+}
+.column-card, .industry-card { position: relative; }
+.new-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: linear-gradient(180deg, #3d9cff 0%, #1f6fe0 100%); color: #fff;
+  font-weight: 800; font-size: 0.84rem; letter-spacing: 0.06em; line-height: 1;
+  padding: 7px 14px 6px; border-radius: 999px;
+  box-shadow: 0 3px 0 #1550b0, 0 6px 12px rgba(31, 111, 224, 0.25);
+}
+.industry-card .new-badge { left: auto; right: 12px; }
+
+/* ボア径選びゲーム（エアシリンダの記事・2026-10-21）。動くのはスタートを押したときだけ */
+.ufo-weight { font-size: 1rem; color: var(--navy); margin: 0 0 8px !important; }
+.ufo-weight b { font-size: 1.3rem; color: var(--orange-dark); }
+.ufo-pick p { font-size: 0.86rem; margin: 10px 0 0 !important; }
+.ufo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 16px; }
+.ufo-actions .calc-reset { margin-top: 0; }
+.ufo-actions button:disabled { opacity: 0.45; cursor: default; }
+.ufo .calc-btns button:disabled { opacity: 0.55; cursor: default; }
+.ufo-msg { margin-top: 14px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px; background: #fff; font-size: 0.95rem; line-height: 1.8; }
+.ufo-msg.is-ok { border: 2px solid var(--orange); background: #fff7f0; }
+.ufo-msg.is-ng { border: 2px solid var(--navy); }
+.ufo-msg small { color: var(--ink-soft); }

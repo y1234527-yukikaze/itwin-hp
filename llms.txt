@@ -27,6 +27,7 @@
 - [ロボット架台の強度計算](https://i-twin.co.jp/column/articles/robot-stand-strength-calculation): 非常停止時の慣性力の求め方と、門型架台の計算例
 - [溶接の強度計算の方法と例](https://i-twin.co.jp/column/articles/weld-strength-calculation): すみ肉溶接ののど厚、有効長さ、曲げを受ける溶接の計算
 - [アンカーボルトの引き抜き計算の方法と例](https://i-twin.co.jp/column/articles/anchor-bolt-calculation): 柱の根元の曲げと設備の転倒から求める引き抜き力、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さ
+- [エアシリンダの選定計算の方法と例](https://i-twin.co.jp/column/articles/air-cylinder-selection): 押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッション、空気の消費量
 
 ## コラム（解説記事）
 
