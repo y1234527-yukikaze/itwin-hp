@@ -158,6 +158,7 @@
 
       <!-- ◆業種別まとめページへの誘導バナー -->
       <div class="industry-banner">
+        <span class="feature-tag">特集</span>
         <div class="industry-banner-text">
           <h2>業種別で探す</h2>
           <p>金属加工・樹脂成形・食品・電子部品など、工程・技術別に活用事例を整理しています。</p>
@@ -167,6 +168,7 @@
 
       <!-- ◆特集「自動化設備の設計ノート」まとめページへの誘導バナー -->
       <div class="industry-banner">
+        <span class="feature-tag">特集</span>
         <div class="industry-banner-text">
           <h2>設計の計算で探す</h2>
           <p>架台の強度計算・溶接・アンカー・シリンダ選定など、計算例と計算ツールつきでまとめています。</p>
@@ -424,5 +426,23 @@
     </div>
   </footer>
 
+
+  <!-- いちばん新しい記事のカードに「NEW」を付ける（日付がいちばん新しいカードを自動で選ぶ。記事を足しても直す必要はない） -->
+  <script>
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.column-grid > a.column-card'));
+    var best = null, bestDate = '';
+    cards.forEach(function (c) {
+      var d = c.getAttribute('data-date') || ((c.querySelector('.column-date') || {}).textContent || '').trim().replace(/\./g, '-');
+      if (d && d > bestDate) { bestDate = d; best = c; }
+    });
+    if (!best) return;
+    var b = document.createElement('span');
+    b.className = 'new-badge';
+    b.textContent = 'New‼';
+    best.classList.add('is-new');
+    best.insertBefore(b, best.firstChild);
+  })();
+  </script>
 </body>
 </html>

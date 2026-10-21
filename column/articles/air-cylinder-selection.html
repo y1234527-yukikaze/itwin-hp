@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：エアシリンダの選定計算の方法と例（特集「自動化設備の設計ノート」05）
+  （溶接の記事を土台に、キットの build_cylinder.py で組み立て・2026-10-21）
+  計算例の検算：キットの cylinder_calc.py／計算ツール：キットの tool_cylinder.html／本文：キットの cylinder_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-air-cylinder.jpg（ナノバナナで生成して差し替え）
+  それ以外の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで｜アイツイン コラム</title>
+  <meta name="description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/air-cylinder-selection">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで">
+  <meta property="og:description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/air-cylinder-selection">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-air-cylinder.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-21">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで">
+  <meta name="twitter:description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-air-cylinder.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで",
+    "description": "エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-air-cylinder.jpg",
+    "datePublished": "2026-10-21",
+    "dateModified": "2026-10-21",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/air-cylinder-selection"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで", "item": "https://i-twin.co.jp/column/articles/air-cylinder-selection" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</span>
+      </div>
+      <h1>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</h1>
+      <p class="catch">公開日：2026年10月21日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.21</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-air-cylinder.jpg" alt="エアシリンダの選定計算。ローラーの上のワークを、エアシリンダで押すイメージ" width="1376" height="768">
+          <figcaption>シリンダの大きさは、押す力だけでなく、止めるときの衝撃でも決まる。</figcaption>
+        </figure>
+
+        <p>
+          エアシリンダを選ぶとき、「とりあえずφ40」「前の設備と同じ」で決めていないでしょうか。本記事では、<strong class="mk">エアシリンダの選定計算の方法</strong>を、計算例つきで解説します。推力と負荷率からボア径（チューブの内径）を決め、<strong>ストロークの終わりで止めるときの衝撃</strong>まで確かめます。
+        </p>
+        <p>
+          後半には、ボア径を選ぶと、押す力・引く力と、ローラーの上で動かせるワークの重さの目安が変わる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、エアシリンダの選定の基本的な計算方法を説明するものです。選定の可否を保証するものではありません</li>
+            <li>負荷率の目安、クッションの吸収量、ロッドの径などは、メーカーや機種で違います。実際の選定では、使うシリンダのカタログと、メーカーの選定ツールで確かめてください</li>
+            <li>加速に必要な力、配管での圧力の落ち、横向きの力、くり返しによる摩耗は、必要に応じて別に確かめてください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>エアシリンダの推力の求め方（押す側と引く側の違い）</li>
+            <li>負荷率の決め方と、ボア径の選び方</li>
+            <li>ストロークの終わりの衝撃（運動エネルギー）の確かめ方</li>
+            <li>ボア径から、ローラーの上で動かせるワークの重さが分かる計算ツール</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>エアシリンダの選定計算の流れ</h2>
+        <p>
+          エアシリンダの選定は、次の4つの順で進めます。多くの解説は①②で終わりますが、トラブルが起きやすいのは③④です。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 230" role="img" aria-label="エアシリンダの選定の流れ。1 必要な力を求める、2 負荷率からボア径を決める、3 ストロークの終わりの衝撃を確かめる、4 横向きの力と空気の量を確かめる">
+            <defs><marker id="cy1" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="10" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
+            <rect x="170" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
+            <rect x="330" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
+            <rect x="490" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
+            <text x="80" y="76" font-size="20" fill="#d4691a" text-anchor="middle">1</text><text x="80" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">必要な力を</text><text x="80" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">求める</text>
+            <text x="240" y="76" font-size="20" fill="#d4691a" text-anchor="middle">2</text><text x="240" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">負荷率から</text><text x="240" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">ボア径を決める</text>
+            <text x="400" y="76" font-size="20" fill="#d4691a" text-anchor="middle">3</text><text x="400" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">止めるときの</text><text x="400" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">衝撃を確かめる</text>
+            <text x="560" y="76" font-size="20" fill="#d4691a" text-anchor="middle">4</text><text x="560" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">横向きの力と</text><text x="560" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">空気の量</text>
+            <line x1="150" y1="115" x2="166" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#cy1)"/>
+            <line x1="310" y1="115" x2="326" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#cy1)"/>
+            <line x1="470" y1="115" x2="486" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#cy1)"/>
+            <text x="480" y="218" font-size="19" fill="#d4691a" text-anchor="middle">見落とされやすいのは、3と4</text>
+          </svg>
+          <figcaption>推力だけで選ぶと、止めるときの衝撃で壊れることがある。</figcaption>
+        </figure>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>選定は、力 → ボア径 → 衝撃 → 横向きの力と空気の量の順で進める</li>
+            <li>推力だけでなく、止めるときの衝撃まで確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>エアシリンダの推力の計算｜押す側と引く側で違う</h2>
+        <p>
+          エアシリンダの推力は、空気の圧力に、ピストンが圧力を受ける面積を掛けて求めます。押す側（ロッドが出る向き）は、ピストン全体の面積で受けます。引く側（ロッドが戻る向き）は、ロッドの分だけ面積が小さくなるため、<strong>引く力は押す力より小さくなります</strong>。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 260" role="img" aria-label="ピストンが圧力を受ける面積。押す側はピストン全体の円の面積、引く側はロッドの分を除いたドーナツ形の面積">
+            <circle cx="170" cy="120" r="90" fill="#d4691a" fill-opacity="0.75"/>
+            <circle cx="470" cy="120" r="90" fill="#d4691a" fill-opacity="0.75"/>
+            <circle cx="470" cy="120" r="36" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
+            <text x="470" y="126" font-size="20" fill="#0d2b4e" text-anchor="middle">ロッド</text>
+            <text x="170" y="240" font-size="21" fill="#0d2b4e" text-anchor="middle">押す側：π × D² ÷ 4</text>
+            <text x="470" y="240" font-size="21" fill="#0d2b4e" text-anchor="middle">引く側：π ×（D² − d²）÷ 4</text>
+          </svg>
+          <figcaption>オレンジが、空気の圧力を受ける面積。引く側はロッドの分だけ小さい。</figcaption>
+        </figure>
+
+        <p class="calc">
+          押す力　F ＝ P × π × D² ÷ 4<br>
+          引く力　F ＝ P × π ×（D² − d²）÷ 4<br>
+          P：シリンダにかかる圧力（MPa ＝ N/mm²）、D：ボア径（mm）、d：ロッドの径（mm）
+        </p>
+        <p>
+          この式で求まるのは<strong>理論推力</strong>です。実際の推力は、シリンダの中の摺動の抵抗、配管やバルブでの圧力の落ち、排気側に残る圧力（背圧）の分だけ小さくなります。
+        </p>
+        <p>
+          使用圧力は、工場の配管の圧力をそのまま使わず、<strong>シリンダが動いているときに、シリンダの近くで確保できる圧力</strong>で計算します。あるメーカーの技術資料では、減圧弁で空気源の圧力の85％程度に設定するのが一般的としています。ただし、圧力の落ち方は、配管の太さと長さ、継手やバルブ、同時に使う空気の量で変わります。一律に15％下がるとは考えず、実機で測って確かめます<span class="need-check">（要確認）</span>。
+        </p>
+        <p>
+          使用圧力0.5MPaでの<strong>理論推力</strong>は、次のとおりです。ロッドの径は、あるメーカーの標準的なシリーズの例です。ロッドの径は、メーカーやシリーズ、仕様で違うため、使う機種のカタログで確かめてください<span class="need-check">（要確認）</span>。
+        </p>
+        <table>
+          <tr><th>ボア径</th><th>ロッドの径</th><th>押す力</th><th>引く力</th></tr>
+          <tr><td>φ16</td><td>φ6</td><td>101 N</td><td>86 N</td></tr>
+          <tr><td>φ20</td><td>φ8</td><td>157 N</td><td>132 N</td></tr>
+          <tr><td>φ25</td><td>φ10</td><td>245 N</td><td>206 N</td></tr>
+          <tr><td>φ32</td><td>φ12</td><td>402 N</td><td>346 N</td></tr>
+          <tr><td>φ40</td><td>φ16</td><td>628 N</td><td>528 N</td></tr>
+          <tr><td>φ50</td><td>φ20</td><td>982 N</td><td>825 N</td></tr>
+          <tr><td>φ63</td><td>φ20</td><td>1,559 N</td><td>1,402 N</td></tr>
+          <tr><td>φ80</td><td>φ25</td><td>2,513 N</td><td>2,268 N</td></tr>
+          <tr><td>φ100</td><td>φ30</td><td>3,927 N</td><td>3,574 N</td></tr>
+        </table>
+        <p>
+          これは理論値で、負荷率や実際の使用圧力を反映した値ではありません。実際の推力との差を見込むのが、次の負荷率です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>推力は、使用圧力×受圧面積。引く側はロッドの分だけ小さい</li>
+            <li>使用圧力は、元の圧力の85％程度で計算する</li>
+            <li>表の推力は理論値。実際はもっと小さい</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>負荷率の決め方と、ボア径の選び方</h2>
+        <p>
+          負荷率は、シリンダの理論推力のうち、実際の負荷に使ってよい割合です。必要な推力は、負荷を負荷率で割って求めます。
+        </p>
+        <p class="calc">
+          <b>必要な推力 ＝ 負荷（N）÷ 負荷率 η</b><br>
+          必要な受圧面積 ＝ 必要な推力 ÷ 使用圧力
+        </p>
+        <p>
+          負荷率の目安は、メーカーの選定資料に従います。ある1社の技術資料では、次のようにしています<span class="need-check">（メーカー・動作の条件で違う・要確認）</span>。
+        </p>
+        <table>
+          <tr><th>使い方</th><th>負荷率の目安</th></tr>
+          <tr><td>止めて押す作業（クランプ、低速のかしめなど）</td><td>0.7以下</td></tr>
+          <tr><td>ガイドに乗せた負荷を、水平に動かす</td><td>1以下</td></tr>
+          <tr><td>負荷を垂直〜水平に動かす</td><td>0.5以下</td></tr>
+        </table>
+        <p>
+          これは1社の目安で、すべてのシリンダに共通の決まりではありません。負荷率1は、理論推力と負荷が同じで余裕がない状態です。負荷は、重力、摩擦、加速に必要な力から、動かす向きごとに求め、実際の使用圧力での推力と比べます。速く動かしたい場合や、起動と停止をひんぱんにくり返す場合は、負荷率をさらに下げ、慣性の力と止めるときの衝撃も別に確かめます。負荷率に余裕がないと、動き出しが遅い、途中で止まる、速度がばらつく、といったことが起きます。水平で、押すときも引くときも同じ負荷なら、力の小さい<strong>引く側で選びます</strong>。押すときと引くときで負荷が違う場合は、それぞれの向きで計算します。
+        </p>
+
+        <h3>計算例1：30kgのワークを垂直に持ち上げる</h3>
+        <p>
+          使用圧力0.5MPa、負荷率0.5、押す側で持ち上げるとします。
+        </p>
+        <p class="calc">
+          負荷　30 × 9.81 ＝ 294 N<br>
+          必要な推力　294 ÷ 0.5 ＝ 588 N<br>
+          必要な受圧面積　588 ÷ 0.5 ＝ 1,177 mm²　→　ボア径　約38.7 mm<br>
+          <b>φ40を選ぶ（押す力628N、負荷率47％）</b>
+        </p>
+        <p>
+          ここでは重力だけを負荷としました。垂直に持ち上げる場合は、ほかに次のことも確かめます<span class="need-check">（要確認）</span>。
+        </p>
+        <ul>
+          <li>シリンダの摺動の抵抗と、動いているときの圧力の落ち</li>
+          <li>動き出しと止まるときの、加速の力</li>
+          <li>下げるときの速度の制御</li>
+          <li>停電、空気の圧力の低下、配管の破損のときの落下防止。シリンダだけで重さを保てるとは限らないため、落ちると危険な装置では、機械的なロックやブレーキなどを考えます</li>
+        </ul>
+
+
+        <h3>計算例2：ローラーの上の100kgのワークを、水平に押す</h3>
+        <p>
+          ワークの下がローラー（ころ）なら、動かすのに必要な力は、重さそのものではなく、ころがりの抵抗です。抵抗の係数 μ は、ローラーの径や軸受、ワークの底面、ローラーの状態、重さの偏りで変わります。ここでは<strong>計算例として0.1と仮定</strong>します。実際は、実機で測った値や設備の仕様を優先してください<span class="need-check">（仮の値・要確認）</span>。使用圧力0.5MPa、負荷率0.5とします。
+        </p>
+        <p class="calc">
+          動かすのに必要な力　0.1 × 100 × 9.81 ＝ 98 N<br>
+          必要な推力　98 ÷ 0.5 ＝ 196 N<br>
+          必要な受圧面積　196 ÷ 0.5 ＝ 392 mm²　→　ボア径　約22.3 mm<br>
+          <b>φ25を選ぶ（押す力245N で負荷率40％、引く力206N で負荷率48％）</b>
+        </p>
+        <p>
+          動き始めの力、加速の力、ワークの位置ずれや引っかかりは、この計算に含めていないので、別に確かめます。そのうえで、ローラーの上なら、φ25でも100kgを動かせる計算になります。逆にいえば、<strong class="mk">細いシリンダでも、重いワークが動いてしまう</strong>ということです。重いワークが動くほど、次の章の「止めるときの衝撃」が大きくなります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>必要な推力は、負荷÷負荷率。動かす作業の負荷率の目安は0.5以下</li>
+            <li>押すときも引くときも同じ負荷なら、引く側で選ぶ</li>
+            <li>ローラーの上では、細いシリンダでも重いワークが動く</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>ストロークの終わりの衝撃｜運動エネルギーとクッション</h2>
+        <p>
+          シリンダで動かしたワークを、ストロークの終わりで止めるとき、ワークの運動エネルギーをどこかで受け止めなければなりません。外にストッパーがなければ、シリンダの中のピストンがふたに当たって止まります。この衝撃をやわらげるのが、シリンダのクッション（ゴムのクッションや、空気のクッション）です。
+        </p>
+        <p class="calc">
+          <b>運動エネルギー　E ＝ m × v² ÷ 2</b><br>
+          m：ワークの質量（kg）、v：ストロークの終わりの速度（m/s）
+        </p>
+        <p>
+          この値を、使うシリンダのカタログにあるクッションの吸収量（許容運動エネルギー）と比べます。吸収量は、シリーズ、ボア径、クッションの種類（ゴムか空気か）で決まっています。質量 m には、ワークだけでなく、ピストンやロッドなどシリンダの動く部分の質量も含めます。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 280" role="img" aria-label="ワンポイント。運動エネルギーは速度の2乗に比例する。速度が2倍になると、止めるときのエネルギーは4倍になる">
+            <rect x="12" y="10" width="616" height="260" fill="#ffffff" stroke="#d9dee4" stroke-width="2"/>
+            <text x="30" y="40" font-size="22" fill="#d4691a">ワンポイント</text>
+            <text x="30" y="64" font-size="20" fill="#0d2b4e">速度が2倍になると、止めるときのエネルギーは4倍</text>
+            <rect x="120" y="200" width="70" height="40" fill="#b8c6d6"/>
+            <text x="155" y="226" font-size="19" fill="#0d2b4e" text-anchor="middle">1</text>
+            <rect x="260" y="80" width="70" height="160" fill="#d4691a"/>
+            <text x="295" y="166" font-size="22" fill="#ffffff" text-anchor="middle">4</text>
+            <rect x="400" y="200" width="70" height="40" fill="#b8c6d6"/>
+            <rect x="400" y="160" width="70" height="40" fill="#b8c6d6"/>
+            <text x="435" y="226" font-size="19" fill="#0d2b4e" text-anchor="middle">2</text>
+            <text x="155" y="262" font-size="19" fill="#0d2b4e" text-anchor="middle">基準</text>
+            <text x="295" y="262" font-size="19" fill="#0d2b4e" text-anchor="middle">速度2倍</text>
+            <text x="435" y="262" font-size="19" fill="#0d2b4e" text-anchor="middle">重さ2倍</text>
+            <line x1="40" y1="240" x2="600" y2="240" stroke="#5a6573" stroke-width="2"/>
+          </svg>
+          <figcaption>重さを2倍にしても2倍だが、速度を2倍にすると4倍になる。止めにくさは速度で大きく変わる。</figcaption>
+        </figure>
+
+        <h3>計算例2の続き：100kgを300mm/sで止める</h3>
+        <p class="calc">
+          E ＝ 100 × 0.3² ÷ 2 ＝ <b>4.5 J</b>
+        </p>
+        <p>
+          ある1社のカタログでは、φ25のクッションの吸収量は、シリーズとクッションの種類によって、およそ0.1〜0.8Jでした。ここでは0.4Jと仮定します<span class="need-check">（機種で違う・要確認）</span>。4.5Jは、その10倍以上です。<strong class="mk">推力は足りているのに、止めることができない</strong>という状態です。
+        </p>
+        <p>
+          対策は、次の3つです。
+        </p>
+        <ul>
+          <li><strong>速度を落とす</strong>：0.4Jで止められる速度は、v ＝ √（2 × 0.4 ÷ 100）＝ 約0.089 m/s、つまり約89mm/sです（シリンダの動く部分の質量を入れると、もう少し遅くなります）</li>
+          <li><strong>外にショックアブソーバを付ける</strong>：ワークのエネルギーを、シリンダではなく外の装置で受け止めます</li>
+          <li><strong>クッションの仕様を変える</strong>：空気のクッション付きなど、吸収量の大きい仕様やシリーズに変えます。ボア径を上げると吸収量が増える機種もありますが、それだけで解決するとは限らないので、カタログの値で確かめます</li>
+        </ul>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ストロークの終わりでは、ワークの運動エネルギーを受け止める必要がある</li>
+            <li>運動エネルギーは速度の2乗に比例する。速度を上げると急に厳しくなる</li>
+            <li>クッションの吸収量を超えるなら、速度を落とすか、外にショックアブソーバを付ける</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。ボア径を変えると、動かせる重さと図のワークの大きさが変わる） -->
+        <h2>自分の条件で試す｜エアシリンダの選定計算ツール（概算）</h2>
+        <p>
+          ボア径を選ぶと、押す力・引く力と、ローラーの上で動かせるワークの重さの目安が変わります。勘違いが起きないよう、条件は「ワークの下がローラーで、水平に動かす場合」に限っています。初期値は、本記事の計算例2と同じです。
+        </p>
+
+        <div class="calc-tool" id="cy-tool">
+          <p class="calc-tool-title">ローラーの上のワークを、エアシリンダで水平に動かす</p>
+          <p class="calc-tool-note">
+            条件は、<strong>ワークの下がローラー（ころ）で、水平に押す・引く場合</strong>に限ります。持ち上げる（垂直）使い方や、床の上を引きずる使い方には使えません。ローラーの抵抗の係数は、計算例として仮定した値です（実機で測った値を優先してください）。推力は理論値（圧力×受圧面積）で、ロッドの径は、あるメーカーの標準的なシリーズの例です。負荷率の目安は、ある1社の技術資料の値です。クッションの吸収量は、使うシリンダのカタログの値を入れてください。運動エネルギーには、シリンダの動く部分の質量を含めていません。加速に必要な力、配管の圧力の落ち、横向きの力は計算に含みません。<strong>結果は選定の可否を保証するものではありません。</strong>実際の選定では、メーカーのカタログと選定ツールで確かめてください。
+          </p>
+
+          <p style="font-size:0.86rem;margin:0 !important;">シリンダのボア径（内径）</p>
+          <div class="calc-btns" data-b="D"><button type="button" data-v="16">φ16</button><button type="button" data-v="20">φ20</button><button type="button" data-v="25">φ25</button><button type="button" data-v="32">φ32</button><button type="button" data-v="40">φ40</button><button type="button" data-v="50">φ50</button><button type="button" data-v="63">φ63</button><button type="button" data-v="80">φ80</button><button type="button" data-v="100">φ100</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">動かす向き</p>
+          <div class="calc-btns" data-b="dir"><button type="button" data-v="push">押す（ロッドが出る）</button><button type="button" data-v="pull">引く（ロッドが戻る）</button></div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 300" role="img" aria-label="ローラーの上のワークを、エアシリンダで水平に押す・引く図。ボア径を変えると、動かせるワークの重さの目安が変わる">
+              <defs>
+                <marker id="cy-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <rect x="20" y="70" width="18" height="160" fill="#5a6573"/>
+              <rect x="38" y="122" width="130" height="56" rx="6" fill="#6f8aa6"/>
+              <text x="103" y="157" font-size="22" fill="#ffffff" text-anchor="middle">φ<tspan data-o="figD"></tspan></text>
+              <rect x="168" y="141" width="62" height="18" fill="#b8c6d6"/>
+              <rect x="226" y="126" width="10" height="48" fill="#5a6573"/>
+              <rect data-o="box" x="236" y="80" width="150" height="132" fill="#e8ecf1" stroke="#0d2b4e" stroke-width="2"/>
+              <text data-o="boxt1" x="311" y="134" font-size="20" fill="#0d2b4e" text-anchor="middle">動かせる重さ</text>
+              <text data-o="boxt2" x="311" y="164" font-size="26" font-weight="700" fill="#0d2b4e" text-anchor="middle">約<tspan data-o="figM"></tspan>kg</text>
+              <line x1="200" y1="222" x2="620" y2="222" stroke="#5a6573" stroke-width="3"/>
+              <circle cx="250" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/><circle cx="310" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/><circle cx="370" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/><circle cx="430" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/><circle cx="490" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/><circle cx="550" cy="236" r="12" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/>
+              <text x="430" y="280" font-size="20" fill="#5a6573" text-anchor="middle">ローラー（ころ）</text>
+              <g data-g="push"><line x1="420" y1="60" x2="520" y2="60" stroke="#d4691a" stroke-width="6" marker-end="url(#cy-ao)"/><text x="420" y="42" font-size="21" fill="#d4691a">押す力 <tspan data-o="figF"></tspan> N</text></g>
+              <g data-g="pull"><line x1="520" y1="60" x2="420" y2="60" stroke="#d4691a" stroke-width="6" marker-end="url(#cy-ao)"/><text x="420" y="42" font-size="21" fill="#d4691a">引く力 <tspan data-o="figF"></tspan> N</text></g>
+            </svg>
+            <p class="calc-fig-note">ボア径を変えると、押す力・引く力と、動かせるワークの重さの目安が変わります。</p>
+          </div>
+
+          <h4>条件</h4>
+          <div class="calc-in">
+            <label>使用圧力<span class="row"><input type="range" data-k="P" min="0.2" max="0.8" step="0.05"><input type="number" data-k="P" min="0.2" max="0.8" step="0.01"><span class="unit">MPa</span></span></label>
+            <label>ローラーの抵抗の係数 μ<span class="row"><input type="range" data-k="mu" min="0.02" max="0.3" step="0.01"><input type="number" data-k="mu" min="0.02" max="0.3" step="0.01"><span class="unit"></span></span></label>
+            <label>負荷率の目安 η<span class="row"><input type="range" data-k="eta" min="0.2" max="1" step="0.05"><input type="number" data-k="eta" min="0.2" max="1" step="0.05"><span class="unit"></span></span></label>
+            <label>実際のワークの重さ<span class="row"><input type="range" data-k="m" min="1" max="2000" step="1"><input type="number" data-k="m" min="1" max="2000" step="1"><span class="unit">kg</span></span></label>
+            <label>ストロークの終わりの速度<span class="row"><input type="range" data-k="v" min="20" max="1000" step="10"><input type="number" data-k="v" min="20" max="1000" step="1"><span class="unit">mm/s</span></span></label>
+            <label>クッションの吸収量（カタログ値）<span class="row"><input type="range" data-k="Ec" min="0.01" max="20" step="0.01"><input type="number" data-k="Ec" min="0.01" max="20" step="0.01"><span class="unit">J</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">負荷率の目安（メーカーの技術資料による）</p>
+          <div class="calc-btns" data-b="etap"><button type="button" data-v="0.5">動かす作業 0.5</button><button type="button" data-v="1">ガイドに乗せて水平 1.0</button></div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>押す力 ／ 引く力（理論）</th><td><b data-o="Fpush"></b> N ／ <b data-o="Fpull"></b> N</td></tr>
+            <tr><th>動かせる重さの目安（押す ／ 引く）</th><td><b data-o="Mpush"></b> kg ／ <b data-o="Mpull"></b> kg</td></tr>
+            <tr><th>実際のワークを動かす力</th><td><b data-o="R"></b> N</td></tr>
+            <tr data-j="lr"><th>負荷率（選んだ向き）</th><td><b data-o="lr"></b> ％<span class="judge" data-o="jlr"></span></td></tr>
+            <tr data-j="E"><th>ストロークの終わりの運動エネルギー</th><td><b data-o="E"></b> J<span class="judge" data-o="jE"></span></td></tr>
+            <tr><th>クッションで止められる速度の目安</th><td><b data-o="vmax"></b> mm/s</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="cy-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('cy-tool');
+          if (!root) return;
+          var ROD = { 16: 6, 20: 8, 25: 10, 32: 12, 40: 16, 50: 20, 63: 20, 80: 25, 100: 30 };
+          var DEF = { D: 25, dir: 'push', P: 0.5, mu: 0.1, eta: 0.5, m: 100, v: 300, Ec: 0.4 };
+          var g = 9.80665, S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            root.querySelectorAll('[data-b="D"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S.D); });
+            root.querySelectorAll('[data-b="dir"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === S.dir); });
+            root.querySelectorAll('[data-b="etap"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(S.eta)); });
+            root.querySelectorAll('[data-g]').forEach(function (e) { e.style.display = e.dataset.g === S.dir ? '' : 'none'; });
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var D = S.D, d = ROD[D];
+            var Fpush = S.P * Math.PI * D * D / 4, Fpull = S.P * Math.PI * (D * D - d * d) / 4;
+            var Mpush = Fpush * S.eta / (S.mu * g), Mpull = Fpull * S.eta / (S.mu * g);
+            var F = S.dir === 'push' ? Fpush : Fpull, M = S.dir === 'push' ? Mpush : Mpull;
+            var R = S.mu * S.m * g, lr = R / F * 100;
+            var E = 0.5 * S.m * Math.pow(S.v / 1000, 2), vmax = Math.sqrt(2 * S.Ec / S.m) * 1000;
+            out('Fpush', fmt(Fpush)); out('Fpull', fmt(Fpull)); out('Mpush', fmt(Mpush)); out('Mpull', fmt(Mpull));
+            out('R', fmt(R)); out('lr', fmt(lr)); out('E', fmt(E, 2)); out('vmax', fmt(vmax));
+            out('figD', D); out('figF', fmt(F)); out('figM', fmt(M));
+            // 動かせる重さに合わせて、図のワークの大きさを変える（10kgで小さく、1,000kg以上で最大）
+            var k = Math.min(Math.max((Math.log(M) / Math.LN10 - 1) / 2, 0), 1);
+            var w = 150 + 140 * k, h = 80 + 60 * k, box = root.querySelector('[data-o="box"]');
+            box.setAttribute('width', w); box.setAttribute('height', h); box.setAttribute('y', 210 - h);
+            root.querySelectorAll('[data-o="boxt1"], [data-o="boxt2"]').forEach(function (t) { t.setAttribute('x', 236 + w / 2); });
+            root.querySelector('[data-o="boxt1"]').setAttribute('y', 210 - h / 2 - 8);
+            root.querySelector('[data-o="boxt2"]').setAttribute('y', 210 - h / 2 + 20);
+            judge('jlr', 'lr', lr > S.eta * 100, '目安 ' + fmt(S.eta * 100) + '％ 以下', '目安 ' + fmt(S.eta * 100) + '％ を超過');
+            judge('jE', 'E', E > S.Ec, 'クッションの吸収量 ' + S.Ec + 'J 以下', 'クッションの吸収量 ' + S.Ec + 'J を超過（速度を落とすか、外にショックアブソーバを付ける）');
+            out('eq', '押す力 ＝ ' + S.P + '×π×' + D + '²÷4、引く力 ＝ ' + S.P + '×π×（' + D + '² − ' + d + '²）÷4（ロッド径 φ' + d + ' は、あるシリーズの例）。動かせる重さ ＝ 力×' + S.eta + '÷（' + S.mu + '×9.81）。運動エネルギー ＝ ' + fmt(S.m) + '×（' + S.v + '÷1000）²÷2。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'cylinder' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b="D"] button').forEach(function (b) { b.addEventListener('click', function () { set('D', Number(b.dataset.v)); }); });
+          root.querySelectorAll('[data-b="dir"] button').forEach(function (b) { b.addEventListener('click', function () { set('dir', b.dataset.v); }); });
+          root.querySelectorAll('[data-b="etap"] button').forEach(function (b) { b.addEventListener('click', function () { set('eta', Number(b.dataset.v)); }); });
+          document.getElementById('cy-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：シリンダのボア径選びゲーム（UFOキャッチャー風。動くのはスタートを押したときだけ） -->
+        <h3>やってみよう｜ボア径を選んで、ワークを運ぶ</h3>
+        <p>
+          縦のシリンダでワークを持ち上げ、横のシリンダで右の置き場まで運びます。選べるのは、2本のシリンダのボア径だけです。ワークの重さは、毎回変わります。小さすぎても、大きすぎてもうまくいきません。
+        </p>
+
+        <div class="calc-tool ufo" id="ufo-tool">
+          <p class="calc-tool-title">ボア径選びゲーム</p>
+          <p class="ufo-weight">今回のワークの重さ：<b data-u="m"></b> kg</p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 380" role="img" aria-label="UFOキャッチャーのような装置。上のレールを横のシリンダが動かし、縦のシリンダの先の爪でワークをつかんで、右の置き場へ運ぶ">
+              <g data-u="frame">
+                <rect x="0" y="330" width="640" height="50" fill="#d9dee4"/>
+                <rect x="14" y="30" width="12" height="300" fill="#5a6573"/><rect x="614" y="30" width="12" height="300" fill="#5a6573"/>
+                <rect x="14" y="60" width="612" height="12" fill="#5a6573"/>
+                <rect x="34" y="36" width="96" height="22" rx="4" fill="#6f8aa6"/>
+                <text x="82" y="52" font-size="15" fill="#ffffff" text-anchor="middle" data-u="hlabel"></text>
+                <rect data-u="hrod" x="130" y="42" width="20" height="10" fill="#b8c6d6"/>
+                <g data-u="carriage">
+                  <rect x="-30" y="44" width="60" height="32" rx="3" fill="#0d2b4e"/>
+                  <rect x="-15" y="76" width="30" height="78" rx="3" fill="#6f8aa6"/>
+                  <text x="0" y="122" font-size="14" fill="#ffffff" text-anchor="middle" transform="rotate(-90 0 118)" data-u="vlabel"></text>
+                  <rect data-u="vrod" x="-4" y="154" width="8" height="16" fill="#b8c6d6"/>
+                </g>
+                <rect x="420" y="300" width="120" height="30" fill="none" stroke="#5a6573" stroke-width="3" data-u="tray"/>
+                <text x="480" y="356" font-size="17" fill="#5a6573" text-anchor="middle">置き場</text>
+                <text x="150" y="356" font-size="17" fill="#5a6573" text-anchor="middle">ワーク</text>
+              </g>
+              <g data-u="work"><rect data-u="workbox" fill="#d4691a" rx="3"/><text data-u="worktext" font-size="15" fill="#ffffff" text-anchor="middle"></text></g>
+              <g data-u="claw">
+                <rect x="-16" y="-4" width="32" height="10" rx="2" fill="#0d2b4e"/>
+                <path data-u="clawL" stroke="#0d2b4e" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path data-u="clawR" stroke="#0d2b4e" stroke-width="5" fill="none" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="ufo-pick">
+            <p>縦のシリンダ（持ち上げる）のボア径</p>
+            <div class="calc-btns" data-ub="v"></div>
+            <p>横のシリンダ（運ぶ）のボア径</p>
+            <div class="calc-btns" data-ub="h"></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-u="start">スタート</button>
+            <button type="button" class="calc-reset" data-u="again">もう一回（重さが変わります）</button>
+          </div>
+          <div class="ufo-msg" data-u="msg" aria-live="polite">ボア径を選んで、スタートを押してください。</div>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+            ゲームの判定は、使用圧力0.5MPaの理論推力と負荷率で決めています。縦は「ワーク＋爪3kg」の重さ、横は「ワーク＋台車15kg」をレールの抵抗の係数0.15で動かす力で判定します。負荷率が80％を超えると動かせず、縦は10％未満、横は8％未満だと「大きすぎ」としています。大きすぎると勢いがついて止めるときの衝撃で落ちる、というのは分かりやすくするための演出で、実際の装置では速度の調整やクッションで防げます。
+          </p>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('ufo-tool');
+          if (!root) return;
+          var BORES = [16, 20, 25, 32, 40, 50, 63, 80, 100];
+          var ROD = { 16: 6, 20: 8, 25: 10, 32: 12, 40: 16, 50: 20, 63: 20, 80: 25, 100: 30 };
+          var P = 0.5, G = 9.80665, FLOOR = 330, PICK = 150, PLACE = 480, TOP = 170;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-u="' + k + '"]'); };
+          var S = { v: 40, h: 25, m: 30, running: false }, used = false;
+          // 描画の状態
+          var D = { cx: PICK, ry: TOP, open: 1, th: 0, held: false, wx: PICK, wy: 0, wr: 0, shake: 0, jx: 0 };
+
+          function pullF(b) { return P * Math.PI * (b * b - ROD[b] * ROD[b]) / 4; }
+          function pushF(b) { return P * Math.PI * b * b / 4; }
+          function loadV() { return (S.m + 3) * G; }
+          function loadH() { return 0.15 * (S.m + 15) * G; }
+          function judgeV(b) { var r = loadV() / pullF(b); return r > 0.8 ? 'small' : r < 0.1 ? 'big' : 'ok'; }
+          function judgeH(b) { var r = loadH() / pushF(b); return r > 0.8 ? 'small' : r < 0.08 ? 'big' : 'ok'; }
+          function okRange(fn) { var a = BORES.filter(function (b) { return fn(b) === 'ok'; }); return a.length ? 'φ' + a[0] + (a.length > 1 ? '〜φ' + a[a.length - 1] : '') : 'なし'; }
+          function pct(x) { return Math.round(x * 100) + '％'; }
+          function size() { return { w: 40 + S.m * 0.6, h: 28 + S.m * 0.4 }; }
+
+          // ボタンを作る
+          ['v', 'h'].forEach(function (k) {
+            var box = root.querySelector('[data-ub="' + k + '"]');
+            BORES.forEach(function (b) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = 'φ' + b; bt.dataset.v = b;
+              bt.addEventListener('click', function () { if (S.running) return; S[k] = b; syncBtns(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          function syncBtns() {
+            ['v', 'h'].forEach(function (k) {
+              root.querySelectorAll('[data-ub="' + k + '"] button').forEach(function (b) {
+                b.setAttribute('aria-pressed', Number(b.dataset.v) === S[k]); b.disabled = S.running;
+              });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+
+          function draw() {
+            var s = size(), fr = 'translate(' + (D.jx + Math.sin(D.shake) * 0) + ',0)';
+            q('frame').setAttribute('transform', 'translate(' + D.jx + ',0)');
+            q('hlabel').textContent = '横 φ' + S.h; q('vlabel').textContent = '縦 φ' + S.v;
+            q('hrod').setAttribute('width', Math.max(D.cx - 30 - 130, 4));
+            q('carriage').setAttribute('transform', 'translate(' + D.cx + ',0)');
+            q('vrod').setAttribute('height', Math.max(D.ry - 154, 4));
+            var half = s.w / 2 + 4 + 12 * D.open, len = 18 + s.h * 0.55;
+            q('clawL').setAttribute('d', 'M-12,4 L' + (-half) + ',10 L' + (-half) + ',' + len + ' L' + (-half + 7) + ',' + (len + 6));
+            q('clawR').setAttribute('d', 'M12,4 L' + half + ',10 L' + half + ',' + len + ' L' + (half - 7) + ',' + (len + 6));
+            var px = D.cx + D.jx, deg = D.th * 180 / Math.PI;
+            q('claw').setAttribute('transform', 'translate(' + px + ',' + D.ry + ') rotate(' + (-deg) + ')');
+            if (D.held) {
+              var L = 18 + s.h / 2;
+              D.wx = px + Math.sin(D.th) * L; D.wy = D.ry + Math.cos(D.th) * L; D.wr = -deg;
+            }
+            var wb = q('workbox');
+            wb.setAttribute('x', -s.w / 2); wb.setAttribute('y', -s.h / 2); wb.setAttribute('width', s.w); wb.setAttribute('height', s.h);
+            var wt = q('worktext'); wt.setAttribute('x', 0); wt.setAttribute('y', 5); wt.textContent = S.m + 'kg';
+            q('work').setAttribute('transform', 'translate(' + D.wx + ',' + D.wy + ') rotate(' + D.wr + ')');
+          }
+
+          // ── 時間で動かす小さな仕組み ──
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null;
+              function f(now) { if (t0 === null) t0 = now; var t = Math.min((now - t0) / ms, 1); fn(t, (now - t0) / 1000); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function wait(ms) { return step(ms, function () {}); }
+          function tween(key, to, ms, ef) { var from = D[key]; return step(ms, function (t) { D[key] = from + (to - from) * (ef || ease)(t); }); }
+          // 吊った爪の揺れ（振り子が少しずつ収まる）
+          function sway(amp, ms, phase) {
+            var w = 9;
+            return step(ms, function (t, sec) { D.th = amp * Math.exp(-sec / 0.45) * Math.cos(w * sec + (phase || 0)); });
+          }
+          // 架台がガタッと揺れる
+          function bump(px) { return step(260, function (t, sec) { D.jx = px * Math.exp(-sec / 0.08) * Math.sin(60 * sec); }); }
+          // ワークが落ちる（重力・床ではねる・止まる）
+          function fall(vx, vy, vr) {
+            var s = size(), floorY = FLOOR - s.h / 2;
+            D.held = false;
+            return new Promise(function (res) {
+              var last = null, rest = 0;
+              function f(now) {
+                if (last === null) last = now; var dt = Math.min((now - last) / 1000, 0.03); last = now;
+                vy += 900 * dt; D.wx += vx * dt; D.wy += vy * dt; D.wr += vr * dt;
+                if (D.wx > 596 - s.w / 2) { D.wx = 596 - s.w / 2; vx = -vx * 0.05; }
+                if (D.wy >= floorY) { D.wy = floorY; vy = -vy * 0.28; vx *= 0.35; vr *= 0.4; if (Math.abs(vy) < 30) { vy = 0; vx *= 0.5; rest += dt; } }
+                draw();
+                if (rest > 0.25 || reduce) {
+                  // 倒れた向きにそろえて止める（横倒しなら、高さは幅の半分）
+                  var k = Math.round(D.wr / 90); D.wr = k * 90;
+                  D.wy = (k % 2 ? FLOOR - s.w / 2 : floorY); draw(); res();
+                } else requestAnimationFrame(f);
+              }
+              requestAnimationFrame(f);
+            });
+          }
+
+          function msg(text, kind) { var m = q('msg'); m.innerHTML = text; m.className = 'ufo-msg' + (kind ? ' is-' + kind : ''); }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'cylinder_game' }); }
+            S.running = true; syncBtns(); q('tray').setAttribute('stroke', '#5a6573');
+            var s = size(), jv = judgeV(S.v), jh = judgeH(S.h);
+            var rv = loadV() / pullF(S.v), rh = loadH() / pushF(S.h);
+            var grabY = FLOOR - s.h - 18;
+            msg('動いています…');
+            // 1. 下がって、つかむ
+            D.open = 1; D.th = 0;
+            await tween('ry', grabY, 900);
+            await sway(0.04, 300);
+            await tween('open', 0, 400);
+            // 2. 持ち上げる
+            if (jv === 'small') {
+              D.held = false;
+              await step(1300, function (t, sec) { D.ry = grabY - 3 * Math.min(t * 4, 1) + Math.sin(sec * 70) * 1.2; D.jx = Math.sin(sec * 55) * 0.8; });
+              D.jx = 0;
+              await tween('open', 1, 280);
+              await tween('ry', TOP, 900);
+              msg('<b>持ち上がりませんでした。</b>縦のシリンダ φ' + S.v + ' では力が足りません（負荷率 ' + pct(rv) + '）。この重さなら、縦は <b>' + okRange(judgeV) + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            D.held = true;
+            if (jv === 'big') {
+              await tween('ry', TOP, 380, function (t) { return t * t; });
+              await Promise.all([bump(5), step(10, function () {})]);
+              await tween('open', 0.5, 120);
+              await fall(0, 60, 40);
+              await sway(0.15, 700);
+              msg('<b>落ちてしまいました。</b>縦のシリンダ φ' + S.v + ' は大きすぎて（負荷率 ' + pct(rv) + '）、勢いよく上がり、止まるときの衝撃でワークが外れました。縦は <b>' + okRange(judgeV) + '</b> がおすすめです。<br><small>実際の装置では、速度の調整やクッションで衝撃をやわらげられます。</small>', 'ng');
+              return end();
+            }
+            await tween('ry', TOP, 700 + 1100 * rv);
+            await step(240, function (t, sec) { D.ry = TOP + 4 * Math.exp(-sec / 0.06) * Math.sin(sec * 50); });
+            // 3. 横に運ぶ
+            if (jh === 'small') {
+              await step(1300, function (t, sec) { D.cx = PICK + 5 * Math.min(t * 3, 1) + Math.sin(sec * 60) * 1.5; D.th = -0.03 * Math.sin(sec * 60); });
+              await tween('cx', PICK, 300); D.th = 0;
+              await tween('ry', grabY, 800);
+              await tween('open', 1, 300); D.held = false;
+              await tween('ry', TOP, 700);
+              msg('<b>運べませんでした。</b>横のシリンダ φ' + S.h + ' では力が足りず、動き出せません（負荷率 ' + pct(rh) + '）。この重さなら、横は <b>' + okRange(judgeH) + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            if (jh === 'big') {
+              await step(520, function (t) { D.cx = PICK + (PLACE - PICK) * t * t; D.th = -0.18 * Math.min(t * 3, 1); });
+              var p1 = bump(6);
+              // 端で急に止まり、大きく振れる。いちばん前に振れたところで外れる
+              await step(170, function (t, sec) { D.th = -0.18 + 0.85 * Math.sin(Math.min(sec / 0.17, 1) * Math.PI / 2); });
+              await p1;
+              var s2 = size(), L = 18 + s2.h / 2;
+              await Promise.all([fall(420, -120, 230), tween('open', 0.6, 150), sway(0.7, 1200, 0)]);
+              msg('<b>落ちてしまいました。</b>横のシリンダ φ' + S.h + ' は大きすぎて（負荷率 ' + pct(rh) + '）、勢いがつきすぎ、端で止まった衝撃でワークが振り落とされました。横は <b>' + okRange(judgeH) + '</b> がおすすめです。<br><small>実際の装置では、速度の調整やショックアブソーバで衝撃をやわらげられます。</small>', 'ng');
+              return end();
+            }
+            var A = 0.06 + 0.12 * (1 - rh);
+            await step(1500, function (t) { D.cx = PICK + (PLACE - PICK) * ease(t); D.th = -A * Math.cos(Math.PI * t) * (t < 0.08 ? t / 0.08 : 1); });
+            var p2 = bump(1.5);
+            await sway(A, 1100);
+            await p2; D.th = 0;
+            // 4. 置く
+            await tween('ry', grabY, 900);
+            await tween('open', 1, 350); D.held = false;
+            await tween('ry', TOP, 800);
+            q('tray').setAttribute('stroke', '#d4691a');
+            msg('<b>成功！</b>縦 φ' + S.v + '（負荷率 ' + pct(rv) + '）、横 φ' + S.h + '（負荷率 ' + pct(rh) + '）は、' + S.m + 'kgのワークにちょうどよい大きさです。', 'ok');
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function reset(newWeight) {
+            if (newWeight) S.m = 5 + Math.floor(Math.random() * 56);
+            q('m').textContent = S.m;
+            D = { cx: PICK, ry: TOP, open: 1, th: 0, held: false, wx: PICK, wy: FLOOR - size().h / 2, wr: 0, shake: 0, jx: 0 };
+            q('tray').setAttribute('stroke', '#5a6573');
+            msg('ボア径を選んで、スタートを押してください。');
+            draw();
+          }
+          q('start').addEventListener('click', function () {
+            // 2回目以降は、ワークを元の位置に戻してから始める
+            var s = size(); D.held = false; D.wx = PICK; D.wy = FLOOR - s.h / 2; D.wr = 0; D.cx = PICK; D.ry = TOP; D.th = 0; D.jx = 0;
+            q('tray').setAttribute('stroke', '#5a6573');
+            // スマホでは装置の絵が画面の外にあることが多いので、見える位置まで送る
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', function () { reset(true); });
+          reset(true); syncBtns();
+        })();
+        </script>
+
+        <!-- ◆5 -->
+        <h2>横向きの力と、空気の消費量</h2>
+
+        <h3>ロッドに横向きの力をかけない</h3>
+        <p>
+          エアシリンダのロッドは、まっすぐ押し引きするための部品で、横向きの力には弱くできています。ワークの重さをロッドで支えたり、ワークの向きがずれたまま押したりすると、ロッドやシリンダの中の部品が早く摩耗します。横向きの力がかかる場合は、ガイドを付けて、ガイドで重さを受けます。許される横向きの力は、カタログで確かめます。ストロークが長い場合は、ロッドの座屈も確かめます。
+        </p>
+
+        <h3>空気の消費量を見積もる</h3>
+        <p>
+          シリンダを増やすときは、工場のコンプレッサに余裕があるかも確かめます。メーカーの技術資料では、1往復あたりの空気の消費量（大気圧に換算した体積）を、次の式で求めます。
+        </p>
+        <p class="calc">
+          押す側　q1 ＝ 押す側の受圧面積 × ストローク ×（P ＋ 0.1）÷ 0.1 × 10⁻⁶<br>
+          引く側　q2 ＝ 引く側の受圧面積 × ストローク ×（P ＋ 0.1）÷ 0.1 × 10⁻⁶<br>
+          <b>1往復の消費量　q ＝ q1 ＋ q2</b><br>
+          （面積は mm²、ストロークは mm、P はゲージ圧力 MPa、0.1 は大気圧の分。単位は dm³、つまりリットル。配管の分は別に足す）
+        </p>
+        <p>
+          φ25（ロッドφ10）、ストローク200mm、0.5MPaなら、押す側が約0.59リットル、引く側が約0.50リットルで、1往復で約1.08リットルです。1分間に10往復すれば、約11リットル（大気圧換算）になります。実際の消費量は、配管や継手の容積、漏れ、温度でも変わるので、メーカーの計算ツールで条件を合わせて確かめます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ロッドに横向きの力をかけない。重さはガイドで受ける</li>
+            <li>シリンダを増やすときは、空気の消費量とコンプレッサの余裕を確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>シリンダを取り付ける架台とブラケットの力</h2>
+        <p>
+          シリンダが押す力は、そのまま反対向きに、シリンダを取り付けたブラケットと架台にかかります。押す力が600Nなら、ブラケットには600Nの力が、取付面からの高さに応じた曲げとしてかかります。ストロークの終わりで止める衝撃も、ブラケットに伝わります。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 260" role="img" aria-label="シリンダの取付けの図。シリンダがワークを押すと、同じ大きさの反対向きの力が、シリンダを取り付けたブラケットにかかる">
+            <defs>
+              <marker id="cy6" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              <marker id="cy6n" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+            </defs>
+            <rect x="20" y="210" width="600" height="30" fill="#d9dee4"/>
+            <rect x="80" y="60" width="20" height="150" fill="#5a6573"/>
+            <rect x="100" y="90" width="150" height="46" rx="6" fill="#6f8aa6"/>
+            <rect x="250" y="104" width="80" height="16" fill="#b8c6d6"/>
+            <rect x="330" y="70" width="120" height="140" fill="#e8ecf1" stroke="#0d2b4e" stroke-width="2"/>
+            <text x="390" y="146" font-size="21" fill="#0d2b4e" text-anchor="middle">ワーク</text>
+            <line x1="460" y1="112" x2="540" y2="112" stroke="#d4691a" stroke-width="6" marker-end="url(#cy6)"/>
+            <text x="470" y="96" font-size="20" fill="#d4691a">押す力</text>
+            <line x1="70" y1="112" x2="24" y2="112" stroke="#0d2b4e" stroke-width="6" marker-end="url(#cy6n)"/>
+            <text x="22" y="28" font-size="20" fill="#0d2b4e">反対向きの力が</text>
+            <text x="22" y="52" font-size="20" fill="#0d2b4e">ブラケットに</text>
+          </svg>
+          <figcaption>押す力と同じ大きさの力が、取付けのブラケットにかかる。</figcaption>
+        </figure>
+
+        <p>
+          力の伝わる先は、取付けの形や負荷の支え方で変わります。ブラケットだけでなく、ブラケットを止めるボルト、フレーム、相手の部材まで含めて、力の流れを確かめます。ブラケットの溶接は「<a href="weld-strength-calculation.html">溶接の強度計算</a>」、ブラケットを固定する架台は「<a href="stand-strength-calculation.html">架台の強度計算</a>」の方法で確かめます。太いシリンダほど、取付けにも大きな力がかかります。
+        </p>
+
+        <!-- ◆7 -->
+        <h2>エアシリンダの選定でよくある失敗</h2>
+
+        <h3>元の空気の圧力のまま計算する</h3>
+        <p>
+          工場の元の圧力が0.6MPaでも、減圧弁で下げた圧力で動かします。ほかの設備が同時に空気を使うと、さらに下がります。使用圧力で計算します。
+        </p>
+
+        <h3>押す側の推力で、引く動きも選ぶ</h3>
+        <p>
+          引く側は、ロッドの分だけ力が小さくなります。引く動きで負荷を動かす場合は、引く側の推力で確かめます。
+        </p>
+
+        <h3>推力が足りているから大丈夫と考える</h3>
+        <p>
+          推力が足りていても、ストロークの終わりの衝撃でクッションやふたが壊れることがあります。重いワークを速く動かすときほど、運動エネルギーを確かめます。
+        </p>
+
+        <h3>圧力を下げて、速度を調整する</h3>
+        <p>
+          圧力を下げて遅くしようとすると、推力も下がり、動きが不安定になります。速度は、スピードコントローラなどで、排気の量を絞って調整する方法（メータアウト）が広く使われています。ただし、負荷の向きや求める速度によって適した回路は変わるため、用途に合わせて選びます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>計算は、減圧弁で下げた使用圧力で行う</li>
+            <li>引く動きは、引く側の推力で確かめる</li>
+            <li>推力が足りていても、止めるときの衝撃を確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算書 -->
+        <h2>エアシリンダの選定で記録に残す項目</h2>
+        <ul>
+          <li>負荷の大きさと向き（垂直・水平、ローラーやガイドの有無、抵抗の係数）</li>
+          <li>使用圧力と、元の圧力</li>
+          <li>ボア径、ロッドの径、押す側・引く側のどちらで使うか</li>
+          <li>負荷率と、その根拠</li>
+          <li>ストロークの終わりの速度と運動エネルギー、クッションの吸収量、ショックアブソーバの有無</li>
+          <li>横向きの力の有無と、ガイドの構成</li>
+          <li>計算に含めていないもの（加速の力、配管の圧力の落ち、摩耗など）</li>
+        </ul>
+
+        <!-- ◆質問 -->
+        <h2>エアシリンダの選定でよくある質問</h2>
+
+        <h3>負荷率は、どこまで上げてよいですか</h3>
+        <p>
+          動かす作業では0.5以下が目安です。止めて押すだけの作業なら0.7程度まで使えます。速く動かしたい、速度を安定させたい場合は、もっと下げます。迷ったら、1つ上のボア径を選びます。
+        </p>
+
+        <h3>シリンダの速度は、どうやって求めますか</h3>
+        <p>
+          速度は、負荷率、配管の太さと長さ、バルブの大きさ、スピードコントローラの絞りで決まり、計算だけで正確に出すのは難しい値です。メーカーの選定ツールで見積もり、実機で調整します<span class="need-check">（要確認）</span>。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          エアシリンダの選定計算は、使用圧力と受圧面積から推力を求め、負荷を負荷率で割ってボア径を決めるのが基本です。引く側はロッドの分だけ力が小さいことにも注意します。
+        </p>
+        <p>
+          そのうえで、<strong class="mk">ストロークの終わりで止めるときの運動エネルギー</strong>を確かめます。ローラーの上のように、細いシリンダでも重いワークが動く場面ほど、衝撃が問題になります。まずは計算ツールで、ボア径と動かせる重さの関係を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・エアシリンダメーカーの技術資料（機種選定手順：負荷率の目安、使用圧力の設定、クッションの許容運動エネルギー、空気消費量の式）<br>
+          ・推力と運動エネルギーの式は、一般的な力学の式
+        </p>
+
+        <div class="article-cta">
+          エアシリンダの選定や、シリンダを使った省力化の装置・治具の設計でお困りのことはありませんか。条件の整理から、設計のご相談まで承ります。お気軽にお問い合わせください。
+          <span class="cta-price">強度検証・設計のご依頼の料金は、「<a href="../../price.html#design">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.20</p>
+                <h3><a href="anchor-bolt-calculation.html">アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで</a></h3>
+                <p class="column-excerpt">柱の根元の曲げから、アンカーボルトの引き抜き力、あと施工アンカーの許容荷重、ベースプレートの厚さまで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.14</p>
+                <h3><a href="weld-strength-calculation.html">溶接の強度計算の方法と例｜すみ肉溶接ののど厚から、曲げを受ける溶接まで</a></h3>
+                <p class="column-excerpt">のど厚と有効長さの求め方、製造業で使える許容応力の決め方、曲げを受ける溶接の計算例。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

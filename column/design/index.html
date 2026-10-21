@@ -75,7 +75,8 @@
         { "@type": "ListItem", "position": 1, "name": "架台の強度計算の方法と例", "url": "https://i-twin.co.jp/column/articles/stand-strength-calculation" },
         { "@type": "ListItem", "position": 2, "name": "ロボット架台の強度計算の方法", "url": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation" },
         { "@type": "ListItem", "position": 3, "name": "溶接の強度計算の方法と例", "url": "https://i-twin.co.jp/column/articles/weld-strength-calculation" },
-        { "@type": "ListItem", "position": 4, "name": "アンカーボルトの引き抜き計算の方法と例", "url": "https://i-twin.co.jp/column/articles/anchor-bolt-calculation" }
+        { "@type": "ListItem", "position": 4, "name": "アンカーボルトの引き抜き計算の方法と例", "url": "https://i-twin.co.jp/column/articles/anchor-bolt-calculation" },
+        { "@type": "ListItem", "position": 5, "name": "エアシリンダの選定計算の方法と例", "url": "https://i-twin.co.jp/column/articles/air-cylinder-selection" }
       ]
     }
   }
@@ -181,7 +182,7 @@
       <!-- ◆記事カードデータ（追加・修正はこのブロック内だけでOK） -->
       <div class="industry-grid">
 
-        <a class="industry-card ind-1" href="../articles/stand-strength-calculation.html">
+        <a class="industry-card ind-1" href="../articles/stand-strength-calculation.html" data-date="2026-10-13">
           <div class="industry-head"><span class="industry-no">01</span><h2>架台の強度計算の方法と例</h2><small>角パイプ・アングル・溝形鋼</small></div>
           <div class="industry-body">
             <p>梁の曲げとたわみ、柱の座屈、水平力。500kgの設備をのせる架台の計算例と、部材ごとの違いを解説します。計算ツールつき。</p>
@@ -189,7 +190,7 @@
           </div>
         </a>
 
-        <a class="industry-card ind-8" href="../articles/robot-stand-strength-calculation.html">
+        <a class="industry-card ind-8" href="../articles/robot-stand-strength-calculation.html" data-date="2026-10-12">
           <div class="industry-head"><span class="industry-no">02</span><h2>ロボット架台の強度計算</h2><small>非常停止時の慣性力</small></div>
           <div class="industry-body">
             <p>ロボットが急に止まるとき、架台には横向きの力とモーメントがかかります。慣性力の求め方と計算例。計算ツールつき。</p>
@@ -197,7 +198,7 @@
           </div>
         </a>
 
-        <a class="industry-card ind-2" href="../articles/weld-strength-calculation.html">
+        <a class="industry-card ind-2" href="../articles/weld-strength-calculation.html" data-date="2026-10-14">
           <div class="industry-head"><span class="industry-no">03</span><h2>溶接の強度計算</h2><small>すみ肉溶接・のど厚・曲げ</small></div>
           <div class="industry-body">
             <p>のど厚と有効長さ、許容応力の決め方から、架台の柱の根元のように曲げを受ける溶接の計算まで。計算ツールつき。</p>
@@ -205,7 +206,7 @@
           </div>
         </a>
 
-        <a class="industry-card ind-3" href="../articles/anchor-bolt-calculation.html">
+        <a class="industry-card ind-3" href="../articles/anchor-bolt-calculation.html" data-date="2026-10-20">
           <div class="industry-head"><span class="industry-no">04</span><h2>アンカーボルトとベースプレート</h2><small>引き抜き力・せん断・板厚</small></div>
           <div class="industry-body">
             <p>柱の根元の曲げから、アンカーボルトの引き抜き力、あと施工アンカーの許容荷重、ベースプレートの厚さまで。計算ツールつき。</p>
@@ -213,13 +214,13 @@
           </div>
         </a>
 
-        <div class="industry-card ind-4 is-soon">
-          <div class="industry-head"><span class="industry-no">05</span><h2>エアシリンダの選定と推力</h2><small>内径・負荷率</small></div>
+        <a class="industry-card ind-4" href="../articles/air-cylinder-selection.html" data-date="2026-10-21">
+          <div class="industry-head"><span class="industry-no">05</span><h2>エアシリンダの選定と推力</h2><small>推力・負荷率・衝撃</small></div>
           <div class="industry-body">
-            <p>必要な推力から内径を決める手順と、見落としやすい確認項目を解説します。</p>
-            <span class="industry-soon">準備中</span>
+            <p>押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの衝撃まで。ボア径から動かせる重さが分かる計算ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
           </div>
-        </div>
+        </a>
 
         <div class="industry-card ind-5 is-soon">
           <div class="industry-head"><span class="industry-no">06</span><h2>コンベアのモーター選定</h2><small>ベルト・ローラー</small></div>
@@ -319,5 +320,23 @@
     </div>
   </footer>
 
+
+  <!-- いちばん新しい記事のカードに「NEW」を付ける（日付がいちばん新しいカードを自動で選ぶ。記事を足しても直す必要はない） -->
+  <script>
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('a.industry-card[data-date]'));
+    var best = null, bestDate = '';
+    cards.forEach(function (c) {
+      var d = c.getAttribute('data-date') || ((c.querySelector('.column-date') || {}).textContent || '').trim().replace(/\./g, '-');
+      if (d && d > bestDate) { bestDate = d; best = c; }
+    });
+    if (!best) return;
+    var b = document.createElement('span');
+    b.className = 'new-badge';
+    b.textContent = 'New‼';
+    best.classList.add('is-new');
+    best.insertBefore(b, best.firstChild);
+  })();
+  </script>
 </body>
 </html>
