@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：コンベアのモーター選定の計算方法と例（特集「自動化設備の設計ノート」06）
+  （溶接の記事を土台に、キットの build_motor.py で組み立て・2026-10-22）
+  計算例の検算：キットの motor_calc.py／計算ツール：キットの tool_motor.html／ゲーム：tool_motor_game.html／本文：motor_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-conveyor-motor.jpg（ナノバナナで生成して差し替え）
+  それ以外の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方｜アイツイン コラム</title>
+  <meta name="description" content="コンベアのモーター選定の計算方法を、計算例つきで解説します。ほしい速さからの減速比の決め方、ベルトを引く力からのトルクとモーター容量の求め方、傾きや50Hz・60Hzでの違い、起動のトルクまで。計算ツールとゲームつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/conveyor-motor-selection">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方">
+  <meta property="og:description" content="コンベアのモーター選定の計算方法を、計算例つきで解説します。ほしい速さからの減速比の決め方、ベルトを引く力からのトルクとモーター容量の求め方、傾きや50Hz・60Hzでの違い、起動のトルクまで。計算ツールとゲームつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/conveyor-motor-selection">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-conveyor-motor.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-22">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方">
+  <meta name="twitter:description" content="コンベアのモーター選定の計算方法を、計算例つきで解説します。ほしい速さからの減速比の決め方、ベルトを引く力からのトルクとモーター容量の求め方、傾きや50Hz・60Hzでの違い、起動のトルクまで。計算ツールとゲームつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-conveyor-motor.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方",
+    "description": "コンベアのモーター選定の計算方法を、計算例つきで解説します。ほしい速さからの減速比の決め方、ベルトを引く力からのトルクとモーター容量の求め方、傾きや50Hz・60Hzでの違い、起動のトルクまで。計算ツールとゲームつきです。",
+    "image": "https://i-twin.co.jp/img/column-conveyor-motor.jpg",
+    "datePublished": "2026-10-22",
+    "dateModified": "2026-10-22",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/conveyor-motor-selection"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方", "item": "https://i-twin.co.jp/column/articles/conveyor-motor-selection" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方</span>
+      </div>
+      <h1>コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方</h1>
+      <p class="catch">公開日：2026年10月22日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.22</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-conveyor-motor.jpg" alt="コンベアのモーター選定。ベルトコンベアの端に付いた、減速機とモーターのイメージ" width="1376" height="768">
+          <figcaption>モーターの大きさは、減速比とセットで決まる。</figcaption>
+        </figure>
+
+        <p>
+          コンベアのモーターを選ぶとき、「前の設備と同じ0.4kW」「とりあえず大きめ」で決めていないでしょうか。本記事では、<strong class="mk">コンベアのモーター選定の計算方法</strong>を、計算例つきで解説します。ほしい速さから減速比を決め、ベルトを引く力からトルクを求めて、モーターの容量を選びます。
+        </p>
+        <p>
+          ポイントは、<strong>減速比を変えると、速さとトルクが入れ替わる</strong>ことです。後半には、条件を入れて容量と減速比を試せる計算ツールと、モーターと減速機を選んで荷物を時間内に運ぶゲームがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、ベルトコンベアを一定の速さで動かすモーターの、基本的な選定の計算を説明するものです。選定の可否を保証するものではありません</li>
+            <li>摩擦係数、効率、モーターの回転数は、メーカーの技術資料にある値の例です。実際の選定では、使うモーターと減速機のカタログと、メーカーの選定ツールで確かめてください</li>
+            <li>減速機の許容トルク、軸にかかる力、起動と停止の回数、温度などの使用環境は、必要に応じて別に確かめてください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>コンベアのモーター選定の流れ</li>
+            <li>ほしい速さから、減速比を決める方法（50Hzと60Hzの違い）</li>
+            <li>ベルトを引く力から、必要なトルクとモーター容量を求める方法</li>
+            <li>容量と減速比を試せる計算ツール</li>
+            <li>モーターと減速機を選んで、荷物を時間内に運ぶゲーム</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>コンベアのモーター選定の流れ</h2>
+        <p>
+          コンベアのモーターは、次の4つの順で選びます。「必要な動力（kW）だけ求めて選ぶ」方法もありますが、それでは減速比が決まらず、速さもトルクも確かめられません。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 230" role="img" aria-label="コンベアのモーター選定の流れ。1 ほしい速さから減速比を決める、2 ベルトを引く力とトルクを求める、3 モーター軸に直して容量を選ぶ、4 起動と速さを確かめる">
+            <defs><marker id="mt1" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="10" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
+            <rect x="170" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
+            <rect x="330" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
+            <rect x="490" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
+            <text x="80" y="76" font-size="20" fill="#d4691a" text-anchor="middle">1</text><text x="80" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">ほしい速さから</text><text x="80" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">減速比を決める</text>
+            <text x="240" y="76" font-size="20" fill="#d4691a" text-anchor="middle">2</text><text x="240" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">ベルトを引く力と</text><text x="240" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">トルクを求める</text>
+            <text x="400" y="76" font-size="20" fill="#d4691a" text-anchor="middle">3</text><text x="400" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">モーター軸に直し</text><text x="400" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">容量を選ぶ</text>
+            <text x="560" y="76" font-size="20" fill="#d4691a" text-anchor="middle">4</text><text x="560" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">起動と速さを</text><text x="560" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">確かめる</text>
+            <line x1="150" y1="115" x2="166" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
+            <line x1="310" y1="115" x2="326" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
+            <line x1="470" y1="115" x2="486" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
+            <text x="240" y="218" font-size="19" fill="#d4691a" text-anchor="middle">1と3は、減速比でつながっている</text>
+          </svg>
+          <figcaption>減速比を先に決めないと、モーター軸のトルクが求まらない。</figcaption>
+        </figure>
+
+        <p>
+          ここでは、モーターに減速機を付けた「ギヤモーター」で、ベルトの端のローラー（駆動ローラー）を回す形を考えます。モーターは、工場でよく使われる三相の4極を想定します。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>選定は、減速比 → トルク → 容量 → 起動と速さの確認の順で進める</li>
+            <li>動力（kW）だけで選ぶと、減速比と速さが決まらない</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>減速比の決め方｜速さとトルクは入れ替わる</h2>
+        <p>
+          三相4極のモーターの同期速度は、50Hzで毎分1,500回転、60Hzで毎分1,800回転です。実際の回転は「すべり」の分だけ遅く、本記事では計算例として、50Hzで1,450r/min、60Hzで1,750r/minを使います。定格の回転速度は機種で違うので、最終的には銘板やカタログの値を使います<span class="need-check">（要確認）</span>。コンベアのローラーは、毎分数十回転でよいことが多いので、減速機で回転を落とします。
+        </p>
+        <p class="calc">
+          ローラーの回転数　NG ＝ V ÷（π × D）<br>
+          減速比　i ＝ モーターの回転数 ÷ NG<br>
+          V：ベルトの速さ（m/min）、D：駆動ローラーの直径（m）
+        </p>
+        <p>
+          減速機は、回転を 1/i に落とすかわりに、トルクをおよそ i 倍にします（実際は減速機の効率の分だけ小さい）。つまり、<strong class="mk">減速比を大きくすると、遅くなるが力は強くなる</strong>、小さくすると、速くなるが力は弱くなる、という関係です。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 260" role="img" aria-label="減速比と速さ、トルクの関係。減速比1/10は速いがトルクが小さい。減速比1/50は遅いがトルクが大きい">
+            <rect x="12" y="10" width="616" height="240" fill="#ffffff" stroke="#d9dee4" stroke-width="2"/>
+            <text x="30" y="40" font-size="22" fill="#d4691a">ワンポイント</text>
+            <text x="30" y="66" font-size="20" fill="#0d2b4e">同じモーターでも、減速比で速さと力が入れ替わる</text>
+            <text x="150" y="104" font-size="20" fill="#0d2b4e" text-anchor="middle">減速比 1/10</text>
+            <text x="470" y="104" font-size="20" fill="#0d2b4e" text-anchor="middle">減速比 1/50</text>
+            <text x="40" y="146" font-size="18" fill="#5a6573">速さ</text>
+            <rect x="90" y="128" width="200" height="26" fill="#d4691a"/>
+            <rect x="410" y="128" width="40" height="26" fill="#d4691a"/>
+            <text x="40" y="196" font-size="18" fill="#5a6573">力</text>
+            <rect x="90" y="178" width="40" height="26" fill="#0d2b4e"/>
+            <rect x="410" y="178" width="200" height="26" fill="#0d2b4e"/>
+            <text x="320" y="236" font-size="18" fill="#5a6573" text-anchor="middle">速さと力の積（＝動力）は、ほぼ同じ</text>
+          </svg>
+          <figcaption>減速比を5倍にすると、速さはおよそ1/5、力はおよそ5倍になる。</figcaption>
+        </figure>
+
+        <h3>計算例：20m/minのベルトコンベア（50Hz）</h3>
+        <p>
+          駆動ローラーの直径100mm、ほしい速さ20m/min（±10％まで許す）とします。
+        </p>
+        <p class="calc">
+          NG ＝ 20 ÷（π × 0.1）＝ 63.7 r/min<br>
+          i ＝ 1,450 ÷ 63.7 ＝ 22.8<br>
+          1/20 なら　1,450 ÷ 20 × π × 0.1 ＝ 22.8 m/min（＋14％）<br>
+          1/25 なら　1,450 ÷ 25 × π × 0.1 ＝ <b>18.2 m/min（−9％）→ 1/25 を選ぶ</b>
+        </p>
+        <p>
+          減速比は、メーカーごとに決まった数値の中から選びます。計算値に近い方ではなく、<strong>ほしい速さの範囲に入る方</strong>を選びます。この例では、近いのは1/20ですが、範囲に入るのは1/25です。
+        </p>
+
+        <h3>50Hzと60Hzで、速さが2割変わる</h3>
+        <p>
+          同じモーターと減速機でも、60Hzの地域では回転数が約1.2倍になります。上の例の1/25を60Hzで使うと、1,750 ÷ 25 × π × 0.1 ＝ <b>22.0 m/min</b>です。東日本で作った設備を西日本の工場に置くと、コンベアが2割速くなります。前後の設備との速さの合わせや、荷物の受け渡しに影響するので、移設のときは減速比を見直すか、インバータで速さを合わせます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>減速比 ＝ モーターの回転数 ÷ ローラーの回転数</li>
+            <li>減速比を大きくすると、遅くなるが力は強くなる</li>
+            <li>減速比は、ほしい速さの範囲に入るものを選ぶ。60Hzでは約2割速くなる</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>必要なトルクとモーター容量の求め方</h2>
+        <p>
+          次に、ベルトを動かし続けるのに必要な力を求めます。ベルトと荷物を合わせた質量を m とすると、ベルトを引く力は、ベルトの下との摩擦と、上りなら荷物を持ち上げる分の合計です。
+        </p>
+        <p class="calc">
+          <b>ベルトを引く力　F ＝ m × g ×（sinθ ＋ μ × cosθ）</b><br>
+          ローラー軸のトルク　TL ＝ F × D ÷（2 × η）<br>
+          モーター軸の必要トルク　TM ＝ TL × 安全率 ÷（i × ηG）<br>
+          m：ベルトと荷物の合計の質量（kg）、g：9.81、θ：傾き、μ：摩擦係数、η：ベルトとローラーの効率（減速機の損失は含めない）、ηG：減速機の効率
+        </p>
+        <p>
+          これは、<strong>一定の速さで運んでいるときに必要なトルクの概算式</strong>です。ローラーの軸受やシールの抵抗、荷物を押す外からの力などがあれば、F に足します。起動のときの加速の分は、次の章で別に求めます。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 260" role="img" aria-label="ベルトコンベアにかかる力。ベルトを引く力は、ベルトの下との摩擦と、上りでは荷物を持ち上げる力の合計">
+            <defs><marker id="mt3" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
+            <rect x="0" y="230" width="640" height="30" fill="#d9dee4"/>
+            <g transform="rotate(-10 80 200)">
+              <rect x="80" y="190" width="440" height="20" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/>
+              <circle cx="80" cy="200" r="13" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/>
+              <circle cx="520" cy="200" r="13" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/>
+              <rect x="230" y="130" width="90" height="60" rx="3" fill="#0d2b4e"/>
+              <text x="275" y="167" font-size="18" fill="#ffffff" text-anchor="middle">荷物</text>
+              <line x1="340" y1="160" x2="440" y2="160" stroke="#d4691a" stroke-width="5" marker-end="url(#mt3)"/>
+              <text x="340" y="146" font-size="18" fill="#d4691a">ベルトを引く力 F</text>
+            </g>
+            <text x="20" y="34" font-size="19" fill="#0d2b4e">F ＝ 摩擦（μ × m × g × cosθ）</text>
+            <text x="20" y="62" font-size="19" fill="#0d2b4e">　＋ 持ち上げる分（m × g × sinθ）</text>
+            <text x="120" y="226" font-size="17" fill="#5a6573">傾き θ</text>
+          </svg>
+          <figcaption>水平なら摩擦だけ。上りでは、荷物を持ち上げる分が加わる。</figcaption>
+        </figure>
+
+        <p>
+          摩擦係数 μ は、ベルトの下が板（すべる）か、ローラー（転がる）かで大きく違います。ある1社の技術資料では、すべる面の摩擦係数の参考値を、ガイドの有無によって0.05〜0.3程度の幅で示し、ベルトコンベアの計算例では0.3を使っています。ローラーの上を転がるベルトでは、抵抗はローラーの軸受、径、荷重、配置で決まるため、単純な摩擦係数ではなく、実測や設備の仕様から決めた「見かけの係数」として扱います。本記事では、比べるための計算例として0.05と仮定します<span class="need-check">（仮の値・要確認）</span>。
+        </p>
+        <table>
+          <tr><th>項目</th><th>値の例</th><th>出どころ</th></tr>
+          <tr><td>摩擦係数（板の上をすべる）</td><td>0.3</td><td>モーターメーカーの計算例（参考値は0.05〜0.3程度の幅）</td></tr>
+          <tr><td>見かけの係数（ローラーの上を転がる）</td><td>0.05</td><td>本記事の仮定。実測や設備の仕様で決める</td></tr>
+          <tr><td>ベルトとローラーの効率 η</td><td>0.9</td><td>モーターメーカーの計算例</td></tr>
+          <tr><td>減速機の効率 ηG</td><td>0.85</td><td>本記事の仮定。形式、減速比、運転の条件で違うので、カタログの値を使う</td></tr>
+          <tr><td>安全率</td><td>2</td><td>初期の選定の目安の例（1.5〜2とする資料が多い）</td></tr>
+        </table>
+        <p>
+          安全率は、負荷の変動、摩擦のばらつき、起動の回数、衝撃、運転の時間を見込むためのものです。安全率を掛けても、起動のときのトルク、減速機の許容トルク、モーターの温度上昇を確かめたことにはなりません。
+        </p>
+
+        <h3>計算例（続き）：150kg、板の上、水平</h3>
+        <p>
+          ベルトと荷物の合計150kg、ベルトの下は板（μ0.3）、減速比1/25とします。
+        </p>
+        <p class="calc">
+          F ＝ 150 × 9.81 × 0.3 ＝ 441 N<br>
+          TL ＝ 441 × 0.1 ÷（2 × 0.9）＝ 24.5 N·m<br>
+          TM ＝ 24.5 × 2 ÷（25 × 0.85）＝ 2.31 N·m
+        </p>
+        <p>
+          モーターの定格トルクは、容量を回転の速さで割って求めます。50Hzで1,450r/minなら、0.2kWで約1.32N·m、0.4kWで約2.63N·mです（目安・機種のカタログで確かめる）。
+        </p>
+        <p class="calc">
+          0.2kW：2.31 ÷ 1.32 ＝ 175％　→　足りない<br>
+          <b>0.4kW：2.31 ÷ 2.63 ＝ 88％　→　0.4kW を選ぶ</b>
+        </p>
+        <p>
+          この88％は、<strong>安全率2を掛けた必要トルク</strong>と、定格トルクの比です。安全率を掛ける前の、実際の負荷トルクはモーター軸で約1.15N·m（定格の約44％）です。最終的には、使う周波数での定格トルク、始動トルク、減速機の許容出力トルクも確かめます。
+        </p>
+
+        <h3>動力（W）でも確かめる</h3>
+        <p>
+          トルクで選んだ結果は、動力でも確かめておくと安心です。運んでいるときの動力は、ベルトを引く力に速さを掛け、効率で割って求めます。
+        </p>
+        <p class="calc">
+          P ＝ F × V ÷（η × ηG）＝ 441 ×（18.2 ÷ 60）÷（0.9 × 0.85）＝ 約175 W
+        </p>
+        <p>
+          175Wなら0.2kWで足りそうに見えます。しかし、安全率2を見込むと約350Wで、0.2kWでは足りません。トルクで求めた結果（0.2kWで175％）と同じ答えです。動力だけで見ると、安全率と減速比の選び方が抜け落ちやすいので、<strong>トルクで選び、動力で確かめる</strong>順にします。
+        </p>
+
+        <h3>同じコンベアを、上り10°にすると</h3>
+        <p class="calc">
+          F ＝ 150 × 9.81 ×（sin10° ＋ 0.3 × cos10°）＝ 690 N<br>
+          TM ＝ 690 × 0.1 ÷（2 × 0.9）× 2 ÷（25 × 0.85）＝ 3.61 N·m<br>
+          0.4kW：137％ → 足りない　／　<b>0.75kW（約4.94N·m）：73％ → 0.75kW を選ぶ</b>
+        </p>
+        <p>
+          たった10°の傾きで、必要な力は1.5倍以上になりました。逆に、ベルトの下をローラーにすると（μ0.05）、水平なら必要トルクは0.39N·mで、0.1kWでも足ります。<strong class="mk">傾きとベルトの下の作りで、モーターの大きさは何倍も変わる</strong>ということです。
+        </p>
+
+        <h3>60Hzでは、定格トルクが小さくなる</h3>
+        <p>
+          トルクは、出力を回転の速さで割った値です。定格の出力が同じなら、回転の速いほうが定格トルクは小さくなります。1,750r/minの例で計算すると、0.4kWの定格トルクは約2.18N·mで、水平の計算例でも比は88％から約106％に上がります。50Hzでぎりぎりの選定は、60Hzの地域では足りなくなることがあります。50Hzと60Hzは、それぞれの定格回転速度と定格トルクで確かめます<span class="need-check">（機種の定格で確かめる）</span>。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ベルトを引く力は、摩擦と、上りでは持ち上げる分の合計</li>
+            <li>モーター軸のトルクは、ローラー軸のトルク×安全率÷（減速比×減速機の効率）</li>
+            <li>傾きとベルトの下の作りで、必要な容量は何倍も変わる</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>起動のときの加速のトルク</h2>
+        <p>
+          止まっている荷物とベルトを動かし始めるときは、一定の速さで運ぶときより大きなトルクが要ります。加速に必要なトルクは、回っているものの「回しにくさ」（慣性モーメント）と、加速の速さで決まります。
+        </p>
+        <p class="calc">
+          ベルトと荷物の慣性モーメント（ローラー軸）　J ＝ m ×（D ÷ 2）²　＋ ローラーの分<br>
+          モーター軸に直すと　J ÷ i²<br>
+          加速のトルク　Ta ＝（J ÷ i²）× ω ÷ t ÷ ηG（ω：モーターの角速度、t：止まった状態から ω までの加速の時間）
+        </p>
+        <p>
+          計算例（150kg、1/25、1秒で加速）では、ローラーも含めた J は約0.39kg·m²、モーター軸に直すと1/625になり、加速のトルクは約0.11N·mです。この例のように、加速の時間が十分に長く、負荷の慣性が小さい場合は、加速の分は一定の速さで運ぶ分に比べて小さいことがあります。ただし、荷物が多い、ローラーが大きい、短い時間で起動する、起動と停止をくり返す、といった場合は無視できないので、計算して確かめます。
+        </p>
+        <p>
+          また、この式にはモーター自身の回転子と、減速機の中の慣性が入っていません。必要に応じて、モーター軸に直して足します。減速機の効率を含めた直し方は、メーカーの選定式に従います。
+        </p>
+        <p>
+          三相モーターを直接電源につないで起動すると、始動トルクで急に動き出し、ベルトの上の荷物が滑ったり倒れたりすることがあります。始動トルクの大きさはモーターの形式と設計で違うので、起動に必要なトルクと、カタログの始動トルクやトルクの特性を照らし合わせます。始動のときの電流も、電源の設備や保護の機器を選ぶために、別に確かめます。荷物を優しく動かしたいときは、インバータでゆっくり加速させます<span class="need-check">（要確認）</span>。起動と停止の回数が多い場合は、モーターの温度上昇もメーカーの資料で確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>加速のトルクは、慣性モーメントを減速比の2乗で割って求める</li>
+            <li>加速の分は、慣性と加速の時間しだい。短い時間で起動する場合は計算する</li>
+            <li>始動トルクは機種で違う。急な起動は荷物を滑らせる</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。傾きで図の角度が、減速比で速さが変わる） -->
+        <h2>自分の条件で試す｜コンベアのモーター選定ツール（概算）</h2>
+        <p>
+          質量、ほしい速さ、傾き、ベルトの下の作りを入れ、減速比を選ぶと、速さとおすすめのモーター容量が出ます。減速比を変えて、速さと容量がどう入れ替わるかを試してみてください。初期値は、本記事の計算例と同じです。
+        </p>
+
+        <div class="calc-tool" id="mt-tool">
+          <p class="calc-tool-title">ベルトコンベアのモーター容量と減速比</p>
+          <p class="calc-tool-note">
+            ベルトの上の荷物を、ローラー（プーリ）で一定の速さで運ぶ場合の概算です。モーターは三相4極を想定し、回転数は50Hzで1,450r/min、60Hzで1,750r/minの例で計算します。定格トルクは「容量÷回転の速さ」で求めた目安です。摩擦係数、効率、安全率は、メーカーの技術資料にある値の例と、本記事の仮定です。ローラーの上の0.05は仮の値なので、実測や設備の仕様を優先してください。加速のトルクは、ベルト・荷物・ローラーの分だけで、モーター自身と減速機の慣性は含みません。始動トルク、減速機の許容トルク、軸にかかる力、起動の回数と温度、使用環境は別に確かめてください。<strong>結果は選定の可否を保証するものではありません。</strong>実際の選定では、メーカーのカタログと選定ツールで確かめてください。
+          </p>
+
+          <p style="font-size:0.86rem;margin:0 !important;">ベルトの下</p>
+          <div class="calc-btns" data-b="bed"><button type="button" data-v="0.3">板の上をすべる μ0.3</button><button type="button" data-v="0.05">ローラーの上を転がる μ0.05</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">電源の周波数</p>
+          <div class="calc-btns" data-b="hz"><button type="button" data-v="50">50Hz（東日本）</button><button type="button" data-v="60">60Hz（西日本）</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">減速比</p>
+          <div class="calc-btns" data-b="i"><button type="button" data-v="5">1/5</button><button type="button" data-v="10">1/10</button><button type="button" data-v="15">1/15</button><button type="button" data-v="20">1/20</button><button type="button" data-v="25">1/25</button><button type="button" data-v="30">1/30</button><button type="button" data-v="40">1/40</button><button type="button" data-v="50">1/50</button><button type="button" data-v="60">1/60</button></div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 300" role="img" aria-label="ベルトコンベアの図。傾きを変えると、コンベアの角度が変わる。右の端に、減速機とモーターが付いている">
+              <defs>
+                <marker id="mt-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <rect x="0" y="270" width="640" height="30" fill="#d9dee4"/>
+              <line data-o="legL" x1="80" x2="80" y2="270" stroke="#5a6573" stroke-width="6"/>
+              <line data-o="legR" x2="0" y2="270" stroke="#5a6573" stroke-width="6"/>
+              <g data-o="conv">
+                <rect x="80" y="200" width="400" height="22" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/>
+                <circle cx="80" cy="211" r="14" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/>
+                <circle cx="480" cy="211" r="14" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/>
+                <rect data-o="box" x="200" fill="#0d2b4e" rx="3"/>
+                <text data-o="boxt" x="245" font-size="18" fill="#ffffff" text-anchor="middle"></text>
+                <line x1="330" y1="180" x2="420" y2="180" stroke="#d4691a" stroke-width="5" marker-end="url(#mt-ao)"/>
+                <text x="330" y="166" font-size="19" fill="#d4691a">速さ <tspan data-o="figV"></tspan> m/min</text>
+              </g>
+              <g data-o="drive">
+                <rect x="10" y="-22" width="44" height="44" rx="4" fill="#6f8aa6"/>
+                <text x="32" y="6" font-size="15" fill="#ffffff" text-anchor="middle">1/<tspan data-o="figI"></tspan></text>
+                <rect x="54" y="-16" width="70" height="32" rx="5" fill="#0d2b4e"/>
+                <text x="89" y="6" font-size="15" fill="#ffffff" text-anchor="middle"><tspan data-o="figK"></tspan>kW</text>
+                <text x="10" y="44" font-size="15" fill="#5a6573">減速機</text><text x="70" y="44" font-size="15" fill="#5a6573">モーター</text>
+              </g>
+              <text x="20" y="30" font-size="19" fill="#0d2b4e">傾き <tspan data-o="figTh"></tspan>°、荷物 <tspan data-o="figM"></tspan> kg</text>
+            </svg>
+            <p class="calc-fig-note">傾きを変えると図の角度が、減速比を変えると速さが変わります。モーターの欄は、おすすめの容量です。</p>
+          </div>
+
+          <h4>条件</h4>
+          <div class="calc-in">
+            <label>ベルトと荷物の合計の質量<span class="row"><input type="range" data-k="m" min="10" max="1000" step="10"><input type="number" data-k="m" min="10" max="1000" step="1"><span class="unit">kg</span></span></label>
+            <label>ほしい速さ<span class="row"><input type="range" data-k="V" min="2" max="90" step="1"><input type="number" data-k="V" min="2" max="90" step="0.1"><span class="unit">m/min</span></span></label>
+            <label>駆動ローラーの直径<span class="row"><input type="range" data-k="D" min="50" max="300" step="5"><input type="number" data-k="D" min="50" max="300" step="1"><span class="unit">mm</span></span></label>
+            <label>傾き（上り）<span class="row"><input type="range" data-k="th" min="0" max="20" step="1"><input type="number" data-k="th" min="0" max="20" step="0.5"><span class="unit">°</span></span></label>
+            <label>摩擦係数 μ<span class="row"><input type="range" data-k="mu" min="0.02" max="0.5" step="0.01"><input type="number" data-k="mu" min="0.02" max="0.5" step="0.01"><span class="unit"></span></span></label>
+            <label>減速機の効率 ηG<span class="row"><input type="range" data-k="eg" min="0.5" max="0.95" step="0.05"><input type="number" data-k="eg" min="0.5" max="0.95" step="0.01"><span class="unit"></span></span></label>
+            <label>安全率<span class="row"><input type="range" data-k="sf" min="1" max="3" step="0.1"><input type="number" data-k="sf" min="1" max="3" step="0.1"><span class="unit"></span></span></label>
+            <label>起動の時間（止まった状態から、ほしい速さまで）<span class="row"><input type="range" data-k="t" min="0.2" max="5" step="0.1"><input type="number" data-k="t" min="0.2" max="5" step="0.1"><span class="unit">秒</span></span></label>
+          </div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>ローラーの回転数 ／ 減速比の計算値</th><td><b data-o="NG"></b> r/min ／ 1/<b data-o="ic"></b></td></tr>
+            <tr data-j="V"><th>選んだ減速比での速さ</th><td><b data-o="Vr"></b> m/min<span class="judge" data-o="jV"></span></td></tr>
+            <tr><th>ベルトを引く力 ／ ローラー軸のトルク</th><td><b data-o="F"></b> N ／ <b data-o="TL"></b> N·m</td></tr>
+            <tr><th>モーター軸の必要トルク（安全率込み）</th><td><b data-o="TM"></b> N·m</td></tr>
+            <tr data-j="K"><th>おすすめのモーター容量</th><td><b data-o="K"></b><span class="judge" data-o="jK"></span></td></tr>
+            <tr><th>加速のトルク（モーター軸、モーター自身の分を除く）</th><td><b data-o="Ta"></b> N·m</td></tr>
+            <tr><th>運んでいるときの動力の目安（安全率なし）</th><td><b data-o="P"></b> W</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="mt-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('mt-tool');
+          if (!root) return;
+          var KW = [0.1, 0.2, 0.4, 0.75, 1.5, 2.2, 3.7], NM = { 50: 1450, 60: 1750 };
+          var DEF = { m: 150, V: 20, D: 100, th: 0, mu: 0.3, eg: 0.85, sf: 2, t: 1, hz: 50, i: 25 };
+          var g = 9.807, ETA = 0.9, MR = 5, S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            root.querySelectorAll('[data-b="bed"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(S.mu)); });
+            root.querySelectorAll('[data-b="hz"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S.hz); });
+            root.querySelectorAll('[data-b="i"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S.i); });
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var a = S.th * Math.PI / 180, D = S.D / 1000, N = NM[S.hz];
+            var F = S.m * g * (Math.sin(a) + S.mu * Math.cos(a));
+            var TL = F * D / (2 * ETA);
+            var TM = TL * S.sf / (S.i * S.eg);
+            var NG = S.V / (Math.PI * D), ic = N / NG, Vr = N / S.i * Math.PI * D;
+            var J = S.m * D * D / 4 + 2 * MR * D * D / 8, w = 2 * Math.PI * N / 60;
+            var Ta = J / (S.i * S.i) * w / S.t / S.eg;
+            var P = F * (Vr / 60) / ETA / S.eg;
+            var K = null;
+            for (var n = 0; n < KW.length; n++) { if (TM <= KW[n] * 1000 / w) { K = KW[n]; break; } }
+            out('NG', fmt(NG, 1)); out('ic', fmt(ic, 1)); out('Vr', fmt(Vr, 1));
+            out('F', fmt(F)); out('TL', fmt(TL, 2)); out('TM', fmt(TM, 2)); out('Ta', fmt(Ta, 3)); out('P', fmt(P));
+            var dv = (Vr - S.V) / S.V * 100;
+            judge('jV', 'V', Math.abs(dv) > 10, 'ほしい速さの ' + (dv >= 0 ? '+' : '') + fmt(dv) + '％（±10％以内）', 'ほしい速さの ' + (dv >= 0 ? '+' : '') + fmt(dv) + '％（±10％を外れる。減速比を見直す）');
+            if (K) {
+              var Tr = K * 1000 / w;
+              out('K', K + ' kW');
+              judge('jK', 'K', false, '安全率込みの必要トルクは、定格トルク約 ' + fmt(Tr, 2) + ' N·m の ' + fmt(TM / Tr * 100) + '％', '');
+            } else {
+              out('K', '3.7kW を超える');
+              judge('jK', 'K', true, '', '減速比を大きくするか、条件を見直す');
+            }
+            out('figV', fmt(Vr, 1)); out('figI', S.i); out('figK', K || '—'); out('figTh', S.th); out('figM', fmt(S.m));
+            // 図：コンベアを左のローラーを中心に傾け、右の端に減速機とモーターを付ける
+            root.querySelector('[data-o="conv"]').setAttribute('transform', 'rotate(' + (-S.th) + ' 80 211)');
+            var hx = 80 + 400 * Math.cos(a), hy = 211 - 400 * Math.sin(a);
+            root.querySelector('[data-o="drive"]').setAttribute('transform', 'translate(' + hx + ',' + hy + ')');
+            var lr = root.querySelector('[data-o="legR"]'); lr.setAttribute('x1', hx); lr.setAttribute('x2', hx); lr.setAttribute('y1', hy + 14);
+            root.querySelector('[data-o="legL"]').setAttribute('y1', 225);
+            var k = Math.min(Math.max(Math.log(S.m / 10) / Math.log(100), 0), 1), bw = 50 + 60 * k, bh = 30 + 34 * k;
+            var bx = root.querySelector('[data-o="box"]'); bx.setAttribute('x', 245 - bw / 2); bx.setAttribute('y', 200 - bh); bx.setAttribute('width', bw); bx.setAttribute('height', bh);
+            var bt = root.querySelector('[data-o="boxt"]'); bt.setAttribute('y', 200 - bh / 2 + 6); bt.textContent = '荷物';
+            out('eq', '力 ＝ ' + fmt(S.m) + '×9.81×（sin' + S.th + '° ＋ ' + S.mu + '×cos' + S.th + '°）。ローラー軸のトルク ＝ 力×' + S.D + '÷1000÷（2×0.9）。モーター軸 ＝ ローラー軸のトルク×' + S.sf + '÷（' + S.i + '×' + S.eg + '）。速さ ＝ ' + N + '÷' + S.i + '×π×' + S.D + '÷1000。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'conveyor_motor' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b="bed"] button').forEach(function (b) { b.addEventListener('click', function () { set('mu', Number(b.dataset.v)); }); });
+          root.querySelectorAll('[data-b="hz"] button').forEach(function (b) { b.addEventListener('click', function () { set('hz', Number(b.dataset.v)); }); });
+          root.querySelectorAll('[data-b="i"] button').forEach(function (b) { b.addEventListener('click', function () { set('i', Number(b.dataset.v)); }); });
+          document.getElementById('mt-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：モーターと減速機選びゲーム（コンベアの記事・2026-10-22。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜荷物を時間内に運ぶモーター選びゲーム</h2>
+        <p>
+          ベルトコンベアで、荷物を8m先まで運びます。荷物の重さ、コンベアの傾き、制限時間は、毎回変わります。選べるのは、モーターの容量と減速機の減速比の2つです。減速比を小さくすると速く運べますが、そのぶんモーターに大きな力が要ります。減速比を大きくすると力に余裕が出ますが、遅くなります。
+        </p>
+
+        <div class="calc-tool ufo" id="mg-tool">
+          <p class="calc-tool-title">モーターと減速機選びゲーム</p>
+          <p class="ufo-weight">荷物 <b data-g="m"></b> kg、傾き <b data-g="th"></b>°、<b data-g="T"></b> 秒以内に8m先へ</p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 400" role="img" aria-label="ベルトコンベアで荷物を運ぶ図。右の端に、減速機とモーターが付いている">
+              <rect x="0" y="350" width="640" height="50" fill="#d9dee4"/>
+              <line data-g="legL" x1="70" x2="70" y1="314" y2="350" stroke="#5a6573" stroke-width="6"/>
+              <line data-g="legR" y2="350" stroke="#5a6573" stroke-width="6"/>
+              <g data-g="conv">
+                <rect x="70" y="290" width="400" height="22" fill="#b8c6d6" stroke="#5a6573" stroke-width="2"/>
+                <line data-g="belt" x1="70" y1="290" x2="470" y2="290" stroke="#5a6573" stroke-width="4" stroke-dasharray="14 10"/>
+                <g data-g="pulL"><circle cx="70" cy="301" r="14" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/><line x1="70" y1="289" x2="70" y2="313" stroke="#5a6573" stroke-width="2"/></g>
+                <g data-g="pulR"><circle cx="470" cy="301" r="14" fill="#e8ecf1" stroke="#5a6573" stroke-width="2"/><line x1="470" y1="289" x2="470" y2="313" stroke="#5a6573" stroke-width="2"/></g>
+                <line x1="456" y1="290" x2="456" y2="236" stroke="#d4691a" stroke-width="3"/>
+                <path d="M456,236 L486,246 L456,256 Z" fill="#d4691a"/>
+                <g data-g="box"><rect data-g="bx" rx="3" fill="#0d2b4e"/><text data-g="bt" font-size="18" fill="#ffffff" text-anchor="middle"></text></g>
+              </g>
+              <g data-g="drive">
+                <rect x="10" y="-22" width="44" height="44" rx="4" fill="#6f8aa6"/>
+                <text x="32" y="6" font-size="17" fill="#ffffff" text-anchor="middle">1/<tspan data-g="fi"></tspan></text>
+                <rect data-g="mot" x="54" rx="5" fill="#0d2b4e"/>
+                <text data-g="mk" font-size="17" fill="#ffffff" text-anchor="middle"></text>
+                <g data-g="smoke"></g>
+              </g>
+              <text x="20" y="38" font-size="25" fill="#0d2b4e">経過 <tspan data-g="clk">0.0</tspan> 秒 ／ 制限 <tspan data-g="lim"></tspan> 秒</text>
+              <text x="20" y="72" font-size="25" fill="#0d2b4e">速さ <tspan data-g="spd">0.0</tspan> m/min</text>
+              <text x="620" y="104" font-size="18" fill="#5a6573" text-anchor="end">時間は早送りで表示</text>
+              <text data-g="say" font-size="20" fill="#d4691a" text-anchor="middle" style="display:none"></text>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p><p class="ufo-ov-n">※ 目安をつかむためのゲームです。<br>設計では条件を確かめて計算してください。</p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-g="start">スタート</button>
+            <button type="button" class="calc-reset" data-g="again">もう一回（条件が変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>モーターの容量</p>
+              <div class="calc-btns" data-gb="k"></div>
+              <p>減速比</p>
+              <div class="calc-btns" data-gb="i"></div>
+            </div>
+            <div class="ufo-msg" data-g="msg" aria-live="polite">モーターの容量と減速比を選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              判定は、本記事の計算ツールと同じ式で求めた、モーター軸の必要トルク（安全率2を掛けたもの）の、定格トルクに対する割合で決めています。条件は、ベルトの下が板（μ0.3）、駆動ローラーの直径100mm、50Hz（1,450r/min）、減速機の効率0.85です。ゲームなので、110％までは成功とし、30％未満は「大きすぎ」としています。止まり方や煙は、分かりやすくするための演出です。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('mg-tool');
+          if (!root) return;
+          var KW = [0.1, 0.2, 0.4, 0.75, 1.5], IS = [5, 10, 15, 20, 25, 30, 50], TS = [8, 10, 12, 15, 20, 25, 30, 40, 50], THS = [0, 5, 10, 15];
+          var g = 9.807, LEN = 8, MU = 0.3, DR = 0.1, ETA = 0.9, EG = 0.85, SF = 2, NM = 1450, FAIL = 1.10, OVER = 0.30;
+          var X0 = 70, CL = 400, BELT = 290;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-g="' + k + '"]'); };
+          var S = { k: 0.4, i: 25, m: 150, th: 0, T: 30, running: false }, used = false, D;
+
+          // 本記事の計算ツールと同じ式
+          function ratio(kw, i) {
+            var a = S.th * Math.PI / 180, F = S.m * g * (Math.sin(a) + MU * Math.cos(a));
+            var TM = F * DR / (2 * ETA) * SF / (i * EG), Tr = kw * 1000 / (2 * Math.PI * NM / 60);
+            return TM / Tr;
+          }
+          function speed(i) { return NM / i * Math.PI * DR; }            // m/min
+          function need(i) { return LEN / (speed(i) / 60); }             // 秒
+          // おすすめ：小さい容量から順に、時間内に届き、力が足りて、大きすぎない組み合わせ（同じ容量なら減速比の大きい方）
+          function bestPair() {
+            for (var a = 0; a < KW.length; a++) for (var b = IS.length - 1; b >= 0; b--) {
+              var r = ratio(KW[a], IS[b]);
+              if (need(IS[b]) <= S.T && r <= FAIL && r >= OVER) return { k: KW[a], i: IS[b] };
+            }
+            return null;
+          }
+          function best() { var b = bestPair(); return b ? b.k + 'kW・減速比1/' + b.i : 'なし'; }
+          function pct(x) { return x >= 5 ? '約' + Math.round(x) + '倍' : Math.round(x * 100) + '％'; }
+          function f1(x) { return x.toLocaleString('ja-JP', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); }
+
+          [['k', KW, 'kW', ''], ['i', IS, '', '1/']].forEach(function (c) {
+            var box = root.querySelector('[data-gb="' + c[0] + '"]');
+            c[1].forEach(function (v) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = c[3] + v + c[2]; bt.dataset.v = v;
+              bt.addEventListener('click', function () { if (S.running) return; S[c[0]] = v; syncBtns(); home(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          function syncBtns() {
+            ['k', 'i'].forEach(function (k) {
+              root.querySelectorAll('[data-gb="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S[k]); b.disabled = S.running; });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+          function bsize() { var k = Math.min(Math.max(Math.log(S.m / 20) / Math.log(25), 0), 1); return { w: 44 + 40 * k, h: 30 + 30 * k }; }
+          function msize() { var k = Math.log(S.k / 0.1) / Math.LN2; return { w: 50 + 15 * k, h: 26 + 6 * k }; }
+          function home() { D = { p: 0, belt: 0, ang: 0, clk: 0, v: 0, heat: 0, puffs: [] }; }
+
+          function draw() {
+            var a = S.th * Math.PI / 180;
+            q('conv').setAttribute('transform', 'rotate(' + (-S.th) + ' ' + X0 + ' 301)');
+            var hx = X0 + CL * Math.cos(a), hy = 301 - CL * Math.sin(a);
+            q('drive').setAttribute('transform', 'translate(' + hx + ',' + hy + ')');
+            var lr = q('legR'); lr.setAttribute('x1', hx); lr.setAttribute('x2', hx); lr.setAttribute('y1', hy + 14);
+            q('belt').setAttribute('stroke-dashoffset', -D.belt);
+            q('pulL').setAttribute('transform', 'rotate(' + D.ang + ' 70 301)');
+            q('pulR').setAttribute('transform', 'rotate(' + D.ang + ' 470 301)');
+            var B = bsize(), x = X0 + 8 + D.p * (CL - 30 - B.w);
+            var bx = q('bx'); bx.setAttribute('x', 0); bx.setAttribute('y', -B.h); bx.setAttribute('width', B.w); bx.setAttribute('height', B.h);
+            var bt = q('bt'); bt.setAttribute('x', B.w / 2); bt.setAttribute('y', -B.h / 2 + 6); bt.textContent = S.m + 'kg';
+            q('box').setAttribute('transform', 'translate(' + x + ',' + BELT + ')');
+            var M = msize(), mo = q('mot');
+            mo.setAttribute('y', -M.h / 2); mo.setAttribute('width', M.w); mo.setAttribute('height', M.h);
+            var c1 = [13, 43, 78], c2 = [212, 105, 26], h = D.heat;
+            mo.setAttribute('fill', 'rgb(' + c1.map(function (c, n) { return Math.round(c + (c2[n] - c) * h); }).join(',') + ')');
+            var mk = q('mk'); mk.setAttribute('x', 54 + M.w / 2); mk.setAttribute('y', 6); mk.textContent = S.k + 'kW';
+            q('fi').textContent = S.i;
+            q('smoke').innerHTML = D.puffs.map(function (p) { return '<circle cx="' + (54 + M.w / 2 + p.x) + '" cy="' + (-M.h / 2 - p.y) + '" r="' + p.r + '" fill="#8a949e" fill-opacity="' + p.o + '"/>'; }).join('');
+            q('clk').textContent = f1(D.clk); q('spd').textContent = f1(D.v); q('lim').textContent = S.T;
+          }
+
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null, last = null;
+              function f(now) { if (t0 === null) { t0 = now; last = now; } var t = Math.min((now - t0) / ms, 1), dt = (now - last) / 1000; last = now; fn(t, dt); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); overlay(t, k); }
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            var ovt = ov.querySelector('.ufo-ov-t'); ovt.textContent = '';
+            title.split('、').forEach(function (p, i, a) { var sp = document.createElement('span'); sp.textContent = p + (i < a.length - 1 ? '、' : ''); ovt.appendChild(sp); });
+            ov.querySelector('.ufo-ov-s').textContent = kind === 'ok' ? 'ちょうどよい組み合わせです' : rec ? 'おすすめ：' + rec[1] : '';
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+          // ベルトを v（m/min）で動かし、荷物を進める。sc は、1秒の間に進めるゲームの中の秒数（早送り）
+          function move(dt, v, sc, carry) {
+            var sim = dt * sc, m = v / 60 * sim;                        // 進んだ距離（m）
+            D.clk += sim; D.v = v;
+            D.belt += m * CL / LEN; D.ang += m / (Math.PI * DR) * 360;
+            if (carry) D.p = Math.min(D.p + m / LEN, 1);
+          }
+          function puff(dt) {
+            if (Math.random() < dt * 8) D.puffs.push({ x: (Math.random() - 0.5) * 16, y: 0, r: 4, o: 0.6 });
+            D.puffs.forEach(function (p) { p.y += dt * 40; p.r += dt * 6; p.o -= dt * 0.35; p.x += dt * 6; });
+            D.puffs = D.puffs.filter(function (p) { return p.o > 0; });
+          }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'motor_game' }); }
+            S.running = true; syncBtns(); home(); draw();
+            var r = ratio(S.k, S.i), v = speed(S.i), tn = need(S.i);
+            var fail = r > FAIL, slow = !fail && tn > S.T, over = !fail && !slow && r < OVER;
+            var sc = S.T / 6, rec = best();
+            msg('動いています…');
+            if (fail) {
+              // 動き出すが、力が足りずに速さが落ちて止まる。モーターが熱くなり、煙が出る
+              var vs = v * Math.min(0.6, 0.9 / r);
+              await step(1400, function (t, dt) { move(dt, vs * (t < 0.3 ? t / 0.3 : 1 - (t - 0.3) / 0.7), sc, true); D.heat = t * 0.5; puff(dt * t); });
+              D.v = 0;
+              await step(1400, function (t, dt) { D.heat = 0.5 + 0.5 * t; puff(dt); });
+              if (S.th > 0) {
+                // 上りでは、止まったベルトごと荷物が下がる
+                var p0 = D.p, b0 = D.belt, a0 = D.ang;
+                await step(900, function (t, dt) { var e = ease(t); D.p = p0 * (1 - e); D.belt = b0 - p0 * e * CL; D.ang = a0 - p0 * e * LEN / (Math.PI * DR) * 360; puff(dt); });
+              }
+              await step(800, function (t, dt) { puff(dt); });
+              msg('<b>モーターの力が足りません。</b>' + S.m + 'kgの荷物' + (S.th > 0 ? '（上り' + S.th + '°）' : '') + 'を減速比1/' + S.i + 'で運ぶには、' + S.k + 'kWでは必要なトルクが定格の ' + pct(r) + ' になりました。モーターが止まって熱くなり、保護装置が働きます。この条件なら、<b>' + rec + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            if (slow) {
+              // 時間切れ：制限時間まで運んで、止める
+              var tReal = S.T / sc * 1000;
+              await step(tReal, function (t, dt) { move(dt, v, sc, true); });
+              D.clk = S.T; D.v = 0; draw();
+              msg('<b>時間切れです。</b>減速比1/' + S.i + 'の速さは ' + f1(v) + ' m/minで、8m運ぶのに ' + f1(tn) + ' 秒かかります（制限 ' + S.T + ' 秒）。減速比を小さくすると速くなりますが、そのぶんモーターに大きな力が要ります。この条件なら、<b>' + rec + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            await step(tn / sc * 1000, function (t, dt) { move(dt, v, sc, true); });
+            D.p = 1; D.clk = tn; D.v = 0; draw();
+            if (over) {
+              var say = q('say'); say.style.display = ''; say.textContent = '本体・配線・電気代がかさむ…';
+              say.setAttribute('x', 330); say.setAttribute('y', 110);
+              await step(2200, function (t, dt) { say.style.opacity = (Math.floor(t * 8) % 2) ? 1 : 0.45; });
+              say.style.display = 'none';
+              msg('<b>運べましたが、モーターが大きすぎます。</b>必要なトルクは、' + S.k + 'kWの定格の ' + pct(r) + ' しかありません。モーターと減速機の本体、配線やブレーカーの費用がかさみ、軽い負荷で回すと効率も下がりがちです。この条件なら、<b>' + rec + '</b> がおすすめです。', 'ng');
+            } else {
+              msg('<b>成功！</b>' + S.k + 'kW・減速比1/' + S.i + 'で、速さ ' + f1(v) + ' m/min、8mを ' + f1(tn) + ' 秒で運べました（制限 ' + S.T + ' 秒）。必要なトルクは定格の ' + pct(r) + ' です。', 'ok');
+            }
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function newRound() {
+            for (var n = 0; n < 200; n++) {
+              S.m = 20 + Math.floor(Math.random() * 49) * 10;
+              S.th = THS[Math.floor(Math.random() * THS.length)];
+              S.T = TS[Math.floor(Math.random() * TS.length)];
+              if (bestPair()) break;
+            }
+            q('m').textContent = S.m; q('th').textContent = S.th; q('T').textContent = S.T;
+            home(); msg('モーターの容量と減速比を選んで、スタートを押してください。'); draw();
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', newRound);
+          newRound(); syncBtns();
+        })();
+        </script>
+
+        <!-- ◆5 -->
+        <h2>ローラーコンベアとチェーンコンベアの場合</h2>
+        <p>
+          考え方は同じで、ベルトを引く力の求め方が変わります。
+        </p>
+        <ul>
+          <li><strong>ローラーコンベア（モーターでローラーを回すもの）</strong>：荷物はローラーの上を転がるので、抵抗は小さくなります。一方で、ローラーの数が多いと、ローラー自身の回転の抵抗と慣性が効いてきます。ローラーをチェーンやベルトでつなぐ場合は、その効率も見込みます</li>
+          <li><strong>チェーンコンベア</strong>：チェーンとレールの摩擦で抵抗が決まります。ある減速機メーカーの計算資料では、摩擦の目安を0.1〜0.2としています<span class="need-check">（要確認）</span>。チェーン自身の重さも、質量に入れます</li>
+        </ul>
+        <p>
+          どちらも、モーターと減速機をチェーンでつなぐと、減速機の軸に横向きの力（チェーンの張り）がかかります。減速機の軸が受けられる力（許容の荷重）を、カタログで確かめます。
+        </p>
+
+        <!-- ◆6 -->
+        <h2>コンベアのモーター選定でよくある失敗</h2>
+
+        <h3>動力だけで選び、減速比を後で決める</h3>
+        <p>
+          必要な動力が200Wだから0.2kW、と選んでから減速比を決めると、速さを合わせた結果、トルクが足りないことがあります。動力は「速さ×力」なので、速さが決まらないと意味のある数字になりません。減速比を先に決めます。
+        </p>
+
+        <h3>減速機の許容トルクを見ない</h3>
+        <p>
+          モーターに余裕があっても、減速機の出力軸が受けられるトルクを超えると、歯車が早く傷みます。大きな減速比ほど出力軸のトルクは大きくなるので、減速機の許容トルクも確かめます。
+        </p>
+
+        <h3>上りのコンベアで、止まったときの逆走を考えない</h3>
+        <p>
+          上りのコンベアは、止めたときや電源が切れたときに、荷物の重さでベルトが逆に回ることがあります。モーターを止めるだけで荷物を保てるとは限らないので、ブレーキ付きのモーターや、逆転を防ぐ装置が要るかを確かめます。
+        </p>
+        <p>
+          下りのコンベアでは、重さが運ぶ向きに働くため、荷物がモーターを回す側になり、モーターが発電機のように働くことがあります（回生）。起きるかどうかは、摩擦、速さ、制御で変わります。インバータで動かす場合は、戻ってきたエネルギーで内部の電圧が上がり、過電圧で止まることがあります。減速の時間を長くする、ブレーキ抵抗器を付けるなどの方法を、条件に合わせて考えます<span class="need-check">（要確認）</span>。
+        </p>
+
+        <h3>大きすぎるモーターを選ぶ</h3>
+        <p>
+          余裕を見すぎると、モーターと減速機の本体、配線やブレーカーの費用がかさみ、軽い負荷で回すと効率も下がりがちです。起動のトルクも大きくなり、荷物を急に動かします。安全率は、根拠を持って決めます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>減速比を先に決めてから、トルクで容量を選ぶ</li>
+            <li>減速機の許容トルクと、軸にかかる力も確かめる</li>
+            <li>上りのコンベアは止まったときの逆走を、下りのコンベアは回生を確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>コンベアを載せる架台の確認</h2>
+        <p>
+          モーターと減速機はコンベアの端に付くので、架台の一方に重さが寄ります。起動と停止のたびに、ベルトの張りの変化もフレームにかかります。コンベアの脚や架台は「<a href="stand-strength-calculation.html">架台の強度計算</a>」、床への固定は「<a href="anchor-bolt-calculation.html">アンカーボルトの引き抜き計算</a>」の方法で確かめます。
+        </p>
+
+        <!-- ◆計算書 -->
+        <h2>コンベアのモーター選定で記録に残す項目</h2>
+        <ul>
+          <li>ベルトと荷物の合計の質量、荷物の載り方（1個か、並んで流れるか）</li>
+          <li>ほしい速さとその許容の幅、駆動ローラーの直径</li>
+          <li>傾き、ベルトの下の作りと摩擦係数の根拠</li>
+          <li>電源の周波数（50Hz／60Hz）、インバータの有無</li>
+          <li>減速比、減速機の効率と許容トルク</li>
+          <li>モーター軸の必要トルク、安全率、選んだ容量と定格トルク</li>
+          <li>起動の時間、起動と停止の回数、ブレーキや逆転防止の有無</li>
+        </ul>
+
+        <!-- ◆質問 -->
+        <h2>コンベアのモーター選定でよくある質問</h2>
+
+        <h3>荷物が何個も載る場合、質量はどう考えますか</h3>
+        <p>
+          ベルトの上に同時に載る荷物の、いちばん多いときの合計で考えます。荷物が詰まって止まり、ベルトだけが滑る使い方（アキュムレーション）では、荷物とベルトの摩擦も加わるので、別に計算します。
+        </p>
+
+        <h3>インバータを使えば、減速比は何でもよいですか</h3>
+        <p>
+          軸に付いたファンで冷やすモーター（自冷式）をインバータで遅く回すと、ファンの風も弱くなり、連続で出せるトルクが下がることがあります。遅い速さで大きなトルクが要る場合は、インバータでの運転に向いたモーターや、別に冷やす方式が要るかを、メーカーの資料で確かめます。速さの調整はインバータに任せきりにせず、よく使う速さが定格に近くなるよう減速比を選ぶのが基本です<span class="need-check">（要確認）</span>。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          コンベアのモーター選定は、ほしい速さから減速比を決め、ベルトを引く力からトルクを求め、モーター軸に直して容量を選ぶのが基本です。減速比を大きくすると遅くなるかわりに力が強くなり、小さくすると速くなるかわりに力が要ります。
+        </p>
+        <p>
+          そのうえで、<strong class="mk">傾き、ベルトの下の作り、電源の周波数</strong>で結果が大きく変わることを確かめます。ここで求めた必要トルクは、選定の入口です。最終的には、始動トルク、加速のトルク、減速機の許容トルク、起動の回数と温度、止まったときの安全まで確かめます。まずは計算ツールとゲームで、容量と減速比の組み合わせを試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・モーターメーカーの技術資料（選定の手順、プーリ機構の選定例：摩擦係数、ベルトとローラーの効率、安全率）<br>
+          ・減速機メーカーの動力計算の資料（チェーン・ベルトコンベア：摩擦の目安、減速機の効率）<br>
+          ・力、トルク、慣性モーメントの式は、一般的な力学の式
+        </p>
+
+        <div class="article-cta">
+          コンベアや搬送装置のモーター選定、省力化の装置の設計でお困りのことはありませんか。条件の整理から、設計のご相談まで承ります。お気軽にお問い合わせください。
+          <span class="cta-price">強度検証・設計のご依頼の料金は、「<a href="../../price.html#design">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.21</p>
+                <h3><a href="air-cylinder-selection.html">エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</a></h3>
+                <p class="column-excerpt">押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの衝撃まで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.13</p>
+                <h3><a href="stand-strength-calculation.html">架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</a></h3>
+                <p class="column-excerpt">梁と柱の曲げ、たわみ、座屈から、架台の強度を確かめる方法。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
