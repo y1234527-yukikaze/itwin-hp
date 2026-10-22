@@ -2231,3 +2231,9 @@ a.industry-card { cursor: pointer; }
   .ufo-panel .ufo-pick { grid-template-columns: 1fr; gap: 0; }
   .ufo-panel .calc-btns button { padding: 3px 7px; font-size: 0.76rem; }
 }
+/* ゲームの結果カードの注記（目安であることを小さく添える・2026-10-22） */
+.ufo-ov-n { font-size: 0.72rem; color: var(--ink-soft); margin: 8px 0 0 !important; line-height: 1.5; }
+@media (max-width: 700px) { .ufo-ov-n { font-size: 0.64rem; margin-top: 4px !important; } }
+
+/* ゲーム結果の見出しは「、」の区切りでだけ折り返す（末尾1〜2文字だけ残るのを防ぐ） */
+.ufo-ov-t span { display: inline-block; }
