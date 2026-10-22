@@ -2203,3 +2203,31 @@ a.industry-card { cursor: pointer; }
 .ufo-msg.is-ok { border: 2px solid var(--orange); background: #fff7f0; }
 .ufo-msg.is-ng { border: 2px solid var(--navy); }
 .ufo-msg small { color: var(--ink-soft); }
+/* ゲームの結果を、装置の絵の真ん中に出す（2026-10-22） */
+.ufo-fig { position: relative; }
+.ufo-ov { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0; transition: opacity .3s ease; }
+.ufo-ov.is-show { opacity: 1; }
+.ufo-ov-card { background: rgba(255, 255, 255, 0.95); border: 2px solid var(--navy); border-radius: 8px; padding: 14px 22px; max-width: 86%; text-align: center; box-shadow: 0 6px 20px rgba(13, 43, 78, 0.18); }
+.ufo-ov.is-ok .ufo-ov-card { border-color: var(--orange); }
+.ufo-ov-t { font-weight: 700; font-size: 1.2rem; color: var(--navy); margin: 0 !important; line-height: 1.5; }
+.ufo-ov.is-ok .ufo-ov-t { color: var(--orange-dark); }
+.ufo-ov-s { font-size: 0.95rem; color: var(--ink); margin: 4px 0 0 !important; }
+.ufo-ov-s:empty { display: none; }
+.ufo-fig + .ufo-actions { margin-top: 12px; margin-bottom: 6px; }
+@media (max-width: 700px) {
+  .ufo-ov-card { padding: 8px 12px; max-width: 92%; }
+  .ufo-ov-t { font-size: 0.98rem; }
+  .ufo-ov-s { font-size: 0.82rem; }
+}
+/* ゲーム：スタートから下（選択と結果）は、枠の中だけでスクロールする。絵を見たまま選べるよう、選択は小さくまとめる（2026-10-22） */
+.ufo-panel { max-height: 230px; overflow-y: auto; border-top: 1px solid var(--line); padding: 4px 6px 8px 0; overscroll-behavior: contain; }
+.ufo-panel .ufo-pick { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 12px; }
+.ufo-panel .ufo-pick p { margin: 6px 0 0 !important; font-size: 0.82rem; white-space: nowrap; }
+.ufo-panel .ufo-pick .calc-btns { margin: 6px 0 0; gap: 4px; }
+.ufo-panel .calc-btns button { padding: 3px 9px; font-size: 0.8rem; min-height: 0; }
+.ufo-panel .ufo-msg { margin-top: 10px; padding: 8px 12px; font-size: 0.88rem; }
+@media (max-width: 700px) {
+  .ufo-panel { max-height: 38vh; }
+  .ufo-panel .ufo-pick { grid-template-columns: 1fr; gap: 0; }
+  .ufo-panel .calc-btns button { padding: 3px 7px; font-size: 0.76rem; }
+}
