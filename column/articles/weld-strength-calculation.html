@@ -196,7 +196,7 @@
           架台やブラケットを設計するとき、部材の強さは計算しても、溶接は「全周を溶接しておけば大丈夫」と済ませていないでしょうか。本記事では、<strong class="mk">溶接の強度計算の方法</strong>を、すみ肉溶接を中心に、計算例つきで解説します。ずらす力を受ける溶接だけでなく、架台の柱の根元のように<strong>曲げを受ける溶接</strong>まで扱います。
         </p>
         <p>
-          後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+          後半には、ご自身の条件を入れて試せる計算ツールと、おもりを吊れる溶接を選ぶゲームがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
         </p>
 
         <div class="chapter-sum">
@@ -215,6 +215,7 @@
             <li>製造業で使える、溶接の許容応力の決め方</li>
             <li>ずらす力を受ける溶接と、曲げを受ける溶接の計算例</li>
             <li>自分の条件を入れて試せる、概算の計算ツール</li>
+            <li>おもりを吊れる溶接のサイズと長さを選ぶゲーム</li>
           </ul>
         </div>
 
@@ -682,6 +683,224 @@
           document.getElementById('wd-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
           for (var k in DEF) S[k] = DEF[k];
           sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：溶接の大きさ選びゲーム（溶接の記事・2026-10-22。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜おもりを吊れる溶接を選ぶゲーム</h2>
+        <p>
+          柱に溶接したブラケットの先に、おもりを吊ります。おもりの重さは、毎回変わります。選べるのは、溶接のサイズと長さだけです。足りないと溶接が割れ、多すぎると手間とひずみ、費用が大変になります。
+        </p>
+
+        <div class="calc-tool ufo" id="wg-tool">
+          <p class="calc-tool-title">溶接の大きさ選びゲーム</p>
+          <p class="ufo-weight">今回のおもりの重さ：<b data-w="m"></b> kg</p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 400" role="img" aria-label="柱に溶接したブラケットの先に、おもりを吊る図">
+              <rect x="0" y="350" width="640" height="50" fill="#d9dee4"/>
+              <rect x="120" y="30" width="50" height="320" fill="#5a6573"/>
+              <g data-w="brk">
+                <path data-w="plate" fill="#6f8aa6" stroke="#0d2b4e" stroke-width="2"/>
+                <line data-w="weld" stroke="#d4691a" stroke-linecap="butt"/>
+                <circle data-w="pin" r="6" fill="#0d2b4e"/>
+              </g>
+              <path data-w="crack" fill="none" stroke="#d4691a" stroke-width="3"/>
+              <line data-w="rope" stroke="#5a6573" stroke-width="3"/>
+              <g data-w="load"><rect data-w="lbox" rx="4" fill="#0d2b4e"/><text data-w="ltext" font-size="18" fill="#ffffff" text-anchor="middle"></text></g>
+              <g data-w="welder" style="display:none">
+                <circle cx="0" cy="-58" r="9" fill="#0d2b4e"/><rect x="-11" y="-70" width="22" height="9" fill="#5a6573"/>
+                <path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L-22,-50" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/>
+              </g>
+              <g data-w="sparks"></g>
+              <text data-w="say" font-size="20" fill="#d4691a" text-anchor="middle" style="display:none"></text>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p><p class="ufo-ov-n">※ 目安をつかむためのゲームです。<br>設計では条件を確かめて計算してください。</p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-w="start">スタート</button>
+            <button type="button" class="calc-reset" data-w="again">もう一回（重さが変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>溶接のサイズ（脚長）</p>
+              <div class="calc-btns" data-wb="S"></div>
+              <p>溶接の長さ（縦2本）</p>
+              <div class="calc-btns" data-wb="d"></div>
+            </div>
+            <div class="ufo-msg" data-w="msg" aria-live="polite">溶接のサイズと長さを選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              判定は、本記事の計算ツール（曲げを受けるブラケット・縦2本）と同じ式で求めた、合わせた応力の許容応力75.4MPaに対する割合で決めています（腕の長さ200mm、ブラケットの板厚12mm）。ゲームなので、110％までは成功とし、30％未満は「大きすぎ」としています。割れ方の動きは、分かりやすくするための演出です。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('wg-tool');
+          if (!root) return;
+          var SIZES = [3, 4, 5, 6, 8, 10], LENS = [60, 100, 150, 200, 250, 300];
+          var g = 9.81, E_ARM = 200, FW = 75.4, T = 12, FAIL = 1.10, OVER = 0.30;
+          var CX = 170, TOP = 120, TIPX = 410, FLOOR = 350;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-w="' + k + '"]'); };
+          var S = { S: 6, d: 150, m: 300, running: false }, used = false, D;
+
+          // 本記事の計算ツールと同じ式（縦2本のすみ肉溶接が曲げを受ける）
+          function ratio(Sz, d) {
+            var P = S.m * g, a = 0.7 * Sz, le = Math.max(d - 2 * Sz, 1), A = a * le * 2, Zw = 2 * le * le / 6;
+            var sb = P * E_ARM / (a * Zw), ts = P / A;
+            return Math.sqrt(sb * sb + ts * ts) / FW;
+          }
+          // おすすめ：割れず大きすぎない組み合わせのうち、溶接の量（サイズ²×長さ）がいちばん少ないもの。
+          // サイズ3mmは実際には選びにくいため、まず4〜6mmから探し、なければ3mmも含める
+          function best() {
+            var b = pick(4) || pick(3);
+            return b ? 'サイズ' + b.S + 'mm・長さ' + b.d + 'mm' : 'なし';
+          }
+          function pick(minS) {
+            var b = null;
+            SIZES.forEach(function (Sz) { LENS.forEach(function (d) {
+              var r = ratio(Sz, d); if (Sz < minS || Sz > T || r > FAIL || r < OVER) return;
+              var v = Sz * Sz * d; if (!b || v < b.v) b = { S: Sz, d: d, v: v };
+            }); });
+            return b;
+          }
+          function pct(x) { return Math.round(x * 100) + '％'; }
+
+          [['S', SIZES, 'mm'], ['d', LENS, 'mm']].forEach(function (c) {
+            var box = root.querySelector('[data-wb="' + c[0] + '"]');
+            c[1].forEach(function (v) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = v + c[2]; bt.dataset.v = v;
+              bt.addEventListener('click', function () { if (S.running) return; S[c[0]] = v; syncBtns(); home(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          function syncBtns() {
+            ['S', 'd'].forEach(function (k) {
+              root.querySelectorAll('[data-wb="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S[k]); b.disabled = S.running; });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+          function hpx() { return 34 + S.d * 0.62; }
+          // おもりの絵の大きさ（重さに応じて段階的に大きく。6,000kgでも絵に収まる）
+          function lsize() { var k = Math.log(S.m / 100); return { w: 40 + 18 * k, h: 30 + 10 * k }; }
+          function home() { D = { rot: 0, fall: 0, crack: 0, ly: 60, lx: TIPX - 14, attached: false, ropeOff: false }; }
+
+          function draw() {
+            var h = hpx(), tipY = TOP + 22;
+            // ブラケット（溶接の下端を中心に回る）
+            var px = CX, py = TOP + h;
+            q('brk').setAttribute('transform', 'translate(0,' + D.fall + ') rotate(' + D.rot + ' ' + px + ' ' + py + ')');
+            q('plate').setAttribute('d', 'M' + CX + ',' + TOP + ' L' + TIPX + ',' + TOP + ' L' + TIPX + ',' + (TOP + 30) + ' L' + CX + ',' + (TOP + h) + ' Z');
+            var wl = q('weld'); wl.setAttribute('x1', CX + 1); wl.setAttribute('x2', CX + 1); wl.setAttribute('y1', TOP); wl.setAttribute('y2', TOP + h); wl.setAttribute('stroke-width', 3 + S.S * 0.9);
+            q('pin').setAttribute('cx', TIPX - 14); q('pin').setAttribute('cy', tipY);
+            // 割れ（溶接の上の端から、下へ広がる）
+            var cl = D.crack * h * 0.8, cpath = '';
+            if (D.crack > 0) { var y = TOP, zz = 'M' + (CX + 2) + ',' + y; for (var i = 1; i <= 6; i++) { y = TOP + cl * i / 6; zz += ' L' + (CX + (i % 2 ? 8 : -2)) + ',' + y; } cpath = zz; }
+            q('crack').setAttribute('d', cpath);
+            // おもりと吊り下げロープ（ブラケットの回転に付いていく）
+            var t = D.rot * Math.PI / 180, dx = TIPX - 14 - px, dy = tipY - py;
+            var hx = px + dx * Math.cos(t) - dy * Math.sin(t), hy = py + D.fall + dx * Math.sin(t) + dy * Math.cos(t);
+            var L = lsize(), ropeLen = 70, lx, ly;
+            if (D.attached) { lx = hx; ly = hy + ropeLen + L.h / 2; } else { lx = D.lx; ly = D.ly; }
+            var rp = q('rope');
+            rp.setAttribute('x1', D.attached ? hx : lx); rp.setAttribute('y1', D.attached ? hy : 0);
+            rp.setAttribute('x2', lx); rp.setAttribute('y2', ly - L.h / 2);
+            rp.style.display = D.ropeOff ? 'none' : '';
+            var lb = q('lbox'); lb.setAttribute('x', -L.w / 2); lb.setAttribute('y', -L.h / 2); lb.setAttribute('width', L.w); lb.setAttribute('height', L.h);
+            var lt = q('ltext'); lt.setAttribute('y', 6); lt.textContent = S.m + 'kg';
+            q('load').setAttribute('transform', 'translate(' + lx + ',' + ly + ')');
+          }
+
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null;
+              function f(now) { if (t0 === null) t0 = now; var t = Math.min((now - t0) / ms, 1); fn(t, (now - t0) / 1000); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); overlay(t, k); }
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            var ovt = ov.querySelector('.ufo-ov-t'); ovt.textContent = '';
+            title.split('、').forEach(function (p, i, a) { var sp = document.createElement('span'); sp.textContent = p + (i < a.length - 1 ? '、' : ''); ovt.appendChild(sp); });
+            ov.querySelector('.ufo-ov-s').textContent = kind === 'ok' ? 'ちょうどよい溶接です' : rec ? 'おすすめ：' + rec[1] : '';
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+          // 溶接が多すぎるとき：溶接工が長い時間かけて溶接する
+          function welding(text) {
+            var w = q('welder'), sp = q('sparks'), say = q('say'), h = hpx();
+            w.style.display = ''; say.style.display = ''; say.textContent = text;
+            w.setAttribute('transform', 'translate(214,' + FLOOR + ')');
+            say.setAttribute('x', 330); say.setAttribute('y', 70);
+            return step(2800, function (t, s) {
+              var y = TOP + h * ((s * 0.6) % 1);
+              var html = '';
+              for (var i = 0; i < 7; i++) { var a = Math.random() * Math.PI * 2, r = 4 + Math.random() * 16; html += '<circle cx="' + (CX + 4 + Math.cos(a) * r) + '" cy="' + (y + Math.sin(a) * r) + '" r="2.2" fill="#f3a03d"/>'; }
+              sp.innerHTML = html;
+              say.style.opacity = (Math.floor(s * 2) % 2) ? 1 : 0.5;
+            }).then(function () { w.style.display = 'none'; say.style.display = 'none'; sp.innerHTML = ''; });
+          }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'weld_game' }); }
+            S.running = true; syncBtns(); home(); draw();
+            var r = ratio(S.S, S.d), big = S.S > T, over = !big && r < OVER, fail = r > FAIL;
+            var rec = best();
+            msg('動いています…');
+            if (!fail && (big || over)) await welding(big ? '板が熱でゆがむ…' : 'まだ溶接中…');
+            // おもりを吊るす
+            var L = lsize(), tipY = TOP + 22, hang = tipY + 70 + L.h / 2;
+            await step(1200, function (t) { D.ly = 60 + (hang - 60) * ease(t); });
+            D.attached = true;
+            if (fail) {
+              // 先端がじわっと下がり、溶接の上の端から割れが広がる
+              await step(1000, function (t, s) { D.rot = 3 * t + Math.sin(s * 40) * 0.3; D.crack = 0.15 * t; });
+              await step(900, function (t, s) { D.crack = 0.15 + 0.85 * t; D.rot = 3 + 6 * t + Math.sin(s * 60) * 0.4; });
+              // おもりが外れて落ち、ブラケットも柱から外れて床に落ちる
+              var L2 = lsize(), h2 = hpx(), py = TOP + h2, a = 28 * Math.PI / 180;
+              var tipLow = py + (TIPX - CX) * Math.sin(a) + (TOP + 30 - py) * Math.cos(a);
+              var fallTo = FLOOR - 4 - tipLow;
+              draw(); var cur = q('load').getAttribute('transform').match(/translate\(([-\d.]+),([-\d.]+)\)/);
+              D.attached = false; D.ropeOff = true; D.lx = +cur[1]; D.ly = +cur[2];
+              var ly0 = D.ly, lyTo = FLOOR - L2.h / 2;
+              await step(700, function (t) { var e = t * t; D.rot = 9 + 19 * e; D.fall = fallTo * e; D.ly = ly0 + (lyTo - ly0) * Math.min(e * 1.4, 1); });
+              D.crack = 0; draw();
+              msg('<b>溶接が割れました。</b>サイズ' + S.S + 'mm・長さ' + S.d + 'mmの溶接では、' + S.m + 'kgのおもりで、応力が許容応力の ' + pct(r) + ' になりました。この重さなら、<b>' + rec + '</b> がおすすめです（溶接の量が少なくて済む例）。', 'ng');
+              return end();
+            }
+            // 吊ったときの小さなたわみ
+            await step(700, function (t, s) { D.rot = (0.4 + 2.2 * r) * Math.exp(-s / 0.2) * Math.cos(s * 22) * (1 - t) + 0.4 * r; });
+            if (big) {
+              msg('<b>吊れましたが、溶接が大きすぎます。</b>サイズ' + S.S + 'mmは、ブラケットの板厚' + T + 'mmを超えています。板が熱でゆがんだり、溶け落ちたりしやすく、溶接の時間と費用もかさみます（応力は許容応力の ' + pct(r) + '）。この重さなら、<b>' + rec + '</b> がおすすめです。', 'ng');
+            } else if (over) {
+              msg('<b>吊れましたが、溶接が多すぎます。</b>応力は許容応力の ' + pct(r) + ' で、余裕がありすぎます。溶接の時間が長くなり、熱によるひずみと費用も増えます。この重さなら、<b>' + rec + '</b> がおすすめです。', 'ng');
+            } else {
+              msg('<b>成功！</b>サイズ' + S.S + 'mm・長さ' + S.d + 'mmの溶接は、' + S.m + 'kgのおもりにちょうどよい大きさです（応力は許容応力の ' + pct(r) + '）。', 'ok');
+            }
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function newWeight() {
+            S.m = 200 + Math.round(Math.random() * 58) * 100;
+            q('m').textContent = S.m.toLocaleString('ja-JP');
+            home(); msg('溶接のサイズと長さを選んで、スタートを押してください。'); draw();
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', newWeight);
+          newWeight(); syncBtns();
         })();
         </script>
 

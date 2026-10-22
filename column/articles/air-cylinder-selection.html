@@ -601,7 +601,7 @@
                 <path data-u="clawR" stroke="#0d2b4e" stroke-width="5" fill="none" stroke-linecap="round"/>
               </g>
             </svg>
-            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p></div></div>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p><p class="ufo-ov-n">※ 目安をつかむためのゲームです。<br>設計では条件を確かめて計算してください。</p></div></div>
           </div>
           <div class="ufo-actions">
             <button type="button" class="btn btn--fill" data-u="start">スタート</button>
@@ -734,7 +734,8 @@
             var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
             var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
             var sub = kind === 'ok' ? 'ちょうどよい大きさです' : rec ? 'おすすめ：' + rec[1] : '';
-            ov.querySelector('.ufo-ov-t').textContent = title;
+            var ovt = ov.querySelector('.ufo-ov-t'); ovt.textContent = '';
+            title.split('、').forEach(function (p, i, a) { var sp = document.createElement('span'); sp.textContent = p + (i < a.length - 1 ? '、' : ''); ovt.appendChild(sp); });
             ov.querySelector('.ufo-ov-s').textContent = sub;
             ov.className = 'ufo-ov is-show is-' + kind;
           }

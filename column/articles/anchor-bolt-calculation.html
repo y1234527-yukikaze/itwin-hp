@@ -196,7 +196,7 @@
           架台や設備を床に固定するアンカーボルトは、「M12を4本」と決まった形で選ばれがちです。しかし、柱の根元に曲げがかかると、アンカーボルトには思った以上の引き抜き力がかかります。本記事では、<strong class="mk">アンカーボルトの引き抜き計算の方法</strong>を、計算例つきで解説します。あわせて、<strong>ベースプレートの厚さの決め方</strong>までを扱います。
         </p>
         <p>
-          特集の「<a href="stand-strength-calculation.html">架台の強度計算</a>」「<a href="robot-stand-strength-calculation.html">ロボット架台の強度計算</a>」「<a href="weld-strength-calculation.html">溶接の強度計算</a>」の続きです。前の記事で求めた柱の根元の力を使って、床までの力の流れを確かめます。後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+          特集の「<a href="stand-strength-calculation.html">架台の強度計算</a>」「<a href="robot-stand-strength-calculation.html">ロボット架台の強度計算</a>」「<a href="weld-strength-calculation.html">溶接の強度計算</a>」の続きです。前の記事で求めた柱の根元の力を使って、床までの力の流れを確かめます。後半には、ご自身の条件を入れて試せる計算ツールと、架台が浮かないアンカーを選ぶゲームがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
         </p>
 
         <div class="chapter-sum">
@@ -216,6 +216,7 @@
             <li>あと施工アンカーの3つの壊れ方と、耐力の式</li>
             <li>式の値と、メーカーの技術資料の値の使い分け</li>
             <li>ベースプレートの厚さの決め方と、自分の条件で試せる計算ツール</li>
+            <li>ロボットに合ったアンカーの太さと本数を選ぶゲーム</li>
           </ul>
         </div>
 
@@ -775,6 +776,254 @@
           document.getElementById('an-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
           for (var k in DEF) S[k] = DEF[k];
           sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：アンカー選びゲーム（アンカーボルトの記事・2026-10-22。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜架台が浮かないアンカーを選ぶゲーム</h2>
+        <p>
+          門型の架台に、ロボットを天吊りします。ロボットの大きさは、毎回変わります。選べるのは、柱の根元を床に止めるアンカーの太さと本数だけです。足りないとアンカーが抜けて架台が浮き、多すぎると穴あけの手間と費用が大変になります。
+        </p>
+
+        <div class="calc-tool ufo" id="ag-tool">
+          <p class="calc-tool-title">アンカー選びゲーム</p>
+          <p class="ufo-weight">今回のロボット：<b data-a="rname"></b> <span data-a="rspec"></span></p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 400" role="img" aria-label="門型の架台にロボットを天吊りした図。柱の根元のベースプレートを、アンカーボルトで床のコンクリートに止めている">
+              <rect x="0" y="320" width="640" height="80" fill="#cfd6de"/>
+              <line x1="0" y1="320" x2="640" y2="320" stroke="#5a6573" stroke-width="2"/>
+              <g data-a="holes"></g>
+              <g data-a="ped"></g>
+              <g data-a="world">
+                <g data-a="anchL"></g><g data-a="anchR"></g>
+                <rect data-a="plateL" height="8" fill="#0d2b4e"/><rect data-a="plateR" height="8" fill="#0d2b4e"/>
+                <line data-a="colL" stroke="#5a6573" stroke-width="16"/><line data-a="colR" stroke="#5a6573" stroke-width="16"/>
+                <line data-a="beam" stroke="#0d2b4e" stroke-width="16"/>
+                <g data-a="robot">
+                  <rect data-a="rbase" fill="#6f8aa6" rx="4"/>
+                  <line data-a="l1" stroke="#d4691a" stroke-linecap="round"/>
+                  <line data-a="l2" stroke="#d4691a" stroke-linecap="round"/>
+                  <circle data-a="j1" fill="#0d2b4e"/><circle data-a="j2" fill="#0d2b4e"/>
+                  <rect data-a="hand" fill="#0d2b4e" width="18" height="8" rx="2"/>
+                </g>
+              </g>
+              <rect data-a="work" width="26" height="20" rx="2" fill="#e8a33d" stroke="#8a5a2b" stroke-width="1.5"/>
+              <g data-a="crew" style="display:none">
+                <circle cx="0" cy="-58" r="9" fill="#0d2b4e"/>
+                <path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L16,-34" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <rect x="14" y="-40" width="22" height="10" rx="2" fill="#d4691a"/><line x1="25" y1="-30" x2="25" y2="-6" stroke="#5a6573" stroke-width="3"/>
+              </g>
+              <g data-a="dust"></g>
+              <text data-a="say" font-size="20" fill="#d4691a" text-anchor="middle" style="display:none">ガガガ…</text>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p><p class="ufo-ov-n">※ 目安をつかむためのゲームです。<br>設計では条件を確かめて計算してください。</p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-a="start">スタート</button>
+            <button type="button" class="calc-reset" data-a="again">もう一回（ロボットが変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>アンカーの太さ</p>
+              <div class="calc-btns" data-ab="size"></div>
+              <p>柱1本あたりの本数</p>
+              <div class="calc-btns" data-ab="n"></div>
+            </div>
+            <div class="ufo-msg" data-a="msg" aria-live="polite">アンカーの太さと本数を選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              判定は、本記事の計算と同じ式（柱の根元の曲げから、圧縮側のボルト列を回転の中心として求めた引き抜き力。ボルトの間隔150mm、柱は□125×6、ロボットの条件はロボット架台の記事と同じ）で求めたアンカー1本の引き抜き力を、本記事で紹介した長期の許容引張荷重の例（M10 9.1kN、M12 13.7kN、M16 22.2kN、M20 32.9kN）と比べて決めています。ゲームなので、110％までは成功とし、30％未満は「多すぎ」としています。抜け方の動きは、分かりやすくするための演出です。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('ag-tool');
+          if (!root) return;
+          var SIZES = [{ name: 'M10', Ta: 9100, px: 3 }, { name: 'M12', Ta: 13700, px: 4 }, { name: 'M16', Ta: 22200, px: 5.5 }, { name: 'M20', Ta: 32900, px: 7 }];
+          var COUNTS = [2, 4, 6, 8];
+          var ROBOTS = [
+            { name: '小型', mb: 60, mp: 10, R: 800, base: 40, l1: 58, l2: 52 },
+            { name: '中型', mb: 250, mp: 50, R: 1400, base: 56, l1: 80, l2: 70 },
+            { name: '大型', mb: 400, mp: 80, R: 1600, base: 66, l1: 92, l2: 80 }
+          ];
+          var g = 9.81, H = 2500, BOLT = 150, CW = 21.7, FAIL = 1.10, OVER = 0.30;
+          var FLOOR = 320, XL = 150, XR = 490, TOPY = 90, CX = 320;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-a="' + k + '"]'); };
+          var S = { size: 1, n: 4, r: 1, running: false }, used = false, D;
+
+          // ロボット架台の記事と同じ式で、柱の根元の曲げと軸力を出し、アンカー1本の引き抜き力を求める
+          function pull(r, n) {
+            var Rm = r.R / 1000, mm = r.mb * 0.6, a = 10;
+            var Vs = (r.mb + r.mp) * g, Ms = r.mp * g * Rm + mm * g * Rm / 2;
+            var F = 2 * (r.mp * a + mm * a / 2), Md = 2 * (r.mp * a * Rm + mm * (a / 2) * (Rm / 2));
+            var V = Vs + F, Mmm = (Ms + Md) * 1000;
+            var N = V / 2 + CW * 2 * g / 2 + CW * 2.5 * g, Mc = F / 2 * H + Mmm / 2;
+            return (Mc - N * BOLT / 2) / (BOLT * (n / 2));
+          }
+          function ratio(si, n) { return pull(ROBOTS[S.r], n) / SIZES[si].Ta; }
+          function kind(x) { return x > FAIL ? 'fail' : x < OVER ? 'over' : 'ok'; }
+          function okList() {
+            var a = [];
+            COUNTS.forEach(function (n) { SIZES.forEach(function (s, i) { if (kind(ratio(i, n)) === 'ok') a.push(s.name + '×' + n + '本'); }); });
+            return a.length ? a.slice(0, 3).join('、') : 'なし';
+          }
+          function pct(x) { return Math.round(x * 100) + '％'; }
+
+          [['size', SIZES.map(function (s, i) { return [i, s.name]; })], ['n', COUNTS.map(function (n) { return [n, n + '本']; })]].forEach(function (c) {
+            var box = root.querySelector('[data-ab="' + c[0] + '"]');
+            c[1].forEach(function (p) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = p[1]; bt.dataset.v = p[0];
+              bt.addEventListener('click', function () { if (S.running) return; S[c[0]] = Number(p[0]); syncBtns(); home(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          function syncBtns() {
+            ['size', 'n'].forEach(function (k) {
+              root.querySelectorAll('[data-ab="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === S[k]); b.disabled = S.running; });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+
+          function ik(r, dx, dy) {
+            var d = Math.min(Math.sqrt(dx * dx + dy * dy), r.l1 + r.l2 - 1);
+            var c2 = (d * d - r.l1 * r.l1 - r.l2 * r.l2) / (2 * r.l1 * r.l2), q2 = Math.acos(Math.max(-1, Math.min(1, c2)));
+            if (dx < 0) q2 = -q2;
+            var q1 = Math.atan2(dx, dy) - Math.atan2(r.l2 * Math.sin(q2), r.l1 + r.l2 * Math.cos(q2));
+            return { a: q1, b: q2 };
+          }
+          function targets() {
+            var r = ROBOTS[S.r], reach = r.l1 + r.l2;
+            return { home: ik(r, 0, reach * 0.55), pick: ik(r, -reach * 0.62, reach * 0.72), place: ik(r, reach * 0.62, reach * 0.72),
+                     pickUp: ik(r, -reach * 0.55, reach * 0.55), placeUp: ik(r, reach * 0.55, reach * 0.55) };
+          }
+          function shoulderY() { return TOPY + 8 + ROBOTS[S.r].base * 0.35 + 6; }
+          function home() {
+            var T = targets(), r = ROBOTS[S.r], reach = r.l1 + r.l2;
+            D = { tilt: 0, lift: 0, pulled: 0, sway: 0, jx: 0, a: T.home.a, b: T.home.b, held: false, wx: CX - reach * 0.62, wy: shoulderY() + reach * 0.72 + 20, wr: 0 };
+          }
+          function rot(x, y, deg, ox, oy) { var t = deg * Math.PI / 180, dx = x - ox, dy = y - oy; return { x: ox + dx * Math.cos(t) - dy * Math.sin(t), y: oy + dx * Math.sin(t) + dy * Math.cos(t) }; }
+
+          function anchors(x0, k, px, cone) {
+            var html = '', w = 56, sp = w / (k + 1);
+            for (var i = 1; i <= k; i++) {
+              var x = x0 - w / 2 + sp * i;
+              if (cone) html += '<path d="M' + (x - 26) + ',' + FLOOR + ' L' + (x + 26) + ',' + FLOOR + ' L' + (x + 4) + ',' + (FLOOR + 48) + ' L' + (x - 4) + ',' + (FLOOR + 48) + ' Z" fill="#b8c2cc" stroke="#8a96a3"/>';
+              html += '<line x1="' + x + '" y1="' + (FLOOR - 14) + '" x2="' + x + '" y2="' + (FLOOR + 50) + '" stroke="#3d4650" stroke-width="' + px + '"/>';
+              html += '<rect x="' + (x - px - 3) + '" y="' + (FLOOR - 16) + '" width="' + (2 * px + 6) + '" height="6" fill="#3d4650"/>';
+            }
+            return html;
+          }
+          function draw() {
+            var r = ROBOTS[S.r], s = SIZES[S.size], k = S.n / 2, sw = D.sway;
+            var reach = r.l1 + r.l2, ty = shoulderY() + reach * 0.72 + 30;
+            q('ped').innerHTML = '<rect x="' + (CX - reach * 0.62 - 26) + '" y="' + ty + '" width="52" height="' + (FLOOR - ty) + '" fill="#b8c6d6"/>' +
+              '<rect x="' + (CX + reach * 0.62 - 26) + '" y="' + ty + '" width="52" height="' + (FLOOR - ty) + '" fill="#b8c6d6"/>';
+            // 抜けたあとの穴
+            var holes = '';
+            if (D.pulled) { var w = 56, sp = w / (k + 1); for (var i = 1; i <= k; i++) { var x = XL - w / 2 + sp * i; holes += '<path d="M' + (x - 26) + ',' + FLOOR + ' L' + (x + 26) + ',' + FLOOR + ' L' + (x + 4) + ',' + (FLOOR + 48) + ' L' + (x - 4) + ',' + (FLOOR + 48) + ' Z" fill="#5a6573"/>'; } }
+            q('holes').innerHTML = holes;
+            q('anchL').innerHTML = anchors(XL, k, s.px, D.pulled);
+            q('anchR').innerHTML = anchors(XR, k, s.px, false);
+            q('anchL').setAttribute('transform', 'translate(0,' + (-D.lift) + ')');
+            [['plateL', XL], ['plateR', XR]].forEach(function (p) { var e = q(p[0]); e.setAttribute('x', p[1] - 34); e.setAttribute('y', FLOOR - 8 - (p[0] === 'plateL' ? D.lift : 0)); e.setAttribute('width', 68); });
+            var bl = XL + sw, br = XR + sw;
+            [['colL', XL, bl, D.lift], ['colR', XR, br, 0]].forEach(function (c) { var e = q(c[0]); e.setAttribute('x1', c[1]); e.setAttribute('y1', FLOOR - 8 - c[3]); e.setAttribute('x2', c[2]); e.setAttribute('y2', TOPY); });
+            var bm = q('beam'); bm.setAttribute('x1', bl - 12); bm.setAttribute('y1', TOPY); bm.setAttribute('x2', br + 12); bm.setAttribute('y2', TOPY);
+            q('world').setAttribute('transform', 'translate(' + D.jx + ',0) rotate(' + D.tilt + ' ' + XR + ' ' + FLOOR + ')');
+            var sx = CX + sw, sy = shoulderY(), bw = r.base, bh = r.base * 0.35;
+            var rb = q('rbase'); rb.setAttribute('x', sx - bw / 2); rb.setAttribute('y', sy - bh - 6); rb.setAttribute('width', bw); rb.setAttribute('height', bh);
+            var ex = sx + r.l1 * Math.sin(D.a), ey = sy + r.l1 * Math.cos(D.a);
+            var hx = ex + r.l2 * Math.sin(D.a + D.b), hy = ey + r.l2 * Math.cos(D.a + D.b), lw = 8 + r.base / 12;
+            [['l1', sx, sy, ex, ey], ['l2', ex, ey, hx, hy]].forEach(function (L) { var e = q(L[0]); e.setAttribute('x1', L[1]); e.setAttribute('y1', L[2]); e.setAttribute('x2', L[3]); e.setAttribute('y2', L[4]); e.setAttribute('stroke-width', lw); });
+            q('j1').setAttribute('cx', sx); q('j1').setAttribute('cy', sy); q('j1').setAttribute('r', lw * 0.7);
+            q('j2').setAttribute('cx', ex); q('j2').setAttribute('cy', ey); q('j2').setAttribute('r', lw * 0.6);
+            q('hand').setAttribute('x', hx - 9); q('hand').setAttribute('y', hy);
+            if (D.held) { var p = rot(hx, hy + 18, D.tilt, XR, FLOOR); D.wx = p.x + D.jx; D.wy = p.y; D.wr = D.tilt; }
+            q('work').setAttribute('transform', 'translate(' + (D.wx - 13) + ',' + (D.wy - 10) + ') rotate(' + D.wr + ' 13 10)');
+          }
+
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null;
+              function f(now) { if (t0 === null) t0 = now; var t = Math.min((now - t0) / ms, 1); fn(t, (now - t0) / 1000); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function pose(to, ms, ef) { var a0 = D.a, b0 = D.b; return step(ms, function (t) { var e = (ef || ease)(t); D.a = a0 + (to.a - a0) * e; D.b = b0 + (to.b - b0) * e; }); }
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); overlay(t, k); }
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            var ovt = ov.querySelector('.ufo-ov-t'); ovt.textContent = '';
+            title.split('、').forEach(function (p, i, a) { var sp = document.createElement('span'); sp.textContent = p + (i < a.length - 1 ? '、' : ''); ovt.appendChild(sp); });
+            ov.querySelector('.ufo-ov-s').textContent = kind === 'ok' ? 'ちょうどよいアンカーです' : rec ? 'おすすめ：' + rec[1] : '';
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+          // アンカーが多すぎるとき：ドリルで穴をあけ続ける
+          function drilling() {
+            var c = q('crew'), say = q('say'), dust = q('dust');
+            c.style.display = ''; say.style.display = '';
+            return step(2800, function (t, s) {
+              var x = XL - 70 + 140 * Math.floor(t * 4) / 4;
+              c.setAttribute('transform', 'translate(' + (x - 25) + ',' + (FLOOR + Math.sin(s * 60) * 1.2) + ')');
+              say.setAttribute('x', x); say.setAttribute('y', FLOOR - 92);
+              var h = ''; for (var i = 0; i < 6; i++) h += '<circle cx="' + (x + (Math.random() - 0.5) * 30) + '" cy="' + (FLOOR - Math.random() * 14) + '" r="2" fill="#8a96a3"/>';
+              dust.innerHTML = h; say.style.opacity = (Math.floor(s * 3) % 2) ? 1 : 0.5;
+            }).then(function () { c.style.display = 'none'; say.style.display = 'none'; dust.innerHTML = ''; });
+          }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'anchor_game' }); }
+            S.running = true; syncBtns(); home(); draw();
+            var r = ROBOTS[S.r], s = SIZES[S.size], x = ratio(S.size, S.n), kd = kind(x), T = targets(), Tn = Math.round(pull(r, S.n));
+            msg('動いています…');
+            if (kd === 'over') await drilling();
+            await pose(T.pickUp, 700); await pose(T.pick, 500); D.held = true; await pose(T.pickUp, 500);
+            if (kd === 'fail') {
+              // 急に止まった反動で、左の柱の根元が浮き、アンカーがコンクリートの円すいごと抜ける
+              await pose(T.placeUp, 500, function (t) { return t * t; });
+              await step(900, function (t, s2) { D.sway = 18 * Math.sin(s2 * 10) * Math.min(t * 2, 1); D.lift = 3 * t + Math.abs(Math.sin(s2 * 25)) * 2; });
+              D.pulled = 1;
+              await step(700, function (t) { var e = t * t; D.lift = 3 + 22 * e; D.tilt = 6 * e; D.sway = 18 * (1 - t); });
+              await step(400, function (t, s2) { D.jx = 4 * Math.exp(-s2 / 0.08) * Math.sin(60 * s2); });
+              msg('<b>アンカーが抜けました。</b>' + s.name + '×' + S.n + '本では、ロボットが止まるときの力で、アンカー1本に約' + Tn.toLocaleString('ja-JP') + 'Nの引き抜き力がかかり、許容値の ' + pct(x) + ' になりました。この' + r.name + 'ロボットなら、<b>' + okList() + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            await pose(T.placeUp, 900);
+            await step(800, function (t, s2) { D.sway = (4 + 10 * x) * Math.exp(-s2 / 0.3) * Math.cos(11 * s2); D.lift = Math.max(0, 1.5 * x * Math.sin(s2 * 11)) * (1 - t); });
+            D.sway = 0; D.lift = 0;
+            await pose(T.place, 450); D.held = false; await pose(T.placeUp, 400); await pose(T.home, 600);
+            if (kd === 'over') {
+              msg('<b>動きましたが、アンカーが多すぎます。</b>' + s.name + '×' + S.n + '本では、引き抜き力は許容値の ' + pct(x) + ' で、余裕がありすぎます。穴あけの手間と費用が増え、床の鉄筋に当たる心配も増えます。この' + r.name + 'ロボットなら、<b>' + okList() + '</b> がおすすめです。', 'ng');
+            } else {
+              msg('<b>成功！</b>' + s.name + '×' + S.n + '本は、この' + r.name + 'ロボットにちょうどよいアンカーです（1本の引き抜き力は約' + Tn.toLocaleString('ja-JP') + 'Nで、許容値の ' + pct(x) + '）。', 'ok');
+            }
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function newRobot(change) {
+            if (change) { var n; do { n = Math.floor(Math.random() * ROBOTS.length); } while (n === S.r && Math.random() < 0.7); S.r = n; }
+            var r = ROBOTS[S.r];
+            q('rname').textContent = r.name;
+            q('rspec').textContent = '（本体' + r.mb + 'kg・可搬' + r.mp + 'kg・リーチ' + r.R.toLocaleString('ja-JP') + 'mm）';
+            home(); msg('アンカーの太さと本数を選んで、スタートを押してください。'); draw();
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', function () { newRobot(true); });
+          newRobot(true); syncBtns();
         })();
         </script>
 
