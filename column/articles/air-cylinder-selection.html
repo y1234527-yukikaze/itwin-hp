@@ -196,7 +196,7 @@
           エアシリンダを選ぶとき、「とりあえずφ40」「前の設備と同じ」で決めていないでしょうか。本記事では、<strong class="mk">エアシリンダの選定計算の方法</strong>を、計算例つきで解説します。推力と負荷率からボア径（チューブの内径）を決め、<strong>ストロークの終わりで止めるときの衝撃</strong>まで確かめます。
         </p>
         <p>
-          後半には、ボア径を選ぶと、押す力・引く力と、ローラーの上で動かせるワークの重さの目安が変わる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
+          後半には、ボア径を選ぶと、押す力・引く力と、ローラーの上で動かせるワークの重さの目安が変わる計算ツールと、ボア径を選んでワークを運ぶゲームがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。
         </p>
 
         <div class="chapter-sum">
@@ -215,6 +215,7 @@
             <li>負荷率の決め方と、ボア径の選び方</li>
             <li>ストロークの終わりの衝撃（運動エネルギー）の確かめ方</li>
             <li>ボア径から、ローラーの上で動かせるワークの重さが分かる計算ツール</li>
+            <li>ボア径を選んで、ワークをつかんで運ぶゲーム</li>
           </ul>
         </div>
 
@@ -565,7 +566,7 @@
         </script>
 
         <!-- ◆やってみよう：シリンダのボア径選びゲーム（UFOキャッチャー風。動くのはスタートを押したときだけ） -->
-        <h3>やってみよう｜ボア径を選んで、ワークを運ぶ</h3>
+        <h2>やってみよう｜ボア径を選んで、ワークを運ぶゲーム</h2>
         <p>
           縦のシリンダでワークを持ち上げ、横のシリンダで右の置き場まで運びます。選べるのは、2本のシリンダのボア径だけです。ワークの重さは、毎回変わります。小さすぎても、大きすぎてもうまくいきません。
         </p>
@@ -600,22 +601,25 @@
                 <path data-u="clawR" stroke="#0d2b4e" stroke-width="5" fill="none" stroke-linecap="round"/>
               </g>
             </svg>
-          </div>
-
-          <div class="ufo-pick">
-            <p>縦のシリンダ（持ち上げる）のボア径</p>
-            <div class="calc-btns" data-ub="v"></div>
-            <p>横のシリンダ（運ぶ）のボア径</p>
-            <div class="calc-btns" data-ub="h"></div>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p></div></div>
           </div>
           <div class="ufo-actions">
             <button type="button" class="btn btn--fill" data-u="start">スタート</button>
             <button type="button" class="calc-reset" data-u="again">もう一回（重さが変わります）</button>
           </div>
-          <div class="ufo-msg" data-u="msg" aria-live="polite">ボア径を選んで、スタートを押してください。</div>
-          <p class="calc-tool-note" style="margin:10px 0 0 !important;">
-            ゲームの判定は、使用圧力0.5MPaの理論推力と負荷率で決めています。縦は「ワーク＋爪3kg」の重さ、横は「ワーク＋台車15kg」をレールの抵抗の係数0.15で動かす力で判定します。負荷率が80％を超えると動かせず、縦は10％未満、横は8％未満だと「大きすぎ」としています。大きすぎると勢いがついて止めるときの衝撃で落ちる、というのは分かりやすくするための演出で、実際の装置では速度の調整やクッションで防げます。
-          </p>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>縦のシリンダ（持ち上げる）のボア径</p>
+              <div class="calc-btns" data-ub="v"></div>
+              <p>横のシリンダ（運ぶ）のボア径</p>
+              <div class="calc-btns" data-ub="h"></div>
+            </div>
+            <div class="ufo-msg" data-u="msg" aria-live="polite">ボア径を選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              ゲームの判定は、使用圧力0.5MPaの理論推力と負荷率で決めています。縦は「ワーク＋爪3kg」の重さ、横は「ワーク＋台車15kg」をレールの抵抗の係数0.15で動かす力で判定します。負荷率が80％を超えると動かせず、縦は10％未満、横は8％未満だと「大きすぎ」としています。大きすぎると勢いがついて止めるときの衝撃で落ちる、というのは分かりやすくするための演出で、実際の装置では速度の調整やクッションで防げます。
+            </p>
+          </div>
         </div>
 
         <script>
@@ -722,7 +726,18 @@
             });
           }
 
-          function msg(text, kind) { var m = q('msg'); m.innerHTML = text; m.className = 'ufo-msg' + (kind ? ' is-' + kind : ''); }
+          function msg(text, kind) { var m = q('msg'); m.innerHTML = text; m.className = 'ufo-msg' + (kind ? ' is-' + kind : ''); overlay(text, kind); }
+          // 結果は、装置の絵の真ん中にも大きく出す（下の欄には詳しい説明）
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            var sub = kind === 'ok' ? 'ちょうどよい大きさです' : rec ? 'おすすめ：' + rec[1] : '';
+            ov.querySelector('.ufo-ov-t').textContent = title;
+            ov.querySelector('.ufo-ov-s').textContent = sub;
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
 
           async function run() {
             if (S.running) return;

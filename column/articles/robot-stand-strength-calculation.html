@@ -196,7 +196,7 @@
           ロボットの重さに耐える部材を選んだのに、動かしてみると架台が揺れる。原因の多くは、<strong class="mk">ロボット架台の強度計算</strong>を自重だけで済ませていることにあります。本記事では、非常停止時の慣性力をどう扱うかを中心に、架台の強度計算の方法を、仮想モデルの計算例つきで解説します。
         </p>
         <p>
-          記事中の数値は、すべて説明用の仮想モデルのものです。一般論にとどまる値には「要確認」と記しています。実際の設計では、メーカーの資料とご自身の条件で確認してください。
+          後半には、条件を入れて試せる計算ツールと、ロボットに合った架台の部材を選ぶゲームがあります。記事中の数値は、すべて説明用の仮想モデルのものです。一般論にとどまる値には「要確認」と記しています。実際の設計では、メーカーの資料とご自身の条件で確認してください。
         </p>
 
         <p>
@@ -210,6 +210,7 @@
             <li>仮想モデルでの計算例（応力・たわみ・アンカー）</li>
             <li>よくある失敗と、架台の強度計算書に残す項目</li>
             <li>自分の条件を入れて試せる、概算の計算ツール</li>
+            <li>ロボットに合った梁と柱を選ぶゲーム</li>
           </ul>
         </div>
 
@@ -582,6 +583,299 @@
           document.getElementById('rs-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
           for (var k in DEF) S[k] = DEF[k];
           sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：架台の部材選びゲーム（ロボット架台の記事・2026-10-22。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜ロボットに合った架台を選ぶゲーム</h2>
+        <p>
+          門型の架台に、ロボットを天吊りします。ロボットの大きさは、毎回変わります。選べるのは、梁（横）と柱（縦）の角パイプのサイズだけです。細すぎると架台が壊れ、太すぎると据え付けと費用が大変になります。
+        </p>
+
+        <div class="calc-tool ufo" id="rg-tool">
+          <p class="calc-tool-title">架台の部材選びゲーム</p>
+          <p class="ufo-weight">今回のロボット：<b data-g="rname"></b> <span data-g="rspec"></span></p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 400" role="img" aria-label="門型の架台にロボットを天吊りした図。ロボットが左の台のワークを右の台へ運ぶ">
+              <rect x="0" y="350" width="640" height="50" fill="#d9dee4"/>
+              <g data-g="ped"></g>
+              <g data-g="world">
+                <g data-g="struct">
+                  <path data-g="colL" fill="none" stroke="#5a6573" stroke-linecap="butt"/>
+                  <path data-g="colR" fill="none" stroke="#5a6573" stroke-linecap="butt"/>
+                  <path data-g="beam" fill="none" stroke="#0d2b4e" stroke-linecap="butt"/>
+                  <path data-g="beamL" fill="none" stroke="#0d2b4e" stroke-linecap="butt"/>
+                  <path data-g="beamR" fill="none" stroke="#0d2b4e" stroke-linecap="butt"/>
+                  <path data-g="crack" fill="none" stroke="#d4691a" stroke-width="3"/>
+                </g>
+                <g data-g="robot">
+                  <rect data-g="rbase" fill="#6f8aa6" rx="4"/>
+                  <line data-g="l1" stroke="#d4691a" stroke-linecap="round"/>
+                  <line data-g="l2" stroke="#d4691a" stroke-linecap="round"/>
+                  <circle data-g="j1" fill="#0d2b4e"/><circle data-g="j2" fill="#0d2b4e"/>
+                  <rect data-g="hand" fill="#0d2b4e" width="18" height="8" rx="2"/>
+                </g>
+              </g>
+              <rect data-g="work" width="26" height="20" rx="2" fill="#e8a33d" stroke="#8a5a2b" stroke-width="1.5"/>
+              <g data-g="crew" style="display:none">
+                <g data-g="p1"><circle cx="0" cy="-58" r="9" fill="#0d2b4e"/><path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L12,-56" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+                <g data-g="p2"><circle cx="0" cy="-58" r="9" fill="#0d2b4e"/><path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L-12,-56" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+                <line data-g="carry" stroke="#0d2b4e" stroke-linecap="butt"/>
+                <text data-g="say" font-size="20" fill="#d4691a" text-anchor="middle">重い…</text>
+              </g>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-g="start">スタート</button>
+            <button type="button" class="calc-reset" data-g="again">もう一回（ロボットが変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>梁（横）の角パイプ</p>
+              <div class="calc-btns" data-gb="beam"></div>
+              <p>柱（縦）の角パイプ</p>
+              <div class="calc-btns" data-gb="col"></div>
+            </div>
+            <div class="ufo-msg" data-g="msg" aria-live="polite">梁と柱のサイズを選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              判定は、本記事の計算ツールと同じ式（スパン2,000mm、柱の高さ2,500mm、手先の速度2.0m/s、停止時間0.2s、慣性力は2倍、許容応力80MPa）で求めた、梁と柱の応力の許容応力に対する割合で決めています。ゲームなので、110％までは成功とし、30％未満は「大きすぎ」としています。壊れ方の動きは、分かりやすくするための演出です。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('rg-tool');
+          if (!root) return;
+          // 角パイプの断面性能（A:mm2, I:mm4, Z:mm3, w:kg/m）と、図の線の太さ
+          var SEC = [
+            { k: '60x3.2', name: '□60×3.2', A: 700.7, I: 36.9e4, Z: 12.3e3, w: 5.50, px: 7 },
+            { k: '75x3.2', name: '□75×3.2', A: 892.7, I: 75.5e4, Z: 20.1e3, w: 7.01, px: 9 },
+            { k: '100x3.2', name: '□100×3.2', A: 1213, I: 187e4, Z: 37.5e3, w: 9.52, px: 11 },
+            { k: '100x6', name: '□100×6', A: 2163, I: 3.11e6, Z: 62.3e3, w: 17.0, px: 13 },
+            { k: '125x6', name: '□125×6', A: 2763, I: 6.41e6, Z: 103e3, w: 21.7, px: 16 },
+            { k: '150x6', name: '□150×6', A: 3363, I: 11.5e6, Z: 153e3, w: 26.4, px: 19 }
+          ];
+          var ROBOTS = [
+            { name: '小型', mb: 60, mp: 10, R: 800, base: 40, l1: 62, l2: 56 },
+            { name: '中型', mb: 250, mp: 50, R: 1400, base: 58, l1: 88, l2: 78 },
+            { name: '大型', mb: 400, mp: 80, R: 1600, base: 70, l1: 100, l2: 90 }
+          ];
+          var g = 9.81, L = 2000, H = 2500, SA = 80, FAIL = 1.10, OVER = 0.30;
+          var FLOOR = 350, XL = 130, XR = 510, TOPY = 104, CX = 320;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-g="' + k + '"]'); };
+          var S = { beam: 3, col: 3, r: 1, running: false }, used = false, D;
+
+          // 本記事の計算ツールと同じ式で、梁と柱の応力の割合を求める
+          function ratios(r, b, c) {
+            var Rm = r.R / 1000, mm = r.mb * 0.6, a = 2.0 / 0.2;
+            var Vs = (r.mb + r.mp) * g, Ms = r.mp * g * Rm + mm * g * Rm / 2;
+            var F = 2 * (r.mp * a + mm * a / 2), Md = 2 * (r.mp * a * Rm + mm * (a / 2) * (Rm / 2));
+            var V = Vs + F, Hh = F, Mmm = (Ms + Md) * 1000;
+            var sb = (V * L / 4 + Mmm / 2 + b.w * g / 1000 * L * L / 8) / b.Z;
+            var N = V / 2 + b.w * (L / 1000) * g / 2 + c.w * (H / 1000) * g;
+            var sc = (Hh / 2 * H + Mmm / 2) / c.Z + N / c.A;
+            return { b: sb / SA, c: sc / SA };
+          }
+          function kind(x) { return x > FAIL ? 'fail' : x < OVER ? 'over' : 'ok'; }
+          function okList(r) {
+            var a = SEC.filter(function (s) { var x = ratios(r, s, s); return kind(x.b) === 'ok' && kind(x.c) === 'ok'; });
+            return a.length ? a[0].name + (a.length > 1 ? '〜' + a[a.length - 1].name : '') : 'なし';
+          }
+          function standKg(b, c) { return b.w * L / 1000 + 2 * c.w * H / 1000; }
+          function pct(x) { return Math.round(x * 100) + '％'; }
+
+          ['beam', 'col'].forEach(function (k) {
+            var box = root.querySelector('[data-gb="' + k + '"]');
+            SEC.forEach(function (s, i) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = s.name; bt.dataset.i = i;
+              bt.addEventListener('click', function () { if (S.running) return; S[k] = i; syncBtns(); home(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          function syncBtns() {
+            ['beam', 'col'].forEach(function (k) {
+              root.querySelectorAll('[data-gb="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.i) === S[k]); b.disabled = S.running; });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+
+          // ロボットの腕（2本のリンク）の位置を、手先の目標点から求める
+          function ik(r, dx, dy) {
+            var d = Math.min(Math.sqrt(dx * dx + dy * dy), r.l1 + r.l2 - 1);
+            var c2 = (d * d - r.l1 * r.l1 - r.l2 * r.l2) / (2 * r.l1 * r.l2), q2 = Math.acos(Math.max(-1, Math.min(1, c2)));
+            if (dx < 0) q2 = -q2;
+            var q1 = Math.atan2(dx, dy) - Math.atan2(r.l2 * Math.sin(q2), r.l1 + r.l2 * Math.cos(q2));
+            return { a: q1, b: q2 };
+          }
+          function targets() {
+            var r = ROBOTS[S.r], reach = r.l1 + r.l2;
+            return { home: ik(r, 0, reach * 0.55), pick: ik(r, -reach * 0.62, reach * 0.72), place: ik(r, reach * 0.62, reach * 0.72),
+                     pickUp: ik(r, -reach * 0.55, reach * 0.55), placeUp: ik(r, reach * 0.55, reach * 0.55) };
+          }
+          function home() {
+            var T = targets();
+            D = { sway: 0, bend: 0, low: 0, sag: 0, broken: 0, crack: 0, topple: 0, jx: 0, a: T.home.a, b: T.home.b, held: false, rdrop: 0, rrot: 0, wx: 0, wy: 0, wr: 0, wfree: false, crew: false };
+            var r = ROBOTS[S.r], reach = r.l1 + r.l2;
+            D.wx = CX - reach * 0.62; D.wy = shoulderY() + reach * 0.72 + 20;
+          }
+          function shoulderY() { return TOPY + 8 + ROBOTS[S.r].base * 0.35 + 6; }
+
+          function draw() {
+            var b = SEC[S.beam], c = SEC[S.col], r = ROBOTS[S.r];
+            var sw = D.sway, topY = TOPY + 6 + D.low;
+            // 台（ワークの置き台）
+            var reach = r.l1 + r.l2, ty = shoulderY() + reach * 0.72 + 30;
+            q('ped').innerHTML = '<rect x="' + (CX - reach * 0.62 - 26) + '" y="' + ty + '" width="52" height="' + (FLOOR - ty) + '" fill="#b8c6d6"/>' +
+              '<rect x="' + (CX + reach * 0.62 - 26) + '" y="' + ty + '" width="52" height="' + (FLOOR - ty) + '" fill="#b8c6d6"/>';
+            // 柱（曲がり bend、上の揺れ sway）
+            ['colL', 'colR'].forEach(function (k, i) {
+              var x0 = i ? XR : XL, p = q(k);
+              p.setAttribute('stroke-width', c.px);
+              p.setAttribute('d', 'M' + x0 + ',' + FLOOR + ' Q' + (x0 + sw * 0.4 + D.bend) + ',' + ((FLOOR + topY) / 2) + ' ' + (x0 + sw) + ',' + topY);
+            });
+            // 梁（たわみ sag、折れ broken）
+            var bl = XL - 12 + sw, br = XR + 12 + sw, mid = (bl + br) / 2, by = TOPY + D.low;
+            ['beam', 'beamL', 'beamR'].forEach(function (k) { q(k).setAttribute('stroke-width', b.px); });
+            if (D.broken > 0) {
+              var ang = D.broken * 0.9, half = (br - bl) / 2;
+              q('beam').setAttribute('d', '');
+              q('beamL').setAttribute('d', 'M' + bl + ',' + by + ' L' + (bl + half * Math.cos(ang)) + ',' + (by + half * Math.sin(ang)));
+              q('beamR').setAttribute('d', 'M' + br + ',' + by + ' L' + (br - half * Math.cos(ang)) + ',' + (by + half * Math.sin(ang)));
+            } else {
+              q('beam').setAttribute('d', 'M' + bl + ',' + by + ' Q' + mid + ',' + (by + D.sag * 2) + ' ' + br + ',' + by);
+              q('beamL').setAttribute('d', ''); q('beamR').setAttribute('d', '');
+            }
+            q('crack').setAttribute('d', D.crack > 0 && !D.broken ? 'M' + (mid - 4) + ',' + (TOPY + D.sag - 8) + ' L' + (mid + 3) + ',' + (TOPY + D.sag) + ' L' + (mid - 3) + ',' + (TOPY + D.sag + 8) : '');
+            // 架台ごと倒れる（右の柱の根元を中心に回る）
+            q('world').setAttribute('transform', 'translate(' + D.jx + ',0) rotate(' + D.topple + ' ' + XR + ' ' + FLOOR + ')');
+            // ロボット
+            var sx = CX + sw, sy = shoulderY() + D.sag + D.rdrop + D.low;
+            var bw = r.base, bh = r.base * 0.35;
+            q('robot').setAttribute('transform', 'rotate(' + D.rrot + ' ' + sx + ' ' + sy + ')');
+            var rb = q('rbase'); rb.setAttribute('x', sx - bw / 2); rb.setAttribute('y', sy - bh - 6); rb.setAttribute('width', bw); rb.setAttribute('height', bh);
+            var ex = sx + r.l1 * Math.sin(D.a), ey = sy + r.l1 * Math.cos(D.a);
+            var hx = ex + r.l2 * Math.sin(D.a + D.b), hy = ey + r.l2 * Math.cos(D.a + D.b);
+            var lw = 8 + r.base / 12;
+            [['l1', sx, sy, ex, ey], ['l2', ex, ey, hx, hy]].forEach(function (L) { var e = q(L[0]); e.setAttribute('x1', L[1]); e.setAttribute('y1', L[2]); e.setAttribute('x2', L[3]); e.setAttribute('y2', L[4]); e.setAttribute('stroke-width', lw); });
+            q('j1').setAttribute('cx', sx); q('j1').setAttribute('cy', sy); q('j1').setAttribute('r', lw * 0.7);
+            q('j2').setAttribute('cx', ex); q('j2').setAttribute('cy', ey); q('j2').setAttribute('r', lw * 0.6);
+            q('hand').setAttribute('x', hx - 9); q('hand').setAttribute('y', hy);
+            // ワーク（持っているときは手先に付ける。倒れたときは架台の回転にも合わせる）
+            if (D.held) {
+              var p = rot(hx, hy + 18, D.topple, XR, FLOOR); D.wx = p.x + D.jx; D.wy = p.y; D.wr = D.topple;
+            }
+            q('work').setAttribute('transform', 'translate(' + (D.wx - 13) + ',' + (D.wy - 10) + ') rotate(' + D.wr + ' 13 10)');
+          }
+          function rot(x, y, deg, ox, oy) { var t = deg * Math.PI / 180, dx = x - ox, dy = y - oy; return { x: ox + dx * Math.cos(t) - dy * Math.sin(t), y: oy + dx * Math.sin(t) + dy * Math.cos(t) }; }
+
+          // ── 時間で動かす仕組み（エアシリンダの記事のゲームと同じ） ──
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null;
+              function f(now) { if (t0 === null) t0 = now; var t = Math.min((now - t0) / ms, 1); fn(t, (now - t0) / 1000); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function pose(to, ms, ef) { var a0 = D.a, b0 = D.b; return step(ms, function (t) { var e = (ef || ease)(t); D.a = a0 + (to.a - a0) * e; D.b = b0 + (to.b - b0) * e; }); }
+          function swayOut(amp, ms) { return step(ms, function (t, s) { D.sway = amp * Math.exp(-s / 0.35) * Math.cos(11 * s); }); }
+          function bump(px) { return step(280, function (t, s) { D.jx = px * Math.exp(-s / 0.08) * Math.sin(60 * s); }); }
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); overlay(t, k); }
+          // 結果は、装置の絵の真ん中にも大きく出す（下の欄には詳しい説明）
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            var sub = kind === 'ok' ? 'ちょうどよい大きさです' : rec ? 'おすすめ：' + rec[1] : '';
+            ov.querySelector('.ufo-ov-t').textContent = title;
+            ov.querySelector('.ufo-ov-s').textContent = sub;
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+
+          // 太すぎるとき：2人がかりで重い梁を運び込む
+          function install(b) {
+            var crew = q('crew'); crew.style.display = '';
+            q('carry').setAttribute('stroke-width', b.px + 4);
+            return step(2600, function (t, s) {
+              var x = -60 + 420 * t, bob = Math.abs(Math.sin(s * 5)) * 4, sag = 3 + Math.sin(s * 9) * 2;
+              q('p1').setAttribute('transform', 'translate(' + x + ',' + (FLOOR + bob) + ')');
+              q('p2').setAttribute('transform', 'translate(' + (x + 120) + ',' + (FLOOR + 4 - bob) + ')');
+              var c = q('carry'); c.setAttribute('x1', x + 12); c.setAttribute('y1', FLOOR - 56 + bob + sag); c.setAttribute('x2', x + 108); c.setAttribute('y2', FLOOR - 56 - bob + sag);
+              var s2 = q('say'); s2.setAttribute('x', x + 60); s2.setAttribute('y', FLOOR - 80 + Math.sin(s * 6) * 2); s2.style.opacity = (Math.floor(s * 2) % 2) ? 1 : 0.4;
+            }).then(function () { crew.style.display = 'none'; });
+          }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'robot_stand_game' }); }
+            S.running = true; syncBtns(); home(); draw();
+            var r = ROBOTS[S.r], b = SEC[S.beam], c = SEC[S.col], x = ratios(r, b, c);
+            var kb = kind(x.b), kc = kind(x.c), T = targets();
+            msg('動いています…');
+            var over = (kb === 'over' || kc === 'over') && kb !== 'fail' && kc !== 'fail';
+            if (over) await install(kb === 'over' ? b : c);
+            // ワークを取りに行く
+            await pose(T.pickUp, 700); await pose(T.pick, 500);
+            D.held = true;
+            // 梁が先に負ける場合：持ち上げたところで、梁がたわんで折れる
+            if (kb === 'fail' && (x.b >= x.c || kc !== 'fail')) {
+              await Promise.all([pose(T.pickUp, 600), step(900, function (t) { D.sag = 4 + 14 * t * t; })]);
+              await step(400, function (t, s) { D.crack = 1; D.jx = Math.sin(s * 70) * 1.5; }); D.jx = 0;
+              // ロボットが落ちて、床の上に横倒しになる（腕は折りたたむ）
+              var a0 = D.a, b0 = D.b;
+              await step(550, function (t) { D.broken = ease(t); D.rdrop = (FLOOR - shoulderY() - 26) * t * t; D.rrot = -80 * t * t; D.a = a0 + (0.3 - a0) * t; D.b = b0 + (2.3 - b0) * t; });
+              // 手から外れたワークは、床の上に置く
+              D.held = false; D.wy = FLOOR - 10; D.wr = 12; draw();
+              await bump(5);
+              msg('<b>梁が折れました。</b>梁 ' + b.name + ' は細すぎて、応力が許容応力の ' + pct(x.b) + ' になりました。この' + r.name + 'ロボットなら、梁・柱とも <b>' + okList(r) + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            await pose(T.pickUp, 500);
+            // 運ぶ（急に止まる＝非常停止と同じ大きさの力がかかる）
+            if (kc === 'fail') {
+              await pose(T.placeUp, 500, function (t) { return t * t; });
+              await step(1100, function (t, s) { D.sway = 26 * Math.min(t * 2, 1) * Math.sin(s * 9); D.bend = 30 * t; });
+              // 柱が根元から曲がり、上が横にずれながら沈み込む
+              await step(1000, function (t) { var e = t * t; D.sway = 26 + 150 * e; D.bend = 30 + 70 * e; D.low = 70 * e; });
+              await bump(7);
+              msg('<b>架台ごと倒れました。</b>柱 ' + c.name + ' は細すぎて、ロボットが止まるときの力で、応力が許容応力の ' + pct(x.c) + ' になりました。この' + r.name + 'ロボットなら、梁・柱とも <b>' + okList(r) + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            var amp = 2 + 12 * Math.max(x.c, 0.1);
+            await pose(T.placeUp, 900);
+            await swayOut(amp, 900);
+            await pose(T.place, 450); D.held = false; D.wy += 0; await pose(T.placeUp, 400); await pose(T.home, 600);
+            var kg = Math.round(standKg(b, c)), best = SEC.filter(function (s) { var y = ratios(r, s, s); return kind(y.b) === 'ok' && kind(y.c) === 'ok'; })[0];
+            if (over) {
+              var bk = best ? Math.round(standKg(best, best)) : kg;
+              msg('<b>動きましたが、架台が大きすぎます。</b>梁 ' + b.name + '（' + pct(x.b) + '）、柱 ' + c.name + '（' + pct(x.c) + '）は余裕がありすぎて、架台の重さは約' + kg + 'kg（ちょうどよい ' + (best ? best.name : '') + ' なら約' + bk + 'kg）。運び込みと据え付けに人手がかかり、材料費もかさみます。この' + r.name + 'ロボットなら <b>' + okList(r) + '</b> がおすすめです。', 'ng');
+            } else {
+              msg('<b>成功！</b>梁 ' + b.name + '（許容応力の ' + pct(x.b) + '）、柱 ' + c.name + '（' + pct(x.c) + '）は、この' + r.name + 'ロボットにちょうどよい架台です。架台の重さは約' + kg + 'kgです。', 'ok');
+            }
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function newRobot(change) {
+            if (change) { var n; do { n = Math.floor(Math.random() * ROBOTS.length); } while (n === S.r && Math.random() < 0.7); S.r = n; }
+            var r = ROBOTS[S.r];
+            q('rname').textContent = r.name;
+            q('rspec').textContent = '（本体' + r.mb + 'kg・可搬' + r.mp + 'kg・リーチ' + r.R.toLocaleString('ja-JP') + 'mm）';
+            home(); msg('梁と柱のサイズを選んで、スタートを押してください。'); draw();
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', function () { newRobot(true); });
+          newRobot(true); syncBtns();
         })();
         </script>
 
