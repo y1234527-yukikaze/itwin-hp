@@ -196,7 +196,7 @@
           設備をのせる架台を自分で設計するとき、「この部材で持つのか」をどう確かめればよいのでしょうか。本記事では、<strong class="mk">架台の強度計算の方法</strong>を、500kgの設備をのせる架台の計算例で解説します。角パイプ、アングル、溝形鋼で結果がどう変わるかも比べます。
         </p>
         <p>
-          記事の後半には、ご自身の条件を入れて試せる計算ツールがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。実際の設計では、使用する鋼材の資料とご自身の条件で確認してください。
+          記事の後半には、ご自身の条件を入れて試せる計算ツールと、設備に合った架台を選ぶゲームがあります。数値はすべて説明用の例で、一般論にとどまる値には「要確認」と記しています。実際の設計では、使用する鋼材の資料とご自身の条件で確認してください。
         </p>
 
         <div class="chapter-sum">
@@ -214,6 +214,7 @@
             <li>500kgの設備をのせる架台の計算例（梁・柱・水平力）</li>
             <li>角パイプ・アングル・溝形鋼の違いと、見落としやすい「弱い軸」</li>
             <li>自分の条件を入れて試せる、概算の計算ツール</li>
+            <li>設備に合った梁・柱と筋かいを選ぶゲーム</li>
           </ul>
         </div>
 
@@ -734,6 +735,254 @@
           document.getElementById('st-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
           for (var k in DEF) S[k] = DEF[k];
           sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆やってみよう：架台の部材選びゲーム（架台の記事・2026-10-22。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜設備に合った架台を選ぶゲーム</h2>
+        <p>
+          クレーンで設備を架台に載せ、地震の揺れに耐えられるかを試します。設備の重さは、毎回変わります。選べるのは、梁（横）と柱（縦）の角パイプのサイズと、筋かいの有無です。細すぎると壊れ、太すぎると据え付けと費用が大変になります。
+        </p>
+
+        <div class="calc-tool ufo" id="sg-tool">
+          <p class="calc-tool-title">架台の部材選びゲーム</p>
+          <p class="ufo-weight">今回の設備の重さ：<b data-s="m"></b> kg</p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 400" role="img" aria-label="4本脚の架台に、クレーンで設備を載せる図。床が横に揺れる">
+              <g data-s="floor"><rect x="-40" y="350" width="720" height="50" fill="#d9dee4"/>
+                <path d="M0,362 L640,362" stroke="#c4ccd6" stroke-width="2" stroke-dasharray="14 18"/></g>
+              <line data-s="hookline" x1="320" y1="0" stroke="#5a6573" stroke-width="3"/>
+              <path data-s="hook" fill="#5a6573" stroke="#5a6573" stroke-width="2"/>
+              <g data-s="stand">
+                <path data-s="brace1" stroke="#8a5a2b" stroke-width="5" fill="none"/>
+                <path data-s="brace2" stroke="#8a5a2b" stroke-width="5" fill="none"/>
+                <path data-s="colL" fill="none" stroke="#5a6573"/>
+                <path data-s="colR" fill="none" stroke="#5a6573"/>
+                <path data-s="beam" fill="none" stroke="#0d2b4e"/>
+                <path data-s="beamL" fill="none" stroke="#0d2b4e"/>
+                <path data-s="beamR" fill="none" stroke="#0d2b4e"/>
+                <path data-s="crack" fill="none" stroke="#d4691a" stroke-width="3"/>
+              </g>
+              <g data-s="equip"><rect data-s="ebox" rx="4" fill="#6f8aa6" stroke="#0d2b4e" stroke-width="2"/><text data-s="etext" font-size="18" fill="#ffffff" text-anchor="middle"></text></g>
+              <text data-s="quake" x="320" y="40" font-size="22" fill="#d4691a" text-anchor="middle" style="display:none">地震の揺れ</text>
+              <g data-s="crew" style="display:none">
+                <g data-s="p1"><circle cx="0" cy="-58" r="9" fill="#0d2b4e"/><path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L12,-56" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+                <g data-s="p2"><circle cx="0" cy="-58" r="9" fill="#0d2b4e"/><path d="M0,-49 L0,-20 M0,-20 L-9,0 M0,-20 L9,0 M0,-42 L-12,-56" stroke="#0d2b4e" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+                <line data-s="carry" stroke="#0d2b4e" stroke-linecap="butt"/>
+                <text data-s="say" font-size="20" fill="#d4691a" text-anchor="middle">重い…</text>
+              </g>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-s="start">スタート</button>
+            <button type="button" class="calc-reset" data-s="again">もう一回（重さが変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>梁（横）の角パイプ</p>
+              <div class="calc-btns" data-sb="beam"></div>
+              <p>柱（縦）の角パイプ</p>
+              <div class="calc-btns" data-sb="col"></div>
+              <p>筋かい</p>
+              <div class="calc-btns" data-sb="brace"><button type="button" data-v="0">なし</button><button type="button" data-v="1">あり</button></div>
+            </div>
+            <div class="ufo-msg" data-s="msg" aria-live="polite">梁と柱のサイズ、筋かいの有無を選んで、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              判定は、本記事の計算ツールと同じ式（スパン1,000mm、柱の高さ800mm、設備の重さは2本の梁の中央に半分ずつ、地震の横の力は重さの0.3倍、許容応力80MPa）で求めた、梁と柱の応力の割合で決めています。ゲームなので、110％までは成功としています。壊れないいちばん細いサイズとその1つ上を「ちょうどよい」とし、それより2つ以上太いと「大きすぎ」としています。壊れ方の動きは、分かりやすくするための演出です。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('sg-tool');
+          if (!root) return;
+          // 本記事の計算ツールと同じ角パイプの断面性能
+          var SEC = [
+            { name: '□50×3.2', A: 572.7, I: 20.4e4, Z: 8.16e3, i: 18.9, w: 4.50, px: 7 },
+            { name: '□60×3.2', A: 700.7, I: 36.9e4, Z: 12.3e3, i: 23.0, w: 5.50, px: 9 },
+            { name: '□75×3.2', A: 892.7, I: 75.5e4, Z: 20.1e3, i: 29.1, w: 7.01, px: 11 },
+            { name: '□100×3.2', A: 1213, I: 187e4, Z: 37.5e3, i: 39.3, w: 9.52, px: 14 }
+          ];
+          var g = 9.81, E = 205000, F = 235, L = 1000, H = 800, KH = 0.3, SA = 80, FAIL = 1.10;
+          var LAM = Math.sqrt(Math.PI * Math.PI * E / (0.6 * F));
+          var FLOOR = 350, XL = 220, XR = 420, TOPY = 182;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-s="' + k + '"]'); };
+          var S = { beam: 1, col: 1, brace: '0', m: 500, running: false }, used = false, D;
+
+          function fc(lam) { var r = lam / LAM; return lam <= LAM ? F * (1 - 0.4 * r * r) / (1.5 + (2 / 3) * r * r) : 0.277 * F / (r * r); }
+          function rBeam(s) { var P = S.m * g / 2; return ((P * L / 4) + s.w * g / 1000 * L * L / 8) / s.Z / SA; }
+          function rCol(s, brace) {
+            var N = S.m * g / 4 + s.w * g * (L + H) / 1000, lam = (brace ? H : 2 * H) / s.i;
+            var Q = brace ? 0 : KH * S.m * g / 4;
+            return N / s.A / fc(lam) + Q * H / s.Z / SA;
+          }
+          function minOk(fn) { for (var i = 0; i < SEC.length; i++) if (fn(SEC[i]) <= FAIL) return i; return SEC.length - 1; }
+          function range(i) { return SEC[i].name + (i + 1 < SEC.length ? '〜' + SEC[i + 1].name : ''); }
+          function pct(x) { return Math.round(x * 100) + '％'; }
+          function standKg(b, c) { return 2 * b.w * L / 1000 + 4 * c.w * H / 1000; }
+
+          ['beam', 'col'].forEach(function (k) {
+            var box = root.querySelector('[data-sb="' + k + '"]');
+            SEC.forEach(function (s, i) {
+              var bt = document.createElement('button'); bt.type = 'button'; bt.textContent = s.name; bt.dataset.v = i;
+              bt.addEventListener('click', function () { if (S.running) return; S[k] = i; syncBtns(); home(); draw(); });
+              box.appendChild(bt);
+            });
+          });
+          root.querySelectorAll('[data-sb="brace"] button').forEach(function (bt) {
+            bt.addEventListener('click', function () { if (S.running) return; S.brace = bt.dataset.v; syncBtns(); home(); draw(); });
+          });
+          function syncBtns() {
+            ['beam', 'col', 'brace'].forEach(function (k) {
+              root.querySelectorAll('[data-sb="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', String(S[k]) === b.dataset.v); b.disabled = S.running; });
+            });
+            q('start').disabled = S.running; q('again').disabled = S.running;
+          }
+          function esize() { return { w: 80 + S.m * 0.05, h: 46 + S.m * 0.025 }; }
+          function home() { D = { fx: 0, sway: 0, bend: 0, low: 0, sag: 0, crack: 0, broken: 0, ey: 80, ex: 0, er: 0, onStand: false, hook: true }; }
+
+          function draw() {
+            var b = SEC[S.beam], c = SEC[S.col], es = esize(), fx = D.fx, sw = D.sway, topY = TOPY + D.low;
+            q('floor').setAttribute('transform', 'translate(' + fx + ',0)');
+            ['colL', 'colR'].forEach(function (k, i) {
+              var x0 = (i ? XR : XL) + fx, p = q(k); p.setAttribute('stroke-width', c.px);
+              p.setAttribute('d', 'M' + x0 + ',' + FLOOR + ' Q' + (x0 + sw * 0.4 + D.bend) + ',' + ((FLOOR + topY) / 2) + ' ' + (x0 + sw) + ',' + topY);
+            });
+            var br = S.brace === '1' && !D.broken;
+            q('brace1').setAttribute('d', br ? 'M' + (XL + fx) + ',' + FLOOR + ' L' + (XR + fx + sw) + ',' + topY : '');
+            q('brace2').setAttribute('d', br ? 'M' + (XR + fx) + ',' + FLOOR + ' L' + (XL + fx + sw) + ',' + topY : '');
+            var bl = XL - 14 + fx + sw, brx = XR + 14 + fx + sw, mid = (bl + brx) / 2, by = topY - 6;
+            ['beam', 'beamL', 'beamR'].forEach(function (k) { q(k).setAttribute('stroke-width', b.px); });
+            if (D.broken > 0) {
+              var ang = D.broken * 1.0, half = (brx - bl) / 2;
+              q('beam').setAttribute('d', '');
+              q('beamL').setAttribute('d', 'M' + bl + ',' + by + ' L' + (bl + half * Math.cos(ang)) + ',' + (by + half * Math.sin(ang)));
+              q('beamR').setAttribute('d', 'M' + brx + ',' + by + ' L' + (brx - half * Math.cos(ang)) + ',' + (by + half * Math.sin(ang)));
+            } else {
+              q('beam').setAttribute('d', 'M' + bl + ',' + by + ' Q' + mid + ',' + (by + D.sag * 2) + ' ' + brx + ',' + by);
+              q('beamL').setAttribute('d', ''); q('beamR').setAttribute('d', '');
+            }
+            q('crack').setAttribute('d', D.crack && !D.broken ? 'M' + (mid - 4) + ',' + (by + D.sag - 9) + ' L' + (mid + 3) + ',' + (by + D.sag) + ' L' + (mid - 3) + ',' + (by + D.sag + 9) : '');
+            // 設備（架台に載っている間は、梁の真ん中に付いていく）
+            var ex, ey;
+            if (D.onStand) { ex = mid + D.ex; ey = by - b.px / 2 - es.h / 2 + D.sag + D.ey; } else { ex = 320 + D.ex; ey = D.ey; }
+            var bx = q('ebox'); bx.setAttribute('x', -es.w / 2); bx.setAttribute('y', -es.h / 2); bx.setAttribute('width', es.w); bx.setAttribute('height', es.h);
+            var tx = q('etext'); tx.setAttribute('x', 0); tx.setAttribute('y', 6); tx.textContent = S.m + 'kg';
+            q('equip').setAttribute('transform', 'translate(' + ex + ',' + ey + ') rotate(' + D.er + ')');
+            // クレーンのフック
+            var hy = D.hook ? ey - es.h / 2 : -20;
+            q('hookline').setAttribute('x2', 320); q('hookline').setAttribute('y2', Math.max(hy - 10, 0)); q('hookline').style.display = D.hook ? '' : 'none';
+            q('hook').setAttribute('d', D.hook ? 'M306,' + (hy - 14) + ' h28 v12 h-28 z' : '');
+          }
+
+          function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+          function step(ms, fn) {
+            ms = reduce ? ms * 0.25 : ms;
+            return new Promise(function (res) {
+              var t0 = null;
+              function f(now) { if (t0 === null) t0 = now; var t = Math.min((now - t0) / ms, 1); fn(t, (now - t0) / 1000); draw(); if (t < 1) requestAnimationFrame(f); else res(); }
+              requestAnimationFrame(f);
+            });
+          }
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); overlay(t, k); }
+          function overlay(text, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            var title = (text.match(/<b>(.*?)<\/b>/) || [, ''])[1];
+            var rec = text.match(/<b>([^<]*?)<\/b> がおすすめ/);
+            ov.querySelector('.ufo-ov-t').textContent = title;
+            ov.querySelector('.ufo-ov-s').textContent = kind === 'ok' ? 'ちょうどよい架台です' : rec ? 'おすすめ：' + rec[1].replace(/×3\.2/g, '') : '';
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+          function install(s) {
+            var crew = q('crew'); crew.style.display = '';
+            q('carry').setAttribute('stroke-width', s.px + 4);
+            return step(2600, function (t, sec) {
+              var x = -60 + 420 * t, bob = Math.abs(Math.sin(sec * 5)) * 4, sg = 3 + Math.sin(sec * 9) * 2;
+              q('p1').setAttribute('transform', 'translate(' + x + ',' + (FLOOR + bob) + ')');
+              q('p2').setAttribute('transform', 'translate(' + (x + 120) + ',' + (FLOOR + 4 - bob) + ')');
+              var c = q('carry'); c.setAttribute('x1', x + 12); c.setAttribute('y1', FLOOR - 56 + bob + sg); c.setAttribute('x2', x + 108); c.setAttribute('y2', FLOOR - 56 - bob + sg);
+              var s2 = q('say'); s2.setAttribute('x', x + 60); s2.setAttribute('y', FLOOR - 80 + Math.sin(sec * 6) * 2); s2.style.opacity = (Math.floor(sec * 2) % 2) ? 1 : 0.4;
+            }).then(function () { crew.style.display = 'none'; });
+          }
+          // 地震：床が横に揺れ、架台の上が遅れて揺れる
+          function quake(ms, ampTop, grow) {
+            q('quake').style.display = '';
+            return step(ms, function (t, s) {
+              var env = Math.sin(Math.PI * Math.min(t * 1.2, 1));
+              D.fx = 8 * env * Math.sin(s * 14);
+              D.sway = ampTop * (grow ? Math.min(t * 1.5, 1) : env) * Math.sin(s * 14 - 0.9);
+            }).then(function () { q('quake').style.display = 'none'; });
+          }
+
+          async function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'stand_game' }); }
+            S.running = true; syncBtns(); home(); draw();
+            var b = SEC[S.beam], c = SEC[S.col], brace = S.brace === '1';
+            var rb = rBeam(b), rc = rCol(c, brace), mb = minOk(rBeam), mcNo = minOk(function (s) { return rCol(s, false); }), mc = minOk(function (s) { return rCol(s, brace); });
+            var overB = rb <= FAIL && S.beam >= mb + 2, overC = rc <= FAIL && S.col >= mc + 2;
+            var recTxt = '梁 ' + range(mb) + '・柱 ' + range(mc) + (brace ? '（筋かいあり）' : '（筋かいなし）');
+            msg('動いています…');
+            if (rb <= FAIL && rc <= FAIL && (overB || overC)) await install(overB ? b : c);
+            // クレーンで吊り下ろす
+            var es = esize(), restY = TOPY - 6 - b.px / 2 - es.h / 2;
+            var y0s = D.ey; await step(1400, function (t) { D.ey = y0s + (restY - y0s) * ease(t); });
+            D.onStand = true; D.ey = 0;
+            // 梁が細い：載せたところで大きくたわみ、折れる
+            if (rb > FAIL) {
+              await step(900, function (t) { D.sag = 4 + 16 * t * t; });
+              D.hook = false;
+              await step(400, function (t, s) { D.crack = 1; D.fx = Math.sin(s * 70) * 1.2; }); D.fx = 0;
+              var drop = FLOOR - es.h / 2 - (restY + D.sag) - 2;
+              await step(600, function (t) { D.broken = ease(t); D.ey = drop * t * t; D.er = 8 * t; });
+              msg('<b>梁が折れました。</b>梁 ' + b.name + ' は細すぎて、' + S.m + 'kgの設備を載せると、応力が許容応力の ' + pct(rb) + ' になりました。この重さなら、<b>' + recTxt + '</b> がおすすめです。', 'ng');
+              return end();
+            }
+            await step(500, function (t) { D.sag = 2 * t; });
+            D.hook = false; draw();
+            // 地震
+            if (rc > FAIL) {
+              await quake(2200, 34, true);
+              await step(1000, function (t) { var e = t * t; D.sway = 34 + 70 * e; D.bend = 50 * e; D.low = 70 * e; D.er = 14 * e; D.ex = 20 * e; });
+              // 傾いた架台から、設備が床へすべり落ちる
+              var cur = TOPY + D.low - 6 - b.px / 2 - es.h / 2 + D.sag, fall = FLOOR - es.h / 2 - 2 - cur, ex0 = D.ex;
+              await step(500, function (t) { D.ey = fall * t * t; D.ex = ex0 + 50 * t; D.er = 14 + 10 * t; });
+              D.er = 4; draw();
+              msg('<b>架台が崩れました。</b>柱 ' + c.name + ' は細すぎて、地震の横の力で、応力が許容応力の ' + pct(rc) + ' になりました。この重さなら、<b>' + recTxt + '</b> がおすすめです。' + (brace ? '' : '<br><small>筋かいを入れると、柱は細くても持ちこたえやすくなります。</small>'), 'ng');
+              return end();
+            }
+            var amp = brace ? 3 : 8 + 22 * Math.min(rc, 1);
+            await quake(2600, amp, false);
+            await step(700, function (t, s) { D.sway = amp * 0.3 * Math.exp(-s / 0.25) * Math.cos(14 * s); D.fx = 0; });
+            D.sway = 0; draw();
+            var kg = Math.round(standKg(b, c));
+            if (overB || overC) {
+              var best = Math.round(standKg(SEC[mb], SEC[mc]));
+              msg('<b>持ちこたえましたが、架台が大きすぎます。</b>梁 ' + b.name + '（' + pct(rb) + '）、柱 ' + c.name + '（' + pct(rc) + '）は余裕がありすぎて、架台の重さは約' + kg + 'kg（ちょうどよい太さなら約' + best + 'kg）。運び込みと据え付けに人手がかかり、材料費もかさみます。この重さなら、<b>' + recTxt + '</b> がおすすめです。', 'ng');
+            } else {
+              msg('<b>成功！</b>梁 ' + b.name + '（許容応力の ' + pct(rb) + '）、柱 ' + c.name + '（' + pct(rc) + '）は、' + S.m + 'kgの設備にちょうどよい架台です。架台の重さは約' + kg + 'kgです。' + (brace ? '' : '<br><small>筋かいがないので、揺れは大きめでした。筋かいを入れると、揺れが小さくなります。</small>'), 'ok');
+            }
+            end();
+          }
+          function end() { S.running = false; syncBtns(); }
+          function newWeight() {
+            S.m = 200 + Math.round(Math.random() * 13) * 100;
+            q('m').textContent = S.m.toLocaleString('ja-JP');
+            home(); msg('梁と柱のサイズ、筋かいの有無を選んで、スタートを押してください。'); draw();
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', newWeight);
+          newWeight(); syncBtns();
         })();
         </script>
 
