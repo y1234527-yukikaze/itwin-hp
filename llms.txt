@@ -29,6 +29,7 @@
 - [アンカーボルトの引き抜き計算の方法と例](https://i-twin.co.jp/column/articles/anchor-bolt-calculation): 柱の根元の曲げと設備の転倒から求める引き抜き力、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さ
 - [エアシリンダの選定計算の方法と例](https://i-twin.co.jp/column/articles/air-cylinder-selection): 押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッション、空気の消費量
 - [コンベアのモーター選定の計算方法と例](https://i-twin.co.jp/column/articles/conveyor-motor-selection): ほしい速さからの減速比、ベルトを引く力からのトルクとモーター容量、傾きと50Hz・60Hzの違い、起動のトルク
+- [真空パッドの選定計算と把持力の求め方](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
 
 ## コラム（解説記事）
 

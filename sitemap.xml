@@ -203,6 +203,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://i-twin.co.jp/column/articles/vacuum-pad-selection</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <url>
     <loc>https://i-twin.co.jp/column/articles/stand-strength-calculation</loc>
