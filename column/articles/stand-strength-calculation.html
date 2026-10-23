@@ -1191,5 +1191,19 @@
     </div>
   </footer>
 
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
 </body>
 </html>

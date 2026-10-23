@@ -233,19 +233,28 @@
 
         <figure class="article-figure">
           <svg viewBox="0 0 640 230" role="img" aria-label="コンベアのモーター選定の流れ。1 ほしい速さから減速比を決める、2 ベルトを引く力とトルクを求める、3 モーター軸に直して容量を選ぶ、4 起動と速さを確かめる">
-            <defs><marker id="mt1" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker></defs>
-            <rect x="10" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
-            <rect x="170" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
-            <rect x="330" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#d4691a" stroke-width="3"/>
-            <rect x="490" y="40" width="140" height="150" rx="8" fill="#ffffff" stroke="#0d2b4e" stroke-width="2"/>
-            <text x="80" y="76" font-size="20" fill="#d4691a" text-anchor="middle">1</text><text x="80" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">ほしい速さから</text><text x="80" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">減速比を決める</text>
-            <text x="240" y="76" font-size="20" fill="#d4691a" text-anchor="middle">2</text><text x="240" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">ベルトを引く力と</text><text x="240" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">トルクを求める</text>
-            <text x="400" y="76" font-size="20" fill="#d4691a" text-anchor="middle">3</text><text x="400" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">モーター軸に直し</text><text x="400" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">容量を選ぶ</text>
-            <text x="560" y="76" font-size="20" fill="#d4691a" text-anchor="middle">4</text><text x="560" y="112" font-size="18" fill="#0d2b4e" text-anchor="middle">起動と速さを</text><text x="560" y="136" font-size="18" fill="#0d2b4e" text-anchor="middle">確かめる</text>
-            <line x1="150" y1="115" x2="166" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
-            <line x1="310" y1="115" x2="326" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
-            <line x1="470" y1="115" x2="486" y2="115" stroke="#d4691a" stroke-width="4" marker-end="url(#mt1)"/>
-            <text x="240" y="218" font-size="19" fill="#d4691a" text-anchor="middle">1と3は、減速比でつながっている</text>
+            <defs>
+              <linearGradient id="mt1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf2"/></linearGradient>
+              <filter id="mt1s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0d2b4e" flood-opacity="0.16"/></filter>
+              <linearGradient id="mt1a" gradientUnits="userSpaceOnUse" x1="0" y1="-8" x2="30" y2="8"><stop offset="0" stop-color="#f6c12f"/><stop offset="0.55" stop-color="#ef8a24"/><stop offset="1" stop-color="#e0491c"/></linearGradient>
+              <g id="mt1arrow" fill="none" stroke="url(#mt1a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="0" y1="0" x2="4" y2="0"/><line x1="11" y1="0" x2="28" y2="0"/><path d="M20,-8 L28,0 L20,8"/>
+              </g>
+            </defs>
+            <g filter="url(#mt1s)">
+              <rect x="12" y="28" width="122" height="150" rx="20" fill="url(#mt1g)" stroke="#e1e6ec"/>
+              <rect x="177" y="28" width="122" height="150" rx="20" fill="url(#mt1g)" stroke="#e1e6ec"/>
+              <rect x="342" y="28" width="122" height="150" rx="20" fill="url(#mt1g)" stroke="#e1e6ec"/>
+              <rect x="507" y="28" width="122" height="150" rx="20" fill="url(#mt1g)" stroke="#e1e6ec"/>
+            </g>
+            <text x="73" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">1</text><text x="73" y="108" font-size="15" fill="#0d2b4e" text-anchor="middle">ほしい速さから</text><text x="73" y="132" font-size="15" fill="#0d2b4e" text-anchor="middle">減速比を決める</text>
+            <text x="238" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">2</text><text x="238" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">ベルトを</text><text x="238" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">引く力と</text><text x="238" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">トルクを求める</text>
+            <text x="403" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">3</text><text x="403" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">モーター軸に</text><text x="403" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">直して</text><text x="403" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">容量を選ぶ</text>
+            <text x="568" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">4</text><text x="568" y="108" font-size="15" fill="#0d2b4e" text-anchor="middle">起動と速さを</text><text x="568" y="132" font-size="15" fill="#0d2b4e" text-anchor="middle">確かめる</text>
+            <use href="#mt1arrow" transform="translate(141,103)"/>
+            <use href="#mt1arrow" transform="translate(306,103)"/>
+            <use href="#mt1arrow" transform="translate(471,103)"/>
+            <text x="240" y="216" font-size="18" fill="#d4691a" text-anchor="middle">1と3は、減速比でつながっている</text>
           </svg>
           <figcaption>減速比を先に決めないと、モーター軸のトルクが求まらない。</figcaption>
         </figure>
@@ -1044,5 +1053,19 @@
     </div>
   </footer>
 
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
 </body>
 </html>
