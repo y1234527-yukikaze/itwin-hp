@@ -2278,3 +2278,14 @@ a.industry-card { cursor: pointer; }
 .ufo .ufo-actions .btn--fill:hover:not(:disabled) { background: linear-gradient(180deg, #9cf57f 0%, #4bd935 45%, #27b018 100%); }
 .ufo .ufo-actions .btn--fill:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #1e3d12, inset 0 2px 0 rgba(255, 255, 255, 0.6); }
 /* スライダーの緑の幅（--p）は、記事の末尾のスクリプトで値に合わせて変える */
+
+/* 記事上部の行き来リンク（一覧・特集・前後の記事）2026-10-24 */
+.article-nav-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px 18px; margin:0 0 18px; padding-bottom:12px; border-bottom:1px solid var(--line); font-size:0.82rem; }
+.article-nav-top span { display:flex; flex-wrap:wrap; gap:4px 0; }
+.article-nav-top a { color:var(--ink-soft); text-decoration:none; }
+.article-nav-top a:hover { color:var(--orange); }
+.article-nav-top span a + a::before { content:"／"; margin:0 8px; color:var(--line); }
+.article-nav-top .ant-next { color:var(--navy); font-weight:700; }
+@media (max-width: 600px) {
+  .article-nav-top { flex-direction:column; align-items:flex-start; }
+}
