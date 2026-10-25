@@ -193,6 +193,7 @@
   <!-- ◆本体：記事 -->
   <section class="section">
     <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
       <div class="article-body article-rich">
 
         <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
@@ -988,6 +989,34 @@
         </div>
 
       </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li class="is-cur"><span>02 ロボット架台</span></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li></ol>
+          <p class="cs-pager"><a href="stand-strength-calculation.html">‹ 前の記事</a><a class="cs-next" href="weld-strength-calculation.html">次の記事 ›</a></p>
+          <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP3</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/thumb-column-stand-strength.jpg" alt="" width="72" height="40"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/thumb-column-weld-strength.jpg" alt="" width="72" height="40"><span>溶接の強度計算の方法と例</span></a></li><li><a href="robot-stand-strength-calculation.html"><img src="../../img/thumb-column-robot-stand.jpg" alt="" width="72" height="40"><span>ロボット架台の強度計算の方法</span></a></li></ol>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">無料で診断する</p>
+          <a class="cs-link" href="../../checklist.html">お悩みチェックリスト ›</a>
+          <a class="cs-link" href="../../simulator.html">概算シミュレーション ›</a>
+        </div>
+        <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design">設計の相談をする</a>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
     </div>
   </section>
 
