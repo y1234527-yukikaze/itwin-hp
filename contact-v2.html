@@ -176,8 +176,8 @@
             <!-- ボット除け（ハニーポット）：人は入力しない隠し項目。Formspreeが自動で無視します -->
             <input type="text" name="_gotcha" style="display:none">
             <div class="field">
-              <label for="company">会社名 <span class="req">必須</span></label>
-              <input type="text" id="company" name="会社名" required>
+              <label for="company">会社名</label>
+              <input type="text" id="company" name="会社名" placeholder="個人の方は空欄で大丈夫です">
             </div>
             <div class="field">
               <label for="name">お名前 <span class="req">必須</span></label>
@@ -198,6 +198,7 @@
                 <option value="issues">現場のお悩み・課題相談</option>
                 <option value="simulator">概算シミュレーション結果について</option>
                 <option value="auto">自動化の相談</option>
+                <option value="design">強度計算・図面・設計のご依頼</option>
                 <option value="scan">3Dスキャン・現状データ化の相談</option>
                 <option value="other">その他</option>
               </select>
@@ -220,6 +221,7 @@
               <input type="hidden" id="message" name="お問い合わせ内容">
             </div>
             <p class="form-encourage">内容は箇条書きのままで大丈夫です。まずは、お気軽に送ってみてください。</p>
+            <p class="form-promise">ご相談・お見積もりは無料です。通常2営業日以内にメールでご返信します。</p>
             <button type="submit" class="btn btn--fill" style="width:100%;">送信する</button>
             <p class="form-note">※ は必須項目です。いただいた個人情報はお問い合わせ対応のみに使用します。</p>
             <p class="form-note">※ 図面や社外秘の情報は、このフォームには書かないでください。ご連絡のあと、受け渡しの方法をご相談します。</p>
