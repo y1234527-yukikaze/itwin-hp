@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：タクトタイムとは？計算方法と計算例（特集「自動化設備の設計ノート」08）
+  （溶接の記事を土台に、キットの build_takt.py で組み立て・2026-10-25）
+  計算例の検算：キットの takt_calc.py／計算ツール：キットの tool_takt.html／ゲーム：tool_takt_game.html／本文：takt_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-takt-time.jpg（ナノバナナで生成して差し替え）
+  それ以外の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで｜アイツイン コラム</title>
+  <meta name="description" content="タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、改善の進め方、設備の目標サイクルタイムと動作ごとの割り振りまで。計算ツールとゲームつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/takt-time-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで">
+  <meta property="og:description" content="タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、改善の進め方、設備の目標サイクルタイムと動作ごとの割り振りまで。計算ツールとゲームつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/takt-time-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-takt-time.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-10-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで">
+  <meta name="twitter:description" content="タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、改善の進め方、設備の目標サイクルタイムと動作ごとの割り振りまで。計算ツールとゲームつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-takt-time.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで",
+    "description": "タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、改善の進め方、設備の目標サイクルタイムと動作ごとの割り振りまで。計算ツールとゲームつきです。",
+    "image": "https://i-twin.co.jp/img/column-takt-time.jpg",
+    "datePublished": "2026-10-25",
+    "dateModified": "2026-10-25",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/takt-time-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで", "item": "https://i-twin.co.jp/column/articles/takt-time-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで</span>
+      </div>
+      <h1>タクトタイムとは？計算方法と計算例、サイクルタイムとの違いから改善まで</h1>
+      <p class="catch">公開日：2026年10月25日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../design/index.html">設計の計算で探す</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="vacuum-pad-selection.html">‹ 前の記事：07 真空パッド</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.10.25</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-takt-time.jpg" alt="タクトタイムの計算。組立ラインと加工設備で、決まった時間ごとに製品が流れていくイメージ" width="1376" height="768">
+          <figcaption>タクトタイムは、現場の速さではなく、必要な数から決まる。</figcaption>
+        </figure>
+
+        <p>
+          「この設備、何秒で1個作れればいいのか」「ラインには何人いればいいのか」。どちらも、最初に決めるのは<strong class="mk">タクトタイム</strong>です。本記事では、タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイムやリードタイムとの違い、ラインバランスと必要な人数までを順に扱います。
+        </p>
+        <p>
+          後半では、設備を設計する立場から、タクトタイムを「設備の目標サイクルタイム」に直し、送る・掴む・加工する・運ぶといった動作ごとの時間に割り振る方法を説明します。条件を入れて試せる計算ツールと、作業を分けて人数を決めるゲームもあります。数値はすべて説明用の例です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、1種類の製品を流すラインを例に、タクトタイムと人数、設備のサイクルタイムの基本的な考え方を説明するものです</li>
+            <li>稼働時間、必要数、作業時間、時間稼働率、良品率は、すべて説明用の仮の値です。実際の計画では、自社の生産計画と現場で測った値を使ってください</li>
+            <li>1本のラインで何種類もの製品を作る場合や、段取り替えが多い場合は、本記事の考え方に加えて品種ごとの負荷を確かめてください</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>タクトタイムの意味と計算式、稼働時間と必要数の取り方</li>
+            <li>サイクルタイム・リードタイムとの違いと、タクトタイムとの関係</li>
+            <li>必要な人数とバランス率の求め方</li>
+            <li>時間稼働率と良品率から、設備の目標サイクルタイムを逆算する方法</li>
+            <li>目標サイクルタイムを、設備の動作ごとの時間に割り振る方法</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>タクトタイムとは｜1個を何秒で作ればよいかの目安</h2>
+        <p>
+          タクトタイムは、<strong>決められた稼働時間の中で、必要な数を作り切るために、1個あたりに使ってよい時間</strong>です。語源は、音楽の拍子を意味するドイツ語の Takt です。必要な数がそろうペースを、ラインが刻む拍子にたとえた言葉です。
+        </p>
+        <p>
+          大事なのは、タクトタイムは現場の作業の速さから決まるのではなく、お客様が必要とする数から決まることです。同じラインでも、注文が増えればタクトタイムは短くなり、減れば長くなります。設備や人の能力は、このタクトタイムに合わせて用意します。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 230" role="img" aria-label="タクトタイムから設備の動作までの流れ。1 稼働時間と必要数からタクトタイムを求める、2 人数とラインバランスを決める、3 時間稼働率と良品率で設備の目標を決める、4 動作ごとに時間を割り振る">
+            <defs>
+              <linearGradient id="tt1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf2"/></linearGradient>
+              <filter id="tt1s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0d2b4e" flood-opacity="0.16"/></filter>
+              <linearGradient id="tt1a" gradientUnits="userSpaceOnUse" x1="0" y1="-8" x2="30" y2="8"><stop offset="0" stop-color="#f6c12f"/><stop offset="0.55" stop-color="#ef8a24"/><stop offset="1" stop-color="#e0491c"/></linearGradient>
+              <g id="tt1arrow" fill="none" stroke="url(#tt1a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="0" y1="0" x2="4" y2="0"/><line x1="11" y1="0" x2="28" y2="0"/><path d="M20,-8 L28,0 L20,8"/>
+              </g>
+            </defs>
+            <g filter="url(#tt1s)">
+              <rect x="12" y="28" width="122" height="150" rx="20" fill="url(#tt1g)" stroke="#e1e6ec"/>
+              <rect x="177" y="28" width="122" height="150" rx="20" fill="url(#tt1g)" stroke="#e1e6ec"/>
+              <rect x="342" y="28" width="122" height="150" rx="20" fill="url(#tt1g)" stroke="#e1e6ec"/>
+              <rect x="507" y="28" width="122" height="150" rx="20" fill="url(#tt1g)" stroke="#e1e6ec"/>
+            </g>
+            <text x="73" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">1</text><text x="73" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">稼働時間と</text><text x="73" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">必要数から</text><text x="73" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">タクトを出す</text>
+            <text x="238" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">2</text><text x="238" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">人数と</text><text x="238" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">作業の分け方を</text><text x="238" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">決める</text>
+            <text x="403" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">3</text><text x="403" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">止まる分と</text><text x="403" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">不良の分で</text><text x="403" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">設備の目標へ</text>
+            <text x="568" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">4</text><text x="568" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">動作ごとに</text><text x="568" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">時間を</text><text x="568" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">割り振る</text>
+            <use href="#tt1arrow" transform="translate(141,103)"/>
+            <use href="#tt1arrow" transform="translate(306,103)"/>
+            <use href="#tt1arrow" transform="translate(471,103)"/>
+            <text x="320" y="216" font-size="18" fill="#d4691a" text-anchor="middle">1と2は人のライン、3と4は設備の設計で使う</text>
+          </svg>
+          <figcaption>本記事は、この順に説明する。</figcaption>
+        </figure>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>タクトタイムは、必要な数を作り切るために、1個あたりに使ってよい時間</li>
+            <li>現場の速さではなく、必要な数から決まる。人と設備はそれに合わせて用意する</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>タクトタイムの計算式と計算例</h2>
+        <p class="calc">
+          <b>タクトタイム ＝ 稼働時間 ÷ 必要数</b><br>
+          稼働時間：休憩などを除いた、その期間に生産に使える正味の時間（秒）、必要数：その期間に作る数（個）
+        </p>
+        <p>
+          式は割り算1つですが、何を稼働時間に入れ、何を必要数とするかで答えが変わります。
+        </p>
+
+        <h3>稼働時間の取り方</h3>
+        <p>
+          稼働時間は、勤務の時間から、<strong>あらかじめ決まっていて作業ができない時間</strong>を除いたものです。休憩、朝礼、始業の点検、終業の清掃などがこれにあたります。決まった時刻に行う段取り替えも、計画に入っていれば除きます。
+        </p>
+        <p>
+          一方、設備の故障や部品の待ちのように、いつ起きるか分からない停止は、本記事ではここで引かず、後で説明する「時間稼働率」で扱います。両方で引くと、同じ停止を二重に数えることになります。計画した保全を稼働時間から引くか、止まった時間として数えるかなど、区分の仕方は会社の管理の基準によって違うので、社内の決まりにそろえます。
+        </p>
+
+        <h3>必要数の取り方</h3>
+        <p>
+          必要数は、出荷に必要な良品の数を基準にします。月の計画から出す場合は、月の必要数を稼働日の数で割って、1日あたりにします。注文が日によって大きく変わるなら、平均だけでなく、多い日の数でも計算しておきます。
+        </p>
+
+        <h3>計算例：2直で、1日に1,100個</h3>
+        <p>
+          月に22,000個を、20日で作る組立ラインを考えます。1日の必要数は1,100個です。勤務は1日2直で、1直は8時間（480分）から、休憩30分と、朝礼・始業点検の10分を除いた440分とします。
+        </p>
+        <p class="calc">
+          稼働時間 ＝ 440分 × 2直 ＝ 880分 ＝ 52,800秒<br>
+          <b>タクトタイム ＝ 52,800 ÷ 1,100 ＝ 48秒</b>
+        </p>
+        <p>
+          このラインでは、48秒ごとに1個、完成品が出てくれば、1日の必要数がそろいます。
+        </p>
+
+        <h3>必要数や勤務が変わると</h3>
+        <table>
+          <tr><th>1日の必要数</th><th>タクトタイム（2直・880分）</th></tr>
+          <tr><td>880個</td><td>60秒</td></tr>
+          <tr><td>1,100個</td><td>48秒</td></tr>
+          <tr><td>1,320個</td><td>40秒</td></tr>
+          <tr><td>1,650個</td><td>32秒</td></tr>
+        </table>
+        <p>
+          必要数が1.5倍になると、タクトタイムは3分の2になります。同じ1,100個を1直だけで作るなら、稼働時間が半分になるので、タクトタイムは24秒です。勤務の組み方は、タクトタイムを決める大きな要素で、人や設備を増やす前に検討できる手段でもあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>タクトタイム ＝ 稼働時間 ÷ 必要数</li>
+            <li>稼働時間からは、休憩や朝礼など、計画で決まった止まる時間だけを除く</li>
+            <li>計算例では、880分・1日1,100個で48秒。勤務の組み方でも変わる</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>サイクルタイム・リードタイムとの違い</h2>
+        <p>
+          タクトタイムとよく並べられるのが、サイクルタイムとリードタイムです。名前は似ていますが、決め方も測り方も違います。
+        </p>
+        <table>
+          <tr><th>名前</th><th>何の時間か</th><th>どう決まるか</th></tr>
+          <tr><td>タクトタイム</td><td>1個あたりに使ってよい時間</td><td>稼働時間と必要数から計算する目安</td></tr>
+          <tr><td>サイクルタイム</td><td>1つの工程や設備が、1個を仕上げるのに実際にかかる時間</td><td>現場で測る。設備では、次の1個に取りかかれるまでの時間</td></tr>
+          <tr><td>リードタイム</td><td>着手から完成（または受注から出荷）までにかかる全体の時間</td><td>加工の時間に、運ぶ時間、待つ時間、検査の時間を足したもの</td></tr>
+        </table>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 250" role="img" aria-label="3つの時間の違い。タクトタイムは目安の間隔、サイクルタイムは1つの工程の実際の時間、リードタイムは待ちを含む全体の時間">
+            <text x="20" y="44" font-size="17" fill="#0d2b4e">タクトタイム</text>
+            <g fill="#d4691a"><rect x="190" y="30" width="6" height="22"/><rect x="290" y="30" width="6" height="22"/><rect x="390" y="30" width="6" height="22"/><rect x="490" y="30" width="6" height="22"/><rect x="590" y="30" width="6" height="22"/></g>
+            <line x1="196" y1="41" x2="290" y2="41" stroke="#d4691a" stroke-width="2" stroke-dasharray="5 4"/>
+            <text x="243" y="74" font-size="15" fill="#d4691a" text-anchor="middle">この間隔で1個</text>
+            <text x="20" y="124" font-size="17" fill="#0d2b4e">サイクルタイム</text>
+            <rect x="190" y="108" width="82" height="24" rx="4" fill="#0d2b4e"/><rect x="290" y="108" width="82" height="24" rx="4" fill="#0d2b4e"/><rect x="390" y="108" width="82" height="24" rx="4" fill="#0d2b4e"/><rect x="490" y="108" width="82" height="24" rx="4" fill="#0d2b4e"/>
+            <text x="231" y="152" font-size="15" fill="#0d2b4e" text-anchor="middle">1工程の実際の時間</text>
+            <text x="20" y="204" font-size="17" fill="#0d2b4e">リードタイム</text>
+            <rect x="190" y="188" width="70" height="24" rx="4" fill="#6f8aa6"/><rect x="260" y="188" width="90" height="24" fill="#e3e6ea"/><rect x="350" y="188" width="70" height="24" fill="#6f8aa6"/><rect x="420" y="188" width="100" height="24" fill="#e3e6ea"/><rect x="520" y="188" width="76" height="24" rx="4" fill="#6f8aa6"/>
+            <text x="305" y="205" font-size="14" fill="#5a6573" text-anchor="middle">待ち</text><text x="470" y="205" font-size="14" fill="#5a6573" text-anchor="middle">運ぶ・待ち</text>
+            <text x="393" y="238" font-size="15" fill="#0d2b4e" text-anchor="middle">着手から完成まで、待ちも含めた全体</text>
+          </svg>
+          <figcaption>タクトタイムは目安、サイクルタイムは工程ごとの実際の時間、リードタイムは全体の時間。</figcaption>
+        </figure>
+
+        <p>
+          サイクルタイムは、同じ工程を何回か測り、ばらつきも見ます。手作業では、作業者や部品の状態で毎回少しずつ変わるので、平均だけでなく、長いほうの値も記録しておきます。設備では、ワークを受け取ってから、次のワークを受け取れる状態になるまでを1サイクルとします。
+        </p>
+        <p>
+          リードタイムを短くするには、加工を速くするより、工程の間の待ちと仕掛かりを減らすほうが効くことが多いです。タクトタイムとサイクルタイムは「1個あたりの時間」、リードタイムは「1個が通り抜ける時間」と覚えると混同しにくくなります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>タクトタイムは計算で決める目安、サイクルタイムは工程ごとに測る実際の時間</li>
+            <li>リードタイムは、待ちや運ぶ時間を含む、着手から完成までの全体の時間</li>
+            <li>サイクルタイムは、平均だけでなくばらつきも記録する</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>タクトタイムとサイクルタイムの関係</h2>
+        <p>
+          タクトタイムとサイクルタイムを比べると、そのラインが必要な数を作れるかどうかが分かります。
+        </p>
+        <ul>
+          <li><strong>サイクルタイムがタクトタイムより長い工程がある</strong>：その工程が間に合わず、後ろの工程は待たされ、前には仕掛かりがたまります。残業や休日の出勤で、足りない分を補うことになります</li>
+          <li><strong>すべての工程が、タクトタイムより大幅に短い</strong>：必要な数より速く作れますが、作りすぎて在庫が増えるか、人や設備の待ちが生まれます。速ければよい、とは限りません</li>
+          <li><strong>すべての工程が、タクトタイムより少し短い</strong>：必要な数を、無理なく作れる状態です。ばらつきや小さな停止を吸収できる程度の余裕を残します</li>
+        </ul>
+        <p>
+          比べるときは、サイクルタイムの平均だけでなく、長いほうの値も見ます。平均がタクトタイムより短くても、長い値がたびたび出れば、その都度遅れがたまっていきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>タクトタイムより長い工程があれば、そこで遅れと仕掛かりが生まれる</li>
+            <li>短すぎるのも、作りすぎや待ちのもとになる。少し短い状態をめざす</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>必要な人数とバランス率の求め方</h2>
+        <p>
+          手作業のラインでは、タクトタイムから、何人で作業を分ければよいかを考えます。
+        </p>
+        <p class="calc">
+          <b>必要な人数（理論）＝ 作業時間の合計 ÷ タクトタイム</b>（小数点以下は切り上げ）<br>
+          <b>バランス率（％）＝ 作業時間の合計 ÷（いちばん長い工程の時間 × 人数）× 100</b>
+        </p>
+        <p>
+          バランス率は、各工程の作業時間がどれだけそろっているかを表します。100％に近いほど、待ちの少ないラインです。
+        </p>
+
+        <h3>計算例：9つの作業を、タクトタイム48秒で分ける</h3>
+        <p>
+          先ほどの1日1,100個のラインで、次の9つの作業を順番に行うとします。作業の順番は入れ替えられないものとします。
+        </p>
+        <table>
+          <tr><th>作業</th><th>時間</th><th>作業</th><th>時間</th></tr>
+          <tr><td>1 部品をそろえる</td><td>12秒</td><td>6 カバーを付ける</td><td>15秒</td></tr>
+          <tr><td>2 本体を治具に置く</td><td>9秒</td><td>7 動作を確かめる</td><td>25秒</td></tr>
+          <tr><td>3 部品を組み付ける</td><td>19秒</td><td>8 ラベルを貼る</td><td>11秒</td></tr>
+          <tr><td>4 ねじを締める</td><td>17秒</td><td>9 箱に詰める</td><td>14秒</td></tr>
+          <tr><td>5 配線をつなぐ</td><td>20秒</td><td>合計</td><td>142秒</td></tr>
+        </table>
+        <p class="calc">
+          必要な人数（理論）＝ 142 ÷ 48 ＝ 2.96　→　3人
+        </p>
+        <p>
+          計算では3人です。ところが、順番を崩さずに3人で分けると、いちばんうまく分けても工程の時間は40秒・52秒・50秒になり、2人がタクトタイムの48秒を超えます。<strong class="mk">理論の人数は「これより少なくはできない」という下限で、その人数で収まるとは限りません。</strong>この3人の分け方でもバランス率は91.0％と高いのですが、いちばん長い工程がタクトタイムを超えている限り、必要な数は作れません。バランス率と、各工程がタクトタイムに収まっているかは、別々に確かめます。
+        </p>
+        <p>
+          4人で分けると、40秒（作業1〜3）、37秒（作業4・5）、40秒（作業6・7）、25秒（作業8・9）になり、全員がタクトタイムに収まります。
+        </p>
+        <p class="calc">
+          バランス率 ＝ 142 ÷（40 × 4）× 100 ＝ <b>88.8％</b>
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 300" role="img" aria-label="工程ごとの時間の棒グラフ。3人では52秒と50秒の工程がタクトタイム48秒を超える。4人では全員が48秒以内に収まる">
+            <text x="160" y="26" font-size="18" fill="#0d2b4e" text-anchor="middle">3人で分けた場合</text>
+            <text x="480" y="26" font-size="18" fill="#0d2b4e" text-anchor="middle">4人で分けた場合</text>
+            <line x1="40" y1="250" x2="290" y2="250" stroke="#5a6573" stroke-width="2"/>
+            <line x1="350" y1="250" x2="620" y2="250" stroke="#5a6573" stroke-width="2"/>
+            <rect x="60" y="130" width="50" height="120" fill="#6f8aa6"/><rect x="135" y="94" width="50" height="156" fill="#d4691a"/><rect x="210" y="100" width="50" height="150" fill="#d4691a"/>
+            <text x="85" y="122" font-size="16" fill="#0d2b4e" text-anchor="middle">40</text><text x="160" y="86" font-size="16" fill="#d4691a" text-anchor="middle">52</text><text x="235" y="92" font-size="16" fill="#d4691a" text-anchor="middle">50</text>
+            <rect x="370" y="130" width="46" height="120" fill="#6f8aa6"/><rect x="433" y="139" width="46" height="111" fill="#6f8aa6"/><rect x="496" y="130" width="46" height="120" fill="#6f8aa6"/><rect x="559" y="175" width="46" height="75" fill="#6f8aa6"/>
+            <text x="393" y="122" font-size="16" fill="#0d2b4e" text-anchor="middle">40</text><text x="456" y="131" font-size="16" fill="#0d2b4e" text-anchor="middle">37</text><text x="519" y="122" font-size="16" fill="#0d2b4e" text-anchor="middle">40</text><text x="582" y="167" font-size="16" fill="#0d2b4e" text-anchor="middle">25</text>
+            <line x1="40" y1="106" x2="290" y2="106" stroke="#d4691a" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <line x1="350" y1="106" x2="620" y2="106" stroke="#d4691a" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <text x="44" y="100" font-size="14" fill="#d4691a">タクト 48秒</text>
+            <text x="85" y="272" font-size="14" fill="#5a6573" text-anchor="middle">1人目</text><text x="160" y="272" font-size="14" fill="#5a6573" text-anchor="middle">2人目</text><text x="235" y="272" font-size="14" fill="#5a6573" text-anchor="middle">3人目</text>
+            <text x="393" y="272" font-size="14" fill="#5a6573" text-anchor="middle">1人目</text><text x="456" y="272" font-size="14" fill="#5a6573" text-anchor="middle">2人目</text><text x="519" y="272" font-size="14" fill="#5a6573" text-anchor="middle">3人目</text><text x="582" y="272" font-size="14" fill="#5a6573" text-anchor="middle">4人目</text>
+            <text x="320" y="296" font-size="16" fill="#d4691a" text-anchor="middle">線より上に出た工程で、遅れがたまる</text>
+          </svg>
+          <figcaption>工程ごとの時間を棒にして、タクトタイムの線と比べると、どこが間に合わないかが一目で分かる。</figcaption>
+        </figure>
+
+        <h3>バランスをよくする方法</h3>
+        <p>
+          4人目の工程は25秒で、ほかの工程より手が空きます。この空きを減らすには、まず、いちばん長い工程（ボトルネック）から手を付けます。ほかの工程をいくら速くしても、完成品がラインの最後から出る間隔は、いちばん長い工程が決めるからです。
+        </p>
+        <ul>
+          <li>長い作業を2つに分けられないか、前後の工程に移せないかを考える</li>
+          <li>治具や工具を変えて、長い作業そのものを短くする</li>
+          <li>分けられない長い作業は、2人や2台で並べて、交互に受け持つ</li>
+          <li>それでも合わないときは、勤務の組み方を変えて、タクトタイムの側を見直す</li>
+        </ul>
+        <p>
+          作業を移すときは、作業の順番の決まり（ねじを締める前にカバーは付けられない、など）を崩さないようにします。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>必要な人数（理論）＝ 作業時間の合計 ÷ タクトタイム。これは下限で、順番の決まりによって1人増えることがある</li>
+            <li>計算例では、理論は3人、実際は4人。バランス率は88.8％</li>
+            <li>改善は、いちばん長い工程から手を付ける</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>設備の目標サイクルタイムは、タクトタイムより短くする</h2>
+        <p>
+          ここからは、設備を設計する立場で考えます。自動化の装置を入れるとき、「タクトタイムが48秒だから、装置のサイクルタイムも48秒でよい」とすると、多くの場合、必要な数を作れません。設備は、故障や段取りで止まることがあり、小さな停止（チョコ停）や速度の低下もあり、不良品も出るからです。
+        </p>
+        <p class="calc">
+          <b>設備の目標サイクルタイム ＝ タクトタイム × 時間稼働率 × 良品率</b><br>
+          時間稼働率：稼働時間のうち、設備が止まらずに動いている時間の割合、良品率：作ったうち良品になる割合
+        </p>
+        <p>
+          チョコ停や速度の低下（性能のロス）を別に見込む場合は、設備総合効率（OEE）の考え方にならい、性能稼働率も掛けます。本記事では、止まる時間をまとめて見込んだ時間稼働率を85％、良品率を98％とします<span class="need-check">（仮の値・要確認）</span>。
+        </p>
+        <p class="calc">
+          目標サイクルタイム ＝ 48 × 0.85 × 0.98 ＝ <b>39.98秒（約40秒）</b>
+        </p>
+        <p>
+          必要数を良品率で割って「作らなければならない数」を1,122個とし、稼働時間に時間稼働率を掛けた時間で割っても、同じ答えになります。設備の仕様は、タクトタイムの48秒ではなく、<strong class="mk">約40秒を目標に、ばらつきの分の余裕を持たせて</strong>決めます。ちょうど40秒では、計算上わずかに足りないことにも注意します。
+        </p>
+        <p>
+          なお、トヨタ生産方式の考え方では、設備を動かしたいときに正常に動かせる状態を表す「可動率（べきどうりつ）」と、需要に応じて設備をどれだけ使ったかを表す「稼働率」を区別して扱います。本記事の時間稼働率は、前者に近い意味です。用語や計算の仕方は文献や会社によって違うことがあるので、社内で定義をそろえてから数字を決めます。
+        </p>
+
+        <h3>同じ停止を二重に引かない</h3>
+        <p>
+          計画した段取り替えを稼働時間から引いたなら、その時間は時間稼働率には入れません。たとえば、1直30分の段取り替えを稼働時間から引き、さらに時間稼働率の中にも含めて計算すると、目標は約37.3秒になり、40秒より2.7秒厳しくなります。厳しすぎる目標は、装置を必要以上に速く、高くします。<strong>何を稼働時間で引き、何を時間稼働率で見込んだか</strong>を、計算書に書いておきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>設備の目標サイクルタイム ＝ タクトタイム × 時間稼働率 × 良品率（性能のロスを別に見込むなら性能稼働率も掛ける）</li>
+            <li>計算例では、48秒が約40秒になる。設備の仕様は、余裕を持たせて決める</li>
+            <li>計画した停止は、稼働時間か時間稼働率のどちらか一方でだけ扱う</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>目標サイクルタイムを、設備の動作ごとに割り振る</h2>
+        <p>
+          目標の40秒が決まったら、装置の動作ごとに時間を割り振ります。ワークをコンベアで送り、シリンダで押さえ（クランプ）、加工し、真空パッドで取り出して次の工程へ運ぶ装置を例にします。
+        </p>
+        <table>
+          <tr><th>動作</th><th>時間</th><th>見積もりの考え方</th></tr>
+          <tr><td>ワークを送る（コンベア）</td><td>3.0秒</td><td>300mmを0.15m/sで送る2.0秒に、加減速と位置決めの1.0秒を足す</td></tr>
+          <tr><td>位置決め・クランプ（シリンダ）</td><td>0.8秒</td><td>ストローク50mmを平均100mm/sで0.5秒、弁の切り替えとセンサの確認に0.3秒</td></tr>
+          <tr><td>加工</td><td>28.0秒</td><td>加工の条件から決まる時間</td></tr>
+          <tr><td>アンクランプ</td><td>0.6秒</td><td>シリンダが戻り、センサで確かめるまで</td></tr>
+          <tr><td>取り出し・吸着（真空パッド）</td><td>2.0秒</td><td>ハンドが下りて吸い、真空が届いたことを確かめる0.5秒を含む</td></tr>
+          <tr><td>次の工程へ運ぶ</td><td>4.0秒</td><td>運んで置き、真空を切るまで</td></tr>
+          <tr><td>ハンドが戻る</td><td>3.0秒</td><td>取り出しの位置まで戻る</td></tr>
+        </table>
+        <p class="calc">
+          全部を順番に行うと　3.0 ＋ 0.8 ＋ 28.0 ＋ 0.6 ＋ 2.0 ＋ 4.0 ＋ 3.0 ＝ 41.4秒　→　目標の40秒を1.4秒超える
+        </p>
+        <p>
+          ここで、ハンドが「運ぶ・戻る」（7.0秒）の間に、次のワークの送りとクランプ、加工を始めるようにします。ハンドは加工が終わる前に戻ってこられるので、この7.0秒はサイクルタイムから外れます。
+        </p>
+        <p class="calc">
+          重ねた場合　3.0 ＋ 0.8 ＋ 28.0 ＋ 0.6 ＋ 2.0 ＝ <b>34.4秒</b>（目標の40秒に5.6秒の余裕）
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 300" role="img" aria-label="設備の動作のタイムチャート。全部を順番に行うと41.4秒で目標40秒を超える。運ぶ・戻るを次のワークの加工と重ねると34.4秒になる">
+            <text x="16" y="28" font-size="17" fill="#0d2b4e">全部を順番に行う（41.4秒）</text>
+            <rect x="100" y="44" width="36" height="30" fill="#8fa3b8"/><rect x="136" y="44" width="9.6" height="30" fill="#5a6573"/><rect x="145.6" y="44" width="336" height="30" fill="#0d2b4e"/><rect x="481.6" y="44" width="7.2" height="30" fill="#5a6573"/><rect x="488.8" y="44" width="24" height="30" fill="#6f8aa6"/><rect x="512.8" y="44" width="84" height="30" fill="#d4691a"/>
+            <text x="313" y="65" font-size="15" fill="#ffffff" text-anchor="middle">加工 28.0秒</text>
+            <text x="555" y="65" font-size="14" fill="#ffffff" text-anchor="middle">運ぶ・戻る</text>
+            <text x="16" y="128" font-size="17" fill="#0d2b4e">運ぶ・戻るを、次のワークと重ねる（34.4秒）</text>
+            <rect x="100" y="144" width="36" height="30" fill="#8fa3b8"/><rect x="136" y="144" width="9.6" height="30" fill="#5a6573"/><rect x="145.6" y="144" width="336" height="30" fill="#0d2b4e"/><rect x="481.6" y="144" width="7.2" height="30" fill="#5a6573"/><rect x="488.8" y="144" width="24" height="30" fill="#6f8aa6"/>
+            <text x="313" y="165" font-size="15" fill="#ffffff" text-anchor="middle">加工 28.0秒</text>
+            <rect x="100" y="182" width="84" height="22" fill="#d4691a"/>
+            <text x="190" y="198" font-size="14" fill="#d4691a">前のワークを運ぶ・戻る（加工と同時）</text>
+            <line x1="580" y1="36" x2="580" y2="216" stroke="#d4691a" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <text x="580" y="234" font-size="15" fill="#d4691a" text-anchor="middle">目標 40秒</text>
+            <rect x="40" y="252" width="14" height="14" fill="#8fa3b8"/><text x="60" y="264" font-size="14" fill="#0d2b4e">送る</text>
+            <rect x="110" y="252" width="14" height="14" fill="#5a6573"/><text x="130" y="264" font-size="14" fill="#0d2b4e">クランプ・アンクランプ</text>
+            <rect x="306" y="252" width="14" height="14" fill="#0d2b4e"/><text x="326" y="264" font-size="14" fill="#0d2b4e">加工</text>
+            <rect x="374" y="252" width="14" height="14" fill="#6f8aa6"/><text x="394" y="264" font-size="14" fill="#0d2b4e">取り出し・吸着</text>
+            <rect x="510" y="252" width="14" height="14" fill="#d4691a"/><text x="530" y="264" font-size="14" fill="#0d2b4e">運ぶ・戻る</text>
+            <text x="320" y="292" font-size="16" fill="#d4691a" text-anchor="middle">同時にできる動作を重ねると、サイクルタイムが縮む</text>
+          </svg>
+          <figcaption>横の長さが時間。下の段では、ハンドの動きを次のワークの加工中に済ませている。</figcaption>
+        </figure>
+
+        <p>
+          重ねられるのは、互いにぶつからず、順番の決まりや安全のための確認の待ちもない動作です。ハンドと次のワークの送りが同じ場所を通るなら、ぶつからないようにセンサで確かめる時間が要ります。重ねた動作のどちらかが遅れたときに、装置がどう待つかも決めておきます。
+        </p>
+        <p>
+          動作の時間は、速さの最大値だけで見積もると短くなりすぎます。シリンダは弁が切り替わってから動き出すまでの遅れ、コンベアは加減速、真空パッドは真空が届くまでの時間があります。シリンダの速さは、負荷や供給の圧力、速さの調整でも変わります。真空が届くまでの時間は、パッドと配管の容積、真空を作る機器の能力、漏れで変わります。このほか、センサの応答、制御の処理、安全のための確認（インターロック）の時間や、ワークの位置ずれで取り直す時間も見込みます。それぞれの見積もり方は「<a href="air-cylinder-selection.html">エアシリンダの選定計算</a>」「<a href="conveyor-motor-selection.html">コンベアのモーター選定</a>」「<a href="vacuum-pad-selection.html">真空パッドの選定計算</a>」で扱っています。表の値は計画のための見積もりなので、<strong>試作や実機で測って確かめます</strong>。
+        </p>
+        <p>
+          また、<strong>いちばん長い動作が目標を超えるなら、重ねても解決しません</strong>。計算例で加工が40秒を超えるなら、加工の条件を見直すか、加工する場所を2つにして交互に使う、といった方法を考えます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>目標サイクルタイムを、動作ごとの時間に割り振り、タイムチャートで確かめる</li>
+            <li>計算例では、順番に行うと41.4秒。運ぶ・戻るを重ねて34.4秒になった</li>
+            <li>動作の時間には、弁の遅れ、加減速、真空が届くまでの時間を含める</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。工程の時間を変えると棒グラフが変わる） -->
+        <h2>自分の条件で試す｜タクトタイムとラインバランスの計算ツール</h2>
+        <p>
+          稼働時間、必要数、時間稼働率、良品率を入れると、タクトタイムと設備の目標サイクルタイムが出ます。工程ごとの時間を入れると、棒グラフにタクトタイムの線を重ねて、バランス率といちばん長い工程を示します。初期値は、本記事の計算例と同じです。
+        </p>
+
+        <div class="calc-tool" id="tk-tool">
+          <p class="calc-tool-title">タクトタイムと、工程ごとの時間のバランス</p>
+          <p class="calc-tool-note">
+            タクトタイムは「稼働時間 ÷ 必要数」、設備の目標サイクルタイムは「タクトタイム × 時間稼働率 × 良品率」で概算します。チョコ停や速度の低下（性能のロス）を別に見込む場合は、その分も時間稼働率に含めて入れてください。稼働時間には、休憩や朝礼など、計画で決まった止まる時間を除いた時間を入れます。計画した段取り替えを稼働時間から引いた場合は、その分を時間稼働率に入れないでください。工程ごとの時間は、現場で測った値（できれば長いほうの値）を入れます。バランス率は「工程の時間の合計 ÷（いちばん長い工程の時間 × 工程の数）」です。<strong>結果は目安で、ラインや設備の能力を保証するものではありません。</strong>多くの品種を流す場合や、段取り替えが多い場合は、品種ごとの負荷も確かめてください。
+          </p>
+
+          <h4>タクトタイム</h4>
+          <p style="font-size:0.86rem;margin:6px 0 0 !important;">1日の直の数</p>
+          <div class="calc-btns" data-b="sh"><button type="button" data-v="1">1直</button><button type="button" data-v="2">2直</button><button type="button" data-v="3">3直</button></div>
+          <div class="calc-in">
+            <label>1直の稼働時間（休憩・朝礼などを除く）<span class="row"><input type="range" data-k="wm" min="60" max="600" step="5"><input type="number" data-k="wm" min="60" max="600" step="5"><span class="unit">分</span></span></label>
+            <label>1日の必要数（良品）<span class="row"><input type="range" data-k="nd" min="10" max="5000" step="10"><input type="number" data-k="nd" min="1" max="5000" step="1"><span class="unit">個</span></span></label>
+            <label>設備の時間稼働率<span class="row"><input type="range" data-k="av" min="50" max="100" step="1"><input type="number" data-k="av" min="50" max="100" step="1"><span class="unit">％</span></span></label>
+            <label>良品率<span class="row"><input type="range" data-k="yd" min="80" max="100" step="0.5"><input type="number" data-k="yd" min="80" max="100" step="0.1"><span class="unit">％</span></span></label>
+          </div>
+          <table class="calc-out">
+            <tr><th>稼働時間（1日）</th><td><b data-o="wt"></b> 分</td></tr>
+            <tr><th>タクトタイム</th><td><b data-o="TT"></b> 秒</td></tr>
+            <tr><th>設備の目標サイクルタイム（時間稼働率・良品率込み）</th><td><b data-o="CT"></b> 秒</td></tr>
+          </table>
+
+          <h4>工程ごとの時間</h4>
+          <p style="font-size:0.86rem;margin:6px 0 0 !important;">工程（人・設備）の数</p>
+          <div class="calc-btns" data-b="ns"><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button><button type="button" data-v="6">6</button><button type="button" data-v="7">7</button><button type="button" data-v="8">8</button></div>
+          <div class="calc-in tk-st">
+            <label data-st="1">工程1<span class="row"><input type="number" data-k="s1" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="2">工程2<span class="row"><input type="number" data-k="s2" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="3">工程3<span class="row"><input type="number" data-k="s3" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="4">工程4<span class="row"><input type="number" data-k="s4" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="5">工程5<span class="row"><input type="number" data-k="s5" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="6">工程6<span class="row"><input type="number" data-k="s6" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="7">工程7<span class="row"><input type="number" data-k="s7" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+            <label data-st="8">工程8<span class="row"><input type="number" data-k="s8" min="1" max="600" step="1"><span class="unit">秒</span></span></label>
+          </div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 280" role="img" aria-label="工程ごとの時間の棒グラフ。タクトタイムの線と、設備の目標サイクルタイムの線を重ねている">
+              <rect x="0" y="0" width="640" height="280" fill="#ffffff"/>
+              <line x1="50" y1="230" x2="620" y2="230" stroke="#5a6573" stroke-width="2"/>
+              <g data-o="bars"></g>
+              <line data-o="ttl" x1="50" x2="620" stroke="#d4691a" stroke-width="2.5" stroke-dasharray="7 5"/>
+              <text data-o="ttt" x="54" font-size="15" fill="#d4691a" stroke="#ffffff" stroke-width="4" paint-order="stroke"></text>
+              <line data-o="ctl" x1="50" x2="620" stroke="#0d2b4e" stroke-width="1.5" stroke-dasharray="3 4"/>
+              <text data-o="ctt" x="616" font-size="14" fill="#0d2b4e" text-anchor="end" stroke="#ffffff" stroke-width="4" paint-order="stroke"></text>
+            </svg>
+            <p class="calc-fig-note" data-o="figNote"></p>
+          </div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>工程の時間の合計</th><td><b data-o="sum"></b> 秒</td></tr>
+            <tr><th>必要な人数・台数（理論の下限）</th><td><b data-o="nmin"></b>（<span data-o="nraw"></span>）</td></tr>
+            <tr><th>いちばん長い工程</th><td><b data-o="mx"></b></td></tr>
+            <tr data-j="bal"><th>判定</th><td><b data-o="jt"></b><span class="judge" data-o="jd"></span></td></tr>
+            <tr><th>バランス率</th><td><b data-o="br"></b> ％</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="tk-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('tk-tool');
+          if (!root) return;
+          var DEF = { sh: 2, wm: 440, nd: 1100, av: 85, yd: 98, ns: 4, s1: 40, s2: 37, s3: 40, s4: 25, s5: 30, s6: 30, s7: 30, s8: 30 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function f1(x) { var r = Math.round(x * 10) / 10; return fmt(r, r % 1 ? 1 : 0); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function el(k) { return root.querySelector('[data-o="' + k + '"]'); }
+          function press(b, v) { root.querySelectorAll('[data-b="' + b + '"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.v) === String(v)); }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) {
+              if (document.activeElement !== e) e.value = S[e.dataset.k];
+              if (e.type === 'range') e.style.setProperty('--p', (S[e.dataset.k] - e.min) / (e.max - e.min) * 100 + '%');
+            });
+            press('sh', S.sh); press('ns', S.ns);
+            root.querySelectorAll('[data-st]').forEach(function (e) { e.style.display = Number(e.dataset.st) <= S.ns ? '' : 'none'; });
+          }
+          function calc() {
+            var wt = S.wm * S.sh, TT = wt * 60 / S.nd, CT = TT * S.av / 100 * S.yd / 100;
+            out('wt', fmt(wt)); out('TT', f1(TT)); out('CT', f1(CT));
+            var st = [], sum = 0, mx = 0, mi = 0;
+            for (var i = 1; i <= S.ns; i++) { var t = S['s' + i]; st.push(t); sum += t; if (t > mx) { mx = t; mi = i; } }
+            var over = st.filter(function (t) { return t > TT; }).length;
+            out('sum', f1(sum));
+            out('nmin', Math.ceil(sum / TT - 1e-9)); out('nraw', f1(sum) + ' ÷ ' + f1(TT) + ' ＝ ' + fmt(sum / TT, 2));
+            out('mx', '工程' + mi + '（' + f1(mx) + ' 秒）');
+            out('br', fmt(sum / (mx * S.ns) * 100, 1));
+            var row = root.querySelector('[data-j="bal"]');
+            if (over) {
+              out('jt', over + 'つの工程がタクトを超える');
+              out('jd', 'いちばん長い工程は ' + f1(mx - TT) + ' 秒超えています。作業を分けるか、工程を増やします');
+              row.classList.add('over');
+            } else {
+              out('jt', '全部の工程がタクトに収まる');
+              out('jd', 'いちばん長い工程の余裕は ' + f1(TT - mx) + ' 秒です');
+              row.classList.remove('over');
+            }
+            // 棒グラフ
+            var top = Math.max(TT, mx) * 1.18, H = 190, base = 230, x0 = 50, W = 570;
+            var y = function (v) { return base - v / top * H; };
+            var bw = Math.min(56, W / S.ns * 0.6), gap = W / S.ns, h = '';
+            st.forEach(function (t, i) {
+              var cx = x0 + gap * (i + 0.5), c = t > TT ? '#d4691a' : '#6f8aa6';
+              h += '<rect x="' + (cx - bw / 2) + '" y="' + y(t) + '" width="' + bw + '" height="' + (base - y(t)) + '" fill="' + c + '"/>';
+              h += '<text x="' + cx + '" y="' + (y(t) - 6) + '" font-size="15" fill="' + (t > TT ? '#d4691a' : '#0d2b4e') + '" text-anchor="middle">' + fmt(t, t % 1 ? 1 : 0) + '</text>';
+              h += '<text x="' + cx + '" y="' + (base + 20) + '" font-size="14" fill="#5a6573" text-anchor="middle">工程' + (i + 1) + '</text>';
+            });
+            el('bars').innerHTML = h;
+            ['ttl', 'ctl'].forEach(function (k, j) { var v = j ? CT : TT; el(k).setAttribute('y1', y(v)); el(k).setAttribute('y2', y(v)); });
+            out('ttt', 'タクト ' + f1(TT) + '秒'); el('ttt').setAttribute('y', y(TT) - 6);
+            out('ctt', '設備の目標 ' + f1(CT) + '秒'); el('ctt').setAttribute('y', y(CT) + 16);
+            out('figNote', 'オレンジの棒は、タクトタイムを超えている工程です。点線（紺）は、設備で作る場合の目標サイクルタイムです。');
+            out('eq', 'タクトタイム ＝ ' + fmt(wt) + '分×60 ÷ ' + fmt(S.nd) + '個。目標サイクルタイム ＝ タクトタイム × ' + S.av + '％ × ' + S.yd + '％。バランス率 ＝ ' + f1(sum) + ' ÷（' + f1(mx) + ' × ' + S.ns + '）。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'takt_time' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b] button').forEach(function (b) {
+            b.addEventListener('click', function () { set(b.parentNode.dataset.b, Number(b.dataset.v)); });
+          });
+          document.getElementById('tk-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆依頼の案内（計算ツールのすぐ下。キットの article_nav.py で入れ直す） -->
+        <p class="tool-cta">実際の設備での計算・選定の確認は、オンラインでお引き受けします（全国対応）。<a href="../../price.html#design">料金の目安</a><a href="../../contact-v2.html?topic=design">相談する ›</a></p>
+
+        <!-- ◆やってみよう：ライン分けゲーム（タクトタイムの記事・2026-10-25。動くのはスタートを押したときだけ） -->
+        <h2>やってみよう｜タクトに間に合わせろ！ライン分けゲーム</h2>
+        <p>
+          8つの作業を、順番を変えずに何人かで分けます。作業の時間とタクトタイムは、毎回変わります。作業と作業の間をクリックすると、そこで次の人に交代します。スタートを押すと、タクトタイムごとに製品が流れてきます。タクトを超える人の前には、製品がたまっていきます。全員をタクトに収め、できるだけ少ない人数で回せばクリアです。
+        </p>
+
+        <div class="calc-tool ufo" id="tg-tool">
+          <p class="calc-tool-title">ライン分けゲーム</p>
+          <p class="ufo-weight">タクトタイム <b data-g="tt"></b> 秒（作業の合計 <b data-g="sum"></b> 秒）</p>
+
+          <div class="calc-fig ufo-fig">
+            <svg viewBox="0 0 640 330" role="img" aria-label="組立ラインの図。作業を受け持つ人が並び、左から製品が流れてくる。タクトを超える人の前に製品がたまる">
+              <rect x="0" y="262" width="640" height="68" fill="#d9dee4"/>
+              <rect x="20" y="236" width="600" height="14" rx="3" fill="#5a6573"/>
+              <g data-g="st"></g>
+              <g data-g="pr"></g>
+              <text x="20" y="36" font-size="24" fill="#0d2b4e">完成 <tspan data-g="done">0</tspan> 個</text>
+              <text x="20" y="66" font-size="17" fill="#5a6573">タクトどおりなら <tspan data-g="goal">—</tspan> 個</text>
+              <text x="620" y="36" font-size="17" fill="#5a6573" text-anchor="end" data-g="clock"></text>
+              <text x="320" y="300" font-size="16" fill="#0d2b4e" text-anchor="middle" data-g="hint">作業の間をクリックして、受け持ちを分けてください</text>
+            </svg>
+            <div class="ufo-ov" aria-hidden="true"><div class="ufo-ov-card"><p class="ufo-ov-t"></p><p class="ufo-ov-s"></p><p class="ufo-ov-n">※ 目安をつかむためのゲームです。<br>実際のラインでは、作業時間を測って確かめてください。</p></div></div>
+          </div>
+          <div class="ufo-actions">
+            <button type="button" class="btn btn--fill" data-g="start">スタート</button>
+            <button type="button" class="calc-reset" data-g="again">もう一回（条件が変わります）</button>
+          </div>
+
+          <div class="ufo-panel">
+            <div class="ufo-pick">
+              <p>作業（左から順番。間の「｜」を押すと、そこで次の人に交代）</p>
+              <div class="tg-chips" data-g="chips"></div>
+            </div>
+            <div class="ufo-msg" data-g="msg" aria-live="polite">作業の間の「｜」を押して受け持ちを分け、スタートを押してください。</div>
+            <p class="calc-tool-note" style="margin:10px 0 0 !important;">
+              製品は、タクトタイムごとに1個ずつ流れてきます。1人が受け持つ時間は、受け持つ作業の時間の合計です。前の人から受け取り、自分の作業が終わって手が空いていれば、すぐに次の製品に取りかかります。いちばん少ない人数は、作業を前から順に、タクトを超えない範囲で詰めていく分け方で求めています。運ぶ時間や作業のばらつきは入れていません。
+            </p>
+          </div>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('tg-tool');
+          if (!root) return;
+          var NAMES = ['部品をそろえる', '治具に置く', '組み付ける', 'ねじを締める', '配線する', 'カバーを付ける', '確かめる', '箱に詰める'];
+          var TTS = [40, 45, 48, 50, 54, 60], CYC = 10, SPT = 0.9;
+          var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var q = function (k) { return root.querySelector('[data-g="' + k + '"]'); };
+          var S = { tt: 48, el: [], cut: [], running: false }, used = false, SIM = null;
+
+          function groups() {
+            var g = [[]];
+            S.el.forEach(function (t, i) { g[g.length - 1].push(i); if (S.cut[i]) g.push([]); });
+            return g;
+          }
+          function segT(g) { return g.map(function (a) { return a.reduce(function (s, i) { return s + S.el[i]; }, 0); }); }
+          // いちばん少ない人数：前から順に、タクトを超えない範囲で詰める
+          function minSplit() {
+            var seg = [0], idx = [[]];
+            S.el.forEach(function (t, i) {
+              if (seg[seg.length - 1] + t > S.tt) { seg.push(t); idx.push([i]); } else { seg[seg.length - 1] += t; idx[idx.length - 1].push(i); }
+            });
+            return { seg: seg, idx: idx };
+          }
+          function f0(x) { return Math.round(x).toLocaleString('ja-JP'); }
+
+          function renderChips() {
+            var box = q('chips'); box.textContent = '';
+            var g = groups(), gi = 0, k = 0;
+            S.el.forEach(function (t, i) {
+              var c = document.createElement('span');
+              c.className = 'tg-chip tg-c' + (gi % 2);
+              c.innerHTML = '<small>' + (gi + 1) + '人目</small>' + NAMES[i] + ' <b>' + t + '秒</b>';
+              box.appendChild(c);
+              if (i < S.el.length - 1) {
+                var b = document.createElement('button');
+                b.type = 'button'; b.className = 'tg-cut'; b.textContent = '｜';
+                b.setAttribute('aria-pressed', S.cut[i] ? 'true' : 'false');
+                b.setAttribute('aria-label', NAMES[i] + 'と' + NAMES[i + 1] + 'の間で交代する');
+                b.disabled = S.running;
+                b.addEventListener('click', function () { if (S.running) return; S.cut[i] = !S.cut[i]; SIM = null; renderChips(); draw(0); msg('作業の間の「｜」を押して受け持ちを分け、スタートを押してください。'); });
+                box.appendChild(b);
+              }
+              if (S.cut[i]) gi++;
+            });
+          }
+
+          // 製品の流れを計算する（i：製品、j：人）
+          function simulate(seg) {
+            var n = seg.length, K = CYC + n + 4, fin = [], beg = [];
+            for (var i = 0; i < K; i++) {
+              fin.push([]); beg.push([]);
+              for (var j = 0; j < n; j++) {
+                var ready = j ? fin[i][j - 1] : i * S.tt;
+                var free = i ? fin[i - 1][j] : 0;
+                beg[i][j] = Math.max(ready, free); fin[i][j] = beg[i][j] + seg[j];
+              }
+            }
+            return { seg: seg, beg: beg, fin: fin, K: K, end: (CYC - 1) * S.tt + seg.reduce(function (a, b) { return a + b; }, 0) };
+          }
+
+          function draw(tm) {
+            var g = groups(), seg = segT(g), n = seg.length, x0 = 70, x1 = 600, gap = (x1 - x0) / n;
+            var h = '';
+            seg.forEach(function (t, j) {
+              var cx = x0 + gap * (j + 0.5), ov = t > S.tt;
+              h += '<rect x="' + (cx - 26) + '" y="170" width="52" height="56" rx="6" fill="' + (ov ? '#fbe3d2' : '#eef2f6') + '" stroke="' + (ov ? '#d4691a' : '#0d2b4e') + '" stroke-width="2"/>';
+              h += '<text x="' + cx + '" y="194" font-size="14" fill="#0d2b4e" text-anchor="middle">' + (j + 1) + '人目</text>';
+              h += '<text x="' + cx + '" y="214" font-size="15" font-weight="700" fill="' + (ov ? '#d4691a' : '#0d2b4e') + '" text-anchor="middle">' + t + '秒</text>';
+            });
+            q('st').innerHTML = h;
+            var p = '', done = 0;
+            if (SIM && SIM.seg.length === n) {
+              var que = []; for (var j = 0; j < n; j++) que.push(0);
+              for (var i = 0; i < SIM.K; i++) {
+                if (i * S.tt > tm) break;
+                var at = -1, wait = -1;
+                for (var j2 = 0; j2 < n; j2++) {
+                  var ready = j2 ? SIM.fin[i][j2 - 1] : i * S.tt;
+                  if (tm >= SIM.beg[i][j2] && tm < SIM.fin[i][j2]) { at = j2; break; }
+                  if (tm >= ready && tm < SIM.beg[i][j2]) { wait = j2; break; }
+                }
+                if (tm >= SIM.fin[i][n - 1]) { done++; continue; }
+                if (at >= 0) {
+                  var cx = x0 + gap * (at + 0.5), pr = (tm - SIM.beg[i][at]) / SIM.seg[at];
+                  p += '<rect x="' + (cx - 20 + pr * 26) + '" y="222" width="14" height="14" rx="2" fill="#d4691a"/>';
+                } else if (wait >= 0) {
+                  var qx = x0 + gap * (wait + 0.5) - 34, k = que[wait]++;
+                  var col = Math.floor(k / 6), row = k % 6;
+                  p += '<rect x="' + (qx - col * 16) + '" y="' + (222 - row * 16) + '" width="14" height="14" rx="2" fill="#d4691a" fill-opacity="0.85"/>';
+                }
+              }
+            }
+            q('pr').innerHTML = p;
+            q('done').textContent = done;
+            q('clock').textContent = SIM ? f0(Math.min(tm, SIM.end)) + ' 秒' : '';
+            q('hint').style.display = n === 1 ? '' : 'none';
+          }
+
+          function msg(t, k) { var m = q('msg'); m.innerHTML = t; m.className = 'ufo-msg' + (k ? ' is-' + k : ''); }
+          function overlay(title, sub, kind) {
+            var ov = root.querySelector('.ufo-ov');
+            if (!kind) { ov.className = 'ufo-ov'; return; }
+            ov.querySelector('.ufo-ov-t').textContent = title;
+            ov.querySelector('.ufo-ov-s').textContent = sub;
+            ov.className = 'ufo-ov is-show is-' + kind;
+          }
+          function syncBtns() { q('start').disabled = S.running; q('again').disabled = S.running; root.querySelectorAll('.tg-cut').forEach(function (b) { b.disabled = S.running; }); }
+
+          function run() {
+            if (S.running) return;
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'takt_game' }); }
+            var seg = segT(groups()), best = minSplit();
+            SIM = simulate(seg); S.running = true; syncBtns(); overlay(); msg('製品が流れています…');
+            q('goal').textContent = CYC;
+            var ms = SIM.end / S.tt * SPT * 1000 * (reduce ? 0.25 : 1), t0 = null;
+            function f(now) {
+              if (t0 === null) t0 = now;
+              var r = Math.min((now - t0) / ms, 1);
+              draw(r * SIM.end);
+              if (r < 1) requestAnimationFrame(f); else finish(seg, best);
+            }
+            requestAnimationFrame(f);
+          }
+          function finish(seg, best) {
+            S.running = false; syncBtns();
+            var mx = Math.max.apply(null, seg), n = seg.length, sum = seg.reduce(function (a, b) { return a + b; }, 0);
+            var br = Math.round(sum / (mx * n) * 1000) / 10;
+            var rec = best.idx.map(function (a) { return NAMES[a[0]] + (a.length > 1 ? '〜' + NAMES[a[a.length - 1]] : ''); }).join('／');
+            var done = +q('done').textContent;
+            if (mx > S.tt) {
+              var bad = seg.indexOf(mx) + 1;
+              msg('<b>間に合いませんでした。</b>' + bad + '人目の受け持ちが ' + mx + ' 秒で、タクト ' + S.tt + ' 秒を ' + (mx - S.tt) + ' 秒超えています。タクトを超える人の前には、製品が1個ごとにたまっていきます。完成は ' + done + ' 個でした。この条件なら <b>' + best.seg.length + '人</b>（' + rec + '）で回せます。', 'ng');
+              overlay('間に合いませんでした', 'おすすめ：' + best.seg.length + '人で分ける', 'ng');
+            } else if (n > best.seg.length) {
+              msg('<b>回せましたが、人が多すぎます。</b>' + n + '人でバランス率は ' + br + '％です。この条件なら <b>' + best.seg.length + '人</b>（' + rec + '）でもタクトに収まります。', 'ng');
+              overlay('回せましたが、人が多すぎます', 'おすすめ：' + best.seg.length + '人で分ける', 'ng');
+            } else {
+              msg('<b>成功！</b>' + n + '人で、全員がタクト ' + S.tt + ' 秒に収まりました。いちばん長い受け持ちは ' + mx + ' 秒、バランス率は ' + br + '％です。' + (br >= 90 ? 'とてもよくそろっています。' : '受け持ちの時間をもっとそろえられないか、試してみてください。'), 'ok');
+              overlay('成功！' + n + '人で回せました', 'バランス率 ' + br + '％', 'ok');
+            }
+          }
+
+          function newRound() {
+            for (var k = 0; k < 500; k++) {
+              S.tt = TTS[Math.floor(Math.random() * TTS.length)];
+              var hi = Math.min(26, S.tt - 4);
+              S.el = NAMES.map(function () { return 6 + Math.floor(Math.random() * (hi - 5)); });
+              var m = minSplit().seg.length;
+              if (m >= 3 && m <= 5) break;
+            }
+            S.cut = S.el.map(function () { return false; }); S.cut.pop();
+            SIM = null; overlay();
+            q('tt').textContent = S.tt; q('sum').textContent = S.el.reduce(function (a, b) { return a + b; }, 0);
+            q('goal').textContent = '—';
+            renderChips(); draw(0);
+            msg('作業の間の「｜」を押して受け持ちを分け、スタートを押してください。');
+          }
+          q('start').addEventListener('click', function () {
+            var fig = root.querySelector('.ufo-fig'), rc = fig.getBoundingClientRect();
+            if (rc.top < 60 || rc.bottom > window.innerHeight) fig.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+            run();
+          });
+          q('again').addEventListener('click', newRound);
+          newRound(); syncBtns();
+        })();
+        </script>
+
+        <!-- ◆8 -->
+        <h2>タクトタイムの計算でよくある失敗</h2>
+
+        <h3>休憩や朝礼を引かずに計算する</h3>
+        <p>
+          計算例で勤務の8時間をそのまま使うと、タクトタイムは約52.4秒になります。休憩中も作れる前提になるので、必要なペースを約4秒ゆるく見積もることになり、その目標で組んだラインでは、毎日1,100個に届きません。
+        </p>
+
+        <h3>サイクルタイムの平均だけで比べる</h3>
+        <p>
+          平均は45秒でも、ときどき55秒かかる工程があれば、そのたびに遅れがたまります。測った値の長いほうも見て、なぜ長くなったかを確かめます。
+        </p>
+
+        <h3>設備の動作を、全部足し算で見積もる</h3>
+        <p>
+          全部の動作を順番に足すと、装置の仕様が必要以上に厳しくなり、速いシリンダや大きなモーターを選んでしまいます。同時にできる動作を、タイムチャートで先に整理します。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>稼働時間から、計画で決まった止まる時間を引く</li>
+            <li>サイクルタイムは、平均だけでなく長いほうの値も見る</li>
+            <li>設備の動作は、足し算の前にタイムチャートで重ね方を考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆質問 -->
+        <h2>タクトタイムの計算でよくある質問</h2>
+
+        <h3>何種類もの製品を1本のラインで作るときは、どう計算しますか</h3>
+        <p>
+          まず、全品種の必要数を合計して、共通のタクトタイムを出します。そのうえで、品種ごとのサイクルタイムを比べ、時間のかかる品種が続くと遅れがたまらないか、流す順番で平均できないかを確かめます。段取り替えの時間を稼働時間で引くか、時間稼働率で見込むかも決めておきます。
+        </p>
+
+        <h3>タクトタイムは、短いほうがよいのですか</h3>
+        <p>
+          タクトタイムは必要な数から決まる目安なので、短ければ短いほどよい、とは言えません。求められる数を上回る速さのラインは、在庫や待ちを生みます。目標は、タクトタイムに合わせて、必要な数をむだなく作ることです。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          タクトタイムは「稼働時間 ÷ 必要数」で求め、1個あたりに使ってよい時間を表します。計算例では、880分で1日1,100個を作るラインで48秒でした。手作業のラインでは、作業時間の合計から必要な人数を出し、順番の決まりを守って作業を分け、バランス率で確かめます。
+        </p>
+        <p>
+          設備では、<strong class="mk">タクトタイムに時間稼働率と良品率を掛けて、目標サイクルタイムを決める</strong>ことが出発点です。そのうえで、動作ごとに時間を割り振り、同時にできる動作をタイムチャートで重ねます。まずは計算ツールで自社の条件を入れ、ゲームで作業の分け方を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・生産管理・工程設計の一般的な考え方（タクトタイム、サイクルタイム、リードタイム、ラインバランス）<br>
+          ・トヨタ生産方式の用語（可動率と稼働率）、設備総合効率（時間稼働率・性能稼働率・良品率）<br>
+          ・動作の時間の見積もりは、本シリーズのエアシリンダ、コンベア、真空パッドの記事を参照
+        </p>
+
+        <div class="article-cta">
+          新しい設備のサイクルタイムの見積もりや、ラインの人数・作業の分け方でお困りのことはありませんか。条件の整理から、設備の設計のご相談まで承ります。お気軽にお問い合わせください。
+          <span class="cta-price">強度検証・設計のご依頼の料金は、「<a href="../../price.html#design">料金の目安</a>」のページに載せています。ご相談は「<a href="../../contact-v2.html?topic=design">お問い合わせ</a>」からどうぞ。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.22</p>
+                <h3><a href="conveyor-motor-selection.html">コンベアのモーター選定の計算方法と例｜必要な動力・減速比・トルクの求め方</a></h3>
+                <p class="column-excerpt">ほしい速さからの減速比、ベルトを引く力からのトルクとモーター容量まで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.21</p>
+                <h3><a href="air-cylinder-selection.html">エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</a></h3>
+                <p class="column-excerpt">押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの衝撃まで。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li class="is-cur"><span>08 タクトタイム</span></li></ol>
+          <p class="cs-pager"><a href="vacuum-pad-selection.html">‹ 前の記事</a></p>
+          <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP3</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/column-stand-strength.jpg" alt="" width="72" height="40" loading="lazy"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/column-weld-strength.jpg" alt="" width="72" height="40" loading="lazy"><span>溶接の強度計算の方法と例</span></a></li><li><a href="robot-stand-strength-calculation.html"><img src="../../img/column-robot-stand.jpg" alt="" width="72" height="40" loading="lazy"><span>ロボット架台の強度計算の方法</span></a></li></ol>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">無料で診断する</p>
+          <a class="cs-link" href="../../checklist.html">お悩みチェックリスト ›</a>
+          <a class="cs-link" href="../../simulator.html">概算シミュレーション ›</a>
+        </div>
+        <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design">設計の相談をする</a>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+</body>
+</html>
