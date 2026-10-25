@@ -2309,35 +2309,43 @@ a.industry-card { cursor: pointer; }
 .tg-cut[aria-pressed="true"] { border:2px solid var(--orange); color:#fff; background:var(--orange); }
 .tg-cut:disabled { cursor:default; opacity:.6; }
 
-/* 記事の右の欄（PCは本文の右に固定、スマホは記事の最後）2026-10-25・まず08で試す */
-.col-side { max-width:720px; margin:48px auto 0; display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
-.cs-box { background:#fff; border:1px solid #dfe4ea; border-radius:8px; padding:11px 14px; }
-.cs-h { font-size:0.86rem; font-weight:700; color:var(--navy); margin:0 0 6px !important; padding-bottom:5px; border-bottom:1px solid #e6eaef; }
-.cs-series { list-style:none; margin:0 !important; padding:0 !important; font-size:0.84rem; display:grid; grid-template-columns:1fr 1fr; gap:0 6px; }
+/* 記事の右の欄（PCは本文の右、スマホは記事の最後）2026-10-25。設計ノート8本。
+   見た目はユーザー指定の参考サイトに寄せる：1件ずつ影付きのカード、角に番号、見出しは中央寄せで下に青い太線。
+   PCでは本文850px＋右375pxに広げ、見出しの帯も同じ幅にする（左右の余白を減らす） */
+.col-side { --cs-blue:#2f80ed; max-width:720px; margin:48px auto 0; display:grid; grid-template-columns:minmax(0,1fr); gap:22px; }
+.cs-box { min-width:0; }
+.cs-h { font-size:1.02rem; font-weight:700; color:var(--navy); text-align:center; margin:0 0 12px !important; padding-bottom:8px; border-bottom:3px solid var(--cs-blue); letter-spacing:.04em; }
+.cs-card, .cs-rank a, .cs-link { background:#fff; border:1px solid #e3e8ee; border-radius:6px; box-shadow:0 2px 6px rgba(13,43,78,.12); }
+.cs-card { padding:10px 12px; }
+.cs-series { list-style:none; margin:0 !important; padding:0 !important; font-size:0.9rem; display:grid; grid-template-columns:1fr 1fr; gap:2px 6px; }
 .cs-series li { margin:0 !important; line-height:1.4; }
-.cs-series a, .cs-series span { display:block; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-radius:4px; color:var(--ink); text-decoration:none; }
-.cs-series a:hover { background:#f2f5f8; color:var(--orange); }
-.cs-series .is-cur span { background:#eef2f7; color:var(--navy); font-weight:700; }
-.cs-pager { display:flex; justify-content:space-between; margin:8px 0 0 !important; font-size:0.84rem; }
+.cs-series a, .cs-series span { display:block; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-radius:4px; color:var(--ink); text-decoration:none; }
+.cs-series a:hover { background:#eef5fe; color:var(--cs-blue); }
+.cs-series .is-cur span { background:var(--cs-blue); color:#fff; font-weight:700; }
+.cs-pager { display:flex; justify-content:space-between; margin:10px 0 0 !important; padding-top:8px; border-top:1px solid #eef1f4; font-size:0.88rem; }
 .cs-pager a { color:var(--ink-soft); text-decoration:none; }
-.cs-pager .cs-next { margin-left:auto; color:var(--navy); font-weight:700; }
-.cs-more { margin:4px 0 0 !important; font-size:0.8rem; }
+.cs-pager .cs-next { margin-left:auto; color:var(--cs-blue); font-weight:700; }
+.cs-more { margin:10px 0 0 !important; font-size:0.84rem; text-align:center; }
 .cs-more a { color:var(--ink-soft); }
-.cs-more a + a { margin-left:12px; }
-.cs-rank { list-style:none; margin:0 !important; padding:0 !important; counter-reset:rk; }
-.cs-rank li { margin:0 0 6px !important; counter-increment:rk; }
-.cs-rank a { display:grid; grid-template-columns:72px 1fr; gap:10px; align-items:center; font-size:0.84rem; line-height:1.45; color:var(--ink); text-decoration:none; position:relative; }
-.cs-rank a::before { content:counter(rk); position:absolute; left:-4px; top:-4px; width:18px; height:18px; border-radius:50%; background:var(--navy); color:#fff; font-size:0.7rem; text-align:center; line-height:18px; }
-.cs-rank img { width:72px; height:40px; object-fit:cover; border-radius:4px; display:block; }
-.cs-rank a:hover span { color:var(--orange); }
-.cs-link { display:block; padding:2px 0; font-size:0.88rem; color:var(--navy); text-decoration:none; }
-.cs-link:hover { color:var(--orange); }
-.col-side .cs-cta { display:block; text-align:center; padding:12px 10px; white-space:normal; }
+.cs-more a + a { margin-left:16px; }
+.cs-rank { list-style:none; margin:0 !important; padding:0 !important; counter-reset:rk; display:grid; gap:10px; }
+.cs-rank li { margin:0 !important; counter-increment:rk; }
+.cs-rank a { display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:center; padding:12px 12px 12px 14px; font-size:0.92rem; font-weight:700; line-height:1.5; color:var(--navy); text-decoration:none; position:relative; }
+.cs-rank a::before { content:counter(rk); position:absolute; left:0; top:0; width:24px; height:24px; border-radius:6px 0 6px 0; background:var(--cs-blue); color:#fff; font-size:0.82rem; font-weight:700; text-align:center; line-height:24px; }
+.cs-rank img { width:96px; height:54px; object-fit:cover; border-radius:3px; display:block; }
+.cs-rank a:hover { border-color:#bcd5f7; }
+.cs-rank a:hover span { color:var(--cs-blue); }
+.cs-link { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; margin-bottom:10px; font-size:0.94rem; font-weight:700; color:var(--navy); text-decoration:none; }
+.cs-link:last-child { margin-bottom:0; }
+.cs-link:hover { border-color:#bcd5f7; color:var(--cs-blue); }
+.col-side .cs-cta { display:block; text-align:center; padding:14px 10px; white-space:normal; }
 @media (min-width: 1100px) {
-  .article-layout { display:grid; grid-template-columns:minmax(0,720px) 280px; gap:44px; justify-content:center; align-items:start; }
+  body:has(.article-layout) .subhero .wrap,
+  .section .wrap:has(> .article-layout) { max-width:1380px; }
+  .article-layout { display:grid; grid-template-columns:minmax(0,850px) minmax(300px,375px); column-gap:clamp(40px, 5vw, 96px); justify-content:center; align-items:start; }
   .article-layout > .article-body { margin:0; max-width:none; }
   .article-layout .article-nav-top { display:none; }
-  .col-side { margin:0; position:sticky; top:92px; max-height:calc(100vh - 110px); overflow-y:auto; overflow-x:hidden; }
+  .col-side { margin:0; position:sticky; top:92px; }
 }
 #tg-tool .ufo-panel { max-height:none; }
 #tg-tool .ufo-panel .ufo-pick { display:block; }
