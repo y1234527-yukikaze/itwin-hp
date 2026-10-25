@@ -2297,3 +2297,48 @@ a.industry-card { cursor: pointer; }
 .tool-cta { margin:18px 0 34px; padding:12px 16px; border:1px dashed #b9c2cc; border-radius:6px; background:#fafbfc; font-size:0.9rem; color:var(--ink); text-align:center; }
 .tool-cta a { white-space:nowrap; margin-left:12px; color:var(--navy); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
 .tool-cta a:hover { color:var(--orange); }
+
+/* ライン分けゲームの作業カード（タクトタイムの記事・2026-10-25） */
+.tg-chips { display:flex; flex-wrap:wrap; align-items:stretch; gap:6px 0; margin:6px 0 4px; }
+.tg-chip { display:flex; flex-direction:column; justify-content:center; padding:6px 10px; border-radius:8px; font-size:0.84rem; line-height:1.35; color:var(--navy); border:1px solid #d3d8df; }
+.tg-chip small { font-size:0.72rem; color:var(--ink-soft); }
+.tg-chip b { color:var(--navy); }
+.tg-c0 { background:#eef2f7; }
+.tg-c1 { background:#fdf0e6; border-color:#efc9a8; }
+.tg-cut { width:26px; margin:0 2px; border:1px dashed #b9c2cc; border-radius:6px; background:#fff; color:#b9c2cc; font-weight:700; cursor:pointer; }
+.tg-cut[aria-pressed="true"] { border:2px solid var(--orange); color:#fff; background:var(--orange); }
+.tg-cut:disabled { cursor:default; opacity:.6; }
+
+/* 記事の右の欄（PCは本文の右に固定、スマホは記事の最後）2026-10-25・まず08で試す */
+.col-side { max-width:720px; margin:48px auto 0; display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
+.cs-box { background:#fff; border:1px solid #dfe4ea; border-radius:8px; padding:11px 14px; }
+.cs-h { font-size:0.86rem; font-weight:700; color:var(--navy); margin:0 0 6px !important; padding-bottom:5px; border-bottom:1px solid #e6eaef; }
+.cs-series { list-style:none; margin:0 !important; padding:0 !important; font-size:0.84rem; display:grid; grid-template-columns:1fr 1fr; gap:0 6px; }
+.cs-series li { margin:0 !important; line-height:1.4; }
+.cs-series a, .cs-series span { display:block; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-radius:4px; color:var(--ink); text-decoration:none; }
+.cs-series a:hover { background:#f2f5f8; color:var(--orange); }
+.cs-series .is-cur span { background:#eef2f7; color:var(--navy); font-weight:700; }
+.cs-pager { display:flex; justify-content:space-between; margin:8px 0 0 !important; font-size:0.84rem; }
+.cs-pager a { color:var(--ink-soft); text-decoration:none; }
+.cs-pager .cs-next { margin-left:auto; color:var(--navy); font-weight:700; }
+.cs-more { margin:4px 0 0 !important; font-size:0.8rem; }
+.cs-more a { color:var(--ink-soft); }
+.cs-more a + a { margin-left:12px; }
+.cs-rank { list-style:none; margin:0 !important; padding:0 !important; counter-reset:rk; }
+.cs-rank li { margin:0 0 6px !important; counter-increment:rk; }
+.cs-rank a { display:grid; grid-template-columns:72px 1fr; gap:10px; align-items:center; font-size:0.84rem; line-height:1.45; color:var(--ink); text-decoration:none; position:relative; }
+.cs-rank a::before { content:counter(rk); position:absolute; left:-4px; top:-4px; width:18px; height:18px; border-radius:50%; background:var(--navy); color:#fff; font-size:0.7rem; text-align:center; line-height:18px; }
+.cs-rank img { width:72px; height:40px; object-fit:cover; border-radius:4px; display:block; }
+.cs-rank a:hover span { color:var(--orange); }
+.cs-link { display:block; padding:2px 0; font-size:0.88rem; color:var(--navy); text-decoration:none; }
+.cs-link:hover { color:var(--orange); }
+.col-side .cs-cta { display:block; text-align:center; padding:12px 10px; white-space:normal; }
+@media (min-width: 1100px) {
+  .article-layout { display:grid; grid-template-columns:minmax(0,720px) 280px; gap:44px; justify-content:center; align-items:start; }
+  .article-layout > .article-body { margin:0; max-width:none; }
+  .article-layout .article-nav-top { display:none; }
+  .col-side { margin:0; position:sticky; top:92px; max-height:calc(100vh - 110px); overflow-y:auto; overflow-x:hidden; }
+}
+#tg-tool .ufo-panel { max-height:none; }
+#tg-tool .ufo-panel .ufo-pick { display:block; }
+#tg-tool .ufo-panel .ufo-pick p { white-space:normal; }

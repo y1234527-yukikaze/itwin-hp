@@ -30,6 +30,7 @@
 - [エアシリンダの選定計算の方法と例](https://i-twin.co.jp/column/articles/air-cylinder-selection): 押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッション、空気の消費量
 - [コンベアのモーター選定の計算方法と例](https://i-twin.co.jp/column/articles/conveyor-motor-selection): ほしい速さからの減速比、ベルトを引く力からのトルクとモーター容量、傾きと50Hz・60Hzの違い、起動のトルク
 - [真空パッドの選定計算と把持力の求め方](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
+- [タクトタイムとは？計算方法と計算例](https://i-twin.co.jp/column/articles/takt-time-calculation): 計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、稼働率と良品率からの設備の目標サイクルタイム、動作ごとの時間の割り振り
 
 ## コラム（解説記事）
 
