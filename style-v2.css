@@ -2046,6 +2046,8 @@ a.industry-card { cursor: pointer; }
 }
 .article-rich .calc b { color: var(--navy); }
 .article-rich .need-check { font-size: 0.82rem; color: var(--orange); font-weight: 700; white-space: nowrap; }
+/* 1行に収まらない長い注記だけ、中で折り返す（スマホで右にはみ出すのを防ぐ・2026-10-28） */
+.article-rich .need-check { white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
 
 /* 記事内の計算ツール（2026-10-13・特集「自動化設備の設計ノート」用）
    利用者が自分で数値を動かして結果を確かめる欄。自動で動く演出は入れない */
