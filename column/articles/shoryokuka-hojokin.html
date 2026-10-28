@@ -381,5 +381,17 @@
     </div>
   </footer>
 
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
 </body>
 </html>
