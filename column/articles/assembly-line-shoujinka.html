@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：製造業のシステム連携とは？
+  （コラム制作キット E:/ClaudeCode/itwinHP_column_kit の template-rich.html から作成・2026-10-10）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-assembly-line.jpg（1376×768・ナノバナナで生成して差し替え）
+  本文イラスト：img/column-system-integration-divided.jpg / -support.jpg（ナノバナナで生成して差し替え）
+  図：img/column-system-integration-overview / merits / order / worktime / steps .jpg（figs_system_integration.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで｜アイツイン コラム</title>
+  <meta name="description" content="組み立てラインの省人化は、どこから進めればよいのでしょうか。本記事では、組立作業を5つに分けて自動化しやすい工程と難しい工程を見極める方法、ラインの形の選び方、段階的な進め方、人数と回収年数の試算、よくある失敗までを解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/assembly-line-shoujinka">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで">
+  <meta property="og:description" content="組み立てラインの省人化は、どこから進めればよいのでしょうか。本記事では、組立作業を5つに分けて自動化しやすい工程と難しい工程を見極める方法、ラインの形の選び方、段階的な進め方、人数と回収年数の試算、よくある失敗までを解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/assembly-line-shoujinka">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-assembly-line.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-02">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで">
+  <meta name="twitter:description" content="組み立てラインの省人化は、どこから進めればよいのでしょうか。本記事では、組立作業を5つに分けて自動化しやすい工程と難しい工程を見極める方法、ラインの形の選び方、段階的な進め方、人数と回収年数の試算、よくある失敗までを解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-assembly-line.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで",
+    "description": "組み立てラインの省人化は、どこから進めればよいのでしょうか。本記事では、組立作業を5つに分けて自動化しやすい工程と難しい工程を見極める方法、ラインの形の選び方、段階的な進め方、人数と回収年数の試算、よくある失敗までを解説します。",
+    "image": "https://i-twin.co.jp/img/column-assembly-line.jpg",
+    "datePublished": "2026-11-02",
+    "dateModified": "2026-11-02",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/assembly-line-shoujinka"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで", "item": "https://i-twin.co.jp/column/articles/assembly-line-shoujinka" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで</span>
+      </div>
+      <h1>組み立てラインの省人化の進め方｜自動化しやすい工程・ラインの形・費用の考え方まで</h1>
+      <p class="catch">公開日：2026年11月2日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="manufacturing-system-integration.html">‹ 前の記事：製造業のシステム連携</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">省人化・自動化</span>公開日：2026.11.02</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line.jpg" alt="組み立てラインの省人化。人の作業と、半自動の装置やロボットを組み合わせて、少ない人数で回る組み立てラインのイメージ" width="1376" height="768">
+          <figcaption>全部を機械にするのではなく、どこを機械にするかを選ぶ。</figcaption>
+        </figure>
+
+        <p>
+          「組み立てラインの人が集まらず、今いる人に負担が寄っている」「ロボットを入れたいが、どの工程から手をつければよいのか分からない」。組み立ての現場で、こうした声をよく聞きます。
+        </p>
+        <p>
+          本記事では、<strong class="mk">組み立てラインの省人化</strong>の進め方を、作業の分け方、自動化しやすい作業の見極め方、ラインの形、段階的な進め方、人数と回収年数の試算の順に解説します。後半では、搬送装置の機械設計に携わってきた立場から、実際の自動化で起きたつまずきもご紹介します。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>組み立てラインの作業の分け方と、自動化しやすい作業・難しい作業の見極め方</li>
+            <li>ラインの形の選び方と、治具 → 半自動 → ロボットの段階的な進め方</li>
+            <li>何人減らせて何年で元が取れるかの試算（計算ツールつき）と、よくある失敗</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1. 省人化とは -->
+        <h2>組み立てラインの省人化とは｜省力化との違いと、求められる理由</h2>
+        <h3>省人化は「人の数」を、省力化は「人の負担」を減らす</h3>
+        <p>
+          2つの言葉の使い方は資料によって幅があるため、本記事では次のように使います。省人化は、同じ生産量と品質を保ちながら、必要な作業の人数を減らすこと。省力化は、人数を変えずに、作業の時間や体と気持ちの負担を減らすことです。部品を取りに歩く距離を短くするのは省力化で、その結果ラインの人数が減れば省人化にもつながります。
+        </p>
+        <p>
+          つまり、2つは別々のものではなく、<strong class="mk">省力化を積み重ねた先に、省人化がある</strong>と考えると分かりやすくなります。作業を軽くした結果として人数を減らす順番のほうが、現場の納得も得やすくなります（参考：「<a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a>」）。
+        </p>
+
+        <h3>組み立てラインで省人化が求められる3つの理由</h3>
+        <p>
+          理由は大きく3つです。1つ目は、くり返しや立ちっぱなしの作業が多く、人が集まりにくいこと。2つ目は、夜勤を含む2直・3直のラインでは1つの持ち場に何人もの担当が要り、欠員が出るとすぐに回らなくなること。3つ目は、締め忘れや付け間違いが、人の注意だけでは防ぎきれないことです。
+        </p>
+
+        <h3>人を減らす前に、つらい作業から減らす</h3>
+        <p>
+          「何人減らせるか」が先に話題になりがちですが、最初に効くのは、しゃがむ、腕を伸ばす、重い物を持ち上げるといった、体に負担がかかる作業を減らすことです。ケガや腰痛の原因になり、人が辞める理由にもなるからです。<strong>つらい作業を機械に任せると、人数が減るだけでなく、残る人が長く働けるラインになります。</strong>
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>省人化は人の数、省力化は人の負担を減らすこと。省力化の先に省人化がある</li>
+            <li>人が集まらない、交代の勤務が回らない、品質がばらつく、の3つが理由</li>
+            <li>人数より先に、体に負担がかかるつらい作業から減らす</li>
+          </ul>
+        </div>
+
+        <!-- ◆2. 作業を分ける -->
+        <h2>組み立てラインの作業を、5つに分けて見る</h2>
+        <p>
+          「組み立て」の中には性質の違う作業が混ざっているため、まず作業を分けて見ます。おおむね次の5つに分けられます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-tasks.jpg" alt="組み立てラインの作業は5つに分けて見る。1.部品を供給する、2.取り付ける、3.締める・はめる、4.確かめる、5.運ぶ" width="1376" height="768" loading="lazy">
+          <figcaption>同じ「組み立て」でも、作業の種類によって機械への置き換えやすさが違う</figcaption>
+        </figure>
+
+        <h3>部品を供給する（取りに行く・並べる・向きをそろえる）</h3>
+        <p>
+          部品を棚から取る、使う順に並べる、向きをそろえる作業です。付加価値を生まないのに、全体の時間のかなりの割合を占めていることがあります。置き場所を変える、傾けた棚で手元まで流す、といった工夫だけで減らせる場合も多い作業です。
+        </p>
+
+        <h3>取り付ける・組み付ける</h3>
+        <p>
+          部品を正しい位置に置き、ほかの部品と合わせる作業です。組み立ての中心ですが、部品が柔らかい、すき間が小さい、手の感覚で位置を合わせている、といった場合は、機械に置き換えるのが難しくなります。
+        </p>
+
+        <h3>締める・はめる（ねじ締め・圧入・かしめ）</h3>
+        <p>
+          ねじを締める、部品を押し込む、かしめる、といった作業です。ねじや部品の位置と向きを安定させられれば、機械にしやすい作業で、締め付けの力や押し込んだ深さも記録できます。ただし、ねじの供給と整列、斜め入りやかじり、軸と穴のずれへの対策は必要です。
+        </p>
+
+        <h3>確かめる（検査）</h3>
+        <p>
+          付け忘れ、締め忘れ、向きの間違いなどを確かめる作業です。目で見ている場合は、人や時間帯によって見落としが出ます。カメラやセンサーで確かめる場合は、何を「良」とするかの基準を先に決めておきます。
+        </p>
+
+        <h3>運ぶ（工程の間の搬送・反転・箱詰め）</h3>
+        <p>
+          製品を次の工程へ渡す、裏返す、箱に詰める作業です。重い物を扱う、しゃがむなど、体に負担がかかる作業が集まりやすい分類です。<strong class="mk">自動化の効果が見えやすいのは、組み立ての中心よりも、その前後の「供給」と「運ぶ」であることが多い</strong>のです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>組み立てラインの作業は、供給・取り付け・締める・確かめる・運ぶの5つに分けて見る</li>
+            <li>締める作業は、位置と向きを安定させられれば機械にしやすい。取り付けは条件によって難しい</li>
+            <li>効果が見えやすいのは、組み立ての前後の「供給」と「運ぶ」</li>
+          </ul>
+        </div>
+
+        <!-- ◆3. 見極め -->
+        <h2>自動化しやすい作業と、難しい作業の見極め方</h2>
+        <p>
+          判断の目安は、作業の「くり返しの度合い」と「ばらつきの大きさ」です。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-fit.jpg" alt="自動化しやすい作業と難しい作業。しやすい：同じ動きのくり返し、位置が決まっている、重い・つらい姿勢。難しい：柔らかい・形が変わる部品、品種や向きが多い、手の感覚で合わせる" width="1376" height="768" loading="lazy">
+          <figcaption>くり返しが多く、ばらつきが小さい作業ほど機械に向く</figcaption>
+        </figure>
+
+        <h3>自動化しやすい作業｜同じ動きのくり返し・位置が決まっている・つらい姿勢</h3>
+        <p>
+          毎回同じ動きをくり返す作業や、部品の位置と向きを安定させられる作業は、自動化の対象になりやすい作業です。条件がそろえば、ねじ締め、圧入、部品の受け渡し、製品の反転や箱詰めなどがこれにあたります。重い物を持ち上げる、しゃがんで手を伸ばすといったつらい姿勢の作業も、機械に任せる効果が大きい作業です。
+        </p>
+
+        <h3>自動化が難しい作業｜柔らかい部品・品種が多い・手の感覚で合わせる</h3>
+        <p>
+          反対に、配線やチューブのように柔らかく形が変わる部品を扱う作業や、手の感覚で位置を合わせる作業は、自動化の難しさが上がる傾向があります。専用のハンドやセンサーを工夫すればできる場合もありますが、装置が複雑になって費用がかさみ、動きも人より遅くなりがちです。品種が多い作業も、品種ごとの手順や部品の形、段取り替えの違いが大きいほど、難しさと設備の費用が増えます。こうした作業は、<strong>無理に機械にせず、人に残す</strong>ほうが現実的な場合が多くあります。
+        </p>
+
+        <h3>優先するのは「つらい作業」「夜の作業」「ミスが起きやすい作業」</h3>
+        <p>
+          機械に向く作業が見つかったら、優先順位を決めます。優先したいのは、体に負担がかかる作業、夜勤など交代の勤務がある作業、ミスが品質の問題につながりやすい作業です。<strong class="mk">交代の勤務がある工程は、1か所を機械にすると、直の数だけ人の手当てが要らなくなる</strong>ため、同じ投資でも効果が大きくなります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>くり返しが多く、位置や向きを安定させられる作業は機械に向きやすい</li>
+            <li>柔らかい部品、品種の違いが大きい作業、手の感覚が要る作業は、人に残すほうが現実的な場合が多い</li>
+            <li>つらい作業、交代の勤務がある作業、ミスが起きやすい作業から優先する</li>
+          </ul>
+        </div>
+
+        <!-- ◆4. ラインの形 -->
+        <h2>組み立てラインの形を選ぶ｜コンベヤのライン・セル・人とロボットの組み合わせ</h2>
+        <p>
+          省人化では、工程ごとの機械化だけでなく、ラインの形そのものを見直すことも効果があります。代表的な形は次の3つです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-layout.jpg" alt="組み立てラインの3つの形。コンベヤで流すライン（数が多く品種が少ない）、セル（品種が多い）、人とロボットの組み合わせ（難しい作業は人に残す）" width="1376" height="768" loading="lazy">
+          <figcaption>作る数と品種の多さで、向いている形が変わる</figcaption>
+        </figure>
+
+        <h3>コンベヤで流すライン｜数が多く、品種が少ないとき</h3>
+        <p>
+          工程ごとに持ち場を分け、製品をコンベヤで流す形です。品種や工程が安定していて、作る数が多い製品に向きやすい形です。複数の品種を混ぜて流す（混流）ラインもあります。作業を覚えやすい反面、いちばん遅い工程にライン全体の速さが引っぱられます。人数を減らすには、工程ごとの時間をそろえ、1人の受け持ちを増やしていきます。工程ごとの時間のそろえ方は、「<a href="takt-time-calculation.html">タクトタイムとは？計算方法と計算例</a>」で解説しています。
+        </p>
+
+        <h3>セル（1人〜数人で組み上げる）｜品種が多いとき</h3>
+        <p>
+          1人、または数人が、部品の取り付けから検査までをまとめて受け持つ形です。品種の切り替えや作る数の変化に対応しやすい反面、覚える作業が多く、慣れるまでに時間がかかります。どちらの形が合うかは、品種の数、作る数、作業の内容、段取りの時間、設備にかけられる費用を合わせて決めます。セルの中の供給や検査だけを機械にする組み合わせもよく使われます。
+        </p>
+
+        <h3>人とロボットを組み合わせる｜難しい作業は人に残す</h3>
+        <p>
+          機械に向く作業は装置に任せ、難しい作業は人に残す形です。<strong class="mk">組み立てラインの省人化では、全部を機械にするより、人と機械の分担を決めるほうが成功しやすい</strong>と考えています。人の近くでロボットを動かす場合は、ハンド、つかむ物、周りの設備まで含めて危険を洗い出す「リスクアセスメント」を行い、安全対策を設計の段階から決めておきます。労働安全衛生規則（第150条の4）では、産業用ロボットとの接触で危険が生じるおそれがあるときは、柵や囲いを設けるなどの措置が求められます。人と同じ空間で動かす協働の運転では、人の接近を検知するセンサー、速度や力の制限、保護停止などを組み合わせ、柵を設けない構成にできる場合もあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>数が多く品種が少ないならコンベヤのライン、品種が多いならセルが向く</li>
+            <li>コンベヤのラインは、いちばん遅い工程に全体の速さが引っぱられる</li>
+            <li>難しい作業は人に残し、人と機械の分担を決めるほうが成功しやすい</li>
+          </ul>
+        </div>
+
+        <!-- ◆5. 進め方 -->
+        <h2>組み立てラインの省人化の進め方4ステップ</h2>
+        <p>
+          お金のかからない工夫から積み上げていくのがおすすめです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-steps.jpg" alt="組み立てラインの省人化の進め方4ステップ。作業を分けて時間を測る、置き方と治具で減らす、半自動で担当を増やす、効く所だけロボット" width="1376" height="768" loading="lazy">
+          <figcaption>お金のかからない工夫から順に、効果を確かめながら進める</figcaption>
+        </figure>
+
+        <h3>STEP1：作業を分けて、時間を測る</h3>
+        <p>
+          まず、2章の5つの分類で作業を書き出し、それぞれに何秒かかっているかを測ります。あわせて、1個を何秒で作ればよいかの目安（タクトタイム）を出しておきます。作業の時間の合計をタクトタイムで割って切り上げると、理論上の人数の下限が分かります。実際の受け持ちは、作業の順番の決まり（先にしないとできない作業）、分けられない作業、設備や工具の位置、作業者の技能を考えて割り振り、現場で動かして時間と動線を確かめながら調整します。
+        </p>
+
+        <h3>STEP2：部品の置き方や治具を工夫して、ムダを減らす</h3>
+        <p>
+          部品を手の届く位置に置く、取り出しやすい向きに並べる、位置決めの治具を作るなど、お金をあまりかけずに作業の時間を減らします。<strong>この段階で減らせる時間は、思っている以上に大きい</strong>ことがあります。歩く、探す、持ち替える時間は、測って初めて気づくことが多いからです。
+        </p>
+
+        <h3>STEP3：半自動にして、1人が受け持てる範囲を広げる</h3>
+        <p>
+          ねじ締めの機械、押し込むための簡単なプレス、合否を知らせる検査の治具など、人が操作する半自動の装置を入れます。1つの作業の時間が短くなると、1人が受け持てる作業が増え、人数が減ります。ロボットより費用が小さく、品種が変わっても使い回しやすいのが利点です。
+        </p>
+
+        <h3>STEP4：効果が見込める所だけ、ロボットや専用の装置にする</h3>
+        <p>
+          最後に、ここまでで残った作業のうち、つらい作業や、交代の勤務がある作業など、効果が大きい所だけをロボットや専用の装置にします。ロボットは本体のほかに、手先の道具や安全対策、据え付け、調整の費用もかかります。内訳は「<a href="hansou-shoujinka-cost.html">搬送作業の省人化、参考値は1,000万円〜2,000万円</a>」が参考になります。国の補助金を使える場合もあります（「<a href="shoryokuka-hojokin.html">中小企業省力化投資補助金の解説</a>」）。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>作業を分けて時間を測り、タクトタイムから必要な人数の目安を出す</li>
+            <li>置き方・治具 → 半自動 → ロボットの順に、お金のかからない工夫から積み上げる</li>
+            <li>ロボットは、つらい作業や交代の勤務がある作業など、効果が大きい所に絞る</li>
+          </ul>
+        </div>
+
+        <!-- ◆6. 試算 -->
+        <h2>何人減らせて、何年で元が取れるか｜試算の考え方</h2>
+        <p>
+          6工程の組み立てラインを例に、人数と回収年数を試算します。数字はすべて説明のための例です。
+        </p>
+
+        <h3>人数は「作業の時間の合計」と「タクトタイム」で決まる</h3>
+        <p>
+          例のラインは、部品をそろえる14秒、組み付ける18秒、ねじを締める16秒、圧入する12秒、確かめる15秒、箱に詰める13秒の6工程で、合計は88秒です。1個を30秒で作る必要があるとします。今は1工程に1人ずつ、6人で回しています。
+        </p>
+        <p>
+          88秒を30秒で割ると約2.9なので、理論上の下限は3人です。ただし、この例では作業の順番を変えられないとして前から順に分けると、30秒に収まる分け方は4人（14秒／18秒／16＋12秒／15＋13秒）になります。<strong class="mk">お金をかけずに、受け持ちを並べ替えるだけで6人から4人になる</strong>計算です。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-roi.jpg" alt="組み立てラインの省人化の試算のイメージ。今は6人、並べ替えで4人（投資0円）、部品の置き方の工夫で3人（投資80万円・3か月以内に回収）、ロボットを足して2人（追加1,850万円・1直なら約6年、2直なら約2.6年で回収）" width="1376" height="768" loading="lazy">
+          <figcaption>試算のイメージ（数値は説明のための例です）</figcaption>
+        </figure>
+
+        <p>
+          次に、部品をそろえる作業を、手元まで部品が流れてくる棚で8秒に縮めます（費用は80万円とします）。すると、8＋18秒／16＋12秒／15＋13秒の3人で回せるようになります。さらに、ねじ締めをロボットにし、圧入と検査を半自動にすると（追加で1,850万円）、2人になります。
+        </p>
+
+        <h3>回収年数は「投資額 ÷ 年間の効果」</h3>
+        <p>
+          回収年数は、投資額を年間の効果で割った簡易な目安です。年間の効果には、実際に減る費用（人件費、残業代、外注費など）と、増産で増える利益を入れ、保守費、消耗品、電気代などの増える費用を引きます。ここでは人件費を1人年400万円、増える費用を保守費として投資額の年5％とします。棚の工夫は、1人減って年400万円の削減に対し、投資は80万円なので、3か月かからずに元が取れます。一方、2人目を減らすロボットの追加分は、1,850万円の投資に対して年間の効果が約310万円（400万円 − 保守費約90万円）で、回収に約6年かかります。
+        </p>
+        <p>
+          同じラインを2直で動かしているなら、減る人数は直の数だけ増えます。2直なら年間の効果は約710万円になり、回収は約2.6年に縮まります。<strong>最後の1人を減らすほど費用は大きくなり、元が取れるかどうかは直の数で大きく変わる</strong>ことが分かります。なお、減った人が別の作業に移るだけで給与などの支出が変わらなければ、人件費の削減にはなりません。その人が残業や外注を減らす、増産につながるといった場合は、その分を別の効果として数えます。設備の使える年数や税金、回収後の効果も合わせて判断します。
+        </p>
+
+        <h3>自分の条件で試す｜省人化の回収年数の計算ツール</h3>
+        <p>
+          初期値は、上の例のロボットの追加分（1直）です。直の数を2直に変えて、回収年数がどう変わるかを確かめてみてください。
+        </p>
+
+        <div class="calc-tool" id="lr-tool">
+          <p class="calc-tool-title">省人化の回収年数の試算</p>
+          <p class="calc-tool-note">
+            年間の削減額は「減る人数 × 直の数 × 1人あたりの年間人件費」、回収年数は「投資額 ÷（年間の削減額 − 年間の保守費）」で概算します。1人あたりの年間人件費には、給与のほかに、会社が負担する社会保険料なども含めた金額を入れてください。<strong>減った人が別の作業に移るだけで、給与などの支出が変わらない場合は、人件費の削減になりません。</strong>残業や外注を減らせる場合、増産できる場合は、その効果も別に考えてください。電気代、消耗品、設計の変更、止まったときの損失、税金や補助金は含めていません。結果は目安で、投資の判断を保証するものではありません。
+          </p>
+          <div class="calc-in">
+            <label>減る人数（1直あたり）<span class="row"><input type="range" data-k="n" min="0.5" max="10" step="0.5"><input type="number" data-k="n" min="0.5" max="10" step="0.5"><span class="unit">人</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:6px 0 0 !important;">1日の直の数（交代の数）</p>
+          <div class="calc-btns" data-b="sh"><button type="button" data-v="1">1直</button><button type="button" data-v="2">2直</button><button type="button" data-v="3">3直</button></div>
+          <div class="calc-in">
+            <label>1人あたりの年間人件費<span class="row"><input type="range" data-k="pay" min="200" max="800" step="10"><input type="number" data-k="pay" min="200" max="800" step="10"><span class="unit">万円</span></span></label>
+            <label>設備の投資額（据え付け・調整を含む）<span class="row"><input type="range" data-k="inv" min="10" max="10000" step="10"><input type="number" data-k="inv" min="10" max="10000" step="10"><span class="unit">万円</span></span></label>
+            <label>年間の保守費<span class="row"><input type="range" data-k="mt" min="0" max="1000" step="5"><input type="number" data-k="mt" min="0" max="1000" step="5"><span class="unit">万円</span></span></label>
+          </div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 280" role="img" aria-label="投資してからの年数と、累計の差し引きの折れ線グラフ。0の線を超えた年で元が取れる">
+              <rect x="0" y="0" width="640" height="280" fill="#ffffff"/>
+              <g data-o="grid"></g>
+              <line data-o="zero" x1="70" x2="620" stroke="#5a6573" stroke-width="2"/>
+              <text data-o="zt" x="64" font-size="14" fill="#5a6573" text-anchor="end">0</text>
+              <polyline data-o="line" fill="none" stroke="#0d2b4e" stroke-width="3"/>
+              <g data-o="dots"></g>
+              <g data-o="be"></g>
+            </svg>
+            <p class="calc-fig-note" data-o="figNote"></p>
+          </div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>年間の削減額</th><td><b data-o="sv"></b> 万円</td></tr>
+            <tr><th>年間の効果（削減額 − 保守費）</th><td><b data-o="ef"></b> 万円</td></tr>
+            <tr data-j="pb"><th>回収年数</th><td><b data-o="pb"></b><span class="judge" data-o="jd"></span></td></tr>
+            <tr><th>5年間の差し引き</th><td><b data-o="n5"></b> 万円</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="lr-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('lr-tool');
+          if (!root) return;
+          var DEF = { n: 1, sh: 1, pay: 400, inv: 1850, mt: 90 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function f1(x) { var r = Math.round(x * 10) / 10; return fmt(r, r % 1 ? 1 : 0); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function el(k) { return root.querySelector('[data-o="' + k + '"]'); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) {
+              if (document.activeElement !== e) e.value = S[e.dataset.k];
+              if (e.type === 'range') e.style.setProperty('--p', (S[e.dataset.k] - e.min) / (e.max - e.min) * 100 + '%');
+            });
+            root.querySelectorAll('[data-b="sh"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.v) === String(S.sh)); });
+          }
+          function calc() {
+            var sv = S.n * S.sh * S.pay, ef = sv - S.mt, pb = ef > 0 ? S.inv / ef : null, n5 = ef * 5 - S.inv;
+            out('sv', fmt(sv)); out('ef', fmt(ef)); out('n5', fmt(n5));
+            var row = root.querySelector('[data-j="pb"]');
+            if (pb === null) {
+              out('pb', '回収できない'); out('jd', '保守費が削減額を上回っています');
+              row.classList.add('over');
+            } else {
+              out('pb', f1(pb) + ' 年');
+              out('jd', pb <= 3 ? '3年以内' : pb <= 5 ? '3年を超え、5年以内' : '5年を超える');
+              row.classList.toggle('over', pb > 5);
+            }
+            // 累計の差し引きの折れ線（0〜5年）
+            var pts = [], lo = -S.inv, hi = Math.max(0, n5);
+            for (var y = 0; y <= 5; y++) pts.push(ef * y - S.inv);
+            pts.forEach(function (v) { lo = Math.min(lo, v); hi = Math.max(hi, v); });
+            var pad = (hi - lo) * 0.12 || 1, top = hi + pad, bot = lo - pad;
+            var X = function (y) { return 70 + y * 110; }, Y = function (v) { return 30 + (top - v) / (top - bot) * 200; };
+            var g = '';
+            for (var y2 = 0; y2 <= 5; y2++) g += '<line x1="' + X(y2) + '" y1="30" x2="' + X(y2) + '" y2="230" stroke="#e3e8ee" stroke-width="1"/><text x="' + X(y2) + '" y="254" font-size="15" fill="#5a6573" text-anchor="middle">' + y2 + '年</text>';
+            el('grid').innerHTML = g;
+            ['zero'].forEach(function (k) { el(k).setAttribute('y1', Y(0)); el(k).setAttribute('y2', Y(0)); });
+            el('zt').setAttribute('y', Y(0) + 5);
+            el('line').setAttribute('points', pts.map(function (v, i) { return X(i) + ',' + Y(v); }).join(' '));
+            el('dots').innerHTML = pts.map(function (v, i) {
+              var c = v >= 0 ? '#d4691a' : '#0d2b4e';
+              return '<circle cx="' + X(i) + '" cy="' + Y(v) + '" r="5" fill="' + c + '"/>' + (i === 0 || i === 5 ? '<text x="' + (X(i) + (i ? -8 : 8)) + '" y="' + (Y(v) + (v >= 0 ? -10 : 22)) + '" font-size="15" fill="' + c + '" text-anchor="' + (i ? 'end' : 'start') + '" stroke="#ffffff" stroke-width="4" paint-order="stroke">' + fmt(v) + '万円</text>' : '');
+            }).join('');
+            var be = '';
+            if (pb !== null && pb <= 5) {
+              be = '<line x1="' + X(pb) + '" y1="30" x2="' + X(pb) + '" y2="230" stroke="#d4691a" stroke-width="2" stroke-dasharray="6 5"/>'
+                 + '<text x="' + X(pb) + '" y="24" font-size="15" fill="#d4691a" text-anchor="middle" stroke="#ffffff" stroke-width="4" paint-order="stroke">' + f1(pb) + '年で元が取れる</text>';
+            }
+            el('be').innerHTML = be;
+            out('figNote', 'グラフは、投資した時点を0年として、毎年の効果を足していった累計です。オレンジの点が0を上回った年から、元が取れています。');
+            out('eq', '年間の削減額 ＝ ' + f1(S.n) + '人 × ' + S.sh + '直 × ' + fmt(S.pay) + '万円。回収年数 ＝ ' + fmt(S.inv) + '万円 ÷（' + fmt(sv) + ' − ' + fmt(S.mt) + '）万円。5年間の差し引き ＝ 年間の効果 × 5 − 投資額。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'line_roi' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b] button').forEach(function (b) {
+            b.addEventListener('click', function () { set(b.parentNode.dataset.b, Number(b.dataset.v)); });
+          });
+          document.getElementById('lr-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>人数は、作業の時間の合計とタクトタイム、受け持ちの分け方で決まる</li>
+            <li>安い工夫で減る1人と、ロボットで減らす最後の1人では、回収年数が大きく違う</li>
+            <li>交代の勤務があるラインほど、同じ投資でも早く元が取れる</li>
+          </ul>
+        </div>
+
+
+        <!-- ◆7. 失敗 -->
+        <h2>組み立てラインの省人化でよくある4つの失敗</h2>
+        <p>
+          よく見られる失敗と、その防ぎ方をまとめます。
+        </p>
+
+        <h3>失敗1：減らした人が、別の作業に回っただけ</h3>
+        <p>
+          ラインの人数は減ったものの、その人が装置の見守りや部品の補充に回り、ほかの効果も生まれなかった、という例です。空いた人にどの仕事をしてもらい、どんな効果（残業や外注の削減、増産）を出すのか、装置の見守りや補充の手間はどれだけかを、入れる前に決めておきます。
+        </p>
+
+        <h3>失敗2：装置が止まると、誰も直せない</h3>
+        <p>
+          装置が止まったときに現場で原因が分からず、メーカーの到着までラインが止まる例です。夜勤の時間帯なら、朝まで戻せないこともあります。<strong>止まったときに、どこを見て、どう戻すかを、設計の段階から決めておく</strong>ことが大切です。点検しやすい配置など、保全の目線が省人化の効果を左右します。
+        </p>
+
+        <h3>失敗3：図面と現場の寸法が違い、据え付けでやり直しになる</h3>
+        <p>
+          既存のラインに装置を足すときは、元の図面をもとに設計しがちですが、長年の改造や修理で、現場の寸法が図面と違っていることがあります。据え付けの段階で気づくと、装置や現場の手直しが必要になり、費用も日程も大きく狂います。<strong class="mk">設計に入る前に、現場の寸法を実際に測って確かめる</strong>ことが、いちばん確実な防ぎ方です。
+        </p>
+
+        <h3>失敗4：品種が増えて、装置が使えなくなる</h3>
+        <p>
+          専用に作った装置が、新しい品種で使えなくなる例です。品種の増え方を見込み、治具の交換で対応できる作りにする、半自動にとどめるといった判断が必要です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>空いた人の仕事と、装置の見守りの手間を、入れる前に決めておく</li>
+            <li>止まったときの戻し方と点検のしやすさを、設計の段階から考える</li>
+            <li>設計の前に現場の寸法を測る。品種が増えたときの使い方も見込む</li>
+          </ul>
+        </div>
+
+        <!-- ◆8. 設計者の目線 -->
+        <h2>設計者の目線から｜パレットの反転作業を自動化した例</h2>
+        <p>
+          搬送装置の機械設計に携わった立場から、組み立てラインの一部を自動化した例をご紹介します（内容は一部ぼかしています）。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-case.jpg" alt="組み立てラインのパレットの反転作業。以前は作業者がしゃがみ、腕を伸ばしてパレットを180度回していたが、反転の装置に置き換えた" width="1376" height="768" loading="lazy">
+          <figcaption>しゃがんで腕を伸ばしていた反転の作業を、装置に置き換えた</figcaption>
+        </figure>
+
+        <h3>しゃがんで腕を伸ばす反転の作業を、昼と夜の2直で人が行っていた</h3>
+        <p>
+          あるラインでは、部品を載せたパレットを、途中で180度回す作業を人が行っていました。パレットの位置が低く、作業者はしゃがんだうえで腕を伸ばさないと届きません。パレットには、勝手に回らないための止め具が付いていて、毎回それを外し、手で180度回し、また止め具を掛け直します。あわせて、部品の数を目で確かめます。これを3つのパレットで行っていました。
+        </p>
+        <p>
+          この作業のために、昼と夜の2直で1人ずつ、計2人がついていました。この反転の作業をすべて装置に置き換え、<strong class="mk">2人がついていた作業を、0人にしました</strong>。つらい姿勢の作業と、交代の勤務がある作業という、3章で挙げた優先度の高い条件が両方そろった工程でした。
+        </p>
+
+        <h3>重さも重心も違うパレットを、決まった空間で回す</h3>
+        <p>
+          苦労したのは、2つの条件の両立です。1つは、反転の装置を既存のラインの決まった空間に収めること。もう1つは、パレットと部品の重さが品種ごとに違い、重心の位置も変わることです。どの重さ、どの重心でも、パレットを落とさず、決まった位置で確実に止められる機構にする必要がありました。
+        </p>
+
+        <h3>図面を信じて設計し、現場の寸法でつまずいた</h3>
+        <p>
+          いちばんの反省点は、7章の失敗3そのものです。元の図面を信じて設計しましたが、現地で測ると寸法が違っており、急いで現場の設備を図面どおりに直す工事が必要になりました。この経験から、<strong>設計に入る前に現場を測ること、装置が決まった空間の中でどう動くかを、作る前に確かめておくこと</strong>の大切さを痛感しました。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>つらい姿勢で、2直の勤務がある反転の作業を自動化し、2人を0人にした</li>
+            <li>重さと重心が変わる条件と、限られた空間を、設計の最初に決める必要があった</li>
+            <li>図面と現場の寸法が違っていた。設計の前に測り、作る前に動きを確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆9. アイツインの支援 -->
+        <h2>アイツインの組み立てラインの省人化の支援</h2>
+        <p>
+          アイツインは、搬送装置の機械設計と、現場の保全の経験をもとに、組み立てラインの省人化を<strong class="mk">「作る前に試す」</strong>進め方で支援しています。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-assembly-line-support.jpg" alt="エンジニアが組み立てラインの作業者と一緒に、タブレットに映したラインの配置と作業の流れを確かめているイラスト" width="1376" height="768" loading="lazy">
+          <figcaption>装置を作る前に、ラインの動きと人数を一緒に確かめる</figcaption>
+        </figure>
+
+        <h3>作る前に、ラインの動きと人数を画面で確かめる</h3>
+        <p>
+          どの工程を人に残し、どこを機械にすると何人で回るのかを、装置を作る前に画面の上で確かめ、投資額と回収年数の目安も整理します。<a href="../../digital-twin.html">現場をデジタル上で再現する方法</a>を使い、大きな投資で失敗するリスクを抑えます。
+        </p>
+
+        <h3>設計の前に、現場の寸法を測ってデータにする</h3>
+        <p>
+          図面だけに頼らず、現場を測ってデータにしてから設計に入ります。装置が空間に収まるか、周りの設備とぶつからないかを、据え付けの前に確かめられます。
+        </p>
+
+        <h3>止まりにくく、直しやすい装置を設計する</h3>
+        <p>
+          保全の経験から、止まったときに原因を確かめやすく、点検しやすい作りの装置を設計します。装置をのせる架台の強度計算や、図面の作成もお受けしています。計算の考え方は「<a href="../design/index.html">自動化設備の設計ノート</a>」でも公開しています。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          本記事では、組み立てラインの省人化の進め方を、作業の分け方から試算、よくある失敗まで解説しました。
+        </p>
+        <p>
+          作業を分けて時間を測り、受け持ちを並べ替え、置き方や治具を工夫し、それでも残ったつらい作業や交代の勤務がある作業だけを機械にする。<strong class="mk">組み立てラインの省人化は、お金のかからない工夫から順に積み上げるほど、元が取りやすくなります</strong>。まずは、自社のラインの作業を5つに分けて、時間を測るところから始めてみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://laws.e-gov.go.jp/law/347M50002000032" target="_blank" rel="noopener">労働安全衛生規則（e-Gov法令検索）</a><br>
+          ・本記事の試算の数字は、説明のための例です。実際の設備の安全性や、法令への適合を確かめるものではありません。
+        </p>
+
+        <div class="article-cta">
+          機械にする工程を、どこから選べばよいか迷っている。装置を入れて、本当に元が取れるか不安だ。無料相談で、作業の測り方から、人と機械の分担、回収年数の目安までを一緒に整理しませんか。お気軽にご相談ください。
+          <span class="cta-price">サービスごとの料金は、「<a href="../../price.html">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.18</p>
+                <h3><a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+                <p class="column-excerpt">ロボットによる自動化には「向いている現場の条件」があります。人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.08.10</p>
+                <h3><a href="hansou-shoujinka-cost.html">搬送作業の省人化、参考値は1,000万円〜2,000万円。ロボット本体は全体の3割です</a></h3>
+                <p class="column-excerpt">搬送作業を産業用ロボットで省人化する場合の費用感を、項目ごとに解説します。ロボット本体は全体のおよそ3割にすぎず、残り7割は周辺費用です。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
