@@ -2386,3 +2386,15 @@ a.industry-card { cursor: pointer; }
 }
 .hub-links a, .hub-none a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
 .hub-links a:hover { color: #d4691a; }
+
+/* 記事の本文中のリンク（色と下線で、押せることが分かるように・2026-11-03） */
+.article-body :where(p, li, td, dd, figcaption) a:not([class]):not(.article-toc a):not(aside a) {
+  color: var(--orange-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(212, 105, 26, 0.55);
+  text-underline-offset: 3px;
+}
+.article-body :where(p, li, td, dd, figcaption) a:not([class]):not(.article-toc a):not(aside a):hover {
+  color: var(--orange);
+  text-decoration-color: var(--orange);
+}
