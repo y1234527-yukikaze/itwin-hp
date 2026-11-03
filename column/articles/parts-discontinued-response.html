@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：製造業のシステム連携とは？
+  （コラム制作キット E:/ClaudeCode/itwinHP_column_kit の template-rich.html から作成・2026-10-10）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-parts-eol.jpg（1376×768・ナノバナナで生成して差し替え）
+  本文イラスト：img/column-system-integration-divided.jpg / -support.jpg（ナノバナナで生成して差し替え）
+  図：img/column-system-integration-overview / merits / order / worktime / steps .jpg（figs_system_integration.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで｜アイツイン コラム</title>
+  <meta name="description" content="部品の製造中止への対応は、何から始めればよいのでしょうか。本記事では、通知を受けたときの初動、最終購入・代替品・現物からの作り直しなど5つの対応方法、最終購入数の計算、代替品の選び方、予防策までをわかりやすく解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/parts-discontinued-response">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで">
+  <meta property="og:description" content="部品の製造中止への対応は、何から始めればよいのでしょうか。本記事では、通知を受けたときの初動、最終購入・代替品・現物からの作り直しなど5つの対応方法、最終購入数の計算、代替品の選び方、予防策までをわかりやすく解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/parts-discontinued-response">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-parts-eol.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-03">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで">
+  <meta name="twitter:description" content="部品の製造中止への対応は、何から始めればよいのでしょうか。本記事では、通知を受けたときの初動、最終購入・代替品・現物からの作り直しなど5つの対応方法、最終購入数の計算、代替品の選び方、予防策までをわかりやすく解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-parts-eol.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで",
+    "description": "部品の製造中止への対応は、何から始めればよいのでしょうか。本記事では、通知を受けたときの初動、最終購入・代替品・現物からの作り直しなど5つの対応方法、最終購入数の計算、代替品の選び方、予防策までをわかりやすく解説します。",
+    "image": "https://i-twin.co.jp/img/column-parts-eol.jpg",
+    "datePublished": "2026-11-03",
+    "dateModified": "2026-11-03",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/parts-discontinued-response"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで", "item": "https://i-twin.co.jp/column/articles/parts-discontinued-response" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで</span>
+      </div>
+      <h1>部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで</h1>
+      <p class="catch">公開日：2026年11月3日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="assembly-line-shoujinka.html">‹ 前の記事：組み立てラインの省人化</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">保全・設備管理</span>公開日：2026.11.03</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol.jpg" alt="部品の製造中止への対応。製造中止になった部品を前に、代替品・最終購入・現物からの作り直しを検討するイメージ" width="1376" height="768">
+          <figcaption>部品が手に入らなくなる前に、打てる手は意外と多い。</figcaption>
+        </figure>
+
+        <p>
+          「使っている部品が、来年で製造中止になると通知が来た」「設備の部品が壊れたが、作っている会社がもうない」。製造の現場では、部品の製造中止は避けて通れない問題です。対応が遅れると、製品が作れなくなったり、設備が止まったまま直せなくなったりします。
+        </p>
+        <p>
+          本記事では、<strong class="mk">部品の製造中止への対応</strong>を、通知を受けたときに最初に確かめること、5つの対応方法、最終購入の数の決め方、代替品の選び方、予防策の順に解説します。後半では、生産設備の部品が製造中止になったときに、設備を延命するか更新するかの考え方を、保全の現場の経験も交えてご紹介します。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>製造中止の通知を受けたら最初に確かめることと、5つの対応方法</li>
+            <li>最終購入の数の決め方（計算ツールつき）と、代替品を選ぶときの確認項目</li>
+            <li>製造中止で慌てないための予防策と、生産設備を延命するか更新するかの考え方</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1. 製造中止とは -->
+        <h2>部品の製造中止とは｜生産終了・EOL・廃番と、供給が止まるまでの流れ</h2>
+
+        <h3>製造中止・生産終了・EOL・廃番は、現場では近い意味で使われる</h3>
+        <p>
+          部品の製造中止とは、メーカーがその部品を作るのをやめ、新しく買えなくなることです。「生産終了」「廃番（はいばん）」「ディスコン」とも呼ばれ、英語の End of Life を略して「EOL」と書かれることもあります。ただし、メーカーによっては、生産の終了、最終注文の締め切り、最終出荷、修理やサポートの終了を、別々の日付で管理しています。<strong>EOLの通知が出ても、すぐに買えなくなるとは限らない</strong>ため、通知の文面で、最終注文日（LTB）と最終出荷日（LTS）を確かめることが大切です。
+        </p>
+
+        <h3>通知から供給が止まるまでの流れ</h3>
+        <p>
+          半導体のメーカーなどでは、製造中止を前もって知らせ、最後の注文を受け付ける期間と、最後に出荷する時期を設けることがあります。この最後のまとめ買いを「ラストタイムバイ（最終購入）」と呼びます。ただし、知らせる時期や注文の期限はメーカーや部品によって違い、事情によって短くなることもあります。流通している在庫が減ったり、部品の材料の供給が止まったりして、正式な知らせを目にする前に手に入りにくくなることもあるため、<strong>重要な部品は、ふだんから供給の状況を確かめておく</strong>ことが大切です。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol-flow.jpg" alt="部品の製造中止から供給が止まるまでの流れ。製造中止の通知、最終注文の受付、最終注文の締め切り、在庫限りで供給終了。通知を受けたら締め切りまでに対応を決める" width="1376" height="768" loading="lazy">
+          <figcaption>締め切りまでの間に、どう対応するかを決める</figcaption>
+        </figure>
+
+        <h3>製品の部品と、生産設備の部品では困り方が違う</h3>
+        <p>
+          製造中止で困る部品には、自社の製品に組み込む部品と、自社の生産設備に使われている部品があります。前者は製品を作り続けられなくなり、後者は壊れたときに交換できず、設備が止まったまま直せなくなります。<strong class="mk">生産設備の部品は、壊れるまで製造中止に気づかないことが多い</strong>のが特徴です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>製造中止・EOLなどは近い意味だが、最終注文日と最終出荷日は分けて確かめる</li>
+            <li>通知から最終注文の締め切りまでの間に、対応を決める</li>
+            <li>生産設備の部品は、壊れるまで製造中止に気づかないことが多い</li>
+          </ul>
+        </div>
+
+        <!-- ◆2. 最初に確かめること -->
+        <h2>製造中止の通知を受けたら、最初に確かめる4つのこと</h2>
+        <p>
+          対応の方法を考える前に、次の4つを確かめます。
+        </p>
+
+        <h3>1. どの製品・どの設備に使っているか</h3>
+        <p>
+          同じ部品が、複数の製品や設備に使われていることはよくあります。部品表や設備の台帳から、使っている所をすべて洗い出します。生産設備の場合は、設備ごとの部品の一覧がないことも多いため、この機会に、設備の型式と中の主な部品を書き出しておくと、次の製造中止にも備えられます。
+        </p>
+
+        <h3>2. 今の在庫と、いつまで足りるか</h3>
+        <p>
+          社内の在庫と、取引先や商社が持っている在庫を確かめ、今の使い方なら何か月もつかを出します。保守用の部品なら、これまでの交換の記録から、1年に何個使っているかを確かめます。
+        </p>
+
+        <h3>3. 最終注文の締め切りと、後継品の有無</h3>
+        <p>
+          メーカーの通知で、最終注文の締め切り日と、推奨する後継品があるかを確かめます。後継品があっても、寸法や性能が同じとは限りません。
+        </p>
+
+        <h3>4. 誰が、いつまでに決めるか</h3>
+        <p>
+          製造中止の対応には、購買、設計、品質、保全など、複数の部署が関わります。<strong>担当と決める期限を最初に決めておかないと、締め切りを過ぎてしまいます</strong>。対応の経過を記録に残しておくと、次に同じことが起きたときにも役立ちます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>部品を使っている製品と設備を、すべて洗い出す</li>
+            <li>在庫がいつまでもつかと、最終注文の締め切り、後継品の有無を確かめる</li>
+            <li>担当と決める期限を最初に決め、経過を記録に残す</li>
+          </ul>
+        </div>
+
+        <!-- ◆3. 5つの対応方法 -->
+        <h2>部品の製造中止への主な5つの対応方法</h2>
+        <p>
+          製造中止への主な対応は、次の5つです。部品によっては、修理や再生、ユニットごとの交換、設備全体の更新も選択肢になります。1つだけを選ぶのではなく、部品の重要度や設備を使う残りの年数、費用、品質と安全を比べて、組み合わせて使います。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol-options.jpg" alt="部品の製造中止への5つの対応方法。最終購入、代替品に置き換える、中古品や在庫品を探す、現物から作り直す、設計を変える" width="1376" height="768" loading="lazy">
+          <figcaption>早く・安く済む方法から、時間はかかるが長く続けられる方法まで</figcaption>
+        </figure>
+
+        <h3>対応1：最終購入で、必要な数を買っておく</h3>
+        <p>
+          締め切りまでに、今後使う分を一度に確保する方法です。手早い方法ですが、使う数を読み違えると、不足や余りが出ます（数の決め方は次の章）。
+        </p>
+
+        <h3>対応2：代替品・互換品に置き換える</h3>
+        <p>
+          メーカーの後継品や、他社の同じような部品に置き換える方法です。寸法や性能のわずかな違いで、取り付けの部品やプログラムの変更が必要になることもあります。元の部品と代替品の仕様書を並べ、違いを書き出すと見落としを防げます。
+        </p>
+
+        <h3>対応3：中古品や、他社の在庫品を探す</h3>
+        <p>
+          中古品の販売店や、在庫を持つ商社から探す方法です。急場をしのぐには有効ですが、本物かどうか、状態や保管の経緯、残りの寿命が分からないことも多く、長く続けられる方法ではありません。使う前に動作を確かめ、手に入れた時期と状態を記録しておくと、あとで原因を追いやすくなります。
+        </p>
+
+        <h3>対応4：現物から図面を起こして、作り直す</h3>
+        <p>
+          図面がない機械部品は、形や寸法、材質、加工の条件が分かれば、現物を測って図面にし、作り直せることがあります。測る、図面にする、材質と強度を確かめる、加工する、という流れです。<strong class="mk">ブラケットや軸、カラー、板のような機械加工の部品は、メーカーがなくなっても作り直しを検討しやすい</strong>のが、この方法の強みです。一方、電子部品や基板は、多層の配線や専用のIC、中のプログラムなどが関わるため、同じ働きを再現するには高度な解析が要る場合があります。ただし、基板全体を作り直さなくても、壊れた部品の交換で直せることもあります。</p>
+        <p>
+          現物から測るときは、すり減ったり欠けたりした部分を、元の寸法に戻して考える必要があります。穴と軸のすき間（はめ合い）、表面の仕上げ、熱処理や表面処理、材質も確かめます。たとえば、焼き入れした軸を、普通の鋼材で同じ寸法に削っただけでは、すり減りにくさや寿命が同じになるとは限りません。材質が分からない場合は、成分を分析して調べることもあります。
+        </p>
+
+        <h3>対応5：設計を変えて、別の部品で置き換える</h3>
+        <p>
+          代わりの部品がそのまま使えない場合は、周りの設計を変えて、手に入る部品に合わせます。時間と費用はかかりますが、製造中止の心配をしばらく減らせます。
+        </p>
+
+        <table>
+          <tr><th>対応方法</th><th>速さ</th><th>費用</th><th>続けられる期間</th></tr>
+          <tr><td>最終購入</td><td>速い</td><td>部品代と保管費</td><td>買った数まで</td></tr>
+          <tr><td>代替品</td><td>やや速い</td><td>確認・変更の費用</td><td>代替品が続く間</td></tr>
+          <tr><td>中古品・在庫品</td><td>速い</td><td>部品代</td><td>短い</td></tr>
+          <tr><td>現物から作り直す</td><td>中くらい</td><td>図面化と加工</td><td>図面がある限り</td></tr>
+          <tr><td>設計を変える</td><td>遅い</td><td>大きい</td><td>長い</td></tr>
+        </table>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>主な対応は、最終購入・代替品・中古品・作り直し・設計変更の5つ</li>
+            <li>機械加工の部品は、材質や熱処理まで確かめれば作り直しを検討しやすい</li>
+            <li>速さ、費用、続けられる期間を比べて、組み合わせて使う</li>
+          </ul>
+        </div>
+
+        <!-- ◆4. 最終購入の数 -->
+        <h2>最終購入の数の決め方｜計算例と計算ツール</h2>
+        <p>
+          最終購入では、「これから何個使うか」を見積もり、予備（安全在庫）を足し、使える在庫と、期限内に届く注文済みの数を引いた数を買います。保守用と生産用で、見積もり方が少し違います。数字は説明のための例です。
+        </p>
+
+        <h3>保守用の部品は「台数 × 交換の割合 × 使う年数」で見積もる</h3>
+        <p>
+          設備の交換部品の例です。同じ設備が5台あり、1台に2個使っている部品が、1年に1割ほど故障などで交換になっているとします。設備はあと8年使う予定です。ここでの交換の割合は、「設置されている部品の数に対して、1年に交換した数の割合」です。
+        </p>
+        <p class="calc">
+          使う見込み ＝ 5台 × 2個 × 10％ × 8年 ＝ 8個<br>
+          予備20％を足す ＝ 8 × 1.2 ＝ 9.6 → 10個<br>
+          <b>買う数 ＝ 10個 − 在庫2個 ＝ 8個（1個3万円なら24万円）</b>
+        </p>
+        <p>
+          この8個は、平均的な交換の数の見積もりで、足りることを保証する数ではありません。設備の台数がこの先減るか、壊れた部品を修理して使えるか、決まった周期で交換する部品か、注文してから届くまでの期間、1個足りないと設備全体が止まるか、といった点も考えて予備を決めます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol-ltb.jpg" alt="最終購入の数の計算例のイメージ。保守用は、5台×2個×年10％×8年で8個、予備20％で10個、在庫2個を引いて8個を買う。生産用は、月200台×18か月で3,600個、不良率2％で割り戻し予備5％を足して3,858個、在庫300個を引いて3,558個を買う" width="1376" height="768" loading="lazy">
+          <figcaption>最終購入の数の計算例（数値は説明のための例です）</figcaption>
+        </figure>
+
+        <h3>生産用の部品は「月の使用数 × 作り続ける月数」で見積もる</h3>
+        <p>
+          製品に組み込む部品の例です。月に200台作る製品に1個ずつ使っていて、製品はあと18か月作る予定です。投入した部品のうち、不良や試験で失う割合（不良率）を2％、予備を5％とします。
+        </p>
+        <p class="calc">
+          使う見込み ＝ 200台 × 1個 × 18か月 ＝ 3,600個<br>
+          不良の分を割り戻す ＝ 3,600 ÷（1 − 0.02）＝ 約3,673.5個<br>
+          予備5％を足す ＝ 3,673.5 × 1.05 ＝ 約3,857.1 → 3,858個<br>
+          <b>買う数 ＝ 3,858個 − 在庫300個 ＝ 3,558個（1個800円なら約285万円）</b>
+        </p>
+        <p>
+          不良率が「投入した数に対する不良の割合」なら、×（1＋不良率）ではなく ÷（1−不良率）で計算します。×1.02 だと、必要な良品の数にわずかに届きません。
+        </p>
+
+        <h3>買いすぎにも注意する</h3>
+        <p>
+          多めに買うと、保管の場所と費用がかかり、使わなかった分は損になります。ゴムや樹脂の部品、電池、一部の電子部品のように、<strong>使わなくても保管している間に劣化する部品</strong>もあります（ゴムの硬化やひび、樹脂の吸湿による寸法の変化、電池の自然な放電、電子部品の端子のさびなど）。メーカーが指定する保管の条件と使用の期限も確かめます。最終購入は、ほかの対応までの「つなぎ」と考え、その間に代替品や作り直しを進めるのが現実的です。
+        </p>
+
+        <h3>自分の条件で試す｜最終購入の数の計算ツール</h3>
+        <p>
+          初期値は、上の保守用の例です。「生産用」に切り替えると、生産用の例の条件になります。
+        </p>
+
+        <div class="calc-tool" id="eol-tool">
+          <p class="calc-tool-title">ラストタイムバイ（最終購入）の数の計算</p>
+          <p class="calc-tool-note">
+            保守用は「設備の台数 × 1台あたりの使用数 × 1年に交換する割合 × 使い続ける年数」、生産用は「月の生産数 × 1台あたりの使用数 × 作り続ける月数」を不良率で割り戻して（÷（1 − 不良率））、使う見込みの数を出します。そこに予備を足し、使える在庫と、期限内に届く注文済みの数を引いた数が、買う数の目安です。<strong>結果は目安で、必要な数を保証するものではありません。</strong>交換の割合は、設置されている部品の数に対する1年の交換数の割合で、これまでの交換の記録から出すのが確実です。予備は、交換の数のばらつき、届くまでの期間、止まったときの影響を考えて決めてください。長く保管すると劣化する部品は、保管の条件と、使える期間も確かめてください。
+          </p>
+          <p style="font-size:0.86rem;margin:6px 0 0 !important;">部品の使い道</p>
+          <div class="calc-btns" data-b="md"><button type="button" data-v="m">保守用（設備の交換部品）</button><button type="button" data-v="p">生産用（製品に使う部品）</button></div>
+          <div class="calc-in" data-g="m">
+            <label>設備の台数<span class="row"><input type="range" data-k="units" min="1" max="100" step="1"><input type="number" data-k="units" min="1" max="100" step="1"><span class="unit">台</span></span></label>
+            <label>1台あたりの使用数<span class="row"><input type="range" data-k="per" min="1" max="50" step="1"><input type="number" data-k="per" min="1" max="50" step="1"><span class="unit">個</span></span></label>
+            <label>1年に交換する割合（故障・寿命）<span class="row"><input type="range" data-k="rate" min="1" max="100" step="1"><input type="number" data-k="rate" min="1" max="100" step="1"><span class="unit">％</span></span></label>
+            <label>設備を使い続ける年数<span class="row"><input type="range" data-k="years" min="1" max="20" step="1"><input type="number" data-k="years" min="1" max="20" step="1"><span class="unit">年</span></span></label>
+          </div>
+          <div class="calc-in" data-g="p">
+            <label>月の生産数<span class="row"><input type="range" data-k="month" min="10" max="10000" step="10"><input type="number" data-k="month" min="1" max="10000" step="1"><span class="unit">台</span></span></label>
+            <label>1台あたりの使用数<span class="row"><input type="range" data-k="pper" min="1" max="50" step="1"><input type="number" data-k="pper" min="1" max="50" step="1"><span class="unit">個</span></span></label>
+            <label>製品を作り続ける月数<span class="row"><input type="range" data-k="months" min="1" max="120" step="1"><input type="number" data-k="months" min="1" max="120" step="1"><span class="unit">か月</span></span></label>
+            <label>不良率（投入した数に対する割合）<span class="row"><input type="range" data-k="loss" min="0" max="20" step="0.5"><input type="number" data-k="loss" min="0" max="20" step="0.5"><span class="unit">％</span></span></label>
+          </div>
+          <div class="calc-in">
+            <label>予備の割合<span class="row"><input type="range" data-k="spare" min="0" max="100" step="1"><input type="number" data-k="spare" min="0" max="100" step="1"><span class="unit">％</span></span></label>
+            <label>今の在庫と注文済みの数<span class="row"><input type="range" data-k="stock" min="0" max="5000" step="1"><input type="number" data-k="stock" min="0" max="100000" step="1"><span class="unit">個</span></span></label>
+            <label>1個の値段<span class="row"><input type="range" data-k="price" min="0" max="500000" step="100"><input type="number" data-k="price" min="0" max="10000000" step="100"><span class="unit">円</span></span></label>
+          </div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 200" role="img" aria-label="必要な数の内訳の帯グラフ。使う見込みの数、予備などの分、そのうち在庫でまかなえる数を示す">
+              <rect x="0" y="0" width="640" height="200" fill="#ffffff"/>
+              <g data-o="bar"></g>
+            </svg>
+            <p class="calc-fig-note" data-o="figNote"></p>
+          </div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>使う見込みの数</th><td><b data-o="use"></b> 個</td></tr>
+            <tr><th>予備などを含めた必要数</th><td><b data-o="need"></b> 個</td></tr>
+            <tr data-j="buy"><th>買う数（在庫と注文済みを引いた数）</th><td><b data-o="buy"></b> 個<span class="judge" data-o="jd"></span></td></tr>
+            <tr><th>購入金額の目安</th><td><b data-o="yen"></b> 円</td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="eol-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('eol-tool');
+          if (!root) return;
+          var DEF = { md: 'm', units: 5, per: 2, rate: 10, years: 8, month: 200, pper: 1, months: 18, loss: 2, spare: 20, stock: 2, price: 30000 };
+          var PDEF = { spare: 5, stock: 300, price: 800 };   // 生産用に切り替えたときの初期値（記事の例2）
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function f1(x) { var r = Math.round(x * 10) / 10; return fmt(r, r % 1 ? 1 : 0); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) {
+              if (document.activeElement !== e) e.value = S[e.dataset.k];
+              if (e.type === 'range') e.style.setProperty('--p', Math.min(1, (S[e.dataset.k] - e.min) / (e.max - e.min)) * 100 + '%');
+            });
+            root.querySelectorAll('[data-b="md"] button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.v === S.md); });
+            root.querySelectorAll('[data-g]').forEach(function (e) { e.style.display = e.dataset.g === S.md ? '' : 'none'; });
+          }
+          function calc() {
+            var use, need, eq;
+            if (S.md === 'm') {
+              use = S.units * S.per * S.rate / 100 * S.years;
+              need = Math.ceil(use * (1 + S.spare / 100) - 1e-9);
+              eq = '使う見込み ＝ ' + S.units + '台 × ' + S.per + '個 × ' + S.rate + '％ × ' + S.years + '年 ＝ ' + f1(use) + '個。必要数 ＝ ' + f1(use) + ' ×（1 ＋ 予備' + S.spare + '％）を切り上げ。';
+            } else {
+              use = S.month * S.pper * S.months;
+              need = Math.ceil(use / (1 - S.loss / 100) * (1 + S.spare / 100) - 1e-9);
+              eq = '使う見込み ＝ ' + fmt(S.month) + '台 × ' + S.pper + '個 × ' + S.months + 'か月 ＝ ' + fmt(use) + '個。必要数 ＝ ' + fmt(use) + ' ÷（1 − 不良率' + S.loss + '％）×（1 ＋ 予備' + S.spare + '％）を切り上げ。';
+            }
+            var buy = Math.max(0, need - S.stock);
+            out('use', f1(use)); out('need', fmt(need)); out('buy', fmt(buy)); out('yen', fmt(buy * S.price));
+            var row = root.querySelector('[data-j="buy"]');
+            if (buy === 0) { out('jd', '今の在庫で足りる見込み'); row.classList.remove('over'); }
+            else { out('jd', '在庫と注文済み ' + fmt(S.stock) + '個を引いた数'); row.classList.remove('over'); }
+            out('eq', eq + ' 買う数 ＝ 必要数 − 在庫と注文済み ' + fmt(S.stock) + '個。');
+            // 帯グラフ：使う見込み／予備などの分、上に在庫の範囲
+            var W = 560, x0 = 40, tot = Math.max(need, S.stock, 1), k = W / tot;
+            var wUse = Math.min(use, need) * k, wSp = (need - Math.min(use, need)) * k, wSt = Math.min(S.stock, tot) * k;
+            var h = '';
+            h += '<text x="' + x0 + '" y="40" font-size="16" fill="#5a6573">在庫と注文済みでまかなえる分</text>';
+            h += '<rect x="' + x0 + '" y="50" width="' + wSt + '" height="22" fill="#e3e8ee" stroke="#5a6573" stroke-dasharray="5 4"/>';
+            h += '<rect x="' + x0 + '" y="92" width="' + wUse + '" height="44" fill="#0d2b4e"/>';
+            h += '<rect x="' + (x0 + wUse) + '" y="92" width="' + wSp + '" height="44" fill="#d4691a"/>';
+            h += '<text x="' + x0 + '" y="164" font-size="16" fill="#0d2b4e">■ 使う見込み ' + f1(use) + '個</text>';
+            h += '<text x="' + (x0 + 250) + '" y="164" font-size="16" fill="#d4691a">■ 予備・不良の分 ' + fmt(need - Math.min(use, need), 0) + '個</text>';
+            h += '<text x="' + (x0 + W) + '" y="188" font-size="16" fill="#0d2b4e" text-anchor="end">必要数 ' + fmt(need) + '個／買う数 ' + fmt(buy) + '個</text>';
+            root.querySelector('[data-o="bar"]').innerHTML = h;
+            out('figNote', '下の帯が必要数（紺：使う見込み、オレンジ：予備や不良の分）です。上の点線の帯は今の在庫と注文済みの数で、帯からはみ出た分が買う数になります。');
+          }
+          function set(k, v) {
+            if (k === 'md' && v !== S.md) { for (var p in PDEF) S[p] = v === 'p' ? PDEF[p] : DEF[p]; }
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'eol_ltb' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          root.querySelectorAll('[data-b] button').forEach(function (b) {
+            b.addEventListener('click', function () { set(b.parentNode.dataset.b, b.dataset.v); });
+          });
+          document.getElementById('eol-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>保守用は台数・交換の割合・使う年数、生産用は月の使用数・月数で見積もる</li>
+            <li>予備を足し、使える在庫と注文済みの数を引く。生産用の不良率は割り戻す</li>
+            <li>買いすぎにも注意し、最終購入はほかの対応までのつなぎと考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆5. 代替品の確認 -->
+        <h2>代替品を選ぶときに確かめる4つの項目</h2>
+        <p>
+          代替品は「同じような部品」を探すだけでは足りません。置き換えたあとに不具合が出ないよう、次の4つを確かめます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol-check.jpg" alt="代替品を選ぶときに確かめる4つの項目。寸法と取り付け、性能と使う条件、強度と寿命、規格と取引先の承認" width="1376" height="768" loading="lazy">
+          <figcaption>見た目が同じでも、使う条件まで同じとは限らない</figcaption>
+        </figure>
+
+        <h3>寸法と取り付け（穴の位置・軸の太さ・つなぎ口）</h3>
+        <p>
+          外形の大きさ、取り付け穴の位置、軸の太さ、配線のつなぎ口の形などを、元の部品と比べます。わずかな違いでも、取り付けの板や配線を変える必要が出ます。
+        </p>
+
+        <h3>性能と使う条件（力・速さ・電圧・温度・精度）</h3>
+        <p>
+          力や速さ、電圧や温度の範囲、精度などが、今の使い方を満たすかを確かめます。カタログの数字が同じでも、測り方の条件が違うことがあります。
+        </p>
+
+        <h3>強度と寿命（材質が変わる場合）</h3>
+        <p>
+          機械部品を作り直すときや、材質の違う代替品にするときは、強度と寿命を確かめます。元の部品より弱い材料にすると、早く壊れたり、周りの部品を傷めたりします。力がかかる部品は、<a href="stand-strength-calculation.html">強度計算</a>で余裕を確かめておくと安心です。
+        </p>
+
+        <h3>規格と、取引先の承認</h3>
+        <p>
+          製品に使う部品を変える場合は、製品が満たすべき規格や、取引先との取り決めを確かめます。<strong class="mk">部品を変えたことを取引先に知らせ、承認を得る必要がある場合もあります</strong>。承認に時間がかかることもあるため、早めに相談を始めます。</p>
+        <p>
+          非常停止のスイッチや安全センサーなど、安全に関わる部品は、寸法や電気の仕様が合うだけでは足りません。置き換えたあとも、設備全体の安全の働きが保たれ、求められる安全性能（PLやSILなど）を満たすかを確かめます。必要に応じてリスクアセスメントをやり直し、止まるまでの時間などを、実際に動かして確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>寸法と取り付け、性能と使う条件を、元の部品と比べる</li>
+            <li>材質が変わるときは、強度と寿命を確かめる</li>
+            <li>規格と取引先の承認、安全に関わる部品は交換後の安全性能まで確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆6. 予防策 -->
+        <h2>製造中止で慌てないための4つの予防策｜重要度で分けて備える</h2>
+        <p>
+          製造中止は、起きてから動くと選べる手が限られます。ただし、すべての部品を大量に買い置くのは、お金と場所、劣化の点で現実的ではありません。まずは部品を重要度で分け、手間のかけ方を変えます（分け方は一つの例です）。
+        </p>
+        <table>
+          <tr><th>分類</th><th>部品の例</th><th>主な備え</th></tr>
+          <tr><td>A：止まると影響が大きい・安全に関わる</td><td>制御装置、専用の駆動装置、安全部品</td><td>早めの確認、代替品の評価、予備の確保</td></tr>
+          <tr><td>B：止まるが代わりがある</td><td>センサー、汎用モーター、電磁弁</td><td>代替品を前もって評価、購入先を分ける</td></tr>
+          <tr><td>C：作り直しやすい</td><td>ブラケット、カラー、機械加工の部品</td><td>図面を整える、作り直しを検討</td></tr>
+        </table>
+        <p>
+          そのうえで、次の4つで備えます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-parts-eol-prevent.jpg" alt="製造中止で慌てないための4つの予防策。重要部品の一覧をつくる、購入先を複数にして約束を書面に、設備と部品をそろえる、特殊な部品は壊れる前に図面にする" width="1376" height="768" loading="lazy">
+          <figcaption>起きてからではなく、起きる前に備える</figcaption>
+        </figure>
+
+        <h3>重要な部品の一覧をつくり、製造中止の情報を定期的に確かめる</h3>
+        <p>
+          止まると影響が大きい部品、ほかに買える所がない部品を一覧にし、メーカーの情報を定期的に確かめます。一覧には、部品の名前と型番、使っている製品や設備、使う数、購入先、代わりの部品の有無、メーカーの製品の状況、最終注文日と最終出荷日、在庫と年間の使用数、止まったときの影響を並べておくと便利です。年に1〜2回でも見直すだけで、通知を見落とすことが減ります。
+        </p>
+
+        <h3>購入先を複数にし、長く供給してもらう約束を書面にする</h3>
+        <p>
+          同じメーカーの部品を複数の販売店から買えるようにしても、メーカーが作るのをやめれば、どこからも買えなくなります。別のメーカーの代替品を前もって評価しておくことが大切です。長く使う部品は、製造中止の知らせの時期、最終注文日、最終出荷日、代替品の情報などを、口約束ではなく書面で取り決めておきます。ただし、取り決めがあっても、相手の倒産や災害などによる供給の停止まで、すべて防げるわけではありません。
+        </p>
+
+        <h3>設備と部品を、できるだけ同じものにそろえる</h3>
+        <p>
+          同じ種類の設備や部品にそろえておくと、予備品を共有でき、余分な在庫を持たずに済みます。設備を更新するときも、古い設備を一部残しておけば、部品を取り外して予備品として使えます。ただし、共有する前に、取り付け、性能、設定、安全の働きが合うかを確かめます。また、1つの型番にそろえすぎると、その型番が製造中止になったときに、多くの設備が同時に困ることにも注意します。
+        </p>
+
+        <h3>特殊な機械部品は、壊れる前に図面にしておく</h3>
+        <p>
+          図面のない特殊な機械部品は、壊れてからでは、元の形が分からなくなることがあります。<strong class="mk">壊れる前に現物を測って図面にしておけば、製造中止になっても作り直せます</strong>。設備の中で、代わりがなく、止まると生産が止まる部品から優先して進めます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>重要な部品の一覧をつくり、製造中止の情報を定期的に確かめる</li>
+            <li>購入先を複数にし、供給の期間を書面で取り決める</li>
+            <li>設備と部品をそろえ、特殊な機械部品は壊れる前に図面にする</li>
+          </ul>
+        </div>
+
+        <!-- ◆7. 生産設備の部品 -->
+        <h2>生産設備の部品が製造中止になったとき｜延命か、更新か</h2>
+        <p>
+          生産設備の部品が手に入らなくなったとき、選択肢は大きく「設備を使い続ける（延命）」か「設備を新しくする（更新）」かです。保全の現場の目線でお話しします。
+        </p>
+
+        <h3>「次に壊れたら、生産できない」と言われた会社の例</h3>
+        <p>
+          以前に耳にした、ある印刷会社の話です。古い設備の中の機械部品が壊れ、調べたところ、その部品を作っている会社はもうありませんでした。「次に壊れたら、生産できなくなります」と伝えられた会社は、融資を受けて設備を更新しました。
+        </p>
+        <p>
+          更新によって、部品の心配はなくなりました。ただ、今後の受注の見通しによっては、大きな投資をする以外の道もあったのではないか、とも考えています。壊れた部品が機械部品であれば、現物から図面を起こして作り直せた可能性があるからです。<strong class="mk">特殊な機械部品を前もって調べ、早めに図面にしておけば、「部品が手に入らないから更新するしかない」という状況は防げます</strong>。
+        </p>
+
+        <h3>延命か更新かは「これから何年使うか」で決める</h3>
+        <p>
+          延命か更新かは、部品が手に入るかどうかだけでは決まりません。次のような点を合わせて考えます。
+        </p>
+        <ul>
+          <li>その設備で作る製品の需要が、これから何年続く見込みか</li>
+          <li>部品の作り直しや代替品にかかる費用と、更新の費用の差</li>
+          <li>製造中止の部品が、機械部品か、電子部品か（作り直しやすさが違うことが多い）</li>
+          <li>更新すると、生産性や品質、省力化でどれだけ得をするか</li>
+        </ul>
+        <p>
+          機械加工の部品の作り直しは、設備の更新より少ない費用で済むことがよくあります。ただし、ほかの部分も古く、次々と壊れるようなら、延命の費用はかさみます。この先数年の修理の見込みも合わせて比べます。需要の見通しが短いなら、部品の作り直しで延命し、その間に次の手を考える。長く使うなら、更新して生産性を上げる。<strong>部品の問題を、設備投資を見直すきっかけにする</strong>と考えると、判断を誤りにくくなります。
+        </p>
+
+        <h3>保全の現場では、機械部品は作り直し、電装品は予備で備えた</h3>
+        <p>
+          筆者が保全を担当していたころも、製造中止の部品はよくある問題でした。機械部品が欠けたり壊れたりしたときは、自分たちで作り直して修理していました。基板の故障では、メモリーなどの部品が原因の場合は修理できませんでしたが、コンデンサーを交換して復旧できたこともあります。
+        </p>
+        <p>
+          ただし、基本的に電装品は修理が難しいものです。そのため、同じ設備を複数そろえて予備品を共有し、余分な在庫を持たないようにする。設備を更新するときも、古い設備を一部残して、部品を取り外して使える予備にする。こうした備え方が、電装品の製造中止には効果的でした。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>機械部品の製造中止は、図面にして作り直せば更新を避けられることがある</li>
+            <li>延命か更新かは、需要の見通しと費用、部品の種類を合わせて決める</li>
+            <li>修理が難しい電装品は、設備をそろえる、古い設備を部品取りに残すなどで備える</li>
+          </ul>
+        </div>
+
+        <!-- ◆8. アイツインの支援 -->
+        <h2>アイツインの製造中止部品の対応支援</h2>
+        <p>
+          アイツインは、保全と機械設計の経験をもとに、<strong class="mk">製造中止になった機械部品の「作り直し」と、設備の延命</strong>を支援しています。
+        </p>
+
+        <h3>「設備を更新するしかない」の前に、ほかの道を一緒に考える</h3>
+        <p>
+          「部品が製造中止で手に入らないから、設備を更新するしかない」と言われたとき、本当にそれしか道がないのか。大きな設備投資や更新が、今の受注の見通しに見合っているのか。こうしたご相談もお受けしています。部品の作り直しや代替品で延命できるか、延命と更新で費用と効果がどう違うかを、保全と設計の目線で整理します。
+        </p>
+
+        <h3>現物を測って、図面にする</h3>
+        <p>
+          図面のない機械部品を、現物から測って図面にします。形が複雑な部品は、3Dスキャンでデータにしてから図面にすることもできます。すり減った部分は、周りの部品との組み合わせから元の寸法を考えて図面にします。壊れる前の予防として、設備の中の特殊な部品をまとめて図面にしておくご依頼もお受けしています。
+        </p>
+
+        <h3>代わりの部品の取り付けと、強度を確かめる</h3>
+        <p>
+          代替品に置き換えるときの取り付け寸法の確認や、作り直す部品の材質を変えるときの強度計算を行います。計算の考え方は「<a href="../design/index.html">自動化設備の設計ノート</a>」でも公開しています。
+        </p>
+
+        <h3>作り直しの手配と、制御機器の置き換えのご相談</h3>
+        <p>
+          図面をもとにした機械部品の作り直しの手配や、製造中止になった制御機器（コントローラーやモーターなど）の置き換えのご相談もお受けしています。なお、電子回路や基板の再設計は、対象外です。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          本記事では、部品の製造中止への対応を、初動から予防策、設備の延命と更新の考え方まで解説しました。
+        </p>
+        <p>
+          製造中止は、通知を受けてから慌てても、選べる手は限られます。重要な部品を一覧にし、特殊な機械部品は壊れる前に図面にしておく。<strong class="mk">部品の製造中止への対応は、起きる前の備えで、選べる手が大きく変わります</strong>。まずは、止まると困る設備の中に、代わりのない部品がないかを確かめることから着手してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・IEC 62402:2019 Obsolescence management（国際電気標準会議）<br>
+          ・経済産業省「経済安全保障上の課題への対応（民間ベストプラクティス集 第2.0版）」<br>
+          ・厚生労働省「機能安全による機械等に係る安全確保に関する技術上の指針」<br>
+          ・本記事の計算の数字は、説明のための例です。必要な数や、部品の安全性を保証するものではありません。
+        </p>
+
+        <div class="article-cta">
+          製造中止の部品をどう手当てすればよいか迷っている。「設備を更新するしかない」と言われたが、本当にそうなのか確かめたい。図面のない機械部品を、壊れる前に図面にしておきたい。無料相談で、部品の作り直しや設備の延命の進め方を一緒に整理しませんか。お気軽にご相談ください。
+          <span class="cta-price">サービスごとの料金は、「<a href="../../price.html">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.09.06</p>
+                <h3><a href="legacy-equipment-data.html">レガシー装置、諦めていませんか？配線をいじらずデータを取得する3つの方法</a></h3>
+                <p class="column-excerpt">通信機能もセンサーもない古い設備でも、配線を一切いじらずにデータは取れます。電流・振動・信号灯という3つの入口と、現実的な始め方を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.13</p>
+                <h3><a href="stand-strength-calculation.html">架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</a></h3>
+                <p class="column-excerpt">500kgの設備をのせる架台の計算例で、梁の曲げとたわみ、柱の座屈、水平力の計算手順を解説します。条件を入れて試せる計算ツールつきです。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
