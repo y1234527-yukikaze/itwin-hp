@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：製造業のシステム連携とは？
+  （コラム制作キット E:/ClaudeCode/itwinHP_column_kit の template-rich.html から作成・2026-10-10）
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-shoryokuka.jpg（1376×768・ナノバナナで生成して差し替え）
+  本文イラスト：img/column-system-integration-divided.jpg / -support.jpg（ナノバナナで生成して差し替え）
+  図：img/column-system-integration-overview / merits / order / worktime / steps .jpg（figs_system_integration.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方｜アイツイン コラム</title>
+  <meta name="description" content="中小製造業の省力化は、どこから考えればよいのでしょうか。本記事では、省力化が必要な理由と5つの方法、作業ごとの事例の探し方、装置の検討から見積もり・補助金・判断までの進め方、投資の回収の目安を解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方">
+  <meta property="og:description" content="中小製造業の省力化は、どこから考えればよいのでしょうか。本記事では、省力化が必要な理由と5つの方法、作業ごとの事例の探し方、装置の検討から見積もり・補助金・判断までの進め方、投資の回収の目安を解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-shoryokuka.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-03">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方">
+  <meta name="twitter:description" content="中小製造業の省力化は、どこから考えればよいのでしょうか。本記事では、省力化が必要な理由と5つの方法、作業ごとの事例の探し方、装置の検討から見積もり・補助金・判断までの進め方、投資の回収の目安を解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-shoryokuka.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方",
+    "description": "中小製造業の省力化は、どこから考えればよいのでしょうか。本記事では、省力化が必要な理由と5つの方法、作業ごとの事例の探し方、装置の検討から見積もり・補助金・判断までの進め方、投資の回収の目安を解説します。",
+    "image": "https://i-twin.co.jp/img/column-shoryokuka.jpg",
+    "datePublished": "2026-11-03",
+    "dateModified": "2026-11-03",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方", "item": "https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方</span>
+      </div>
+      <h1>中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方</h1>
+      <p class="catch">公開日：2026年11月3日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="equipment-failure-maintenance.html">‹ 前の記事：設備の故障を減らす保全</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">省人化・自動化</span>公開日：2026.11.03</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-shoryokuka.jpg" alt="中小製造業の省力化事例。作業の名前から、事例と装置のイメージ、補助金の当てはまりまでを探すイメージ" width="1376" height="768">
+          <figcaption>まずは、自社の作業に近い事例を探すところから。</figcaption>
+        </figure>
+
+        <p>
+          「人が足りないので省力化したいが、どんな装置にすればよいのか分からない」「事例を探しても、国の資料や補助金のサイトに情報が散らばっていて、自社の作業に近いものが見つからない」。中小の製造業で省力化を考え始めたとき、多くの方がこの段階で止まってしまいます。
+        </p>
+        <p>
+          本記事では、<strong class="mk">中小製造業の省力化</strong>について、必要な理由と5つの方法を整理したうえで、作業の名前から事例を探せる「事例ハブ」をご用意しました。あわせて、装置を考える、見積もりを頼む、補助金を確かめる、判断する、という進め方と、投資の回収の目安も解説します。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>中小製造業で省力化が必要な理由と、省力化の5つの方法</li>
+            <li>作業の名前から探せる省力化の事例（18の作業）と、補助金の当てはまり</li>
+            <li>装置の検討から見積もり・補助金・判断までの進め方と、回収年数の計算（計算ツールつき）</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1. なぜ必要か -->
+        <h2>中小製造業で省力化が必要な3つの理由</h2>
+
+        <h3>理由1：人が集まりにくく、今いる人に負担が寄っている</h3>
+        <p>
+          働く世代が減るなか、中小の製造業では、募集をかけても人が集まりにくくなっています。足りない分は、今いる人の残業や掛け持ちで補われがちで、負担が重なると、さらに人が辞めるという悪い流れが生まれます。人を増やすのが難しい以上、<strong class="mk">今いる人で回せるように、作業そのものを軽くする</strong>ことが欠かせません。
+        </p>
+
+        <h3>理由2：賃金を上げながら、利益を確保する必要がある</h3>
+        <p>
+          人を確保するために賃金を上げる動きが広がるなか、同じやり方のままでは、利益が圧迫されます。1人がこなせる仕事の量を増やす省力化は、賃金を上げながら会社を続けていくための手段でもあります。国も、中小企業の省力化への投資を、中小企業省力化投資補助金などで後押ししています。ただし、対象になる会社や設備、補助率には要件があり、審査を経て交付が決まります。
+        </p>
+
+        <h3>理由3：ベテランの技を、仕組みに置き換える必要がある</h3>
+        <p>
+          長年の経験で回っている工程は、その人が辞めると止まってしまいます。熟練の手作業を装置や治具に置き換えたり、経験を数字の基準にしたりすることは、技術を引き継ぐことにもつながります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>人が集まりにくく、今いる人に負担が寄っている</li>
+            <li>賃金を上げながら利益を確保するために、1人がこなせる量を増やす</li>
+            <li>ベテランの技を、装置や数字の基準に置き換える</li>
+          </ul>
+        </div>
+
+        <!-- ◆2. 省力化と省人化 -->
+        <h2>省力化と省人化の違い｜まず「負担を減らす」から</h2>
+        <p>
+          省力化は、作業の時間や体の負担を減らすことです。省人化は、その結果として、必要な人数を減らすことです。中小の製造業では、いきなり人を減らすことを目標にするより、<strong>まず省力化で作業を軽くし、その結果として人数が減る</strong>という順番のほうが、現場の納得も得やすく、失敗も少なくなります。考え方の詳しい説明は「<a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a>」で、組み立てラインでの具体的な進め方は「<a href="assembly-line-shoujinka.html">組み立てラインの省人化の進め方</a>」で紹介しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>省力化は負担を減らすこと、省人化は人数を減らすこと</li>
+            <li>省力化で作業を軽くした結果として、人数が減る順番がよい</li>
+            <li>いきなり人を減らす目標は、現場の反発や失敗を招きやすい</li>
+          </ul>
+        </div>
+
+        <!-- ◆3. 5つの方法 -->
+        <h2>中小製造業の省力化の5つの方法</h2>
+        <p>
+          省力化というとロボットを思い浮かべがちですが、方法はほかにもあります。お金のかからないものから順に、5つに分けて整理します。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-shoryokuka-methods.jpg" alt="中小製造業の省力化の5つの方法。紙と転記をなくすデジタル化、置き方と治具の工夫、運ぶ・持ち上げるの補助、検査と測定の自動化、ロボットと自動機" width="1376" height="768" loading="lazy">
+          <figcaption>お金のかからない方法から順に検討する</figcaption>
+        </figure>
+
+        <h3>方法1：紙と転記をなくす（デジタル化）</h3>
+        <p>
+          手書きの日報や伝票の転記、見積もりの計算など、事務の作業も省力化の大きな対象です。表計算や簡単なシステムで、同じ数字を何度も書き写す作業をなくします。
+        </p>
+
+        <h3>方法2：置き方と治具を工夫する</h3>
+        <p>
+          部品を手の届く位置に置く、取り出しやすい向きに並べる、位置を決める治具をつくる、といった工夫です。費用は小さいのに、歩く・探す・持ち替える時間が減り、効果が出やすい方法です。
+        </p>
+
+        <h3>方法3：運ぶ・持ち上げるを補助する</h3>
+        <p>
+          台車やコンベヤ、無人搬送車で運ぶ作業を減らし、重さを打ち消す補助装置で持ち上げる負担を軽くします。体への負担が大きい作業ほど、効果を実感しやすくなります。
+        </p>
+
+        <h3>方法4：検査と測定を自動にする</h3>
+        <p>
+          目で見る検査をカメラと画像処理に、手で測る寸法を自動の測定機に置き換えます。人による見落としのばらつきも減らせます。
+        </p>
+
+        <h3>方法5：ロボットや自動機を入れる</h3>
+        <p>
+          くり返しの多い作業や、重い・危ない作業をロボットや専用の自動機に任せます。効果は大きい反面、費用も大きくなるため、<strong class="mk">ほかの方法で減らしたうえで、効果の大きい作業に絞って入れる</strong>のが基本です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>省力化の方法は、デジタル化・置き方と治具・運ぶ補助・検査の自動化・ロボットの5つ</li>
+            <li>置き方や治具の工夫は、費用が小さく効果が出やすい</li>
+            <li>ロボットや自動機は、効果の大きい作業に絞って入れる</li>
+          </ul>
+        </div>
+
+        <!-- ◆4. 事例ハブ -->
+        <h2>作業から探す｜中小製造業の省力化の事例</h2>
+        <p>
+          省力化を考えるときは、まず「この作業を、どんな装置や仕組みにできるか」のイメージをつかむことが大切です。ここでは、製造業でよくある18の作業について、よく使われる装置や仕組み、国・公的機関・業界団体が公開している事例、補助金のカタログに当てはまる製品の分類をまとめました。作業の名前を入れるか、ボタンを押すと絞り込めます。
+        </p>
+
+        <!-- ◆事例ハブ：作業から探す（中身は最初からページに書き、探す箱は絞り込みだけ。データはキットの hub_shoryoku.py） -->
+        <div class="hub" id="hub">
+          <div class="hub-search">
+            <label for="hub-q">省力化したい作業を入れてください</label>
+            <input type="search" id="hub-q" placeholder="例：箱詰め、溶接、検査、日報" autocomplete="off">
+            <div class="hub-chips"><button type="button" class="hub-chip" data-q="機械への材料の出し入れ">機械への材料の出し入れ</button><button type="button" class="hub-chip" data-q="工程間の搬送">工程間の搬送</button><button type="button" class="hub-chip" data-q="重い物の持ち上げ・反転">重い物の持ち上げ・反転</button><button type="button" class="hub-chip" data-q="箱詰め・包装">箱詰め・包装</button><button type="button" class="hub-chip" data-q="パレットへの積み付け">パレットへの積み付け</button><button type="button" class="hub-chip" data-q="組立・ねじ締め・圧入">組立・ねじ締め・圧入</button><button type="button" class="hub-chip" data-q="外観検査・測定">外観検査・測定</button><button type="button" class="hub-chip" data-q="溶接">溶接</button><button type="button" class="hub-chip" data-q="バリ取り・研磨">バリ取り・研磨</button><button type="button" class="hub-chip" data-q="塗装">塗装</button><button type="button" class="hub-chip" data-q="板金・プレス（曲げ・抜き・切断）">板金・プレス（曲げ・抜き・切断）</button><button type="button" class="hub-chip" data-q="裁断・縫製（布・革・畳）">裁断・縫製（布・革・畳）</button><button type="button" class="hub-chip" data-q="食品の加工・充填">食品の加工・充填</button><button type="button" class="hub-chip" data-q="洗浄">洗浄</button><button type="button" class="hub-chip" data-q="在庫・倉庫・ピッキング・ラベル">在庫・倉庫・ピッキング・ラベル</button><button type="button" class="hub-chip" data-q="段取り替え">段取り替え</button><button type="button" class="hub-chip" data-q="記録・帳票・見積もり（事務）">記録・帳票・見積もり（事務）</button><button type="button" class="hub-chip" data-q="稼働の見える化・夜間の無人運転">稼働の見える化・夜間の無人運転</button></div>
+            <p class="hub-count" aria-live="polite"></p>
+          </div>
+          <div class="hub-cards">
+            <details class="hub-card" data-k="機械への材料の出し入れ 工作機械や成形機への投入と取り出し 出し入れ 投入 取り出し 取出し ロード アンロード ワーク交換 マシニング 旋盤 成形機 ローダ">
+              <summary><h3>機械への材料の出し入れ</h3><span class="hub-sub">工作機械や成形機への投入と取り出し</span></summary>
+              <div class="hub-body">
+                <p>工作機械や成形機に材料をセットし、加工が終わったら取り出す作業です。ロボットや自動ワーク交換装置にすると、人が機械の前に張り付かずに済み、1人で複数の機械を見たり、夜間に無人で動かしたりしやすくなります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/machining/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「機械加工：ロード・アンロード」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=9" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（1人で複数の設備を見る体制・PDFの9ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「ローダ付きNC旋盤」「工作機械用自動ワーク交換装置」「後工程自動化機能付成形品取出しロボット」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="工程間の搬送 台車やフォークリフトでの運搬 搬送 運搬 運ぶ 台車 AGV AMR 無人搬送 コンベヤ コンベア フォークリフト 移動">
+              <summary><h3>工程間の搬送</h3><span class="hub-sub">台車やフォークリフトでの運搬</span></summary>
+              <div class="hub-body">
+                <p>台車を押す、フォークリフトで運ぶといった工程の間の運搬を、無人搬送車やコンベヤに置き換えます。運搬は付加価値を生まないのに、歩く時間が積み重なりやすい作業です。通路や段差の条件で、選べる装置が変わります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=12" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（金属プレス部品の運搬を無人搬送車にして2人を1人に・PDFの12ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=11" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（鋳造の中子の搬送と設置をロボットに・PDFの11ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_catalog_case_studies_2512.pdf#page=7" target="_blank" rel="noopener">中小企業省力化投資補助金「カタログ注文型 活用事例集」（倉庫間の部品の移動をフォークリフトから無人搬送車に・PDFの7ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/transport/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「マテリアルハンドリング」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「無人搬送車（AGV・AMR）」「垂直搬送機（貨物専用）」「無人フォークリフト（AGF）」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="hansou-shoujinka-cost.html">搬送作業の省人化の費用の内訳</a></li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="重い物の持ち上げ・反転 腰に負担のかかる作業を軽くする 持ち上げ 重量物 重い 腰痛 負担 アシスト バランサ 吊り 反転 裏返す">
+              <summary><h3>重い物の持ち上げ・反転</h3><span class="hub-sub">腰に負担のかかる作業を軽くする</span></summary>
+              <div class="hub-body">
+                <p>重い部品や製品を持ち上げる、裏返すといった作業を、重さを打ち消す補助装置（バランサ）や反転機で軽くします。人の作業は残りますが、体の負担とケガの危険が減り、慣れていない人でもこなせるようになります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20260602.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（約70kgの鋼板を吸着して上げ下げする曲げ機で4人を2人に）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_catalog_case_studies_2512.pdf#page=6" target="_blank" rel="noopener">中小企業省力化投資補助金「カタログ注文型 活用事例集」（印刷用紙の積み替えの体の負担を装置で軽く・PDFの6ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「バランサ装置」「金型・大型部材用反転機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="assembly-line-shoujinka.html">パレットの反転作業を自動化した例（組み立てラインの省人化）</a></li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="箱詰め・包装 並べて詰める、箱を組む・閉じる 箱詰め 梱包 包装 段ボール 製函 製箱 封函 箱 詰める 袋詰め 出荷 整列 ピッキング">
+              <summary><h3>箱詰め・包装</h3><span class="hub-sub">並べて詰める、箱を組む・閉じる</span></summary>
+              <div class="hub-body">
+                <p>製品を並べて箱に詰める、箱を組み立てる・閉じるといった作業です。箱を組む・閉じる装置から始め、詰める作業をロボットにする例もあります。品種や箱の種類が多いほど、装置の切り替えが複雑になり、費用が上がります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20260519.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（出荷用の箱づくりを1箱10分から約1分に）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20230126.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（計量と袋詰めの自動化で5人の工程を3人に）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=5" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（惣菜の包装とラベル貼りの自動化で13人を4人に・PDFの5ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=8" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（乾麺の包装ラインへの投入をロボットに・PDFの8ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/picking/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「ピッキング・整列・包装」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「組立函自動製函機」「段ボール箱製函機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="パレットへの積み付け 箱や袋を段積みする出荷作業 パレタイズ パレット 積み付け 積み込み 段積み 出荷 袋">
+              <summary><h3>パレットへの積み付け</h3><span class="hub-sub">箱や袋を段積みする出荷作業</span></summary>
+              <div class="hub-body">
+                <p>箱や袋をパレットに積み上げる作業は、重く、同じ動きのくり返しが多いため、ロボットの効果が出やすい作業です。積み方の種類が多い場合は、切り替えのしやすさも確かめます。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/shipment/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「入出荷」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「パレタイズロボット」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="組立・ねじ締め・圧入 組み付ける、締める、押し込む 組立 組み立て 組付け ねじ ネジ 締め タッピング 圧入 かしめ 治具">
+              <summary><h3>組立・ねじ締め・圧入</h3><span class="hub-sub">組み付ける、締める、押し込む</span></summary>
+              <div class="hub-body">
+                <p>ねじ締めの機械、押し込むための簡単なプレス、位置を決める治具などで半自動にする例が多くあります。柔らかい部品や品種の多い組み付けは、人に残すほうが現実的な場合もあります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/construction/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「一般組立」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「精密板金向け自動タッピングマシン」「クリンチングファスナー圧入機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="assembly-line-shoujinka.html">組み立てラインの省人化の進め方</a></li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="外観検査・測定 目で見る検査、手で測る寸法 検査 外観 目視 測定 計測 寸法 検品 画像 カメラ 不良 品質">
+              <summary><h3>外観検査・測定</h3><span class="hub-sub">目で見る検査、手で測る寸法</span></summary>
+              <div class="hub-body">
+                <p>目で見る検査をカメラと画像処理に、手で測る寸法を自動の測定機に置き換えます。装置を選ぶ前に、何を不良とするかの基準と、良品・不良品の見本をそろえておくことが大切です。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=2" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（三次元測定機で1回の検査を80分から15分に・PDFの2ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2024/chusho/b1_4_2.html" target="_blank" rel="noopener">中小企業庁「中小企業白書2024」（ゴム部品の全数検査に自動検査装置）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=5" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（鋳物の検査をカメラとロボットとAIで行い、合否で仕分け・PDFの5ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=6" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（見分けにくい透明な樹脂製品の外観検査・PDFの6ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=3" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（自動車シートのしわの検査をカメラとAIで・PDFの3ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=11" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（食品の異物の検査をAIで・PDFの11ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=5" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（点灯の検査の自動化・PDFの5ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/measurement/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「測定・検査・試験」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「AI外観検査用画像処理システム」「自動画像測定機」「CNC三次元測定機」「検品・仕分システム」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="溶接 アーク・スポット・TIG・レーザー 溶接 アーク スポット TIG レーザー 溶接ロボット">
+              <summary><h3>溶接</h3><span class="hub-sub">アーク・スポット・TIG・レーザー</span></summary>
+              <div class="hub-body">
+                <p>溶接ロボットや協働ロボット、レーザー溶接機などで自動化します。少量多品種の場合は、溶接そのものの時間だけでなく、段取りやプログラムづくりの手間も含めて効果を考えます。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=240" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（板金の曲げと溶接にロボット・PDFの240ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=4" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（溶接の出来をAIで検査し、検査の人を不要に・PDFの4ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=4" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（プレス品の溶接にロボット・PDFの4ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=10" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（少量多品種の板金の溶接・PDFの10ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/arc_welding/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「アーク溶接」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/spot_welding/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「スポット溶接」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「精密板金向けTIG溶接協働ロボットシステム」「テーブル式スポット溶接機」「ファイバーレーザー溶接機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="weld-strength-calculation.html">溶接の強度計算の方法と例</a></li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="バリ取り・研磨 削り残しの除去と仕上げ バリ取り バリ 研磨 磨き 仕上げ ブラスト 研削">
+              <summary><h3>バリ取り・研磨</h3><span class="hub-sub">削り残しの除去と仕上げ</span></summary>
+              <div class="hub-body">
+                <p>重い物を持ちながらのバリ取りや、粉じんの中での研磨は、専用の装置やロボットにする効果が大きい作業です。細かな仕上げなど、人の手に残る工程を見極めることも大切です。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=3" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（鉄鍋のバリ取りにロボット・PDFの3ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/polish/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「機械加工：研磨・バリ取り」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「鍛圧・板金加工用バリ取り装置」「鋳物用自動バリ取り装置」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="塗装 吹き付け、コーティング 塗装 塗る スプレー 吹き付け コーティング 塗り">
+              <summary><h3>塗装</h3><span class="hub-sub">吹き付け、コーティング</span></summary>
+              <div class="hub-body">
+                <p>吹き付け塗装などをロボットにすると、塗りむらが減って品質が安定し、溶剤のある環境から人を離せます。塗る物の形や色替えの頻度で、装置の選び方が変わります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=3" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（鉄急須の内面の琺瑯引きにロボット・PDFの3ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/paint/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「塗装」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>製造業向けのカタログ注文型の製品カテゴリは見当たらず、一般型など個別の申請が中心（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="板金・プレス（曲げ・抜き・切断） 曲げ、プレス、材料の出し入れ 板金 プレス 曲げ ベンディング プレスブレーキ 抜き 切断 レーザー加工 シャーリング 金型">
+              <summary><h3>板金・プレス（曲げ・抜き・切断）</h3><span class="hub-sub">曲げ、プレス、材料の出し入れ</span></summary>
+              <div class="hub-body">
+                <p>曲げ加工のロボット、材料の自動搬入・搬出、金型の自動交換などで自動化します。少量多品種でも、段取り替えまで自動でできる設備が出てきています。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=240" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（材料の供給から仕分けまでを一体にして24時間の無人運転・PDFの240ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2025/chusho/b1_1_4.html" target="_blank" rel="noopener">中小企業庁「中小企業白書2025」（板金の抜きから曲げへ、上流の工程から順に自動化）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20260602.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（大きな鋼板の曲げを4人から2人に、加工時間を約7割削減）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=10" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（少量多品種の板金の自動化・PDFの10ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/stamping/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「プレス」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/cutting/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「機械加工：切断」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「プレスブレーキ用ロボットシステム」「板金機械用材料シート自動搬入・搬出装置」「プレスブレーキ用金型自動交換装置」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="裁断・縫製（布・革・畳） 型紙どおりに切る、縫う 裁断 縫製 縫う 縫い ミシン 布 生地 革 畳 型紙 パターン CAD 延反 検反 繊維 アパレル 家具">
+              <summary><h3>裁断・縫製（布・革・畳）</h3><span class="hub-sub">型紙どおりに切る、縫う</span></summary>
+              <div class="hub-body">
+                <p>布や革を型紙どおりに切る、縫い合わせるといった作業を、自動の裁断機や、型紙をデータで扱うCAD、縫う作業のロボットで減らします。型紙をデータにすると、保管や変更の手間も減ります。裁断で空いた人を縫製に回して、増産につなげた例もあります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=4" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（家具の革の裁断を自動にして1枚60分を15分に・PDFの4ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=3" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（畳の裁断と縫いを協働ロボットに・PDFの3ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=11" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（型紙の作成を3次元のCADで自動化・PDFの11ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「自動裁断機」「自動延反機」「コンピュータ横編み機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="食品の加工・充填 下処理、切る、詰める、計る 食品 加工 下処理 充填 計量 惣菜 魚 麺 菓子 パン カット スライス 包あん 成形 冷凍 異物">
+              <summary><h3>食品の加工・充填</h3><span class="hub-sub">下処理、切る、詰める、計る</span></summary>
+              <div class="hub-body">
+                <p>魚のうろこ取りや切り身、材料を計って混ぜる、袋や容器に詰めるといった食品の加工の作業を、専用の加工機や充填機に置き換えます。衛生の決まりや、洗いやすさも装置選びの大事な条件です。熟練者しかできなかった作業を機械に任せ、教育の時間を生み出した例もあります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20260820.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（魚のうろこ取りを6人で300分から12分に）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20250128.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（充填包装と搬入・検査の自動化で生産能力1.3倍）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://shoryokuka.smrj.go.jp/assets/pdf/shoryokuka_ippan_case_studies_2605.pdf#page=6" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」（麺の製造ラインで1日の作業を200分削減・PDFの6ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「食品スライサ・カッタ」「食品切断・分離・除去機」「食品包覆機」「飲食料品充填・吐出機」「食料品加熱撹拌機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="洗浄 加工後の部品や金型を洗う 洗浄 洗う 脱脂 油 汚れ 切りくず">
+              <summary><h3>洗浄</h3><span class="hub-sub">加工後の部品や金型を洗う</span></summary>
+              <div class="hub-body">
+                <p>加工後の部品の油や切りくずを落とす、金型や部品を洗うといった作業を、洗浄装置にまとめます。洗う時間の短縮だけでなく、仕上がりがそろう効果もあります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.jara.jp/navi/example/industrial/washing/index.html" target="_blank" rel="noopener">日本ロボット工業会「ロボット活用ナビ」「洗浄」の導入事例</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「金属加工製品用洗浄装置」「プラスチック成形機部品洗浄装置（洗浄液式）」「切削屑連続遠心脱油機」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="在庫・倉庫・ピッキング・ラベル 探す、取り出す、表示する 在庫 倉庫 棚 保管 ピッキング 入出庫 ラベル 表示 自動倉庫 棚卸し 探す">
+              <summary><h3>在庫・倉庫・ピッキング・ラベル</h3><span class="hub-sub">探す、取り出す、表示する</span></summary>
+              <div class="hub-body">
+                <p>物を探す、取り出す、数える、ラベルを貼るといった作業を、自動倉庫や、取り出す場所をランプで知らせる仕組み、自動のラベル貼り機などで減らします。どこに何があるかを記録するだけでも、探す時間は減ります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=11" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（鋳物の出荷を自動倉庫とロボットにして14人を4人に・PDFの11ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://labour-saving.smrj.go.jp/casestudy/0026-05-seizo-2.pdf" target="_blank" rel="noopener">中小機構「省力化ナビ」の製造業の事例（金型を探す仕組みで棚卸しを効率化・PDF）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「自動倉庫」「ラックシステム」「デジタルピッキングシステム」「オートラベラー」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="段取り替え 品種の切り替え、金型や工具の交換 段取り 段取り替え 切り替え 金型交換 工具 治具 品種">
+              <summary><h3>段取り替え</h3><span class="hub-sub">品種の切り替え、金型や工具の交換</span></summary>
+              <div class="hub-body">
+                <p>金型や工具の交換、設定の変更など、品種を切り替えるための作業です。自動交換の装置のほか、工具の長さを機械の外で測っておく、治具を共通にするといった工夫でも短くできます。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=240" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（段取り替えの時間を約20％削減・PDFの240ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=7" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（機械の停止の半分を占めた加工データの手直しを自動化・PDFの7ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=10" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（段取り替えまで自動化した板金・PDFの10ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--sub">補助金</span>カタログ注文型の製品カテゴリに「プレスブレーキ用金型自動交換装置」「ツールプリセッター」「パレットチェンジャー付3軸マシニングセンタ」など（<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">製品カタログ</a>）</li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="記録・帳票・見積もり（事務） 日報、伝票、見積もり、生産管理 日報 記録 帳票 伝票 紙 手書き 見積 見積もり 受注 生産管理 RPA OCR 事務 教育 マニュアル">
+              <summary><h3>記録・帳票・見積もり（事務）</h3><span class="hub-sub">日報、伝票、見積もり、生産管理</span></summary>
+              <div class="hub-body">
+                <p>手書きの伝票や日報の転記、見積もりの計算、生産の計画づくりなどを、システムや自動化の道具で減らします。現場の作業だけでなく、事務の作業も省力化の大きな対象です。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=241" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（紙の帳票をなくして月約530時間を削減・PDFの241ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=242" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（データを一元管理して生産の指示を自動で出す・PDFの242ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=11" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（縫製の仕様書をタブレットでペーパーレスに・PDFの11ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chubu.meti.go.jp/a32kikaku/kizashi/20250416/20250416_kizashi_report8.pdf#page=28" target="_blank" rel="noopener">中部経済産業局「兆しレポート：省力化投資と現場社員のリスキリング」（帳票の電子化とIoT・RPAで入力を年8,100時間以上削減・PDFの28ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://seisansei.smrj.go.jp/case/20220627.html" target="_blank" rel="noopener">中小機構「補助金活用ナビ」の活用事例（熱処理・塗装の作業情報をデジタル化）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chubu.meti.go.jp/a32kikaku/kizashi/20250416/20250416_kizashi_report8.pdf#page=25" target="_blank" rel="noopener">中部経済産業局「兆しレポート：省力化投資と現場社員のリスキリング」（ロボットと日報の電子化などで労働生産性が倍に・PDFの25ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=6" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（手書き伝票と書類の電子化・PDFの6ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=7" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（受注・見積もり・生産管理・PDFの7ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=8" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（紙の書類の読み取りと事務の自動化・PDFの8ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://labour-saving.smrj.go.jp/casestudy/0028-05-seizo-4.pdf" target="_blank" rel="noopener">中小機構「省力化ナビ」の製造業の事例（見積もりの計算の仕組みづくり・PDF）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://labour-saving.smrj.go.jp/casestudy/0029-05-seizo-5.pdf" target="_blank" rel="noopener">中小機構「省力化ナビ」の製造業の事例（生産管理の効率化・PDF）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://labour-saving.smrj.go.jp/casestudy/0025-05-seizo-1.pdf" target="_blank" rel="noopener">中小機構「省力化ナビ」の製造業の事例（動画などによる教育・PDF）</a></li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="manufacturing-system-integration.html">製造業のシステム連携とは</a></li>
+                </ul>
+              </div>
+            </details>
+            <details class="hub-card" data-k="稼働の見える化・夜間の無人運転 設備の状態を知る、人のいない時間に動かす 稼働 見える化 監視 IoT センサー 無人 夜間 停止 故障 遠隔 データ">
+              <summary><h3>稼働の見える化・夜間の無人運転</h3><span class="hub-sub">設備の状態を知る、人のいない時間に動かす</span></summary>
+              <div class="hub-body">
+                <p>設備が動いているか、止まっているかを自動で記録し、離れた場所からも確かめられるようにします。止まっている時間や理由が分かると、どこを省力化すべきかも見えてきます。夜間の無人運転にもつながります。</p>
+                <ul class="hub-links">
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf#page=10" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン（中小製造業）」（樹脂成形のラインの稼働率を見える化し55％から93％に・PDFの10ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho/00Hakusyo_zentai.pdf#page=242" target="_blank" rel="noopener">中小企業庁「中小企業白書2026」（設備の稼働率と不良率をリアルタイムで確認・PDFの242ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.chubu.meti.go.jp/a32kikaku/kizashi/20250416/20250416_kizashi_report8.pdf#page=28" target="_blank" rel="noopener">中部経済産業局「兆しレポート：省力化投資と現場社員のリスキリング」（稼働率と止まった理由を見える化し、1人あたりの生産性が30％以上アップ・PDFの28ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=9" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（成形機の進み具合をIoTで集めてリアルタイムに表示・PDFの9ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf#page=8" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（熟練者の成形機の調整を数値にして、誰でも調整できるように・PDFの8ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=8" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（24時間無人で動かす工場を遠隔で監視・PDFの8ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--case">事例</span><a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/pdf/250625_2.pdf#page=9" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（機械の稼働状況の管理・PDFの9ページ目）</a></li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="legacy-equipment-data.html">配線をいじらず古い設備からデータを取る方法</a></li>
+                <li><span class="hub-tag hub-tag--own">関連</span><a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方</a></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <p class="hub-none" hidden>当てはまる作業が見つかりませんでした。作業の名前を変えて探すか、<a href="../../contact-v2.html?topic=auto">そのままご相談ください</a>。</p>
+          <p class="hub-note">事例は、国・公的機関・自治体の研究会・業界団体が公開しているものです（群馬県の研究会の事例集は、国の機関であるIPAのサイトに掲載されています）。補助金の製品カテゴリは、中小企業省力化投資補助金のカタログ注文型の製品カテゴリの資料（2026年10月8日更新）で確かめたもので、カテゴリや登録された製品は変わることがあります。申請の前に、必ず最新の公式の情報を確かめてください。</p>
+        </div>
+
+        <script>
+        (function () {
+          var hub = document.getElementById('hub');
+          if (!hub) return;
+          var q = document.getElementById('hub-q'), cards = hub.querySelectorAll('.hub-card'), count = hub.querySelector('.hub-count'), none = hub.querySelector('.hub-none'), timer = null, sent = {};
+          function norm(s) { return s.toLowerCase().replace(/[\s・、,]+/g, ' ').trim(); }
+          function apply() {
+            var words = norm(q.value).split(' ').filter(Boolean), n = 0;
+            cards.forEach(function (c) {
+              var k = norm(c.dataset.k + ' ' + c.textContent), hit = !words.length || words.some(function (w) { return k.indexOf(w) >= 0; });
+              c.hidden = !hit; if (hit) n++;
+              if (words.length) c.open = hit && n <= 3;
+            });
+            count.textContent = words.length ? n + '件の作業が見つかりました' : '';
+            none.hidden = n > 0;
+            hub.querySelectorAll('.hub-chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.q === q.value)); });
+            clearTimeout(timer);
+            if (words.length) timer = setTimeout(function () { if (typeof gtag === 'function') gtag('event', 'hub_search', { q: q.value.slice(0, 30), hits: n }); }, 1200);
+          }
+          q.addEventListener('input', apply);
+          hub.querySelectorAll('.hub-chip').forEach(function (b) {
+            b.addEventListener('click', function () { q.value = q.value === b.dataset.q ? '' : b.dataset.q; apply(); });
+          });
+          cards.forEach(function (c) {
+            c.addEventListener('toggle', function () {
+              var t = c.querySelector('h3').textContent;
+              if (c.open && !sent[t] && typeof gtag === 'function') { sent[t] = 1; gtag('event', 'hub_open', { task: t }); }
+            });
+          });
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>まず、自社の作業に近い事例で、装置や仕組みのイメージをつかむ</li>
+            <li>事例は国・公的機関・業界団体の公開情報から探せる</li>
+            <li>補助金のカタログに当てはまる製品の分類があるかも、早めに確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆5. 進め方 -->
+        <h2>中小製造業の省力化の進め方5ステップ</h2>
+        <p>
+          省力化は、次の5つのステップで進めるのが一般的です。事例でイメージをつかみ、見積もりと補助金を見比べて、最後は金額と効果のバランスで決めます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-shoryokuka-steps.jpg" alt="中小製造業の省力化の進め方5ステップ。時間を測る、装置を考える、見積もりを取る、補助金を確かめる、金額と効果を比べて決める" width="1376" height="768" loading="lazy">
+          <figcaption>装置を考える → 見積もり → 補助金 → 判断の順に進める</figcaption>
+        </figure>
+
+        <h3>STEP1：作業を書き出し、時間を測る</h3>
+        <p>
+          どの作業に、誰が、1日に何時間かけているかを書き出します。体に負担がかかる作業や、ミスが起きやすい作業にも印を付けます。<strong>時間を測ると、省力化で効果が出る作業がはっきりします</strong>。
+        </p>
+
+        <h3>STEP2：装置や仕組みのイメージを決める</h3>
+        <p>
+          前の章の事例を参考に、「この作業を、こんな装置や仕組みに変えたい」というイメージをつくります。全部を機械にする必要はなく、人に残す部分を決めることも大切です。
+        </p>
+
+        <h3>STEP3：商社や施工業者に見積もりを頼む</h3>
+        <p>
+          付き合いのある商社や設備の施工業者に、イメージを伝えて見積もりを頼みます。物の大きさや重さ、数、品種、今の人数と時間を伝えると、見積もりの精度が上がります。可能なら、2社以上から取って比べます。
+        </p>
+
+        <h3>STEP4：補助金がどこまで使えるかを確かめる</h3>
+        <p>
+          見積もりを見ながら、補助金の当てはまりを確かめます。中小企業省力化投資補助金の申請の型は、大きく2つです。カタログに載った製品から選ぶ型と、自社に合わせた設備を個別に申請する型です。カタログ注文型は販売事業者と一緒に申請し、一般型は自社で事業計画をつくって審査を受けます。どちらに当てはまるか、対象になる費用はどこまでかを、公式の情報や支援機関で確かめます。<strong>交付が決まる前に発注や契約をすると、対象にならない</strong>ので注意します（詳しくは「<a href="shoryokuka-hojokin.html">中小企業省力化投資補助金、自社の工場は何が対象になる？</a>」）。
+        </p>
+
+        <h3>STEP5：金額と効果のバランスで決める</h3>
+        <p>
+          装置の中身、金額、補助金、減る時間を並べて、投資に踏み切るかを決めます。<strong class="mk">補助金が使えるから買うのではなく、補助金がなくても元が取れるかを先に確かめる</strong>と、判断を誤りにくくなります。回収の目安は、次の章の計算ツールで試せます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>作業と時間を測り、事例で装置や仕組みのイメージを決める</li>
+            <li>見積もりを取り、補助金がどこまで使えるかを確かめる</li>
+            <li>補助金がなくても元が取れるかを先に確かめ、金額と効果で決める</li>
+          </ul>
+        </div>
+
+        <!-- ◆6. 費用と回収 -->
+        <h2>省力化の費用と効果｜補助金を使った場合の回収の目安</h2>
+        <p>
+          省力化の効果は、減る作業時間を金額にして考えます。数字は説明のための例です。
+        </p>
+
+        <h3>減る時間を、金額にする</h3>
+        <p>
+          ここで計算するのは、会社が自分で投資を判断するための簡易な目安です。ある作業の省力化で、3人の作業がそれぞれ1日2時間減り、年に240日働くとします。1時間あたりの人件費を2,500円、装置の保守などの運用費を年20万円とします。
+        </p>
+        <p class="calc">
+          年間に減る時間 ＝ 2時間 × 3人 × 240日 ＝ 1,440時間<br>
+          人件費の減少 ＝ 1,440時間 × 2,500円 ＝ 360万円<br>
+          <b>年間の効果 ＝ 360万円 − 運用費20万円 ＝ 340万円</b>
+        </p>
+
+        <h3>補助金なしと、ありで回収年数を比べる</h3>
+        <p>
+          装置の投資額（設計・据え付け・調整・教育を含む）が800万円で、補助率が2分の1の補助金が使えた場合を比べます。補助率は制度や型、会社の規模で違い、たとえば中小企業省力化投資補助金では、カタログ注文型は2分の1以下、一般型は中小企業で2分の1（小規模企業者などは3分の2）です。公募の回ごとに変わることがあるため、申請するときの公募要領で確かめます。
+        </p>
+        <p class="calc">
+          補助金なし：800万円 ÷ 340万円 ＝ 約2.4年<br>
+          <b>補助金あり：（800万円 − 400万円）÷ 340万円 ＝ 約1.2年</b>
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-shoryokuka-roi.jpg" alt="省力化の回収年数の計算例のイメージ。3人が1日2時間ずつ減り年240日で1,440時間、人件費2,500円で360万円、運用費を引いて年340万円の効果。投資800万円で補助金なしは約2.4年、補助率2分の1なら約1.2年で回収" width="1376" height="768" loading="lazy">
+          <figcaption>回収年数の計算例（数値は説明のための例です）</figcaption>
+        </figure>
+
+        <p>
+          補助金があると回収は早くなりますが、採択されるとは限りません。中小企業省力化投資補助金は、交付が決まってから設備を買って支払い、実績を報告したあとに補助額が確定して支払われる後払い（精算払い）です。受け取る額が、交付が決まった額の全額になるとも限りません。そのため、設備の代金は自己資金や融資で先に用意しておく必要があります。また、減った時間で人がほかの仕事に移るだけなら、人件費は減りません。その場合は、残業や外注、採用が減る、増産できる、といった別の効果で考えます。国の事例集を見ても、省力化で空いた時間を、試作や品質管理、若手の育成、営業や新しい商品の開発に回した例が多くあります。<strong>省力化のあと、人に何をしてもらうかまで決めておく</strong>と、効果は大きくなります。</p>
+        <p>
+          なお、補助金を申請するときに求められる「投資回収期間」は、公募要領の決まった式で計算します（補助金を差し引かず、減る工数と、増える付加価値で計算するなど）。ここでの自社の判断のための計算とは、分けて考えてください。
+        </p>
+
+        <h3>自分の条件で試す｜省力化の回収年数の計算ツール</h3>
+        <p>
+          初期値は、上の例の条件です。補助率を0％にすると、補助金なしの場合と同じになります。
+        </p>
+
+        <div class="calc-tool" id="sr-tool">
+          <p class="calc-tool-title">省力化の効果と、補助金を使った場合の回収年数</p>
+          <p class="calc-tool-note">
+            年間の効果は「1日に減らせる時間 × 人数 × 年間の稼働日数 × 1時間あたりの人件費 − 年間の運用費」、回収年数は「実際の負担額 ÷ 年間の効果」で概算します。補助率は、制度や型、会社の規模によって違います。<strong>補助金は採択されるとは限らず、中小企業省力化投資補助金は設備を買って支払ったあとに受け取る後払い（精算払い）です</strong>。いったんは全額を用意する必要があり、受け取る額が交付決定の額の全額になるとも限りません。補助金の申請で求められる投資回収期間は、公募要領の式で別に計算します。減った時間で人件費が減らない場合（ほかの仕事に移るだけの場合）は、その分は効果になりません。残業や外注、採用の削減、増産による効果があれば、その分を足して考えてください。結果は目安で、投資の判断や補助金の採択を保証するものではありません。
+          </p>
+          <div class="calc-in">
+            <label>1人が1日に減らせる作業時間<span class="row"><input type="range" data-k="h" min="0.1" max="8" step="0.1"><input type="number" data-k="h" min="0.1" max="24" step="0.1"><span class="unit">時間</span></span></label>
+            <label>対象の人数（直の数も含めた延べ）<span class="row"><input type="range" data-k="n" min="1" max="30" step="1"><input type="number" data-k="n" min="1" max="200" step="1"><span class="unit">人</span></span></label>
+            <label>年間の稼働日数<span class="row"><input type="range" data-k="d" min="100" max="365" step="1"><input type="number" data-k="d" min="1" max="365" step="1"><span class="unit">日</span></span></label>
+            <label>1時間あたりの人件費<span class="row"><input type="range" data-k="w" min="1000" max="6000" step="50"><input type="number" data-k="w" min="500" max="20000" step="10"><span class="unit">円</span></span></label>
+            <label>設備の投資額（設計・据え付け・調整・教育を含む）<span class="row"><input type="range" data-k="inv" min="10" max="5000" step="10"><input type="number" data-k="inv" min="1" max="100000" step="1"><span class="unit">万円</span></span></label>
+            <label>年間の運用費（保守・電気・消耗品など）<span class="row"><input type="range" data-k="op" min="0" max="500" step="1"><input type="number" data-k="op" min="0" max="10000" step="1"><span class="unit">万円</span></span></label>
+            <label>補助率<span class="row"><input type="range" data-k="sub" min="0" max="80" step="1"><input type="number" data-k="sub" min="0" max="100" step="1"><span class="unit">％</span></span></label>
+          </div>
+
+          <div class="calc-fig" style="margin-top:10px;">
+            <svg viewBox="0 0 640 200" role="img" aria-label="回収年数の比べ。補助金なしと補助金ありの、元が取れるまでの年数の帯グラフ">
+              <rect x="0" y="0" width="640" height="200" fill="#ffffff"/>
+              <g data-o="bar"></g>
+            </svg>
+            <p class="calc-fig-note" data-o="figNote"></p>
+          </div>
+
+          <h4>結果</h4>
+          <table class="calc-out">
+            <tr><th>年間に減る作業時間</th><td><b data-o="hours"></b> 時間</td></tr>
+            <tr><th>年間の効果（人件費 − 運用費）</th><td><b data-o="eff"></b> 万円</td></tr>
+            <tr><th>実際の負担額（投資額 − 補助金）</th><td><b data-o="pay"></b> 万円</td></tr>
+            <tr data-j="pb"><th>回収年数（補助金なし → あり）</th><td><b data-o="pb"></b><span class="judge" data-o="jd"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="sr-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('sr-tool');
+          if (!root) return;
+          var DEF = { h: 2, n: 3, d: 240, w: 2500, inv: 800, op: 20, sub: 50 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function f1(x) { var r = Math.round(x * 10) / 10; return fmt(r, r % 1 ? 1 : 0); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) {
+              if (document.activeElement !== e) e.value = S[e.dataset.k];
+              if (e.type === 'range') e.style.setProperty('--p', Math.min(1, (S[e.dataset.k] - e.min) / (e.max - e.min)) * 100 + '%');
+            });
+          }
+          function calc() {
+            var hours = S.h * S.n * S.d, gain = hours * S.w / 10000, eff = gain - S.op;
+            var pay = S.inv * (1 - S.sub / 100);
+            var pb0 = eff > 0 ? S.inv / eff : null, pb1 = eff > 0 ? pay / eff : null;
+            out('hours', fmt(hours)); out('eff', f1(eff)); out('pay', f1(pay));
+            var row = root.querySelector('[data-j="pb"]');
+            if (pb0 === null) { out('pb', '回収できない'); out('jd', '運用費が効果を上回っています'); row.classList.add('over'); }
+            else {
+              out('pb', f1(pb0) + ' 年 → ' + f1(pb1) + ' 年');
+              out('jd', '補助金で ' + f1(pb0 - pb1) + ' 年短くなる見込み');
+              row.classList.remove('over');
+            }
+            out('eq', '年間の効果 ＝ ' + f1(S.h) + '時間 × ' + S.n + '人 × ' + S.d + '日 × ' + fmt(S.w) + '円 ÷ 1万 − 運用費 ' + fmt(S.op) + '万円。実際の負担 ＝ ' + fmt(S.inv) + '万円 ×（1 − 補助率 ' + S.sub + '％）。');
+            // 帯グラフ：回収年数（最大10年まで表示）
+            var top = 10, x0 = 170, W = 380, k = W / top, h = '';
+            [[0, '補助金なし', pb0, '#0d2b4e'], [1, '補助金あり', pb1, '#d4691a']].forEach(function (r) {
+              var y = 40 + r[0] * 64, v = r[2];
+              h += '<text x="16" y="' + (y + 22) + '" font-size="16" fill="#0d2b4e">' + r[1] + '</text>';
+              if (v === null) { h += '<text x="' + x0 + '" y="' + (y + 22) + '" font-size="16" fill="#d4691a">回収できない</text>'; return; }
+              h += '<rect x="' + x0 + '" y="' + y + '" width="' + Math.min(v, top) * k + '" height="32" fill="' + r[3] + '"/>';
+              h += '<text x="' + (x0 + Math.min(v, top) * k + 6) + '" y="' + (y + 22) + '" font-size="16" fill="#0d2b4e">' + f1(v) + '年' + (v > top ? '（10年超）' : '') + '</text>';
+            });
+            for (var yr = 0; yr <= top; yr += 2) h += '<text x="' + (x0 + yr * k) + '" y="186" font-size="13" fill="#5a6573" text-anchor="middle">' + yr + '年</text>';
+            root.querySelector('[data-o="bar"]').innerHTML = h;
+            out('figNote', '元が取れるまでの年数の比べです。補助金は、採択された場合の目安です。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'shoryoku_roi' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          document.getElementById('sr-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>省力化の効果は、減る時間に人件費を掛け、運用費を引いて考える</li>
+            <li>補助金で回収は早くなるが、採択は保証されず、省力化投資補助金は後払い</li>
+            <li>人件費が減らない場合は、残業や外注の削減、増産で効果を考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆7. 失敗 -->
+        <h2>中小製造業の省力化でよくある3つの失敗</h2>
+
+        <h3>失敗1：装置を入れることが目的になる</h3>
+        <p>
+          「ロボットを入れたい」から始めると、効果の小さい作業に大きな投資をしてしまうことがあります。中部経済産業局の調査でも、何をさせたいかを十分に決めないままロボットを入れ、期待ほどの効果が出なかった例が紹介されています（<a href="https://www.chubu.meti.go.jp/a32kikaku/kizashi/20250416/20250416_kizashi_report8.pdf#page=23" target="_blank" rel="noopener">兆しレポート</a>）。その会社は、失敗を社内で振り返り、社員を育てたうえでロボットを入れ直して、効果を上げています。まず作業の時間を測り、どこを減らすと効くかを確かめてから、装置を選びます。
+        </p>
+
+        <h3>失敗2：補助金ありきで選ぶ</h3>
+        <p>
+          補助金の対象になる装置から選ぶと、自社の作業に合わない装置を入れてしまうことがあります。先に作業に合う装置を考え、そのあとで補助金の当てはまりを確かめる順番が大切です。
+        </p>
+
+        <h3>失敗3：入れたあとの運用と保全を考えていない</h3>
+        <p>
+          装置が止まったときに直せる人がいない、品種が増えて使えなくなった、という例は少なくありません。止まったときの戻し方、点検のしやすさ、品種が増えたときの使い方まで、入れる前に考えておきます（「<a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方</a>」）。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>装置ではなく、作業の時間を減らすことを目的にする</li>
+            <li>先に作業に合う装置を考え、補助金はそのあとで確かめる</li>
+            <li>止まったときや品種が増えたときの運用まで、入れる前に考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆8. アイツインの支援 -->
+        <h2>アイツインの中小製造業の省力化の支援</h2>
+        <p>
+          アイツインは、搬送装置の機械設計と保全の経験をもとに、中小製造業の省力化を<strong class="mk">「作る前に試す」</strong>進め方で支援しています。
+        </p>
+
+        <h3>作業時間を測り、どこを省力化すべきかを数字にする</h3>
+        <p>
+          現場にうかがい、作業の流れと時間を測って、どの作業に時間と負担が集中しているかを数字で整理します。「どこから手をつければよいか分からない」という段階からご相談いただけます。
+        </p>
+
+        <h3>装置のイメージを、作る前に画面で確かめる</h3>
+        <p>
+          装置や仕組みのイメージを、現場をデジタル上で再現して確かめます。見積もりを頼む前に、置き場所や動き、人数の変化を確かめられるので、商社や施工業者への依頼もしやすくなります。
+        </p>
+
+        <h3>設計・強度計算と、止まりにくい装置づくり</h3>
+        <p>
+          装置をのせる架台の強度計算や図面の作成、保全の目線での止まりにくく直しやすい設計もお受けしています。本格的に進める場合も、3か月単位で成果を確かめながら続けるかどうかをご判断いただけます。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          本記事では、中小製造業の省力化について、必要な理由、5つの方法、作業から探せる事例、進め方、回収の目安、よくある失敗を解説しました。
+        </p>
+        <p>
+          省力化は、装置を買うことではなく、作業の時間と負担を減らすことです。自社の作業に近い事例でイメージをつかみ、見積もりと補助金を見比べ、補助金がなくても元が取れるかで判断する。<strong class="mk">中小製造業の省力化は、事例を探して、測って、比べて決める</strong>ことで、失敗しにくくなります。まずは、上の事例ハブで、自社の作業に近い事例を探してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・<a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho.html" target="_blank" rel="noopener">中小企業庁「2026年版 中小企業白書」</a><br>
+          ・<a href="https://shoryokuka.smrj.go.jp/pr_tool/" target="_blank" rel="noopener">中小企業省力化投資補助金「一般型 活用事例集」「カタログ注文型 活用事例集」（広報ツール）</a><br>
+          ・<a href="https://www.cas.go.jp/jp/seisaku/atarashii_sihonsyugi/shouryokukatousi/06-1.pdf" target="_blank" rel="noopener">経済産業省「省力化投資促進プラン ―中小製造業―」（2025年6月）</a><br>
+          ・<a href="https://www.tohoku.meti.go.jp/s_monozukuri/topics/250625.html" target="_blank" rel="noopener">東北経済産業局「中小製造業における省力化事例集」（2025年6月）</a><br>
+          ・<a href="https://www.chubu.meti.go.jp/a32kikaku/kizashi/20250416/20250416_kizashi_report8.pdf" target="_blank" rel="noopener">中部経済産業局「兆しレポート：省力化投資の効果を高める現場社員のリスキリングの兆し」（2025年4月）</a><br>
+          ・<a href="https://local-iot-lab.ipa.go.jp/lab/gunma-pref-iot/assets/b36ac38eae1855efd09192a4a91e8d8353a98e82.pdf" target="_blank" rel="noopener">群馬県IoT・AI推進研究会「成果事例集」（2022年3月・IPA 地域DX推進ラボのサイトに掲載）</a><br>
+          ・<a href="https://labour-saving.smrj.go.jp/" target="_blank" rel="noopener">独立行政法人中小企業基盤整備機構「省力化ナビ」</a><br>
+          ・<a href="https://seisansei.smrj.go.jp/case/" target="_blank" rel="noopener">独立行政法人中小企業基盤整備機構「補助金活用ナビ」補助金の活用事例</a><br>
+          ・<a href="https://shoryokuka.smrj.go.jp/catalog/product_catalog/" target="_blank" rel="noopener">中小企業省力化投資補助事業 製品カタログ（製品カテゴリ）</a><br>
+          ・<a href="https://www.jara.jp/navi/example/industrial/index.html" target="_blank" rel="noopener">一般社団法人日本ロボット工業会「ロボット活用ナビ」産業用ロボット事例紹介</a><br>
+          ・本記事の計算の数字は、説明のための例です。補助金の採択や投資の効果を保証するものではありません。
+        </p>
+
+        <div class="article-cta">
+          アイツインでは、中小製造業の省力化のご相談を受け付けています。どの作業から省力化すればよいか迷っている、装置のイメージを見積もりの前に確かめたい、といった段階からで大丈夫です。作業時間の測り方から、装置のイメージ、補助金を見据えた進め方までを一緒に整理します。お気軽にご相談ください。
+          <span class="cta-price">サービスごとの料金は、「<a href="../../price.html">料金の目安</a>」のページに載せています。</span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.18</p>
+                <h3><a href="syoryokuka-genba.html">省人化ではなく省力化を。製造現場の負担を軽くする第一歩とは</a></h3>
+                <p class="column-excerpt">ロボットによる自動化には「向いている現場の条件」があります。人を減らす省人化ではなく、今いる人の負担を軽くする省力化という考え方と、その第一歩を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.08.13</p>
+                <h3><a href="shoryokuka-hojokin.html">中小企業省力化投資補助金、自社の工場は何が対象になる？現場目線で解説</a></h3>
+                <p class="column-excerpt">省力化投資補助金のカタログ注文型と一般型の違いを整理し、自社の現場のどこが対象になりそうかを、技術的な視点から解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav') && !h.closest('.hub'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
