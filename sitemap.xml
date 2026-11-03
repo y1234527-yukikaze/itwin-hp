@@ -97,7 +97,7 @@
 
   <url>
     <loc>https://i-twin.co.jp/column/articles/syoryokuka-genba</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -231,6 +231,13 @@
   </url>
 
   <url>
+    <loc>https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
     <loc>https://i-twin.co.jp/column/articles/equipment-failure-maintenance</loc>
     <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -274,7 +281,7 @@
 
   <url>
     <loc>https://i-twin.co.jp/column/articles/shoryokuka-hojokin</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
