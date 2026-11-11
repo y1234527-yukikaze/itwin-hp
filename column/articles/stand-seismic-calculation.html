@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：架台の耐震計算の方法と例（特集「自動化設備の設計ノート」09）
+  （溶接の記事を土台に、キットの build_seismic.py で組み立て・2026-11-11）
+  計算例の検算：キットの seismic_calc.py／計算ツール：キットの tool_seismic.html／本文：seismic_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-stand-seismic.jpg（ナノバナナで生成して差し替え）
+  それ以外の図は、本文に直接書いた線画（SVG）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-11）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで｜アイツイン コラム</title>
+  <meta name="description" content="架台の耐震計算の方法を、工場の生産設備の例題で解説します。設計用水平震度の決め方（客先の指定、指定がないときの設置する階と耐震クラス）、地震の力から柱の応力とアンカーの引き抜きを求める手順、見落としやすい重心の高さ、客先に出す耐震計算書の項目まで。計算ツール付き。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/stand-seismic-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで">
+  <meta property="og:description" content="架台の耐震計算の方法を、工場の生産設備の例題で解説します。設計用水平震度の決め方（客先の指定、指定がないときの設置する階と耐震クラス）、地震の力から柱の応力とアンカーの引き抜きを求める手順、見落としやすい重心の高さ、客先に出す耐震計算書の項目まで。計算ツール付き。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/stand-seismic-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-stand-seismic.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-11">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで">
+  <meta name="twitter:description" content="架台の耐震計算の方法を、工場の生産設備の例題で解説します。設計用水平震度の決め方（客先の指定、指定がないときの設置する階と耐震クラス）、地震の力から柱の応力とアンカーの引き抜きを求める手順、見落としやすい重心の高さ、客先に出す耐震計算書の項目まで。計算ツール付き。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-stand-seismic.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで",
+    "description": "架台の耐震計算の方法を、工場の生産設備の例題で解説します。設計用水平震度の決め方（客先の指定、指定がないときの設置する階と耐震クラス）、地震の力から柱の応力とアンカーの引き抜きを求める手順、見落としやすい重心の高さ、客先に出す耐震計算書の項目まで。計算ツール付き。",
+    "image": "https://i-twin.co.jp/img/column-stand-seismic.jpg",
+    "datePublished": "2026-11-11",
+    "dateModified": "2026-11-11",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/stand-seismic-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで", "item": "https://i-twin.co.jp/column/articles/stand-seismic-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで</span>
+      </div>
+      <h1>架台の耐震計算の方法と例｜設計用水平震度の決め方から計算書まで</h1>
+      <p class="catch">公開日：2026年11月11日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../design/index.html">設計の計算で探す</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="takt-time-calculation.html">‹ 前の記事：08 タクトタイム</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.11.11</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-stand-seismic.jpg" alt="架台の耐震計算。設備をのせた架台に、地震の横の力がかかるイメージ" width="1376" height="768">
+          <figcaption>地震の力は、設備の重さに「震度」を掛けて求める。</figcaption>
+        </figure>
+
+        <p>
+          「この架台、耐震計算書も出してください」。架台の設計は終わったのに、客先から急に<strong class="mk">耐震計算</strong>を求められることがあります。ふだんの強度計算と何が違うのか、地震の力の大きさをどう決めるのか、一から調べると時間がかかります。
+        </p>
+        <p>
+          本記事では、架台の耐震計算の方法を、例題で解説します。中心は、地震の力を決める<strong>設計用水平震度の決め方</strong>です。客先の指定の確かめ方と、指定がないときの考え方（設置する階と耐震クラス）を説明し、柱の応力とアンカーの引き抜きまでを順に求めます。例題の架台は、本シリーズの「<a href="stand-strength-calculation.html">架台の強度計算の方法と例</a>」と同じものです。最後に、客先に出す耐震計算書の項目もまとめます。<a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'intro'});">強度計算書の見本（11ページ）</a>もあわせてご覧ください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、工場の床に置く生産設備の4本脚の架台を例に、耐震計算の基本的な考え方を説明するものです。計算した架台の安全性を保証するものではありません</li>
+            <li>震度は客先の指定が優先です。指定がない場合の参考として、建築設備の耐震設計・施工の指針（日本建築センター）の考え方を紹介します</li>
+            <li>梁、溶接部、ベースプレート、設備本体の固定は別に確かめてください。床や建物が耐えるかは、建物の設計者の確認が必要です</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>架台の耐震計算と、ふつうの強度計算の違い</li>
+            <li>設計用水平震度の決め方（客先の指定、指定がないときの考え方）</li>
+            <li>地震の力から、柱の応力とアンカーの引き抜きを求める手順</li>
+            <li>工場の1階と2階で、同じ架台の結果がどれだけ変わるか</li>
+            <li>客先に出す耐震計算書に書く項目</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>架台の耐震計算とは｜ふつうの強度計算との違い</h2>
+        <p>
+          ふつうの強度計算では、設備の重さが<strong>下向き</strong>にかかるものとして、梁の曲げとたわみ、柱の座屈を確かめます。耐震計算では、これに加えて、地震で生じる<strong>横向きの力と縦向きの力</strong>を考えます。
+        </p>
+        <p>
+          地震の力は、設備の重さに「震度」という係数を掛けて求めます。震度0.4なら、重さの40％の力が横からかかると考えます。この横の力は、設備の重心にかかります。重心が架台の上面より高いと、横の力は架台を倒す向きにも働きます。そのため、耐震計算で確かめることは、次の3つになります。
+        </p>
+        <ul>
+          <li><b>柱の強さ</b>：横の力による曲げと、縦の力と倒す力で増えた圧縮</li>
+          <li><b>倒れ</b>：倒そうとする力が、重さの止める力を上回らないか</li>
+          <li><b>アンカー</b>：浮き上がる側のアンカーボルトが、引き抜かれないか</li>
+        </ul>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 230" role="img" aria-label="耐震計算の流れ。1 設置する階と耐震クラスから震度を決める、2 重さに震度を掛けて地震の力を出す、3 柱の応力を確かめる、4 倒れとアンカーを確かめる">
+            <defs>
+              <linearGradient id="sz1g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf2"/></linearGradient>
+              <filter id="sz1s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0d2b4e" flood-opacity="0.16"/></filter>
+              <linearGradient id="sz1a" gradientUnits="userSpaceOnUse" x1="0" y1="-8" x2="30" y2="8"><stop offset="0" stop-color="#f6c12f"/><stop offset="0.55" stop-color="#ef8a24"/><stop offset="1" stop-color="#e0491c"/></linearGradient>
+              <g id="sz1arrow" fill="none" stroke="url(#sz1a)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="0" y1="0" x2="4" y2="0"/><line x1="11" y1="0" x2="28" y2="0"/><path d="M20,-8 L28,0 L20,8"/>
+              </g>
+            </defs>
+            <g filter="url(#sz1s)">
+              <rect x="12" y="28" width="122" height="150" rx="20" fill="url(#sz1g)" stroke="#e1e6ec"/>
+              <rect x="177" y="28" width="122" height="150" rx="20" fill="url(#sz1g)" stroke="#e1e6ec"/>
+              <rect x="342" y="28" width="122" height="150" rx="20" fill="url(#sz1g)" stroke="#e1e6ec"/>
+              <rect x="507" y="28" width="122" height="150" rx="20" fill="url(#sz1g)" stroke="#e1e6ec"/>
+            </g>
+            <text x="73" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">1</text><text x="73" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">階と耐震クラス</text><text x="73" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">から</text><text x="73" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">震度を決める</text>
+            <text x="238" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">2</text><text x="238" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">重さ × 震度で</text><text x="238" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">地震の力を</text><text x="238" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">出す</text>
+            <text x="403" y="68" font-size="22" font-weight="700" fill="#0d2b4e" text-anchor="middle">3</text><text x="403" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">柱の曲げと</text><text x="403" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">圧縮を</text><text x="403" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">確かめる</text>
+            <text x="568" y="68" font-size="22" font-weight="700" fill="#d4691a" text-anchor="middle">4</text><text x="568" y="104" font-size="15" fill="#0d2b4e" text-anchor="middle">倒れと</text><text x="568" y="126" font-size="15" fill="#0d2b4e" text-anchor="middle">アンカーを</text><text x="568" y="148" font-size="15" fill="#0d2b4e" text-anchor="middle">確かめる</text>
+            <use href="#sz1arrow" transform="translate(141,103)"/>
+            <use href="#sz1arrow" transform="translate(306,103)"/>
+            <use href="#sz1arrow" transform="translate(471,103)"/>
+            <text x="320" y="216" font-size="18" fill="#d4691a" text-anchor="middle">いちばん迷うのは1の震度の決め方</text>
+          </svg>
+          <figcaption>本記事は、この順に説明する。</figcaption>
+        </figure>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>耐震計算では、下向きの重さに加えて、地震の横の力と縦の力を考える</li>
+            <li>地震の力は「重さ × 震度」。横の力は設備の重心にかかる</li>
+            <li>確かめるのは、柱の強さ、倒れ、アンカーの引き抜きの3つ</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>設計用水平震度の決め方</h2>
+        <p>
+          震度をいくつにするかで、結果は大きく変わります。決める順番は、<strong>まず客先の指定を確かめ、指定がなければ参考になる考え方で決めて、客先と合意する</strong>、です。
+        </p>
+
+        <h3>まず、客先の仕様書で震度が指定されていないか確かめる</h3>
+        <p>
+          工場の生産設備をのせる架台では、客先の設備仕様書や社内の基準で、「水平震度0.6」「水平震度1.0」のように震度が決められていることがあります。<strong class="mk">指定があれば、その値で計算します</strong>。指定がないときは、どの考え方で震度を決めるかを客先に相談し、合意した値と根拠を計算書に書いておきます。
+        </p>
+
+        <h3>指定がないときの参考｜建築設備の指針の考え方</h3>
+        <p>
+          建物に据え付ける設備の耐震では、建築設備の耐震設計・施工の指針の「局部震度法」の考え方がよく参考にされます。地震の力の大きさを、置く階と、設備の重要度（耐震クラス）から決める方法です。
+        </p>
+        <p class="calc">
+          <b>設計用水平震度 KH ＝ Z × KS</b>　　<b>設計用鉛直震度 KV ＝ KH ÷ 2</b><br>
+          Z：地域係数、KS：設計用標準震度（設置する階と耐震クラスで決まる）
+        </p>
+        <p>
+          建物は、上の階ほど大きく揺れます。そのため、同じ設備でも、置く階によって震度が変わります。指針では、次の表の値を使います。
+        </p>
+        <table>
+          <thead><tr><th>設置する階</th><th>耐震クラスS</th><th>耐震クラスA</th><th>耐震クラスB</th></tr></thead>
+          <tbody>
+            <tr><td>上層階、屋上及び塔屋</td><td>2.0</td><td>1.5</td><td>1.0</td></tr>
+            <tr><td>中間階</td><td>1.5</td><td>1.0</td><td>0.6</td></tr>
+            <tr><td>地階及び1階</td><td>1.0</td><td>0.6</td><td>0.4</td></tr>
+          </tbody>
+        </table>
+        <p>
+          工場でいえば、1階の床に置く設備は「地階及び1階」、2階建ての工場の2階の床に置く設備は「上層階」（最上階）にあたります。3階建て以上の建物では、上層階と中間階の範囲が階数で決まっているので、指針で確かめます。
+        </p>
+        <p>
+          耐震クラスは、設備の重要度や、地震のあとも動き続ける必要があるかで決めます。一般的な設備ではクラスBを使う例が多いものの、決まりではありません。<strong>どのクラスで計算するかは、客先に確かめて決めます</strong>。
+        </p>
+
+        <h3>地域係数 Z</h3>
+        <p>
+          地域係数は、地域ごとの地震の起こりやすさを表す値で、建築基準法施行令第88条にもとづく告示（昭和55年建設省告示第1793号）で決まっています。値は1.0、0.9、0.8、0.7の4種類です。区分は市町村ごとに決まっている場合があるので、設置場所の区分を告示で確かめます。迷うときは1.0とすると、小さく見積もることはありません。
+        </p>
+
+        <h3>指針は「参考」。架台の計算で分かることと、分からないこと</h3>
+        <p>
+          この指針は、本来は建物の設備（空調や給排水など）のためのものです。生産設備の架台に使うときは、あくまで震度を決める考え方の参考として使い、どの考え方を使ったかを計算書に書きます。
+        </p>
+        <p>
+          また、架台とアンカーの計算で分かるのは、<strong>架台が壊れたり倒れたりしないか</strong>までです。設備を置く床や建物が、その重さと地震の力に耐えるかは、建物の設計者の確認が必要です。特に、2階の床に重い設備を置くときは、床の強さを先に確かめてもらいます。
+        </p>
+        <p>
+          本シリーズの<a href="stand-strength-calculation.html">架台の強度計算の記事</a>では、横の力の係数を「仮に0.3」としていました。表と比べると、1階・クラスBでも0.4です。0.3のままでは、多くの条件で地震の力を小さく見積もることになります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>震度は、まず客先の仕様書の指定を確かめる。指定があればその値で計算する</li>
+            <li>指定がなければ、建築設備の指針の KH ＝ Z × KS を参考にする（1階・クラスB 0.4、2階建ての2階・クラスB 1.0）</li>
+            <li>架台の計算で分かるのは架台とアンカーまで。床や建物の確認は、建物の設計者に依頼する</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>架台の耐震計算の手順</h2>
+        <p>
+          震度が決まったら、地震の力を求め、架台の部材とアンカーを確かめます。ここでは、筋かいのない4本脚の架台を例にします。
+        </p>
+
+        <h3>手順1｜地震の力を求める</h3>
+        <p class="calc">
+          <b>横の地震力 FH ＝ KH × W</b>　　<b>縦の地震力 FV ＝ KV × W</b><br>
+          W：設備と架台の重さ（N）＝ 質量（kg）× 9.81
+        </p>
+        <p>
+          設備の重さには、架台の上にのる部品や、中に入る液体なども含めます。運転中に重さが変わる設備は、重いほうの状態で計算します。
+        </p>
+
+        <h3>手順2｜横の力を、重心の高さにかける</h3>
+        <p>
+          横の力は、設備の重心にかけます。重心の位置は、設備の図面やメーカーの資料で確かめます。分からないときは、設備の高さの半分を仮に使い、計算書にそう書いておきます。
+        </p>
+
+        <figure class="article-figure">
+          <svg viewBox="0 0 640 300" role="img" aria-label="重心の高さと倒す力の関係。重心が高いほど、同じ横の力でも倒す力が大きくなる">
+            <defs>
+              <marker id="sz2o" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+            </defs>
+            <text x="20" y="30" font-size="20" fill="#0d2b4e">ワンポイント｜重心が高いほど、倒す力は大きくなる</text>
+            <line x1="20" y1="270" x2="620" y2="270" stroke="#8a96a3" stroke-width="4"/>
+            <!-- 低い設備 -->
+            <rect x="80" y="196" width="12" height="74" fill="#6f8aa6"/><rect x="228" y="196" width="12" height="74" fill="#6f8aa6"/><rect x="80" y="186" width="160" height="12" fill="#6f8aa6"/>
+            <rect x="105" y="140" width="110" height="46" fill="#ebedf0" stroke="#0d2b4e" stroke-width="2"/>
+            <circle cx="160" cy="163" r="6" fill="#0d2b4e"/>
+            <line x1="160" y1="163" x2="60" y2="163" stroke="#d4691a" stroke-width="5" marker-end="url(#sz2o)"/>
+            <text x="160" y="300" font-size="17" fill="#0d2b4e" text-anchor="middle">重心が低い</text>
+            <!-- 高い設備 -->
+            <rect x="400" y="196" width="12" height="74" fill="#6f8aa6"/><rect x="548" y="196" width="12" height="74" fill="#6f8aa6"/><rect x="400" y="186" width="160" height="12" fill="#6f8aa6"/>
+            <rect x="435" y="56" width="90" height="130" fill="#ebedf0" stroke="#0d2b4e" stroke-width="2"/>
+            <circle cx="480" cy="110" r="6" fill="#0d2b4e"/>
+            <line x1="480" y1="110" x2="380" y2="110" stroke="#d4691a" stroke-width="5" marker-end="url(#sz2o)"/>
+            <path d="M560,268 L560,226" stroke="#d4691a" stroke-width="5" marker-end="url(#sz2o)"/>
+            <text x="574" y="250" font-size="16" fill="#d4691a">浮く</text>
+            <text x="480" y="300" font-size="17" fill="#0d2b4e" text-anchor="middle">重心が高い</text>
+          </svg>
+          <figcaption>同じ重さ・同じ震度でも、背の高い設備は倒れやすく、浮き上がる側のアンカーが引っ張られる。</figcaption>
+        </figure>
+
+        <h3>手順3｜柱の曲げと圧縮を確かめる</h3>
+        <p>
+          筋かいのない架台では、横の力を4本の柱で分けて受け、柱の根元が曲げられます。本記事では、架台の強度計算の記事と同じく、柱を上端が自由な片持ちとして、横の力を4本で等分する単純化を使います。
+        </p>
+        <p class="calc">
+          <b>柱1本の曲げ M ＝（FH ÷ 4）× h</b>　　<b>曲げ応力 ＝ M ÷ Z</b><br>
+          <b>柱1本の軸力 N ＝（W ＋ FV）÷ 4 ＋ 自重 ＋ FH × hg ÷（2 × L）</b><br>
+          h：柱の高さ、Z：柱の断面係数、hg：架台の上面から重心までの高さ、L：揺れの向きの柱の間隔
+        </p>
+        <p>
+          軸力の最後の項は、重心が架台の上面より高い分の倒す力を、揺れの向きの反対側の2本の柱が受ける分です。圧縮応力と曲げ応力は、それぞれの許容応力との比を足して、1.0以下かどうかで確かめます。
+        </p>
+
+        <h3>手順4｜倒れとアンカーの引き抜きを確かめる</h3>
+        <p>
+          最後に、設備と架台が一体で倒れようとする場合を確かめます。建築設備の耐震設計の資料では、倒そうとする力から重さが止める力を引き、ボルトの間隔と引っ張られる側のボルトの本数で割って、アンカーボルト1本の引き抜き力を求めます。
+        </p>
+        <p class="calc">
+          <b>引き抜き力 Rb ＝｛FH ×（h ＋ hg）−（W − FV）× L ÷ 2｝÷（L × nt）</b><br>
+          nt：浮き上がる側のアンカーの本数（4本脚で各柱1本なら2本）
+        </p>
+        <p>
+          力はすべてN、長さはすべてmmにそろえます（W は質量ではなく重さ）。W − FV は、縦の揺れが上向きにかかって、重さが軽くなった状態を表します。nt は、ボルトの総本数ではなく、引っ張られる側の本数です。この式は、設備と架台が一つのかたまりとして倒れようとするとした簡易な求め方です。
+        </p>
+        <p>
+          値がマイナスなら、重さが倒れを止めていて、浮き上がりません。プラスになったら、その力に耐えるアンカーを選びます。あわせて、横の力をボルトの総本数で割ったせん断力も求め、引き抜きとの組み合わせ、コンクリートの壊れ方、へりあきを確かめます。アンカーの耐力とベースプレートの厚さの決め方は、「<a href="anchor-bolt-calculation.html">アンカーボルトの引き抜き計算の方法と例</a>」で詳しく解説しています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>地震の力は「重さ × 震度」。横の力は設備の重心にかける</li>
+            <li>柱は、横の力による曲げと、縦の力と倒す力で増えた圧縮を組み合わせて確かめる</li>
+            <li>倒そうとする力が止める力を上回ったら、アンカーの引き抜きを計算する</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>計算例｜同じ架台を工場の1階と2階に置く</h2>
+        <p>
+          <a href="stand-strength-calculation.html">架台の強度計算の記事</a>と同じ架台で計算します。条件は次のとおりです。
+        </p>
+        <ul>
+          <li>設備の質量 500kg、架台の上面から重心まで hg ＝ 400mm</li>
+          <li>柱の間隔 L ＝ 1,000mm（縦横とも）、柱の高さ h ＝ 800mm、筋かいなし</li>
+          <li>柱は角パイプ □50×50×3.2（断面係数 8.16×10³ mm³、断面積 572.7mm²）</li>
+          <li>客先の指定はなく、建築設備の指針の考え方を参考に、耐震クラスB、地域係数 Z ＝ 1.0 とする</li>
+          <li>曲げの許容応力は、架台の記事と同じ80MPa（引張強さ400MPa ÷ 5）</li>
+        </ul>
+        <p>
+          地震は、短い時間だけかかる「短期」の力です。建築基準法施行令第90条では、鋼材の短期の許容応力度を、長期の1.5倍としています。本記事では、架台の記事と比べやすいように、余裕を見た80MPaのまま比べます。座屈、溶接、ボルト、アンカーの許容値は、それぞれの決まりで別に確かめます。
+        </p>
+
+        <h3>工場の1階に置く場合</h3>
+        <p>
+          表から KS ＝ 0.4 なので、KH ＝ 1.0 × 0.4 ＝ 0.4、KV ＝ 0.2 です。重さ W ＝ 500 × 9.81 ＝ 4,905N から、横の地震力 FH ＝ 1,962N、縦の地震力 FV ＝ 981N です。
+        </p>
+        <p>
+          柱1本の横の力は 1,962 ÷ 4 ＝ 490.5N、根元の曲げは 490.5 × 800 ＝ 392,400N·mm、曲げ応力は 392,400 ÷ 8,160 ＝ <strong>48.1MPa</strong> です。軸力は、重さと縦の力の分が（4,905 ＋ 981）÷ 4 ＝ 1,472N、梁と柱の自重が約80N、重心が高い分が 1,962 × 400 ÷ 2,000 ＝ 392N で、合計 1,943N です。圧縮応力は3.39MPaで、座屈を考えた許容圧縮応力は102.6MPaです（座屈長さは柱の高さの2倍）。
+        </p>
+        <p>
+          組み合わせると、3.39 ÷ 102.6 ＋ 48.1 ÷ 80 ＝ <strong>0.63</strong> で、1.0以下です。倒す力は 1,962 ×（800 ＋ 400）＝ 2,354,400N·mm、止める力は（4,905 − 981）× 500 ＝ 1,962,000N·mm で、倒す力が少し上回ります。アンカー1本の引き抜きは（2,354,400 − 1,962,000）÷（1,000 × 2）＝ <strong>196N</strong> です。
+        </p>
+
+        <h3>2階建ての工場の2階に置く場合</h3>
+        <p>
+          2階建ての工場の2階は上層階にあたり、KS ＝ 1.0、KH ＝ 1.0、KV ＝ 0.5 です。横の地震力は設備の重さと同じ 4,905N になり、1階の2.5倍です。同じ式で計算すると、柱の曲げ応力は120.2MPa、組み合わせは<strong>1.55</strong>で、□50では足りません。
+        </p>
+
+        <h3>条件を変えると、どれだけ変わるか</h3>
+        <p>
+          同じ架台で、震度と部材を変えた結果を並べます。柱の曲げは曲げ応力（MPa）、アンカーは1本あたりの引き抜き（N）です。部材の指定がない行は□50です。
+        </p>
+        <table>
+          <thead><tr><th>条件</th><th>KH</th><th>柱の曲げ</th><th>組合せ</th><th>アンカー<br>1本</th></tr></thead>
+          <tbody>
+            <tr><td>架台の記事の値（重心の高さなし）</td><td>0.3</td><td>36.1</td><td>0.48</td><td>0</td></tr>
+            <tr><td>1階</td><td>0.4</td><td>48.1</td><td>0.63</td><td>196</td></tr>
+            <tr><td>客先の指定が0.6の場合</td><td>0.6</td><td>72.1</td><td>0.94</td><td>907</td></tr>
+            <tr><td>2階</td><td>1.0</td><td>120.2</td><td><strong>1.55</strong></td><td>2,330</td></tr>
+            <tr><td>2階（□75）</td><td>1.0</td><td>48.8</td><td>0.64</td><td>2,330</td></tr>
+            <tr><td>2階（□50＋筋かい）</td><td>1.0</td><td>0</td><td>0.06</td><td>2,330</td></tr>
+          </tbody>
+        </table>
+        <p>
+          1階では余裕がありますが、<strong class="mk">同じ架台を2階に置くと、組み合わせが1.55になり、□50では足りません</strong>。柱を□75にすると0.64まで下がります。筋かいを入れると、横の力を筋かいが受けるので、柱はほぼ圧縮だけになります（筋かい1本には約3,100Nの引張がかかります）。
+        </p>
+        <p>
+          アンカーの引き抜きは、部材を変えても変わりません。2階では1本あたり約2,300Nです。重心がさらに高く hg ＝ 800mm なら、約3,300Nになります。アンカーの記事の例（長期の許容値13,700N）なら収まりますが、使う製品の技術資料で確かめます。
+        </p>
+
+        <h3>この計算例で確認していないもの</h3>
+        <ul>
+          <li>梁の曲げ、梁と柱の接合部、溶接部の強さ</li>
+          <li>ベースプレートの厚さ、アンカーのへりあき・間隔、床のコンクリートの強さ</li>
+          <li>筋かい本体と、その取り付け部の強さ</li>
+          <li>設備本体を架台に固定するボルトの強さ</li>
+          <li>架台の揺れやすさ（固有振動数）と、設備の振動との関係</li>
+          <li>設備を置く床や建物が、重さと地震の力に耐えるか（建物の設計者の確認）</li>
+        </ul>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>1階では組み合わせ0.63。同じ架台でも2階建ての工場の2階では1.55で足りない</li>
+            <li>対策は、柱を太くするか、筋かいを入れる。筋かいが最も効く</li>
+            <li>アンカーの引き抜きは、震度と重心の高さで決まり、部材を変えても減らない</li>
+          </ul>
+        </div>
+
+                <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。図は入力に合わせて切り替わる） -->
+        <h2>自分の条件で試す｜架台の耐震計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。客先から震度を指定されている場合は、その値を直接入れられます。指定がない場合は、設置する階と耐震クラスを選ぶと震度が決まります。柱の応力とアンカーの引き抜きまで、その場で変わります。初期値は、本記事の計算例（工場の1階・耐震クラスB）と同じです。
+        </p>
+
+        <div class="calc-tool" id="sz-tool">
+          <p class="calc-tool-title">4本脚の架台の耐震計算（概算）</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（局部震度法の考え方で設計用水平震度を決める、地震の横の力は設備の重心にかける、筋かいがない場合の柱は上端が自由な片持ち柱として横の力を4本で等分する、筋かいがある場合は柱の曲げを0とする）による概算です。震度の値は建築設備の耐震の指針の考え方の例で、使う基準は客先の指定や建物の条件で決まります。梁、溶接部、ベースプレート、床、設備本体の固定は計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、適用する基準と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <div class="calc-fig">
+            <svg viewBox="0 0 640 320" role="img" aria-label="設置する階と、地震の力がかかる位置の図">
+              <defs>
+                <marker id="sz-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+                <marker id="sz-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <!-- 建物と設置する階 -->
+              <text x="16" y="28" font-size="17" fill="#0d2b4e">設置する階</text>
+              <rect x="30" y="80" width="120" height="210" fill="none" stroke="#8a96a3" stroke-width="3"/>
+              <rect x="66" y="56" width="48" height="24" fill="none" stroke="#8a96a3" stroke-width="3"/>
+              <line x1="30" y1="150" x2="150" y2="150" stroke="#8a96a3" stroke-width="2"/>
+              <line x1="30" y1="220" x2="150" y2="220" stroke="#8a96a3" stroke-width="2"/>
+              <rect data-g="f-top" x="33" y="83" width="114" height="64" fill="#d4691a" opacity="0.25"/>
+              <rect data-g="f-mid" x="33" y="153" width="114" height="64" fill="#d4691a" opacity="0.25"/>
+              <rect data-g="f-low" x="33" y="223" width="114" height="64" fill="#d4691a" opacity="0.25"/>
+              <text x="90" y="122" font-size="15" fill="#0d2b4e" text-anchor="middle">上層階・屋上</text>
+              <text x="90" y="192" font-size="15" fill="#0d2b4e" text-anchor="middle">中間階</text>
+              <text x="90" y="262" font-size="15" fill="#0d2b4e" text-anchor="middle">地階・1階</text>
+              <line x1="20" y1="296" x2="160" y2="296" stroke="#8a96a3" stroke-width="4"/>
+              <text x="90" y="316" font-size="14" fill="#5a6b7d" text-anchor="middle">上の階ほど大きく揺れる</text>
+              <!-- 架台と設備（正面） -->
+              <line x1="190" y1="20" x2="190" y2="300" stroke="#d9dee4" stroke-width="2"/>
+              <text x="206" y="28" font-size="17" fill="#0d2b4e">正面から見た架台と設備</text>
+              <line x1="230" y1="290" x2="610" y2="290" stroke="#8a96a3" stroke-width="4"/>
+              <rect x="300" y="170" width="14" height="120" fill="#6f8aa6"/><rect x="526" y="170" width="14" height="120" fill="#6f8aa6"/>
+              <rect x="300" y="158" width="240" height="14" fill="#6f8aa6"/>
+              <g data-g="brace"><line x1="314" y1="286" x2="526" y2="174" stroke="#d4691a" stroke-width="5"/><line x1="314" y1="174" x2="526" y2="286" stroke="#d4691a" stroke-width="5"/></g>
+              <rect x="350" y="62" width="140" height="96" fill="#ebedf0" stroke="#0d2b4e" stroke-width="2"/>
+              <text x="420" y="84" font-size="15" fill="#0d2b4e" text-anchor="middle">設備</text>
+              <circle cx="420" cy="112" r="7" fill="#0d2b4e"/>
+              <text x="434" y="132" font-size="14" fill="#0d2b4e">重心</text>
+              <line x1="420" y1="112" x2="300" y2="112" stroke="#d4691a" stroke-width="6" marker-end="url(#sz-ao)"/>
+              <text x="228" y="100" font-size="16" fill="#d4691a">横の力 KH×W</text>
+              <line x1="560" y1="112" x2="560" y2="150" stroke="#0d2b4e" stroke-width="5" marker-end="url(#sz-an)"/>
+              <text x="566" y="104" font-size="15" fill="#0d2b4e">縦 KV×W</text>
+              <line x1="500" y1="112" x2="500" y2="165" stroke="#0d2b4e" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text x="506" y="146" font-size="14" fill="#0d2b4e">hg</text>
+              <g data-g="lift"><line x1="533" y1="296" x2="533" y2="254" stroke="#d4691a" stroke-width="5" marker-end="url(#sz-ao)"/><text x="548" y="276" font-size="15" fill="#d4691a">浮く</text></g>
+            </svg>
+            <p class="calc-fig-note">オレンジの矢印は地震の横の力で、設備の重心にかけます。重心が高い（hg が大きい）ほど、架台を倒そうとする力が大きくなります。</p>
+          </div>
+
+          <h4>震度を決める条件</h4>
+          <p style="font-size:0.86rem;margin:4px 0 0 !important;">震度の決め方</p>
+          <div class="calc-btns" data-b="mode"><button type="button" data-v="calc">階とクラスから（指針の考え方）</button><button type="button" data-v="direct">震度を直接入れる（客先の指定）</button></div>
+          <div data-g="m-calc">
+            <p style="font-size:0.86rem;margin:10px 0 0 !important;">設置する階（2階建ての工場の2階は「上層階」）</p>
+            <div class="calc-btns" data-b="fl"><button type="button" data-v="top">上層階、屋上及び塔屋</button><button type="button" data-v="mid">中間階</button><button type="button" data-v="low">地階及び1階</button></div>
+            <p style="font-size:0.86rem;margin:10px 0 0 !important;">耐震クラス（設備の重要度で決まる。客先に確認）</p>
+            <div class="calc-btns" data-b="cl"><button type="button" data-v="S">S</button><button type="button" data-v="A">A</button><button type="button" data-v="B">B</button></div>
+            <div class="calc-in">
+              <label>地域係数 Z<span class="row"><input type="range" data-k="z" min="0.7" max="1" step="0.1"><input type="number" data-k="z" min="0.7" max="1" step="0.1"><span class="unit"></span></span></label>
+            </div>
+          </div>
+          <div class="calc-in" data-g="m-direct">
+            <label>設計用水平震度 KH（客先の指定の値）<span class="row"><input type="range" data-k="khd" min="0.1" max="2" step="0.05"><input type="number" data-k="khd" min="0.1" max="2" step="0.05"><span class="unit"></span></span></label>
+          </div>
+
+          <h4>設備と架台</h4>
+          <div class="calc-in">
+            <label>設備の質量（架台を含む）<span class="row"><input type="range" data-k="m" min="50" max="3000" step="10"><input type="number" data-k="m" min="50" max="3000" step="10"><span class="unit">kg</span></span></label>
+            <label>柱の間隔（揺れの向き）<span class="row"><input type="range" data-k="L" min="300" max="3000" step="50"><input type="number" data-k="L" min="300" max="3000" step="50"><span class="unit">mm</span></span></label>
+            <label>柱の高さ<span class="row"><input type="range" data-k="h" min="300" max="2500" step="50"><input type="number" data-k="h" min="300" max="2500" step="50"><span class="unit">mm</span></span></label>
+            <label>架台の上面から設備の重心まで（hg）<span class="row"><input type="range" data-k="hg" min="0" max="2000" step="50"><input type="number" data-k="hg" min="0" max="2000" step="50"><span class="unit">mm</span></span></label>
+          </div>
+          <p style="font-size:0.86rem;margin:12px 0 0 !important;">柱の角パイプ</p>
+          <div class="calc-btns" data-b="size"><button type="button" data-v="0">□50×50×3.2</button><button type="button" data-v="1">□60×60×3.2</button><button type="button" data-v="2">□75×75×3.2</button><button type="button" data-v="3">□100×100×3.2</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">筋かい</p>
+          <div class="calc-btns" data-b="brace"><button type="button" data-v="0">なし</button><button type="button" data-v="1">あり</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力（曲げ）の決め方</p>
+          <div class="calc-btns" data-b="sap"><button type="button" data-v="80">引張強さ400÷5＝80MPa</button><button type="button" data-v="163">機械の構造物の規格の例 163MPa</button></div>
+
+          <h4>地震の力</h4>
+          <table class="calc-out">
+            <tr><th>設計用標準震度 KS</th><td><b data-o="ks"></b></td></tr>
+            <tr><th>設計用水平震度 KH ＝ Z × KS</th><td><b data-o="kh"></b></td></tr>
+            <tr><th>横の地震力 FH ＝ KH × W</th><td><b data-o="fh"></b> N</td></tr>
+            <tr><th>縦の地震力 FV ＝ KH ÷ 2 × W</th><td><b data-o="fv"></b> N</td></tr>
+          </table>
+          <h4>柱</h4>
+          <table class="calc-out">
+            <tr><th>柱1本の軸力（重心が高い分を含む）</th><td><b data-o="N"></b> N</td></tr>
+            <tr><th>許容圧縮応力</th><td><b data-o="fc"></b> MPa</td></tr>
+            <tr><th>横の力による柱の曲げ応力</th><td><b data-o="sbc"></b> MPa</td></tr>
+            <tr><th>横ゆれ（架台の上面）</th><td><b data-o="sway"></b> mm</td></tr>
+            <tr data-j="comb"><th>圧縮と曲げの組合せ（1.0以下が目安）</th><td><b data-o="comb"></b><span class="judge" data-o="jcomb"></span></td></tr>
+            <tr data-g="brace"><th>筋かい1本の力（引張）</th><td><b data-o="fb"></b> N</td></tr>
+          </table>
+          <h4>倒れとアンカー</h4>
+          <table class="calc-out">
+            <tr><th>倒そうとする力 FH ×（h ＋ hg）</th><td><b data-o="mot"></b> N·mm</td></tr>
+            <tr><th>重さが止める力（W − FV）× L ÷ 2</th><td><b data-o="mst"></b> N·mm</td></tr>
+            <tr data-j="rb"><th>アンカー1本の引き抜き（片側2本）</th><td><b data-o="rb"></b> N<span class="judge" data-o="jrb"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="sz-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('sz-tool');
+          if (!root) return;
+          // 角形鋼管の断面性能（JIS G 3466 の表）。A:mm2, I:mm4, Z:mm3, imin:mm, w:kg/m
+          var SEC = [
+            { n: '□50×50×3.2',   A: 572.7, I: 20.4e4, Z: 8.16e3, imin: 18.9, w: 4.50 },
+            { n: '□60×60×3.2',   A: 700.7, I: 36.9e4, Z: 12.3e3, imin: 23.0, w: 5.50 },
+            { n: '□75×75×3.2',   A: 892.7, I: 75.5e4, Z: 20.1e3, imin: 29.1, w: 7.01 },
+            { n: '□100×100×3.2', A: 1213,  I: 187e4,  Z: 37.5e3, imin: 39.3, w: 9.52 }
+          ];
+          // 局部震度法の設計用標準震度 KS（建築設備の耐震の指針の考え方の例・水槽以外）
+          var KS = { top: { S: 2.0, A: 1.5, B: 1.0 }, mid: { S: 1.5, A: 1.0, B: 0.6 }, low: { S: 1.0, A: 0.6, B: 0.4 } };
+          var DEF = { mode: 'calc', khd: 0.6, fl: 'low', cl: 'B', z: 1.0, m: 500, L: 1000, h: 800, hg: 400, size: '0', brace: '0', sa: 80 };
+          var S = {}, used = false, g = 9.81, E = 205000, F = 235;
+          var LAM = Math.sqrt(Math.PI * Math.PI * E / (0.6 * F));
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function show(k, on) { root.querySelectorAll('[data-g="' + k + '"]').forEach(function (e) { e.style.display = on ? '' : 'none'; }); }
+          function fc(lam) {
+            var r = lam / LAM;
+            if (lam <= LAM) return F * (1 - 0.4 * r * r) / (1.5 + (2 / 3) * r * r);
+            return 0.277 * F / (r * r);
+          }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            [['mode', S.mode], ['fl', S.fl], ['cl', S.cl], ['size', S.size], ['brace', S.brace], ['sap', String(S.sa)]].forEach(function (p) {
+              root.querySelectorAll('[data-b="' + p[0] + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === p[1]); });
+            });
+            var calcMode = S.mode === 'calc';
+            show('m-calc', calcMode); show('m-direct', !calcMode);
+            show('f-top', calcMode && S.fl === 'top'); show('f-mid', calcMode && S.fl === 'mid'); show('f-low', calcMode && S.fl === 'low');
+            show('brace', S.brace === '1');
+          }
+          function judge(key, row, over, textOk, textOver) {
+            out(key, over ? textOver : textOk);
+            root.querySelector('[data-j="' + row + '"]').classList.toggle('over', over);
+          }
+          function calc() {
+            var s = SEC[Number(S.size)], L = S.L, h = S.h, hg = S.hg, brace = S.brace === '1';
+            var direct = S.mode === 'direct';
+            var ks = KS[S.fl][S.cl], kh = direct ? S.khd : S.z * ks;
+            var W = S.m * g, FH = kh * W, FV = kh / 2 * W;
+            var self = s.w * g * L / 1000 + s.w * g * h / 1000;
+            var dN = FH * (brace ? h + hg : hg) / (2 * L);          // 倒す力のうち、柱の軸力の偶力で受ける分
+            var N = (W + FV) / 4 + self + dN;
+            var Q = brace ? 0 : FH / 4, Mc = Q * h, sbc = Mc / s.Z;
+            var Lk = brace ? h : 2 * h, lam = Lk / s.imin, f = fc(lam), sc = N / s.A;
+            var comb = sc / f + sbc / S.sa;
+            var sway = Q * Math.pow(h, 3) / (3 * E * s.I);
+            var Fb = brace ? FH / 2 * Math.sqrt(L * L + h * h) / L : 0;
+            var Mot = FH * (h + hg), Mst = (W - FV) * L / 2, Rb = Math.max(0, (Mot - Mst) / L / 2);
+            out('ks', direct ? '－（震度を直接入力）' : fmt(ks, 1)); out('kh', fmt(kh, 2)); out('fh', fmt(FH)); out('fv', fmt(FV));
+            out('N', fmt(N)); out('fc', fmt(f, 1)); out('sbc', fmt(sbc, 1)); out('sway', fmt(sway, 2)); out('comb', fmt(comb, 2));
+            out('fb', fmt(Fb)); out('mot', fmt(Mot)); out('mst', fmt(Mst)); out('rb', fmt(Rb));
+            judge('jcomb', 'comb', comb > 1, '1.0 以下', '1.0 を超過');
+            judge('jrb', 'rb', Rb > 0, '浮き上がらない', '浮き上がる側のアンカーに引き抜き');
+            show('lift', Rb > 0);
+            out('eq', s.n + '。重さ W ' + fmt(W) + ' N、柱の圧縮応力 ' + fmt(sc, 2) + ' MPa（細長比 ' + fmt(lam) + '、座屈長さ ' + fmt(Lk) + ' mm）、柱の根元の曲げ ' + fmt(Mc) + ' N·mm。'
+              + (brace ? '筋かいあり：筋かいが横の力をすべて受けると仮定し、柱の曲げを0としています。倒す力はすべて柱の軸力（偶力）で受けます。' : '筋かいなし：横の力を4本の柱で等分し、柱の根元の曲げで受けます。重心が架台の上面より高い分だけ、柱の軸力で受けます。')
+              + 'アンカーの値は、設備と架台が一体で倒れようとするとした指針の式による概算です。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'seismic' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          ['mode', 'fl', 'cl', 'size', 'brace'].forEach(function (k) {
+            root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.addEventListener('click', function () { set(k, b.dataset.v); }); });
+          });
+          root.querySelectorAll('[data-b="sap"] button').forEach(function (b) { b.addEventListener('click', function () { set('sa', Number(b.dataset.v)); }); });
+          document.getElementById('sz-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆依頼の案内（計算ツールのすぐ下。キットの article_nav.py で入れ直す） -->
+        <div class="tool-cta tool-cta--box">
+          <p class="tc-lead">初めての条件や、調べる時間がないときは</p>
+          <p class="tc-text">図面や寸法などの条件を送っていただければ、架台の耐震計算から計算書の作成までお引き受けします。客先にそのまま出せる資料にまとめます（オンライン・全国対応）。</p>
+          <p class="tc-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E6%9E%B6%E5%8F%B0%E3%81%AE%E8%80%90%E9%9C%87%E8%A8%88%E7%AE%97">架台の耐震計算を依頼する</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'tool_cta'});">計算書の見本</a></p>
+        </div>
+
+        <!-- ◆ツールの後（依頼の案内はこの前に article_nav.py が入れる） -->
+
+        <!-- ◆5 -->
+        <h2>耐震計算で見落としやすい点</h2>
+
+        <h3>震度を、1階の値のまま使う</h3>
+        <p>
+          工場の2階や中二階に置く設備でも、1階の値で計算してしまうことがあります。表のとおり、同じ耐震クラスでも、上層階の震度は1階の2〜2.5倍です。設置する階は、計算書の最初に書いておきます。
+        </p>
+
+        <h3>重心の高さを無視する</h3>
+        <p>
+          横の力を架台の上面にかけて計算すると、背の高い設備では倒す力を小さく見積もります。制御盤やタンクのように背の高い設備は、特に重心の位置を確かめます。
+        </p>
+
+        <h3>キャスターやアジャスターで置くだけにする</h3>
+        <p>
+          キャスターやレベル調整のアジャスターで床に置くだけの架台は、地震で動いたり、倒れたりします。耐震計算を求められたら、床へのアンカー固定か、移動を止める金具を前提にします。
+        </p>
+
+        <h3>防振ゴムやばねで支える設備</h3>
+        <p>
+          振動の大きい設備を防振ゴムやばねで支えると、地震のときは固定した設備より大きく揺れやすくなります。建築設備の資料では、防振支持の設備に固定の設備より大きな震度を使う例があります（1階で0.4に対して0.6など）。また、設備が防振材の上から外れたり倒れたりしないよう、ストッパーを設けます。ストッパーは地震の力に耐えるものとし、ふだんの運転では触れないすき間を空けて、防振の働きを妨げないようにします。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>設置する階を確かめ、上の階では大きな震度を使う</li>
+            <li>横の力は重心にかける。背の高い設備ほど倒れやすい</li>
+            <li>置くだけの架台や防振支持の設備は、固定の方法から考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>客先に出す耐震計算書に書く項目</h2>
+        <p>
+          耐震計算書は、計算の結果だけでなく、<strong>何を前提に計算したか</strong>が読み手に分かることが大切です。次の項目をそろえると、客先の確認がスムーズになります。
+        </p>
+        <ol>
+          <li><b>対象と条件</b>：設備の名前、質量、重心の位置、架台の寸法と部材、設置する建物と階</li>
+          <li><b>適用した基準</b>：客先の仕様書、または参考にした指針の名前、耐震クラス、地域係数</li>
+          <li><b>設計用震度</b>：KS、KH、KV の値と、決めた根拠</li>
+          <li><b>地震の力</b>：横と縦の地震力、かける位置</li>
+          <li><b>部材の確認</b>：柱・梁・筋かいの応力と許容応力、組み合わせの値</li>
+          <li><b>アンカーの確認</b>：引き抜き力とせん断力、使うアンカーの許容値</li>
+          <li><b>結論と前提</b>：結果のまとめ、計算に含めていないもの（床や建物の確認は対象外であることなど）</li>
+        </ol>
+        <p>
+          実際の計算書の形は、<a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'section'});">強度計算書の見本（11ページ）</a>で確かめられます。耐震計算書も、この見本と同じ流れでまとめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>計算書には、結果だけでなく、適用した基準と震度の根拠を書く</li>
+            <li>計算に含めていないものも書いておくと、客先との行き違いを防げる</li>
+          </ul>
+        </div>
+
+        <!-- ◆質問 -->
+        <h2>架台の耐震計算でよくある質問</h2>
+
+        <h3>工場の生産設備でも、建築設備の指針を使えますか</h3>
+        <p>
+          生産設備そのものに決まった基準がない場合、考え方の例として建築設備の指針を使うことはよくあります。ただし、客先の仕様書や業界の基準で震度が決まっていれば、そちらが優先です。どの基準を使ったかを、計算書に必ず書きます。
+        </p>
+
+        <h3>耐震クラスが分からないときは、どうすればよいですか</h3>
+        <p>
+          客先の設備の担当者に確かめます。確かめられないまま計算を進める場合は、複数のクラスで計算して結果を並べ、どれを採用するかを客先に決めてもらう方法があります。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          架台の耐震計算は、設備の重さに震度を掛けて地震の力を求め、柱の強さ、倒れ、アンカーの引き抜きを確かめる計算です。震度は、まず客先の指定を確かめ、指定がなければ建築設備の指針の考え方（KH ＝ Z × KS）を参考にします。計算例では、同じ□50の架台が、工場の1階では組み合わせ0.63、2階建ての工場の2階では1.55になりました。
+        </p>
+        <p>
+          <strong class="mk">最初に、使う震度と、その根拠を客先と決めること</strong>が、やり直しを防ぐいちばんの近道です。まずは計算ツールで、ご自身の設備の条件を入れて試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・建築設備耐震設計・施工指針（日本建築センター）の局部震度法の考え方（設計用標準震度、KV ＝ KH ÷ 2、アンカーボルトの引き抜き力の式）<br>
+          ・消防庁「消防用設備等の地震時に作用する外力の類型化」（設計用標準震度の表）<br>
+          ・昭和55年建設省告示第1793号（地域係数）、建築基準法施行令第90条（鋼材の許容応力度）<br>
+          ・国土交通省「公共建築工事標準仕様書（機械設備工事編）」（防振支持の設備の震度、ストッパー）<br>
+          ・柱の許容圧縮応力：鋼構造の設計規準の式（本シリーズの架台の記事と同じ）
+        </p>
+
+        <div class="article-cta"><!-- ◆記事下の依頼の案内（キットの article_nav.py で入れ直す） -->
+          今回の仕様が初めての条件で、一から調べる時間がないときは、架台の耐震計算から計算書の作成までお引き受けします。図面や寸法などの条件を送っていただければ、計算の前提の整理から資料づくりまで行います（オンライン・全国対応）。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E6%9E%B6%E5%8F%B0%E3%81%AE%E8%80%90%E9%9C%87%E8%A8%88%E7%AE%97">架台の耐震計算を依頼する</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'article_cta'});">計算書の見本</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.13</p>
+                <h3><a href="stand-strength-calculation.html">架台の強度計算の方法と例｜角パイプ・アングル・溝形鋼の選び方まで</a></h3>
+                <p class="column-excerpt">梁の曲げとたわみ、柱の座屈、部材の選び方まで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.21</p>
+                <h3><a href="anchor-bolt-calculation.html">アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで</a></h3>
+                <p class="column-excerpt">柱の根元の曲げからのボルトの力、アンカーの耐力、ベースプレートの厚さまで。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li><li class="is-cur"><span>09 架台の耐震</span></li></ol>
+            <p class="cs-pager"><a href="takt-time-calculation.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">計算・選定のご依頼</p>
+          <p class="cs-ask-text">初めての条件や、調べる時間がないときは、架台の耐震計算から計算書の作成までお引き受けします（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E6%9E%B6%E5%8F%B0%E3%81%AE%E8%80%90%E9%9C%87%E8%A8%88%E7%AE%97">計算を依頼する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#design">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP3</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/thumb-column-stand-strength.jpg" alt="" width="80" height="45"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/thumb-column-weld-strength.jpg" alt="" width="80" height="45"><span>溶接の強度計算の方法と例</span></a></li><li><a href="robot-stand-strength-calculation.html"><img src="../../img/thumb-column-robot-stand.jpg" alt="" width="80" height="45"><span>ロボット架台の強度計算の方法</span></a></li></ol>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>受付：平日 9:00–17:00</li>
+              <li>TEL：0835-57-0969</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
