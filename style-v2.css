@@ -2216,6 +2216,8 @@ a.industry-card { cursor: pointer; }
   box-shadow: 0 3px 0 #1550b0, 0 6px 12px rgba(31, 111, 224, 0.25);
 }
 .industry-card .new-badge { left: auto; right: 12px; }
+/* NEW の札と見出しが重ならないよう、見出しの右に札の幅をあける */
+.industry-card.is-new h2 { padding-right: 72px; }
 
 /* ボア径選びゲーム（エアシリンダの記事・2026-10-21）。動くのはスタートを押したときだけ */
 .ufo-weight { font-size: 1rem; color: var(--navy); margin: 0 0 8px !important; }
@@ -2344,7 +2346,7 @@ a.industry-card { cursor: pointer; }
 .cs-card, .cs-rank a, .cs-link { background:#fff; border:1px solid #e3e8ee; border-radius:6px; box-shadow:0 2px 6px rgba(13,43,78,.12); }
 .cs-card { padding:8px 10px; }
 .cs-series { list-style:none; margin:0 !important; padding:0 !important; font-size:0.82rem; display:grid; grid-template-columns:1fr 1fr; gap:2px 6px; }
-.cs-series li { margin:0 !important; line-height:1.4; }
+.cs-series li { margin:0 !important; line-height:1.4; min-width:0; }
 .cs-series a, .cs-series span { display:block; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-radius:4px; color:var(--ink); text-decoration:none; }
 .cs-series a:hover { background:#eef5fe; color:var(--cs-blue); }
 .cs-series .is-cur span { background:var(--cs-blue); color:#fff; font-weight:700; }
@@ -2510,3 +2512,21 @@ a.industry-card { cursor: pointer; }
   .case-list { grid-template-columns: 1fr; }
   .case-filter-sep { display: none; }
 }
+
+/* ===== プロンプト作成ツール（仕組みノート02・2026-11-12） ===== */
+.pr-tool .pr-lbl { font-size: 0.86rem; font-weight: 700; margin: 12px 0 0 !important; color: var(--ink); }
+.pr-in { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+.pr-in label { display: block; font-size: 0.86rem; color: var(--ink); }
+.pr-in input[type="text"] { display: block; width: 100%; box-sizing: border-box; margin-top: 3px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: 0.92rem; background: #fff; }
+.pr-in input[type="text"]:focus { outline: 2px solid var(--orange); outline-offset: 0; border-color: var(--orange); }
+.pr-in input::placeholder { color: #8c97a3; opacity: 0.75; }
+.pr-out { display: block; width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid var(--navy); border-radius: 8px; background: var(--paper-soft); font: inherit; font-size: 0.88rem; line-height: 1.7; color: var(--ink); resize: vertical; white-space: pre-wrap; }
+.pr-acts { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
+.pr-copy { font: inherit; font-size: 0.95rem; font-weight: 700; padding: 9px 26px; border: none; border-radius: 999px; background: var(--orange); color: #fff; cursor: pointer; box-shadow: 0 3px 8px rgba(212, 105, 26, 0.3); }
+.pr-copy:hover { filter: brightness(1.06); }
+.pr-note { font-size: 0.8rem; color: var(--ink-soft); margin: 0 0 6px !important; }
+.pr-note:empty { display: none; }
+.pr-msg { font-size: 0.85rem; font-weight: 700; color: var(--navy); }
+.pr-tool .calc-reset + .calc-reset { margin-left: 8px; }
+/* 記事中のプロンプト例（段落を保ったまま表示） */
+.prompt-ex p.prompt-txt { white-space: pre-line; font-size: 0.92rem; line-height: 1.75; }
