@@ -941,6 +941,15 @@ section[id] { scroll-margin-top: 84px; }
   box-shadow: 0 0 0 3px rgba(212,105,26,0.12);
 }
 .field textarea { min-height: 140px; resize: vertical; }
+/* フッターの「お問い合わせはお問い合わせフォームから承ります」の文中リンク：前後の文字と同じ大きさにする */
+.site-footer .footer-inline-link { font-size: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* お急ぎ（電話で折り返し）のチェック：電話番号の欄の下 */
+.field .urgent-chk {
+  display: flex; align-items: center; gap: 8px;
+  margin: 10px 0 0; font-weight: 500; color: var(--ink); cursor: pointer;
+}
+.field .urgent-chk input { width: 18px; height: 18px; padding: 0; margin: 0; flex: none; accent-color: var(--orange); }
+.field-help { font-size: 0.85rem; color: var(--ink-soft); margin: 6px 0 0; }
 
 /* お問い合わせ内容：上段＝自動反映のプレビュー（グレー）、下段＝自由記述（通常色）を
    ひとつの枠にまとめて、見た目は1つの入力欄に見せる */
