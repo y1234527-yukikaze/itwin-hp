@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：製造業の生成AIプロンプト例10選（特集「AIで作る 現場の仕組みノート」02）
+  （溶接の記事を土台に、キットの build_prompt.py で組み立て・2026-11-12）
+  プロンプト作成ツール：キットの tool_prompt.html／本文：prompt_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-genai-prompt.jpg（ナノバナナで生成して差し替え）
+  図3枚：キットの figs_prompt.py で作る（-kata / -shikumi / -steps）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-12）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール｜アイツイン コラム</title>
+  <meta name="description" content="製造業で生成AIのプロンプトは、どう書けばよいのでしょうか。本記事では、伝わるプロンプトの型と悪い例・良い例を整理したうえで、点検の記録や不良の原因整理など現場ですぐ使えるプロンプト例10選と、使うときの注意点をわかりやすく解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/manufacturing-genai-prompt">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール">
+  <meta property="og:description" content="製造業で生成AIのプロンプトは、どう書けばよいのでしょうか。本記事では、伝わるプロンプトの型と悪い例・良い例を整理したうえで、点検の記録や不良の原因整理など現場ですぐ使えるプロンプト例10選と、使うときの注意点をわかりやすく解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/manufacturing-genai-prompt">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-genai-prompt.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-12">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール">
+  <meta name="twitter:description" content="製造業で生成AIのプロンプトは、どう書けばよいのでしょうか。本記事では、伝わるプロンプトの型と悪い例・良い例を整理したうえで、点検の記録や不良の原因整理など現場ですぐ使えるプロンプト例10選と、使うときの注意点をわかりやすく解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-genai-prompt.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール",
+    "description": "製造業で生成AIのプロンプトは、どう書けばよいのでしょうか。本記事では、伝わるプロンプトの型と悪い例・良い例を整理したうえで、点検の記録や不良の原因整理など現場ですぐ使えるプロンプト例10選と、使うときの注意点をわかりやすく解説します。",
+    "image": "https://i-twin.co.jp/img/column-genai-prompt.jpg",
+    "datePublished": "2026-11-12",
+    "dateModified": "2026-11-12",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "AIで作る 現場の仕組みノート", "item": "https://i-twin.co.jp/column/shikumi/" },
+      { "@type": "ListItem", "position": 4, "name": "製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール", "item": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../shikumi/index.html">AIで作る 現場の仕組みノート</a> ／
+        <span>製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール</span>
+      </div>
+      <h1>製造業の生成AIプロンプト例10選｜現場で使える型と作成ツール</h1>
+      <p class="catch">公開日：2026年11月12日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../shikumi/index.html">現場の仕組みノート</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="raspberry-pi-manufacturing.html">‹ 前の記事：01 ラズパイの使い方</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">AI・現場の仕組み</span>公開日：2026.11.12</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-genai-prompt.jpg" alt="製造業の生成AIプロンプト。現場の担当者が、AIに渡す文章を組み立てているイメージ" width="1376" height="768">
+          <figcaption>AIの答えは、渡す文章（プロンプト）でほとんど決まる。</figcaption>
+        </figure>
+
+        <p>
+          「生成AIを使ってみたが、ありきたりな答えしか返ってこない」「メールや議事録以外に、現場で何に使えるのか分からない」。製造業で生成AIを使い始めると、多くの方がこの2つで手が止まります。
+        </p>
+        <p>
+          本記事では、<strong class="mk">製造業の生成AIプロンプト</strong>を、すぐ使える例10選で紹介します。伝わるプロンプトの型と悪い例・良い例、点検の記録や不良の原因整理に使える例のほか、後半では<strong>書類づくりから一歩進めて、AIに現場の仕組みを作ってもらう頼み方</strong>もまとめました。選んで書き込むだけでプロンプトができる作成ツールも付けています。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>製造業での生成AIの使われ方と、まだ届いていない所【2026年・白書】</li>
+            <li>伝わるプロンプトの型（5つの要素）と、悪い例・良い例</li>
+            <li>点検の記録・不良の原因・手順書など、現場ですぐ使えるプロンプト例</li>
+            <li>記録・読み取り・転記の仕組みをAIに作ってもらう頼み方と、4つの段階</li>
+            <li>選んで書き込むだけで、AIに渡す文章ができる作成ツール</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>製造業の生成AI活用の現状【2026年・白書】</h2>
+
+        <h3>業務で生成AIを使っているという回答は86.4%</h3>
+        <p>
+          総務省の令和8年版情報通信白書によると、企業に勤める人への調査で、生成AIの活用方針について「わからない」と答えた人を除いて集計すると、自社の何らかの業務で生成AIを使っているという回答は86.4%でした。前の年度の調査から大きく上がり、ほかの国との差も縮まっています。生成AIは、もう一部の企業だけの道具ではありません。
+        </p>
+
+        <h3>使い道は「議事録・メール」が約7割で最も多い</h3>
+        <p>
+          同じ調査で業務ごとの使われ方を見ると、日本では「議事録・メール作成補助」が約7割と最も多く、「営業・販売」が約6割、「社内ヘルプデスク」が約5割と続きます（会社の仕組みとして使う場合と、個人が自分の作業に使う場合を合わせた数字です）。効果を感じていると答えた割合も、議事録・メールが約7割と、ほかより目立って高い結果でした。今の生成AIは、主に<b>文章を書く手伝い</b>として使われています。
+        </p>
+
+        <h3>現場の困りごとには、まだ届いていない</h3>
+        <p>
+          これらの数字は、生成AIで現場の作業を自動にできる割合ではありません。一方で、製造業の現場には、文章では片づかない困りごとが多くあります。毎日の点検で手書きしている数値、生産終了で替えがきかない機器、表から表への転記。生成AIは文章だけでなく、こうした作業を自動にする<strong class="mk">小さな仕組みを作る手伝い</strong>もできます。ただし、どちらに使う場合も、答えの質は渡す文章（プロンプト）で大きく変わります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>何らかの業務で生成AIを使っているという回答は86.4%（「わからない」を除いた集計）</li>
+            <li>使い道は議事録・メールが約7割で最も多く、文章の手伝いが中心</li>
+            <li>現場の困りごとを解決する仕組みづくりにも使えるが、プロンプトが大切</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>伝わるプロンプトの型｜5つの要素</h2>
+        <p>
+          生成AIは、入力された文章をもとに答えを作ります。現場の事情や設備の状態を知っているわけではないため、条件を伝えないと、どの工場にも当てはまる一般論や、実際の現場とは違う答えが返ってきます。決まった規格があるわけではありませんが、筆者は次の5つの要素をそろえて頼むようにしています。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-genai-prompt-kata.jpg" alt="伝わるプロンプトの型。役割、何をしたいか、材料と条件、答えの形、確かめ方の5つの要素をそろえて頼む" width="1376" height="768" loading="lazy">
+          <figcaption>5つの要素をそろえると、一般論ではなく、自分の現場に合った答えが返ってくる。</figcaption>
+        </figure>
+
+        <h3>型の5つの要素｜役割・したいこと・材料と条件・答えの形・確かめ方</h3>
+        <ul>
+          <li><b>役割</b>：「あなたは製造業の品質の記録の整理を手伝うアシスタントです」のように、AIの立場を決める</li>
+          <li><b>何をしたいか・どうしたいか</b>：目的と、できたものをどう使うか（朝礼で説明する、班長に渡す など）</li>
+          <li><b>材料と条件</b>：元になる記録やメモ、読む人、長さ、現場の条件</li>
+          <li><b>答えの形</b>：箇条書き、表、手順、そのまま使える文章のどれで欲しいか</li>
+          <li><b>確かめ方</b>：記録にないことは推測で補わない、数値に単位と元の記録の場所を付ける、分からないときは質問させる など</li>
+        </ul>
+
+        <h3>悪い例と良い例｜「まとめて」だけでは伝わらない</h3>
+        <p>
+          たとえば点検の記録をまとめてもらう場合、<b>悪い例</b>は「点検の記録をまとめて」だけです。何のために、誰が読むのかが分からないため、AIは当たり障りのない要約を返します。<b>良い例</b>は「先月の点検の記録から、異常の傾向を、朝礼で1分で説明できる長さの箇条書きにしてください。読むのは班長です。記録にない数字は使わないでください」のように、目的・読む人・形・確かめ方まで書いたものです。同じ材料でも、答えの使いやすさが大きく変わります。
+        </p>
+
+        <h3>答えが合わないときは、条件を足して聞き直す</h3>
+        <p>
+          1回目の答えが的外れでも、あきらめる必要はありません。「読む人は現場の班長なので、専門用語を減らしてください」「設備ごとではなく、項目ごとに並べ直してください」のように、足りなかった条件を書き足して聞き直します。うまくいった頼み方は、自分用のひな形として残しておくと、次から使い回せます。ただし、AIの種類や設定が変わると答えも変わるため、ひな形もときどき見直します。
+        </p>
+        <p>
+          また、生成AIの答えには、それらしく見える間違いが混ざることがあります。特に、元の記録にない数字や、規格・法令の内容は、そのまま信じずに元の資料で確かめます。「記録にない数字は使わない」「分からないことは分からないと書く」と頼んでおくと、間違いを減らせます。
+        </p>
+
+        <h3>社名・図面・製造条件など、会社の情報は入れない</h3>
+        <p>
+          サービスによっては、入力した内容や会話の履歴が保存されたり、AIの学習やサービスの改善に使われたりします。学習に使わない設定でも、保存されないとは限りません。社名、顧客名、個人の名前、図面、価格だけでなく、製品の仕様、設備の構成、製造条件、不良の詳しい内容なども、会社の許可なく入力しないでください。「A社」「品番X」のように記号へ置き換えても、特殊な設備や寸法、数量の組み合わせから会社や製品が分かることがあります。使う前に、会社の決まりと、サービスの利用規約を確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>役割・したいこと・材料と条件・答えの形・確かめ方の5つをそろえて頼む</li>
+            <li>合わないときは条件を足して聞き直し、記録にない数字は元の資料で確かめる</li>
+            <li>社名・図面・製造条件など会社の情報は、会社の許可なく入れない</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>現場ですぐ使えるプロンプト例6選｜書類とデータをまとめる</h2>
+        <p>
+          ここからは、そのまま写して使えるプロンプトの例です。【　】の中を自分の現場に合わせて書き換えてください。最後に、元になる記録やメモを貼り付けて使います。
+        </p>
+
+        <h3>例1：点検の記録から、異常の傾向をまとめる</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例1</p>
+          <p class="prompt-txt">あなたは、製造業の保全の記録の整理を手伝うアシスタントです。
+下に貼る【先月】の点検の記録から、管理値を超えた値と、過去の記録と大きく違う値を拾い出し、設備名・項目・値と単位・日付を付けて箇条書きにしてください。
+管理値が記録にない場合は、あなたの判断だけで異常と決めつけず、「記録の書き間違いの可能性があるもの」と分けてください。
+朝礼で1分で説明できる長さにし、読むのは現場の班長です。記録にない数字は使わないでください。</p>
+        </div>
+
+        <h3>例2：不良の記録から、原因の候補を4Mで整理する</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例2</p>
+          <p class="prompt-txt">あなたは、製造業の品質の改善を手伝うアシスタントです。
+下に貼る【3か月分】の不良の記録から、原因の候補を、人・機械・材料・方法の4つに分けて表にしてください。
+それぞれ「記録から言えること」と「推測」を分けてください。「人」は個人の責任と決めつけず、作業方法・教育・作業の負担の面で整理してください。
+記録だけで原因を決められない場合は断定せず、現場で確かめる順番と、追加で集めるとよい記録（ロット、生産数など）を示してください。</p>
+        </div>
+
+        <h3>例3：保全の記録から、次に見る設備の順番を決める</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例3</p>
+          <p class="prompt-txt">あなたは、設備の保全の計画を手伝うアシスタントです。
+下に貼る【1年分】の故障と修理の記録から、故障の回数と止まった時間が多い順に設備を並べ、表にしてください。
+同じ部品の交換がくり返されている設備があれば、別に書き出してください。
+回数と時間だけでは順番を決められない点（安全・品質・ライン全体への影響、予備機の有無など）があれば、その旨と、追加で必要な情報も書いてください。</p>
+        </div>
+
+        <h3>例4：ベテランの話から、作業手順書の下書きを作る</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例4</p>
+          <p class="prompt-txt">あなたは、製造現場の作業手順書づくりを手伝うアシスタントです。
+下に貼るのは、ベテランに【段取り替え】のやり方を聞いたときのメモです。
+番号つきの手順ごとに「作業の内容」「なぜそうするか」「注意する危険」「確かめること」を分けて書いてください。
+メモにない作業方法、電源の切り方、安全装置の扱い、数値や設定値は推測で足さず、「要確認」と書いてください。
+これは下書きで、今の作業標準と安全の決まりに照らし、現場の責任者が確かめてから使います。</p>
+        </div>
+
+        <h3>例5：交代の引き継ぎメモを、決まった形に整える</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例5</p>
+          <p class="prompt-txt">下に貼る走り書きの引き継ぎメモを、「設備の状態」「品質で気になること」「次の班にお願いすること」の3つに分けて、短い箇条書きに整えてください。
+メモにないことは足さないでください。対応が必要なことは「未対応・対応中・済み」を分け、担当や期限がなければ「未記入」としてください。設備の停止や品質の保留は省かないでください。</p>
+        </div>
+
+        <h3>例6：ヒヤリハットの報告から、対策の案を出す</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例6</p>
+          <p class="prompt-txt">あなたは、工場の安全活動を手伝うアシスタントです。
+下に貼るヒヤリハットの報告について、起きた原因の候補と、対策の案を「危ないもの自体をなくす」「作業のやり方を変える」「設備で守る」「決まりや表示で守る」「保護具」に分けて出してください。
+人の注意だけに頼る対策に偏らないようにし、その対策で新しい危険が生まれないかも書いてください。
+対策の案は参考とし、作業する人と安全の担当者で確かめて決めます。</p>
+        </div>
+        <p>
+          どの例も、AIの答えは<b>下書き</b>です。数字の転記の間違いや、記録にない話が混ざっていないかを、元の記録と照らしてから使ってください。特に作業手順や安全の対策は、AIの答えをそのまま現場で行わないでください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>点検・不良・保全・手順書・引き継ぎ・ヒヤリハットに、型どおりの文章で使える</li>
+            <li>【　】を自分の現場に合わせて書き換え、元の記録を貼り付けて使う</li>
+            <li>答えは下書き。元の記録と照らしてから使う</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>書類づくりから仕組みづくりへ｜AIに現場の道具を作ってもらう</h2>
+        <p>
+          ここまでの例は、毎回、記録を貼ってAIに頼むものでした。もう一歩進めると、<strong class="mk">毎日の記録や転記そのものを、AIに作ってもらった仕組みに任せる</strong>ことができます。筆者はプログラムを書いたことがありませんが、点検の記録や、生産終了したQRリーダーの置き換えを、AIに頼んで作ってきました。ただし、AIで作り始めることはできても、設備につないで安心して使えるようにするには、仕様の確認・試験・保守が欠かせません。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-genai-prompt-shikumi.jpg" alt="書類づくりと仕組みづくりの違い。書類は毎回AIに頼むが、仕組みは一度作れば毎日動き、記録や転記が自動になる" width="1376" height="768" loading="lazy">
+          <figcaption>書類は毎回頼む。仕組みは一度作れば、毎日動く。</figcaption>
+        </figure>
+
+        <h3>書類は毎回頼むが、仕組みは一度作れば毎日動く</h3>
+        <p>
+          仕組みといっても、大きなシステムではありません。小さなコンピューター（ラズパイ）と、表計算ソフトの自動化で作れる、困っている一点だけを片づける道具です。頼み方の型は書類と同じですが、<b>使うもの（機材・つなぐ相手）</b>と、<b>うまく動かないときにどうするか</b>を必ず書きます。以下の例は、筆者の経験をもとにした頼み方の例です（当時の文章は残っていません）。
+        </p>
+
+        <h3>例7：点検の数値を、毎日自動で記録する</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例7</p>
+          <p class="prompt-txt">あなたは、ラズパイとPythonで製造現場の小さな仕組みを作るのを手伝うエンジニアです。
+【何をしたいか】制御盤の中の、前に熱くなったことがある部分の温度の変わり方を、毎日記録したい。
+【どうしたいか】10分ごとに記録し、決めた管理値を超えたら画面に知らせたい。
+【使うもの】ラズパイ、温度センサー1つ。設備のネットワークにはつながない。センサーの種類・測れる範囲・取り付け方から一緒に考えてほしい。
+【確かめ方】センサーの断線、測れる範囲の外、おかしな値を見分け、正しく測れないときは普通の温度として扱わないでほしい。
+この仕組みは点検を助ける記録で、火災を見つけたり設備を守ったりする働きには使いません。
+私はプログラムを書いたことがありません。準備から1つずつ、手順を教えてください。</p>
+        </div>
+        <p>
+          温度の記録は点検を助けるもので、火災を防ぐ設備の代わりにはなりません。制御盤を開ける作業やセンサーの取り付けは、電気の知識のある人が安全を確かめて行います。画面の表示だけでは、見ていないときの変化を見逃すため、誰がいつ確かめるかも決めておきます。この事例は、特集の別の記事で詳しく紹介する予定です。
+        </p>
+
+        <h3>例8：表から表への転記を、自動にする</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例8</p>
+          <p class="prompt-txt">あなたは、表計算ソフトの自動化を手伝うアシスタントです。
+【何をしたいか】毎日、生産実績の表から、品番ごとの数を月の集計表へ手で写している。これを自動にしたい。
+【どうしたいか】ボタンを1回押すと、その日の分が集計表の正しい行に入るようにしたい。
+【確かめ方】日付・品番・ラインの組み合わせで見分け、同じデータを2回取り込んでも二重に足されないようにしたい。品番が見つからない、数が数字でないときは写さずに知らせてほしい。途中で止まったときは、元の表を残し、中途半端な集計にならないようにしたい。
+作る前に、元の表をどう整えておくとよいかも教えてください。</p>
+        </div>
+
+        <p>
+          表計算の自動化は、元の表の列の並びや名前が変わると動かなくなることがあります。表の形を決めて変えないこと、元の表のバックアップと、間違えたときの直し方も、あわせて決めておきます。
+        </p>
+
+        <h3>例9：QRコードを読み、PLCへ渡す</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例9</p>
+          <p class="prompt-txt">あなたは、ラズパイとPythonで製造現場の小さな仕組みを作るのを手伝うエンジニアです。
+【何をしたいか】生産終了したQRコードリーダーの代わりに、製品のQRラベルを読み取りたい。
+【どうしたいか】読んだ文字を今までと同じ形でPLCへ送り、PLCのプログラムは変えずに使いたい。
+【使うもの】ラズパイ4、USBカメラ。PLCとはLANでつなぐ（設備のネットワークとは分かれた線）。
+【確かめ方】文字数と形を確かめてから送り、読めないときは前の製品の値を使い回さず、PLCに読み取りNGを知らせたい。通信が切れたとき、同じ値を2回読んだときの動きも決めたい。
+最初に、今のQRリーダーとPLCの通信の条件（送る形、文字数、区切り、送るタイミング）を確かめる手順を教えてください。分からない点は、作る前に質問してください。
+ラズパイは読み取りと値の受け渡しだけにし、非常停止などの安全の働きや安全回路にはつなぎません。</p>
+        </div>
+
+        <p>
+          ふつうのPLCに止めるプログラムが入っていても、それだけで人の安全が守られるわけではありません。安全の働きは、機械の危険を見積もったうえで作られた安全のための回路や機器が担います。また、線を分けても、別の場所で設備のネットワークとつながっていれば分けたことになりません。ネットワークのつながり方は、設備の担当者と図で確かめます。
+        </p>
+
+        <h3>例10：作った仕組みの、確かめ方をAIに出してもらう</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例10</p>
+          <p class="prompt-txt">あなたが作り方を教えてくれた仕組みについて、現場で使い始める前に確かめることを一覧にしてください。
+読めない値、同じ値が2回届く、通信が切れる、通信が戻る、電源を入れ直す、長く動かす、の場面を必ず入れ、「試す条件」「操作」「正しい動き」「結果」「合否」を記録できる表にしてください。
+正しい動きが決まっていない項目は、あなたが決めずに「要確認」としてください。</p>
+        </div>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>毎日の記録や転記は、AIに作ってもらった小さな仕組みに任せられる</li>
+            <li>仕組みを頼むときは、使うものと、うまく動かないときの動きを必ず書く</li>
+            <li>仕組みは値を記録・受け渡すだけにし、安全の働きや安全回路にはつながない</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>仕組みづくりのプロンプトは、一度で書かない｜4つの段階</h2>
+        <p>
+          書類は1回の頼み方で形になりますが、仕組みは<strong class="mk">1回のプロンプトで完成させようとしないこと</strong>が大切です。筆者は、次の4つの段階に分けてAIとやり取りしてきました。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-genai-prompt-steps.jpg" alt="仕組みづくりの4つの段階。作れるかを相談する、小さく動かす、エラーは隠す所を隠して貼る、試験・復旧・保守の準備をする" width="1376" height="768" loading="lazy">
+          <figcaption>相談、小さく動かす、エラーを聞く、試験と保守の準備。この順でAIとやり取りする。</figcaption>
+        </figure>
+
+        <h3>STEP1：作れるか・何がいるかを、先に相談する</h3>
+        <p>
+          いきなり作り方を聞かず、「この仕組みは作れるか」「何を買えばよいか」「市販品で済むなら、そのほうがよいか」を先に相談します。AIは市販品の探し方も手伝えるため、作らないほうがよい場合にも気づけます。
+        </p>
+
+        <h3>STEP2：1つの働きずつ、小さく動かす</h3>
+        <p>
+          温度を読む、記録する、知らせる、のように働きを分け、1つずつ動かして確かめます。全部を一度に作ると、動かないときにどこが悪いのか分からなくなります。
+        </p>
+
+        <h3>STEP3：エラーは隠す所を隠して貼り、直し方を確かめてから試す</h3>
+        <p>
+          動かないときは、画面に出た文字を自分で要約せず、貼って「このエラーが出ました。どうすればよいですか」と聞きます。何をした直後に出たかも書き添えると、答えが早く正確になります。ただし貼る前に、パスワード、IPアドレス、ユーザー名、フォルダの名前、社名、製品の番号などが含まれていないかを確かめ、別の文字に置き換えます。AIが示した直し方やコマンドは、何を変える操作か、元に戻せるかをAIに聞いてから試します。ファイルを消す、ネットワークの設定を変えるなど、設備やデータに関わる操作は、詳しい人に確かめてから行います。
+        </p>
+
+        <h3>STEP4：試験・復旧・保守の準備をする</h3>
+        <p>
+          動いたら、例10のように確かめ方の一覧を出してもらい、まず設備から切り離した状態や試しのデータで、人が試します。最後に「読み取りNGのときに現場の人がすること」「止まったときの戻し方」を手順書にしてもらいます。プログラムの最新版と変更の記録、設定値、バックアップの置き場所、保守する人も書き残します。<b>動いているかを確かめ、使ってよいかを決めるのは人</b>です。使い始めのしばらくは、今までのやり方と二重にチェックします。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>仕組みは、相談→小さく動かす→エラーを聞く→試験・復旧・保守の準備、の順で作る</li>
+            <li>エラーは隠す所を隠して貼り、直し方は何を変えるかを確かめてから試す</li>
+            <li>確かめと二重チェック、使ってよいかの判断は人が行う</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>プロンプト作成ツール｜選んで書き込むだけで、AIに渡す文章ができる</h2>
+        <p>
+          ここまでの型を、選んで書き込むだけで文章にできるツールです。「書類を作る」「データをまとめる」「仕組みを作る」から選び、分かる欄だけ書き込んでください。「記入例を入れる」を押すと、この記事の例をもとにした記入例が入ります。
+        </p>
+
+        <div class="calc-tool pr-tool" id="pr-tool">
+          <p class="calc-tool-title">AIに渡す文章（プロンプト）の作成ツール</p>
+          <p class="calc-tool-note">
+            種類を選び、分かるところだけ書き込んでください。空いている欄は、文章から自動で省きます。できた文章は「コピーする」で写し、お使いの生成AIに貼り付けて使えます。<strong>社名・顧客名・図面・価格・個人の名前は書かないでください。</strong>入力した内容は、このページの中だけで文章にしており、どこにも送っていません。AIの答えは間違いを含むことがあるため、使う前に必ず人が確かめてください。
+          </p>
+          <p class="pr-lbl">何をAIに頼みますか</p>
+          <div class="calc-btns" data-b="type"><button type="button" data-v="doc">書類を作る</button><button type="button" data-v="data">データをまとめる</button><button type="button" data-v="sys">仕組みを作る</button></div>
+          <div class="pr-in">
+            <label>何をしたいか<input type="text" data-k="what" maxlength="200"></label>
+            <label>どうしたいか（どう使いたいか）<input type="text" data-k="how" maxlength="200"></label>
+            <label data-sys-label="使うもの（機材・つなぐ相手）" data-doc-label="材料（下に貼る記録・メモ）">材料<input type="text" data-k="need" maxlength="200"></label>
+            <label>現場の条件<input type="text" data-k="cond" maxlength="200"></label>
+            <label>確かめ方（うまくいかないとき）<input type="text" data-k="check" maxlength="200"></label>
+          </div>
+          <p class="pr-lbl">答えの形</p>
+          <div class="calc-btns" data-b="form"><button type="button" data-v="list">箇条書き</button><button type="button" data-v="table">表</button><button type="button" data-v="step">手順（1つずつ）</button><button type="button" data-v="text">そのまま使える文章</button></div>
+          <p class="pr-lbl" data-o="expLbl">プログラムの経験</p>
+          <div class="calc-btns" data-b="exp"><button type="button" data-v="0">書いたことがない</button><button type="button" data-v="1">少しある</button></div>
+
+          <h4>できた文章</h4>
+          <p class="pr-note" data-o="note"></p>
+          <textarea class="pr-out" data-o="out" readonly rows="16" aria-label="できたプロンプト"></textarea>
+          <div class="pr-acts">
+            <button type="button" class="pr-copy" id="pr-copy">コピーする</button>
+            <span class="pr-msg" data-o="msg" aria-live="polite"></span>
+          </div>
+          <button type="button" class="calc-reset" id="pr-ex">記入例を入れる</button>
+          <button type="button" class="calc-reset" id="pr-clear">すべて消す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('pr-tool');
+          if (!root) return;
+          // 種類ごとの記入例（記事の例7・例2・例1をもとにした例）
+          var EX = {
+            sys: { what: '制御盤の中の、前に熱くなった部分の温度を毎日記録したい', how: '10分ごとに記録し、決めた温度を超えたら画面に知らせたい', need: 'ラズパイ、温度センサー1つ。設備のネットワークにはつながない', cond: '盤の中は夏に40度近くなる。記録は1年分残したい', check: 'センサーの断線やおかしな値を見分け、正しく測れないときは普通の温度として扱わない', form: 'step', exp: 0 },
+            data: { what: 'この3か月の不良の記録から、原因の候補を整理したい', how: '人・機械・材料・方法の4つに分けて、確かめる順番を決めたい', need: '下に貼る不良の記録（日付・品番・不良の内容・数）', cond: '品番や取引先の名前は記号に置き換えてある', check: '記録から言えることと、推測を分けて書いてほしい', form: 'table', exp: 0 },
+            doc: { what: '点検の記録から、先月の異常の傾向を報告書にまとめたい', how: '朝礼で1分で説明できる長さにしたい', need: '下に貼る点検の記録（日付・設備・項目・数値・メモ）', cond: '読む人は現場の班長。専門用語は使わない', check: '数値の転記の間違いがないか、元の記録と照らす', form: 'list', exp: 0 }
+          };
+          var ROLE = { doc: '製造業の現場の書類づくりを手伝うアシスタント', data: '製造業の品質と保全の記録の整理を手伝うアシスタント', sys: 'ラズパイとPythonで、製造現場の小さな仕組みを作るのを手伝うエンジニア' };
+          var INTRO = { doc: '次の内容で、書類の下書きを作ってください。', data: '次の記録を整理して、分かることをまとめてください。', sys: '次の仕組みを作りたいので、作り方を教えてください。' };
+          var FORM = { list: '箇条書きで、短くまとめてください。', table: '表にまとめてください。', step: '手順を番号つきで、1つずつ示してください。', text: 'そのまま使える文章で書いてください。' };
+          var S = { type: 'sys', form: 'step', exp: 0, what: '', how: '', need: '', cond: '', check: '' }, used = false;
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { if (e.tagName === 'TEXTAREA') e.value = v; else e.textContent = v; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) {
+              if (document.activeElement !== e) e.value = S[e.dataset.k];
+              if (S.type in EX) e.placeholder = '例：' + EX[S.type][e.dataset.k];
+            });
+            root.querySelectorAll('[data-b] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.v) === String(S[x.parentNode.dataset.b])); });
+            var lab = root.querySelector('label[data-sys-label]');
+            lab.firstChild.nodeValue = S.type === 'sys' ? lab.dataset.sysLabel : lab.dataset.docLabel;
+            var sys = S.type === 'sys';
+            root.querySelector('[data-b="exp"]').style.display = sys ? '' : 'none';
+            root.querySelector('[data-o="expLbl"]').style.display = sys ? '' : 'none';
+          }
+          function calc() {
+            var t = S.type, L = [];
+            L.push('あなたは、' + ROLE[t] + 'です。');
+            L.push(INTRO[t]);
+            L.push('');
+            var F = [['what', '何をしたいか'], ['how', 'どうしたいか'], ['need', t === 'sys' ? '使うもの' : '材料'], ['cond', '現場の条件'], ['check', '確かめ方']];
+            // 欄がすべて空のときは、薄く表示している記入例で文章を見せる
+            var empty = F.every(function (f) { return !S[f[0]].trim(); });
+            F.forEach(function (f) { var v = empty ? EX[t][f[0]] : S[f[0]].trim(); if (v) L.push('【' + f[1] + '】' + v); });
+            L.push('【答えの形】' + FORM[S.form]);
+            L.push('');
+            if (t === 'sys') {
+              if (S.exp === 0) L.push('私はプログラムを書いたことがありません。準備から1つずつ、手順を教えてください。');
+              L.push('この仕組みは値を記録したり受け渡したりするだけにし、非常停止などの安全の働きや安全回路にはつなぎません。');
+              L.push('つなぐ相手との通信の条件や、センサーの取り付け方が分からない点は、作る前に質問してください。');
+              L.push('うまく動かないときや、値が読めないときの動きも、あわせて提案してください。');
+            } else if (t === 'data') {
+              L.push('記録から言えることと、あなたの推測は分けて書いてください。原因は断定せず、確かめる方法も示してください。');
+            } else {
+              L.push('数字や固有の事実は、材料に書いてあることだけを使い、数値には単位を付けてください。');
+            }
+            L.push('分からない点があれば、答える前に質問してください。分からないことは推測で埋めず、「分からない」と書いてください。');
+            out('note', empty ? '今は薄い字の記入例で文章を作っています。上の欄に書き込むと、書いた内容に置き換わります。' : '');
+            if (t !== 'sys') { L.push(''); L.push('（ここに材料を貼り付けます。社名・顧客名・個人の名前は記号に置き換え、会社の許可のない情報は貼らないでください）'); }
+            out('out', L.join('\n'));
+          }
+          function touch() { if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'prompt_builder' }); } }
+          function set(k, v) { S[k] = v; sync(); calc(); touch(); }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () { set(e.dataset.k, e.value); });
+          });
+          root.querySelectorAll('[data-b] button').forEach(function (b) {
+            b.addEventListener('click', function () {
+              var k = b.parentNode.dataset.b, v = k === 'exp' ? Number(b.dataset.v) : b.dataset.v;
+              set(k, v);
+            });
+          });
+          document.getElementById('pr-ex').addEventListener('click', function () {
+            var e = EX[S.type]; for (var k in e) S[k] = e[k]; sync(); calc(); out('msg', '');
+          });
+          document.getElementById('pr-clear').addEventListener('click', function () {
+            ['what', 'how', 'need', 'cond', 'check'].forEach(function (k) { S[k] = ''; }); sync(); calc(); out('msg', '');
+          });
+          document.getElementById('pr-copy').addEventListener('click', function () {
+            var ta = root.querySelector('.pr-out'), txt = ta.value;
+            function done() { out('msg', 'コピーしました'); }
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(txt).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+            } else { ta.select(); document.execCommand('copy'); done(); }
+            touch();
+          });
+          sync(); calc();
+        })();
+        </script>
+
+        <p>
+          できた文章は、そのままでも使えますが、AIから質問が返ってきたら答えを書き足していくと、さらに自分の現場に合った答えになります。
+        </p>
+        <p>
+          欄を埋めようとして手が止まったら、それは「まだ決まっていないこと」が見つかった合図です。たとえば確かめ方の欄が書けないなら、読めなかったときに現場で誰が何をするかが決まっていません。AIに頼む前に、その一点を現場で話し合うことが、仕組みづくりではいちばんの近道になります。
+        </p>
+
+        <!-- ◆7 -->
+        <h2>アイツインの仕組みづくりの支援</h2>
+        <p>
+          アイツインは、保全の現場での経験をもとに、製造現場の困りごとを、ラズパイとAIで安く解決するお手伝いをしています。
+        </p>
+
+        <h3>どこに生成AIを使うか、困っている一点から一緒に考える</h3>
+        <p>
+          書類で済むのか、仕組みを作るべきか、市販品を選ぶべきか。点検、転記、生産終了の機器など、どこで、なぜ困っているのかを一緒に整理します。
+        </p>
+
+        <h3>試作から、二重チェックと手順書まで</h3>
+        <p>
+          AIを使って試作し、現場で動かして結果を確かめ、困ったときの手順を書き残すところまでを支援します。設備のネットワークとの分け方も、一緒に確かめます。
+        </p>
+
+        <h3>社内で、AIに頼める人を育てる</h3>
+        <p>
+          「作った人しか直せない」状態を避けるために、社内の方がプロンプトを書き、仕組みを作り、直せるようになるための研修もご相談いただけます。内容は、ご相談に合わせてご提案します。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          生成AIは、多くの企業で使われるようになりましたが、使い道はまだ議事録やメールが中心です。製造業の現場で役立てるには、役割・したいこと・材料と条件・答えの形・確かめ方の5つをそろえた<strong class="mk">伝わるプロンプト</strong>で頼むことが出発点になります。
+        </p>
+        <p>
+          さらに一歩進めれば、毎日の記録や転記を、AIに作ってもらった小さな仕組みに任せられます。そのときは一度で作ろうとせず、相談から始めて小さく動かし、確かめと二重チェックは人が行います。まずは、本記事の例やツールで、明日の点検の記録から試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・総務省「令和8年版 情報通信白書」第Ⅰ部第2章第1節（生成AIの業務利用状況）<br>
+          ・独立行政法人 情報処理推進機構「中小企業の情報セキュリティ対策ガイドライン」<br>
+          ・経済産業省「工場システムにおけるサイバー・フィジカル・セキュリティ対策ガイドライン」<br>
+          ・本記事のプロンプトは、説明のための例です。AIの答えの正しさや、仕組みの安全・品質を保証するものではありません。
+        </p>
+
+        <div class="article-cta">
+          生成AIを現場で使いたいが、何から頼めばよいか分からない。毎日の記録や転記を、仕組みにできるか知りたい。無料相談で、困っている一点の洗い出しから、作り方と費用の目安までを一緒に整理しませんか。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91%E7%94%9F%E6%88%90AI%E3%81%A7%E7%8F%BE%E5%A0%B4%E3%81%AE%E5%9B%B0%E3%82%8A%E3%81%94%E3%81%A8%E3%82%92%E8%A7%A3%E6%B1%BA%E3%81%97%E3%81%9F%E3%81%84">仕組みづくりを相談する</a><a href="../../price.html">料金の目安</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../shikumi/index.html">← 仕組みノートのまとめに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.12</p>
+                <h3><a href="raspberry-pi-manufacturing.html">ラズパイの製造業での使い方｜事例・費用・注意点と、AIで作る進め方</a></h3>
+                <p class="column-excerpt">使い方6つ、生産終了のQRリーダーを約5万円で置き換えた事例、費用の比べ方。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.03</p>
+                <h3><a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方｜事後保全・予防保全・予知保全の違いと選び方</a></h3>
+                <p class="column-excerpt">故障の記録から、次に手を打つ設備を決める考え方。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li class="is-cur"><span>02 生成AIプロンプト</span></li></ol>
+            <p class="cs-pager"><a href="raspberry-pi-manufacturing.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">仕組みづくりのご相談</p>
+          <p class="cs-ask-text">困っている一点の洗い出しから、試作・二重チェック・社内の方への研修までご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりを相談する</a>
+          <p class="cs-ask-sub"><a href="../shikumi/index.html#cases">事例集を見る ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP3</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/thumb-column-stand-strength.jpg" alt="" width="80" height="45"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/thumb-column-weld-strength.jpg" alt="" width="80" height="45"><span>溶接の強度計算の方法と例</span></a></li><li><a href="robot-stand-strength-calculation.html"><img src="../../img/thumb-column-robot-stand.jpg" alt="" width="80" height="45"><span>ロボット架台の強度計算の方法</span></a></li></ol>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
