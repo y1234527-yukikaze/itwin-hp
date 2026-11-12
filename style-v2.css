@@ -943,6 +943,42 @@ section[id] { scroll-margin-top: 84px; }
 .field textarea { min-height: 140px; resize: vertical; }
 /* フッターの「お問い合わせはお問い合わせフォームから承ります」の文中リンク：前後の文字と同じ大きさにする */
 .site-footer .footer-inline-link { font-size: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* 計算・設計の見積もり用の短いフォーム（contact-v2：?topic=design のとき。2026-11-12）
+   入力は「お名前・メール・計算したいもの・時期・メモ」だけを見せ、会社名・電話番号・種類はボタンで開く */
+#contact-form.is-design { display: flex; flex-direction: column; }
+#contact-form.is-design .f-company,
+#contact-form.is-design .f-tel,
+#contact-form.is-design .f-topic { order: 1; }
+#contact-form.is-design .form-promise,
+#contact-form.is-design button[type="submit"],
+#contact-form.is-design .form-note { order: 2; }
+#contact-form.is-design:not(.dq-open) .f-company,
+#contact-form.is-design:not(.dq-open) .f-tel,
+#contact-form.is-design:not(.dq-open) .f-topic,
+#contact-form.is-design .f-message,
+#contact-form.is-design .form-encourage { display: none; }
+.dq-head { margin: 0 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.dq-title { font-weight: 700; color: var(--navy); font-size: 1.08rem; margin: 0 0 4px; }
+.dq-sub { font-size: 0.88rem; color: var(--ink-soft); margin: 0; }
+.dq-label { font-weight: 700; color: var(--navy); margin: 0 0 8px; font-size: 0.95rem; }
+.dq-opt { font-weight: 500; font-size: 0.78rem; color: var(--ink-soft); margin-left: 6px; }
+.dq-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.field .dq-chips label {
+  display: inline-flex; align-items: center; gap: 6px; margin: 0;
+  padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
+  background: #fcfdfe; font-weight: 500; font-size: 0.9rem; color: var(--ink); cursor: pointer;
+}
+.field .dq-chips input { width: 16px; height: 16px; padding: 0; margin: 0; flex: none; accent-color: var(--orange); }
+.field .dq-chips label:has(input:checked) { border-color: var(--orange); background: #fff6ef; }
+.dq-note { margin: -4px 0 14px; font-size: 0.92rem; font-weight: 700; color: var(--navy); }
+.dq-more {
+  align-self: flex-start; margin: 0 0 16px; padding: 0; border: 0; background: none;
+  font: inherit; font-size: 0.88rem; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+@media (max-width: 900px) {
+  /* スマホ：見積もりのフォームで来た人には、フォームを会社情報より先に出す */
+  .contact-grid.is-design .form-card { order: -1; }
+}
 /* お急ぎ（電話で折り返し）のチェック：電話番号の欄の下 */
 .field .urgent-chk {
   display: flex; align-items: center; gap: 8px;
@@ -2419,3 +2455,58 @@ a.industry-card { cursor: pointer; }
 .price-ask .price-ask-act { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 14px; }
 .price-ask .price-ask-act .btn { color: #fff; text-decoration: none; white-space: normal; text-align: center; }
 .price-ask .price-ask-act a:not(.btn) { color: var(--navy); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+/* 特集「AIで作る 現場の仕組みノート」のまとめページ：事例集（キットの hub_shikumi.py で作る・2026-11-12 作り直し）
+   記事カード（.industry-card）と同じ作り：色の帯の見出し＋白い本文。実例＝紺、構成例＝青みの灰色 */
+.case-section { margin-top: 72px; }
+.case-section .section-head { margin-bottom: 26px; }
+.kind-tag { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; line-height: 1.6; vertical-align: middle; }
+.kind-tag.is-real { background: var(--navy); color: #fff; }
+.kind-tag.is-plan { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
+.case-filter {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;
+  margin: 0 auto 28px; padding: 14px 18px; max-width: 900px;
+  background: var(--paper-soft); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.case-filter-label { font-size: 0.84rem; font-weight: 700; color: var(--navy); margin-right: 4px; }
+.case-filter-sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+.case-filter button {
+  font: inherit; font-size: 0.86rem; font-weight: 500; padding: 6px 14px;
+  border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.case-filter button:hover { border-color: var(--navy); }
+.case-filter button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+.case-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.case-item {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.case-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #cdd9ea; }
+.case-item[hidden] { display: none; }
+.case-head { padding: 16px 18px; color: #fff; background: var(--navy); }
+.case-item[data-kind="構成例"] .case-head { background: #6f8aa6; }
+.case-meta { display: flex; align-items: center; gap: 8px; margin: 0 0 8px !important; }
+.case-no {
+  background: rgba(255, 255, 255, 0.25); border-radius: 6px; padding: 2px 8px;
+  font-family: "Shippori Mincho", serif; font-size: 0.82rem; font-weight: 700;
+}
+.case-head .kind-tag.is-real { background: #fff; color: var(--navy); }
+.case-head .kind-tag.is-plan { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.85); }
+.case-cat { font-size: 0.78rem; color: rgba(255, 255, 255, 0.9); margin-left: auto; }
+.case-head h3 { color: #fff; font-size: 1.04rem; line-height: 1.5; margin: 0; font-family: "Zen Kaku Gothic New", sans-serif; }
+.case-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+.case-body > p { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.75; margin: 0 0 14px; flex: 1; }
+.case-spec { margin: 0 0 14px; padding: 10px 12px; background: var(--paper-soft); border-radius: 8px; display: grid; grid-template-columns: 4.6em 1fr; gap: 4px 10px; font-size: 0.84rem; }
+.case-spec dt { color: var(--navy); font-weight: 700; }
+.case-spec dd { margin: 0; color: var(--ink); }
+.case-spec dd.is-point { color: var(--orange-text); font-weight: 700; }
+.case-link { color: var(--orange-text); font-size: 0.9rem; font-weight: 700; }
+.case-link:hover { text-decoration: underline; }
+.case-soon { color: var(--ink-soft); font-size: 0.82rem; }
+.case-note { text-align: center; font-size: 0.84rem; color: var(--ink-soft); margin: 18px 0 0; }
+@media (max-width: 1000px) { .case-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .case-list { grid-template-columns: 1fr; }
+  .case-filter-sep { display: none; }
+}

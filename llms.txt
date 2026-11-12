@@ -32,6 +32,8 @@
 - [真空パッドの選定計算と把持力の求め方](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
 - [タクトタイムとは？計算方法と計算例](https://i-twin.co.jp/column/articles/takt-time-calculation): 計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、稼働率と良品率からの設備の目標サイクルタイム、動作ごとの時間の割り振り
 - [架台の耐震計算の方法と例](https://i-twin.co.jp/column/articles/stand-seismic-calculation): 局部震度法の設計用水平震度（設置する階・耐震クラス・地域係数）、地震の力から柱の応力とアンカーの引き抜き、重心の高さ、耐震計算書の項目
+- [特集：AIで作る 現場の仕組みノート](https://i-twin.co.jp/column/shikumi/): ラズパイとPython、AIで製造現場の困りごとを安く解決する実例と考え方のまとめ（事例集つき）
+- [ラズパイの製造業での使い方](https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing): 使い方6つ、「困っている一点」から考える捉え方、生産終了のQRリーダーを約5万円で置き換えた事例、市販品との費用の比べ方、注意点、AIで作る進め方
 
 ## コラム（解説記事）
 

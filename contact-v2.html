@@ -175,25 +175,61 @@
             <input type="hidden" name="_next" value="https://i-twin.co.jp/thanks.html">
             <!-- ボット除け（ハニーポット）：人は入力しない隠し項目。Formspreeが自動で無視します -->
             <input type="text" name="_gotcha" style="display:none">
-            <div class="field">
+            <!-- ◆計算・設計の見積もり用の短いフォーム（?topic=design のとき、または種類で「強度計算・図面・設計」を選んだときだけ表示。2026-11-12） -->
+            <div class="dq-head" hidden>
+              <p class="dq-title">計算・設計のご依頼（見積もりは無料）</p>
+              <p class="dq-sub">お名前とメールアドレス、計算したいものを選ぶだけで送れます。費用と日数の目安をメールでお返しします。</p>
+            </div>
+            <div class="field f-company">
               <label for="company">会社名</label>
               <input type="text" id="company" name="会社名" placeholder="個人の方は空欄で大丈夫です">
             </div>
-            <div class="field">
+            <div class="field f-name">
               <label for="name">お名前 <span class="req">必須</span></label>
               <input type="text" id="name" name="お名前" required>
             </div>
-            <div class="field">
+            <div class="field f-email">
               <label for="email">メールアドレス <span class="req">必須</span></label>
               <input type="email" id="email" name="email" required>
             </div>
-            <div class="field">
+            <div class="field f-what" hidden>
+              <p class="dq-label">計算したいもの <span class="dq-opt">いくつでも</span></p>
+              <div class="dq-chips" id="dq-what">
+                <label><input type="checkbox" value="架台の強度計算">架台の強度</label>
+                <label><input type="checkbox" value="ロボット架台の強度計算">ロボット架台</label>
+                <label><input type="checkbox" value="溶接部の強度計算">溶接部</label>
+                <label><input type="checkbox" value="アンカーボルトの引き抜き計算">アンカーボルト</label>
+                <label><input type="checkbox" value="架台の耐震計算">耐震計算</label>
+                <label><input type="checkbox" value="エアシリンダの選定">エアシリンダ</label>
+                <label><input type="checkbox" value="コンベアのモーター選定">コンベアのモーター</label>
+                <label><input type="checkbox" value="真空パッドの選定">真空パッド</label>
+                <label><input type="checkbox" value="タクトタイムとラインの検討">タクトタイム・ライン</label>
+                <label><input type="checkbox" value="図面の作成">図面の作成</label>
+                <label><input type="checkbox" value="その他・まだ決まっていない">その他・未定</label>
+              </div>
+            </div>
+            <div class="field f-when" hidden>
+              <label for="dq-when">希望の時期</label>
+              <select id="dq-when">
+                <option value="時期は未定（まず見積もりだけ）">時期は未定（まず見積もりだけ）</option>
+                <option value="1週間以内（お急ぎ）">1週間以内（お急ぎ）</option>
+                <option value="2週間以内">2週間以内</option>
+                <option value="1か月以内">1か月以内</option>
+              </select>
+            </div>
+            <div class="field f-memo" hidden>
+              <label for="dq-memo">条件のメモ <span class="dq-opt">任意</span></label>
+              <textarea id="dq-memo" rows="4" placeholder="分かる範囲で大丈夫です。例：のせる設備の重さ、架台の寸法、材質、設置する場所、客先の指定など"></textarea>
+            </div>
+            <p class="dq-note" hidden>図面がなくても、寸法と重さが分かれば概算をお返しします。</p>
+            <button type="button" class="dq-more" id="dq-more" aria-expanded="false" hidden>会社名・電話番号なども入力する（任意）</button>
+            <div class="field f-tel">
               <label for="tel">電話番号 <span class="req" id="tel-req" hidden>必須</span></label>
               <input type="tel" id="tel" name="電話番号">
               <label class="urgent-chk"><input type="checkbox" id="urgent" name="お急ぎ" value="至急：電話での折り返しを希望">お急ぎ（お電話での折り返しを希望する）</label>
               <p class="field-help">お急ぎの方は、チェックを入れて電話番号をご記入ください。担当者からお電話で折り返します。</p>
             </div>
-            <div class="field">
+            <div class="field f-topic">
               <label for="topic">ご相談の種類</label>
               <select id="topic" name="ご相談の種類">
                 <option value="hearing">無料ヒアリングを申し込みたい</option>
@@ -205,7 +241,7 @@
                 <option value="other">その他</option>
               </select>
             </div>
-            <div class="field">
+            <div class="field f-message">
               <label for="message-other">お問い合わせ内容</label>
               <div class="message-block">
                 <div class="message-preview" aria-hidden="true">
@@ -367,16 +403,56 @@
     if (urgentChk) urgentChk.addEventListener("change", syncUrgent);
     syncUrgent();
 
+    // ◆計算・設計の見積もり用の短いフォーム（2026-11-12）
+    // 種類が「強度計算・図面・設計（design）」のときだけ、入力を絞った形に切り替える
+    var topicSel = document.getElementById("topic");
+    var grid = document.querySelector(".contact-grid");
+    var dqParts = form ? form.querySelectorAll(".dq-head, .f-what, .f-when, .f-memo, .dq-note, .dq-more") : [];
+    var dqMore = document.getElementById("dq-more");
+    var dqWhen = document.getElementById("dq-when");
+    var dqMemo = document.getElementById("dq-memo");
+    function isDesign() { return !!(topicSel && topicSel.value === "design"); }
+    function setDesign(on) {
+      if (!form) return;
+      form.classList.toggle("is-design", on);
+      if (grid) grid.classList.toggle("is-design", on);
+      Array.prototype.forEach.call(dqParts, function (el) { el.hidden = !on; });
+    }
+    if (dqMore) dqMore.addEventListener("click", function () {
+      var open = form.classList.toggle("dq-open");
+      dqMore.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    if (topicSel) topicSel.addEventListener("change", function () { setDesign(isDesign()); });
+    function buildDesignMessage() {
+      var what = Array.prototype.map.call(form.querySelectorAll("#dq-what input:checked"), function (c) { return c.value; });
+      var lines = [];
+      lines.push("会社名：" + (companyInput ? companyInput.value : ""));
+      lines.push("お名前：" + (nameInput ? nameInput.value : ""));
+      lines.push("メールアドレス：" + (emailInput ? emailInput.value : ""));
+      lines.push("");
+      lines.push("【計算・設計の見積もり依頼】");
+      lines.push("計算したいもの：" + (what.length ? what.join("、") : "（未選択）"));
+      lines.push("希望の時期：" + (dqWhen ? dqWhen.value : ""));
+      lines.push("");
+      lines.push("【条件のメモ】");
+      lines.push(dqMemo && dqMemo.value ? dqMemo.value : "（なし）");
+      return lines.join("\n");
+    }
+
     if (form) {
       form.addEventListener("submit", function () {
-        var msg = buildFinalMessage();
+        var design = isDesign();
+        var msg = design ? buildDesignMessage() : buildFinalMessage();
         var old = form.querySelector('input[name="_subject"]');
         if (old) old.parentNode.removeChild(old);
+        var subjText = design ? "【計算・設計の見積もり依頼】アイツインへのお問い合わせ" : "";
         if (urgentChk && urgentChk.checked) {
           msg = "【至急】お電話での折り返しを希望（電話番号：" + (telInput ? telInput.value : "") + "）\n\n" + msg;
+          subjText = "【至急・電話折り返し希望】アイツインへのお問い合わせ";
+        }
+        if (subjText) {
           var subj = document.createElement("input");
-          subj.type = "hidden"; subj.name = "_subject";
-          subj.value = "【至急・電話折り返し希望】アイツインへのお問い合わせ";
+          subj.type = "hidden"; subj.name = "_subject"; subj.value = subjText;
           form.appendChild(subj);
         }
         if (hiddenField) hiddenField.value = msg;
@@ -405,6 +481,13 @@
           if (otherLabel) otherLabel.hidden = false;
           if (otherTa) otherTa.placeholder = "そのほか気になる点があれば、ご自由にご記入ください（空欄でも送信できます）。";
         }
+      }
+      // 見積もり用の短いフォーム：記事から来たときは、その記事の計算に最初からチェックを入れておく
+      setDesign(isDesign());
+      if (isDesign() && items) {
+        Array.prototype.forEach.call(form.querySelectorAll("#dq-what input"), function (c) {
+          if (items.indexOf(c.value) !== -1) c.checked = true;
+        });
       }
       if (p.get("sent") === "1") {
         var banner = document.getElementById("sent-banner");
