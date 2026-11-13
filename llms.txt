@@ -35,6 +35,7 @@
 - [特集：AIで作る 現場の仕組みノート](https://i-twin.co.jp/column/shikumi/): ラズパイとPython、AIで製造現場の困りごとを安く解決する実例と考え方のまとめ（事例集つき）
 - [ラズパイの製造業での使い方](https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing): 使い方6つ、「困っている一点」から考える捉え方、生産終了のQRリーダーを約5万円で置き換えた事例、市販品との費用の比べ方、注意点、AIで作る進め方
 - [製造業の生成AIプロンプト例10選](https://i-twin.co.jp/column/articles/manufacturing-genai-prompt): 白書で見る生成AIの使われ方、伝わるプロンプトの型（5つの要素）と悪い例・良い例、点検・不良・保全・手順書のプロンプト例、記録や転記の仕組みをAIに作ってもらう頼み方と4つの段階、プロンプト作成ツール
+- [制御盤の熱対策](https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures): 制御盤の温度が上がると起きること、熱がこもる5つの原因、換気ファン・熱交換器・盤用クーラーなど5つの対策と選び方、発熱量から温度上昇と換気量を概算するツール、温度の点検をセンサー1つとラズパイで自動にした実例（約3〜4万円・警告の表示のみ）
 
 ## コラム（解説記事）
 
