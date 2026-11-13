@@ -81,7 +81,8 @@
       "@type": "ItemList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "ラズパイの使い方", "url": "https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing" },
-        { "@type": "ListItem", "position": 2, "name": "生成AIプロンプト例10選", "url": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt" }
+        { "@type": "ListItem", "position": 2, "name": "生成AIプロンプト例10選", "url": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt" },
+        { "@type": "ListItem", "position": 3, "name": "制御盤の熱対策", "url": "https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures" }
       ]
     }
   }
@@ -207,13 +208,13 @@
           </div>
         </a>
 
-        <div class="industry-card ind-4 is-soon">
-          <div class="industry-head"><span class="industry-no">03</span><h2>制御盤の一部の温度を毎日記録する</h2><small>点検の記録の自動化</small></div>
+        <a class="industry-card ind-4" href="../articles/control-panel-heat-countermeasures.html" data-date="2026-11-13">
+          <div class="industry-head"><span class="industry-no">03</span><h2>制御盤の熱対策</h2><small>原因・対策の選び方と温度監視の実例</small></div>
           <div class="industry-body">
-            <p>過去に過熱のトラブルがあった部品だけを測る。盤の全体ではなく、危ない一点を記録する考え方。</p>
-            <span class="industry-soon">準備中</span>
+            <p>熱がこもる原因と5つの対策、発熱量からの概算。毎日サーモで測っていた点検を、センサー1つとラズパイで自動にした実例。概算ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
           </div>
-        </div>
+        </a>
 
         <div class="industry-card ind-5 is-soon">
           <div class="industry-head"><span class="industry-no">04</span><h2>生産終了のQRリーダーをカメラで置き換える</h2><small>PLCとの連携</small></div>
@@ -288,9 +289,9 @@
             <h3>制御盤の電源ユニットの温度を、毎日自動で記録</h3>
           </div>
           <div class="case-body">
-            <p>過去に過熱のトラブルがあった電源ユニットの近くに温度センサーを置き、毎日の点検で記録していたまわりの温度を自動で残すようにした。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋温度センサー</dd><dt>ポイント</dt><dd class="is-point">盤の全体ではなく、危ない一点だけを測る</dd></dl>
-            <span class="case-soon">くわしい記事は準備中</span>
+            <p>他社の発熱トラブルの水平展開で、毎日サーモグラフィで測って紙に書いていた電源ユニットの温度を、接触式センサー1つで常に記録。しきい値を超えたらLANで設備に送り、画面に警告を表示する（止めない）。1年以上動いている。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ4＋接触式温度センサー → PLC（LAN）</dd><dt>費用</dt><dd>機材費 約3〜4万円</dd><dt>ポイント</dt><dd class="is-point">盤の全体ではなく、熱くなる一点だけを測る</dd></dl>
+            <a class="case-link" href="../articles/control-panel-heat-countermeasures.html">くわしく読む ›</a>
           </div>
         </li>
         <li class="case-item" data-kind="実例" data-cat="読む">
