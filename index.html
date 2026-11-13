@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  アイツイン (i-TWIN)  トップページ v2（自動化「一本集中」版）
+  アイツイン｜特集「AIで作る 現場の仕組みノート」（まとめページ・2026-11-12 作成）
   ------------------------------------------------------------
-  ・このサイトは「自動化」の提案1本に絞った別バージョンです。
-    3Dスキャンは“入口・手段”、最終ゴールは「完全デジタルツイン（考える工場）」。
-  ・既存サイト（index.html 等）とは別ファイルで、互いに影響しません。
-  ・本文・見出しはこのHTML内のテキストを直接書き換えてください。
-  ・現在イラストは未使用です（必要になれば .img-frame の枠スタイルで追加できます）。
+  このページは、キットの hub_shikumi.py で作っています。直接直さず、
+  hub_shikumi.py の SERIES（記事のカード）と CASES（事例集）を直して作り直してください。
   ============================================================
 -->
 <html lang="ja">
@@ -34,141 +31,61 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アイツイン｜デジタルツインで工場を変える｜中小製造業の省力化・省人化</title>
-  <meta name="description" content="アイツイン（i-TWIN）は、工場をデジタル空間に再現する「デジタルツイン」で中小製造業の現場を変える会社です。IoTとAIで設備の故障予見・品質維持を、3Dスキャンと動線の数値化で省力化・省人化を進めます。">
-  <link rel="canonical" href="https://i-twin.co.jp/">
+  <title>AIで作る 現場の仕組みノート｜ラズパイとPythonで製造現場の困りごとを解決｜株式会社アイツイン</title>
+  <meta name="description" content="製造現場の困りごとを、ラズパイ（ラズベリーパイ）とPython、AIを使って安く解決する方法をまとめました。点検の記録、温度の測定、QRコードの読み取り、PLCとの連携などを、実例と構成例、AIへの頼み方つきで解説します。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/shikumi/">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
-  <meta property="og:title" content="アイツイン｜デジタルツインで工場を変える｜中小製造業の省力化・省人化">
-  <meta property="og:description" content="アイツイン（i-TWIN）は、工場をデジタル空間に再現する「デジタルツイン」で中小製造業の現場を変える会社です。IoTとAIで設備の故障予見・品質維持を、3Dスキャンと動線の数値化で省力化・省人化を進めます。">
-  <meta property="og:url" content="https://i-twin.co.jp/">
-  <meta property="og:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta property="og:title" content="AIで作る 現場の仕組みノート｜ラズパイとPythonで製造現場の困りごとを解決｜株式会社アイツイン">
+  <meta property="og:description" content="製造現場の困りごとを、ラズパイ（ラズベリーパイ）とPython、AIを使って安く解決する方法をまとめました。点検の記録、温度の測定、QRコードの読み取り、PLCとの連携などを、実例と構成例、AIへの頼み方つきで解説します。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/shikumi/">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-raspberry-pi.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="アイツイン｜デジタルツインで工場を変える｜中小製造業の省力化・省人化">
-  <meta name="twitter:description" content="アイツイン（i-TWIN）は、工場をデジタル空間に再現する「デジタルツイン」で中小製造業の現場を変える会社です。IoTとAIで設備の故障予見・品質維持を、3Dスキャンと動線の数値化で省力化・省人化を進めます。">
-  <meta name="twitter:image" content="https://i-twin.co.jp/hero-main.png">
+  <meta name="twitter:title" content="AIで作る 現場の仕組みノート｜ラズパイとPythonで製造現場の困りごとを解決｜株式会社アイツイン">
+  <meta name="twitter:description" content="製造現場の困りごとを、ラズパイ（ラズベリーパイ）とPython、AIを使って安く解決する方法をまとめました。点検の記録、温度の測定、QRコードの読み取り、PLCとの連携などを、実例と構成例、AIへの頼み方つきで解説します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-raspberry-pi.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style-v2.css">
-  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.png">
 
-  <!-- ◆構造化データ（Organization）：会社の実体をAI・検索エンジンに正しく認識させる -->
+  <!-- ◆構造化データ（BreadcrumbList） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "アイツイン",
-    "legalName": "株式会社アイツイン",
-    "alternateName": ["株式会社アイツイン", "(株)アイツイン", "かぶしきがいしゃアイツイン", "カブシキガイシャアイツイン"],
-    "url": "https://i-twin.co.jp/",
-    "logo": "https://i-twin.co.jp/itwin-logo.png",
-    "description": "中小製造業向けに、デジタルツインを軸として現場改善を伴走支援する企業。3Dスキャンによる現状のデータ化から、省力化・省人化・自動化の実現までを支援する。",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "小郡令和１丁目１番１号 維新ホール１F Megriba",
-      "addressLocality": "山口市",
-      "addressRegion": "山口県",
-      "addressCountry": "JP"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "url": "https://i-twin.co.jp/contact-v2",
-      "contactType": "customer service",
-      "areaServed": "JP",
-      "availableLanguage": "Japanese"
-    }
-  }
-  </script>
-
-  <!-- ◆構造化データ（FAQPage）：本文の「よくあるご質問」セクションと内容を一致させること -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "何から始めればいいですか？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "まずは無料のオンラインヒアリングで、現場の状況やお困りごとをお伺いします。「何が課題か分からない」という状態でも問題ありません。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "小さな工場でも対応してもらえますか？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "はい。デジタルツインは大企業だけのものではありません。中小製造業の現場規模に合わせて対応します。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "図面がない古い設備でも大丈夫ですか？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "3Dスキャンなどで現物から直接データ化するため、図面が残っていない設備でも対応可能です。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "費用はどれくらいかかりますか？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "現場の状況やご要望によって異なります。サービスごとの料金の目安は、料金のページ（https://i-twin.co.jp/price）に載せています。まずは無料ヒアリングで内容をお伺いしたうえで、具体的にご提案します。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "データが外部に漏れる心配はありませんか？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "取得したデータは、ご希望に応じて社内のPCだけで処理する運用も可能です。外部に預けることなく、自社の資産として積み上げていただけます。"
-        }
-      }
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "AIで作る 現場の仕組みノート", "item": "https://i-twin.co.jp/column/shikumi/" }
     ]
   }
   </script>
 
-  <!-- ◆構造化データ（Service）：提供サービスをAI・検索エンジンに個別の項目として認識させる -->
+  <!-- ◆構造化データ（CollectionPage + ItemList）※ hub_shikumi.py が SERIES から作る -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "デジタルツイン構築支援",
-      "serviceType": "デジタルツイン構築・3Dスキャン",
-      "description": "iPhoneのLiDAR等を使った低コスト3Dスキャンによる現状データ化から、IoTセンサーによる予知保全、デジタルツインの構築までを支援します。",
-      "provider": { "@type": "Organization", "name": "アイツイン" },
-      "areaServed": "JP",
-      "audience": { "@type": "Audience", "audienceType": "中小製造業" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "省人化コンサルティング",
-      "serviceType": "省人化・自動化コンサルティング",
-      "description": "ロボットによる自動化に向いている現場かどうかを見極め、多品種少量生産の現場にも対応した省人化・自動化のご提案を行います。",
-      "provider": { "@type": "Organization", "name": "アイツイン" },
-      "areaServed": "JP",
-      "audience": { "@type": "Audience", "audienceType": "中小製造業" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "省力化コンサルティング",
-      "serviceType": "省力化・現場改善コンサルティング",
-      "description": "人を減らす省人化ではなく、今いる人の負担を軽くする省力化を軸に、現場の作業洗い出しから改善提案までを伴走支援します。",
-      "provider": { "@type": "Organization", "name": "アイツイン" },
-      "areaServed": "JP",
-      "audience": { "@type": "Audience", "audienceType": "中小製造業" }
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AIで作る 現場の仕組みノート",
+    "description": "製造現場の困りごとを、ラズパイとPython、AIを使って安く解決する方法をまとめたページ。",
+    "url": "https://i-twin.co.jp/column/shikumi/",
+    "inLanguage": "ja",
+    "isPartOf": { "@type": "WebSite", "name": "アイツイン（i-TWIN）", "url": "https://i-twin.co.jp/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ラズパイの使い方", "url": "https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing" },
+        { "@type": "ListItem", "position": 2, "name": "生成AIプロンプト例10選", "url": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt" },
+        { "@type": "ListItem", "position": 3, "name": "制御盤の熱対策", "url": "https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures" }
+      ]
     }
-  ]
+  }
   </script>
 </head>
 <body>
@@ -177,36 +94,36 @@
   <header class="site-header">
     <div class="wrap">
       <div class="brand-wrap">
-        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
       </div>
       <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
       <nav class="nav">
         <div class="nav-group">
           <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
           <div class="nav-menu">
-            <a href="index.html#issues">課題</a>
-            <a href="index.html#flow">進め方</a>
-            <a href="index.html#goal">めざす姿</a>
-            <a href="company.html">会社概要</a>
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
           </div>
         </div>
         <div class="nav-group">
           <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
           <div class="nav-menu">
-            <a href="digital-twin.html">デジタルツインとは</a>
-            <a href="column/industries/index.html">業種別活用事例</a>
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
           </div>
         </div>
         <div class="nav-group">
           <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
           <div class="nav-menu">
-            <a href="checklist.html">お悩みチェックリスト</a>
-            <a href="simulator.html">概算シミュレーション</a>
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
           </div>
         </div>
-        <a class="nav-column" href="column/index.html">コラム</a>
-        <a href="price.html">料金</a>
-        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
       </nav>
     </div>
   </header>
@@ -245,411 +162,215 @@
   })();
   </script>
 
-  <!-- ◆ヒーロー -->
-  <section class="hero">
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
     <div class="wrap">
-      <div class="hero-inner">
-        <h1>その自動化、<br><span class="accent">作る前に</span>試せます。</h1>
-        <p class="lead">
-          アイツインは、全体の最適化から工程の最適化まで、日本各地の中小製造業の現場をデジタルツインで再現し効率化を進めます。
-          省力化や自動化、IoTによる予知保全まで、関わるすべての現場を笑顔にしていきます。
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn--fill" href="#trial">無料ヒアリングを申し込む</a>
-          <a class="btn btn--ghost" href="simulator.html">概算シミュレーション</a>
-        </div>
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>AIで作る 現場の仕組みノート</span>
       </div>
+      <h1>AIで作る 現場の仕組みノート</h1>
+      <p class="catch">プログラムを書けなくても、現場の困りごとは安く解決できる。</p>
     </div>
   </section>
 
-  <!-- ◆すぐにご依頼いただけること（2026-10-20 追加）。価格は price.html と同じ値にそろえる -->
-  <section class="quick-order" aria-labelledby="quick-order-title">
+  <!-- ◆本体：記事一覧と事例集 -->
+  <section class="section">
     <div class="wrap">
-      <div class="qo-head">
-        <h2 id="quick-order-title">すぐにご依頼いただけること</h2>
-        <p>図面・強度計算の納期は最短2〜3日（内容により延びる場合があります）</p>
-      </div>
-      <ul class="qo-list">
-        <li><b>部品図の作成（図面のバラシ）</b><span>50,000円〜</span></li>
-        <li><b>架台・治具の強度計算</b><span>70,000円〜</span></li>
-        <li><b>設備・部品の3Dスキャン</b><span>30,000円〜</span></li>
-      </ul>
-      <p class="qo-note">
-        2D図面の3Dモデル化や、図面のない設備の3Dスキャンから図面・強度計算まで、一貫してお受けします。
-        <a href="price.html">料金と納期を見る ›</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- ◆課題セクション -->
-  <section class="section" id="issues">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">こんな課題は、ありませんか。</h2>
-      </div>
-      <!-- ◆課題リスト：1行目=設備側（役割①が答える）／2行目=人側（役割②が答える）／3行目=共通の入口 -->
-      <ul class="issue-list">
-        <li>設備が止まると、現場も止まる</li>
-        <li>人が足りず、受注を断っている</li>
-        <li>何から手をつければいいか分からない</li>
-      </ul>
-      <div style="text-align:center;margin-top:36px;">
-        <a class="btn btn--outline corner-frame" href="checklist.html">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          詳しいお悩みチェックリストを見る ›
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ◆アイツインはどうしていくのか（伴走の進め方＋できること） -->
-  <section class="section section--soft" id="flow">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">アイツインにできること</h2>
-        <p>デジタルツインを設置して終わらせない、伴走型のFDEご支援です。<br><span class="fde-note">FDE：Forward Deployed Engineer（顧客企業の現場に入り込み、業務課題の発見からシステムの設計・開発・本番稼働・定着までを一気通貫で行うエンジニアです）</span></p>
-      </div>
 
       <p class="lead-center">
-        現場を3Dスキャンで<strong>デジタルツインとして再現</strong>し、そこで試しながら
-        <strong>省力化・省人化・自動化</strong>を進めます。
-        御社が描く<strong>最終目標を一緒に達成する</strong>ために、方向性決めから実行・ふりかえりまで伴走します。
+        点検の記録、温度の測定、生産終了の機器の置き換え。製造現場の小さな困りごとは、ラズパイ（ラズベリーパイ）とPythonで安く解決できることがあります。
+        このページでは、保全の現場で<strong>プログラムを書かずにAIを使って作ってきた経験</strong>をもとに、なぜ必要かという背景から、作り方、導入したあとの運用までを順にまとめています。
       </p>
+      <div class="section-more" style="margin-top:22px;"><a class="btn btn--outline" href="#cases">事例集を見る ↓</a></div>
 
-      <div class="flow-path">
-        <div class="flow-step">
-          <img class="fp-icon" src="img/icons/dialogue-hearing.png" alt="" width="64" height="64" loading="lazy">
-          <div class="fp-no">1</div>
-          <h3><small>はじめに</small>ヒアリングで方向性を決める</h3>
-          <p>まず御社のお困りごと・目標をうかがい、どこから・どう進めるかの方向性を一緒に決めます。</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step">
-          <img class="fp-icon" src="img/icons/report-graph.png" alt="" width="64" height="64" loading="lazy">
-          <div class="fp-no">2</div>
-          <h3><small>毎月</small>レポート＆進捗報告会</h3>
-          <p>月1回、進み具合をレポートにまとめ、報告会で共有。次の一手を一緒に確認しながら進めます。</p>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">→</div>
-        <div class="flow-step">
-          <img class="fp-icon" src="img/icons/cowalk-goal.png" alt="" width="64" height="64" loading="lazy">
-          <div class="fp-no">3</div>
-          <h3><small>ゴールまで</small>最終目標へ伴走</h3>
-          <p>御社が描く最終目標を一緒に達成すべく、一段ずつ、長くお付き合いしながら伴走支援します。</p>
-        </div>
+      <!-- ◆記事カード（キットの hub_shikumi.py の SERIES から作る） -->
+      <div class="section-head" style="margin:56px 0 26px;">
+        <span class="eyebrow">ARTICLES</span>
+        <h2 class="h2-underline">記事一覧</h2>
       </div>
+      <div class="industry-grid">
 
-      <!-- ◆「アイツインができること」の6枚のカードは digital-twin.html の12枚と重複するため、
-           2026-09-15 に削除しリンクへ集約。カードを再掲する場合は向こうと内容が重ならないよう注意 -->
-      <p class="flow-note" style="margin-top:44px;">
-        現場の見える化、設備の予兆検知、レイアウトや自動化の事前検証。
-        これらはすべて、<a class="inline-link" href="digital-twin.html">デジタルツイン</a>があるからこそ、
-        勘ではなく<strong>数字で判断しながら</strong>進められます。
-      </p>
-    </div>
-  </section>
+        <a class="industry-card ind-2" href="../articles/raspberry-pi-manufacturing.html" data-date="2026-11-12">
+          <div class="industry-head"><span class="industry-no">01</span><h2>ラズパイの使い方</h2><small>製造業での事例・費用・注意点</small></div>
+          <div class="industry-body">
+            <p>「全部」ではなく「困っている一点」から考える。使い方6つ、費用の比べ方、注意点、AIで作る進め方まで。費用の比較ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
 
-  <!-- ◆アイツインの役割（旧：デジタルツインとは？／2026-09-22 flowセクションと入れ替え） -->
-  <section class="section" id="digital-twin">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">アイツインの役割</h2>
-      </div>
+        <a class="industry-card ind-3" href="../articles/manufacturing-genai-prompt.html" data-date="2026-11-12">
+          <div class="industry-head"><span class="industry-no">02</span><h2>生成AIプロンプト例10選</h2><small>現場で使える型と作成ツール</small></div>
+          <div class="industry-body">
+            <p>書類づくりから仕組みづくりへ。伝わるプロンプトの型、点検・不良・保全に使える例、仕組みをAIに作ってもらう4つの段階。プロンプト作成ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
 
-      <!-- ◆デジタルツインの2つの役割（①設備を見る ②人とモノの動きを試す）
-           2026-09-15、役割ごとの詳細カード12枚は digital-twin.html へ移設。
-           ここには見出しと各役割の説明文のみを残している -->
-      <h3 class="solutions-subhead">アイツインのデジタルツインには、2つの役割があります。</h3>
+        <a class="industry-card ind-4" href="../articles/control-panel-heat-countermeasures.html" data-date="2026-11-13">
+          <div class="industry-head"><span class="industry-no">03</span><h2>制御盤の熱対策</h2><small>原因・対策の選び方と温度監視の実例</small></div>
+          <div class="industry-body">
+            <p>熱がこもる原因と5つの対策、発熱量からの概算。毎日サーモで測っていた点検を、センサー1つとラズパイで自動にした実例。概算ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
 
-      <div class="dt-role">
-        <div class="dt-role-head">
-          <span class="dt-role-no">1</span>
-          <div>
-            <h4>設備を「見る」</h4>
-            <p>現場に取り付けたIoTセンサーから、常にリアルタイムのデータを受け取り、AIが解析します。設備の状態が数字で見えるようになり、故障の予見や品質の維持など、現場のボトルネックを解決できるようになります。</p>
-            <a class="inline-link" href="digital-twin.html#dt-role-1" style="display:inline-block;margin-top:10px;">6つの事例を見る ›</a>
+        <div class="industry-card ind-5 is-soon">
+          <div class="industry-head"><span class="industry-no">04</span><h2>生産終了のQRリーダーをカメラで置き換える</h2><small>PLCとの連携</small></div>
+          <div class="industry-body">
+            <p>更新すると数十万円〜。安いカメラとラズパイで読み取り、PLCへ送って今までどおりに使う。1か月の二重チェックまで。</p>
+            <span class="industry-soon">準備中</span>
           </div>
         </div>
-      </div>
 
-      <div class="dt-role" style="margin-top:44px;">
-        <div class="dt-role-head">
-          <span class="dt-role-no">2</span>
-          <div>
-            <h4>人とモノの動きを「試す」</h4>
-            <p>設備やレイアウトを3Dスキャンで写し取り、人とモノの動きを数値化。現場を止めずにデジタル上で試し、いちばん良いやり方を見つけてから現実に戻します。</p>
-            <a class="inline-link" href="digital-twin.html#dt-role-2" style="display:inline-block;margin-top:10px;">6つの事例を見る ›</a>
+        <div class="industry-card ind-6 is-soon">
+          <div class="industry-head"><span class="industry-no">05</span><h2>PLCとラズパイをつなぐ前に</h2><small>IPアドレスとネットワーク</small></div>
+          <div class="industry-body">
+            <p>設備のネットワークに直接つなぐ危なさと、ネットワークを分ける考え方。</p>
+            <span class="industry-soon">準備中</span>
           </div>
         </div>
+
+        <div class="industry-card ind-7 is-soon">
+          <div class="industry-head"><span class="industry-no">06</span><h2>振動・電流の波形からしきい値を決める</h2><small>異常の見つけ方</small></div>
+          <div class="industry-body">
+            <p>センサーの値を波形にして、異常のしきい値を出す。ベアリングの判定の考え方も。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-8 is-soon">
+          <div class="industry-head"><span class="industry-no">07</span><h2>カメラの外観検査は教師データでつまずく</h2><small>教師データ</small></div>
+          <div class="industry-body">
+            <p>不良品が集まらない、照明や角度で結果がぶれる。教師データの量と質がなぜ大事か。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-1 is-soon">
+          <div class="industry-head"><span class="industry-no">08</span><h2>外観検査を作る前に、仮想空間で試す</h2><small>シミュレーション</small></div>
+          <div class="industry-body">
+            <p>角度と照明を変えて教師データを作り、検査をシミュレーションで確かめてから現場へ。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-2 is-soon">
+          <div class="industry-head"><span class="industry-no">09</span><h2>自作した仕組みを止めないために</h2><small>保守・二重チェック・教育</small></div>
+          <div class="industry-body">
+            <p>導入して終わりではない。読み取りNGのときの手順、作った人しか直せない状態を避ける方法。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
+        <div class="industry-card ind-3 is-soon">
+          <div class="industry-head"><span class="industry-no">10</span><h2>AIで仕組みを作れる人を社内で育てる</h2><small>研修</small></div>
+          <div class="industry-body">
+            <p>プログラムを書かずに、AIで現場の仕組みを作れる人を育てる研修の進め方。</p>
+            <span class="industry-soon">準備中</span>
+          </div>
+        </div>
+
       </div>
 
-      <p class="flow-note" style="margin-top:40px;">
-        この2つで、工場全体が<strong>つながって最適化されていく段階</strong>へ進んでいきます。
-      </p>
+      <!-- ◆事例集（キットの hub_shikumi.py の CASES から作る。ここを直接直さず、CASES に足して作り直す） -->
+      <div class="case-section" id="cases">
+        <div class="section-head">
+          <span class="eyebrow">CASES</span>
+          <h2 class="h2-underline">事例集</h2>
+          <p><span class="kind-tag is-real">実例</span> は実際に作って現場で使ったもの、<span class="kind-tag is-plan">構成例</span> は同じ考え方で作れる組み合わせです。</p>
+        </div>
+        <div class="case-filter" role="group" aria-label="事例の絞り込み"><span class="case-filter-label">絞り込み</span><button type="button" data-f="すべて">すべて</button><button type="button" data-f="実例">実例</button><button type="button" data-f="構成例">構成例</button><span class="case-filter-sep" aria-hidden="true"></span><button type="button" data-f="記録する">記録する</button><button type="button" data-f="測る">測る</button><button type="button" data-f="読む">読む</button><button type="button" data-f="見る">見る</button><button type="button" data-f="動かす">動かす</button></div>
+        <ul class="case-list">
+        <li class="case-item" data-kind="実例" data-cat="記録する">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 01</span><span class="kind-tag is-real">実例</span><span class="case-cat">記録する</span></p>
+            <h3>制御盤の電源ユニットの温度を、毎日自動で記録</h3>
+          </div>
+          <div class="case-body">
+            <p>他社の発熱トラブルの水平展開で、毎日サーモグラフィで測って紙に書いていた電源ユニットの温度を、接触式センサー1つで常に記録。しきい値を超えたらLANで設備に送り、画面に警告を表示する（止めない）。1年以上動いている。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ4＋接触式温度センサー → PLC（LAN）</dd><dt>費用</dt><dd>機材費 約3〜4万円</dd><dt>ポイント</dt><dd class="is-point">盤の全体ではなく、熱くなる一点だけを測る</dd></dl>
+            <a class="case-link" href="../articles/control-panel-heat-countermeasures.html">くわしく読む ›</a>
+          </div>
+        </li>
+        <li class="case-item" data-kind="実例" data-cat="読む">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 02</span><span class="kind-tag is-real">実例</span><span class="case-cat">読む</span></p>
+            <h3>生産終了のQRリーダーを、カメラとラズパイで置き換え</h3>
+          </div>
+          <div class="case-body">
+            <p>手に入らなくなったQRリーダーの代わりに、USBカメラでQRラベルを読み、内容をPLCへ送って今までどおり使えるようにした。最初の1か月は人と二重チェックした。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ4＋USBカメラ → PLC（分かれたLAN）</dd><dt>費用</dt><dd>機材費 約5万円（新しいリーダーなら数十万円〜）</dd><dt>ポイント</dt><dd class="is-point">読む機器の役割だけを置き換え、PLCから先は変えない</dd></dl>
+            <a class="case-link" href="../articles/raspberry-pi-manufacturing.html">くわしく読む ›</a>
+          </div>
+        </li>
+        <li class="case-item" data-kind="構成例" data-cat="測る">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 03</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">測る</span></p>
+            <h3>振動・電流の波形から、異常のしきい値を出す</h3>
+          </div>
+          <div class="case-body">
+            <p>振動センサーや電流センサーの値をラズパイで集め、AIで波形にしてしきい値を決める。センサーの種類によっては、ベアリングの傷の兆しをつかむこともできる。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋振動センサーまたは電流センサー</dd><dt>ポイント</dt><dd class="is-point">正常なときの値を先に記録し、設備ごとに基準を決める</dd></dl>
+            <span class="case-soon">くわしい記事は準備中</span>
+          </div>
+        </li>
+        <li class="case-item" data-kind="構成例" data-cat="見る">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 04</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">見る</span></p>
+            <h3>カメラで簡単な外観検査をする</h3>
+          </div>
+          <div class="case-body">
+            <p>決まった位置に置かれたワークをカメラで撮り、付け忘れや向きの違いを見分ける。良品と不良品の画像（教師データ）をそろえるところが最初の壁になる。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋カメラ＋照明</dd><dt>ポイント</dt><dd class="is-point">照明と置き方をそろえてから撮る</dd></dl>
+            <span class="case-soon">くわしい記事は準備中</span>
+          </div>
+        </li>
+        <li class="case-item" data-kind="構成例" data-cat="記録する">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 05</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">記録する</span></p>
+            <h3>出退勤や作業の開始・終了を記録する</h3>
+          </div>
+          <div class="case-body">
+            <p>ICカードやQRコードをかざした時刻を記録し、表計算で集計できる形に残す。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋カードリーダーまたはカメラ</dd><dt>ポイント</dt><dd class="is-point">集計したい形（表の列）を先に決める</dd></dl>
+            <span class="case-soon">くわしい記事は準備中</span>
+          </div>
+        </li>
+        <li class="case-item" data-kind="構成例" data-cat="動かす">
+          <div class="case-head">
+            <p class="case-meta"><span class="case-no">事例 06</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">動かす</span></p>
+            <h3>ラズパイからPLCへ数値を渡し、ロボットを動かす</h3>
+          </div>
+          <div class="case-body">
+            <p>カメラで読んだ位置などの数値をラズパイからPLCへ渡し、ロボットの動きに使う。受け取ったPLCの側で、値の範囲や通信の途切れを確かめる。</p>
+            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ → PLC → ロボット</dd><dt>ポイント</dt><dd class="is-point">安全の働きはPLCとロボットに残し、ラズパイは値を渡すだけ</dd></dl>
+            <span class="case-soon">くわしい記事は準備中</span>
+          </div>
+        </li>
+        </ul>
+        <p class="case-note">事例は順次追加していきます。似たような困りごとがあれば、お気軽にご相談ください。</p>
+      </div>
+      <script>
+      (function () {
+        var f = document.querySelector('.case-filter'); if (!f) return;
+        var items = document.querySelectorAll('.case-item');
+        function apply(v) {
+          f.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === v)); });
+          items.forEach(function (it) { it.hidden = !(v === 'すべて' || it.dataset.kind === v || it.dataset.cat === v); });
+        }
+        f.addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (b) apply(b.dataset.f); });
+        apply('すべて');
+      })();
+      </script>
+
+      <p class="design-order">仕組みづくりの試作や、社内の方への研修もご相談いただけます。<br><a href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりについて相談する ›</a></p>
 
       <div class="section-more">
-        <a class="btn btn--outline" href="digital-twin.html">デジタルツインで何ができるのか、詳しく見る ›</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ◆伴走ストーリー＝階段（#steps）★このサイトの核 -->
-  <section class="section section--soft" id="steps">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">続けるほど、工場は強くなる。</h2>
-      </div>
-      <p class="lead-center">
-        <strong>3ヶ月＝1クール・全4クール（1年間）の年間計画</strong>で、一緒に工場を育てていく伴走型です。
-      </p>
-
-      <!-- ◆年間計画の4クール。図と各クールの詳細は annual-plan.html にまとめている（2026-09-15 移設）
-           トップでは4段階のラベルのみを示し、詳細はボタンから誘導する -->
-      <ol class="plan-steps">
-        <li>
-          <span class="ps-no">1</span>
-          <b>年間目標ヒアリング</b>
-          <span class="ps-desc">目指す姿と1年後の目標を共有し、3ヶ月ごとの実行計画に分解します。</span>
-        </li>
-        <li>
-          <span class="ps-no">2</span>
-          <b>測定と改善</b>
-          <span class="ps-desc">方針に沿って現場を測り、改善を進めます。</span>
-        </li>
-        <li>
-          <span class="ps-no">3</span>
-          <b>継続して積み上げ</b>
-          <span class="ps-desc">同じサイクルを繰り返し、改善実績を重ねます。</span>
-        </li>
-        <li>
-          <span class="ps-no">4</span>
-          <b>総仕上げ</b>
-          <span class="ps-desc">1年間の集大成として成果を形にし、その後の展望を描きます。</span>
-        </li>
-      </ol>
-
-      <!-- 成果物の内訳・交通費の注記など、詳しい条件は annual-plan.html に記載 -->
-      <p class="stairs-foot">
-        内容や順番は決めつけず、御社へのヒアリングをもとに<strong>一緒に組み立て</strong>ます。まずは STEP 1 から、無理なく始められます。<br>
-        ※ デジタルツイン導入に必要なIoTセンサーは、レンタルもしくは御社にご用意いただく形からお選びいただけます。料金は、クール期間中は無料、クール契約終了後は月額契約に切り替わります。レンタルを選択された場合は、契約終了時に回収となります。
-      </p>
-
-      <!-- ◆めざす姿（#goal）。2026-10-20 に、独立していた「工場は自分で考えるようになる」の章をここへまとめた -->
-      <div class="goal-inline" id="goal">
-        <h3 class="goal-title">その先にめざすのは、「自分で気づく」工場です。</h3>
-        <div class="loop loop--light">
-          <div class="loop-node">
-            <span class="ln-no">01</span>
-            <h3>リアルタイムでデータが入る</h3>
-            <p>現場の設備の状態が、そのままデジタルツインへ。</p>
-          </div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-node">
-            <span class="ln-no">02</span>
-            <h3>予知保全・シミュレーション</h3>
-            <p>異常を先読みし、改善案をデジタル上で試す。</p>
-          </div>
-          <div class="loop-arrow" aria-hidden="true">→</div>
-          <div class="loop-node">
-            <span class="ln-no">03</span>
-            <h3>現場へフィードバック</h3>
-            <p>分かったことを現場に返し、また良くしていく。</p>
-          </div>
-        </div>
-        <p class="loop-return">↺ そして、<span class="accent">またデータが入る</span>。このループが回り続ける工場を、一緒に目指します。<a href="column/articles/factory-that-thinks.html">詳しく見る ›</a></p>
+        <a class="btn btn--outline" href="../index.html">コラム一覧をすべて見る ›</a>
       </div>
 
-      <div class="section-more" style="margin-top:30px;">
-        <a class="btn btn--outline" href="annual-plan.html">各クールで何をするのか、詳しく見る ›</a>
-        <a class="btn btn--outline" href="price.html#partner">伴走支援の料金を見る ›</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ◆無料ヒアリング（#trial） -->
-  <section class="section section--soft" id="trial">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">まずは、無料ヒアリングから。</h2>
-        <p>Web会議で、御社の現場や課題、目指す姿をお伺いします。</p>
-      </div>
-      <div class="trial-banner">
-        <div class="t-text">
-          <span class="tag">まずはお話から</span>
-          <h3>無料ヒアリングを<br>実施します。</h3>
-          <p>御社の現場や課題を、Web会議でじっくりお伺いします。自動化・デジタルツインで何ができるか、御社に合わせた具体的なイメージをお伝えします。</p>
-          <p class="trial-note">※ 基本はオンライン（Web会議）でのご相談です。日程はお気軽にご相談ください。</p>
-        </div>
-        <div class="trial-actions">
-          <a class="btn btn--fill" href="contact-v2.html?topic=hearing">無料ヒアリングを申し込む</a>
-          <a class="btn btn--ghost" href="contact-v2.html?topic=auto">まずはお問い合わせ</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ◆データは外に出ない（安心） -->
-  <section class="section assure">
-    <div class="wrap">
-      <h2 class="h2-underline">御社の技術を、<span class="accent">外に出さない</span>という選択。</h2>
-      <p>
-        IoTセンサーで取得したデータは、御社にご用意いただくPCに取り込み、<br class="assure-br">
-        現場（社内）だけで処理する運用が可能です。<br class="assure-br">
-        このPCを完全にローカル環境でご利用いただく場合、<br class="assure-br">
-        大切なノウハウや図面、現場の情報を外部に預けることなく、<br class="assure-br">
-        自社の資産としてデータを積み上げていけます。
-      </p>
-      <p style="margin-top:16px;">
-        一方で、内容によっては計算結果のデータを暗号化したうえで、<br class="assure-br">
-        クラウドを活用する場合もあります。<br class="assure-br">
-        御社の状況やご要望に合わせて、最適な形をご提案します。
-      </p>
-    </div>
-  </section>
-
-  <!-- ◆よくあるご質問（#faq） -->
-  <section class="section" id="faq">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">よくあるご質問</h2>
-      </div>
-      <div class="accordion" id="faq-accordion">
-
-        <div class="acc-item">
-          <button class="acc-head" aria-expanded="false">
-            <span class="acc-num">Q</span>
-            <span class="acc-label"><span class="acc-title">何から始めればいいですか？</span></span>
-            <span class="acc-mark">+</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>まずは無料のオンラインヒアリングで、現場の状況やお困りごとをお伺いします。「何が課題か分からない」という状態でも問題ありません。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <button class="acc-head" aria-expanded="false">
-            <span class="acc-num">Q</span>
-            <span class="acc-label"><span class="acc-title">小さな工場でも対応してもらえますか？</span></span>
-            <span class="acc-mark">+</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>はい。デジタルツインは大企業だけのものではありません。中小製造業の現場規模に合わせて対応します。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <button class="acc-head" aria-expanded="false">
-            <span class="acc-num">Q</span>
-            <span class="acc-label"><span class="acc-title">図面がない古い設備でも大丈夫ですか？</span></span>
-            <span class="acc-mark">+</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>3Dスキャンなどで現物から直接データ化するため、図面が残っていない設備でも対応可能です。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <button class="acc-head" aria-expanded="false">
-            <span class="acc-num">Q</span>
-            <span class="acc-label"><span class="acc-title">費用はどれくらいかかりますか？</span></span>
-            <span class="acc-mark">+</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>現場の状況やご要望によって異なります。サービスごとの料金の目安は「<a class="inline-link" href="price.html">料金の目安</a>」に載せています。まずは無料ヒアリングで内容をお伺いしたうえで、具体的にご提案します。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <button class="acc-head" aria-expanded="false">
-            <span class="acc-num">Q</span>
-            <span class="acc-label"><span class="acc-title">データが外部に漏れる心配はありませんか？</span></span>
-            <span class="acc-mark">+</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>取得したデータは、ご希望に応じて社内のPCだけで処理する運用も可能です。外部に預けることなく、自社の資産として積み上げていただけます。</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQアコーディオンの開閉（グループ内で1つだけ開く） -->
-  <script>
-  (function () {
-    var acc = document.getElementById('faq-accordion');
-    if (!acc) return;
-    acc.querySelectorAll('.acc-item').forEach(function (item) {
-      var head = item.querySelector('.acc-head');
-      head.addEventListener('click', function () {
-        var wasOpen = item.classList.contains('open');
-        acc.querySelectorAll('.acc-item.open').forEach(function (o) {
-          o.classList.remove('open');
-          o.querySelector('.acc-head').setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) {
-          item.classList.add('open');
-          head.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  })();
-  </script>
-
-  <!-- ◆プロフィール -->
-  <section class="section section--soft" id="profile">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="h2-underline">会社概要</h2>
-        <p>現場の隣に、いつも。</p>
-      </div>
-
-      <div class="company-box" style="max-width:680px;margin:0 auto 40px;background:var(--paper);">
-        <dl>
-          <dt>会社名</dt><dd>株式会社アイツイン</dd>
-          <dt>所在地</dt><dd>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</dd>
-          <dt>代表者</dt><dd>加瀬部 裕紀</dd>
-          <dt>理念</dt><dd>アイツインは、中小企業をデジタルツインで最適な状態に仕上げ、確かな技を未来へつなぎ、関わるすべての現場を笑顔にしていきます。</dd>
-        </dl>
-      </div>
-
-      <!-- ◆代表の要約。メッセージ本文（6段落）は 2026-09-15 に company.html へ移設 -->
-      <div class="profile">
-        <!-- 写真エリア -->
-        <div class="profile-photo">
-          <img src="profile.jpg" alt="代表者の写真">
-        </div>
-        <div class="profile-body">
-          <p class="role">代表</p>
-          <h2>加瀬部 裕紀</h2>
-          <p class="name-en">Yuki Kasebe</p>
-          <p>製造業に15年。設備の保全と設計の両方を経験するなかで、「どうすればもっと効率化できるのか」を考え続けてきました。その答えとしてたどり着いたのが<a class="inline-link" href="digital-twin.html">デジタルツイン</a>です。社名の「アイツイン」も、この技術に由来します。</p>
-          <blockquote class="quote">
-            「中小製造業に、おどろきと、わくわくを。」<br>
-            現場が前を向ける、その瞬間をつくりたい。
-          </blockquote>
-          <p><a class="btn btn--outline" href="company.html">代表メッセージを読む ›</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ◆CTAバンド -->
-  <section class="section cta-band">
-    <div class="wrap">
-      <h2 class="h2-underline">まずは、お気軽にご相談ください。</h2>
-      <p>「何ができるのか知りたい」だけでも大歓迎です。御社の現場に合わせてご提案します。</p>
-      <a class="btn btn--fill" href="contact-v2.html?topic=hearing">お問い合わせ・無料ヒアリング</a>
     </div>
   </section>
 
@@ -665,35 +386,36 @@
           <div>
             <h4>サイトメニュー</h4>
             <ul>
-              <li><a href="#issues">課題</a></li>
-              <li><a href="#flow">進め方</a></li>
-              <li><a href="#steps">続けるほど強くなる</a></li>
-              <li><a href="#goal">めざす姿</a></li>
-              <li><a href="#faq">よくあるご質問</a></li>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+              <li><a href="../../index.html#faq">よくあるご質問</a></li>
             </ul>
           </div>
           <div>
             <h4>ご案内</h4>
             <ul>
-              <li><a href="#trial">無料相談</a></li>
-              <li><a href="company.html">会社概要</a></li>
-              <li><a href="price.html">料金</a></li>
-              <li><a href="column/index.html">コラム</a></li>
-              <li><a href="contact-v2.html">お問い合わせ</a></li>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../industries/index.html">業種別活用事例</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
             </ul>
           </div>
           <div>
             <h4>お問い合わせ</h4>
             <ul>
               <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
-              <li>お問い合わせは<a class="footer-inline-link" href="contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
               <li>返信：平日 9:00–17:00</li>
             </ul>
           </div>
           <div class="footer-line">
             <h4>公式LINE</h4>
             <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
-              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
             </a>
             <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
           </div>
@@ -702,10 +424,28 @@
       <div class="copyright">
         <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
         © 2026 株式会社アイツイン（アイツイン / i-TWIN）
-        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
       </div>
     </div>
   </footer>
 
+
+  <!-- いちばん新しい記事のカードに「NEW」を付ける（日付がいちばん新しいカードを自動で選ぶ。記事を足しても直す必要はない） -->
+  <script>
+  (function () {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('a.industry-card[data-date]'));
+    var best = null, bestDate = '';
+    cards.forEach(function (c) {
+      var d = c.getAttribute('data-date') || ((c.querySelector('.column-date') || {}).textContent || '').trim().replace(/\./g, '-');
+      if (d && d >= bestDate) { bestDate = d; best = c; }
+    });
+    if (!best) return;
+    var b = document.createElement('span');
+    b.className = 'new-badge';
+    b.textContent = 'New‼';
+    best.classList.add('is-new');
+    best.insertBefore(b, best.firstChild);
+  })();
+  </script>
 </body>
 </html>
