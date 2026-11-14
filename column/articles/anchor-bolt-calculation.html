@@ -689,7 +689,7 @@
             <p class="calc-fig-note">オレンジの矢印が、アンカーボルト1本にかかる引き抜き力です。入力に合わせて数値が変わります。</p>
           </div>
 
-          <h4>柱の根元にかかる力と、ボルトの配置</h4>
+          <p class="calc-h">柱の根元にかかる力と、ボルトの配置</p>
           <div class="calc-in">
             <label data-m="base">柱の根元の曲げモーメント M<span class="row"><input type="range" data-k="M" min="0" max="20000" step="1"><input type="number" data-k="M" min="0" max="20000" step="0.001"><span class="unit">N·m</span></span></label>
             <label data-m="base">柱の軸力 N（押す向き）<span class="row"><input type="range" data-k="N" min="0" max="50000" step="10"><input type="number" data-k="N" min="0" max="50000" step="1"><span class="unit">N</span></span></label>
@@ -707,7 +707,7 @@
           <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容引張荷重の例（本記事の長期の値）</p>
           <div class="calc-btns" data-b="tap"><button type="button" data-v="13700">M12の例 13,700N</button><button type="button" data-v="22200">M16の例 22,200N</button></div>
 
-          <h4 data-m="base">ベースプレート</h4>
+          <p class="calc-h" data-m="base">ベースプレート</p>
           <div class="calc-in" data-m="base">
             <label>柱の幅 D<span class="row"><input type="range" data-k="D" min="30" max="300" step="5"><input type="number" data-k="D" min="30" max="300" step="1"><span class="unit">mm</span></span></label>
             <label>プレートの幅 B<span class="row"><input type="range" data-k="B" min="60" max="600" step="5"><input type="number" data-k="B" min="60" max="600" step="1"><span class="unit">mm</span></span></label>
@@ -716,7 +716,7 @@
           </div>
           <div class="calc-btns" data-b="fbp" data-m="base"><button type="button" data-v="163">機械の構造物の規格の例 163MPa</button><button type="button" data-v="80">引張強さ400÷5＝80MPa</button></div>
 
-          <h4>結果</h4>
+          <p class="calc-h">結果</p>
           <table class="calc-out">
             <tr data-m="over"><th>横の力 Fh ／ 縦の力 Fv</th><td><b data-o="Fh"></b> N ／ <b data-o="Fv"></b> N</td></tr>
             <tr data-j="T"><th>アンカー1本の引き抜き力</th><td><b data-o="T"></b> N<span class="judge" data-o="jT"></span></td></tr>

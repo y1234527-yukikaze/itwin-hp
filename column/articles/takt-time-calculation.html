@@ -606,7 +606,7 @@
             タクトタイムは「稼働時間 ÷ 必要数」、設備の目標サイクルタイムは「タクトタイム × 時間稼働率 × 良品率」で概算します。チョコ停や速度の低下（性能のロス）を別に見込む場合は、その分も時間稼働率に含めて入れてください。稼働時間には、休憩や朝礼など、計画で決まった止まる時間を除いた時間を入れます。計画した段取り替えを稼働時間から引いた場合は、その分を時間稼働率に入れないでください。工程ごとの時間は、現場で測った値（できれば長いほうの値）を入れます。バランス率は「工程の時間の合計 ÷（いちばん長い工程の時間 × 工程の数）」です。<strong>結果は目安で、ラインや設備の能力を保証するものではありません。</strong>多くの品種を流す場合や、段取り替えが多い場合は、品種ごとの負荷も確かめてください。
           </p>
 
-          <h4>タクトタイム</h4>
+          <p class="calc-h">タクトタイム</p>
           <p style="font-size:0.86rem;margin:6px 0 0 !important;">1日の直の数</p>
           <div class="calc-btns" data-b="sh"><button type="button" data-v="1">1直</button><button type="button" data-v="2">2直</button><button type="button" data-v="3">3直</button></div>
           <div class="calc-in">
@@ -621,7 +621,7 @@
             <tr><th>設備の目標サイクルタイム（時間稼働率・良品率込み）</th><td><b data-o="CT"></b> 秒</td></tr>
           </table>
 
-          <h4>工程ごとの時間</h4>
+          <p class="calc-h">工程ごとの時間</p>
           <p style="font-size:0.86rem;margin:6px 0 0 !important;">工程（人・設備）の数</p>
           <div class="calc-btns" data-b="ns"><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4</button><button type="button" data-v="5">5</button><button type="button" data-v="6">6</button><button type="button" data-v="7">7</button><button type="button" data-v="8">8</button></div>
           <div class="calc-in tk-st">
@@ -648,7 +648,7 @@
             <p class="calc-fig-note" data-o="figNote"></p>
           </div>
 
-          <h4>結果</h4>
+          <p class="calc-h">結果</p>
           <table class="calc-out">
             <tr><th>工程の時間の合計</th><td><b data-o="sum"></b> 秒</td></tr>
             <tr><th>必要な人数・台数（理論の下限）</th><td><b data-o="nmin"></b>（<span data-o="nraw"></span>）</td></tr>

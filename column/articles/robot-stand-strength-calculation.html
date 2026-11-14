@@ -475,7 +475,7 @@
             本記事と同じ単純化（梁は両端単純支持、柱は面外方向の片持ち梁、慣性力は2倍、鉛直と水平の慣性力は同時に作用）による概算です。溶接部、ベースプレート、床は計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、メーカーの資料と専門家の確認にもとづいて判断してください。
           </p>
 
-          <h4>ロボットの条件</h4>
+          <p class="calc-h">ロボットの条件</p>
           <div class="calc-in">
             <label>本体の質量<span class="row"><input type="range" data-k="mb" min="50" max="1000" step="10"><input type="number" data-k="mb" min="50" max="1000" step="10"><span class="unit">kg</span></span></label>
             <label>可搬質量（ハンド含む）<span class="row"><input type="range" data-k="mp" min="5" max="300" step="5"><input type="number" data-k="mp" min="5" max="300" step="5"><span class="unit">kg</span></span></label>
@@ -485,7 +485,7 @@
             <label>停止時間<span class="row"><input type="range" data-k="t" min="0.05" max="1" step="0.01"><input type="number" data-k="t" min="0.05" max="1" step="0.01"><span class="unit">s</span></span></label>
           </div>
 
-          <h4>架台の条件</h4>
+          <p class="calc-h">架台の条件</p>
           <div class="calc-in">
             <label>スパン<span class="row"><input type="range" data-k="L" min="1000" max="4000" step="100"><input type="number" data-k="L" min="1000" max="4000" step="100"><span class="unit">mm</span></span></label>
             <label>柱の高さ<span class="row"><input type="range" data-k="h" min="1000" max="4000" step="100"><input type="number" data-k="h" min="1000" max="4000" step="100"><span class="unit">mm</span></span></label>
@@ -504,14 +504,14 @@
             <button type="button" data-sa="163">機械の構造物の規格の例 163MPa</button>
           </div>
 
-          <h4>設計に使う荷重</h4>
+          <p class="calc-h">設計に使う荷重</p>
           <table class="calc-out">
             <tr><th>鉛直力 V（自重＋鉛直の慣性力）</th><td><b data-o="V"></b> N</td></tr>
             <tr><th>水平力 H（水平の慣性力）</th><td><b data-o="H"></b> N</td></tr>
             <tr><th>モーメント M（自重＋慣性力）</th><td><b data-o="M"></b> N·m</td></tr>
           </table>
 
-          <h4>結果</h4>
+          <p class="calc-h">結果</p>
           <table class="calc-out">
             <tr data-j="beam"><th>梁の応力</th><td><b data-o="sb"></b> MPa<span class="judge" data-o="jb"></span></td></tr>
             <tr data-j="col"><th>柱の応力</th><td><b data-o="sc"></b> MPa<span class="judge" data-o="jc"></span></td></tr>

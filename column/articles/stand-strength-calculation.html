@@ -612,7 +612,7 @@
             <p class="calc-fig-note">紺の矢印は重さ、オレンジの矢印は水平力です。右は梁を切った断面で、点線のまわりに曲がります。</p>
           </div>
 
-          <h4>のせる物と寸法</h4>
+          <p class="calc-h">のせる物と寸法</p>
           <div class="calc-in">
             <label>のせる物の質量<span class="row"><input type="range" data-k="m" min="50" max="3000" step="10"><input type="number" data-k="m" min="50" max="3000" step="10"><span class="unit">kg</span></span></label>
             <label>梁のスパン<span class="row"><input type="range" data-k="L" min="300" max="3000" step="50"><input type="number" data-k="L" min="300" max="3000" step="50"><span class="unit">mm</span></span></label>
@@ -631,13 +631,13 @@
           <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方</p>
           <div class="calc-btns" data-b="sap"><button type="button" data-v="80">引張強さ400÷5＝80MPa</button><button type="button" data-v="163">機械の構造物の規格の例 163MPa</button></div>
 
-          <h4>梁</h4>
+          <p class="calc-h">梁</p>
           <table class="calc-out">
             <tr><th>梁1本が受ける重さ</th><td><b data-o="P"></b> N</td></tr>
             <tr data-j="sb"><th>梁の曲げ応力</th><td><b data-o="sb"></b> MPa<span class="judge" data-o="jsb"></span></td></tr>
             <tr data-j="dl"><th>梁のたわみ</th><td><b data-o="dl"></b> mm<span class="judge" data-o="jdl"></span></td></tr>
           </table>
-          <h4>柱</h4>
+          <p class="calc-h">柱</p>
           <table class="calc-out">
             <tr data-j="lam"><th>細長比（いちばん弱い軸）</th><td><b data-o="lam"></b><span class="judge" data-o="jlam"></span></td></tr>
             <tr><th>許容圧縮応力</th><td><b data-o="fc"></b> MPa</td></tr>
