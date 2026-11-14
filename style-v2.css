@@ -2079,6 +2079,8 @@ a.industry-card { cursor: pointer; }
 .calc-tool-title { font-family: "Shippori Mincho", serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; margin: 0 0 4px !important; }
 .calc-tool-note { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 14px !important; line-height: 1.7 !important; }
 .calc-tool h4 { font-size: 0.92rem; color: var(--navy); margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+/* 計算ツールの中の小見出し。見出しタグ（h4）は記事の目次の構造に使うため、ツールの中では p に（2026-11-14 SEO会社の助言） */
+.calc-tool .calc-h { font-size: 0.92rem; font-weight: 700; color: var(--navy); margin: 18px 0 8px !important; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
 .calc-in { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; }
 .calc-in label { display: block; font-size: 0.86rem; color: var(--ink); }
 .calc-in .row { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
@@ -2593,3 +2595,8 @@ a.industry-card { cursor: pointer; }
   .cf-layout { grid-template-columns: minmax(0, 1fr); }
   .cf-side { position: static; }
 }
+
+/* 列の多い表：スマホでは横にスクロールして読む（2026-11-14 保全の比較表から） */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 1.4em; }
+.table-scroll > table { margin: 0 !important; }
+@media (max-width: 700px) { .table-scroll > .table-wide { min-width: 640px; } }
