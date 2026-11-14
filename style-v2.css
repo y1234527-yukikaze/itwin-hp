@@ -2363,6 +2363,9 @@ a.industry-card { cursor: pointer; }
 .cs-rank img { width:80px; height:45px; object-fit:cover; border-radius:3px; display:block; }
 .cs-rank a:hover { border-color:#bcd5f7; }
 .cs-rank a:hover span { color:var(--cs-blue); }
+/* 新着・おすすめ（1件だけ。番号の札は出さない）2026-11-13 */
+.cs-pick a::before { content:none; }
+.cs-pick a { padding-left:10px; }
 .cs-link { display:flex; justify-content:space-between; align-items:center; padding:9px 12px; margin-bottom:8px; font-size:0.86rem; font-weight:500; color:var(--ink); text-decoration:none; }
 .cs-link:last-child { margin-bottom:0; }
 .cs-link:hover { border-color:#bcd5f7; color:var(--cs-blue); }
@@ -2530,3 +2533,63 @@ a.industry-card { cursor: pointer; }
 .pr-tool .calc-reset + .calc-reset { margin-left: 8px; }
 /* 記事中のプロンプト例（段落を保ったまま表示） */
 .prompt-ex p.prompt-txt { white-space: pre-line; font-size: 0.92rem; line-height: 1.75; }
+
+/* ===========================================================
+   お問い合わせフォーム（contact-v2）の新しい形（2026-11-14）
+   上は細い帯、左にフォーム、右に固定の案内（料金と日数の目安・流れ・よくある質問・会社情報）
+   =========================================================== */
+.cf-band { background: var(--paper-soft); border-bottom: 1px solid var(--line); }
+.cf-band .wrap { padding: 22px 24px 18px; }
+.cf-band .breadcrumb { color: var(--ink-soft); margin-bottom: 6px; font-size: 0.8rem; }
+.cf-band .breadcrumb a { color: var(--ink-soft); }
+.cf-band .breadcrumb a:hover { color: var(--navy); }
+.cf-band .breadcrumb span { color: var(--orange-text); }
+.cf-band h1 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); color: var(--navy); margin: 0; letter-spacing: .04em; }
+.cf-band + .section { padding-top: 36px; }
+
+.cf-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(28px, 4vw, 64px); }
+.cf-layout .form-card { border: 0; box-shadow: none; padding: 4px 0 0; background: none; }
+.cf-layout .field { margin-bottom: 22px; }
+.cf-layout .field label, .cf-layout .dq-label { font-size: 0.92rem; margin-bottom: 7px; }
+.cf-layout .field .req { background: none; color: #d33a2c; font-size: 1rem; padding: 0; margin-left: 3px; vertical-align: baseline; }
+.cf-layout .req-mark { color: #d33a2c; font-weight: 700; }
+.cf-layout .field input, .cf-layout .field select, .cf-layout .field textarea {
+  border: 1px solid #d3dae2; border-radius: 4px; background: #fff; padding: 11px 13px; font-size: 0.97rem;
+}
+.cf-layout .field input::placeholder, .cf-layout .field textarea::placeholder { color: #6b7785; }
+.cf-layout .dq-head { border-bottom: 0; padding: 0; margin: 0 0 24px; }
+.cf-layout .dq-title { font-size: clamp(1.15rem, 2vw, 1.35rem); color: var(--navy); padding-left: 12px; border-left: 4px solid var(--orange); line-height: 1.4; }
+.cf-layout .dq-sub { margin-top: 8px; }
+.cf-layout .cf-submit { display: block; width: auto; min-width: 240px; margin: 8px auto 14px; padding: 14px 40px; border-radius: 999px; }
+.cf-layout .form-promise { text-align: center; }
+/* 見積もりのフォーム：計算したいもの（チェック済み）を、名前より上に */
+#contact-form.is-design .dq-head { order: -3; }
+#contact-form.is-design .f-what { order: -2; }
+
+/* 右の固定の欄 */
+.cf-side { --cs-blue:#2f80ed; position: sticky; top: 92px; display: grid; gap: 22px; align-self: start; }
+.cf-box { min-width: 0; }
+.cf-h { font-size: 0.95rem; font-weight: 700; color: var(--navy); text-align: center; margin: 0 0 10px !important; padding-bottom: 6px; border-bottom: 3px solid var(--cs-blue); letter-spacing: .04em; }
+.cf-price { background: #fff; border: 1px solid #e3e8ee; border-radius: 6px; box-shadow: 0 2px 6px rgba(13,43,78,.12); padding: 14px 16px; }
+.cf-price-row { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin: 0 0 6px !important; font-size: 0.86rem; }
+.cf-price-row b { color: var(--orange-text); white-space: nowrap; font-size: 0.95rem; }
+.cf-price-main { margin: 6px 0 0 !important; font-size: 0.86rem; font-weight: 700; color: var(--navy); }
+.cf-price-list { margin: 8px 0 0 !important; padding-left: 1.1em; font-size: 0.82rem; color: var(--ink-soft); }
+.cf-price-list li { margin: 2px 0; }
+.cf-more { text-align: center; margin: 8px 0 0 !important; font-size: 0.84rem; }
+.cf-more a { color: var(--cs-blue); }
+.cf-flow { margin: 0 !important; padding-left: 1.3em; font-size: 0.86rem; color: var(--ink); }
+.cf-flow li { margin: 0 0 6px; line-height: 1.6; }
+.cf-faq { border-bottom: 1px solid #e3e8ee; }
+.cf-faq summary { cursor: pointer; padding: 9px 2px; font-size: 0.86rem; color: var(--ink); list-style: none; position: relative; padding-right: 18px; }
+.cf-faq summary::-webkit-details-marker { display: none; }
+.cf-faq summary::after { content: "＋"; position: absolute; right: 0; top: 9px; color: var(--cs-blue); font-size: 0.8rem; }
+.cf-faq[open] summary::after { content: "−"; }
+.cf-faq p { margin: 0 0 10px !important; font-size: 0.82rem; color: var(--ink-soft); line-height: 1.7; }
+.cf-company { display: grid; grid-template-columns: 76px 1fr; gap: 6px 10px; margin: 0; font-size: 0.82rem; }
+.cf-company dt { color: var(--navy); font-weight: 700; }
+.cf-company dd { margin: 0; color: var(--ink-soft); }
+@media (max-width: 900px) {
+  .cf-layout { grid-template-columns: minmax(0, 1fr); }
+  .cf-side { position: static; }
+}

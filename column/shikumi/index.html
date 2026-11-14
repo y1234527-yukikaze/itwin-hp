@@ -82,7 +82,8 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "ラズパイの使い方", "url": "https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing" },
         { "@type": "ListItem", "position": 2, "name": "生成AIプロンプト例10選", "url": "https://i-twin.co.jp/column/articles/manufacturing-genai-prompt" },
-        { "@type": "ListItem", "position": 3, "name": "制御盤の熱対策", "url": "https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures" }
+        { "@type": "ListItem", "position": 3, "name": "制御盤の熱対策", "url": "https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures" },
+        { "@type": "ListItem", "position": 4, "name": "ラズパイでQRコードを読み取る", "url": "https://i-twin.co.jp/column/articles/raspberry-pi-qr-code-reading" }
       ]
     }
   }
@@ -183,7 +184,6 @@
         点検の記録、温度の測定、生産終了の機器の置き換え。製造現場の小さな困りごとは、ラズパイ（ラズベリーパイ）とPythonで安く解決できることがあります。
         このページでは、保全の現場で<strong>プログラムを書かずにAIを使って作ってきた経験</strong>をもとに、なぜ必要かという背景から、作り方、導入したあとの運用までを順にまとめています。
       </p>
-      <div class="section-more" style="margin-top:22px;"><a class="btn btn--outline" href="#cases">事例集を見る ↓</a></div>
 
       <!-- ◆記事カード（キットの hub_shikumi.py の SERIES から作る） -->
       <div class="section-head" style="margin:56px 0 26px;">
@@ -216,13 +216,13 @@
           </div>
         </a>
 
-        <div class="industry-card ind-5 is-soon">
-          <div class="industry-head"><span class="industry-no">04</span><h2>生産終了のQRリーダーをカメラで置き換える</h2><small>PLCとの連携</small></div>
+        <a class="industry-card ind-5" href="../articles/raspberry-pi-qr-code-reading.html" data-date="2026-11-14">
+          <div class="industry-head"><span class="industry-no">04</span><h2>ラズパイでQRコードを読み取る</h2><small>工場での実例と読めないときの対策</small></div>
           <div class="industry-body">
-            <p>更新すると数十万円〜。安いカメラとラズパイで読み取り、PLCへ送って今までどおりに使う。1か月の二重チェックまで。</p>
-            <span class="industry-soon">準備中</span>
+            <p>買う前はノートパソコンのカメラで試す。人が判断できる情報を出させるAIの頼み方、読めない6つの原因、生産終了したリーダーを約5万円で置き換えた実例。目安ツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
           </div>
-        </div>
+        </a>
 
         <div class="industry-card ind-6 is-soon">
           <div class="industry-head"><span class="industry-no">05</span><h2>PLCとラズパイをつなぐ前に</h2><small>IPアドレスとネットワーク</small></div>
@@ -274,96 +274,7 @@
 
       </div>
 
-      <!-- ◆事例集（キットの hub_shikumi.py の CASES から作る。ここを直接直さず、CASES に足して作り直す） -->
-      <div class="case-section" id="cases">
-        <div class="section-head">
-          <span class="eyebrow">CASES</span>
-          <h2 class="h2-underline">事例集</h2>
-          <p><span class="kind-tag is-real">実例</span> は実際に作って現場で使ったもの、<span class="kind-tag is-plan">構成例</span> は同じ考え方で作れる組み合わせです。</p>
-        </div>
-        <div class="case-filter" role="group" aria-label="事例の絞り込み"><span class="case-filter-label">絞り込み</span><button type="button" data-f="すべて">すべて</button><button type="button" data-f="実例">実例</button><button type="button" data-f="構成例">構成例</button><span class="case-filter-sep" aria-hidden="true"></span><button type="button" data-f="記録する">記録する</button><button type="button" data-f="測る">測る</button><button type="button" data-f="読む">読む</button><button type="button" data-f="見る">見る</button><button type="button" data-f="動かす">動かす</button></div>
-        <ul class="case-list">
-        <li class="case-item" data-kind="実例" data-cat="記録する">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 01</span><span class="kind-tag is-real">実例</span><span class="case-cat">記録する</span></p>
-            <h3>制御盤の電源ユニットの温度を、毎日自動で記録</h3>
-          </div>
-          <div class="case-body">
-            <p>他社の発熱トラブルの水平展開で、毎日サーモグラフィで測って紙に書いていた電源ユニットの温度を、接触式センサー1つで常に記録。しきい値を超えたらLANで設備に送り、画面に警告を表示する（止めない）。1年以上動いている。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ4＋接触式温度センサー → PLC（LAN）</dd><dt>費用</dt><dd>機材費 約3〜4万円</dd><dt>ポイント</dt><dd class="is-point">盤の全体ではなく、熱くなる一点だけを測る</dd></dl>
-            <a class="case-link" href="../articles/control-panel-heat-countermeasures.html">くわしく読む ›</a>
-          </div>
-        </li>
-        <li class="case-item" data-kind="実例" data-cat="読む">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 02</span><span class="kind-tag is-real">実例</span><span class="case-cat">読む</span></p>
-            <h3>生産終了のQRリーダーを、カメラとラズパイで置き換え</h3>
-          </div>
-          <div class="case-body">
-            <p>手に入らなくなったQRリーダーの代わりに、USBカメラでQRラベルを読み、内容をPLCへ送って今までどおり使えるようにした。最初の1か月は人と二重チェックした。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ4＋USBカメラ → PLC（分かれたLAN）</dd><dt>費用</dt><dd>機材費 約5万円（新しいリーダーなら数十万円〜）</dd><dt>ポイント</dt><dd class="is-point">読む機器の役割だけを置き換え、PLCから先は変えない</dd></dl>
-            <a class="case-link" href="../articles/raspberry-pi-manufacturing.html">くわしく読む ›</a>
-          </div>
-        </li>
-        <li class="case-item" data-kind="構成例" data-cat="測る">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 03</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">測る</span></p>
-            <h3>振動・電流の波形から、異常のしきい値を出す</h3>
-          </div>
-          <div class="case-body">
-            <p>振動センサーや電流センサーの値をラズパイで集め、AIで波形にしてしきい値を決める。センサーの種類によっては、ベアリングの傷の兆しをつかむこともできる。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋振動センサーまたは電流センサー</dd><dt>ポイント</dt><dd class="is-point">正常なときの値を先に記録し、設備ごとに基準を決める</dd></dl>
-            <span class="case-soon">くわしい記事は準備中</span>
-          </div>
-        </li>
-        <li class="case-item" data-kind="構成例" data-cat="見る">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 04</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">見る</span></p>
-            <h3>カメラで簡単な外観検査をする</h3>
-          </div>
-          <div class="case-body">
-            <p>決まった位置に置かれたワークをカメラで撮り、付け忘れや向きの違いを見分ける。良品と不良品の画像（教師データ）をそろえるところが最初の壁になる。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋カメラ＋照明</dd><dt>ポイント</dt><dd class="is-point">照明と置き方をそろえてから撮る</dd></dl>
-            <span class="case-soon">くわしい記事は準備中</span>
-          </div>
-        </li>
-        <li class="case-item" data-kind="構成例" data-cat="記録する">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 05</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">記録する</span></p>
-            <h3>出退勤や作業の開始・終了を記録する</h3>
-          </div>
-          <div class="case-body">
-            <p>ICカードやQRコードをかざした時刻を記録し、表計算で集計できる形に残す。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ＋カードリーダーまたはカメラ</dd><dt>ポイント</dt><dd class="is-point">集計したい形（表の列）を先に決める</dd></dl>
-            <span class="case-soon">くわしい記事は準備中</span>
-          </div>
-        </li>
-        <li class="case-item" data-kind="構成例" data-cat="動かす">
-          <div class="case-head">
-            <p class="case-meta"><span class="case-no">事例 06</span><span class="kind-tag is-plan">構成例</span><span class="case-cat">動かす</span></p>
-            <h3>ラズパイからPLCへ数値を渡し、ロボットを動かす</h3>
-          </div>
-          <div class="case-body">
-            <p>カメラで読んだ位置などの数値をラズパイからPLCへ渡し、ロボットの動きに使う。受け取ったPLCの側で、値の範囲や通信の途切れを確かめる。</p>
-            <dl class="case-spec"><dt>構成</dt><dd>ラズパイ → PLC → ロボット</dd><dt>ポイント</dt><dd class="is-point">安全の働きはPLCとロボットに残し、ラズパイは値を渡すだけ</dd></dl>
-            <span class="case-soon">くわしい記事は準備中</span>
-          </div>
-        </li>
-        </ul>
-        <p class="case-note">事例は順次追加していきます。似たような困りごとがあれば、お気軽にご相談ください。</p>
-      </div>
-      <script>
-      (function () {
-        var f = document.querySelector('.case-filter'); if (!f) return;
-        var items = document.querySelectorAll('.case-item');
-        function apply(v) {
-          f.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === v)); });
-          items.forEach(function (it) { it.hidden = !(v === 'すべて' || it.dataset.kind === v || it.dataset.cat === v); });
-        }
-        f.addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (b) apply(b.dataset.f); });
-        apply('すべて');
-      })();
-      </script>
+
 
       <p class="design-order">仕組みづくりの試作や、社内の方への研修もご相談いただけます。<br><a href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりについて相談する ›</a></p>
 

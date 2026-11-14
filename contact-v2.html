@@ -129,41 +129,20 @@
   })();
   </script>
 
-  <!-- ◆下層ヒーロー -->
-  <section class="subhero">
+  <!-- ◆上の細い帯（2026-11-14：大きな見出しをやめ、最初の画面からすぐ入力欄が見えるようにした） -->
+  <section class="cf-band">
     <div class="wrap">
       <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <span>お問い合わせ</span></div>
-      <h1>お問い合わせ</h1>
-      <p class="catch">まずは、お気軽に。</p>
+      <h1>お問い合わせフォーム</h1>
     </div>
   </section>
 
   <!-- ◆本体 -->
   <section class="section">
     <div class="wrap">
-      <div class="contact-grid">
+      <div class="contact-grid cf-layout">
 
-        <!-- 左：相談の流れ＋会社情報 -->
-        <div class="contact-info">
-          <h3>ご相談の流れ</h3>
-          <ul class="flow">
-            <li>このフォームから、お問い合わせ内容をお送りください。</li>
-            <li>担当より、内容を確認のうえご連絡いたします。</li>
-            <li>御社の状況をうかがい、最適なご提案をいたします。</li>
-            <li>無料ヒアリングのお申し込みも、このフォームから承ります。</li>
-          </ul>
-
-          <h3>会社情報</h3>
-          <div class="company-box">
-            <dl>
-              <dt>会社名</dt><dd>株式会社アイツイン</dd>
-              <dt>所在地</dt><dd>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</dd>
-              <dt>返信の時間</dt><dd>平日 9:00–17:00</dd>
-            </dl>
-          </div>
-        </div>
-
-        <!-- 右：フォーム -->
+        <!-- 左：フォーム -->
         <div class="form-card">
           <!-- 送信完了メッセージ（送信処理を設定後、?sent=1 で表示） -->
           <div id="sent-banner" class="sent-banner" hidden>
@@ -182,15 +161,15 @@
             </div>
             <div class="field f-company">
               <label for="company">会社名</label>
-              <input type="text" id="company" name="会社名" placeholder="個人の方は空欄で大丈夫です">
+              <input type="text" id="company" name="会社名">
             </div>
             <div class="field f-name">
-              <label for="name">お名前 <span class="req">必須</span></label>
-              <input type="text" id="name" name="お名前" required>
+              <label for="name">お名前 <span class="req" aria-label="必須">*</span></label>
+              <input type="text" id="name" name="お名前" placeholder="お名前を入力してください" required>
             </div>
             <div class="field f-email">
-              <label for="email">メールアドレス <span class="req">必須</span></label>
-              <input type="email" id="email" name="email" required>
+              <label for="email">メールアドレス <span class="req" aria-label="必須">*</span></label>
+              <input type="email" id="email" name="email" placeholder="メールアドレスを入力してください" required>
             </div>
             <div class="field f-what" hidden>
               <p class="dq-label">計算したいもの <span class="dq-opt">いくつでも</span></p>
@@ -224,7 +203,7 @@
             <p class="dq-note" hidden>図面がなくても、寸法と重さが分かれば概算をお返しします。</p>
             <button type="button" class="dq-more" id="dq-more" aria-expanded="false" hidden>会社名・電話番号なども入力する（任意）</button>
             <div class="field f-tel">
-              <label for="tel">電話番号 <span class="req" id="tel-req" hidden>必須</span></label>
+              <label for="tel">電話番号 <span class="req" id="tel-req" aria-label="必須" hidden>*</span></label>
               <input type="tel" id="tel" name="電話番号">
               <label class="urgent-chk"><input type="checkbox" id="urgent" name="お急ぎ" value="至急：電話での折り返しを希望">お急ぎ（お電話での折り返しを希望する）</label>
               <p class="field-help">お急ぎの方は、チェックを入れて電話番号をご記入ください。担当者からお電話で折り返します。</p>
@@ -260,11 +239,51 @@
             </div>
             <p class="form-encourage">内容は箇条書きのままで大丈夫です。まずは、お気軽に送ってみてください。</p>
             <p class="form-promise">ご相談・お見積もりは無料です。通常2営業日以内にメールでご返信します。</p>
-            <button type="submit" class="btn btn--fill" style="width:100%;">送信する</button>
-            <p class="form-note">※ は必須項目です。いただいた個人情報はお問い合わせ対応のみに使用します。</p>
+            <button type="submit" class="btn btn--fill cf-submit">送信する</button>
+            <p class="form-note"><span class="req-mark">*</span> は必須項目です。いただいた個人情報はお問い合わせ対応のみに使用します。</p>
             <p class="form-note">※ 図面や社外秘の情報は、このフォームには書かないでください。ご連絡のあと、受け渡しの方法をご相談します。</p>
           </form>
         </div>
+
+        <!-- 右：固定の欄（スマホではフォームの下）。料金の目安は、押してきた内容に合わせて下のJSで出し分ける -->
+        <aside class="cf-side" aria-label="お問い合わせの案内">
+          <div class="cf-box cf-price">
+            <p class="cf-h">料金と日数の目安</p>
+            <div id="cf-price-body">
+              <p class="cf-price-main">ご相談・お見積もりは無料です。</p>
+            </div>
+            <ul class="cf-price-list">
+              <li>2営業日以内に、メールでご返信します</li>
+              <li id="cf-lead" hidden>図面や強度計算の納期は、最短2〜3日、長くても1週間以内が目安です</li>
+            </ul>
+            <p class="cf-more"><a href="price.html">料金の目安 ›</a></p>
+          </div>
+          <div class="cf-box">
+            <p class="cf-h">送信したあとの流れ</p>
+            <ol class="cf-flow">
+              <li>内容を確認し、2営業日以内にメールでご返信します</li>
+              <li>必要に応じて、条件や図面の受け渡しをご相談します</li>
+              <li>費用と日数の目安をお伝えし、ご判断いただきます</li>
+            </ol>
+          </div>
+          <div class="cf-box">
+            <p class="cf-h">よくある質問</p>
+            <details class="cf-faq"><summary>見積もりは無料ですか？</summary><p>はい、ご相談とお見積もりは無料です。費用が決まってから、ご依頼いただくかをご判断ください。</p></details>
+            <details class="cf-faq"><summary>図面がなくても頼めますか？</summary><p>はい。寸法と重さが分かれば概算をお返しします。図面が残っていない設備は、3Dスキャンで形を測ってから計算することもできます。</p></details>
+            <details class="cf-faq"><summary>急ぎの依頼はできますか？</summary><p>お受けします。図面や強度計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により延びる場合があります。</p></details>
+            <details class="cf-faq"><summary>遠方の会社でも頼めますか？</summary><p>日本国内からのご依頼をお受けしています。ご相談はオンラインでもできます。現地での作業がある場合は、交通費・宿泊費を別にいただきます。</p></details>
+            <details class="cf-faq"><summary>個人でも頼めますか？</summary><p>法人のお客様が中心ですが、個人事業主・個人の方もご相談ください。内容によってはお受けできない場合があります。</p></details>
+            <p class="cf-more"><a href="price.html#price-faq">料金についての質問をもっと見る ›</a></p>
+          </div>
+          <div class="cf-box">
+            <p class="cf-h">会社情報</p>
+            <dl class="cf-company">
+              <dt>会社名</dt><dd>株式会社アイツイン</dd>
+              <dt>所在地</dt><dd>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</dd>
+              <dt>返信の時間</dt><dd>平日 9:00–17:00</dd>
+            </dl>
+          </div>
+        </aside>
 
       </div>
     </div>
@@ -422,7 +441,37 @@
       var open = form.classList.toggle("dq-open");
       dqMore.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    if (topicSel) topicSel.addEventListener("change", function () { setDesign(isDesign()); });
+    if (topicSel) topicSel.addEventListener("change", function () { setDesign(isDesign()); syncGuide(); });
+
+    // ◆C・D：押してきた内容を見出しに出し、右の欄に料金と日数の目安を出す（2026-11-14）
+    var STRENGTH = ["架台の強度計算", "ロボット架台の強度計算", "溶接部の強度計算", "アンカーボルトの引き抜き計算", "架台の耐震計算"];
+    var SELECT = ["エアシリンダの選定", "コンベアのモーター選定", "真空パッドの選定", "タクトタイムとラインの検討"];
+    var dqTitle = form ? form.querySelector(".dq-title") : null;
+    var priceBody = document.getElementById("cf-price-body");
+    var leadLi = document.getElementById("cf-lead");
+    function row(k, v) { return '<p class="cf-price-row"><span>' + k + '</span><b>' + v + '</b></p>'; }
+    function syncGuide() {
+      if (!priceBody) return;
+      var t = topicSel ? topicSel.value : "";
+      var what = form ? Array.prototype.map.call(form.querySelectorAll("#dq-what input:checked"), function (c) { return c.value; }) : [];
+      var html = "";
+      if (t === "design") {
+        var st = what.some(function (w) { return STRENGTH.indexOf(w) >= 0; }) || !what.length;
+        var dr = what.indexOf("図面の作成") >= 0;
+        var se = what.some(function (w) { return SELECT.indexOf(w) >= 0; });
+        if (st) html += row("強度検証（計算書付き）", "70,000円〜");
+        if (dr) html += row("部品図の作成（1〜10点）", "50,000円〜");
+        if (se) html += row("機器の選定・ラインの検討", "内容に応じてお見積り");
+        if (dqTitle) dqTitle.textContent = (what.length === 1 ? what[0].replace("その他・まだ決まっていない", "計算・設計") : "計算・設計") + "の見積もり（無料）";
+      } else if (t === "auto") {
+        html += row("仕組みづくりのご相談", "無料") + row("試作・確かめ・手順書づくり", "200,000円〜");
+      } else if (t === "scan") {
+        html += row("部品・治具のスキャン", "30,000円〜") + row("設備単体のスキャン", "150,000円〜");
+      }
+      priceBody.innerHTML = html + '<p class="cf-price-main">ご相談・お見積もりは無料です。</p>';
+      if (leadLi) leadLi.hidden = t !== "design";
+    }
+    if (form) form.addEventListener("change", function (e) { if (e.target.closest("#dq-what")) syncGuide(); });
     function buildDesignMessage() {
       var what = Array.prototype.map.call(form.querySelectorAll("#dq-what input:checked"), function (c) { return c.value; });
       var lines = [];
@@ -489,6 +538,7 @@
           if (items.indexOf(c.value) !== -1) c.checked = true;
         });
       }
+      syncGuide();
       if (p.get("sent") === "1") {
         var banner = document.getElementById("sent-banner");
         if (banner) { banner.hidden = false; banner.scrollIntoView({ behavior: "smooth", block: "center" }); }
