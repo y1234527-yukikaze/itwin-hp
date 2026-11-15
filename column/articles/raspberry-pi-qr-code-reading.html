@@ -69,7 +69,7 @@
     "description": "ラズパイでQRコードを読み取るには、どうすればよいのでしょうか。本記事では、ラズパイとカメラでQRコードを読み取る仕組みと必要なもの、ノートパソコンのカメラで試す方法、読めないときの原因と対策を、工場で使った実例とあわせてわかりやすく解説します。",
     "image": "https://i-twin.co.jp/img/column-raspberry-pi-qr-reading.jpg",
     "datePublished": "2026-11-14",
-    "dateModified": "2026-11-14",
+    "dateModified": "2026-11-15",
     "inLanguage": "ja",
     "author": {
       "@type": "Organization",
@@ -201,7 +201,7 @@
         <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
         <nav class="article-nav-top" aria-label="記事の行き来">
           <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../shikumi/index.html">現場の仕組みノート</a></span>
-          <span class="ant-pager"><a class="ant-prev" href="control-panel-heat-countermeasures.html">‹ 前の記事：03 制御盤の熱対策</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="control-panel-heat-countermeasures.html">‹ 前の記事：03 制御盤の熱対策</a><a class="ant-next" href="plc-raspberry-pi-connection.html">次の記事：05 PLCとの接続 ›</a></span>
         </nav>
 
         <p class="article-meta"><span class="article-category">AI・現場の仕組み</span>公開日：2026.11.14</p>
@@ -579,7 +579,7 @@ PLCへ送る働きは、このあと別に相談します。</p>
 
         <h3>注意2：PLCとの通信が切れたときの動きを決める</h3>
         <p>
-          実例でも、PLCとの通信の不具合がありました。PLCとの通信は、PLCの種類によって方式が違い、LANでつなぐだけでは動きません。通信の方式、IPアドレスとポート、送る文字の形、PLC側で受け取る場所、待つ時間（タイムアウト）を、設備の担当者と確かめます。送ったあとはPLC側が受け取ったことを確かめてから、次の製品を読むようにします。返事が来ないからと無条件に送り直すと二重に処理されることがあるため、通し番号などで重なりを見分けます。ネットワークは設備のネットワークとは分け、つなぎ方は図で確かめます。
+          実例でも、PLCとの通信の不具合がありました。PLCとの通信は、PLCの種類によって方式が違い、LANでつなぐだけでは動きません。通信の方式、IPアドレスとポート、送る文字の形、PLC側で受け取る場所、待つ時間（タイムアウト）を、設備の担当者と確かめます。送ったあとはPLC側が受け取ったことを確かめてから、次の製品を読むようにします。返事が来ないからと無条件に送り直すと二重に処理されることがあるため、通し番号などで重なりを見分けます。ネットワークは設備のネットワークとは分け、つなぎ方は図で確かめます（つなぎ方の選び方とIPアドレスの管理は「<a href="plc-raspberry-pi-connection.html">PLCとラズパイの接続方法</a>」で詳しく解説しています）。
         </p>
 
         <h3>注意3：安全に関わる働きはさせない</h3>
@@ -671,8 +671,8 @@ PLCへ送る働きは、このあと別に相談します。</p>
         <div class="cs-box">
           <p class="cs-h">この特集の記事</p>
           <div class="cs-card">
-            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li class="is-cur"><span>04 QRコードの読み取り</span></li></ol>
-            <p class="cs-pager"><a href="control-panel-heat-countermeasures.html">‹ 前の記事</a></p>
+            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li class="is-cur"><span>04 QRコードの読み取り</span></li><li><a href="plc-raspberry-pi-connection.html">05 PLCとの接続</a></li></ol>
+            <p class="cs-pager"><a href="control-panel-heat-countermeasures.html">‹ 前の記事</a><a class="cs-next" href="plc-raspberry-pi-connection.html">次の記事 ›</a></p>
           </div>
           <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
         </div>
@@ -684,7 +684,7 @@ PLCへ送る働きは、このあと別に相談します。</p>
         </div>
         <div class="cs-box">
           <p class="cs-h">新着のコラム</p>
-          <ul class="cs-rank cs-pick"><li><a href="control-panel-heat-countermeasures.html"><img src="../../img/thumb-column-control-panel-heat.jpg" alt="" width="80" height="45"><span>制御盤の熱対策</span></a></li></ul>
+          <ul class="cs-rank cs-pick"><li><a href="plc-raspberry-pi-connection.html"><img src="../../img/thumb-column-plc-raspberry-pi-connection.jpg" alt="" width="80" height="45"><span>PLCとラズパイの接続方法3通り</span></a></li></ul>
         </div>
         <div class="cs-box">
           <p class="cs-h">おすすめのコラム</p>

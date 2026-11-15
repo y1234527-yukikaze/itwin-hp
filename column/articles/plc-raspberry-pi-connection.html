@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：PLCとラズパイの接続方法（特集「AIで作る 現場の仕組みノート」05）
+  （溶接の記事を土台に、キットの build_plc.py で組み立て・2026-11-15）
+  IPアドレスの重なりチェック：キットの tool_ip_check.html／本文：plc_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-plc-raspberry-pi-connection.jpg（ナノバナナで生成して差し替え）
+  図3枚：キットの figs_plc.py で作る（-methods / -ip / -network）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-15）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理｜アイツイン コラム</title>
+  <meta name="description" content="PLCとラズパイを接続する方法を、LANでの通信、24Vの接点信号、ラズパイをPLC代わりに使う方法の3通りで比べ、選び方と注意点を解説します。IPアドレスの重複で設備のデータが止まった実例と、ネットワークの分け方、IPアドレスの重なりを確かめるツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/plc-raspberry-pi-connection">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理">
+  <meta property="og:description" content="PLCとラズパイを接続する方法を、LANでの通信、24Vの接点信号、ラズパイをPLC代わりに使う方法の3通りで比べ、選び方と注意点を解説します。IPアドレスの重複で設備のデータが止まった実例と、ネットワークの分け方、IPアドレスの重なりを確かめるツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/plc-raspberry-pi-connection">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-plc-raspberry-pi-connection.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-15">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理">
+  <meta name="twitter:description" content="PLCとラズパイを接続する方法を、LANでの通信、24Vの接点信号、ラズパイをPLC代わりに使う方法の3通りで比べ、選び方と注意点を解説します。IPアドレスの重複で設備のデータが止まった実例と、ネットワークの分け方、IPアドレスの重なりを確かめるツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-plc-raspberry-pi-connection.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理",
+    "description": "PLCとラズパイを接続する方法を、LANでの通信、24Vの接点信号、ラズパイをPLC代わりに使う方法の3通りで比べ、選び方と注意点を解説します。IPアドレスの重複で設備のデータが止まった実例と、ネットワークの分け方、IPアドレスの重なりを確かめるツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-plc-raspberry-pi-connection.jpg",
+    "datePublished": "2026-11-15",
+    "dateModified": "2026-11-15",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/plc-raspberry-pi-connection"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "AIで作る 現場の仕組みノート", "item": "https://i-twin.co.jp/column/shikumi/" },
+      { "@type": "ListItem", "position": 4, "name": "PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理", "item": "https://i-twin.co.jp/column/articles/plc-raspberry-pi-connection" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../shikumi/index.html">AIで作る 現場の仕組みノート</a> ／
+        <span>PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理</span>
+      </div>
+      <h1>PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理</h1>
+      <p class="catch">公開日：2026年11月15日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../shikumi/index.html">現場の仕組みノート</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="raspberry-pi-qr-code-reading.html">‹ 前の記事：04 QRコードの読み取り</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">AI・現場の仕組み</span>公開日：2026.11.15</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-plc-raspberry-pi-connection.jpg" alt="PLCとラズパイの接続。設備の制御盤の横に小さなコンピューターを置き、LANと信号の線でつなぐイメージ" width="1376" height="768">
+          <figcaption>つなぐ方法を選ぶ前に、何を渡すのか、ほかの設備とつながっているのかを確かめる。</figcaption>
+        </figure>
+
+        <p>
+          「ラズパイで設備のデータを取りたいが、PLCとどうつなげばよいのか分からない」「つないだせいで、設備が止まったらどうしよう」。PLCとラズパイの接続を調べると、通信のプログラムや回路の作り方を解説した記事が多く見つかります。一方で、工場の中で使い続けるときに起きる問題は、あまり書かれていません。
+        </p>
+        <p>
+          本記事では、<strong class="mk">PLCとラズパイの接続方法を、LAN・接点信号・PLC代わりの3通り</strong>に分けて、選び方と注意点を整理します。後半では、<strong>1台の装置のIPアドレスが変わっただけで、設備全体のデータの流れが止まった実例</strong>と、そこから考えたネットワークの分け方をご紹介します。IPアドレスの重なりを確かめるツールも付けました。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>PLCとラズパイの接続方法3通りと、それぞれの向き不向き</li>
+            <li>LANでつなぐときに、PLCの担当者と決めておく5つのこと</li>
+            <li>24Vの接点信号をラズパイに渡すときの注意</li>
+            <li>IPアドレスの重複で設備のデータが止まった実例と、重なりチェックのツール</li>
+            <li>ネットワークをFA用・OA用・ラズパイ用に分ける考え方</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>PLCとラズパイの接続方法は3通り｜何を渡すかで決める</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-plc-raspberry-pi-connection-methods.jpg" alt="PLCとラズパイの接続方法3通り。LANで値をやり取りする、24Vの接点信号を絶縁して渡す、ほかとつながない設備ではラズパイをPLC代わりにする" width="1376" height="768" loading="lazy">
+          <figcaption>値を渡すならLAN、合図だけなら接点信号、設備を丸ごと動かすならPLC代わり。</figcaption>
+        </figure>
+
+        <h3>渡したいのは「値」か「合図」か「制御そのもの」か</h3>
+        <p>
+          PLCとラズパイの接続方法は、何を渡したいかで決まります。温度や生産数、読み取った番号のように<b>数字や文字（値）</b>をやり取りするなら、LANでつなぎます。「検査が終わった」「NGが出た」のような<b>オンとオフの合図</b>を数本渡すだけなら、接点信号でもつなげます。そして、ほかの設備とつながっていない小さな設備なら、PLCを置かずに<b>ラズパイに制御そのものを任せる</b>方法もあります。
+        </p>
+
+        <h3>3つの接続方法のメリット・デメリット比較一覧</h3>
+        <p>
+          3つの方法を、渡せるもの、よい点、気をつけたい点で並べると、次のようになります。
+        </p>
+        <div class="table-scroll"><table class="table-wide">
+          <tr><th>接続方法</th><th>渡せるもの</th><th>よい点</th><th>気をつけたい点</th><th>向いている場面</th></tr>
+          <tr><td>LAN（通信）</td><td>数字・文字をたくさん</td><td>線1本で多くの値をやり取りできる</td><td>通信の方式とIPアドレスを、設備側と合わせる必要がある</td><td>データの記録、読み取った番号の受け渡し</td></tr>
+          <tr><td>接点信号</td><td>オンとオフの合図を数本</td><td>通信の設定がいらず、仕組みが分かりやすい</td><td>24Vと3.3Vの違いがあり、間に絶縁する部品が要る</td><td>終わった・NGなどの合図、PLCにLANの口がないとき</td></tr>
+          <tr><td>PLC代わり</td><td>設備の制御そのもの</td><td>PLCを買わずに、小さな設備を動かせる</td><td>24Vへの対応と、止まったときの備えを自分で用意する</td><td>ほかとつながない、小さな単独の設備</td></tr>
+        </table></div>
+
+        <h3>迷ったら「読むだけ」から始める</h3>
+        <p>
+          どの方法でも、最初はラズパイが<b>PLCの値を読むだけ</b>にするのが安全です。読むだけなら、ラズパイがおかしな動きをしても、設備の動きは変わりません。値を書き込んだり、合図を送ったりするのは、読むだけの仕組みがしばらく安定して動いてからにします。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>値ならLAN、数本の合図なら接点信号、単独の小さな設備ならPLC代わり</li>
+            <li>どの方法にも、設備側と合わせることと、止まったときの備えが要る</li>
+            <li>最初はPLCの値を読むだけにして、安定してから書き込みに進む</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>LANでPLCとラズパイを接続する方法</h2>
+
+        <h3>まずPLC側の通信の口と方式を確かめる</h3>
+        <p>
+          LANでつなぐ前に、PLCにLANの口があるかを確かめます。本体に付いている機種もあれば、通信用のユニットを足して使う機種もあります。次に、<b>どの通信方式に対応しているか</b>を確かめます。PLCメーカーごとの独自の方式のほか、メーカーをまたいで使える標準的な方式として、Modbus TCP や OPC UA に対応している機種もあります。ただし、使える方式は機種・通信ユニット・設定によって違い、PLCが受け答えをする側（サーバー）か、問い合わせる側（クライアント）かでも、つなぎ方が変わります。必ずPLCの仕様書で確かめます。ラズパイの側は、Pythonでこれらの方式を扱うための部品（ライブラリ）が公開されているため、方式が分かれば、AIに頼んで通信の部分を作れます。
+        </p>
+
+        <h3>PLCの担当者と決めておく5つのこと</h3>
+        <p>
+          LANでつなぐときは、次の5つを、PLCのプログラムを管理している担当者と決めておきます。
+        </p>
+        <ul>
+          <li><b>IPアドレス</b>：ラズパイに付ける番号。ほかの機器と重ならないように、台帳で空きを確かめる</li>
+          <li><b>通信の方式と番号（ポート）</b>：PLC側が受け付ける方式と、通信の入口の番号</li>
+          <li><b>読む場所</b>：PLCの中の、どの記憶場所（デバイスやレジスタ）を読むか</li>
+          <li><b>書く場所</b>：書き込む場合は、ラズパイ専用に空けた場所だけにする</li>
+          <li><b>待つ時間と、切れたときの動き</b>：返事が来ないとき何秒待つか、何回やり直すか</li>
+        </ul>
+
+        <h3>書き込みは、決めた場所だけにする</h3>
+        <p>
+          PLCの記憶場所には、設備の動きに使われている所がたくさんあります。番号を1つ間違えて書き込むと、設備が思わぬ動きをすることもあります。<strong class="mk">ラズパイが書き込んでよい場所は、PLCの担当者がラズパイ専用に空けた範囲だけ</strong>と決め、PLC側でも、受け取った値が決めた範囲に収まっているかを確かめてから使うようにします。
+        </p>
+
+        <h3>実例｜QRリーダーの置き換えでは、通信に約1週間かかった</h3>
+        <p>
+          特集の記事「<a href="raspberry-pi-qr-code-reading.html">ラズパイでQRコードを読み取る方法</a>」では、生産終了したQRリーダーを、ラズパイ4とUSBカメラで置き換えた実例を紹介しました。QRコードを読む部分はAIを使って2〜3日で動きましたが、PLCとの通信を確立するのに約1週間かかっています。PLC側も、ラズパイから受け取れるように通信の設定を変えました。LANでつなぐ方法は、<b>読み取りや計測より、つなぐ所に時間がかかる</b>と考えて計画します。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>PLCのLANの口と、対応している通信方式（独自の方式・Modbus TCP・OPC UAなど）を仕様書で確かめる</li>
+            <li>IPアドレス・方式・読む場所・書く場所・待つ時間を、PLCの担当者と決める</li>
+            <li>書き込みはラズパイ専用の範囲だけ。つなぐ所に時間がかかると見込む</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>接点信号でPLCとラズパイを接続する方法</h2>
+
+        <h3>24Vと3.3Vの違い｜そのままつなぐと壊れる</h3>
+        <p>
+          工場のPLCやセンサーのオンとオフの信号には、直流24Vが広く使われています（ただし、5Vや12Vの信号、アナログの信号もあり、同じ24VでもNPNとPNPで信号の出方が違うため、機器の仕様書で確かめます）。一方、ラズパイの入出力の端子は3.3Vで動き、5Vにも耐えられません。<strong class="mk">PLCの24Vの信号を、ラズパイの端子にそのままつなぐと、ラズパイが壊れます。</strong>逆に、ラズパイの3.3Vの出力では、PLCの24V用の入力を動かせないことがほとんどで、端子から取れる電流も小さいため、リレーなどを直接動かすこともできません。
+        </p>
+
+        <h3>絶縁して渡す｜フォトカプラ・リレー・入出力ユニット</h3>
+        <p>
+          そこで、間に電気的に切り離す（絶縁する）部品を入れます。光で信号を伝えるフォトカプラや、小さなリレーを使うのが一般的です。自分で回路を組むのが不安な場合は、24Vの入出力に対応した市販のインターフェースユニットを使う方法もあります。フォトカプラは速い信号にも向きますが、リレーは機械の接点なので、速さと寿命に限りがあります。どの方法でも、配線は電気の知識のある人が行い、信号の種類（NPNかPNPか）、流れる電流、速さを確かめてから選びます。
+        </p>
+
+        <h3>接点信号が向くのは「本数が少ない合図」</h3>
+        <p>
+          接点信号は、1本の線で1つのオンとオフしか渡せません。温度の値や読み取った番号を渡すには向かず、「検査が終わった」「異常が出た」といった合図を数本やり取りする場面に向いています。PLCにLANの口がない古い設備でも使えるのが、この方法のよい点です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>PLCは24V、ラズパイは3.3V。そのままつなぐとラズパイが壊れる</li>
+            <li>フォトカプラ・リレー・市販の変換ユニットで絶縁して渡す</li>
+            <li>本数の少ない合図に向き、LANの口がない古い設備でも使える</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>単独の設備なら、ラズパイをPLC代わりにする方法もある</h2>
+
+        <h3>ほかの設備とつながないなら、ネットワークの心配が減る</h3>
+        <p>
+          ここまでは、すでにあるPLCにラズパイをつなぐ話でした。一方、ほかの設備やネットワークとつながっていない小さな単独の設備（スタンドアロンの設備）なら、<b>PLCを置かずに、ラズパイに制御を任せる</b>方法もあります。ほかの機器とつながらないので、後半で紹介するIPアドレスの重なりやネットワークの分け方の心配は、ぐっと小さくなります。
+        </p>
+
+        <h3>実例｜24Vの入出力が付いた、ラズパイ互換の産業用コントローラを使った</h3>
+        <p>
+          筆者も、PLCの代わりにラズパイを使ったことがあります。ただし、<strong class="mk">ラズパイ本体だけで24Vの設備に対応させるのは手間がかかるため、24Vの入出力が付いた、ラズパイ互換の産業用コントローラを導入しました。</strong>PLCのプログラム言語の国際規格（IEC 61131-3。ラダー図・ファンクションブロック図・構造化テキストなどを定めている）に沿った開発ソフトを使えば、PLCと同じようにラダーでプログラムを書けます。保全の担当者が見慣れたラダーで書けることも、設備を直し続けるうえでは大切です。
+        </p>
+
+        <h3>それでも、非常停止はラズパイを通さない</h3>
+        <p>
+          ラズパイをPLC代わりにする場合でも、非常停止や安全扉のインターロックなど、安全に関わる働きはラズパイに任せません。機械の危険を見積もったうえで、安全のための回路や機器（安全リレーなど）を別に用意し、ラズパイが止まっても、設備が安全な側に止まるようにします。また、ラズパイ4（Model B）の公式の仕様では、使える周りの温度は0〜50℃です（機種によって違います）。制御盤の中は温度が上がりやすく、ほこりや油、電気のノイズの多い場所では、産業用に作られた機器を選ぶほうが安心です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>単独の小さな設備なら、ラズパイにPLCの代わりをさせる方法もある</li>
+            <li>24Vの入出力付きの産業用コントローラなら、ラダーで書けて配線の手間も減る</li>
+            <li>安全の働きは、ラズパイと別の安全のための回路に任せる</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>PLCとラズパイの接続で設備が止まる原因｜IPアドレスの重複</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-plc-raspberry-pi-connection-ip.jpg" alt="IPアドレスの重複で設備のデータが止まった実例。トレーサビリティの装置のIPアドレスが変わり、全体のデータの流れが止まった。原因がIPアドレスと分かるまでと、対象の設備を探すのに時間がかかった" width="1376" height="768" loading="lazy">
+          <figcaption>1台の番号が変わっただけで、全体の流れが止まる。原因と場所を探すのに、いちばん時間がかかった。</figcaption>
+        </figure>
+
+        <h3>実例｜1台のIPアドレスが変わり、データの流れが全部止まった</h3>
+        <p>
+          ここからは、筆者が保全の現場で経験したことです。トレーサビリティの記録を受け持つ装置のIPアドレスが、あるとき変わってしまいました。作業者が、それが問題になるとは知らずに、IPアドレスを変更してしまったのが原因です。その結果、その装置を通っていた<b>設備全体のデータの流れが止まりました。</b>
+        </p>
+
+        <h3>原因と場所を探すのに、いちばん時間がかかった</h3>
+        <p>
+          困ったのは、止まった理由がすぐには分からなかったことです。通信を調べてIPアドレスが原因だと分かってからも、どの設備の番号が変わったのかを、現場で探すのに時間がかかりました。<strong class="mk">どの機器にどの番号を付けたかの一覧と、機器を見ればすぐ番号が分かる目印があれば、探す時間は大きく減らせます。</strong>
+        </p>
+
+        <h3>IPアドレスが重なると、何が起きるか</h3>
+        <p>
+          同じネットワーク（同じグループ）の中で、2台の機器に同じIPアドレスが付くと、送ったデータがどちらに届くか定まらなくなり、どちらか、または両方の通信が不安定になったり、止まったりします。ラズパイを足すときに、すでに使われている番号を知らずに付けてしまうと、ラズパイではなく、<b>もとからある設備の通信が止まる</b>こともあります。ラズパイを1台足すだけでも、つなぐ前に番号の一覧を確かめるのはそのためです。
+        </p>
+
+        <h3>IPアドレスの重なりを確かめるツール</h3>
+        <p>
+          機器の名前とIPアドレスの一覧を入れると、重複、グループ違い、使えない番号を見つけます。ラズパイを足す前に、設備の台帳を貼り付けて確かめてみてください。
+        </p>
+
+        <div class="calc-tool" id="ip-tool">
+          <p class="calc-tool-title">IPアドレスの重なりチェック｜重複・グループ違い・使えない番号を見つける</p>
+          <p class="calc-tool-note">
+            機器の名前とIPアドレスを、1行に1台ずつ入れてください（名前とIPアドレスの間は、空白かタブ。表計算ソフトの2列をそのまま貼り付けても読めます）。<strong>同じ番号の重複</strong>、ネットワークの<strong>グループ違い</strong>、機器に付けられない<strong>ネットワークアドレス・ブロードキャストアドレス</strong>（255.255.255.0なら末尾0と255）を見つけます。入れた内容は、このページの中だけで計算し、どこにも送りません。はじめは、トレーサビリティ装置とラズパイが同じ番号になっている例です。
+          </p>
+          <div class="pr-in">
+            <label>ネットワークの番号（例：192.168.10.0）<input type="text" id="ip-net" inputmode="decimal" autocomplete="off"></label>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">サブネットマスク（グループの大きさ。工場では255.255.255.0が多い）</p>
+          <div class="calc-btns" data-b="mask"><button type="button" data-v="24">255.255.255.0</button><button type="button" data-v="16">255.255.0.0</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 4px !important;">機器の一覧（名前　IPアドレス）</p>
+          <textarea id="ip-list" rows="7" spellcheck="false" style="display:block;width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:0.92rem;line-height:1.7;background:#fff;resize:vertical;"></textarea>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out">
+            <tr data-j="dup"><th>同じ番号の重複</th><td><b data-o="dup"></b> 台<span class="judge" data-o="jdup"></span></td></tr>
+            <tr data-j="out"><th>グループ違い</th><td><b data-o="out"></b> 台<span class="judge" data-o="jout"></span></td></tr>
+            <tr data-j="bad"><th>使えない番号・書き方の誤り</th><td><b data-o="bad"></b> 台<span class="judge" data-o="jbad"></span></td></tr>
+            <tr><th>空いている番号の例</th><td data-o="free"></td></tr>
+          </table>
+          <div class="table-scroll" style="margin-top:10px;"><table class="calc-out" id="ip-rows"></table></div>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="note"></p>
+          <button type="button" class="calc-reset" id="ip-reset">記事の例に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('ip-tool');
+          if (!root) return;
+          var DEF_NET = '192.168.10.0', DEF_MASK = 24;
+          var DEF_LIST = ['PLC（組立1号機）\t192.168.10.10', '表示器（組立1号機）\t192.168.10.11', 'トレーサビリティ装置\t192.168.10.20',
+            'ラズパイ（QR読み取り）\t192.168.10.20', '事務所のパソコン\t192.168.1.35', 'ラズパイ（温度監視）\t192.168.10.255'].join('\n');
+          var net = document.getElementById('ip-net'), list = document.getElementById('ip-list'), rows = document.getElementById('ip-rows');
+          var mask = DEF_MASK, used = false;
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function parseIP(s) {
+            var m = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(s);
+            if (!m) return null;
+            var a = [Number(m[1]), Number(m[2]), Number(m[3]), Number(m[4])];
+            for (var i = 0; i < 4; i++) if (a[i] > 255) return null;
+            return a;
+          }
+          function key(a) { return a.join('.'); }
+          function sameNet(a, n) { return mask === 24 ? a[0] === n[0] && a[1] === n[1] && a[2] === n[2] : a[0] === n[0] && a[1] === n[1]; }
+          function hostKind(a) {
+            if (mask === 24) return a[3] === 0 ? 'net' : a[3] === 255 ? 'bc' : '';
+            if (a[2] === 0 && a[3] === 0) return 'net';
+            if (a[2] === 255 && a[3] === 255) return 'bc';
+            return '';
+          }
+          function syncBtns() { root.querySelectorAll('[data-b="mask"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(Number(x.dataset.v) === mask)); }); }
+          function calc() {
+            var n = parseIP(net.value.trim());
+            var items = [];
+            list.value.split(/\r?\n/).forEach(function (line) {
+              var t = line.trim();
+              if (!t) return;
+              var parts = t.split(/[\s,，]+/), ipTxt = parts.pop(), name = parts.join(' ') || '（名前なし）';
+              items.push({ name: name, txt: ipTxt, ip: parseIP(ipTxt) });
+            });
+            var count = {};
+            items.forEach(function (it) { if (it.ip) count[key(it.ip)] = (count[key(it.ip)] || 0) + 1; });
+            var dup = 0, outN = 0, bad = 0;
+            rows.textContent = '';
+            var hr = rows.insertRow(); ['機器の名前', 'IPアドレス', '判定'].forEach(function (h) { var th = document.createElement('th'); th.textContent = h; th.style.width = 'auto'; hr.appendChild(th); });
+            items.forEach(function (it) {
+              var msg = [], warn = false;
+              if (!it.ip) { msg.push('書き方の誤り（数字4つを点で区切る・各0〜255）'); bad++; warn = true; }
+              else {
+                if (count[key(it.ip)] > 1) { msg.push('ほかの機器と重複'); dup++; warn = true; }
+                if (n && !sameNet(it.ip, n)) { msg.push('グループ違い（このままでは通信できない）'); outN++; warn = true; }
+                else {
+                  var hk = hostKind(it.ip);
+                  if (hk === 'net') { msg.push('使えない番号（ネットワークアドレス）'); bad++; warn = true; }
+                  if (hk === 'bc') { msg.push('使えない番号（ブロードキャストアドレス）'); bad++; warn = true; }
+                }
+              }
+              var r = rows.insertRow();
+              r.insertCell().textContent = it.name;
+              r.insertCell().textContent = it.txt;
+              var c = r.insertCell(); c.textContent = warn ? msg.join('・') : '問題なし';
+              if (warn) { r.classList.add('over'); c.style.color = 'var(--orange-text)'; c.style.fontWeight = '700'; }
+            });
+            out('dup', dup); out('out', outN); out('bad', bad);
+            out('jdup', dup ? '番号を変える' : 'なし'); out('jout', outN ? '設定を確かめる' : 'なし'); out('jbad', bad ? '番号を直す' : 'なし');
+            root.querySelector('[data-j="dup"]').classList.toggle('over', dup > 0);
+            root.querySelector('[data-j="out"]').classList.toggle('over', outN > 0);
+            root.querySelector('[data-j="bad"]').classList.toggle('over', bad > 0);
+            var free = [];
+            if (n) {
+              for (var h = 2; h <= 254 && free.length < 5; h++) {
+                var cand = mask === 24 ? [n[0], n[1], n[2], h] : [n[0], n[1], 0, h];
+                if (!count[key(cand)]) free.push(key(cand));
+              }
+            }
+            out('free', n ? free.join('、') : 'ネットワークの番号を正しく入れてください');
+            var note = !n ? 'ネットワークの番号が読めません。192.168.10.0 のように、数字4つを点で区切って入れてください。'
+              : dup ? '同じ番号の機器が2台あると、どちらか、または両方の通信が不安定になり、止まることがあります。新しく足した機器の番号を、空いている番号に変えます。'
+              : outN ? 'グループ違いの機器は、ルーターなどを通さない限り、このネットワークの機器と通信できません。設定の打ち間違いか、別のネットワークの機器かを確かめます。'
+              : bad ? 'ネットワークアドレス（ネットワークそのものを表す番号）とブロードキャストアドレス（全員あての番号）は、機器には付けられません。空いている番号に直します。'
+              : '入れた範囲では、重なりは見つかりませんでした。ただし、一覧に載っていない機器や、自動で番号を受け取る機器は確かめられません。台帳と現場の機器を突き合わせてください。';
+            out('note', note + '（判定は入れた一覧だけをもとにした目安です。実際の設定は、設備の管理者と確かめてください。）');
+          }
+          function touch() { if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'ip_check' }); } }
+          net.addEventListener('input', function () { calc(); touch(); });
+          list.addEventListener('input', function () { calc(); touch(); });
+          root.querySelectorAll('[data-b="mask"] button').forEach(function (b) {
+            b.addEventListener('click', function () { mask = Number(b.dataset.v); syncBtns(); calc(); touch(); });
+          });
+          function reset() { net.value = DEF_NET; list.value = DEF_LIST; mask = DEF_MASK; syncBtns(); calc(); }
+          document.getElementById('ip-reset').addEventListener('click', reset);
+          reset();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>1台の装置のIPアドレスが変わっただけで、設備全体のデータの流れが止まった</li>
+            <li>時間がかかったのは、原因がIPアドレスと分かるまでと、変わった機器を探すこと</li>
+            <li>番号が重なると、もとからある設備の通信が止まることもある</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>PLCとラズパイの接続はネットワークを分けてから｜FA用・OA用・ラズパイ用</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-plc-raspberry-pi-connection-network.jpg" alt="ネットワークを3つに分ける考え方。設備どうしのFA用、事務所のOA用、ラズパイ用。間は決めた通り道だけでつなぎ、IPアドレスは台帳で管理する" width="1376" height="768" loading="lazy">
+          <figcaption>設備・事務所・ラズパイを分け、間は決めた通り道だけでつなぐ。</figcaption>
+        </figure>
+
+        <h3>3つに分ける考え方</h3>
+        <p>
+          この経験から、筆者は、工場のネットワークは役割ごとに分けておく必要があると考えるようになりました。設備どうしがつながる<b>FA用</b>、事務所のパソコンがつながる<b>OA用</b>、そして試作や計測に使う<b>ラズパイ用</b>の3つです。分けておけば、ラズパイ用のネットワークで番号を間違えても、設備の通信には影響しません。事務所のパソコンの設定変更やウイルスの影響が、設備に及びにくくなるという利点もあります。
+        </p>
+
+        <h3>分け方の例｜線を分ける・PLCに通信ユニットを足す</h3>
+        <p>
+          いちばん分かりやすいのは、<b>線（つなぐ機器）そのものを分ける</b>方法です。特集のQRリーダーの実例では、もともと設備のネットワークとは分かれた線を使いました。ほかに、PLCに通信用のユニットを足して、ラズパイ専用の口を作る方法や、VLANに対応した管理機能のあるスイッチで、つなぐ口（ポート）ごとにグループを分け、1台のスイッチの中に別々のネットワークを作る方法（VLAN）もあります。グループが違う機器どうしは、そのままでは通信できず、やり取りさせるにはルーターなどの設定が要ります。分けたネットワークの間でデータをやり取りする場合は、決めた機器と通り道だけを通すようにします。
+        </p>
+
+        <h3>IPアドレスの台帳と、機器に貼るラベル</h3>
+        <p>
+          ネットワークを分けても、番号の管理がなければ同じことが起きます。どの機器に、どの番号を、いつ、誰が付けたかを、<b>IPアドレスの台帳</b>にまとめます。あわせて、機器の本体にも番号を書いたラベルを貼っておくと、実例のように探す時間がかかることを防げます。上のツールに台帳を貼り付ければ、重なりも確かめられます。
+        </p>
+
+        <h3>変更のルール｜知らずに変えられないようにする</h3>
+        <p>
+          実例の原因は、作業者が影響を知らずに番号を変えたことでした。IPアドレスを変えるときは、<strong class="mk">設備の管理者に相談し、台帳を直してから変える</strong>、というルールを決めて、現場に伝えます。設定画面に入れる人を決めておく、変えたら記録を残す、といった決めごとも効果があります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ネットワークは、FA用・OA用・ラズパイ用に分けておく</li>
+            <li>線を分ける、PLCに通信ユニットを足す、VLAN対応のスイッチで分ける、などの方法がある</li>
+            <li>IPアドレスの台帳とラベル、変更のルールで、知らずに変えられるのを防ぐ</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>AIでPLCとラズパイの接続の仕組みを作るときの頼み方</h2>
+        <p>
+          筆者は、プログラムを書いたことがありません。PLCとの通信の部分も、AIに頼んで作りました。頼み方の型は、特集の記事「<a href="manufacturing-genai-prompt.html">製造業の生成AIプロンプト例10選</a>」と同じで、何をしたいか・どうしたいか・何がいるかを分けて伝えます。
+        </p>
+
+        <h3>まずは、PLCの値を読むだけ</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例1｜PLCの値を読むだけ</p>
+          <p class="prompt-txt">あなたは、ラズパイとPythonで製造現場の小さな仕組みを作るのを手伝うエンジニアです。
+【何をしたいか】PLCの中の生産数の値を、ラズパイで1分ごとに読み取って記録したい。
+【どうしたいか】PLCへの書き込みはしない。読むだけにしたい。
+【何がいるか】ラズパイ4。PLCとはLANでつなぐ（設備のネットワークとは分けた線）。PLCは Modbus TCP に対応。PLCのIPアドレスと読む場所は、担当者から聞いた値を入れる。
+私はプログラムを書いたことがありません。準備から1つずつ、手順を教えてください。</p>
+        </div>
+
+        <h3>次に、通信が切れたときの動きを足す</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例2｜通信が切れたときの動きを足す</p>
+          <p class="prompt-txt">PLCの値を読む仕組みに、次の働きを足してください。
+・返事が3秒来なければ、読めなかったと記録に残す。前の値を使い回さない
+・読めないことが5回続いたら、画面に知らせを出す
+・PLCの電源が戻ったら、自動で読み直しを始める
+・読んだ値が決めた範囲（0〜9999）に入っているかを確かめてから記録する
+・読めた時刻、読めなかった時刻と理由を、あとで表計算ソフトで開ける形で残す</p>
+        </div>
+
+        <h3>AIの答えを、そのまま設備で試さない</h3>
+        <p>
+          AIが作ったプログラムは、まず設備から外したPLCや、止めてもよい時間に試します。特に、書き込む働きを足すときは、どの場所に何を書くかを、PLCの担当者と一緒に1つずつ確かめます。AIは、こちらの設備の配線やPLCのプログラムを知りません。<b>設備の事情は人が確かめ、AIには作る手間を任せる</b>、という分担が安全です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>何をしたいか・どうしたいか・何がいるかを分けて伝える</li>
+            <li>最初は読むだけ。次に、通信が切れたときの動きを足す</li>
+            <li>AIの答えは、設備から外した所で試し、書き込みは担当者と確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆8 -->
+        <h2>アイツインの仕組みづくりの支援</h2>
+        <p>
+          アイツインは、保全の現場での経験をもとに、製造現場の困りごとを、ラズパイとAIで安く解決するお手伝いをしています。
+        </p>
+
+        <h3>つなぐ方法の選び方と、ネットワークの確かめから</h3>
+        <p>
+          何を渡したいか、PLCに何が付いているか、ほかの設備とどうつながっているかをうかがい、LAN・接点信号・PLC代わりのどれが向くかを一緒に判断します。IPアドレスの台帳づくりや、ネットワークの分け方の整理からでもお手伝いします。
+        </p>
+
+        <h3>試作から、PLCとの通信、使い始めの確かめまで</h3>
+        <p>
+          読むだけの仕組みの試作から、PLCの担当の方との通信の確かめ、通信が切れたときの手順書づくりまでを支援します。社内の方がAIを使って直せるようになるための研修もご相談いただけます。
+        </p>
+
+        <h3>まずはお気軽にご相談ください｜何を渡したいかの整理から</h3>
+        <p>
+          「PLCの値をラズパイで記録したい」「ネットワークの番号の管理が心配」「小さな設備をPLCなしで動かしたい」という段階からご相談いただけます。ご相談とお見積もりは無料です。
+        </p>
+        <div class="section-more"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91PLC%E3%81%A8%E3%83%A9%E3%82%BA%E3%83%91%E3%82%A4%E3%82%92%E3%81%A4%E3%81%AA%E3%81%8E%E3%81%9F%E3%81%84">仕組みづくりを相談する（無料）</a></div>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          PLCとラズパイの接続方法は、値を渡すならLAN、数本の合図なら接点信号、ほかとつながない単独の設備ならPLC代わり、の3通りです。どの方法でも、最初はPLCの値を読むだけにして、安定してから書き込みに進みます。
+        </p>
+        <p>
+          そして、工場の中でつなぐときにいちばん気をつけたいのが、IPアドレスです。<strong class="mk">1台の番号が変わるだけで、設備全体のデータが止まることがあります。</strong>ネットワークをFA用・OA用・ラズパイ用に分け、IPアドレスの台帳とラベル、変更のルールを用意してから、ラズパイをつなぎましょう。まずは上のツールに、今の設備の番号の一覧を入れてみるところから始めてみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・本記事の実例は、筆者の現場での経験です。設備の構成やPLCの機種によって、つなぎ方と必要な設定は変わります。<br>
+          ・通信方式・入出力の仕様は、お使いのPLCとラズパイの資料で確かめてください。配線は電気の知識のある人が行ってください。<br>
+          ・重なりチェックのツールは、入れた一覧だけをもとにした目安です。<br>
+          ・参考にした資料：ラズパイの公式ドキュメント（GPIOの電圧）と、ラズパイ4 Model B の公式の仕様（周りの温度）／IEC 61131-3:2025（PLCのプログラム言語）／Modbus Organization の仕様書（Modbus TCP）／OPC Foundation の仕様書（OPC UA、IEC 62541）／RFC 5227（IPアドレスの重複の検出）
+        </p>
+
+        <div class="article-cta">
+          PLCの値をラズパイで記録したい。つなぐ前に、ネットワークの番号を整理しておきたい。無料相談で、つなぐ方法の選び方から、作り方と費用の目安までを一緒に整理しませんか。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91PLC%E3%81%A8%E3%83%A9%E3%82%BA%E3%83%91%E3%82%A4%E3%82%92%E3%81%A4%E3%81%AA%E3%81%8E%E3%81%9F%E3%81%84">仕組みづくりを相談する</a><a href="../../price.html#shikumi">料金の目安</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../shikumi/index.html">← 仕組みノートのまとめに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.14</p>
+                <h3><a href="raspberry-pi-qr-code-reading.html">ラズパイでQRコードを読み取る方法｜工場での実例と、読めないときの対策</a></h3>
+                <p class="column-excerpt">生産終了したQRリーダーを、ラズパイ4とUSBカメラで置き換えた実例。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.12</p>
+                <h3><a href="raspberry-pi-manufacturing.html">ラズパイの製造業での使い方｜事例・費用・注意点と、AIで作る進め方</a></h3>
+                <p class="column-excerpt">使い方6つ、費用の比べ方、注意点、AIで作る進め方。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li><a href="raspberry-pi-qr-code-reading.html">04 QRコードの読み取り</a></li><li class="is-cur"><span>05 PLCとの接続</span></li></ol>
+            <p class="cs-pager"><a href="raspberry-pi-qr-code-reading.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">仕組みづくりのご相談</p>
+          <p class="cs-ask-text">困っている一点の洗い出しから、試作・二重チェック・社内の方への研修までご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#shikumi">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="raspberry-pi-qr-code-reading.html"><img src="../../img/thumb-column-raspberry-pi-qr-reading.jpg" alt="" width="80" height="45"><span>ラズパイでQRコードを読み取る方法</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">おすすめのコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP2</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/thumb-column-stand-strength.jpg" alt="" width="80" height="45"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/thumb-column-weld-strength.jpg" alt="" width="80" height="45"><span>溶接の強度計算の方法と例</span></a></li></ol>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>

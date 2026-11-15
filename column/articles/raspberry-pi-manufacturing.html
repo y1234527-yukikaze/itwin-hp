@@ -69,7 +69,7 @@
     "description": "ラズパイ（ラズベリーパイ）は、製造業でどう使えるのでしょうか。本記事では、点検の記録、温度や振動の測定、QRコードの読み取り、PLCとのデータのやり取りなどの使い方を事例で整理し、費用の目安と注意点、プログラムを書かずにAIで作る進め方を解説します。",
     "image": "https://i-twin.co.jp/img/column-raspberry-pi.jpg",
     "datePublished": "2026-11-12",
-    "dateModified": "2026-11-12",
+    "dateModified": "2026-11-15",
     "inLanguage": "ja",
     "author": {
       "@type": "Organization",
@@ -285,7 +285,7 @@
 
         <h3>読む・つなぐ｜QRコードを読み、PLCへ渡す</h3>
         <p>
-          カメラでQRコードやバーコードを読み取り、その内容をPLCへ送ります。読む機器と設備をつなぐ部分をラズパイが受け持つことで、<strong>設備側の使い方を変えずに</strong>機器を置き換えられます。次の章で詳しく紹介します。
+          カメラでQRコードやバーコードを読み取り、その内容をPLCへ送ります。読む機器と設備をつなぐ部分をラズパイが受け持つことで、<strong>現場の作業を大きく変えずに</strong>機器を置き換えられます。次の章で詳しく紹介します。
         </p>
 
         <h3>見る・書類にする｜カメラの外観確認と、記録の表</h3>
@@ -320,7 +320,7 @@
 
         <h3>今の使い方を変えずに、置き換える</h3>
         <p>
-          機器が古くなって手に入らないとき、仕組みを丸ごと作り替えると、設備のプログラムや作業の手順まで変える必要が出てきます。困っているのが「読む機器」だけなら、<strong>その機器の役割だけをラズパイで代わりに受け持ち、ほかは今までどおりにする</strong>という考え方ができます。現場の人の作業が変わらないので、導入もスムーズです。
+          機器が古くなって手に入らないとき、仕組みを丸ごと作り替えると、設備のプログラムや作業の手順まで変える必要が出てきます。困っているのが「読む機器」だけなら、<strong>その機器の役割だけをラズパイで代わりに受け持ち、ほかはできるだけ今までどおりにする</strong>という考え方ができます。現場の人の作業が変わらないので、導入もスムーズです。
         </p>
 
         <div class="chapter-sum">
@@ -328,7 +328,7 @@
           <ul>
             <li>何を作るかより先に、なぜその作業や記録が必要なのかを確かめる</li>
             <li>全体ではなく、困っている一点だけを測ると、安く小さく始められる</li>
-            <li>困っている機器の役割だけを置き換え、今の使い方は変えない</li>
+            <li>困っている機器の役割だけを置き換え、今の使い方はできるだけ変えない</li>
           </ul>
         </div>
 
@@ -345,15 +345,15 @@
 
         <h3>構成｜ラズパイ4とUSBカメラでQRを読み、PLCへ送る</h3>
         <p>
-          ラズパイ4に市販のUSBカメラをつなぎ、製品に貼られたQRラベルを読み取ります。読み取った内容は、LANでPLCへ送り、<strong>PLC側では今までのリーダーから受け取っていたときと同じように使える</strong>ようにしました。もともとのQRリーダーは、設備のネットワークとは分かれた線でつながっていたため、その線をそのまま使っています。機材費は、約5万円でした。
+          ラズパイ4に市販のUSBカメラをつなぎ、製品に貼られたQRラベルを読み取ります。読み取った内容は、LANでPLCへ送ります。通信の方式が元のリーダーとは違うため、<strong>PLC側は、ラズパイから受け取れるように通信の設定を変えました</strong>。もともとのQRリーダーは、設備のネットワークとは分かれた線でつながっていたため、その線をそのまま使っています。機材費は、約5万円でした。
         </p>
         <p>
           ただし、これは1つの現場での結果です。QRラベルの印刷の質や大きさ、カメラとの距離、照明や反射、止まった状態で読むか動いている状態で読むかで、うまくいくかどうかは変わります。どの現場でも同じ金額で置き換えられる、という意味ではありません。
         </p>
 
         <figure class="article-figure">
-          <img src="../../img/column-raspberry-pi-qr.jpg" alt="生産終了のQRリーダーを約5万円で置き換えた構成。USBカメラでQRラベルを撮り、ラズパイ4で文字にして、設備のネットワークとは分かれたLANでPLCへ送る。PLCと設備のプログラムは変えない" width="1376" height="768" loading="lazy">
-          <figcaption>読む機器の役割だけをラズパイで受け持ち、PLCから先は変えていない。</figcaption>
+          <img src="../../img/column-raspberry-pi-qr.jpg" alt="生産終了のQRリーダーを約5万円で置き換えた構成。USBカメラでQRラベルを撮り、ラズパイ4で文字にして、設備のネットワークとは分かれたLANでPLCへ送る。PLC側は、受け取れるように通信の設定を変えた" width="1376" height="768" loading="lazy">
+          <figcaption>読む機器の役割をラズパイで受け持つ。PLC側は、受け取れるように通信の設定を変えた。</figcaption>
         </figure>
 
         <h3>1か月、人と二重チェックした</h3>
@@ -370,7 +370,7 @@
           <p class="chapter-sum-title">この章のまとめ</p>
           <ul>
             <li>数十万円の更新の代わりに、約5万円の機材でQRリーダーを置き換えた</li>
-            <li>PLC側は変えず、もともと分かれていたネットワークの線をそのまま使った</li>
+            <li>PLC側は受け取るための通信の設定を変え、もともと分かれていたネットワークの線をそのまま使った</li>
             <li>1か月の二重チェックと、読み取りNGのときの手順と教育まで行って完成</li>
           </ul>
         </div>
@@ -596,7 +596,7 @@
           <p>
             工場で、生産終了したQRコードリーダーの代わりを作りたいです。<br>
             【何をしたいか】製品に貼ったQRラベルを読み取りたい。<br>
-            【どうしたいか】読み取った文字を、今までのリーダーと同じ形でPLCへ送り、PLC側のプログラムは変えずに使いたい。<br>
+            【どうしたいか】読み取った文字を、今までのリーダーと同じ形でPLCへ送り、PLC側の変更はできるだけ少なくしたい。<br>
             【何がいるか】ラズパイ4、USBカメラ。PLCとはLANでつなぐ（設備のネットワークとは分かれた線）。<br>
             【現場の条件】ラインの横に置く。明るさは天井の照明。ラベルは1枚ずつ止まった状態で読む。<br>
             【確かめ方】読めなかったときは画面と記録に残し、PLCにも読み取りNGを知らせたい。<br>
@@ -698,7 +698,7 @@
         <div class="cs-box">
           <p class="cs-h">この特集の記事</p>
           <div class="cs-card">
-            <ol class="cs-series"><li class="is-cur"><span>01 ラズパイの使い方</span></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li><a href="raspberry-pi-qr-code-reading.html">04 QRコードの読み取り</a></li></ol>
+            <ol class="cs-series"><li class="is-cur"><span>01 ラズパイの使い方</span></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li><a href="raspberry-pi-qr-code-reading.html">04 QRコードの読み取り</a></li><li><a href="plc-raspberry-pi-connection.html">05 PLCとの接続</a></li></ol>
             <p class="cs-pager"><a class="cs-next" href="manufacturing-genai-prompt.html">次の記事 ›</a></p>
           </div>
           <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
@@ -711,7 +711,7 @@
         </div>
         <div class="cs-box">
           <p class="cs-h">新着のコラム</p>
-          <ul class="cs-rank cs-pick"><li><a href="raspberry-pi-qr-code-reading.html"><img src="../../img/thumb-column-raspberry-pi-qr-reading.jpg" alt="" width="80" height="45"><span>ラズパイでQRコードを読み取る方法</span></a></li></ul>
+          <ul class="cs-rank cs-pick"><li><a href="plc-raspberry-pi-connection.html"><img src="../../img/thumb-column-plc-raspberry-pi-connection.jpg" alt="" width="80" height="45"><span>PLCとラズパイの接続方法3通り</span></a></li></ul>
         </div>
         <div class="cs-box">
           <p class="cs-h">人気コラム TOP2</p>
