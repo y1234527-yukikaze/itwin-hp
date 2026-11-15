@@ -8,6 +8,7 @@
   ・伴走支援の価格は、年間計画のページ（annual-plan.html）には書かず、このページへのリンクだけにしている。
   ・2026-10-19 「お急ぎのご依頼について」の案内を追加。コラム・トップなどから、このページへのリンクを張っている。
     （同日に20％OFFキャンペーンも入れたが、ユーザーの判断で取りやめた）
+  ・2026-11-15 見せ方を変更：ページの頭に「ご依頼の例と料金の目安」（押すと詳細へ）、各サービスの縦の表を横並びのプラン表に。金額は変えていない。
   ============================================================
 -->
 <html lang="ja">
@@ -392,19 +393,25 @@
         部品図の作成（図面のバラシ）、架台・治具の強度計算の外注、設備・部品の3Dスキャン、伴走支援の料金の目安です。表の価格は「〜」のついた最低価格で、実際の金額は内容をうかがってからお見積りします。表示価格はすべて税別です。
       </p>
 
+      <!-- ◆ご依頼の例と料金の目安（2026-11-15 新設。代表的なご依頼を並べ、押すと各サービスの詳しい説明へ移動する。金額は下の各サービスと同じ値にしておく） -->
+      <h2 class="price-sum-h">ご依頼の例と料金の目安</h2>
+      <p class="price-note">近いご依頼を押すと、詳しい説明に移動します。</p>
+      <div class="price-sum">
+        <a href="#design"><span class="ps-cat">設計・図面</span><span class="ps-name">組立図から部品図を作る（1〜10点）</span><span class="ps-price">50,000円〜</span><span class="ps-sub">納期は最短2〜3日</span></a>
+        <a href="#design"><span class="ps-cat">強度検証</span><span class="ps-name">架台・治具の強度計算（計算書付き）</span><span class="ps-price">70,000円〜</span><span class="ps-sub">納期は最短2〜3日</span></a>
+        <a href="#machine-design"><span class="ps-cat">機械設計</span><span class="ps-name">小規模な機械設計・設計の代打</span><span class="ps-price">個別見積</span><span class="ps-sub">急ぎの設計もご相談ください</span></a>
+        <a href="#scan"><span class="ps-cat">3Dスキャン</span><span class="ps-name">部品・治具のスキャン</span><span class="ps-price">30,000円〜</span><span class="ps-sub">点群データの納品まで</span></a>
+        <a href="#scan"><span class="ps-cat">3Dスキャン</span><span class="ps-name">設備単体のスキャン（2m×2m程度）</span><span class="ps-price">150,000円〜</span><span class="ps-sub">点群データの納品まで</span></a>
+        <a href="#shikumi"><span class="ps-cat">仕組みづくり・AI</span><span class="ps-name">ラズパイの試作・現場での確かめ</span><span class="ps-price">200,000円〜</span><span class="ps-sub">機材費は実費・ご相談は無料</span></a>
+        <a href="#shikumi"><span class="ps-cat">研修</span><span class="ps-name">AIで仕組みを作る社内研修（半日）</span><span class="ps-price">100,000円〜</span><span class="ps-sub">オンライン・出張のどちらも可</span></a>
+        <a href="#partner"><span class="ps-cat">伴走支援</span><span class="ps-name">3ヶ月の伴走支援（1クール目）</span><span class="ps-price">600,000円〜</span><span class="ps-sub">2クール目以降は400,000円〜</span></a>
+      </div>
+      <p class="price-sum-more"><a href="#price-faq">料金についてよくあるご質問</a><a href="#order">発注の流れ</a></p>
+
       <div class="price-urgent">
         <p class="price-urgent-title">お急ぎのご依頼について</p>
         <p>お急ぎのご依頼もお受けします。図面や強度計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により納期が延びる場合がございます。予めご了承ください。ご希望の納期をお知らせください。費用は、内容をうかがってご相談します。</p>
       </div>
-
-      <ul class="price-toc">
-        <li><a href="#design">設計・図面／強度検証</a></li>
-        <li><a href="#scan">3Dスキャン</a></li>
-        <li><a href="#shikumi">仕組みづくり・AI</a></li>
-        <li><a href="#partner">伴走支援プログラム</a></li>
-        <li><a href="#price-faq">よくあるご質問</a></li>
-        <li><a href="#order">発注の流れ</a></li>
-      </ul>
 
       <!-- ◆設計・図面／強度検証 -->
       <section id="design" class="price-block">
@@ -412,19 +419,21 @@
         <p>
           組立図やポンチ絵から、製作できる部品図に起こします（図面のバラシ）。社内の設計者が本来の仕事に集中できるよう、図面を描く工程だけを切り出してお引き受けします。架台・治具の強度検証も承ります。ロボットが急に止まるときの力のように、動く荷重を含めた検証にも対応します。
         </p>
-        <table class="price-table">
-          <thead><tr><th>内容</th><th>価格</th></tr></thead>
-          <tbody>
-            <tr><td>部品図作成 1〜10点</td><td>50,000円〜</td></tr>
-            <tr><td>部品図作成 11〜30点</td><td>80,000円〜</td></tr>
-            <tr><td>部品図作成 31点以上</td><td>個別見積</td></tr>
-            <tr><td>ポンチ絵・現物からの起こし</td><td>上記＋割増</td></tr>
-            <tr><td>強度検証（手計算・計算書付き）</td><td>70,000円〜</td></tr>
-            <tr><td>強度検証（FEM解析込み・荷重1ケース）</td><td>150,000円〜</td></tr>
-            <tr><td>荷重ケース追加</td><td>1ケースあたり 30,000円〜</td></tr>
-            <tr><td>3Dモデルがない場合のCAD化</td><td>別途見積</td></tr>
-          </tbody>
-        </table>
+        <!-- 2026-11-15 縦の表から横並びのプラン表に変更（金額は同じ） -->
+        <p class="price-plans-h">部品図の作成（図面のバラシ）</p>
+        <div class="price-plans">
+          <div class="pp"><p class="pp-name">部品図作成<br>1〜10点</p><p class="pp-price">50,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">部品図作成<br>11〜30点</p><p class="pp-price">80,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">部品図作成<br>31点以上</p><p class="pp-price">個別見積</p></div>
+        </div>
+        <p class="price-note">組立図ではなく、ポンチ絵や現物から起こす場合は、上記に割増をいただきます。</p>
+
+        <p class="price-plans-h">強度検証</p>
+        <div class="price-plans">
+          <div class="pp"><p class="pp-name">手計算<br>（計算書付き）</p><p class="pp-price">70,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">FEM解析込み<br>（荷重1ケース）</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">荷重ケースの追加は、1ケースあたり30,000円〜</p></div>
+          <div class="pp"><p class="pp-name">CAD化</p><p class="pp-price">別途見積</p><p class="pp-note">3Dモデルがない場合。図面もなければ、3Dスキャンから起こします</p></div>
+        </div>
         <p class="price-note">FEM解析は、形を細かく分けて、コンピューターで応力を計算する方法です。</p>
         <p class="price-strong">
           <b>アイツインの強み：</b>2D図面の3Dモデル化と、3Dスキャンからの図面化（リバースエンジニアリング）です。図面が残っていない設備・架台でも、3Dスキャンで測定し、3Dモデル・図面に起こして、強度計算まで一貫してお受けします。
@@ -435,9 +444,9 @@
           <p class="price-ask-act"><a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'price_design',article:'price'});">設計・強度検証を依頼・相談する</a><a href="column/reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'price'});">計算書の見本を見る</a></p>
         </div>
 
-        <h3>省人化・省力化の設計、新しい機械の設計</h3>
+        <h3 id="machine-design">省人化・省力化の設計、新しい機械の設計</h3>
         <p>
-          装置・治具の新規設計も承ります。搬送の省人化、作業の省力化を目的とした機構の設計から、今ある設備に追加する機構の設計まで対応します。現場でどの作業に時間がかかっているかをつかんでから設計に入るので、「作ったが使われない」設備になりにくいと考えています。内容によって工数が大きく変わるため、ご相談のうえ個別にお見積りします。
+          設計者が足りないときの代打や、急な機械設計、小規模な設計にも対応します。装置・治具の新規設計も承ります。搬送の省人化、作業の省力化を目的とした機構の設計から、今ある設備に追加する機構の設計まで対応します。現場でどの作業に時間がかかっているかをつかんでから設計に入るので、「作ったが使われない」設備になりにくいと考えています。内容によって工数が大きく変わるため、ご相談のうえ個別にお見積りします。
         </p>
 
         <h3>強度検証をご依頼いただく前に</h3>
@@ -456,14 +465,11 @@
         <p>
           設備・治具・部品を計測して、実寸のデータとしてお渡しします。図面が残っていない設備や、現物しか手がかりのない部品にも対応します。一度データにしておけば、設備を入れ替えるときの干渉の確認、改造の検討、部品の作り直しのたびに、現地へ採寸に行く必要がなくなります。
         </p>
-        <table class="price-table">
-          <thead><tr><th>内容</th><th>価格</th></tr></thead>
-          <tbody>
-            <tr><td>部品・治具のスキャン</td><td>30,000円〜</td></tr>
-            <tr><td>設備単体のスキャン（2m×2m程度）</td><td>150,000円〜</td></tr>
-            <tr><td>点群からのCAD化</td><td>個別見積</td></tr>
-          </tbody>
-        </table>
+        <div class="price-plans" style="margin-top:18px;">
+          <div class="pp"><p class="pp-name">部品・治具のスキャン</p><p class="pp-price">30,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">設備単体のスキャン<br>（2m×2m程度）</p><p class="pp-price">150,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">点群からのCAD化</p><p class="pp-price">個別見積</p></div>
+        </div>
         <p class="price-note">上記は、スキャン（点群データの納品）までの価格です。CAD化は、対象物の形によって工数が大きく変わるため、個別にお見積りします。</p>
         <p>
           スキャンから、3Dモデル化、図面化、強度計算まで、同じ窓口で承ります。工程ごとに別の会社へ頼む手間がかかりません。
@@ -476,16 +482,12 @@
         <p>
           ラズパイとAIで、点検の記録や生産終了した機器の置き換えなど、現場で困っている一点を安く解決します。外観検査のAIに覚えさせる画像づくりや、社内の方がAIで仕組みを作り、直せるようになるための研修も承ります。
         </p>
-        <table class="price-table">
-          <thead><tr><th>内容</th><th>価格</th></tr></thead>
-          <tbody>
-            <tr><td>仕組みづくりのご相談（困っている一点の洗い出し）</td><td>無料</td></tr>
-            <tr><td>試作・現場での確かめ・手順書づくり</td><td>200,000円〜（機材費は実費）</td></tr>
-            <tr><td>外観検査AIの学習用画像（教師データ）の作成　お試し（1品種・NGの種類2〜3）</td><td>150,000円〜</td></tr>
-            <tr><td>社内研修（AIで仕組みを作る・直せる人を育てる）　半日</td><td>100,000円〜</td></tr>
-            <tr><td>社内研修　1日</td><td>200,000円〜</td></tr>
-          </tbody>
-        </table>
+        <div class="price-plans" style="margin-top:18px;">
+          <div class="pp"><p class="pp-name">仕組みづくりのご相談</p><p class="pp-price">無料</p><p class="pp-note">困っている一点の洗い出し</p></div>
+          <div class="pp"><p class="pp-name">試作・現場での確かめ</p><p class="pp-price">200,000<small>円〜</small></p><p class="pp-note">手順書づくりまで。機材費は実費</p></div>
+          <div class="pp"><p class="pp-name">外観検査AIの教師データ作成（お試し）</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">学習用画像。1品種・NGの種類2〜3</p></div>
+          <div class="pp"><p class="pp-name">社内研修</p><p class="pp-price"><span class="pp-lbl">半日</span>100,000<small>円〜</small></p><p class="pp-price"><span class="pp-lbl">1日</span>200,000<small>円〜</small></p><p class="pp-note">AIで仕組みを作る・直せる人を育てる</p></div>
+        </div>
         <p class="price-note">試作の機材費（ラズパイ・センサー・カメラなど）は、内容に応じて実費をいただきます。教師データの作成は、品種やNGの種類が増える場合、お試しのあとにお見積りします。研修は、オンラインと出張のどちらでも承ります。</p>
 
         <h3>外観検査AIの学習用画像（教師データ）の作成</h3>
@@ -516,13 +518,10 @@
         <p>
           現場の「止まる・待つ・戻る・溜まる」を見つけ、改善の実行と定着まで一緒に進めます。デジタルツインづくり、IoTセンサーによる予知保全、省人化・省力化の提案を、現場の課題に合わせて組み合わせます。3ヶ月を1クールとし、クールの終わりに成果物をお渡しします。続けるかどうかはクールごとにご判断いただけるので、使うか分からない顧問料をお支払いいただく必要はありません。
         </p>
-        <table class="price-table">
-          <thead><tr><th>内容</th><th>価格</th></tr></thead>
-          <tbody>
-            <tr><td>1クール目（3ヶ月）</td><td>600,000円〜</td></tr>
-            <tr><td>2クール目以降（3ヶ月）</td><td>400,000円〜</td></tr>
-          </tbody>
-        </table>
+        <div class="price-plans" style="margin-top:18px;">
+          <div class="pp"><p class="pp-name">1クール目（3ヶ月）</p><p class="pp-price">600,000<small>円〜</small></p><p class="pp-note">現状の把握と最初の構築</p></div>
+          <div class="pp"><p class="pp-name">2クール目以降（3ヶ月）</p><p class="pp-price">400,000<small>円〜</small></p><p class="pp-note">たまったデータを使って改善</p></div>
+        </div>
         <p class="price-note">1クール目は、現状の把握と最初の構築があるため作業が多くなります。2クール目からは、たまったデータを使うため価格を抑えています。</p>
 
         <h3>成果物</h3>
@@ -531,7 +530,7 @@
         </p>
         <h3>データの扱い</h3>
         <p>
-          システムは外のネットワークから切り離した環境で動かします。IoTセンサーのデータをクラウドで解析するのは、お客様の書面でのご承諾がある場合だけです。詳しくは、下の「3つのサービスに共通すること」をご覧ください。
+          システムは外のネットワークから切り離した環境で動かします。IoTセンサーのデータをクラウドで解析するのは、お客様の書面でのご承諾がある場合だけです。詳しくは、下の「各サービスに共通すること」をご覧ください。
         </p>
         <p class="price-more">各クールの進め方は「<a href="annual-plan.html">年間計画の進め方</a>」をご覧ください。</p>
       </section>

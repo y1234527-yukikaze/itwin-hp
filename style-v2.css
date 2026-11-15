@@ -2600,3 +2600,37 @@ a.industry-card { cursor: pointer; }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 1.4em; }
 .table-scroll > table { margin: 0 !important; }
 @media (max-width: 700px) { .table-scroll > .table-wide { min-width: 640px; } }
+
+/* ◆料金ページ：ご依頼の例（押すと詳しい説明へ）と、横並びのプラン表（2026-11-15） */
+.price-sum-h { font-size: clamp(1.25rem, 2.4vw, 1.5rem); color: var(--navy); margin: 8px 0 4px; }
+.price-sum { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 10px; }
+.price-sum a { display: flex; flex-direction: column; gap: 4px; padding: 14px 14px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.price-sum a:hover, .price-sum a:focus-visible { border-color: var(--navy); box-shadow: var(--shadow); }
+.price-sum .ps-cat { font-size: 0.78rem; font-weight: 700; color: var(--orange-text); }
+.price-sum .ps-name { font-size: 0.92rem; font-weight: 700; color: var(--navy); line-height: 1.5; flex: 1; }
+.price-sum .ps-price { font-size: 1.22rem; font-weight: 700; color: var(--navy); font-feature-settings: "palt"; }
+.price-sum .ps-sub { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5; }
+.price-sum .ps-go { font-size: 0.78rem; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.price-sum-more { font-size: 0.92rem; margin: 0 0 16px; }
+.price-sum-more a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; margin-right: 1.2em; }
+.price-plans-h { font-weight: 700; color: var(--navy); margin: 22px 0 8px !important; }
+.price-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 10px; }
+.price-plans .pp { border: 1px solid #cfd8e3; border-radius: 6px; padding: 14px 14px 12px; background: #fff; display: flex; flex-direction: column; }
+.price-plans .pp p { margin: 0; }
+.price-plans .pp-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); line-height: 1.5; min-height: 3em; }
+.price-plans .pp-price { font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-top: 8px !important; font-feature-settings: "palt"; }
+.price-plans .pp-price small { font-size: 0.8rem; margin-left: 2px; }
+.price-plans .pp-price + .pp-price { margin-top: 2px !important; }
+.price-plans .pp-price .pp-lbl { font-size: 0.8rem; color: var(--ink-soft); font-weight: 500; margin-right: 6px; }
+.price-plans .pp-note { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.55; margin-top: 6px !important; }
+@media (max-width: 900px) { .price-sum { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) {
+  .price-plans { grid-template-columns: 1fr 1fr; }
+  .price-plans .pp:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .price-plans .pp:last-child:nth-child(odd) .pp-name { min-height: 0; }
+}
+@media (max-width: 420px) {
+  .price-sum a, .price-plans .pp { padding: 12px 11px 10px; }
+  .price-sum .ps-price, .price-plans .pp-price { font-size: 1.12rem; }
+}
+.price-doc h3[id] { scroll-margin-top: 90px; }
