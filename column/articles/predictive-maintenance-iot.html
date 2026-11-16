@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：予知保全をIoTで始める方法（特集「AIで作る 現場の仕組みノート」06）
+  （溶接の記事を土台に、キットの build_pdm.py で組み立て・2026-11-16）
+  しきい値の目安ツール：キットの tool_threshold.html／本文：pdm_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-predictive-maintenance-iot.jpg（ナノバナナで生成して差し替え）
+  図3枚：キットの figs_pdm.py で作る（-sensors / -vibration / -steps）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-16）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール｜アイツイン コラム</title>
+  <meta name="description" content="予知保全をIoTで始める方法を、電流・振動・温度のどれを測るか、ベアリングの周波数まで見られる振動センサーの選び方、しきい値の決め方5ステップで解説します。振動と漏れ電流の実例、ラズパイを使った構成例、解析ツールをAIで作るプロンプト例、しきい値の初めの案を出すツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/predictive-maintenance-iot">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール">
+  <meta property="og:description" content="予知保全をIoTで始める方法を、電流・振動・温度のどれを測るか、ベアリングの周波数まで見られる振動センサーの選び方、しきい値の決め方5ステップで解説します。振動と漏れ電流の実例、ラズパイを使った構成例、解析ツールをAIで作るプロンプト例、しきい値の初めの案を出すツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/predictive-maintenance-iot">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-predictive-maintenance-iot.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-16">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール">
+  <meta name="twitter:description" content="予知保全をIoTで始める方法を、電流・振動・温度のどれを測るか、ベアリングの周波数まで見られる振動センサーの選び方、しきい値の決め方5ステップで解説します。振動と漏れ電流の実例、ラズパイを使った構成例、解析ツールをAIで作るプロンプト例、しきい値の初めの案を出すツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-predictive-maintenance-iot.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール",
+    "description": "予知保全をIoTで始める方法を、電流・振動・温度のどれを測るか、ベアリングの周波数まで見られる振動センサーの選び方、しきい値の決め方5ステップで解説します。振動と漏れ電流の実例、ラズパイを使った構成例、解析ツールをAIで作るプロンプト例、しきい値の初めの案を出すツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-predictive-maintenance-iot.jpg",
+    "datePublished": "2026-11-16",
+    "dateModified": "2026-11-16",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/predictive-maintenance-iot"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "AIで作る 現場の仕組みノート", "item": "https://i-twin.co.jp/column/shikumi/" },
+      { "@type": "ListItem", "position": 4, "name": "予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール", "item": "https://i-twin.co.jp/column/articles/predictive-maintenance-iot" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../shikumi/index.html">AIで作る 現場の仕組みノート</a> ／
+        <span>予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール</span>
+      </div>
+      <h1>予知保全をIoTで始める方法｜振動・電流のしきい値の決め方5ステップと、AIで作る解析ツール</h1>
+      <p class="catch">公開日：2026年11月16日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../shikumi/index.html">現場の仕組みノート</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="plc-raspberry-pi-connection.html">‹ 前の記事：05 PLCとの接続</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">AI・現場の仕組み</span>公開日：2026.11.16</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-predictive-maintenance-iot.jpg" alt="予知保全をIoTで始めるイメージ。モーターに付けたセンサーの値を小さなコンピューターで記録し、しきい値を超えたら点検を知らせる" width="1376" height="768">
+          <figcaption>何を測るかを決め、正常なときを記録し、しきい値を超えたら人が点検する。</figcaption>
+        </figure>
+
+        <p>
+          「予知保全をIoTで始めたいが、何から手を付ければよいのか分からない」「センサーを付けたものの、どこでアラームを鳴らせばよいのか決められない」。予知保全とIoTを調べると、仕組みの説明や、大きな会社の導入事例が多く見つかります。一方で、中小の工場が自分たちで小さく始めるときに困る、<b>何を測るか、どのセンサーなら何が分かるか、しきい値をどう決めるか</b>は、あまり書かれていません。
+        </p>
+        <p>
+          本記事では、<strong class="mk">予知保全をIoTで始める方法を、測るものの選び方、振動センサーの選び方、しきい値の決め方5ステップ</strong>の順に整理します。後半では、振動でベアリングの傷を見つけた実例と、漏れ電流で漏電ブレーカーが落ちる原因を探した実例、そして<b>解析のツールをAIに作ってもらう</b>進め方をご紹介します。正常なときの値から、しきい値の初めの案を出すツールも付けました。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>予知保全のIoTで測る電流・振動・温度の違いと、選び方</li>
+            <li>ベアリングの周波数まで見られる振動センサーと、見られない振動センサーの違い</li>
+            <li>しきい値の決め方5ステップと、初めの案を出すツール</li>
+            <li>振動と漏れ電流の実例と、ラズパイを使った構成例</li>
+            <li>解析のツールをAIに作ってもらうときの頼み方</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>予知保全をIoTで始めるときは「何を測るか」から</h2>
+
+        <h3>予知保全とIoTの関係</h3>
+        <p>
+          予知保全は、設備の状態を測り続け、壊れる前の変化をとらえて手を打つ保全です。IoTは、そのためにセンサーの値を集め、記録し、知らせる仕組みを指します。事後保全や予防保全とどう違うか、どの設備から始めるかの選び方は、コラム「<a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方</a>」で詳しく紹介しています。本記事では、IoTでどう始めるかに絞ってお話しします。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-predictive-maintenance-iot-sensors.jpg" alt="予知保全のIoTで測るもの3つ。電流はモーターの負荷の変化、振動は回転部の傷や緩み、温度は潤滑不良や発熱が分かる。困っている故障に合わせて選ぶ" width="1376" height="768" loading="lazy">
+          <figcaption>電流は負荷の変化、振動は回転部の傷、温度は潤滑不良や発熱。困っている故障で選ぶ。</figcaption>
+        </figure>
+
+        <h3>電流・振動・温度のメリット・デメリット比較一覧</h3>
+        <p>
+          予知保全のIoTでよく測るのは、電流・振動・温度の3つです。分かること、付け方、よい点、気をつけたい点を並べると、次のようになります。
+        </p>
+        <div class="table-scroll"><table class="table-wide">
+          <tr><th>測るもの</th><th>分かること</th><th>付け方</th><th>よい点</th><th>気をつけたい点</th></tr>
+          <tr><td>電流</td><td>モーターの負荷の変化（詰まり・重くなる・負荷が抜けるなど。電流は増える場合も減る場合もある）</td><td>制御盤の中の電線に、挟むセンサーを付ける</td><td>機械本体に手を加えずに測れる場合がある</td><td>盤の中の電気の作業になる。インバーターで動かすモーターは電流の出方が変わる。どこが悪いかまでは分かりにくい</td></tr>
+          <tr><td>振動</td><td>回転部の傷・緩み・軸のずれ・回転のかたより</td><td>モーターや軸受けの近くに取り付ける</td><td>ベアリングの傷の初めのうちに気づける場合がある</td><td>センサーと取り付け方で、分かることが大きく変わる。振動が増えただけでは原因は決まらない</td></tr>
+          <tr><td>温度</td><td>軸受けの潤滑不良・過負荷・制御盤の中の熱</td><td>測りたい所に貼る、近くに置く</td><td>安く始められ、仕組みが分かりやすい</td><td>転がり軸受けの疲れによる初めの傷は、温度より先に振動に出ることが多い</td></tr>
+        </table></div>
+
+        <h3>困っている故障で選ぶ｜迷ったら電流から</h3>
+        <p>
+          何を測るかは、<b>どの故障を早く見つけたいか</b>で決めます。モーターの負荷の変化や詰まりを知りたいなら電流、ベアリングの傷を早く見つけたいなら振動、潤滑不良や発熱を見たいなら温度が候補です（熱については、特集の記事「<a href="control-panel-heat-countermeasures.html">制御盤の熱対策</a>」もご覧ください）。どれから始めるか迷ったら、制御盤の中で測れて変化が分かりやすい<b>電流</b>から1台で試し、早く見つけたい回転部がある設備にだけ振動を足す、という進め方がおすすめです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>予知保全のIoTでよく測るのは、電流・振動・温度の3つ</li>
+            <li>電流は負荷の変化、振動は回転部の傷、温度は潤滑不良や発熱に向く</li>
+            <li>困っている故障で選ぶ。迷ったら電流から1台で試す</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>予知保全のIoTに使う振動センサーの選び方</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-predictive-maintenance-iot-vibration.jpg" alt="振動センサーの3つの種類。振動スイッチは決めた大きさを超えたことを知らせるだけ。小型の加速度センサーは揺れの大きさの移り変わりまで、周波数は仕様しだい。必要な周波数まで測れるセンサーと速い取り込みなら、ベアリングの周波数まで見られる" width="1376" height="768" loading="lazy">
+          <figcaption>「振動センサー」と呼ばれていても、ベアリングの周波数まで見られるものは一部だけ。</figcaption>
+        </figure>
+
+        <h3>振動センサーで分かることは、種類によって違う</h3>
+        <p>
+          ひとくちに振動センサーといっても、分かることは種類によって大きく違います。<strong class="mk">どの振動センサーでも、ベアリングの周波数を調べられるわけではありません。</strong>ラズパイでよく使われるものを含めて、大きく3つに分けると、次のようになります。
+        </p>
+        <ul>
+          <li><b>振動スイッチ</b>：決めた大きさを超えたときに、オンとオフなどの合図を出す部品です。一定以上の揺れが出たことを知らせるのには使えますが、一般的なものは揺れの形を測り続けるものではないため、<b>周波数を調べてベアリングの傷を見つける使い方には向きません</b>。</li>
+          <li><b>小型の加速度センサー</b>：揺れの大きさを数字で測れる、小さな部品です。<b>揺れの大きさの移り変わり</b>を記録して、「少しずつ大きくなっている」に気づくのに使えます。測れる周波数の範囲や、細かい揺れが雑音に埋もれないかは製品によって違うため、ベアリングの傷を調べたいときは、<b>必要な周波数まで測れるか、雑音はどのくらいかを仕様書で確かめます</b>。</li>
+          <li><b>必要な周波数まで測れる加速度センサーと、速く取り込む回路の組み合わせ</b>：調べたい周波数の範囲に合ったセンサーと、値を十分な速さと細かさで取り込む回路を組み合わせたものです。<b>ベアリングの周波数を調べる</b>には、この組み合わせが要ります。センサーの方式によっては、専用の電源や信号を整える回路も必要です。費用は、測りたい周波数や精度で大きく変わります。</li>
+        </ul>
+
+        <h3>ベアリングの傷は「通る周波数」と「高い周波数の衝撃」で見る</h3>
+        <p>
+          ベアリングに傷ができると、玉（転動体）が傷を通るたびに小さな衝撃が出て、ベアリングの寸法と回転の速さで決まる<b>特有の周波数</b>の振動が出ることがあります。外輪の傷、内輪の傷、玉の傷、玉を支える保持器の異常で、それぞれ周波数が違い、計算で求められます（実際には、すべりなどで計算の値から少しずれることがあります）。この周波数そのものは、ふつうの回転の速さなら、数十〜数百Hzほどのことも多くあります。
+        </p>
+        <p>
+          一方で、傷の初めのうちは、玉が傷を通るときの小さな衝撃が、軸受けや機械の<b>高い周波数（数kHz以上）の揺れ</b>を起こすことがあります。この高い周波数の揺れを測り、包絡線解析（エンベロープ解析）などで処理すると、傷が通る周波数を見つけやすくなります。そのため、ベアリングの傷を早く見つけたい場合は、<strong class="mk">傷が通る周波数だけでなく、衝撃を捉える高い周波数まで測れること</strong>が必要になります。
+        </p>
+
+        <h3>測る速さは、調べたい周波数の範囲で決める</h3>
+        <p>
+          1秒間に何回測るか（サンプリング周波数）は、調べたい周波数の範囲で決めます。理屈のうえでは、調べたい周波数の2倍より速く測る必要があります。実際には、測る前に高すぎる周波数を取り除くフィルターの性能も考え、振動の計測器では、<b>調べたい上限の周波数の2.56倍ほどの速さで取り込む</b>方式がよく使われます。どの計測でも2.56倍でよいわけではなく、使う回路とフィルターに合わせて決めます。
+        </p>
+        <p>
+          ラズパイだけに速く途切れない取り込みを任せると、組み方によっては速さや安定が足りないことがあります。そこで、取り込みは専用の計測回路に任せ、ラズパイは受け取ったまとまりの値を計算し、記録する構成にします。速さだけでなく、途中で値が抜けていないか、時刻が正しいかも確かめます。
+        </p>
+
+        <h3>取り付け方でも、測れる周波数が変わる</h3>
+        <p>
+          同じセンサーでも、取り付け方で測れる高い周波数の範囲が変わります。一般に、<b>平らな面にねじでしっかり止める方法</b>が、高い周波数を測るのに向いています。磁石や両面テープで付ける方法は手軽ですが、付ける部分の硬さや材質によって、高い周波数が伝わりにくくなることがあるため、測りたい周波数に足りるかを確かめます。測る向き（上下・左右・軸の向き）と、センサーの位置も、記録の途中で変えないようにします。<b>付ける場所と付け方を変えると、正常なときの値も変わる</b>ためです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>振動スイッチは、決めた大きさを超えたことを知らせるだけ。周波数は調べられない</li>
+            <li>小型の加速度センサーは、揺れの大きさの移り変わりに使える。周波数は仕様しだい</li>
+            <li>ベアリングの傷を見るには、高い周波数まで測れるセンサー・速い取り込み・固い取り付けが要る</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>ラズパイで作る予知保全のIoTの構成例</h2>
+        <p>
+          ここからは、ラズパイを使った予知保全のIoTの構成例です。筆者がラズパイで作って動かしたものではなく、特集でご紹介してきた作り方で組める形として整理しています。
+        </p>
+
+        <h3>電流を測る構成｜挟むセンサーと、アナログの値を読む回路</h3>
+        <p>
+          モーターにつながる電線のうち、<b>測りたい1本だけ</b>を、挟んで電流を測るセンサー（変流器）で挟みます。何本もまとめて挟むと、電流どうしが打ち消し合い、正しく測れません。三相のモーターで、相ごとのかたよりまで見たい場合は、それぞれの相を測ります。この方式は、ふつう交流の電流を測るもので、直流を測りたいときは別の方式のセンサーを選びます。
+        </p>
+        <p>
+          ラズパイにはアナログの値を読む端子がないため、センサーの出す電圧を数字に変える回路（AD変換の回路）を間に入れ、ラズパイで1秒ごとなどに読み取って記録します。センサーには、電圧で出力する型と、電流で出力する型があり、仕様書で確かめます。<b>電流で出力する型は、電線に電流が流れているときに出力の線を開いたままにすると、危険な電圧が出ることがあります。</b>センサーの定格の電流、絶縁の性能、挟める電線の太さも確かめ、むき出しの電線には取り付けません。取り付けは、電気の資格と知識のある人が、止めてよいときに、決まった安全の手順で行います。
+        </p>
+
+        <h3>振動を測る構成｜取り込みは専用の回路に任せる</h3>
+        <p>
+          揺れの大きさの移り変わりを見るだけなら、加速度センサーをラズパイにつなぎ、一定の間隔で記録します。ベアリングの周波数まで調べたい場合は、前の章のとおり、必要な周波数まで測れるセンサーと速く取り込む回路を使い、ラズパイは取り込んだ値をまとめて計算し、結果を記録します。生の揺れの値をすべて残すと記録が大きくなりすぎるため、<b>ふだんは計算した結果だけを残し、しきい値を超えたときだけ生の値を残す</b>ようにします。
+        </p>
+
+        <h3>設備は止めない｜知らせるだけにする</h3>
+        <p>
+          特集のほかの記事と同じく、この仕組みは、設備の状態を記録して点検を知らせるための<strong class="mk">補助の仕組みで、設備を止めず、知らせるだけ</strong>にします。しきい値を超えたら、画面やランプで知らせ、記録を残します。設備を止めるかどうかは、知らせを受けた人が、点検をしてから決めます。非常停止、扉のインターロック、過負荷の保護など、安全に関わる働きは、もとの設備の回路に任せ、ラズパイの動きや通信に頼らせません。導入するときは、ラズパイが壊れたり、止まったり、通信が切れたりしても、設備のふだんの運転と安全の働きに影響しないことを確かめます。
+        </p>
+
+        <h3>費用の目安</h3>
+        <p>
+          電流を1か所測る小さな構成なら、ラズパイ、電流のセンサー、AD変換の回路、ケース、電源などを組み合わせて、<b>数万円ほどから試作できる場合があります</b>（ラズパイは2026年に値上がりしているため、買う時点の値段を確かめます）。ただし、センサーの仕様、盤の中の作業、取り付け方で費用は変わり、実際の費用は、測る条件と安全の対策を確かめてから見積もります。振動でベアリングの周波数まで調べる構成は、センサーと取り込みの回路で費用が大きく上がります。まずは電流や揺れの大きさで小さく始め、効果が見えてから周波数の解析に進むのがおすすめです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>電流は、測りたい1本だけを挟み、AD変換の回路でラズパイに読み込む</li>
+            <li>電流で出力するセンサーは、出力の線を開いたままにしない。取り付けは資格のある人が行う</li>
+            <li>ラズパイは補助の仕組み。止まっても設備と安全の働きに影響しないようにする</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>予知保全のしきい値の決め方5ステップ</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-predictive-maintenance-iot-steps.jpg" alt="予知保全のしきい値の決め方5ステップ。運転の条件ごとに正常なときを記録する、設備ごとに決める、注意と警報の2段階にする、鳴った回数と見逃しで見直す、鳴ったら誰が何をするかを決める" width="1376" height="768" loading="lazy">
+          <figcaption>しきい値は一度で決まらない。正常を記録し、鳴った回数と点検の結果を見て直していく。</figcaption>
+        </figure>
+
+        <h3>ステップ1｜運転の条件ごとに、正常なときを記録する</h3>
+        <p>
+          しきい値を決める前に、まず<b>正常なときの値</b>を記録します。品種の切り替え、負荷の大小、回転の速さ、朝と昼、夏と冬で値は変わるため、できるだけいろいろな運転の状態を含めます。あわせて、<b>回転の速さ、負荷、運転か停止か、品種も一緒に記録</b>します。条件の違う値をひとまとめにすると、正常なときのばらつきが大きくなり、異常を見つけにくくなるため、正常な値が条件で大きく変わる設備では、<b>条件ごとに分けて</b>しきい値を決めます。
+        </p>
+
+        <h3>ステップ2｜設備ごと・測る場所ごとに決める</h3>
+        <p>
+          同じ型の設備でも、据え付けの状態や使われ方で値は違います。<strong class="mk">しきい値は、設備ごと、測る場所ごとに決めます。</strong>設備メーカーの推奨値や、対象の機械に当てはまる振動の評価の規格（ISO 20816 など）がある場合は参考にし、自分の設備の正常な値と見比べて決めます。ただし、この規格は機械の種類や測る条件で当てはまる範囲が違い、揺れ全体の大きさを評価するものです。ベアリングの傷を周波数で調べる方法とは評価のしかたが違うため、目的に合わせて使い分けます。
+        </p>
+
+        <h3>ステップ3｜注意と警報の2段階にする</h3>
+        <p>
+          しきい値は1つではなく、<b>注意</b>と<b>警報</b>の2段階にします。注意は「点検の予定を立てる」段階、警報は「早めに点検する」段階です。初めの案を作る方法のひとつに、正常なときの平均に、ばらつき（標準偏差）の何倍か（たとえば3倍や6倍）を足す方法があります。ただし、振動や電流の値はきれいな山の形に分かれないことも多く、1秒ごとの値は前の値と似やすいため、誤報の出る割合が、統計の教科書どおりになるとは限りません。<b>この方法で出すのは初めの案</b>で、点検の結果と照らし合わせて直していきます。また、電流は、詰まりで上がるだけでなく、負荷が抜けると下がることもあるため、見たい故障に合わせて<b>上と下の両方</b>にしきい値を置くことも考えます。
+        </p>
+
+        <h3>ステップ4｜鳴った回数と見逃しで見直す</h3>
+        <p>
+          しきい値を決めたら、しばらく運用して、鳴った回数と点検の結果を記録します。正常なのに鳴る（誤報）が多いと、だれもアラームを見なくなります。1回だけの飛び値で鳴らさないように、<b>一定の時間、または何回か続けて超えたら鳴らす</b>ようにするのも効果があります。ただし、続けて超えるのを待つ分だけ知らせが遅れ、短い時間だけ起きる異常を見逃すこともあるため、回数や時間は設備に合わせて決めます。大きく飛び出した値は、回数を待たずに別に知らせる方法もあります。
+        </p>
+        <p>
+          逆に、壊れたのに鳴らなかった（見逃し）場合は、すぐにしきい値を下げるのではなく、まず<b>センサーの位置、測れる周波数、運転の条件、解析のしかた</b>が、その故障に合っていたかを確かめます。そのうえで、しきい値や測り方を見直します。しきい値を変えたときは、変えた日、変える前と後の値、理由を記録に残します。
+        </p>
+
+        <h3>ステップ5｜鳴ったら誰が何をするかを決める</h3>
+        <p>
+          アラームが鳴っても、だれが何をするかが決まっていなければ、壊れる前に手を打てません。注意なら保全の担当者が次の点検で確かめる、警報ならその日のうちに見に行く、どの条件で設備を止めるかはだれが判断する、のように、<b>鳴ったあとの動きを先に決めておきます</b>。点検した結果も記録に残し、ステップ4の見直しに使います。
+        </p>
+
+        <h3>しきい値の初めの案を出すツール</h3>
+        <p>
+          正常なときの値を入れると、注意と警報のしきい値の初めの案と、確かめたい値で何回鳴るかを数えます。倍率、上だけか上と下の両方か、続けて超えた回数を変えて、誤報と見逃しのバランスを試してみてください。
+        </p>
+
+        <div class="calc-tool" id="th-tool">
+          <p class="calc-tool-title">しきい値の初めの案を出すツール｜正常なときの値から、注意と警報の値と鳴る回数を見る</p>
+          <p class="calc-tool-note">
+            正常なときに記録した値（振動の大きさ、電流など。単位はそろえてあれば何でも構いません）を貼り付けると、平均とばらつきから<strong>注意</strong>と<strong>警報</strong>のしきい値の初めの案を出します（運転の条件で値が変わる設備は、条件ごとに分けて入れてください）。「確かめたい値」に最近の記録を貼ると、そのしきい値で<strong>アラームが何回鳴っていたか</strong>と、<strong>初めて鳴ったのは何番目の値か</strong>を数えます。数字は空白・改行・カンマのどれで区切っても読めます。入れた内容は、このページの中だけで計算し、どこにも送りません。はじめは、途中から振動がじわじわ大きくなっていく例です。
+          </p>
+          <p style="font-size:0.86rem;margin:10px 0 4px !important;">正常なときの値（20個以上が目安）</p>
+          <textarea id="th-base" rows="4" spellcheck="false" style="display:block;width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:0.92rem;line-height:1.7;background:#fff;resize:vertical;"></textarea>
+          <div class="pr-in" style="margin-top:10px;">
+            <label>注意 ＝ 平均 ＋ ばらつき（標準偏差）の何倍か<input type="text" id="th-k1" inputmode="decimal" autocomplete="off"></label>
+            <label>警報 ＝ 平均 ＋ ばらつき（標準偏差）の何倍か<input type="text" id="th-k2" inputmode="decimal" autocomplete="off"></label>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">どちらに外れたら鳴らすか（電流は、負荷が抜けて下がることもある）</p>
+          <div class="calc-btns" data-b="dir"><button type="button" data-v="up">上がったときだけ</button><button type="button" data-v="both">上がる・下がるの両方</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">何回続けて超えたら鳴らすか（1回だけの飛び値で鳴らさないため）</p>
+          <div class="calc-btns" data-b="run"><button type="button" data-v="1">1回</button><button type="button" data-v="3">3回続けて</button><button type="button" data-v="5">5回続けて</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 4px !important;">確かめたい値（最近の記録。古い順）</p>
+          <textarea id="th-check" rows="4" spellcheck="false" style="display:block;width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:0.92rem;line-height:1.7;background:#fff;resize:vertical;"></textarea>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out">
+            <tr><th>正常なときの平均／ばらつき</th><td><b data-o="mean"></b>／<b data-o="sd"></b>（<span data-o="n"></span>個）</td></tr>
+            <tr><th>注意のしきい値</th><td><b data-o="t1"></b></td></tr>
+            <tr><th>警報のしきい値</th><td><b data-o="t2"></b></td></tr>
+            <tr data-j="fa"><th>正常なときの値で、注意が鳴る回数</th><td><b data-o="fa"></b> 回<span class="judge" data-o="jfa"></span></td></tr>
+            <tr data-j="c1"><th>確かめたい値で、注意が鳴る回数</th><td><b data-o="c1"></b> 回<span class="judge" data-o="f1"></span></td></tr>
+            <tr data-j="c2"><th>確かめたい値で、警報が鳴る回数</th><td><b data-o="c2"></b> 回<span class="judge" data-o="f2"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="note"></p>
+          <button type="button" class="calc-reset" id="th-reset">記事の例に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('th-tool');
+          if (!root) return;
+          var DEF_BASE = '1.24 1.06 1.14 1.21 1.32 1.2 1.07 1.23 1.1 1.3 1.18 1.34 1.19 1.12 1.08 1.17 1.24 1.3 1.22 1.14 1.24 1.09 1.24 1.14 1.32 1.28 1.23 1.12 1.24 1.23 1.16 1.15 1.3 1.17 1.24 1.31 1.08 1.34 1.28 1.15';
+          var DEF_CHECK = '1.12 1.1 1.27 0.99 1.27 1.21 1.15 1.16 1.17 1.18 1.27 1.13 1.29 1.28 1.18 1.25 1.16 1.2 1.24 1.36 1.2 1.19 1.2 1.19 1.11 1.35 1.15 1.15 1.14 1.26 1.46 1.49 1.35 1.33 1.32 1.27 1.43 1.39 1.59 1.43 1.39 1.35 1.38 1.6 1.6 1.51 1.5 1.67 1.65 1.72 1.72 1.69 1.64 1.81 1.83 1.86 1.95 1.97 1.89 2.0';
+          var base = document.getElementById('th-base'), chk = document.getElementById('th-check');
+          var k1 = document.getElementById('th-k1'), k2 = document.getElementById('th-k2');
+          var run = 3, dir = 'up', used = false;
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function nums(s) {
+            return s.split(/[\s,，、]+/).filter(function (t) { return t !== ''; }).map(Number).filter(function (x) { return isFinite(x); });
+          }
+          function fmt(x) { var a = Math.abs(x); return a >= 100 ? x.toFixed(0) : a >= 10 ? x.toFixed(1) : x.toFixed(2); }
+          // 続けて run 回超えたら1回鳴る。下がったら（しきい値以下に戻ったら）数え直す
+          function alarms(v, t, lo) {
+            var cnt = 0, streak = 0, first = -1, on = false;
+            v.forEach(function (x, i) {
+              if (x > t || (dir === 'both' && x < lo)) { streak++; if (streak >= run && !on) { cnt++; on = true; if (first < 0) first = i; } }
+              else { streak = 0; on = false; }
+            });
+            return { cnt: cnt, first: first };
+          }
+          function syncBtns() {
+            root.querySelectorAll('[data-b="run"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(Number(x.dataset.v) === run)); });
+            root.querySelectorAll('[data-b="dir"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.v === dir)); });
+          }
+          function calc() {
+            var b = nums(base.value), c = nums(chk.value);
+            var a1 = Number(k1.value), a2 = Number(k2.value);
+            if (b.length < 2 || !(a1 > 0) || !(a2 > 0)) {
+              ['mean', 'sd', 'n', 't1', 't2', 'fa', 'c1', 'c2', 'jfa', 'f1', 'f2'].forEach(function (k) { out(k, '－'); });
+              out('note', '正常なときの値を2個以上（できれば20個以上）と、倍率を入れてください。');
+              return;
+            }
+            var m = b.reduce(function (s, x) { return s + x; }, 0) / b.length;
+            var sd = Math.sqrt(b.reduce(function (s, x) { return s + (x - m) * (x - m); }, 0) / (b.length - 1));
+            var t1 = m + a1 * sd, t2 = m + a2 * sd, l1 = m - a1 * sd, l2 = m - a2 * sd;
+            out('mean', fmt(m)); out('sd', fmt(sd)); out('n', b.length);
+            out('t1', dir === 'both' ? '上 ' + fmt(t1) + '／下 ' + fmt(l1) : fmt(t1)); out('t2', dir === 'both' ? '上 ' + fmt(t2) + '／下 ' + fmt(l2) : fmt(t2));
+            var fa = alarms(b, t1, l1), r1 = alarms(c, t1, l1), r2 = alarms(c, t2, l2);
+            out('fa', fa.cnt); out('jfa', fa.cnt ? '誤報になりやすい' : 'なし');
+            out('c1', c.length ? r1.cnt : '－'); out('c2', c.length ? r2.cnt : '－');
+            out('f1', r1.first >= 0 ? '初めは ' + (r1.first + 1) + ' 番目' : '鳴らない');
+            out('f2', r2.first >= 0 ? '初めは ' + (r2.first + 1) + ' 番目' : '鳴らない');
+            root.querySelector('[data-j="fa"]').classList.toggle('over', fa.cnt > 0);
+            root.querySelector('[data-j="c1"]').classList.toggle('over', r1.cnt > 0);
+            root.querySelector('[data-j="c2"]').classList.toggle('over', r2.cnt > 0);
+            var note;
+            if (a2 <= a1) note = '警報の倍率は、注意より大きくしてください。';
+            else if (b.length < 20) note = '正常なときの値が少ないと、ばらつきを正しくつかめません。品種や負荷、季節の違いも含めて、もっと記録してから決めます。';
+            else if (sd === 0) note = '正常なときの値が全部同じです。値が変わらない測り方になっていないか、センサーと記録を確かめてください。';
+            else if (fa.cnt > 0) note = '正常なときの値でも注意が鳴っています。このままでは誤報が多くなります。倍率を上げるか、続けて超えた回数で鳴らすようにします。';
+            else if (r2.first >= 0) note = '確かめたい値は ' + (r1.first + 1) + ' 番目で注意、' + (r2.first + 1) + ' 番目で警報を超えました。注意の段階で点検の予定を立て、警報までに手を打てる間があるかを見ます。';
+            else if (r1.first >= 0) note = '確かめたい値は ' + (r1.first + 1) + ' 番目で注意を超えました。値が上がり続けているか、1回だけの飛び値かを、記録で確かめます。';
+            else note = '確かめたい値では、注意も警報も鳴りませんでした。';
+            out('note', note + '（しきい値は、入れた値だけから出した初めの案で、異常の判定を保証するものではありません。値の分布や運転の条件で合う倍率は変わります。設備メーカーの推奨値がある場合はそれを優先し、鳴った記録と点検の結果を見て直していきます。一度しきい値の内側に戻ってから、また超えたときは、もう1回と数えます。）');
+          }
+          function touch() { if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'threshold' }); } }
+          [base, chk, k1, k2].forEach(function (e) { e.addEventListener('input', function () { calc(); touch(); }); });
+          root.querySelectorAll('[data-b="run"] button').forEach(function (bt) {
+            bt.addEventListener('click', function () { run = Number(bt.dataset.v); syncBtns(); calc(); touch(); });
+          });
+          root.querySelectorAll('[data-b="dir"] button').forEach(function (bt) {
+            bt.addEventListener('click', function () { dir = bt.dataset.v; syncBtns(); calc(); touch(); });
+          });
+          function reset() { base.value = DEF_BASE; chk.value = DEF_CHECK; k1.value = 3; k2.value = 6; run = 3; dir = 'up'; syncBtns(); calc(); }
+          document.getElementById('th-reset').addEventListener('click', reset);
+          reset();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>正常なときの値を、運転の条件と一緒に、条件ごとに分けて記録する</li>
+            <li>平均＋ばらつきの何倍かは初めの案。注意と警報の2段階で、電流は下側も考える</li>
+            <li>見逃しは測り方から確かめ、変更の履歴と、鳴ったあとの動きを決めておく</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>予知保全のIoTの事例｜振動と漏れ電流の実例</h2>
+        <p>
+          ここからは、筆者が保全の現場で経験したことです。どちらもラズパイではなく、市販の計測器を使った例ですが、何を測り、どう判断したかは、ラズパイで仕組みを作るときにもそのまま使えます。
+        </p>
+
+        <h3>実例1｜振動の周波数でベアリングの傷を見つけ、精度に出る前に点検した</h3>
+        <p>
+          ミクロン単位の精度が求められる設備では、ベアリングのわずかな傷が、そのまま製品の精度に表れます。そこで、<b>市販の振動センサー</b>でデータを取り、周波数ごとに分けて調べて、ベアリングの傷から出る振動を捉えました。その後、同じ設備すべてで正常なときの振動を記録し、設備ごとにしきい値を決め、超えたら点検のアラームが出るようにしました。アラームが出た時点で点検と精度の確認を行う流れが定着し、精度に影響が出る前に手を打てるようになりました。くわしくは「<a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方</a>」で紹介しています。
+        </p>
+
+        <h3>実例2｜漏電ブレーカーが落ちる原因を、漏れ電流と設備の動きで絞ろうとした</h3>
+        <p>
+          ある設備で、センサーの絶縁が傷んだことが疑われ、設備の漏電ブレーカー（漏電遮断器）が落ちることがありました。困ったのは、<b>どの動きのときに落ちるのかが分からない</b>ことです。配線を1本ずつ外して原因を絞ろうにも、設備が動いていないと不具合が起きないため、特定できません。
+        </p>
+        <p>
+          そこで、<strong class="mk">設備のアースの線（保護接地線）に、漏れ電流を測るクランプメーターを付け、そこを流れる電流と設備の動き（サイクル）を見比べる</strong>ことにしました。どの動きのときに電流が増えるかが分かれば、その動きで使うセンサーに絞れるからです。実際には、測定で特定する前に、傷んだセンサーが見つかったため、この方法で特定するところまでは確かめられませんでした。それでも、<b>動いているときにしか起きない不具合を、動きと電流を並べて絞る</b>考え方は、ほかの設備でも使えると考えています。
+        </p>
+        <p>
+          なお、アースの線だけを挟む方法で測れるのは、<b>その線を流れる電流</b>です。漏れた電流は、機械の金属の枠やケーブルの覆いなど、ほかの道を通ることもあり、設備全体の漏れ電流と同じになるとは限りません。回路全体から漏れた電流を測るには、その回路の電気が流れる線（単相なら2本、三相なら3本、中性線があればそれも）をまとめて挟み、アースの線は挟みません。
+        </p>
+        <p>
+          測るときは、<b>アースの線を外したり切ったりしない</b>、<b>測るために漏電ブレーカーを効かなくしない</b>、使う測定器が電圧と場所に合っているかを確かめる、が基本です。インバーターなどを含む設備では、漏れ電流に高い周波数が含まれることがあるため、測定器がそれに対応しているかも確かめます。測った値だけで漏電の場所を決めつけず、絶縁抵抗の測定などの検査につなげます。アースの線の測定は、電気の資格と知識のある人が、決まった手順で行います。
+        </p>
+
+        <h3>構成例｜ラズパイで漏れ電流と設備の動きを並べて記録する</h3>
+        <p>
+          実例2を仕組みにするなら、漏れ電流を測るセンサーの値と、設備の動き（PLCから受け取る「今どの工程か」の値）を、<b>同じ時刻で並べて記録する</b>構成が考えられます。人がクランプメーターの前で見続けなくても、漏電ブレーカーが落ちる前後に、どの工程で電流が増えたかを記録から読み取れます。PLCとセンサーの値を比べるときは、<b>ラズパイとPLCの時計を合わせておく</b>ことが大切です。時刻がずれていると、原因の工程を取り違えます。PLCとのつなぎ方は、特集の記事「<a href="plc-raspberry-pi-connection.html">PLCとラズパイの接続方法</a>」をご覧ください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>市販の振動センサーで周波数を調べ、設備ごとのしきい値で点検につなげた</li>
+            <li>漏電ブレーカーが落ちる原因を、アースの線の電流と設備の動きを見比べて絞ろうとした</li>
+            <li>アースの線を外さない。ラズパイなら、電流と設備の動きを時計を合わせて並べて記録できる</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>AIで予知保全の解析ツールを作る</h2>
+
+        <h3>AIはツールを作るときに使う｜解析は普通のプログラムで</h3>
+        <p>
+          「AIで予知保全」と聞くと、ラズパイの上でAIが判定する姿を思い浮かべるかもしれません。しかし、文章を扱う大規模なAIを、ふつうのラズパイだけで動かすのは、記憶の量や計算の力の面で難しい場合があります（AI用の追加の部品を使って、小さなAIを動かす方法はあります）。そして、予知保全の基本の解析には、大きなAIは必ずしも要りません。平均とばらつきからのしきい値の計算、周波数の解析、移り変わりの計算は、普通のプログラムで動きます。
+        </p>
+        <p>
+          そこで筆者の進め方は、<strong class="mk">解析のツールをAIに作ってもらい、ツールそのものは、ラズパイやパソコンで動く普通のプログラムにする</strong>というものです。筆者はプログラムを書いたことがありませんが、この分担なら、しきい値の計算や周波数の解析のツールを作れます。頼み方の型は、特集の記事「<a href="manufacturing-genai-prompt.html">製造業の生成AIプロンプト例10選</a>」と同じです。
+        </p>
+
+        <h3>プロンプト例｜記録からしきい値の案を出すツール</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例1｜しきい値の案を出すツール</p>
+          <p class="prompt-txt">あなたは、ラズパイとPythonで製造現場の小さな仕組みを作るのを手伝うエンジニアです。
+【何をしたいか】モーターの電流を1秒ごとに記録した表（時刻・電流・品種・運転か停止かの列）から、注意と警報のしきい値の案を出したい。
+【どうしたいか】正常な期間を日付で指定し、運転中の値だけを品種ごとに分けて、平均とばらつき（標準偏差）を計算する。注意は平均＋ばらつきの3倍、警報は6倍を初めの値にして、倍率は変えられるようにする。上側だけでなく、下側のしきい値も出せるようにする。3回続けて超えたら1回と数え、指定した期間に何回鳴っていたかも出す。
+【何がいるか】表計算ソフトで開ける形の記録。パソコンで動かす。
+私はプログラムを書いたことがありません。準備から1つずつ、手順を教えてください。</p>
+        </div>
+
+        <h3>プロンプト例｜振動を周波数ごとに分けるツール</h3>
+        <div class="chapter-sum chapter-sum--navy prompt-ex">
+          <p class="chapter-sum-title">プロンプト例2｜振動を周波数ごとに分けるツール</p>
+          <p class="prompt-txt">記録した振動の値を、周波数ごとに分けてグラフにするツールを作ってください。
+・記録は1秒間に10,000回測った値。測った速さは、ツールの中で変えられるようにする
+・周波数ごとの大きさをグラフにし、大きい順に上から10個の周波数を表で出す
+・ベアリングの寸法と回転の速さを入れると、傷のときに出やすい周波数を計算して、グラフに線で示す
+・計算の式と、どの値を使ったかを、画面に書いて残す
+・正常なときの記録と、最近の記録を重ねて比べられるようにする
+・正しく動くかを確かめるため、決まった周波数の揺れを混ぜ、雑音も足した試しの値を作る機能を付ける</p>
+        </div>
+
+        <h3>AIの答えを確かめる</h3>
+        <p>
+          AIが作ったツールは、まず<b>答えが分かっている値</b>で試します。たとえば、決まった周波数の揺れを計算で作り、その周波数がグラフに正しく出るかを確かめます。1つの周波数だけでなく、いくつかの周波数を混ぜた値、雑音を足した値、測る速さを変えた値でも試します。しきい値の計算も、上のツールのような別の方法で出した値と見比べます。
+        </p>
+        <p>
+          ただし、計算で作った値で正しく動いても、実際のセンサーの値で正しく異常を見分けられるとは限りません。AIは、設備の状態や、センサーの付け方を知りません。<b>何をどう測ったかは人が確かめ、AIには計算の手間を任せる</b>、という分担が安全です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>基本の解析に大きなAIは要らない。解析のツールをAIに作ってもらう</li>
+            <li>しきい値の案、周波数の解析のツールを、何をしたいか・どうしたいか・何がいるかで頼む</li>
+            <li>答えが分かっている値、混ぜた値、雑音を足した値で試してから使う</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>予知保全のIoTを導入したあとに気をつけること</h2>
+
+        <h3>誤報と見逃し、点検の結果を記録して直し続ける</h3>
+        <p>
+          しきい値は、一度決めたら終わりではありません。鳴った日時、点検した結果（異常があったか、なかったか）、壊れたのに鳴らなかったことを、運転の条件と一緒に記録し、数か月ごとに見直します。部品の交換や設備の調整のあとは、正常なときの値そのものが変わることがあるため、記録をとり直します。そのとき、<b>前の記録は消さずに残し</b>、交換の前と後を比べられるようにします。
+        </p>
+
+        <h3>測る仕組みの故障を、設備の異常と分けて知らせる</h3>
+        <p>
+          センサーが外れたり、線が切れたりすると、値が0のまま、または同じ値のままになり、<b>壊れていても「正常」に見える</b>ことがあります。値が一定の時間まったく変わらない、測れる範囲を超えた、記録が途切れた、通信できない、といったときは、設備の異常とは別に、<b>測る仕組みの異常</b>として知らせます。データがないことを「正常」と受け取らないようにします。センサーの取り付けの緩みや位置のずれも、ふだんの点検の項目に入れます。
+        </p>
+
+        <h3>最後は人が点検して判断する</h3>
+        <p>
+          しきい値を超えたことは、<b>点検のきっかけ</b>です。設備を止めるか、部品を替えるかは、点検した人が判断します。測った値と点検の結果を並べて残していくと、どのくらいの値で、どんな傷があったかが分かるようになり、しきい値の精度も上がっていきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>誤報と見逃し、点検の結果を運転の条件と一緒に記録し、前の記録も残す</li>
+            <li>値が変わらない・記録が途切れたときは、測る仕組みの異常として知らせる</li>
+            <li>しきい値は点検のきっかけ。判断は点検した人が行う</li>
+          </ul>
+        </div>
+
+        <!-- ◆8 -->
+        <h2>アイツインの予知保全の支援</h2>
+        <p>
+          アイツインは、保全の現場での経験をもとに、壊れる前に手を打てる仕組みづくりを、ラズパイとAIで安くお手伝いしています。
+        </p>
+
+        <h3>何を測るかの整理と、センサーの選び方から</h3>
+        <p>
+          どの設備で、どんな故障が困っているかをうかがい、電流・振動・温度のどれを、どこで測るかを一緒に決めます。振動の場合は、揺れの大きさで足りるのか、周波数まで調べる必要があるのかを見極め、センサーと取り付け方を選びます。
+        </p>
+
+        <h3>試作から、しきい値の決め方、鳴ったあとの手順まで</h3>
+        <p>
+          ラズパイを使った記録の仕組みの試作から、正常なときの記録、しきい値の決め方、鳴ったあとに誰が何をするかの手順書づくりまでを支援します。社内の方がAIを使って解析のツールを作り、直せるようになるための研修もご相談いただけます。
+        </p>
+
+        <h3>まずはお気軽にご相談ください｜困っている設備の整理から</h3>
+        <p>
+          「突然止まる設備がある」「センサーを付けたが、しきい値が決められない」「原因の分からない不具合を記録で追いかけたい」という段階からご相談いただけます。ご相談とお見積もりは無料です。
+        </p>
+        <div class="section-more"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91%E4%BA%88%E7%9F%A5%E4%BF%9D%E5%85%A8%E3%82%92%E5%A7%8B%E3%82%81%E3%81%9F%E3%81%84">仕組みづくりを相談する（無料）</a></div>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          予知保全をIoTで始めるときは、まずどの故障を早く見つけたいかを決め、電流・振動・温度から測るものを選びます。迷ったら電流から1台で試し、早く見つけたい回転部がある設備にだけ振動を足します。振動センサーは種類によって分かることが違い、<strong class="mk">ベアリングの傷を周波数で調べるには、高い周波数まで測れるセンサー、速い取り込み、固い取り付けが要ります。</strong>
+        </p>
+        <p>
+          しきい値は、正常なときを運転の条件と一緒に記録し、設備ごとに、注意と警報の2段階で初めの案を決め、鳴った回数と点検の結果で見直していきます。鳴ったあとに誰が何をするかも、先に決めておきましょう。AIは、ラズパイで動かすのではなく、解析のツールを作るのに使えます。まずは上のツールに、手元の記録を入れてみるところから始めてみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・本記事の実例は、筆者の現場での経験です。ラズパイを使った構成は構成例で、筆者が同じ形で作って動かしたものではありません。<br>
+          ・しきい値のツールは、入れた値だけをもとにした初めの案の計算です。設備の異常の判定を保証するものではありません。設備メーカーの推奨値がある場合は、それを優先してください。<br>
+          ・電線へのセンサーの取り付けや、アースの線の測定は、電気の資格と知識のある人が、決まった安全の手順で行ってください。<br>
+          ・参考にした資料：ISO 20816-1・20816-3（機械の振動の測定と評価）／軸受けメーカーの保守と振動監視の技術資料（ベアリングの特有の周波数、高い周波数の衝撃と包絡線解析、温度と振動の監視の得意分野）／加速度センサーの取り付け方と周波数の技術資料／振動計測のサンプリングの技術資料（2.56倍）／米国標準技術研究所（NIST）の工程管理の資料（3σの管理限界と分布のかたより）／変流器と漏れ電流の測定の技術資料／経済産業省「AI導入ガイドブック（予知保全）」／ラズパイの公式ドキュメント
+        </p>
+
+        <div class="article-cta">
+          突然止まる設備がある。センサーを付けたが、しきい値が決められない。無料相談で、何を測るかの整理から、作り方と費用の目安までを一緒に整理しませんか。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91%E4%BA%88%E7%9F%A5%E4%BF%9D%E5%85%A8%E3%82%92%E5%A7%8B%E3%82%81%E3%81%9F%E3%81%84">仕組みづくりを相談する</a><a href="../../price.html#shikumi">料金の目安</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../shikumi/index.html">← 仕組みノートのまとめに戻る</a></p>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.03</p>
+                <h3><a href="equipment-failure-maintenance.html">設備の故障を減らす保全の進め方5ステップ｜事後・予防・予知保全の違いと選び方</a></h3>
+                <p class="column-excerpt">保全の種類の違いと、壊れにくい設備に変えた実例。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.15</p>
+                <h3><a href="plc-raspberry-pi-connection.html">PLCとラズパイの接続方法3通り｜LAN・接点信号・PLC代わりの選び方と、設備を止めないIPアドレス管理</a></h3>
+                <p class="column-excerpt">つなぐ方法の選び方と、IPアドレスの重複で止まった実例。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li><a href="raspberry-pi-qr-code-reading.html">04 QRコードの読み取り</a></li><li><a href="plc-raspberry-pi-connection.html">05 PLCとの接続</a></li><li class="is-cur"><span>06 予知保全のIoT</span></li></ol>
+            <p class="cs-pager"><a href="plc-raspberry-pi-connection.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">仕組みづくりのご相談</p>
+          <p class="cs-ask-text">困っている一点の洗い出しから、試作・二重チェック・社内の方への研修までご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#shikumi">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="plc-raspberry-pi-connection.html"><img src="../../img/thumb-column-plc-raspberry-pi-connection.jpg" alt="" width="80" height="45"><span>PLCとラズパイの接続方法3通り</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">おすすめのコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">人気コラム TOP2</p>
+          <ol class="cs-rank"><li><a href="stand-strength-calculation.html"><img src="../../img/thumb-column-stand-strength.jpg" alt="" width="80" height="45"><span>架台の強度計算の方法と例</span></a></li><li><a href="weld-strength-calculation.html"><img src="../../img/thumb-column-weld-strength.jpg" alt="" width="80" height="45"><span>溶接の強度計算の方法と例</span></a></li></ol>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
