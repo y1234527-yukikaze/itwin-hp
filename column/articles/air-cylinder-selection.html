@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  アイツイン｜コラム記事：エアシリンダの選定計算の方法と例（特集「自動化設備の設計ノート」05）
+  アイツイン｜コラム記事：エアシリンダの推力と選定の計算方法（特集「自動化設備の設計ノート」05）
   （溶接の記事を土台に、キットの build_cylinder.py で組み立て・2026-10-21）
   計算例の検算：キットの cylinder_calc.py／計算ツール：キットの tool_cylinder.html／本文：キットの cylinder_body.html
   ------------------------------------------------------------
@@ -34,22 +34,22 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで｜アイツイン コラム</title>
-  <meta name="description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <title>エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき｜アイツイン コラム</title>
+  <meta name="description" content="エアシリンダの選定計算と推力の求め方を解説します。使用圧力0.5MPaでのボア径φ16〜φ100の押す力・引く力の早見表、負荷率からボア径を選ぶ計算例2つ、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径を選ぶと動かせる重さが分かる計算ツールつきです。">
   <link rel="canonical" href="https://i-twin.co.jp/column/articles/air-cylinder-selection">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
-  <meta property="og:title" content="エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで">
-  <meta property="og:description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <meta property="og:title" content="エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき">
+  <meta property="og:description" content="エアシリンダの選定計算と推力の求め方を解説します。使用圧力0.5MPaでのボア径φ16〜φ100の押す力・引く力の早見表、負荷率からボア径を選ぶ計算例2つ、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径を選ぶと動かせる重さが分かる計算ツールつきです。">
   <meta property="og:url" content="https://i-twin.co.jp/column/articles/air-cylinder-selection">
   <meta property="og:image" content="https://i-twin.co.jp/img/column-air-cylinder.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta property="article:published_time" content="2026-10-21">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで">
-  <meta name="twitter:description" content="エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。">
+  <meta name="twitter:title" content="エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき">
+  <meta name="twitter:description" content="エアシリンダの選定計算と推力の求め方を解説します。使用圧力0.5MPaでのボア径φ16〜φ100の押す力・引く力の早見表、負荷率からボア径を選ぶ計算例2つ、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径を選ぶと動かせる重さが分かる計算ツールつきです。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/column-air-cylinder.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,11 +65,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで",
-    "description": "エアシリンダの選定計算の方法を、計算例つきで解説します。押す力と引く力の求め方、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径から動かせる重さが分かる計算ツールつきです。",
+    "headline": "エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき",
+    "description": "エアシリンダの選定計算と推力の求め方を解説します。使用圧力0.5MPaでのボア径φ16〜φ100の押す力・引く力の早見表、負荷率からボア径を選ぶ計算例2つ、ストロークの終わりの運動エネルギーとクッションの確かめ方まで。ボア径を選ぶと動かせる重さが分かる計算ツールつきです。",
     "image": "https://i-twin.co.jp/img/column-air-cylinder.jpg",
     "datePublished": "2026-10-21",
-    "dateModified": "2026-10-21",
+    "dateModified": "2026-11-17",
     "inLanguage": "ja",
     "author": {
       "@type": "Organization",
@@ -99,7 +99,7 @@
       { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
       { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
       { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
-      { "@type": "ListItem", "position": 4, "name": "エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで", "item": "https://i-twin.co.jp/column/articles/air-cylinder-selection" }
+      { "@type": "ListItem", "position": 4, "name": "エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき", "item": "https://i-twin.co.jp/column/articles/air-cylinder-selection" }
     ]
   }
   </script>
@@ -185,9 +185,9 @@
         <a href="../../index.html">ホーム</a> ／
         <a href="../index.html">コラム</a> ／
         <a href="../design/index.html">自動化設備の設計ノート</a> ／
-        <span>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</span>
+        <span>エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき</span>
       </div>
-      <h1>エアシリンダの選定計算の方法と例｜推力・負荷率から、ストロークの終わりの衝撃まで</h1>
+      <h1>エアシリンダの推力と選定の計算方法｜ボア径φ16〜φ100の早見表・負荷率の決め方・例題つき</h1>
       <p class="catch">公開日：2026年10月21日</p>
     </div>
   </section>
@@ -315,6 +315,7 @@
         <p>
           使用圧力は、工場の配管の圧力をそのまま使わず、<strong>シリンダが動いているときに、シリンダの近くで確保できる圧力</strong>で計算します。あるメーカーの技術資料では、減圧弁で空気源の圧力の85％程度に設定するのが一般的としています。ただし、圧力の落ち方は、配管の太さと長さ、継手やバルブ、同時に使う空気の量で変わります。一律に15％下がるとは考えず、実機で測って確かめます<span class="need-check">（要確認）</span>。
         </p>
+        <h3>ボア径別の推力の早見表（0.5MPa）</h3>
         <p>
           使用圧力0.5MPaでの<strong>理論推力</strong>は、次のとおりです。ロッドの径は、あるメーカーの標準的なシリーズの例です。ロッドの径は、メーカーやシリーズ、仕様で違うため、使う機種のカタログで確かめてください<span class="need-check">（要確認）</span>。
         </p>
