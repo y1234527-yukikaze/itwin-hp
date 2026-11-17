@@ -189,6 +189,29 @@
                 <label><input type="checkbox" value="その他・まだ決まっていない">その他・未定</label>
               </div>
             </div>
+            <!-- ◆強度計算を選んだときだけ出す、概算用の3項目（すべて任意・2026-11-17） -->
+            <div class="field f-est" hidden>
+              <p class="dq-sub dq-est-lead">選んでいただくと、返信のメールで概算（幅のある金額）をお伝えできます。正式なお見積りは図面を拝見してからです。</p>
+              <p class="dq-label">構造の形 <span class="dq-opt">任意</span></p>
+              <div class="dq-chips" id="dq-shape">
+                <label><input type="radio" name="dq_shape" value="門型（柱2本＋上の梁）">門型（柱2本＋上の梁）</label>
+                <label><input type="radio" name="dq_shape" value="4本脚の架台">4本脚の架台</label>
+                <label><input type="radio" name="dq_shape" value="片持ち">片持ち</label>
+                <label><input type="radio" name="dq_shape" value="その他・分からない">その他・分からない</label>
+              </div>
+              <p class="dq-label dq-label--gap">図面 <span class="dq-opt">任意</span></p>
+              <div class="dq-chips" id="dq-draw">
+                <label><input type="radio" name="dq_draw" value="CAD図あり">CAD図あり</label>
+                <label><input type="radio" name="dq_draw" value="手書き・写真のみ">手書き・写真のみ</label>
+                <label><input type="radio" name="dq_draw" value="図面なし">図面なし</label>
+              </div>
+              <p class="dq-label dq-label--gap">結果のお知らせ <span class="dq-opt">任意</span></p>
+              <div class="dq-chips" id="dq-report">
+                <label><input type="radio" name="dq_report" value="結果を先に知りたい（速報。計算書は後日）">結果を先に知りたい（速報・計算書は後日）</label>
+                <label><input type="radio" name="dq_report" value="計算書と一緒でよい">計算書と一緒でよい</label>
+                <label><input type="checkbox" id="dq-format" value="提出先の指定書式がある">提出先の指定書式がある</label>
+              </div>
+            </div>
             <div class="field f-when" hidden>
               <label for="dq-when">希望の時期</label>
               <select id="dq-when">
@@ -197,10 +220,11 @@
                 <option value="2週間以内">2週間以内</option>
                 <option value="1か月以内">1か月以内</option>
               </select>
+              <p class="dq-rush" id="dq-rush" hidden>お急ぎの方は、計算の結果（大丈夫かどうか）だけを先にメールでお知らせできます。計算書は後日お送りします。図面をお持ちの方は、こちらからの返信メールに添付してください。届いた日から見積もりと計算を進めます。</p>
             </div>
             <div class="field f-memo" hidden>
               <label for="dq-memo">条件のメモ <span class="dq-opt">任意</span></label>
-              <textarea id="dq-memo" rows="4" placeholder="分かる範囲で大丈夫です。例：のせる設備の重さ、架台の寸法、材質、設置する場所、客先の指定など"></textarea>
+              <textarea id="dq-memo" rows="4" placeholder="分かる範囲で大丈夫です。例：のせる（吊る）物の重さ、架台の寸法、門型の数や部材のおおよその本数、材質、設置する場所、客先の指定など"></textarea>
             </div>
             <p class="dq-note" hidden>図面がなくても、寸法と重さが分かれば概算をお返しします。</p>
             <button type="button" class="dq-more" id="dq-more" aria-expanded="false" hidden>会社名・電話番号なども入力する（任意）</button>
@@ -257,6 +281,7 @@
             <ul class="cf-price-list">
               <li>2営業日以内に、メールでご返信します</li>
               <li id="cf-lead" hidden>図面や強度計算の納期は、最短2〜3日、長くても1週間以内が目安です</li>
+              <li id="cf-rush" hidden>お急ぎの場合は、結果だけを先にお知らせできます（計算書は後日）</li>
             </ul>
             <p class="cf-more"><a href="price.html">料金の目安 ›</a></p>
           </div>
@@ -272,7 +297,7 @@
             <p class="cf-h">よくある質問</p>
             <details class="cf-faq"><summary>見積もりは無料ですか？</summary><p>はい、ご相談とお見積もりは無料です。費用が決まってから、ご依頼いただくかをご判断ください。</p></details>
             <details class="cf-faq"><summary>図面がなくても頼めますか？</summary><p>はい。寸法と重さが分かれば概算をお返しします。図面が残っていない設備は、3Dスキャンで形を測ってから計算することもできます。</p></details>
-            <details class="cf-faq"><summary>急ぎの依頼はできますか？</summary><p>お受けします。図面や強度計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により延びる場合があります。</p></details>
+            <details class="cf-faq"><summary>急ぎの依頼はできますか？</summary><p>お受けします。図面や強度計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により延びる場合があります。お急ぎの場合は、大丈夫かどうかの結果を先にメールでお知らせし、計算書は後日お送りすることもできます。図面は、こちらからの返信メールに添付してください。</p></details>
             <details class="cf-faq"><summary>遠方の会社でも頼めますか？</summary><p>日本国内からのご依頼をお受けしています。ご相談はオンラインでもできます。現地での作業がある場合は、交通費・宿泊費を別にいただきます。</p></details>
             <details class="cf-faq"><summary>個人でも頼めますか？</summary><p>法人のお客様が中心ですが、個人事業主・個人の方もご相談ください。内容によってはお受けできない場合があります。</p></details>
             <p class="cf-more"><a href="price.html#price-faq">料金についての質問をもっと見る ›</a></p>
@@ -472,7 +497,20 @@
       }
       priceBody.innerHTML = html + '<p class="cf-price-main">ご相談・お見積もりは無料です。</p>';
       if (leadLi) leadLi.hidden = t !== "design";
+      if (rushLi) rushLi.hidden = t !== "design";
+      if (fEst) fEst.hidden = !(t === "design" && what.some(function (w) { return STRENGTH.indexOf(w) >= 0; }));
     }
+    var fEst = form ? form.querySelector(".f-est") : null;
+    function pickVal(id) {
+      var c = form.querySelector("#" + id + " input[type=radio]:checked");
+      return c ? c.value : "（未選択）";
+    }
+    // ◆お急ぎ（1週間以内）を選んだときだけ、結果を先に知らせられる案内を出す（2026-11-17）
+    var rushLi = document.getElementById("cf-rush");
+    var dqRush = document.getElementById("dq-rush");
+    function syncRush() { if (dqRush) dqRush.hidden = !(dqWhen && dqWhen.value.indexOf("1週間以内") === 0); }
+    if (dqWhen) dqWhen.addEventListener("change", syncRush);
+    syncRush();
     if (form) form.addEventListener("change", function (e) { if (e.target.closest("#dq-what")) syncGuide(); });
     function buildDesignMessage() {
       var what = Array.prototype.map.call(form.querySelectorAll("#dq-what input:checked"), function (c) { return c.value; });
@@ -484,6 +522,12 @@
       lines.push("【計算・設計の見積もり依頼】");
       lines.push("計算したいもの：" + (what.length ? what.join("、") : "（未選択）"));
       lines.push("希望の時期：" + (dqWhen ? dqWhen.value : ""));
+      if (fEst && !fEst.hidden) {
+        var fmt = document.getElementById("dq-format");
+        lines.push("構造の形：" + pickVal("dq-shape"));
+        lines.push("図面：" + pickVal("dq-draw"));
+        lines.push("結果のお知らせ：" + pickVal("dq-report") + (fmt && fmt.checked ? "／提出先の指定書式がある" : ""));
+      }
       lines.push("");
       lines.push("【条件のメモ】");
       lines.push(dqMemo && dqMemo.value ? dqMemo.value : "（なし）");
@@ -507,6 +551,12 @@
           form.appendChild(subj);
         }
         if (hiddenField) hiddenField.value = msg;
+        // 概算用の選択肢はお問い合わせ内容にまとめたので、別項目としては送らない
+        Array.prototype.forEach.call(form.querySelectorAll(".f-est input"), function (c) { c.disabled = true; });
+      });
+      // 戻るボタンで戻ってきたときは、選べる状態に戻す
+      window.addEventListener("pageshow", function () {
+        Array.prototype.forEach.call(form.querySelectorAll(".f-est input"), function (c) { c.disabled = false; });
       });
     }
 
