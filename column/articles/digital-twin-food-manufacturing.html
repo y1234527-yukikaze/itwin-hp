@@ -68,8 +68,11 @@
     "inLanguage": "ja",
     "articleSection": "業種別活用事例",
     "author": {
-      "@type": "Organization",
-      "name": "アイツイン（i-TWIN）"
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
     },
     "publisher": {
       "@type": "Organization",
@@ -191,6 +194,7 @@
   <!-- ◆本体：記事 -->
   <section class="section">
     <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
       <div class="article-body">
 
         <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
@@ -302,6 +306,17 @@
             <a class="column-more" href="../index.html">コラム一覧をすべて見る ›</a>
           </p>
 
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
           <h3 style="margin-top:36px;">関連記事</h3>
           <div class="related-articles">
             <div class="column-card">
@@ -322,6 +337,49 @@
         </div>
 
       </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="digital-twin-metal-processing.html">01 金属加工</a></li><li><a href="digital-twin-plastic-molding.html">02 樹脂成形</a></li><li class="is-cur"><span>03 食品製造</span></li><li><a href="digital-twin-electronics-assembly.html">04 電子部品</a></li><li><a href="digital-twin-woodworking-furniture.html">05 木工・家具</a></li><li><a href="digital-twin-printing-packaging.html">06 印刷・パッケージ</a></li><li><a href="digital-twin-textile-sewing.html">07 繊維・縫製</a></li><li><a href="digital-twin-coating-surface-treatment.html">08 塗装・表面処理</a></li></ol>
+            <p class="cs-pager"><a href="digital-twin-plastic-molding.html">‹ 前の記事</a><a class="cs-next" href="digital-twin-electronics-assembly.html">次の記事 ›</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../industries/index.html">業種別で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">現場のお悩みのご相談</p>
+          <p class="cs-ask-text">人手が足りない、設備が止まる、データが生かせていない、といった現場のお悩みを、整理するところからご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=issues&amp;items=%E3%80%90%E7%8F%BE%E5%A0%B4%E3%81%AE%E3%81%8A%E6%82%A9%E3%81%BF%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">お悩みを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="predictive-maintenance-iot.html"><img src="../../img/thumb-column-predictive-maintenance-iot.jpg" alt="" width="80" height="45"><span>予知保全をIoTで始める方法</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261117" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の現場のあるある</p>
+          <div class="aruaru" data-cat="genba"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
     </div>
   </section>
 

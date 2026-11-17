@@ -67,8 +67,11 @@
     "dateModified": "2026-08-10",
     "inLanguage": "ja",
     "author": {
-      "@type": "Organization",
-      "name": "アイツイン（i-TWIN）"
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
     },
     "publisher": {
       "@type": "Organization",
@@ -188,6 +191,7 @@
   <!-- ◆本体：記事 -->
   <section class="section">
     <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
       <div class="article-body">
 
         <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
@@ -371,6 +375,17 @@
         <div class="article-footer-nav">
           <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
 
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
           <h3 style="margin-top:36px;">関連記事</h3>
           <div class="related-articles">
             <div class="column-card">
@@ -391,6 +406,47 @@
         </div>
 
       </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">特集から探す</p>
+          <ul class="cs-hubs"><li><a href="../design/index.html"><b>自動化設備の設計ノート</b><span>強度計算・選定の方法と計算ツール</span></a></li><li><a href="../shikumi/index.html"><b>AIで作る 現場の仕組みノート</b><span>ラズパイとAIで現場の困りごとを解く</span></a></li><li><a href="../industries/index.html"><b>業種別デジタルツイン活用</b><span>金属加工・食品・樹脂成形など8業種</span></a></li></ul>
+          <p class="cs-pager"><a href="factory-that-thinks.html">‹ 前の記事</a><a class="cs-next" href="shoryokuka-hojokin.html">次の記事 ›</a></p>
+          <p class="cs-more"><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">現場のお悩みのご相談</p>
+          <p class="cs-ask-text">人手が足りない、設備が止まる、データが生かせていない、といった現場のお悩みを、整理するところからご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=issues&amp;items=%E3%80%90%E7%8F%BE%E5%A0%B4%E3%81%AE%E3%81%8A%E6%82%A9%E3%81%BF%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">お悩みを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="predictive-maintenance-iot.html"><img src="../../img/thumb-column-predictive-maintenance-iot.jpg" alt="" width="80" height="45"><span>予知保全をIoTで始める方法</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261117" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の現場のあるある</p>
+          <div class="aruaru" data-cat="genba"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
     </div>
   </section>
 

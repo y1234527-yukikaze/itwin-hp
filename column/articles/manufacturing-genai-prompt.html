@@ -72,8 +72,11 @@
     "dateModified": "2026-11-12",
     "inLanguage": "ja",
     "author": {
-      "@type": "Organization",
-      "name": "アイツイン（i-TWIN）"
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
     },
     "publisher": {
       "@type": "Organization",
@@ -670,6 +673,17 @@
         <div class="article-footer-nav">
           <p><a class="btn btn--outline" href="../shikumi/index.html">← 仕組みノートのまとめに戻る</a></p>
 
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
           <h3 style="margin-top:36px;">関連記事</h3>
           <div class="related-articles">
             <div class="column-card">
@@ -710,13 +724,14 @@
           <ul class="cs-rank cs-pick"><li><a href="predictive-maintenance-iot.html"><img src="../../img/thumb-column-predictive-maintenance-iot.jpg" alt="" width="80" height="45"><span>予知保全をIoTで始める方法</span></a></li></ul>
         </div>
         <div class="cs-box">
-          <p class="cs-h">おすすめのコラム</p>
-          <ul class="cs-rank cs-pick"><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261117" defer></script>
         </div>
         <div class="cs-box">
           <p class="cs-h">今日の仕組みづくりのあるある</p>
           <div class="aruaru" data-cat="shikumi"></div>
-          <script src="../aruaru.js" defer></script>
+          <script src="../aruaru.js?v=20261117" defer></script>
         </div>
         <script>
         (function () {
