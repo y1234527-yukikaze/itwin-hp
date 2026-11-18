@@ -24,7 +24,7 @@
 
 - [設計ノートのまとめページ](https://i-twin.co.jp/column/design/): 自動化設備の強度計算・選定の方法を、計算ツールつきで解説する特集
 - [架台の強度計算の方法と例](https://i-twin.co.jp/column/articles/stand-strength-calculation): 梁の曲げとたわみ、柱の座屈、水平力。角パイプ・アングル・溝形鋼の比較
-- [ロボット架台の強度計算](https://i-twin.co.jp/column/articles/robot-stand-strength-calculation): 非常停止時の慣性力の求め方と、門型架台の計算例
+- [ロボット架台の設計と強度計算](https://i-twin.co.jp/column/articles/robot-stand-strength-calculation): 非常停止時の慣性力の求め方と、門型架台の計算例
 - [溶接の強度計算の方法と例](https://i-twin.co.jp/column/articles/weld-strength-calculation): すみ肉溶接ののど厚、有効長さ、曲げを受ける溶接の計算
 - [アンカーボルトの引き抜き計算の方法と例](https://i-twin.co.jp/column/articles/anchor-bolt-calculation): 柱の根元の曲げと設備の転倒から求める引き抜き力、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さ
 - [エアシリンダの推力と選定の計算方法](https://i-twin.co.jp/column/articles/air-cylinder-selection): 押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッション、空気の消費量
@@ -32,6 +32,7 @@
 - [真空パッドの選定計算と把持力の求め方](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
 - [タクトタイムとは？計算方法と計算例](https://i-twin.co.jp/column/articles/takt-time-calculation): 計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、稼働率と良品率からの設備の目標サイクルタイム、動作ごとの時間の割り振り
 - [架台の耐震計算の方法と例](https://i-twin.co.jp/column/articles/stand-seismic-calculation): 局部震度法の設計用水平震度（設置する階・耐震クラス・地域係数）、地震の力から柱の応力とアンカーの引き抜き、重心の高さ、耐震計算書の項目
+- [ボルトの強度計算の方法](https://i-twin.co.jp/column/articles/bolt-strength-calculation): 引張・せん断・モーメントの式、有効断面積と強度区分、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例
 - [特集：AIで作る 現場の仕組みノート](https://i-twin.co.jp/column/shikumi/): ラズパイとPython、AIで製造現場の困りごとを安く解決する実例と考え方のまとめ（事例集つき）
 - [ラズパイの製造業での使い方](https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing): 使い方6つ、「困っている一点」から考える捉え方、生産終了のQRリーダーを約5万円で置き換えた事例、市販品との費用の比べ方、注意点、AIで作る進め方
 - [製造業の生成AIプロンプト例10選](https://i-twin.co.jp/column/articles/manufacturing-genai-prompt): 白書で見る生成AIの使われ方、伝わるプロンプトの型（5つの要素）と悪い例・良い例、点検・不良・保全・手順書のプロンプト例、記録や転記の仕組みをAIに作ってもらう頼み方と4つの段階、プロンプト作成ツール
@@ -50,6 +51,7 @@
 - [組み立てラインの省人化の進め方](https://i-twin.co.jp/column/articles/assembly-line-shoujinka): 組立作業を5つに分けて自動化しやすい工程と難しい工程を見極める方法、コンベヤのライン・セル・人とロボットの組み合わせ、治具から半自動・ロボットへの段階的な進め方、人数と回収年数の試算（計算ツールつき）、よくある失敗。
 - [部品の製造中止への対応方法](https://i-twin.co.jp/column/articles/parts-discontinued-response): 製造中止（生産終了・EOL・廃番）の通知を受けたときに確かめること、最終購入・代替品・中古品・現物からの作り直し・設計変更の5つの対応、最終購入数の計算（計算ツールつき）、代替品の確認項目、予防策、生産設備を延命するか更新するかの考え方。
 - [設備の故障を減らす保全の進め方](https://i-twin.co.jp/column/articles/equipment-failure-maintenance): 設備が故障する5つの原因と3つの時期（バスタブ曲線）、事後保全・予防保全・予知保全・改良保全の違いと重要度による選び方、保全の進め方5ステップ、故障したときの初動と再発防止、故障の損失とMTBF・MTTR・稼働率の計算（計算ツールつき）、振動センサーによる予知保全の例。
+- [3Dスキャンサービスの選び方](https://i-twin.co.jp/column/articles/3d-scan-service): 製造業での3つの使い方、方法と精度の目安、点群・メッシュ・CAD・図面の違い、料金が決まる6つの要素、スマートフォンでできること、デジタルツインへのつながり
 - [中小製造業の省力化事例｜作業から探せる事例と、装置・見積もり・補助金の進め方](https://i-twin.co.jp/column/articles/shoryokuka-chusho-seizogyo): 省力化が必要な理由と5つの方法、18の作業（材料の出し入れ・搬送・箱詰め・パレタイズ・溶接・検査・記録の電子化など）から探せる公的な省力化事例と、省力化投資補助金のカタログの製品の分類、装置の検討から見積もり・補助金・判断までの進め方、回収年数の計算（計算ツールつき）。
 - [コラム一覧](https://i-twin.co.jp/column/)
 

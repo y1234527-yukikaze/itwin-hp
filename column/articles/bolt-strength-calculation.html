@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：ボルトの強度計算の方法（特集「自動化設備の設計ノート」10）
+  （溶接の記事を土台に、キットの build_bolt.py で組み立て・2026-11-18）
+  計算例の検算：キットの bolt_calc.py／計算ツール：キットの tool_bolt.html／本文：bolt_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-bolt-strength.jpg（ナノバナナで生成して差し替え）
+  図：img/column-bolt-forces.jpg / -class.jpg / -bracket.jpg（figs_bolt.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-18）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表｜アイツイン コラム</title>
+  <meta name="description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/bolt-strength-calculation">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表">
+  <meta property="og:description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/bolt-strength-calculation">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-bolt-strength.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-18">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表">
+  <meta name="twitter:description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-bolt-strength.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表",
+    "description": "ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-bolt-strength.jpg",
+    "datePublished": "2026-11-18",
+    "dateModified": "2026-11-18",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/bolt-strength-calculation"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表", "item": "https://i-twin.co.jp/column/articles/bolt-strength-calculation" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表</span>
+      </div>
+      <h1>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表</h1>
+      <p class="catch">公開日：2026年11月18日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../design/index.html">設計の計算で探す</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="stand-seismic-calculation.html">‹ 前の記事：09 架台の耐震</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.11.18</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-bolt-strength.jpg" alt="ボルトの強度計算。ブラケットを留めるボルトに、引張とせん断がかかるイメージ" width="1376" height="768">
+          <figcaption>ボルトの強さは、太さ（有効断面積）と材料の強さ（強度区分）で決まる。</figcaption>
+        </figure>
+
+        <p>
+          「このブラケット、M8で足りるだろうか」。設備の設計では、ボルトのサイズと本数を決める場面が何度もあります。いつものサイズで済ませることも多いのですが、重い物を吊る、片持ちで支える、といった場面では、<strong class="mk">ボルトの強度計算</strong>で確かめておきたくなります。
+        </p>
+        <p>
+          本記事では、ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。使う値（有効断面積と強度区分）、許容応力の決め方、M6〜M24の許容荷重表を示したあと、設備の設計でいちばん見落としやすい<strong>ブラケットのボルト</strong>を計算例で確かめます。同じ5,000Nの力でも、力のかかる位置が離れるだけで、M8では足りなくなる例です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、設備のブラケットや吊り具を留める一般的な鋼製ボルト（並目ねじ）を例に、強度計算の基本的な考え方を説明するものです。計算したボルトの安全性を保証するものではありません</li>
+            <li>許容応力の決め方は、社内基準や客先の指定、適用する規格が優先です。本記事では、よく使われる考え方を例として示します</li>
+            <li>締め付けの力（軸力）の管理、くり返しの力による疲労、建築の高力ボルトの摩擦接合は、本記事の範囲外です</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>ボルトの強度計算で確かめる3つの力（引張・せん断・モーメント）</li>
+            <li>有効断面積と強度区分の読み方、許容応力の決め方</li>
+            <li>引張・せん断の式と、M6〜M24の許容荷重表</li>
+            <li>ブラケットのボルトにかかる力の求め方と、本数より間隔が効く理由</li>
+            <li>板の側の確認と、ボルトの強度計算でよくある失敗</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>ボルトの強度計算で確かめる3つの力</h2>
+        <p>
+          ボルトにかかる力は、向きによって3つに分けられます。どの力を受けているかで、使う式が変わります。最初に、計算したいボルトがどの力を受けているかを整理します。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-bolt-forces.jpg" alt="ボルトにかかる3つの力。引張は軸の向きに引っ張る、せん断は板どうしを横にずらす、モーメントは離れた力がブラケットを回そうとする" width="1376" height="768" loading="lazy">
+          <figcaption>実際の設備では、3つの力が組み合わさってかかることがある。</figcaption>
+        </figure>
+
+        <h3>引張：軸の向きに引っ張る力</h3>
+        <p>
+          上の梁から物を吊るときのように、ボルトを軸の向きに引っ張る力です。ボルトは、ねじの谷のいちばん細い部分から切れます。そのため、引張の計算では、ボルトの呼び径ではなく、ねじの部分の<strong>有効断面積</strong>を使います。
+        </p>
+
+        <h3>せん断：板どうしを横にずらす力</h3>
+        <p>
+          重ねた板どうしが、横にずれようとする力です。ボルトの胴を、はさみで切るような向きに働きます。柱の側面にブラケットを留め、真下に力がかかるときは、まずこの力を受けます。
+        </p>
+
+        <h3>モーメント：離れた力が、ボルトの群れを回そうとする</h3>
+        <p>
+          ブラケットの先やアームの先に力がかかると、力はボルトの並びを回そうとします。このとき、回転の中心から遠いボルトほど強く引っ張られます。<strong class="mk">せん断だけを計算して、この引張を見落とすと、ボルトが足りなくなる</strong>ことがあります。本記事の後半で、計算例で確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ボルトにかかる力は、引張・せん断・モーメントの3つに分けて考える</li>
+            <li>引張は、ねじの部分の有効断面積で計算する</li>
+            <li>離れた位置の力は、ボルトに大きな引張を生む</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>ボルトの強度計算に使う値｜有効断面積と強度区分</h2>
+        <p>
+          ボルトの強度計算に使う値は、ボルトの太さを表す<strong>有効断面積</strong>と、材料の強さを表す<strong>強度区分</strong>の2つです。そこに安全率を掛けて、許容応力を決めます。
+        </p>
+
+        <h3>有効断面積 As（M6〜M24の並目ねじ）</h3>
+        <p>
+          有効断面積は、ねじの谷を考えた計算上の断面積です。JISの値は次のとおりです。呼び径から求めた円の面積より、2〜3割ほど小さくなります。
+        </p>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>サイズ</th><th>M6</th><th>M8</th><th>M10</th><th>M12</th><th>M16</th><th>M20</th><th>M24</th></tr>
+            <tr><th>有効断面積 As（mm²）</th><td>20.1</td><td>36.6</td><td>58.0</td><td>84.3</td><td>157</td><td>245</td><td>353</td></tr>
+          </table>
+        </div>
+
+        <h3>強度区分の読み方（4.6・8.8・10.9・12.9、ステンレス）</h3>
+        <p>
+          鋼のボルトの頭には、「8.8」のような強度区分の刻印があります。前の数字に100を掛けると<strong>引張強さ</strong>、前と後の数字を掛けて10倍すると<strong>降伏点または0.2％耐力</strong>（呼びの値）になります。8.8なら、引張強さ800MPa、0.2％耐力640MPaです。規格では、4.6は下降伏点、8.8以上は0.2％耐力で示されます。本記事では、両方をまとめて「降伏点」と呼びます。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-bolt-class.jpg" alt="強度区分8.8の読み方。前の数字8に100を掛けて引張強さ800MPa、後の数字0.8を掛けて0.2％耐力640MPa。4.6、8.8、10.9、12.9の一覧" width="1376" height="768" loading="lazy">
+          <figcaption>数値は規格の呼びの値。規格には、これとは別に最小値も定められている。</figcaption>
+        </figure>
+
+        <p>
+          8.8は、M16を超えるサイズでは、規格の最小値が引張強さ830MPa、0.2％耐力660MPaと少し高くなります（呼びの値は800MPaと640MPaのまま）。本記事では、どのサイズも呼びの値の800MPaと640MPaで計算します。ステンレスのボルトは、A2-70のように表し、規格の最小値は引張強さ700MPa、0.2％耐力450MPaです。<strong class="mk">A2-70の強さは、鋼の8.8より低い</strong>ため、さびないからと鋼のボルトから置き換えるときは、計算し直します。
+        </p>
+
+        <h3>許容応力の決め方｜3つの考え方の比較一覧</h3>
+        <p>
+          許容応力は、材料の強さを安全率で割って決めます。何を基準に、いくつで割るかで、結果が大きく変わります。本記事と計算ツールでは、次の3つを選べるようにしています。
+        </p>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>考え方</th><th>4.6</th><th>8.8</th><th>向いている場面</th></tr>
+            <tr><th>引張強さ÷3</th><td>133MPa</td><td>267MPa</td><td>止まっている力（静かな力）。本記事の計算例</td></tr>
+            <tr><th>引張強さ÷5</th><td>80MPa</td><td>160MPa</td><td>動く設備など、くり返しかかる力</td></tr>
+            <tr><th>降伏点÷1.5</th><td>160MPa</td><td>427MPa</td><td>降伏させないことを基準にする例</td></tr>
+          </table>
+        </div>
+        <p>
+          引張強さ÷3と÷5は、機械設計で経験的な目安として紹介されるアンウィンの安全率（鋼で、静かな力に3、片振りのくり返しの力に5とする例）によるものです。規格で一律に決まった値ではなく、引張強さ・降伏点・疲労強度のどれを基準にするかも、力のかかり方や壊れ方で判断します。許容せん断応力は、本シリーズの溶接の記事と同じく、ミーゼスの考え方による簡易計算で、許容引張応力÷√3とします。実際の許容応力は、適用する規準やボルトの種類に従います。どれを使ったかは、計算書に必ず書いておきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>使う値は、有効断面積（太さ）と強度区分（材料の強さ）</li>
+            <li>8.8は、引張強さ800MPa・0.2％耐力640MPa。強度区分は刻印で確かめる</li>
+            <li>許容応力の決め方で結果が変わるため、採用した考え方を計算書に書く</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>ボルトの強度計算の式と計算例</h2>
+        <p>
+          ここからは、引張とせん断の式を、計算例で確かめます。許容応力は、静かな力として引張強さ÷3を使います。
+        </p>
+
+        <h3>引張の式と計算例1｜設備を上の梁から吊る</h3>
+        <p class="calc">
+          <b>1本の引張 T ＝ P ÷ n</b>　　<b>引張応力 σ ＝ T ÷ As ≦ 許容引張応力 σa</b><br>
+          P：力（N）、n：ボルトの本数、As：有効断面積（mm²）
+        </p>
+        <p>
+          600kgの設備を、上の梁からボルト4本で吊る例です。力は600×9.81＝5,886N、1本あたり1,472Nです。M6（As＝20.1mm²）なら引張応力は73.2MPaで、強度区分4.6の許容応力133MPaに対して55％です。M8なら40.2MPaで30％になります。吊る物の重心がボルトの中心からずれると、近い側のボルトに力が寄るため、余裕を持たせてサイズを決めます。
+        </p>
+
+        <h3>せん断の式と計算例2｜ブラケットに真下の力がかかる</h3>
+        <p class="calc">
+          <b>1本のせん断 Q ＝ P ÷（n × m）</b>　　<b>せん断応力 τ ＝ Q ÷ As ≦ 許容せん断応力 τa ＝ σa ÷ √3</b><br>
+          m：せん断面の数（1面せん断は1、2面せん断は2）
+        </p>
+        <p>
+          柱の側面に、ブラケットをボルト4本で留め、真下に5,000Nがかかる例です。1本あたり1,250Nです。M8・強度区分4.6では、せん断応力は34.2MPa、許容せん断応力77.0MPaに対して44％です。ねじの部分がずれる面にかかる場合は、このように有効断面積で計算します。ねじのない胴の部分がかかる場合は、呼び径の円の面積で計算できます。
+        </p>
+
+        <h3>引張とせん断を一緒に受けるとき</h3>
+        <p class="calc">
+          <b>（σ ÷ σa）² ＋（τ ÷ τa）² ≦ 1.0</b>
+        </p>
+        <p>
+          ブラケットのように、引張とせん断を一緒に受けるボルトは、それぞれの割合を2乗して足し、1.0以下かどうかで見ます。許容せん断応力を許容引張応力÷√3とした場合、この式はミーゼスの考え方による評価（σ²＋3τ²≦σa²）と同じになります。本記事では、この式を簡易な一次評価として使います。締め付けの力、接合面の摩擦、疲労、こじる力は別に確かめます。適用する規準によっては、組み合わせの専用の式が定められている場合があります。
+        </p>
+
+        <h3>M6〜M24のボルトの許容荷重表（1本あたり）</h3>
+        <p>
+          有効断面積に許容応力を掛けると、1本で受けられる力の目安が出ます。静かな力（引張強さ÷3）の場合です。くり返しの力では、およそ6割になります。
+        </p>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>サイズ</th><th>4.6 引張</th><th>4.6 せん断</th><th>8.8 引張</th><th>8.8 せん断</th></tr>
+            <tr><th>M6</th><td>2,680N（約273kg）</td><td>1,547N（約158kg）</td><td>5,360N（約546kg）</td><td>3,095N（約315kg）</td></tr>
+            <tr><th>M8</th><td>4,880N（約497kg）</td><td>2,817N（約287kg）</td><td>9,760N（約995kg）</td><td>5,635N（約574kg）</td></tr>
+            <tr><th>M10</th><td>7,733N（約788kg）</td><td>4,465N（約455kg）</td><td>15,467N（約1,577kg）</td><td>8,930N（約910kg）</td></tr>
+            <tr><th>M12</th><td>11,240N（約1,146kg）</td><td>6,489N（約662kg）</td><td>22,480N（約2,292kg）</td><td>12,979N（約1,323kg）</td></tr>
+            <tr><th>M16</th><td>20,933N（約2,134kg）</td><td>12,086N（約1,232kg）</td><td>41,867N（約4,268kg）</td><td>24,172N（約2,464kg）</td></tr>
+            <tr><th>M20</th><td>32,667N（約3,330kg）</td><td>18,860N（約1,923kg）</td><td>65,333N（約6,660kg）</td><td>37,720N（約3,845kg）</td></tr>
+            <tr><th>M24</th><td>47,067N（約4,798kg）</td><td>27,174N（約2,770kg）</td><td>94,133N（約9,596kg）</td><td>54,348N（約5,540kg）</td></tr>
+          </table>
+        </div>
+        <p>
+          この表は、力がボルトの軸の向きか、横の向きに素直にかかる場合の目安です。次の章のブラケットのように、離れた位置に力がかかる場合は、この表だけでは決められません。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>引張は T ÷ As、せん断は Q ÷ As で応力を求め、許容応力と比べる</li>
+            <li>引張とせん断が同時なら、2つの割合の2乗の和で見る</li>
+            <li>許容荷重表は、力が素直にかかる場合の目安として使う</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>ブラケットのボルトの強度計算｜離れた力を受けるとき</h2>
+        <p>
+          計算例2のブラケットで、力のかかる位置が、柱の面から300mm離れていたらどうなるでしょうか。モーターや部品を、アームの先にのせるような場面です。
+        </p>
+
+        <h3>回転の中心と、いちばん引っ張られるボルト</h3>
+        <p>
+          離れた力は、ブラケットを下の端まわりに回そうとします。回そうとする力（モーメント）は、力×距離です。このモーメントを、ボルトの引張で受けます。本記事では、ブラケットの下の端を回転の中心とし、ボルトの引張は中心からの距離に比例するとして求める、簡易な方法を使います。この方法は、ブラケットが変形しない、ボルトの伸びやすさがどれも同じ、押し付けられる側は取り付け面が受ける、という仮定にもとづきます。実際の回転の中心は、取り付け面の当たり方で変わるため、構造に合わせて決めます。
+        </p>
+        <p class="calc">
+          <b>モーメント M ＝ P × e</b>　　<b>いちばん上の段の1本の引張 T ＝ M × y<sub>max</sub> ÷ Σ（y²）</b><br>
+          e：面から力までの距離、y：回転の中心から各ボルトまでの距離（ボルトの並びの中心からではない）、Σ（y²）：全部のボルトの y² の合計
+        </p>
+
+        <h3>計算例3｜同じ5,000Nが、300mm離れてかかる</h3>
+        <p>
+          ボルトは横2列×2段の4本、回転の中心から下の段まで20mm、上の段まで120mmとします。モーメントは5,000×300＝1,500,000N·mm、Σ（y²）は2×（20²＋120²）＝29,600mm²です。上の段の1本の引張は、1,500,000×120÷29,600＝<strong>6,081N</strong>になります。せん断は、計算例2と同じく1本1,250Nです。
+        </p>
+        <p>
+          <strong class="mk">上の段のボルトの引張は、せん断の約4.9倍</strong>です。M8・強度区分4.6では、引張応力166.1MPaで許容応力の1.25倍になり、組み合わせの値は1.75で足りません。強度区分8.8なら0.44、M10の4.6なら0.70で足ります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-bolt-bracket.jpg" alt="同じ5000Nでも、ブラケットで300mm離れると、M8・強度区分4.6の組み合わせの値は0.44から1.75になり不足する。段の間隔を広げると0.68で足りる" width="1376" height="768" loading="lazy">
+          <figcaption>力のかかる位置が離れるだけで、同じボルトでも足りなくなる。</figcaption>
+        </figure>
+
+        <h3>本数を増やすより、段の間隔を広げる</h3>
+        <p>
+          ボルトを太くする以外の直し方も比べます。4本のまま、上の段を220mmまで離すと、上の段の引張は3,381Nに下がり、組み合わせの値は0.68になります。一方、120mmの範囲に3段（6本）を並べても、引張は4,569Nにしか下がらず、組み合わせは0.96です。モーメントを受けるボルトは、<strong>本数を増やすより、回転の中心から離して並べる</strong>ほうが効きます。ブラケットの背を高くするのが、いちばん効く直し方です。
+        </p>
+
+        <h3>この計算例で確認していないもの</h3>
+        <ul>
+          <li>締め付けの力（軸力）と、ブラケットや柱の面がたわんで生じるこじる力</li>
+          <li>くり返しの力による疲労と、振動によるゆるみ</li>
+          <li>ブラケットの板、溶接、柱の側の強さと、めねじの強さ</li>
+        </ul>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>離れた力は、モーメントとしてボルトの引張になる</li>
+            <li>回転の中心から遠いボルトほど、強く引っ張られる</li>
+            <li>本数を増やすより、ボルトの間隔を広げるほうが効く</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。図は入力に合わせて切り替わる） -->
+        <h2>自分の条件で試す｜ボルトの強度計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。力のかかり方（引張・せん断・ブラケット）を選び、ボルトのサイズと強度区分、本数を入れると、1本あたりの力と、許容応力に対する割合がその場で変わります。同じ強度区分で足りる、いちばん小さいサイズも表示します。初期値は、本記事の計算例3（ブラケット、力の位置300mm）と同じです。
+        </p>
+
+        <div class="calc-tool" id="bt-tool">
+          <p class="calc-tool-title">ボルトの強度計算（概算）</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（力は各ボルトに等しく分かれる、ブラケットは変形せず下の端を回転の中心としてボルトの引張を距離に比例して配る、せん断はねじの部分がせん断面にかかるとして有効断面積で計算する、引張とせん断の組合せは（σ/σa）²＋（τ/τa）²で見る）による概算です。締め付けの力（軸力）、こじる力、くり返しの力による疲労、板の支圧、めねじの強さは計算に含みません。<strong>結果は設計の可否を保証するものではありません。</strong>実際の設計では、適用する基準と専門家の確認にもとづいて判断してください。
+          </p>
+
+          <div class="calc-fig">
+            <svg viewBox="0 0 640 300" role="img" aria-label="選んだ力のかかり方の図">
+              <defs>
+                <marker id="bt-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+                <marker id="bt-an" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#0d2b4e"/></marker>
+              </defs>
+              <!-- 引張：上の梁から吊る -->
+              <g data-g="f-ten">
+                <rect x="140" y="40" width="360" height="26" fill="#6f8aa6"/>
+                <rect x="200" y="66" width="12" height="70" fill="#0d2b4e"/><rect x="428" y="66" width="12" height="70" fill="#0d2b4e"/>
+                <rect x="186" y="34" width="40" height="8" fill="#0d2b4e"/><rect x="414" y="34" width="40" height="8" fill="#0d2b4e"/>
+                <rect x="170" y="136" width="300" height="20" fill="#6f8aa6"/>
+                <rect x="230" y="156" width="180" height="90" fill="#ebedf0" stroke="#0d2b4e" stroke-width="2"/>
+                <text x="320" y="208" font-size="17" fill="#0d2b4e" text-anchor="middle">吊る物</text>
+                <line x1="320" y1="250" x2="320" y2="292" stroke="#d4691a" stroke-width="6" marker-end="url(#bt-ao)"/>
+                <text x="340" y="282" font-size="16" fill="#d4691a">力 P</text>
+                <text x="520" y="100" font-size="15" fill="#0d2b4e">ボルトは</text><text x="520" y="122" font-size="15" fill="#0d2b4e">軸の向きに</text><text x="520" y="144" font-size="15" fill="#0d2b4e">引っ張られる</text>
+              </g>
+              <!-- せん断：板をずらす -->
+              <g data-g="f-sh">
+                <rect x="120" y="110" width="300" height="24" fill="#6f8aa6"/>
+                <rect x="220" y="134" width="300" height="24" fill="#8fa3b8"/>
+                <rect data-g="f-sh2" x="120" y="158" width="300" height="24" fill="#6f8aa6"/>
+                <rect x="264" y="92" width="12" height="110" fill="#0d2b4e"/><rect x="344" y="92" width="12" height="110" fill="#0d2b4e"/>
+                <line x1="120" y1="122" x2="70" y2="122" stroke="#d4691a" stroke-width="6" marker-end="url(#bt-ao)"/>
+                <line x1="520" y1="146" x2="580" y2="146" stroke="#d4691a" stroke-width="6" marker-end="url(#bt-ao)"/>
+                <text x="40" y="100" font-size="16" fill="#d4691a">力 P</text>
+                <text x="140" y="240" font-size="15" fill="#0d2b4e">板どうしがずれようとし、ボルトの胴を横に切ろうとする</text>
+                <text data-g="f-sh2" x="140" y="264" font-size="15" fill="#0d2b4e">2面せん断：1本のボルトが2か所で切られる向きに力を受ける</text>
+              </g>
+              <!-- ブラケット：横から見た図 -->
+              <g data-g="f-br">
+                <rect x="150" y="30" width="22" height="250" fill="#8a96a3"/>
+                <text x="132" y="296" font-size="14" fill="#5a6b7d">柱の面</text>
+                <rect x="172" y="70" width="16" height="180" fill="#6f8aa6"/>
+                <rect x="188" y="226" width="300" height="16" fill="#6f8aa6"/>
+                <rect x="140" y="92" width="58" height="9" fill="#0d2b4e"/><rect x="140" y="212" width="58" height="9" fill="#0d2b4e"/>
+                <rect data-g="f-r3" x="140" y="152" width="58" height="9" fill="#0d2b4e"/>
+                <circle cx="180" cy="250" r="7" fill="#d4691a"/>
+                <text x="196" y="270" font-size="14" fill="#d4691a">回転の中心（下の端）</text>
+                <line x1="470" y1="242" x2="470" y2="290" stroke="#d4691a" stroke-width="6" marker-end="url(#bt-ao)"/>
+                <text x="484" y="284" font-size="16" fill="#d4691a">力 P</text>
+                <line x1="188" y1="200" x2="470" y2="200" stroke="#0d2b4e" stroke-width="1.5" stroke-dasharray="5 4"/>
+                <text x="300" y="194" font-size="15" fill="#0d2b4e">e（面から力まで）</text>
+                <line x1="110" y1="96" x2="60" y2="96" stroke="#0d2b4e" stroke-width="5" marker-end="url(#bt-an)"/>
+                <text x="20" y="80" font-size="15" fill="#0d2b4e">上の段ほど</text><text x="20" y="128" font-size="15" fill="#0d2b4e">強く引っ張られる</text>
+              </g>
+            </svg>
+            <p class="calc-fig-note" data-o="fignote"></p>
+          </div>
+
+          <p class="calc-h">力のかかり方</p>
+          <div class="calc-btns" data-b="mode"><button type="button" data-v="ten">引張（吊る）</button><button type="button" data-v="sh">せん断（ずらす）</button><button type="button" data-v="br">ブラケット（離れた力）</button></div>
+
+          <div class="calc-in">
+            <label>力 P（1kgの重さは約9.81N）<span class="row"><input type="range" data-k="P" min="100" max="50000" step="100"><input type="number" data-k="P" min="100" max="50000" step="100"><span class="unit">N</span></span></label>
+          </div>
+          <div class="calc-in" data-g="m-n">
+            <label>ボルトの本数<span class="row"><input type="range" data-k="n" min="1" max="12" step="1"><input type="number" data-k="n" min="1" max="12" step="1"><span class="unit">本</span></span></label>
+          </div>
+          <div data-g="m-sh">
+            <p style="font-size:0.86rem;margin:10px 0 0 !important;">せん断面の数</p>
+            <div class="calc-btns" data-b="pl"><button type="button" data-v="1">1面せん断</button><button type="button" data-v="2">2面せん断</button></div>
+          </div>
+          <div data-g="m-br">
+            <p style="font-size:0.86rem;margin:10px 0 0 !important;">ボルトの並び（横2列）</p>
+            <div class="calc-btns" data-b="rows"><button type="button" data-v="2">2段（4本）</button><button type="button" data-v="3">3段（6本）</button></div>
+            <div class="calc-in">
+              <label>面から力までの距離 e<span class="row"><input type="range" data-k="e" min="0" max="1000" step="10"><input type="number" data-k="e" min="0" max="1000" step="10"><span class="unit">mm</span></span></label>
+              <label>回転の中心から、下の段までの距離 y1<span class="row"><input type="range" data-k="y1" min="10" max="200" step="5"><input type="number" data-k="y1" min="10" max="200" step="5"><span class="unit">mm</span></span></label>
+              <label>回転の中心から、上の段までの距離 y2<span class="row"><input type="range" data-k="y2" min="40" max="600" step="10"><input type="number" data-k="y2" min="40" max="600" step="10"><span class="unit">mm</span></span></label>
+            </div>
+          </div>
+
+          <p class="calc-h">ボルト</p>
+          <p style="font-size:0.86rem;margin:4px 0 0 !important;">サイズ（並目ねじ）</p>
+          <div class="calc-btns" data-b="size"><button type="button" data-v="M6">M6</button><button type="button" data-v="M8">M8</button><button type="button" data-v="M10">M10</button><button type="button" data-v="M12">M12</button><button type="button" data-v="M16">M16</button><button type="button" data-v="M20">M20</button><button type="button" data-v="M24">M24</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">強度区分（頭の刻印や製品の仕様で確かめる）</p>
+          <div class="calc-btns" data-b="cl"><button type="button" data-v="4.6">4.6</button><button type="button" data-v="8.8">8.8</button><button type="button" data-v="10.9">10.9</button><button type="button" data-v="12.9">12.9</button><button type="button" data-v="A2-70">ステンレス A2-70</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">許容応力の決め方</p>
+          <div class="calc-btns" data-b="basis"><button type="button" data-v="u3">引張強さ÷3（静かな力）</button><button type="button" data-v="u5">引張強さ÷5（くり返しの力）</button><button type="button" data-v="y15">降伏点（0.2％耐力）÷1.5（降伏を基準にする例）</button></div>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out">
+            <tr><th>許容引張応力 σa ／ 許容せん断応力 τa ＝ σa÷√3</th><td><b data-o="sa"></b> ／ <b data-o="ta"></b> MPa</td></tr>
+            <tr data-g="m-br"><th>ブラケットを回そうとする力 M ＝ P × e</th><td><b data-o="M"></b> N·mm</td></tr>
+            <tr><th>1本の引張 T（ブラケットは上の段）</th><td><b data-o="T"></b> N</td></tr>
+            <tr><th>1本のせん断 Q</th><td><b data-o="Q"></b> N</td></tr>
+            <tr><th>引張応力 σ ＝ T ÷ As ／ σ÷σa</th><td><b data-o="s"></b> MPa ／ <b data-o="rs"></b></td></tr>
+            <tr><th>せん断応力 τ ＝ Q ÷ As ／ τ÷τa</th><td><b data-o="t"></b> MPa ／ <b data-o="rt"></b></td></tr>
+            <tr data-j="comb"><th>組合せ（σ/σa）²＋（τ/τa）²（1.0以下が目安）</th><td><b data-o="comb"></b><span class="judge" data-o="jcomb"></span></td></tr>
+            <tr><th>同じ強度区分で足りる、いちばん小さいサイズ</th><td><b data-o="min"></b></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="bt-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('bt-tool');
+          if (!root) return;
+          // 有効断面積 As（並目ねじ・mm2）。JIS B 1082 / ISO 898-1 の値
+          var AS = { M6: 20.1, M8: 36.6, M10: 58.0, M12: 84.3, M16: 157, M20: 245, M24: 353 };
+          var SIZES = ['M6', 'M8', 'M10', 'M12', 'M16', 'M20', 'M24'];
+          // 強度区分の呼びの値 [引張強さ, 降伏点（0.2％耐力）] MPa
+          var CL = { '4.6': [400, 240], '8.8': [800, 640], '10.9': [1000, 900], '12.9': [1200, 1080], 'A2-70': [700, 450] };
+          var DEF = { mode: 'br', P: 5000, n: 4, pl: '1', rows: '2', e: 300, y1: 20, y2: 120, size: 'M8', cl: '4.6', basis: 'u3' };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function show(k, on) { root.querySelectorAll('[data-g="' + k + '"]').forEach(function (e) { e.style.display = on ? '' : 'none'; }); }
+          function sa() { var c = CL[S.cl]; return S.basis === 'u3' ? c[0] / 3 : S.basis === 'u5' ? c[0] / 5 : c[1] / 1.5; }
+          function forces() {
+            if (S.mode === 'ten') return { T: S.P / S.n, Q: 0, M: 0 };
+            if (S.mode === 'sh') return { T: 0, Q: S.P / S.n / Number(S.pl), M: 0 };
+            var r = Number(S.rows), y1 = S.y1, y2 = Math.max(S.y2, y1 + 10), ys = r === 2 ? [y1, y2] : [y1, (y1 + y2) / 2, y2];
+            var sy2 = 0; ys.forEach(function (y) { sy2 += 2 * y * y; });
+            var M = S.P * S.e;
+            return { T: M * y2 / sy2, Q: S.P / (2 * r), M: M, ys: ys };
+          }
+          function ratio(size, f) {
+            var a = sa(), ta = a / Math.sqrt(3), As = AS[size];
+            var rs = f.T / As / a, rt = f.Q / As / ta;
+            return { rs: rs, rt: rt, comb: rs * rs + rt * rt };
+          }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            [['mode', S.mode], ['pl', S.pl], ['rows', S.rows], ['size', S.size], ['cl', S.cl], ['basis', S.basis]].forEach(function (p) {
+              root.querySelectorAll('[data-b="' + p[0] + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === p[1]); });
+            });
+            show('f-ten', S.mode === 'ten'); show('f-sh', S.mode === 'sh'); show('f-br', S.mode === 'br');
+            show('f-sh2', S.mode === 'sh' && S.pl === '2'); show('f-r3', S.mode === 'br' && S.rows === '3');
+            show('m-n', S.mode !== 'br'); show('m-sh', S.mode === 'sh'); show('m-br', S.mode === 'br');
+          }
+          function calc() {
+            var f = forces(), a = sa(), ta = a / Math.sqrt(3), As = AS[S.size], r = ratio(S.size, f);
+            var over = r.comb > 1;
+            out('sa', fmt(a, 1)); out('ta', fmt(ta, 1)); out('M', fmt(f.M));
+            out('T', fmt(f.T)); out('Q', fmt(f.Q));
+            out('s', fmt(f.T / As, 1)); out('rs', fmt(r.rs, 2)); out('t', fmt(f.Q / As, 1)); out('rt', fmt(r.rt, 2));
+            out('comb', fmt(r.comb, 2));
+            out('jcomb', over ? '1.0 を超過' : '1.0 以下');
+            root.querySelector('[data-j="comb"]').classList.toggle('over', over);
+            var min = '';
+            for (var i = 0; i < SIZES.length; i++) { if (ratio(SIZES[i], f).comb <= 1) { min = SIZES[i]; break; } }
+            out('min', min ? min + '（強度区分 ' + S.cl + '）' : 'M24 でも不足。本数・配置・強度区分を見直す');
+            out('fignote', S.mode === 'ten' ? '力は、本数で等しく分かれるとして計算します。吊る物の重心がボルトの中心からずれると、近い側のボルトに力が寄ります。'
+              : S.mode === 'sh' ? 'ずらす力は、本数（2面せん断ではその2倍の面）で等しく分かれるとして計算します。'
+              : '離れた力は、ブラケットを下の端まわりに回そうとします。ボルトの引張は、回転の中心からの距離に比例して大きくなります。');
+            var txt = 'As（' + S.size + '）＝' + fmt(As, 1) + ' mm²。';
+            if (S.mode === 'br') txt += '段の位置 ' + f.ys.map(function (y) { return fmt(y); }).join('・') + ' mm（2列）、T ＝ M × y2 ÷ Σ（本数×y²）。せん断は本数で等分。';
+            if (S.mode === 'sh' && S.pl === '2') txt += '2面せん断のため、1本のせん断面が2つあるとして力を半分にしています。';
+            out('eq', txt);
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'bolt' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          ['mode', 'pl', 'rows', 'size', 'cl', 'basis'].forEach(function (k) {
+            root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.addEventListener('click', function () { set(k, b.dataset.v); }); });
+          });
+          document.getElementById('bt-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆依頼の案内（計算ツールのすぐ下。キットの article_nav.py で入れ直す） -->
+        <div class="tool-cta tool-cta--box">
+          <p class="tc-lead">初めての条件や、調べる時間がないときは</p>
+          <p class="tc-text">図面や寸法などの条件を送っていただければ、ボルトの強度計算から計算書の作成までお引き受けします。客先にそのまま出せる資料にまとめます（オンライン・全国対応）。図面がなくても、寸法と重さが分かれば概算をお返しします。</p>
+          <p class="tc-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%9C%E3%83%AB%E3%83%88%E3%81%AE%E5%BC%B7%E5%BA%A6%E8%A8%88%E7%AE%97">いくらで何日？ 見積もりだけ聞く（無料）</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'tool_cta'});">計算書の見本</a></p>
+        </div>
+
+        <!-- ◆ツールの後 -->
+        <!-- ◆5 -->
+        <h2>ボルトの強度計算の後に、板の側も確かめる</h2>
+        <p>
+          ボルトが足りても、留めている板の側が先に壊れることがあります。せん断を受けるボルトでは、穴のまわりの板がボルトに押される力（支圧）と、穴から板の端までの距離を確かめます。
+        </p>
+        <p class="calc">
+          <b>支圧応力 σb ＝ Q ÷（d × t）</b><br>
+          d：ボルトの呼び径、t：板の厚さ
+        </p>
+        <p>
+          計算例2の1本1,250NをM8で受ける場合、板の厚さ3.2mmでは支圧応力は48.8MPa、6mmなら26.0MPaです。この式は、力がボルトの径×板の厚さの面に均等にかかるとした平均の値です。許容の値や耐力の求め方は、適用する規準、板の材料、穴の条件で変わります。また、穴の前の部分が裂ける端抜けや、穴で細くなった断面の破断も、あわせて確かめます。薄い板を留めるときほど、ボルトより板の側が厳しくなります。
+        </p>
+        <p>
+          穴から板の端までの距離（縁端距離）が短いと、穴の前の部分が裂けるように壊れます。必要な距離は、規準ごとに決まっています。たとえば鉄骨造の継手の告示（平成12年建設省告示第1464号）では、ボルトの径と板の端の仕上げ方で最小の寸法が変わり、径16mmのボルトでは、せん断縁や手動ガス切断の縁で22mm、圧延のままの縁や機械で仕上げた縁で18mmです。一律に「径の何倍」とは決められないため、適用する規準の表で確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>せん断を受けるボルトでは、板の支圧も確かめる</li>
+            <li>薄い板では、ボルトより板の側が厳しくなりやすい</li>
+            <li>端抜けと縁端距離は、適用する規準の表で確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>ボルトの強度計算でよくある失敗</h2>
+
+        <h3>呼び径の円の面積で計算する</h3>
+        <p>
+          M8を直径8mmの円として計算すると、面積は50.3mm²で、有効断面積36.6mm²より4割近く大きくなります。ねじの部分で受ける引張は、有効断面積で計算します。
+        </p>
+
+        <h3>真下の力だけを見て、離れた位置を忘れる</h3>
+        <p>
+          計算例3のとおり、ブラケットやアームでは、せん断より引張のほうが大きくなることがあります。力の向きだけでなく、力のかかる位置を図に書いてから計算します。
+        </p>
+
+        <h3>強度の計算は足りているのに、ゆるんで折れる</h3>
+        <p>
+          設備の保全の現場で多いのは、振動でボルトがゆるみ、くり返しの力で折れる壊れ方です。静かな力の計算で足りていても、<strong>締め付けの管理</strong>が欠かせません。決められたトルクで締める、ゆるみ止めを使う、ボルトとナットにまたがる線（合いマーク）を引いて点検で見る、といった手入れを、設計の段階から決めておきます。
+        </p>
+
+        <h3>締め付けトルクを、強さと混同する</h3>
+        <p>
+          締め付けトルクは、ボルトに軸力を入れるための値で、強さの計算とは別です。トルクと軸力の関係は、T ＝ K × d × 軸力（K：トルク係数）で表されます（JIS B 1083）。K は0.2が代表的な値としてよく使われますが、ねじ面や座面の摩擦、潤滑、表面処理で大きく変わります。締め付けの値は、ボルトや部品のメーカーが示す値に従い、必要なら締め付けの試験で確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>引張は呼び径ではなく、有効断面積で計算する</li>
+            <li>力のかかる位置を図に書いてから計算する</li>
+            <li>ゆるみと疲労は、締め付けの管理と点検で防ぐ</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>ボルトの強度計算でよくある質問</h2>
+
+        <h3>細いボルトを多く使うのと、太いボルトを少なく使うのは、どちらがよいですか</h3>
+        <p>
+          たとえば、有効断面積の合計は、M8を4本使うと146.4mm²、M12を2本使うと168.6mm²です。力が等しく分かれるなら、太い2本のほうが受けられる力は大きくなります。ただし、ブラケットのようにモーメントを受ける場合は、並べ方で結果が変わります。本数とサイズだけでなく、間隔も合わせて比べます。
+        </p>
+
+        <h3>頭に数字のないボルトは、何として計算しますか</h3>
+        <p>
+          刻印も製品の仕様も確かめられないボルトは、強度区分を決められません。仮に4.6として計算しても、そのボルトの強さが保証されるわけではありません。力を受ける場所では、仕様書や材料の証明書、購入の記録で強度区分を確かめます。確かめられない場合は、刻印で強度区分が分かるボルトに交換します。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          ボルトの強度計算は、力を引張・せん断・モーメントに分け、有効断面積と強度区分から求めた許容応力と比べる計算です。M6〜M24の許容荷重表は、力が素直にかかる場合の目安になります。計算例では、同じ5,000Nでも、ブラケットで300mm離れると、M8・強度区分4.6の組み合わせの値は0.44から1.75になりました。
+        </p>
+        <p>
+          <strong class="mk">力のかかる位置を図に書き、いちばん引っ張られるボルトを見つけること</strong>が、ボルトの強度計算でいちばん大切な一歩です。まずは計算ツールで、ご自身のブラケットの条件を入れて試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・JIS B 1051（炭素鋼及び合金鋼製締結用部品の機械的性質）／ISO 898-1（強度区分と機械的性質、有効断面積）<br>
+          ・JIS B 1082（ねじの有効断面積及び座面の負荷面積）<br>
+          ・ISO 3506-1（耐食ステンレス鋼製締結用部品の機械的性質）<br>
+          ・JIS B 1083（ねじの締付け通則：締め付けトルクと軸力の関係）<br>
+          ・平成12年建設省告示第1464号（鉄骨造の継手又は仕口の構造方法：縁端距離）<br>
+          ・アンウィンの安全率（機械設計で経験的な目安として紹介される安全率の表）
+        </p>
+
+        <div class="article-cta"><!-- ◆記事下の依頼の案内（キットの article_nav.py で入れ直す） -->
+          今回の仕様が初めての条件で、一から調べる時間がないときは、ボルトの強度計算から計算書の作成までお引き受けします。図面や寸法などの条件を送っていただければ、計算の前提の整理から資料づくりまで行います（オンライン・全国対応）。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%9C%E3%83%AB%E3%83%88%E3%81%AE%E5%BC%B7%E5%BA%A6%E8%A8%88%E7%AE%97">ボルトの強度計算を依頼する</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'article_cta'});">計算書の見本</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.14</p>
+                <h3><a href="weld-strength-calculation.html">溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで</a></h3>
+                <p class="column-excerpt">のど厚と有効長さ、ずらす力と曲げを受ける溶接の計算。ブラケットの溶接も。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.21</p>
+                <h3><a href="anchor-bolt-calculation.html">アンカーボルトの引き抜き計算の方法と例｜ベースプレートの厚さの決め方まで</a></h3>
+                <p class="column-excerpt">柱の根元の曲げからのボルトの力、アンカーの耐力、ベースプレートの厚さまで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.12</p>
+                <h3><a href="robot-stand-strength-calculation.html">ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認</a></h3>
+                <p class="column-excerpt">非常停止のときに架台へ入る力と、柱と梁の応力、たわみ、アンカーの確認。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li><li class="is-cur"><span>10 ボルト</span></li></ol>
+            <p class="cs-pager"><a href="stand-seismic-calculation.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">計算・選定のご依頼</p>
+          <p class="cs-ask-text">初めての条件や、調べる時間がないときは、ボルトの強度計算から計算書の作成までお引き受けします（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%9C%E3%83%AB%E3%83%88%E3%81%AE%E5%BC%B7%E5%BA%A6%E8%A8%88%E7%AE%97">計算を依頼する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#design">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="3d-scan-service.html"><img src="../../img/thumb-column-3d-scan-service.jpg" alt="" width="80" height="45"><span>3Dスキャンサービスの選び方</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261118" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の設計のあるある</p>
+          <div class="aruaru" data-cat="design"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+<!-- ◆アイキャッチの傾き（キットの article_nav.py で入れ直す） -->
+<script src="../eye-tilt.js" defer></script>
+</body>
+</html>

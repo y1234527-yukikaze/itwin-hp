@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  アイツイン｜コラム記事：ロボット架台の強度計算の方法
+  アイツイン｜コラム記事：ロボット架台の設計と強度計算
   （コラム制作キットの template-rich.html から作成・2026-10-12）
   計算例の数値は C:/Users/PC/AppData/Local/Temp/kadai/calc.py で検算（キットに robot_stand_calc.py として保存）
   ------------------------------------------------------------
@@ -34,22 +34,22 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例｜アイツイン コラム</title>
-  <meta name="description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <title>ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認｜アイツイン コラム</title>
+  <meta name="description" content="ロボット架台の設計と強度計算の方法を、自社で架台を設計・確認する方向けに解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみと位置決め精度、アンカーの引き抜きを、仮想モデルの例題で順に確かめます。強度計算書に残す項目と、条件を入れて試せる計算ツールつきです。">
   <link rel="canonical" href="https://i-twin.co.jp/column/articles/robot-stand-strength-calculation">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
-  <meta property="og:title" content="ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例">
-  <meta property="og:description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <meta property="og:title" content="ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認">
+  <meta property="og:description" content="ロボット架台の設計と強度計算の方法を、自社で架台を設計・確認する方向けに解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみと位置決め精度、アンカーの引き抜きを、仮想モデルの例題で順に確かめます。強度計算書に残す項目と、条件を入れて試せる計算ツールつきです。">
   <meta property="og:url" content="https://i-twin.co.jp/column/articles/robot-stand-strength-calculation">
   <meta property="og:image" content="https://i-twin.co.jp/img/column-robot-stand.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta property="article:published_time" content="2026-10-12">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例">
-  <meta name="twitter:description" content="ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。">
+  <meta name="twitter:title" content="ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認">
+  <meta name="twitter:description" content="ロボット架台の設計と強度計算の方法を、自社で架台を設計・確認する方向けに解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみと位置決め精度、アンカーの引き抜きを、仮想モデルの例題で順に確かめます。強度計算書に残す項目と、条件を入れて試せる計算ツールつきです。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/column-robot-stand.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,11 +65,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例",
-    "description": "ロボット架台の強度計算の方法を、計算例つきで解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみ、アンカーの確認、架台の強度計算書に残す項目までを、仮想モデルの数値を使って整理しました。",
+    "headline": "ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認",
+    "description": "ロボット架台の設計と強度計算の方法を、自社で架台を設計・確認する方向けに解説します。非常停止時の慣性力の求め方、柱と梁の応力、たわみと位置決め精度、アンカーの引き抜きを、仮想モデルの例題で順に確かめます。強度計算書に残す項目と、条件を入れて試せる計算ツールつきです。",
     "image": "https://i-twin.co.jp/img/column-robot-stand.jpg",
     "datePublished": "2026-10-12",
-    "dateModified": "2026-10-13",
+    "dateModified": "2026-11-18",
     "inLanguage": "ja",
     "author": {
       "@type": "Person",
@@ -102,7 +102,7 @@
       { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
       { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
       { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
-      { "@type": "ListItem", "position": 4, "name": "ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例", "item": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation" }
+      { "@type": "ListItem", "position": 4, "name": "ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認", "item": "https://i-twin.co.jp/column/articles/robot-stand-strength-calculation" }
     ]
   }
   </script>
@@ -188,9 +188,9 @@
         <a href="../../index.html">ホーム</a> ／
         <a href="../index.html">コラム</a> ／
         <a href="../design/index.html">自動化設備の設計ノート</a> ／
-        <span>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</span>
+        <span>ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認</span>
       </div>
-      <h1>ロボット架台の強度計算の方法｜非常停止時の慣性力の扱い方と計算例</h1>
+      <h1>ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認</h1>
       <p class="catch">公開日：2026年10月12日</p>
     </div>
   </section>
@@ -1013,7 +1013,7 @@
         <div class="cs-box">
           <p class="cs-h">この特集の記事</p>
           <div class="cs-card">
-            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li class="is-cur"><span>02 ロボット架台</span></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li></ol>
+            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li class="is-cur"><span>02 ロボット架台</span></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li><li><a href="bolt-strength-calculation.html">10 ボルト</a></li></ol>
             <p class="cs-pager"><a href="stand-strength-calculation.html">‹ 前の記事</a><a class="cs-next" href="weld-strength-calculation.html">次の記事 ›</a></p>
           </div>
           <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
@@ -1026,12 +1026,12 @@
         </div>
         <div class="cs-box">
           <p class="cs-h">新着のコラム</p>
-          <ul class="cs-rank cs-pick"><li><a href="predictive-maintenance-iot.html"><img src="../../img/thumb-column-predictive-maintenance-iot.jpg" alt="" width="80" height="45"><span>予知保全をIoTで始める方法</span></a></li></ul>
+          <ul class="cs-rank cs-pick"><li><a href="3d-scan-service.html"><img src="../../img/thumb-column-3d-scan-service.jpg" alt="" width="80" height="45"><span>3Dスキャンサービスの選び方</span></a></li></ul>
         </div>
         <div class="cs-box">
           <p class="cs-h">今日のおすすめコラム</p>
           <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
-          <script src="../col-list.js?v=20261117" defer></script>
+          <script src="../col-list.js?v=20261118" defer></script>
         </div>
         <div class="cs-box">
           <p class="cs-h">今日の設計のあるある</p>

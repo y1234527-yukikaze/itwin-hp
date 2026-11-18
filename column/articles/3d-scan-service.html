@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：3Dスキャンサービスの選び方（通常のコラム）
+  （保全の記事を土台に、キットの build_scan.py で組み立て・2026-11-18）
+  本文：scan_body.html／選び方ツール：tool_scan.html／図：figs_scan.py（img/column-3d-scan-uses / -data / -twin.jpg）
+  アイキャッチ：img/column-3d-scan-service.jpg（ナノバナナで生成して差し替え）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い｜アイツイン コラム</title>
+  <meta name="description" content="3Dスキャンサービスの選び方を、製造業の部品・設備の例で解説します。スキャンの方法と精度の目安、点群・メッシュ・CAD・図面の違い、料金が決まる6つの要素、スマートフォンでできることまで。目的と大きさから方法を選べるツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/3d-scan-service">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い">
+  <meta property="og:description" content="3Dスキャンサービスの選び方を、製造業の部品・設備の例で解説します。スキャンの方法と精度の目安、点群・メッシュ・CAD・図面の違い、料金が決まる6つの要素、スマートフォンでできることまで。目的と大きさから方法を選べるツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/3d-scan-service">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-3d-scan-service.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-18">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い">
+  <meta name="twitter:description" content="3Dスキャンサービスの選び方を、製造業の部品・設備の例で解説します。スキャンの方法と精度の目安、点群・メッシュ・CAD・図面の違い、料金が決まる6つの要素、スマートフォンでできることまで。目的と大きさから方法を選べるツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-3d-scan-service.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い",
+    "description": "3Dスキャンサービスの選び方を、製造業の部品・設備の例で解説します。スキャンの方法と精度の目安、点群・メッシュ・CAD・図面の違い、料金が決まる6つの要素、スマートフォンでできることまで。目的と大きさから方法を選べるツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-3d-scan-service.jpg",
+    "datePublished": "2026-11-18",
+    "dateModified": "2026-11-18",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/3d-scan-service"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い", "item": "https://i-twin.co.jp/column/articles/3d-scan-service" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <span>3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い</span>
+      </div>
+      <h1>3Dスキャンサービスの選び方｜料金が決まる要素と、点群・CAD・図面の違い</h1>
+      <p class="catch">公開日：2026年11月18日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="shoryokuka-chusho-seizogyo.html">‹ 前の記事：中小製造業の省力化事例</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">デジタルツイン</span>公開日：2026.11.18</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-3d-scan-service.jpg" alt="3Dスキャンサービスの選び方。工場の設備を3Dスキャンして、点群から図面まで作るイメージ" width="1376" height="768">
+          <figcaption>3Dスキャンは、現物の形をそのままデータにする。何のデータが欲しいかで、選び方が変わる。</figcaption>
+        </figure>
+
+        <p>
+          「この設備、図面が残っていない」「新しい装置を入れたいが、今のラインに収まるか分からない」。製造業では、現物の形を正確に知りたい場面がよくあります。巻尺とノギスで測るには大きすぎる、形が複雑すぎる。そんなときに使われるのが、<strong class="mk">3Dスキャンサービス</strong>です。
+        </p>
+        <p>
+          ただ、頼んでみたら「欲しかったデータと違った」ということも起こります。本記事では、3Dスキャンサービスの選び方を、製造業の部品・設備の例で解説します。スキャンの方法と精度の目安、届くデータ（点群・メッシュ・CAD・図面）の違い、料金が決まる要素、スマートフォンでできることまでを順に整理します。目的と大きさから、向いている方法を選べるツールも用意しました。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">本記事の前提</p>
+          <ul>
+            <li>精度の数値は、方法ごとのおおよその目安です。実際の精度は、機材、対象の大きさや表面、測る人と手順で変わります</li>
+            <li>機材や会社の名前は挙げず、方法の違いで説明します</li>
+            <li>料金の金額は、会社や内容で大きく変わるため、決まり方を説明します。当社の目安は料金ページにあります</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>3Dスキャンサービスで、製造業ができる3つのこと</li>
+            <li>スキャンの方法の違いと、精度の目安</li>
+            <li>点群・メッシュ・CAD・図面の違いと、「スキャン＝図面」ではない理由</li>
+            <li>3Dスキャンサービスの料金が決まる6つの要素</li>
+            <li>スマートフォンの3Dスキャンでできること、依頼の前に準備すること</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>3Dスキャンサービスとは｜製造業でできる3つのこと</h2>
+        <p>
+          3Dスキャンサービスは、現物の形を、光やレーザーで読み取って3Dのデータにするサービスです。会社によって、スキャンだけを受けるところと、データの加工や図面の作成まで受けるところがあります。製造業で頼まれることが多いのは、次の3つです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-3d-scan-uses.jpg" alt="製造業で3Dスキャンを使う3つの場面。図面のない設備や部品の図面化、レイアウトの検討、干渉の確認" width="1376" height="768" loading="lazy">
+          <figcaption>同じ3Dスキャンでも、目的によって必要な精度とデータの形が変わる。</figcaption>
+        </figure>
+
+        <h3>図面のない設備・部品を、図面にする</h3>
+        <p>
+          古い設備の部品が壊れたのに図面がない、メーカーがもう作っていない、といった場面です。現物をスキャンして形を写し取り、3Dモデルや図面に起こします。現物から設計データを作るこの作業は、リバースエンジニアリングとも呼ばれます。部品の作り直しや、改造の設計に使えます。
+        </p>
+
+        <h3>新しい設備が入るか、レイアウトを検討する</h3>
+        <p>
+          工場の建屋や今のラインをスキャンすると、柱、配管、天井の高さ、通路まで含めた「今の姿」が3Dで残ります。新しい設備の3Dモデルを置いてみれば、搬入の通り道や、作業する人のスペースが足りるかを、工事の前に確かめられます。古い工場では、図面と現物が違っていることがあり、スキャンの効き目が大きくなります。
+        </p>
+
+        <h3>周りとぶつからないか、干渉を確かめる</h3>
+        <p>
+          ロボットのアームが周りの柵や配管に当たらないか、追加する部品が既存の部品とぶつからないかを、データ上で確かめます。<strong>図面にない後付けの配管やケーブルラックも、スキャンなら写る</strong>ため、図面だけで確かめるより見落としが減ります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>3Dスキャンサービスは、現物の形を3Dのデータにするサービス</li>
+            <li>製造業では、図面化・レイアウトの検討・干渉の確認の3つが多い</li>
+            <li>図面にない後付けの物も写るのが、スキャンの強み</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>3Dスキャンの方法と精度の目安</h2>
+        <p>
+          3Dスキャンには、いくつかの方法があります。大きく分けると、小さな物を細かく測る方法と、大きな空間を広く測る方法です。精度と測れる大きさは、方法によって大きく違います。
+        </p>
+
+        <h3>方法ごとの比較一覧</h3>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>方法</th><th>向いている対象</th><th>精度の参考（装置と条件で変わる）</th><th>主な用途</th></tr>
+            <tr><th>光のパターンを当てる（据え置き・手持ち）</th><td>小さな部品〜中くらいの部品</td><td>高精度な装置では0.1mm以下の例もある</td><td>部品の図面化、作った物との比較</td></tr>
+            <tr><th>レーザーの線を当てる（手持ち）</th><td>部品〜大きめの装置（分けて測り、つなぎ合わせる）</td><td>装置・距離・表面で変わる。高精度な装置では0.1mm以下の例もある</td><td>部品や装置の図面化</td></tr>
+            <tr><th>レーザーで周りを測る（三脚に据える）</th><td>設備まわり・部屋・建屋</td><td>数mm程度の測定例がある。距離と位置合わせで変わる</td><td>レイアウトの検討、干渉の確認</td></tr>
+            <tr><th>写真から作る</th><td>部品〜建物</td><td>撮り方、基準の寸法の置き方、対象の大きさしだい</td><td>見た目の記録、広い範囲の形</td></tr>
+            <tr><th>スマートフォン（一部の機種の距離センサー）</th><td>部屋・大きな物のおおまかな形</td><td>cm程度の誤差の例が報告されている</td><td>おおまかな寸法の確認、記録</td></tr>
+          </table>
+        </div>
+        <p>
+          精度は、方法だけでは決まりません。同じ方法でも、装置、測る距離、表面の状態、校正、何回かに分けて測ったデータの位置合わせで変わります。大きな物を分けて測ると、つなぎ合わせのずれが重なることがあり、基準点の置き方や位置合わせの方法で、そのずれを抑えます。光学式の三次元測定には、性能を確かめる手順を定めた規格（ISO 10360-13 など）もあります。依頼するときは、<strong>どの寸法を、どのくらいの精度で知りたいか</strong>を先に伝えると、方法の選び違いを防げます。
+        </p>
+
+        <h3>「精度」と「細かさ」は別のもの</h3>
+        <p>
+          見積もりや機材の説明では、「精度」と、点の間隔などの「細かさ（解像度）」が並んで書かれていることがあります。精度は、測った位置が本当の位置からどれだけずれるか、細かさは、どれだけ小さな形まで写るかです。点の間隔が0.05mmでも、全体の寸法が0.05mmの精度で測れるとは限りません。長い物ほど、つなぎ合わせのずれが積み重なるためです。<strong>全体は粗く、精度の要る所だけ細かく測る</strong>と、費用を抑えながら必要な寸法を押さえられます。
+        </p>
+
+        <h3>表面の状態で、測りにくい物がある</h3>
+        <p>
+          光やレーザーで読み取る方法は、表面の状態に左右されます。鏡のように光る金属、真っ黒な物、透明な物は、光がうまく返らず、データが欠けやすくなります。このような物は、表面に薄い粉を吹き付けてから測ることがあります。粉を付けてよいか、あとで落とせるかも、依頼の前に確かめておきます。精密に測るときは、粉の膜の厚さが寸法に影響することも考えます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>小さな物を細かく測る方法と、大きな空間を広く測る方法がある</li>
+            <li>精度は方法だけでなく、装置・距離・位置合わせで変わる</li>
+            <li>光る物・黒い物・透明な物は、前の処理が必要なことがある</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>届くデータの違い｜点群・メッシュ・CAD・図面</h2>
+        <p>
+          3Dスキャンサービスで一番つまずきやすいのが、<strong class="mk">届くデータの形</strong>です。「スキャンしてもらえば、すぐに図面になる」と思って頼むと、受け取ったデータが使えない、ということが起こります。スキャンのデータは、多くの場合、次の4つの段階を経て、図面になります。点群やメッシュから、断面の図や寸法の検査の図を直接作ることもあります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-3d-scan-data.jpg" alt="3Dスキャンのデータの4つの段階。点群、メッシュ、CAD、図面の順に、人の手が増え、使い道が変わる" width="1376" height="768" loading="lazy">
+          <figcaption>右に進むほど、人の手と判断が増える。どこまで必要かで、費用も日数も変わる。</figcaption>
+        </figure>
+
+        <h3>点群：点の集まり</h3>
+        <p>
+          スキャンで最初にできるのは、表面の位置を表す、たくさんの点の集まりです。色の付いた点で、空間の様子がよく分かります。工場のレイアウトや干渉の確認には、点群のままで使えることが多くあります。ただし、点と点の間は空いているため、面の形として扱うには、次の段階が必要です。
+        </p>
+
+        <h3>メッシュ：三角形の面でつないだ形</h3>
+        <p>
+          点を小さな三角形でつないで、面にしたデータです。3Dプリンターでの出力や、作った物と元の形の比べ合わせに使えます。頂点を動かすなどの編集はできますが、「この穴の径を10mmから12mmに変える」といった、寸法を指定した変更には向きません。
+        </p>
+
+        <h3>CAD：寸法を変えられる3Dモデル</h3>
+        <p>
+          メッシュを下敷きにして、平らな面、円筒、穴などを、人がCADで作り直したデータです。ファイルの変換ではなく、作り直しの作業です。寸法を変えられ、設計にそのまま使えます。<strong>形を読み取り、どこを平らな面や円とみなすかを人が判断して作る</strong>ため、手間と費用は、ここで大きく増えます。
+        </p>
+
+        <h3>図面：寸法と許される差を書いたもの</h3>
+        <p>
+          図面にするには、形のほかに、寸法の許される差（公差）や、はめあい、材料、表面の仕上げを決める必要があります。スキャンで分かるのは「今の形」だけです。すり減った部品をそのまま測れば、すり減った寸法が出ます。<strong class="mk">設計の意図は、スキャンからは分からない</strong>ため、どの寸法を元の値に戻すかは、使う人と一緒に決めます。
+        </p>
+
+        <h3>ファイル形式の例</h3>
+        <p>
+          同じ段階のデータでも、ファイルの形式はいくつもあります。点群ならE57、PLY、LAS、メッシュならSTL、OBJ、PLY、CADならSTEPやIGES、図面ならPDFやDXFが、よく使われる形式の例です。PLYは点群にもメッシュにも使われ、DXFは2Dの図面のほかに3Dのデータも扱えるため、拡張子だけでなく中身も確かめます。<strong>自社のCADや、データを渡す先のソフトで開ける形式</strong>を、依頼の前に伝えておきます。点群やメッシュは、データの量が大きくなりやすいため、受け取り方（容量や渡し方）も決めておくと安心です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>データは、点群 → メッシュ → CAD → 図面の順に作られる</li>
+            <li>レイアウトや干渉の確認は、点群のままで足りることが多い</li>
+            <li>図面には、スキャンでは分からない設計の意図を、人が足す必要がある</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>3Dスキャンサービスの料金が決まる6つの要素</h2>
+        <p>
+          3Dスキャンサービスの料金は、会社や内容で大きく変わります。金額の幅が大きいのは、次の6つの要素で手間が変わるためです。
+        </p>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>要素</th><th>料金が上がりやすい例</th></tr>
+            <tr><th>1. 大きさ</th><td>設備や部屋のように大きい。何回にも分けて測り、つなぎ合わせる</td></tr>
+            <tr><th>2. 必要な精度</th><td>0.1mm以下を求める。細かく測れる機材と、ていねいな手順が要る</td></tr>
+            <tr><th>3. 表面と形</th><td>光る・黒い・透明、奥まった穴や内側がある。前の処理や測り直しが増える</td></tr>
+            <tr><th>4. 数</th><td>同じ物がたくさんある（1個あたりは下がることもある）</td></tr>
+            <tr><th>5. 届けるデータの段階</th><td>点群やメッシュでなく、CADや図面まで求める</td></tr>
+            <tr><th>6. 現場の条件</th><td>出張して測る。設備を止められる時間が短い、夜や休日しか入れない</td></tr>
+          </table>
+        </div>
+        <p>
+          この中で、金額をいちばん大きく動かすのは「5. 届けるデータの段階」です。点群の納品で済むのか、CADや図面まで要るのかで、手間が何倍も変わることがあります。見積もりを比べるときは、<strong>どの段階のデータまで含んだ金額か</strong>をそろえて比べます。当社の目安は、<a href="../../price.html#scan">料金ページの3Dスキャンの項目</a>にまとめています。
+        </p>
+
+        <h3>機材を買うか、サービスに頼むか</h3>
+        <p>
+          スキャナーを自社で買う方法もあります。ただし、機材のほかに、データを加工するソフト、使い方を覚える時間、測ったデータをCADにする腕が必要です。とくにCADに起こす作業は、慣れた人でも手間がかかります。<strong>年に数回なら、サービスに頼むほうがむだが少ない</strong>ことが多く、毎月のように使うなら、購入や借りる方法を比べる価値があります。まずはサービスで一度試し、自社でどこまでやるかを決める進め方もあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>料金は、大きさ・精度・表面と形・数・データの段階・現場の条件で決まる</li>
+            <li>金額を一番動かすのは、届けるデータの段階</li>
+            <li>見積もりは、どの段階まで含むかをそろえて比べる</li>
+          </ul>
+        </div>
+
+        <!-- ◆選び方ツール（目的・大きさ・精度・表面から、向いている方法と届けるデータを案内する。金額は出さない） -->
+        <h2>自分の条件で試す｜3Dスキャンの選び方ツール</h2>
+        <p>
+          目的、対象の大きさ、必要な精度、表面の状態を選ぶと、向いているスキャンの方法、届けてもらうデータの段階、費用が上がりやすい点、スマートフォンで足りるかの目安が出ます。依頼の前の整理に使ってください。
+        </p>
+
+        <div class="calc-tool" id="sc-tool">
+          <p class="calc-tool-title">3Dスキャンの選び方（目安）</p>
+          <p class="calc-tool-note">
+            本記事の方法の比較と、データの4つの段階にもとづく、一般的な目安です。実際に向いている方法は、機材、対象の形、現場の条件で変わります。<strong>結果は、方法や精度を保証するものではありません。</strong>依頼するときは、目的と必要な精度を伝えて、依頼先と決めてください。
+          </p>
+
+          <p class="calc-h">何に使いますか</p>
+          <div class="calc-btns" data-b="pur"><button type="button" data-v="draw">図面・3Dモデルにしたい</button><button type="button" data-v="layout">レイアウト・干渉を確かめたい</button><button type="button" data-v="compare">作った物と比べたい（検査）</button><button type="button" data-v="record">形を残したい・3Dプリント</button></div>
+          <p class="calc-h">対象の大きさ</p>
+          <div class="calc-btns" data-b="size"><button type="button" data-v="s">部品（〜300mm程度）</button><button type="button" data-v="m">大きな部品・装置（〜2m程度）</button><button type="button" data-v="l">設備まわり・部屋・ライン</button></div>
+          <p class="calc-h">必要な精度</p>
+          <div class="calc-btns" data-b="acc"><button type="button" data-v="fine">0.1mm以下</button><button type="button" data-v="mid">1mm程度</button><button type="button" data-v="rough">1cm程度でよい</button></div>
+          <p class="calc-h">表面の状態</p>
+          <div class="calc-btns" data-b="surf"><button type="button" data-v="normal">ふつう</button><button type="button" data-v="shiny">光る・黒い・透明な所がある</button></div>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out">
+            <tr><th>向いている方法</th><td data-o="method"></td></tr>
+            <tr><th>届けてもらうデータ</th><td data-o="data"></td></tr>
+            <tr><th>費用が上がりやすい点</th><td data-o="cost"></td></tr>
+            <tr data-j="phone"><th>スマートフォンで足りるか</th><td data-o="phone"></td></tr>
+            <tr><th>依頼のときに伝えること</th><td data-o="tell"></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;">当社の料金の目安は、<a href="../../price.html#scan">料金ページの3Dスキャンの項目</a>にあります。</p>
+          <button type="button" class="calc-reset" id="sc-reset">はじめの条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('sc-tool');
+          if (!root) return;
+          var DEF = { pur: 'draw', size: 's', acc: 'fine', surf: 'normal' };
+          var S = {}, used = false;
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            ['pur', 'size', 'acc', 'surf'].forEach(function (k) {
+              root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === S[k]); });
+            });
+          }
+          function calc() {
+            var p = S.pur, z = S.size, a = S.acc, sh = S.surf === 'shiny', m, d, c = [], ph, t = [];
+            // 方法
+            if (z === 'l') {
+              m = a === 'fine' ? '広い範囲は、三脚に据えてレーザーで周りを測る方法。細かい精度が要る所だけ、手持ちのスキャナーで追加して測る'
+                               : '三脚に据えてレーザーで周りを測る方法（必要に応じて写真から作る方法と組み合わせる）';
+            } else if (a === 'rough') {
+              m = '写真から作る方法や、手持ちのスキャナー。精度より手軽さを優先できる';
+            } else if (z === 's') {
+              m = '光のパターンを当てる方法（据え置き・手持ち）。細かい形まで測りやすい';
+            } else {
+              m = '手持ちのレーザーや光のパターンのスキャナー。何回かに分けて測り、つなぎ合わせる';
+            }
+            // データ
+            d = p === 'draw' ? 'CAD（寸法を変えられる3Dモデル）。図面が要るなら、公差やはめあいを相談して図面まで'
+              : p === 'layout' ? '点群（空間の様子）。新しく入れる設備は、3Dモデルを用意して重ねる'
+              : p === 'compare' ? 'メッシュ。元の3Dモデルとの差を、色分けの図で出してもらう'
+              : 'メッシュ（3Dプリントなら、プリンターで読めるファイル形式で）';
+            // 費用
+            if (p === 'draw') c.push('CADや図面に起こす手間（いちばん大きい）');
+            if (a === 'fine') c.push('細かい精度に合わせた機材と手順');
+            if (z !== 's') c.push('何回にも分けて測り、つなぎ合わせる手間');
+            if (z === 'l') c.push('出張と、設備を止められる時間の調整');
+            if (sh) c.push('光る・黒い所への粉の吹き付けと、測り直し');
+            if (!c.length) c.push('大きな上がり要素は少ない条件');
+            // スマートフォン
+            var phoneOk = a === 'rough' && z !== 's' && (p === 'layout' || p === 'record');
+            ph = phoneOk ? '当たりを付ける用途なら向く（おおまかな寸法の確認や記録）'
+               : a === 'rough' ? '参考程度。小さな物は形が崩れやすい'
+               : '向かない（精度がcm程度のため、この精度には足りない）';
+            root.querySelector('[data-j="phone"]').classList.toggle('over', !phoneOk);
+            // 伝えること
+            t.push('目的（' + (p === 'draw' ? '図面化・3Dモデル化' : p === 'layout' ? 'レイアウト・干渉の確認' : p === 'compare' ? '作った物との比較' : '形の記録・3Dプリント') + '）');
+            t.push(a === 'fine' ? '精度が要る寸法の場所（全部を細かく測る必要はないことが多い）' : 'おおよそ必要な精度');
+            t.push('欲しいデータの段階と、使っているCADで開けるファイル形式');
+            if (sh) t.push('表面に粉を付けてよいか');
+            if (z === 'l') t.push('設備を止められる時間と、立ち入り・撮影の決まり');
+            out('method', m); out('data', d); out('cost', c.join('／')); out('phone', ph); out('tell', t.join('／'));
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'scan_select' }); }
+          }
+          ['pur', 'size', 'acc', 'surf'].forEach(function (k) {
+            root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.addEventListener('click', function () { set(k, b.dataset.v); }); });
+          });
+          document.getElementById('sc-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆5 -->
+        <h2>スマートフォンの3Dスキャンでできること・できないこと</h2>
+        <p>
+          一部のスマートフォンやタブレットには、距離を測るセンサーが付いていて、専用のアプリで3Dスキャンができます。手軽に試せるため、「業者に頼まなくても、スマートフォンで十分では」と考える人もいます。
+        </p>
+        <p>
+          向いているのは、部屋や大きな設備のおおまかな形を、記録として残す使い方です。設備を置けそうか、通路の幅がどのくらいかの見当を付けるには役立ちます。一方で、cm程度の誤差の例が報告されていて、アプリや対象の大きさ、距離でも変わります。小さな部品や、公差やはめあいを決める図面のための寸法には向きません。<strong>スマートフォンで当たりを付け、必要な所だけ業者に頼む</strong>、という使い分けがむだのない進め方です。
+        </p>
+
+        <h3>工場でスマートフォンを使うときの注意</h3>
+        <p>
+          工場の中は、撮影が禁じられている場所や、客先の製品が写り込む場所があります。また、3Dスキャンのアプリの中には、データを作るために、撮った内容を外部のサーバーに送るものがあります。<strong>社内の撮影の決まりと、データの保存先、外部に送るかどうか、共有の設定、消し方を確かめてから使う</strong>ことが大切です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>スマートフォンは、部屋や大きな物のおおまかな記録に向く</li>
+            <li>部品の図面化のような細かい寸法には向かない</li>
+            <li>当たりを付けるのはスマートフォン、必要な所は業者、と使い分ける</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>3Dスキャンは、デジタルツインの入り口</h2>
+        <p>
+          3Dスキャンのデータは、図面化やレイアウトの確認で終わりではありません。工場の建屋と設備をスキャンすると、仮想の空間に、現実と同じ形の工場ができます。これが、<a href="digital-twin-basics.html">デジタルツイン</a>の土台になります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-3d-scan-twin.jpg" alt="3Dスキャンからデジタルツインへの流れ。現実の工場を3Dスキャンし、仮想空間で物や人の動きを試し、結果を現実に反映し、また測る" width="1376" height="768" loading="lazy">
+          <figcaption>現実と仮想を行き来することで、変える前に試し、変えたあとにまた確かめられる。</figcaption>
+        </figure>
+
+        <h3>現実と仮想を、行き来する</h3>
+        <p>
+          仮想の工場の中で、設備の置き場所を動かしたり、物や人の流れをシミュレーションしたりして、通りやすい動線や、待ちの少ない配置を探します。良い案が見つかったら、それを現実の工場に反映します。変えたあとの工場をまた測れば、仮想の工場も今の姿にそろいます。<strong class="mk">現実から仮想へ、仮想から現実へという行き来</strong>が、デジタルツインの考え方です。3Dスキャンは、その最初の一歩になります。
+        </p>
+
+        <h3>製造業以外でも広がっている使い方</h3>
+        <p>
+          3Dスキャンは、ほかの業界でも使われています。建設の現場では、工事の途中をスキャンし、設計の3Dモデルと比べて、計画どおりに進んでいるかを確かめる使い方があります。不動産では、部屋を3Dで撮影して、Webで見て回れる内見が使われています（3Dスキャナーのほか、360度カメラなども使われます）。業界が変われば、使い道はまだまだ広がりそうです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>工場をスキャンすると、仮想の空間に同じ工場ができる</li>
+            <li>仮想で試し、現実に反映し、また測る行き来がデジタルツイン</li>
+            <li>建設の進み具合の確認や、不動産のWeb内見にも使われている</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>3Dスキャンサービスに依頼する前に準備すること</h2>
+        <p>
+          依頼の前に、次のことを決めておくと、見積もりが早く、ずれも少なくなります。
+        </p>
+        <ul>
+          <li><b>目的</b>：図面にしたいのか、レイアウトや干渉を確かめたいのか、作った物と比べたいのか</li>
+          <li><b>精度</b>：どの寸法を、どのくらいの精度で知りたいか（全部を細かく測る必要はないことが多い）</li>
+          <li><b>欲しいデータ</b>：点群・メッシュ・CAD・図面のどこまでか。使っているCADで開けるファイルの形式</li>
+          <li><b>対象</b>：大きさ、数、表面（光る・黒い・透明）、粉を付けてよいか、持ち出せるか</li>
+          <li><b>現場の条件</b>：設備を止められる時間、立ち入りや撮影の決まり、データを社外に出してよいか</li>
+          <li><b>手元の資料</b>：古い図面や写真があれば、一部でも役に立つ</li>
+        </ul>
+
+        <h3>見積もりを比べるときの確認項目</h3>
+        <ul>
+          <li>どの段階のデータ（点群・メッシュ・CAD・図面）まで含んだ金額か</li>
+          <li>精度をどう確かめるか（基準の寸法との比べ方や、報告の有無）</li>
+          <li>表面への粉の吹き付けなど、前の処理の費用が含まれているか</li>
+          <li>出張の費用と、現場での作業時間の見込み</li>
+          <li>納期と、届いたデータを直してもらえる範囲</li>
+          <li>データの保管と、作業が終わったあとの扱い</li>
+        </ul>
+
+        <h3>依頼でよくある失敗</h3>
+        <p>
+          よくあるのは、目的を決めずに「とりあえず全部を細かく」と頼み、費用がかさむ失敗です。反対に、精度の足りない方法で測ってしまい、部品が合わずに作り直す失敗もあります。また、届いたデータの形式が自社のCADで開けない、ということも起こります。<strong>目的・精度・データの形式の3つを、最初にそろえる</strong>ことで、多くの失敗は防げます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>目的・精度・欲しいデータを、依頼の前に決める</li>
+            <li>表面の状態や、現場の条件も伝える</li>
+            <li>データの形式が自社のCADで開けるかを確かめる</li>
+          </ul>
+        </div>
+
+        <!-- ◆8 -->
+        <h2>3Dスキャンサービスのよくある質問</h2>
+
+        <h3>3Dスキャンサービスの価格は、どのくらいですか</h3>
+        <p>
+          大きさ、精度、届けるデータの段階で大きく変わります。同じ部品でも、点群の納品だけか、CADや図面まで作るかで、金額は何倍にもなることがあります。当社の目安は<a href="../../price.html#scan">料金ページ</a>にあります。写真と目的を送っていただければ、お見積りをお出しします。
+        </p>
+
+        <h3>スキャンしたデータで、強度計算もできますか</h3>
+        <p>
+          できます。スキャンで形を測り、3Dモデルを作ってから強度計算をします。図面のない架台や設備でも、形を測るところから計算書の作成まで続けて進められます。計算の考え方は、<a href="stand-strength-calculation.html">架台の強度計算の方法と例</a>で解説しています。
+        </p>
+
+        <h3>設備を動かしたまま、スキャンできますか</h3>
+        <p>
+          ふつうの3Dスキャンでは、測っている間に物が動くと、データがゆがみます。動く物を測る方法や、ゆがみを補正する技術もありますが、設備や部品の形を測るなら、止めて測るのが確実です。止められる時間が短い場合は、測る範囲と順番を前もって決めておき、短い時間で終わるように計画します。建屋や通路のように動かない所は、設備が動いていても測れる場合があります。
+        </p>
+
+        <h3>社外に出せない設備でも、頼めますか</h3>
+        <p>
+          ご相談いただけます。当社では、工場の3Dスキャンや撮影のデータを、外部のクラウドや第三者に渡さず、社内の閉じた環境で処理しています。データの持ち出しの範囲や、作業後の扱いも、最初の打ち合わせで決めます。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          3Dスキャンサービスは、現物の形を3Dのデータにするサービスです。製造業では、図面のない設備・部品の図面化、レイアウトの検討、干渉の確認によく使われます。方法によって精度と測れる大きさが違い、届くデータも点群・メッシュ・CAD・図面の4段階があります。料金を一番大きく動かすのは、どの段階のデータまで求めるかです。
+        </p>
+        <p>
+          <strong class="mk">「何のために、どの寸法を、どのデータの形で欲しいか」を最初に決めること</strong>が、3Dスキャンサービスを上手に使ういちばんの近道です。まずは選び方ツールで、ご自身の目的と対象を入れて試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・ISO 10360-13（光学式の三次元座標測定システムの受入れ・再検証の試験）<br>
+          ・ISO 17123-9（地上型レーザースキャナーの現場での試験の手順）<br>
+          ・ASTM E2807（3Dのデータを交換する形式 E57）
+        </p>
+
+        <div class="article-cta">
+          図面のない設備の図面化や、レイアウトの検討でお困りのことはありませんか。3Dスキャンから3Dモデル・図面・強度計算まで、同じ窓口でご相談いただけます。
+          <p style="text-align:center;margin-top:14px;"><a class="btn btn--fill" href="../../contact-v2.html?topic=scan">3Dスキャンについて相談する</a></p>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../index.html">← コラム一覧に戻る</a></p>
+
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.07.13</p>
+                <h3><a href="digital-twin-basics.html">デジタルツインとは？中小製造業がiPhoneから始める低コスト導入法</a></h3>
+                <p class="column-excerpt">デジタルツインの考え方と、身近な道具から始める方法を解説します。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.03</p>
+                <h3><a href="parts-discontinued-response.html">部品の製造中止への対応方法｜代替品の選び方・最終購入数の計算から予防まで</a></h3>
+                <p class="column-excerpt">最終購入・代替品・現物からの作り直しなど、製造中止への5つの対応を解説します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">特集から探す</p>
+          <ul class="cs-hubs"><li><a href="../design/index.html"><b>自動化設備の設計ノート</b><span>強度計算・選定の方法と計算ツール</span></a></li><li><a href="../shikumi/index.html"><b>AIで作る 現場の仕組みノート</b><span>ラズパイとAIで現場の困りごとを解く</span></a></li><li><a href="../industries/index.html"><b>業種別デジタルツイン活用</b><span>金属加工・食品・樹脂成形など8業種</span></a></li></ul>
+          <p class="cs-pager"><a href="shoryokuka-chusho-seizogyo.html">‹ 前の記事</a></p>
+          <p class="cs-more"><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">現場のお悩みのご相談</p>
+          <p class="cs-ask-text">人手が足りない、設備が止まる、データが生かせていない、といった現場のお悩みを、整理するところからご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=issues&amp;items=%E3%80%90%E7%8F%BE%E5%A0%B4%E3%81%AE%E3%81%8A%E6%82%A9%E3%81%BF%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">お悩みを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="bolt-strength-calculation.html"><img src="../../img/thumb-column-bolt-strength.jpg" alt="" width="80" height="45"><span>ボルトの強度計算の方法</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261118" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の現場のあるある</p>
+          <div class="aruaru" data-cat="genba"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+<!-- ◆アイキャッチの傾き（キットの article_nav.py で入れ直す） -->
+<script src="../eye-tilt.js" defer></script>
+</body>
+</html>

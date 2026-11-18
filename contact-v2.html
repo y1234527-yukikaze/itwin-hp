@@ -180,6 +180,7 @@
                 <label><input type="checkbox" value="ロボット架台の強度計算">ロボット架台</label>
                 <label><input type="checkbox" value="溶接部の強度計算">溶接部</label>
                 <label><input type="checkbox" value="アンカーボルトの引き抜き計算">アンカーボルト</label>
+                <label><input type="checkbox" value="ボルトの強度計算">ボルト</label>
                 <label><input type="checkbox" value="架台の耐震計算">耐震計算</label>
                 <label><input type="checkbox" value="エアシリンダの選定">エアシリンダ</label>
                 <label><input type="checkbox" value="コンベアのモーター選定">コンベアのモーター</label>
@@ -471,7 +472,7 @@
     if (topicSel) topicSel.addEventListener("change", function () { setDesign(isDesign()); syncGuide(); });
 
     // ◆C・D：押してきた内容を見出しに出し、右の欄に料金と日数の目安を出す（2026-11-14）
-    var STRENGTH = ["架台の強度計算", "ロボット架台の強度計算", "溶接部の強度計算", "アンカーボルトの引き抜き計算", "架台の耐震計算"];
+    var STRENGTH = ["架台の強度計算", "ロボット架台の強度計算", "溶接部の強度計算", "アンカーボルトの引き抜き計算", "架台の耐震計算", "ボルトの強度計算"];
     var SELECT = ["エアシリンダの選定", "コンベアのモーター選定", "真空パッドの選定", "タクトタイムとラインの検討"];
     var dqTitle = form ? form.querySelector(".dq-title") : null;
     var priceBody = document.getElementById("cf-price-body");
