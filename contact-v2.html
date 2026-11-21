@@ -489,7 +489,7 @@
         var st = what.some(function (w) { return STRENGTH.indexOf(w) >= 0; }) || !what.length;
         var dr = what.indexOf("図面の作成") >= 0;
         var se = what.some(function (w) { return SELECT.indexOf(w) >= 0; });
-        if (st) html += row("強度検証（計算書付き）", "70,000円〜");
+        if (st) html += row("強度検証（計算書・3Dモデル付き）", "50,000円〜");
         if (dr) html += row("部品図の作成（1〜10点）", "50,000円〜");
         if (se) html += row("機器の選定・ラインの検討", "内容に応じてお見積り");
         if (dqTitle) dqTitle.textContent = (what.length === 1 ? what[0].replace("その他・まだ決まっていない", "計算・設計") : "計算・設計") + "の見積もり（無料）";

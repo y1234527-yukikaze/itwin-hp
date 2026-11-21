@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!--
+  アイツイン｜3Dスキャン の詳細ページ
+  2026-11-21 新設。料金ページ（price.html）の段から「詳細はこちら」でつなぐ。
+  料金を変えるときは、price.html とイプロスの料金PDF（キットの ipros_price.py）も同時に直すこと。
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3Dスキャンサービス｜料金・データの段階・ご依頼の流れ｜アイツイン</title>
+  <meta name="description" content="設備・治具・部品の3Dスキャンの料金と中身です。小さい部品は20,000円〜（税別、点群・メッシュの納品まで）。点群・メッシュから3Dモデル（CAD）、図面まで、使いみちに合わせてデータにします。図面が残っていない設備にも対応します。">
+  <link rel="canonical" href="https://i-twin.co.jp/scan-service">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="3Dスキャンサービス｜料金・データの段階・ご依頼の流れ">
+  <meta property="og:description" content="設備・治具・部品の3Dスキャンの料金と中身です。小さい部品は20,000円〜（税別、点群・メッシュの納品まで）。点群・メッシュから3Dモデル（CAD）、図面まで、使いみちに合わせてデータにします。図面が残っていない設備にも対応します。">
+  <meta property="og:url" content="https://i-twin.co.jp/scan-service">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3Dスキャンサービス｜料金・データの段階・ご依頼の流れ">
+  <meta name="twitter:description" content="設備・治具・部品の3Dスキャンの料金と中身です。小さい部品は20,000円〜（税別、点群・メッシュの納品まで）。点群・メッシュから3Dモデル（CAD）、図面まで、使いみちに合わせてデータにします。図面が残っていない設備にも対応します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="stylesheet" href="font-noto.css?v=20261121">
+  <link rel="stylesheet" href="design-flat.css?v=20261121">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList / Service） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "料金の目安", "item": "https://i-twin.co.jp/price" },
+      { "@type": "ListItem", "position": 3, "name": "3Dスキャン", "item": "https://i-twin.co.jp/scan-service" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "3Dスキャン（設備・部品の計測とデータ化）",
+    "serviceType": "3Dスキャン",
+    "provider": { "@id": "https://i-twin.co.jp/#organization" },
+    "areaServed": { "@type": "Country", "name": "日本" },
+    "offers": [
+      { "@type": "Offer", "name": "小さい部品のスキャン（〜100mm角）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 20000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "部品・治具のスキャン（〜300mm角）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 30000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "大きい部品のスキャン（〜600mm角）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 50000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "設備単体のスキャン（2m×2m程度）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
+    ]
+  }
+  </script>
+  <style>
+    .ds-table td:last-child, .ds-table th:last-child { text-align: left; white-space: normal; font-weight: 400; color: var(--ink); }
+    .ds-table td:first-child { font-weight: 700; color: var(--navy); width: 30%; }
+    .ds-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 12px 0 0; }
+    .ds-fig { margin: 16px 0 6px; }
+    .ds-fig img { width: 100%; height: auto; border-radius: 4px; }
+    .ds-fig figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; }
+
+    /* 右側の固定欄（Q&A・問い合わせ） */
+    .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
+    .ds-main { max-width: none; }
+    .ds-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .ds-side-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px; }
+    .ds-side-h { font-weight: 700; color: var(--navy); font-size: 0.98rem; margin: 0 0 6px !important; }
+    .ds-side details { border-top: 1px solid var(--line); }
+    .ds-side details:first-of-type { border-top: 0; }
+    .ds-side summary { cursor: pointer; list-style: none; position: relative; padding: 10px 20px 10px 0; font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.6; }
+    .ds-side summary::-webkit-details-marker { display: none; }
+    .ds-side summary::after { content: "＋"; position: absolute; right: 0; top: 10px; color: var(--orange-text); font-size: 0.8rem; }
+    .ds-side details[open] summary::after { content: "−"; }
+    .ds-side details p { margin: 0 0 12px !important; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75; }
+    .ds-side-cta p { font-size: 0.86rem; margin: 0 0 12px !important; line-height: 1.75; }
+    .ds-side-cta .btn { width: 100%; padding: 12px 16px; font-size: 0.92rem; }
+    .ds-side-cta .ds-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 10px 0 0 !important; }
+    @media (max-width: 960px) {
+      .ds-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .ds-side { position: static; }
+    }
+  </style>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="price.html">料金</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <a href="price.html">料金の目安</a> ／ <span>3Dスキャン</span></div>
+      <h1>3Dスキャンサービス</h1>
+      <p class="catch">図面のない設備や部品も、実寸のデータにします。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap ds-layout">
+      <div class="price-doc ds-main">
+
+      <p class="price-intro">
+        設備・治具・部品を3Dスキャンで計測して、実寸のデータとしてお渡しします。図面が残っていない設備や、現物しか手がかりのない部品にも対応します。<strong class="mk">一度データにしておけば、設備の入れ替えや改造、部品の作り直しのたびに、現地へ採寸に行く必要がなくなります。</strong>表示価格はすべて税別です。
+      </p>
+
+      <section class="price-block">
+        <h2>こんなときにご相談ください</h2>
+        <ul>
+          <li>図面が残っていない設備や部品を、データにしておきたい</li>
+          <li>設備を入れ替える前に、まわりとぶつからないかを確かめたい</li>
+          <li>今ある設備の改造を、実寸のデータで検討したい</li>
+          <li>メーカーがなくなった部品を、現物から作り直したい</li>
+          <li>3Dプリントで作り直したい、元の形と比べたい</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>料金</h2>
+        <p>料金は、<b>対象の大きさ</b>と、<b>どこまでのデータにするか</b>（点群・メッシュ、3Dモデル、図面）で決まります。</p>
+        <div class="table-scroll">
+          <table class="price-table table-wide price-scan-table">
+            <thead><tr><th>対象</th><th>点群・メッシュの納品まで</th><th>3Dモデル（CAD）まで</th><th>図面まで</th></tr></thead>
+            <tr><th>小さい部品（〜100mm角）</th><td class="sc-p">20,000円〜</td><td rowspan="3">平らな面・穴・円筒が中心の形：<br>＋30,000円〜</td><td rowspan="3"><a href="drawing-service.html">部品図の作成</a>（50,000円〜）と組み合わせ</td></tr>
+            <tr><th>部品・治具（〜300mm角）</th><td class="sc-p">30,000円〜</td></tr>
+            <tr><th>大きい部品（〜600mm角）</th><td class="sc-p">50,000円〜</td></tr>
+            <tr><th>設備単体（2m×2m程度）</th><td class="sc-p">150,000円〜</td><td>簡易モデル（外形と取り付け位置）：<br>＋100,000円〜</td><td>個別見積</td></tr>
+            <tr><th>ライン・部屋全体</th><td>個別見積</td><td>―</td><td>―</td></tr>
+          </table>
+        </div>
+        <p class="price-note">3Dモデル（CAD）の金額は、スキャンの料金に加える金額です。計測の方法は2つあります。設備や部屋など動かせないものは、現地でスキャンします（交通費・宿泊費を実費で別にいただきます）。部品・治具など送っていただけるものは、当社でスキャンでき、交通費はかかりません。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>お渡しできるデータの段階</h2>
+        <p>スキャンで取れるのは「点の集まり」です。そこから、使いみちに合わせて段階的にデータを作ります。段階が進むほど、人の手と判断が増えます。</p>
+        <figure class="ds-fig">
+          <img src="img/column-3d-scan-data.jpg?v=20261121" alt="スキャンのデータは、点群、メッシュ、3Dモデル（CAD）、図面の4つの段階で図面になる" width="1376" height="768" loading="lazy">
+          <figcaption>点群 → メッシュ → 3Dモデル（CAD） → 図面の順に、使える場面が広がります</figcaption>
+        </figure>
+        <table class="price-table ds-table">
+          <thead><tr><th>データ</th><th>使いみち</th></tr></thead>
+          <tr><td>点群</td><td>点の集まり。設備の配置や、まわりとぶつからないかの確認に</td></tr>
+          <tr><td>メッシュ</td><td>三角形の面でつないだ形。3Dプリントでの作り直しや、元の形との比べ合わせに</td></tr>
+          <tr><td>3Dモデル（CAD）</td><td>寸法を変えられるデータ。設計や改造の検討に</td></tr>
+          <tr><td>図面</td><td>寸法と公差の入った2D図面。部品の作り直し（加工の発注）に</td></tr>
+        </table>
+        <p class="price-note">曲面の多い形（鋳物、インペラ、樹脂の成形品など）は、点群・メッシュでの納品まで承ります。CAD化はご相談ください。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>計測の方法：現地でスキャンするか、送っていただくか</h2>
+        <table class="price-table ds-table">
+          <thead><tr><th>方法</th><th>向いているもの・費用</th></tr></thead>
+          <tr><td>現地でスキャン</td><td>設備単体、ライン、部屋など、動かせないもの。<b>交通費・宿泊費（実費）が必ずかかります。</b></td></tr>
+          <tr><td>現物を送っていただく</td><td>部品・治具など、送っていただけるもの。交通費はかかりません。行きの送料はお客様のご負担、お返しの送料は当社が負担します。</td></tr>
+        </table>
+        <ul class="price-list">
+          <li>運送中に生じた傷・へこみ・破損などについては、当社では責任を負いかねます。あらかじめご了承ください。</li>
+          <li>傷つきやすいものは、十分に梱包してお送りください。必要に応じて、運送保険をお付けください。</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>スキャンのデータの扱い</h2>
+        <p>工場の3Dスキャンや撮影のデータは、外部のクラウドや第三者に提供せず、当社の閉じた環境で処理します。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>ご依頼の流れ</h2>
+        <ol class="price-steps">
+          <li><b>お問い合わせ</b>：対象物のおおよその寸法と写真、データの使いみちをお送りください。</li>
+          <li><b>内容の確認・お見積り</b>：どこまでのデータにするか、現地でスキャンするか送っていただくかを一緒に決めて、お見積りと日程をご連絡します。</li>
+          <li><b>ご発注</b></li>
+          <li><b>スキャン・データの作成</b>：送っていただいた現物は、作業のあとに当社の負担でお返しします。</li>
+          <li><b>納品・ご説明</b></li>
+        </ol>
+        <p class="price-note">納期は、対象の大きさとデータの段階によって変わります。お見積りのときにご連絡します。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>ご用意いただく情報</h2>
+        <ul>
+          <li>対象物のおおよその寸法と写真</li>
+          <li>置いてある場所（屋内か屋外か、まわりの状況）</li>
+          <li>作業できる時間帯（稼働中かどうか）</li>
+          <li>必要な精度と、データの使いみち</li>
+          <li>納品の形（点群だけか、CAD化までか）</li>
+        </ul>
+        <p class="ds-links"><a href="column/articles/3d-scan-service.html">コラム「3Dスキャンサービスの選び方」を読む ›</a></p>
+      </section>
+
+
+      <p class="section-more"><a class="btn btn--outline" href="price.html">料金の目安（すべてのサービス）に戻る</a></p>
+
+      </div>
+
+      <!-- ◆右側の固定欄：よくあるご質問・問い合わせ（スマホでは本文の下） -->
+      <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
+        <div class="ds-side-box">
+          <p class="ds-side-h">よくあるご質問</p>
+          <details><summary>どのくらいの精度で測れますか？</summary><p>対象の大きさや形、置いてある場所で変わります。必要な精度とデータの使いみちをお知らせください。できるかどうかを確かめてから、お見積りします。</p></details>
+          <details><summary>曲面の多い部品もデータにできますか？</summary><p>点群・メッシュでの納品まで承ります。3Dプリントでの作り直しや、元の形との比べ合わせにお使いいただけます。CAD化はご相談ください。</p></details>
+          <details><summary>工場まで来てもらえますか？</summary><p>はい。現地でスキャンする場合は、交通費・宿泊費（実費）を別にいただきます。部品・治具など送っていただけるものは、当社でスキャンすることもできます（行きの送料はお客様、お返しの送料は当社の負担です）。</p></details>
+          <details><summary>スキャンしたデータで、強度計算もできますか？</summary><p>はい。3Dモデルにしてから、<a href="strength-service.html">強度検証</a>まで同じ窓口で承ります。</p></details>
+        </div>
+        <div class="ds-side-box ds-side-cta">
+          <p class="ds-side-h">お問い合わせ</p>
+          <p>対象物の写真と、おおよその寸法をお送りいただければ、お見積りと日程をご連絡します。</p>
+          <a class="btn btn--fill" href="contact-v2.html?topic=scan" onclick="if(window.gtag)gtag('event','contact_click',{place:'scan_service_side',article:'scan_service'});">3Dスキャンを相談する</a>
+          <p class="ds-side-sub">ご相談とお見積りは無料です。</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>対象物の写真と、おおよその寸法があれば、お見積りできます。</h2>
+      <p>データの使いみちが決まっていない段階のご相談でもかまいません。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=scan" onclick="if(window.gtag)gtag('event','contact_click',{place:'scan_service',article:'scan-service'});">3Dスキャンを相談する</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="price.html">料金</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  /* 「料金についてよくあるご質問」へのリンクで来たときは、収納を開いて見せる */
+  (function () {
+    function openFaq() { var d = document.querySelector('#price-faq .pf-wrap'); if (d && location.hash === '#price-faq') d.open = true; }
+    openFaq(); window.addEventListener('hashchange', openFaq);
+  })();
+</script>
+</body>
+</html>

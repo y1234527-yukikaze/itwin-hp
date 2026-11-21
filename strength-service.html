@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--
+  アイツイン｜強度検証（強度計算の外注）の詳細ページ
+  2026-11-21 新設。料金ページ（price.html）の強度検証の段から「詳細はこちら」でつなぐ。
+  料金を変えるときは、price.html とイプロスの料金PDF（キットの ipros_price.py）も同時に直すこと。
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの｜アイツイン</title>
+  <meta name="description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <link rel="canonical" href="https://i-twin.co.jp/strength-service">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの">
+  <meta property="og:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <meta property="og:url" content="https://i-twin.co.jp/strength-service">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの">
+  <meta name="twitter:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="stylesheet" href="font-noto.css?v=20261121">
+  <link rel="stylesheet" href="design-flat.css?v=20261121">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList / Service） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "料金の目安", "item": "https://i-twin.co.jp/price" },
+      { "@type": "ListItem", "position": 3, "name": "強度検証（強度計算の外注）", "item": "https://i-twin.co.jp/strength-service" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "強度検証（架台・治具の強度計算）",
+    "serviceType": "強度計算",
+    "provider": { "@id": "https://i-twin.co.jp/#organization" },
+    "areaServed": { "@type": "Country", "name": "日本" },
+    "offers": [
+      { "@type": "Offer", "name": "強度検証（手計算・計算書付き・部材15本まで）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 50000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "強度検証（FEM解析込み・組み上げた3Dモデル支給）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 100000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "強度検証（FEM解析込み・2D図面から）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
+    ]
+  }
+  </script>
+  <style>
+    .ds-table td:last-child, .ds-table th:last-child { text-align: left; white-space: normal; font-weight: 400; color: var(--ink); }
+    .ds-table td:first-child { font-weight: 700; color: var(--navy); width: 30%; }
+    .ds-samples { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 12px 0 0; }
+    .ds-fee td:first-child { font-weight: 400; color: var(--ink); width: 64%; }
+    .ds-fee td:last-child { font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .ds-example { background: var(--paper-soft); border-radius: 4px; padding: 14px 18px; margin: 14px 0 0; }
+    .ds-example p { margin: 0 0 6px; }
+    .ds-example-h { font-weight: 700; color: var(--navy); }
+
+    /* 右側の固定欄（Q&A・問い合わせ） */
+    .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
+    .ds-main { max-width: none; }
+    .ds-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .ds-side-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px; }
+    .ds-side-h { font-weight: 700; color: var(--navy); font-size: 0.98rem; margin: 0 0 6px !important; }
+    .ds-side details { border-top: 1px solid var(--line); }
+    .ds-side details:first-of-type { border-top: 0; }
+    .ds-side summary { cursor: pointer; list-style: none; position: relative; padding: 10px 20px 10px 0; font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.6; }
+    .ds-side summary::-webkit-details-marker { display: none; }
+    .ds-side summary::after { content: "＋"; position: absolute; right: 0; top: 10px; color: var(--orange-text); font-size: 0.8rem; }
+    .ds-side details[open] summary::after { content: "−"; }
+    .ds-side details p { margin: 0 0 12px !important; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75; }
+    .ds-side-cta p { font-size: 0.86rem; margin: 0 0 12px !important; line-height: 1.75; }
+    .ds-side-cta .btn { width: 100%; padding: 12px 16px; font-size: 0.92rem; }
+    .ds-side-cta .ds-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 10px 0 0 !important; }
+    @media (max-width: 960px) {
+      .ds-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .ds-side { position: static; }
+    }
+  </style>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="price.html">料金</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <a href="price.html">料金の目安</a> ／ <span>強度検証（強度計算の外注）</span></div>
+      <h1>架台・治具の強度計算の外注（強度検証）</h1>
+      <p class="catch">計算書と、ひと目で分かる色付き資料でお渡しします。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap ds-layout">
+      <div class="price-doc ds-main">
+
+      <p class="price-intro">
+        架台や治具に、のせる物の重さや動く力がかかったときに、部材が耐えられるかを計算で確かめます。お渡しするのは、<strong class="mk">計算書、部材ごとの余裕を色で示した資料、部材の3Dモデル</strong>の3つです。表示価格はすべて税別です。
+      </p>
+
+      <section class="price-block">
+        <h2>こんなときにご相談ください</h2>
+        <ul>
+          <li>客先や元請から、架台・治具の強度計算書を求められた</li>
+          <li>設計は済んだが、強度計算まで手が回らない</li>
+          <li>ロボットが急に止まるときの力のように、動く荷重を含めて確かめたい</li>
+          <li>初めての条件で、調べながら計算する時間がない</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>料金</h2>
+        <div class="price-plans">
+          <div class="pp"><p class="pp-name">手計算<br>（計算書付き）</p><p class="pp-price">50,000<small>円〜</small></p><p class="pp-note">部材15本まで・力のかかり方1つ</p></div>
+          <div class="pp"><p class="pp-name">FEM解析込み<br>（組み上げた3Dモデルをいただける場合）</p><p class="pp-price">100,000<small>円〜</small></p><p class="pp-note">荷重1ケース。モデルの状態によっては、ご相談させてください</p></div>
+          <div class="pp"><p class="pp-name">FEM解析込み<br>（2D図面から）</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">荷重1ケース。部品の3D化と組立を含みます。ロボット架台など</p></div>
+        </div>
+        <p class="price-note">FEM解析は、形を細かく分けて、コンピューターで応力を計算する方法です。手計算では難しい形や、提出用に詳しく確かめたい場合に向いています。</p>
+
+        <p class="price-plans-h">手計算の料金表</p>
+        <table class="price-table ds-table ds-fee">
+          <thead><tr><th>内容</th><th>料金（税別）</th></tr></thead>
+          <tr><td>基本：部材15本まで・力のかかり方1つ（5つの項目をすべて確認）</td><td>50,000円〜</td></tr>
+          <tr><td>部材が16〜30本の場合</td><td>＋30,000円〜</td></tr>
+          <tr><td>部材が31本以上の場合</td><td>個別見積</td></tr>
+          <tr><td>力のかかり方を追加する場合（地震・非常停止など）</td><td>1つにつき ＋20,000円〜</td></tr>
+        </table>
+        <div class="ds-example">
+          <p class="ds-example-h">計算例</p>
+          <p>部材20本の架台で、ふだんの状態に「地震」を追加して確かめる場合<br>
+          50,000円（基本）＋ 30,000円（部材16〜30本）＋ 20,000円（地震）＝ <b>100,000円〜</b></p>
+          <p>櫓（やぐら）のような、柱4本と梁・つなぎの部材で組んだ形なら、多くは部材15本以内に収まり、基本の50,000円〜で承れます。</p>
+        </div>
+      </section>
+
+      <section class="price-block">
+        <h2>「確かめる項目」と「力のかかり方」の違い</h2>
+        <p>強度検証では、<strong class="mk">どんな場面の力で（力のかかり方）</strong>、<strong class="mk">何に対して耐えられるか（確かめる項目）</strong>を確かめます。基本の料金には、力のかかり方1つと、確かめる項目5つがすべて入っています。</p>
+        <p class="price-plans-h">力のかかり方（基本は1つ）</p>
+        <ul>
+          <li><b>基本（料金に含む）</b>：のせる物の重さがかかる、ふだんの状態。決めた大きさの横からの力（重さ×係数）も含めて確かめます</li>
+        </ul>
+        <p class="price-plans-h">追加できる力のかかり方の例（1つにつき＋20,000円〜）</p>
+        <table class="price-table ds-table">
+          <thead><tr><th>力のかかり方</th><th>どんな場面か</th></tr></thead>
+          <tr><td>地震</td><td>設置する階や建物から横の力を決めて、倒れないか・アンカーが抜けないかまで確かめる</td></tr>
+          <tr><td>ロボットの非常停止</td><td>アームが急に止まるときの、勢いによる力</td></tr>
+          <tr><td>片寄ったのせ方</td><td>設備を片側に寄せて置く、のせる位置が変わる</td></tr>
+          <tr><td>吊り上げ・移動</td><td>架台ごとクレーンで吊る、フォークリフトで運ぶ</td></tr>
+          <tr><td>ぶつかる力</td><td>台車やフォークリフトが当たる</td></tr>
+          <tr><td>人が乗る</td><td>点検のときなどに、作業者が乗る</td></tr>
+        </table>
+        <p class="price-note">追加した力のかかり方ごとに、下の5つの項目をひととおり確かめ直します。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>手計算で確かめる5つの項目</h2>
+        <table class="price-table ds-table">
+          <thead><tr><th>項目</th><th>確かめること</th></tr></thead>
+          <tr><td>曲げ</td><td>梁が、のせた物の重さで曲げられても耐えられるか</td></tr>
+          <tr><td>たわみ</td><td>梁が下がりすぎて、設備が傾いたり位置がずれたりしないか</td></tr>
+          <tr><td>座屈</td><td>細長い柱が、押されて急に横へ曲がってしまわないか</td></tr>
+          <tr><td>溶接</td><td>部材どうしをつなぐ溶接が、かかる力に耐えられるか</td></tr>
+          <tr><td>ボルト</td><td>つなぎ目や床への固定のボルトが、切れたり抜けたりしないか</td></tr>
+        </table>
+        <p class="price-note">計算の考え方は、コラム「<a href="column/design/index.html">自動化設備の設計ノート</a>」で紹介しています。初めての方は、計算例を動く図で追う「<a href="column/articles/stand-strength-guide.html">架台の強度計算 はじめての方の読み方ガイド</a>」もどうぞ。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>お渡しするもの（手計算の場合）</h2>
+        <table class="price-table ds-table">
+          <thead><tr><th>納品物</th><th>内容</th></tr></thead>
+          <tr><td>計算書</td><td>荷重の条件、使った基準、計算式と結果をまとめたものです。社内の記録や、客先への説明に使えます</td></tr>
+          <tr><td>色付き資料</td><td>部材ごとの余裕（計算値÷上限）を色で示し、力の流れに沿って1部材ずつ説明します。3Dの図は、ブラウザで回して見られます</td></tr>
+          <tr><td>部材の3Dモデル</td><td>STEP形式で、追加料金なしでお付けします。組み上げた3Dモデル（組立）が必要な場合は、別途お見積りします</td></tr>
+        </table>
+        <p class="ds-samples">
+          <a href="column/reports/stand-color-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand_color',place:'strength_service'});">色付き資料の見本を見る ›</a>
+          <a href="column/reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'strength_service'});">計算書の見本（3Dモデルで解析した例）を見る ›</a>
+        </p>
+      </section>
+
+      <section class="price-block">
+        <h2>計算の前提について</h2>
+        <p>強度計算の結果は、どの基準を使い、どんな仮定を置いたかで変わります。そのため、資料には次の3つを必ず書きます。</p>
+        <ul>
+          <li><b>使った基準</b>：許容応力（使ってよい上限）をどう決めたか。社内基準や客先の指定があれば、そちらを使います</li>
+          <li><b>置いた仮定</b>：荷重のかかり方、部材の支え方、横からの力の大きさなど</li>
+          <li><b>確かめていないこと</b>：たとえば床の強さ、架台全体のねじり、振動など</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>強度検証をご依頼いただく前に</h2>
+        <ul class="price-list">
+          <li>計算は設計判断の参考資料です。最終的に採用するかどうかは、発注者様にてご判断ください。</li>
+          <li>荷重の条件、材質、溶接の仕様、接合の条件などの前提は、計算書に書きます。</li>
+          <li>前提条件は、ご提供いただいた情報にもとづきます。実物と違う場合は、結果が変わります。</li>
+          <li>法令上、資格を持つ人の設計・確認が必要な範囲は対象外です。</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>ご依頼の流れと納期</h2>
+        <ol class="price-steps">
+          <li><b>お問い合わせ</b>：図面（または寸法）と、のせる物の重さなどの条件をお送りください。</li>
+          <li><b>条件の確認・お見積り</b>：足りない条件を確認して、お見積りと納期をご連絡します。</li>
+          <li><b>ご発注</b></li>
+          <li><b>計算・資料の作成</b></li>
+          <li><b>納品・ご説明</b>：計算書・色付き資料・3Dモデルをお渡しし、結果をご説明します。</li>
+        </ol>
+        <p class="price-note">手計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により延びる場合があります。FEM解析は、内容をうかがってご相談します。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>ご用意いただく情報</h2>
+        <ul>
+          <li>対象物の図面または3Dモデル（なければ3Dスキャンで対応します）</li>
+          <li>荷重の条件（のせる物の質量、動く速さ、止まるまでの時間など）</li>
+          <li>材質・部材のサイズ</li>
+          <li>接合の方法（溶接の脚長、ボルトの径・本数）</li>
+          <li>床・基礎の条件（厚さ、アンカーの種類・本数）</li>
+          <li>計算書の提出先（客先に出すかどうか）</li>
+        </ul>
+      </section>
+
+
+      <p class="section-more"><a class="btn btn--outline" href="price.html">料金の目安（すべてのサービス）に戻る</a></p>
+
+      </div>
+
+      <!-- ◆右側の固定欄：よくあるご質問・問い合わせ（スマホでは本文の下） -->
+      <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
+        <div class="ds-side-box">
+          <p class="ds-side-h">よくあるご質問</p>
+          <details><summary>どの基準で計算しますか？</summary><p>社内基準や客先の指定がある場合は、それに合わせます。指定がない場合は、用途に合った基準をご相談のうえで決め、資料に書きます。</p></details>
+          <details><summary>部材が15本を超えるかどうか、分かりません。</summary><p>図面をお送りいただければ、こちらで数えてお見積りします。</p></details>
+          <details><summary>図面がない架台でも頼めますか？</summary><p>はい。現物を3Dスキャンで測って3Dモデルにしてから計算できます（<a href="price.html#scan">3Dスキャンの料金</a>）。</p></details>
+          <details><summary>手計算とFEM解析は、どちらを選べばよいですか？</summary><p>梁と柱で組んだ架台のような形なら、手計算で十分なことが多いです。穴や切り欠きの多い部品、複雑な形、提出用に詳しく確かめたい場合は、FEM解析をおすすめします。迷う場合は、ご相談ください。</p></details>
+        </div>
+        <div class="ds-side-box ds-side-cta">
+          <p class="ds-side-h">お問い合わせ</p>
+          <p>図面と、のせる物の重さが分かれば、お見積りできます。条件がそろっていなくてもかまいません。</p>
+          <a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'strength_service_side',article:'strength_service'});">強度検証を相談する</a>
+          <p class="ds-side-sub">ご相談とお見積りは無料です。</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>図面と、のせる物の重さが分かれば、お見積りできます。</h2>
+      <p>「計算書が必要か分からない」という段階のご相談でもかまいません。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'strength_service',article:'strength-service'});">強度検証を相談する</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="price.html">料金</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  /* 「料金についてよくあるご質問」へのリンクで来たときは、収納を開いて見せる */
+  (function () {
+    function openFaq() { var d = document.querySelector('#price-faq .pf-wrap'); if (d && location.hash === '#price-faq') d.open = true; }
+    openFaq(); window.addEventListener('hashchange', openFaq);
+  })();
+</script>
+</body>
+</html>
