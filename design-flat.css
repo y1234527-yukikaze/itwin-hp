@@ -7,8 +7,9 @@ body.design-flat *::before,
 body.design-flat *::after { box-shadow: none !important; text-shadow: none !important; }
 
 /* ---- 1. 囲み線をなくし、うすい背景色で分ける ---- */
-body.design-flat :is(.flow-step, .plan-steps li, .loop-node, .acc-item, .company-box, .message-block,
-  .cf-box, .pp, .price-ask, .industry-banner, .article-toc, .tool-cta, .article-cta, .author-box,
+/* 入力欄の枠（.message-block）と、余白のない入れ物（.cf-box）は対象外（2026-11-21 問い合わせページで確認） */
+body.design-flat :is(.flow-step, .plan-steps li, .loop-node, .acc-item, .company-box,
+  .pp, .price-ask, .industry-banner, .article-toc, .tool-cta, .article-cta, .author-box,
   .column-card, .cs-card, .aruaru, .card, .profile-photo, .chapter-sum, .calc-tool, .ufo-msg) {
   border: none !important;
   background-color: var(--paper-soft) !important;
@@ -21,8 +22,8 @@ body.design-flat .article-rich :is(.chapter-sum, .article-cta) { outline: none !
 /* ---- 1. 角丸を小さく（番号の丸は残す） ---- */
 body.design-flat :is(.btn:not(.ufo *), .flow-step, .plan-steps li, .loop-node, .acc-item, .company-box, .profile-photo,
   .industry-banner, .column-card, .industry-card, .article-toc, .article-cta, .card, .tag, .tw-tag,
-  .chapter-sum, .calc-tool, .cs-card, .aruaru, .tool-cta, .author-box, .dq-chips label, .cf-box, .pp, .price-ask,
-  .message-block, .article-figure img, .dt-figure img, .trial-banner, .cta-band, .new-badge, .acc-item) {
+  .chapter-sum, .calc-tool, .cs-card, .aruaru, .tool-cta, .author-box, .dq-chips label, .pp, .price-ask,
+  .article-figure img, .dt-figure img, .trial-banner, .cta-band, .new-badge, .acc-item) {
   border-radius: 4px !important;
 }
 
