@@ -54,8 +54,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
   <link rel="icon" href="../../favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -107,7 +109,7 @@
   }
   </script>
 </head>
-<body>
+<body class="design-flat font-noto">
 
   <!-- ◆ヘッダー -->
   <header class="site-header">
@@ -242,7 +244,7 @@
         <h2>PLCとラズパイの接続方法は3通り｜何を渡すかで決める</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-plc-raspberry-pi-connection-methods.jpg" alt="PLCとラズパイの接続方法3通り。LANで値をやり取りする、24Vの接点信号を絶縁して渡す、ほかとつながない設備ではラズパイをPLC代わりにする" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-plc-raspberry-pi-connection-methods.jpg?v=20261121" alt="PLCとラズパイの接続方法3通り。LANで値をやり取りする、24Vの接点信号を絶縁して渡す、ほかとつながない設備ではラズパイをPLC代わりにする" width="1376" height="768" loading="lazy">
           <figcaption>値を渡すならLAN、合図だけなら接点信号、設備を丸ごと動かすならPLC代わり。</figcaption>
         </figure>
 
@@ -373,7 +375,7 @@
         <h2>PLCとラズパイの接続で設備が止まる原因｜IPアドレスの重複</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-plc-raspberry-pi-connection-ip.jpg" alt="IPアドレスの重複で設備のデータが止まった実例。トレーサビリティの装置のIPアドレスが変わり、全体のデータの流れが止まった。原因がIPアドレスと分かるまでと、対象の設備を探すのに時間がかかった" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-plc-raspberry-pi-connection-ip.jpg?v=20261121" alt="IPアドレスの重複で設備のデータが止まった実例。トレーサビリティの装置のIPアドレスが変わり、全体のデータの流れが止まった。原因がIPアドレスと分かるまでと、対象の設備を探すのに時間がかかった" width="1376" height="768" loading="lazy">
           <figcaption>1台の番号が変わっただけで、全体の流れが止まる。原因と場所を探すのに、いちばん時間がかかった。</figcaption>
         </figure>
 
@@ -525,7 +527,7 @@
         <h2>PLCとラズパイの接続はネットワークを分けてから｜FA用・OA用・ラズパイ用</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-plc-raspberry-pi-connection-network.jpg" alt="ネットワークを3つに分ける考え方。設備どうしのFA用、事務所のOA用、ラズパイ用。間は決めた通り道だけでつなぎ、IPアドレスは台帳で管理する" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-plc-raspberry-pi-connection-network.jpg?v=20261121" alt="ネットワークを3つに分ける考え方。設備どうしのFA用、事務所のOA用、ラズパイ用。間は決めた通り道だけでつなぎ、IPアドレスは台帳で管理する" width="1376" height="768" loading="lazy">
           <figcaption>設備・事務所・ラズパイを分け、間は決めた通り道だけでつなぐ。</figcaption>
         </figure>
 

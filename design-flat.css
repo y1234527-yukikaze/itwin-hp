@@ -1,0 +1,54 @@
+/* デザイン（2026-11-21 採用）：「AIっぽさ」を減らす3点。body に design-flat を付けたページだけ有効
+   1. 囲み線・影・角丸を減らす  2. トップH2の下線と長文の中央揃えをやめる  3. グラデーションを単色にする */
+
+/* ---- 1. 影をなくす ---- */
+body.design-flat *,
+body.design-flat *::before,
+body.design-flat *::after { box-shadow: none !important; text-shadow: none !important; }
+
+/* ---- 1. 囲み線をなくし、うすい背景色で分ける ---- */
+body.design-flat :is(.flow-step, .plan-steps li, .loop-node, .acc-item, .company-box, .message-block,
+  .cf-box, .pp, .price-ask, .industry-banner, .article-toc, .tool-cta, .article-cta, .author-box,
+  .column-card, .cs-card, .aruaru, .card, .profile-photo, .chapter-sum, .calc-tool, .ufo-msg) {
+  border: none !important;
+  background-color: var(--paper-soft) !important;
+}
+body.design-flat :is(.article-figure svg, .calc-fig svg) { border: none !important; }
+/* まとめ枠の右下の折り返し（点線）も外す */
+body.design-flat .article-rich :is(.chapter-sum, .article-cta)::after { display: none !important; }
+body.design-flat .article-rich :is(.chapter-sum, .article-cta) { outline: none !important; }
+
+/* ---- 1. 角丸を小さく（番号の丸は残す） ---- */
+body.design-flat :is(.btn:not(.ufo *), .flow-step, .plan-steps li, .loop-node, .acc-item, .company-box, .profile-photo,
+  .industry-banner, .column-card, .industry-card, .article-toc, .article-cta, .card, .tag, .tw-tag,
+  .chapter-sum, .calc-tool, .cs-card, .aruaru, .tool-cta, .author-box, .dq-chips label, .cf-box, .pp, .price-ask,
+  .message-block, .article-figure img, .dt-figure img, .trial-banner, .cta-band, .new-badge, .acc-item) {
+  border-radius: 4px !important;
+}
+
+/* ヘッダーのお問い合わせボタンは影だけで形を出していたため、色面にする */
+body.design-flat .site-header .btn { background: var(--navy) !important; color: #fff !important; }
+
+/* ---- 2. トップのH2の下線をやめる・長い文は左そろえ（見出しも一緒に左へ） ---- */
+body.design-flat .h2-underline { text-decoration: none !important; }
+body.design-flat :is(.section-head, .section-head h2, .section-head p, .lead-center, .flow-note, .stairs-foot) { text-align: left !important; }
+
+/* ---- 3. グラデーションを単色に ---- */
+body.design-flat .hero {
+  background: linear-gradient(rgba(8,30,56,0.72), rgba(8,30,56,0.72)),
+              url("hero-map.jpg") right center/cover no-repeat !important;
+}
+@media (max-width: 700px) {
+  body.design-flat .hero {
+    background: linear-gradient(rgba(8,30,56,0.66), rgba(8,30,56,0.66)),
+                url("hero-map-mobile.jpg") center center/cover no-repeat !important;
+  }
+}
+body.design-flat .subhero     { background: var(--navy-deep) !important; }
+body.design-flat .dt          { background: #0d2b4e !important; }
+body.design-flat .trial-banner{ background: var(--orange) !important; }
+body.design-flat .cta-band    { background: var(--navy) !important; }
+body.design-flat :is(.profile-photo, .img-frame) { background: var(--paper-soft) !important; }
+body.design-flat .new-badge   { background: #1f6fe0 !important; }
+body.design-flat .calc-tool .calc-btns button { background: #fff !important; }
+body.design-flat .calc-tool .calc-btns button[aria-pressed="true"] { background: var(--navy) !important; }

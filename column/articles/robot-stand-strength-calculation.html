@@ -54,8 +54,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
   <link rel="icon" href="../../favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -107,7 +109,7 @@
   }
   </script>
 </head>
-<body>
+<body class="design-flat font-noto">
 
   <!-- ◆ヘッダー -->
   <header class="site-header">
@@ -313,7 +315,7 @@
         <h2>仮想モデルでのロボット架台の強度計算例</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-robot-stand-model.jpg" alt="計算モデル。スパン2,000mm、柱高さ2,500mmの門型架台の梁の中央に、本体250kg・可搬50kgのロボットを天吊りする。横から見ると、水平力とモーメントを柱だけで支える形になる" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-robot-stand-model.jpg?v=20261121" alt="計算モデル。スパン2,000mm、柱高さ2,500mmの門型架台の梁の中央に、本体250kg・可搬50kgのロボットを天吊りする。横から見ると、水平力とモーメントを柱だけで支える形になる" width="1376" height="768" loading="lazy">
           <figcaption>門型架台は、横から見た向き（面外）の力を柱だけで支える</figcaption>
         </figure>
 
@@ -425,7 +427,7 @@
         </p>
 
         <figure class="article-figure">
-          <img src="../../img/column-robot-stand-result.jpg" alt="計算結果。梁の応力78.5MPaで合格（余裕2％）、柱の応力85.1MPaで不合格（6％超過）、梁の高さでの横ゆれは非常停止時に20.4mm" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-robot-stand-result.jpg?v=20261121" alt="計算結果。梁の応力78.5MPaで合格（余裕2％）、柱の応力85.1MPaで不合格（6％超過）、梁の高さでの横ゆれは非常停止時に20.4mm" width="1376" height="768" loading="lazy">
           <figcaption>部材を決めているのは、強度よりも剛性</figcaption>
         </figure>
 

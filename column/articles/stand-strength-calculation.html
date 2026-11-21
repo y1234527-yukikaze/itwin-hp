@@ -54,8 +54,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
   <link rel="icon" href="../../favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -107,7 +109,7 @@
   }
   </script>
 </head>
-<body>
+<body class="design-flat font-noto">
 
   <!-- ◆ヘッダー -->
   <header class="site-header">
@@ -491,13 +493,13 @@
         <p>
           同じ計算例で、部材だけを変えて比べます。1mあたりの重さが近い3種類です。
         </p>
-        <table>
+        <div class="table-scroll"><table class="table-wide">
           <tr><th>部材</th><th>重さ</th><th>梁の応力</th><th>梁のたわみ</th><th>柱の細長比</th></tr>
           <tr><td>角パイプ □50×50×3.2</td><td>4.50 kg/m</td><td>75.8 MPa</td><td>1.24 mm</td><td>85</td></tr>
           <tr><td>アングル L-50×50×6</td><td>4.43 kg/m</td><td>174.2 MPa</td><td>2.00 mm</td><td>166</td></tr>
           <tr><td>溝形鋼 [-75×40（強い向き）</td><td>6.92 kg/m</td><td>30.9 MPa</td><td>0.34 mm</td><td>137</td></tr>
           <tr><td>溝形鋼 [-75×40（弱い向き）</td><td>6.92 kg/m</td><td>139.1 MPa</td><td>2.08 mm</td><td>137</td></tr>
-        </table>
+        </table></div>
         <p>
           重さがほぼ同じ角パイプとアングルで、<strong class="mk">梁の応力は2倍以上違います</strong>。アングルは許容値の80MPaを大きく超えました。溝形鋼は、向きを変えるだけで応力が4倍以上変わります。
         </p>
@@ -1354,7 +1356,7 @@
 })();
 </script>
 <!-- ◆アイキャッチの傾き（キットの article_nav.py で入れ直す） -->
-<script src="../glossary.js?v=20261119" defer></script>
+<script src="../glossary.js?v=20261121" defer></script>
 <script src="../eye-tilt.js" defer></script>
 </body>
 </html>

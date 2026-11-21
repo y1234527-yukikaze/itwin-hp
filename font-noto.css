@@ -1,0 +1,17 @@
+/* 書体（2026-11-21 決定）：見出し・本文とも Noto Sans JP（太さで使い分け）
+   読み込んでいるページ：トップ・会社概要・設計ノート特集・ラズパイの記事。
+   新しいページは、このファイルを読み込み body に font-noto を付けます。全体に広げたら style-v2.css 側に移します。 */
+body.font-noto,
+body.font-noto * {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif !important;
+}
+body.font-noto h1 { font-weight: 900; }
+body.font-noto h2,
+body.font-noto h3 { font-weight: 700; }
+
+/* トップのヒーロー見出しだけは、元の明朝（しっぽり明朝）のまま */
+body.font-noto .hero h1,
+body.font-noto .hero h1 * {
+  font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif !important;
+  font-weight: 700;
+}

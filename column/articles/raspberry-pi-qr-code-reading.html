@@ -54,8 +54,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
   <link rel="icon" href="../../favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -107,7 +109,7 @@
   }
   </script>
 </head>
-<body>
+<body class="design-flat font-noto">
 
   <!-- ◆ヘッダー -->
   <header class="site-header">
@@ -242,7 +244,7 @@
         <h2>ラズパイでQRコードを読み取る仕組み</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-raspberry-pi-qr-reading-flow.jpg" alt="QRコードの読み取りの流れ。カメラで撮る、画像からQRコードを探す、文字にする、記録やPLCへ渡す。ラズパイを買う前は、ノートパソコンのカメラで同じ流れを試せる" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-raspberry-pi-qr-reading-flow.jpg?v=20261121" alt="QRコードの読み取りの流れ。カメラで撮る、画像からQRコードを探す、文字にする、記録やPLCへ渡す。ラズパイを買う前は、ノートパソコンのカメラで同じ流れを試せる" width="1376" height="768" loading="lazy">
           <figcaption>撮る、探す、文字にする、渡す。この流れは、ノートパソコンでもラズパイでも同じ。</figcaption>
         </figure>
 
@@ -380,7 +382,7 @@ PLCへ送る働きは、このあと別に相談します。</p>
         <h2>読めない8つの原因と対策</h2>
 
         <figure class="article-figure">
-          <img src="../../img/column-raspberry-pi-qr-reading-ng.jpg" alt="QRコードが読めない8つの原因。画角の外、角度、照明と反射、ピント、マスが小さい、汚れやかすれ、動きによるブレ、周りの余白不足" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-raspberry-pi-qr-reading-ng.jpg?v=20261121" alt="QRコードが読めない8つの原因。画角の外、角度、照明と反射、ピント、マスが小さい、汚れやかすれ、動きによるブレ、周りの余白不足" width="1376" height="768" loading="lazy">
           <figcaption>読めないときは、まず「写っているか」、次に「きれいに写っているか」を見る。</figcaption>
         </figure>
 
@@ -539,7 +541,7 @@ PLCへ送る働きは、このあと別に相談します。</p>
         </p>
 
         <figure class="article-figure">
-          <img src="../../img/column-raspberry-pi-qr-reading-case.jpg" alt="生産終了したQRリーダーの置き換えの構成。USBカメラで撮り、ラズパイ4で読み取り、分かれたLANでPLCへ送る。3回撮ってNGならアラームを出し、元のリーダーを手持ちで使って読む" width="1376" height="768" loading="lazy">
+          <img src="../../img/column-raspberry-pi-qr-reading-case.jpg?v=20261121" alt="生産終了したQRリーダーの置き換えの構成。USBカメラで撮り、ラズパイ4で読み取り、分かれたLANでPLCへ送る。3回撮ってNGならアラームを出し、元のリーダーを手持ちで使って読む" width="1376" height="768" loading="lazy">
           <figcaption>3回撮って読めなければアラーム。元のリーダーを手持ち用に回して読む。</figcaption>
         </figure>
 
