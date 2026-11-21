@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜架台の強度計算 はじめての方の読み方ガイド（副読本・2026-11-20）
+  親記事 stand-strength-calculation.html の計算例を、動く図で1つずつ追うページ
+  検索結果には出さない（noindex）。サイトマップ・記事一覧・llms.txt には載せない
+  数字はすべて親記事の計算例と同じ。新しい計算はしない
+  図は下のスクリプトが描く（右の図＝PC、各章の頭の図＝スマホ）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>架台の強度計算 はじめての方の読み方ガイド｜アイツイン コラム</title>
+  <meta name="description" content="架台の強度計算の計算例（500kgの設備をのせる4本脚の架台）を、動く図で1つずつ追う読み方ガイドです。力の流れと、梁の曲げ・たわみ・柱の座屈・横からの力の確かめ方が分かります。">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆このページだけの見た目（動く図・力のリレー・3ステップ） -->
+  <style>
+    .sg-lead { max-width: 820px; margin: 0 auto 8px; }
+    .sg-lead p { line-height: 1.9; margin-bottom: 14px; }
+    .sg-lead .sg-back { font-size: 0.92rem; }
+    .sg-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 12px; }
+    .sg-text.article-body { max-width: none; margin: 0; }
+    .sg-text h2:first-child { margin-top: 24px; }
+    .sg-side { position: sticky; top: 88px; }
+    .sg-fig { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; box-shadow: var(--shadow); }
+    .sg-svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 360px); min-height: 230px; }
+    .sg-svg .lb { paint-order: stroke; stroke: #fff; stroke-width: 5px; stroke-linejoin: round; font-family: inherit; }
+    .sg-read { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 8px; }
+    .sg-now { font-weight: 700; color: var(--navy); margin: 0 0 4px !important; font-size: 0.95rem; }
+    .sg-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; font-size: 0.86rem; line-height: 1.5; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+    .sg-row--bar { grid-template-columns: minmax(0, 1fr) minmax(80px, 130px) 3.2em; }
+    .sg-k { color: var(--ink-soft); }
+    .sg-v { color: var(--navy); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+    .sg-bar { position: relative; height: 10px; background: #e7ebf0; border-radius: 99px; overflow: hidden; }
+    .sg-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 99px; }
+    .sg-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; margin-top: 8px; }
+    .sg-fnote { font-size: 0.78rem; color: var(--ink-soft); margin: 0 !important; line-height: 1.6; }
+    .sg-replay { font: inherit; font-size: 0.82rem; color: var(--navy); background: #fff; border: 1px solid var(--navy); border-radius: 99px; padding: 4px 14px; cursor: pointer; margin-left: auto; }
+    .sg-replay:hover, .sg-replay:focus-visible { background: var(--navy); color: #fff; }
+    .sg-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.78rem; color: var(--ink-soft); margin: 8px 2px 0; }
+    .sg-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .sg-legend i { width: 12px; height: 10px; border-radius: 2px; display: inline-block; }
+    .sg-slot { display: none; }
+    .sg-ch { padding-bottom: 28px; }
+    .sg-ch h2 { scroll-margin-top: 90px; }
+
+    .sg-relay-h { font-size: 0.86rem; font-weight: 700; color: var(--ink-soft); margin: 16px 0 0 !important; }
+    .sg-relay { display: flex; flex-direction: column; gap: 2px; margin: 6px 0 12px; }
+    .sg-relay .r { display: grid; grid-template-columns: 7.5em 8.5em minmax(0, 1fr); align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; font-size: 0.86rem; line-height: 1.5; background: #fff; transition: background-color .3s, border-color .3s; }
+    .sg-relay .r b { color: var(--navy); font-variant-numeric: tabular-nums; }
+    .sg-relay .r i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+    .sg-relay .r.lit { background: #fff4ea; border-color: #f0c9a6; }
+    .sg-relay .ar { align-self: flex-start; margin-left: 2.6em; color: var(--ink-soft); font-size: 0.8rem; line-height: 1.2; }
+
+    .sg-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 8px 0 22px; }
+    .sg-steps > div { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; }
+    .sg-steps p { margin: 0 !important; font-size: 0.9rem; line-height: 1.75; }
+    .sg-steps .sg-sn { font-weight: 700; color: var(--navy); margin-bottom: 4px !important; }
+
+    .sg-after { max-width: 820px; margin: 24px auto 0; }
+    .sg-qa details { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 8px 0; background: #fff; }
+    .sg-qa summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+    .sg-qa details p { margin: 10px 0 2px; }
+    .sg-go { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 18px 0 8px; }
+
+    @media (max-width: 959px) {
+      .sg-main { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .sg-side { display: none; }
+      .sg-slot { display: block; margin: 0 0 18px; }
+      .sg-svg { max-height: none; min-height: 0; }
+    }
+    @media (max-width: 700px) {
+      .sg-steps { grid-template-columns: minmax(0, 1fr); }
+      .sg-relay .r { grid-template-columns: 6.5em minmax(0, 1fr); }
+      .sg-relay .r .rd { grid-column: 2; }
+      .sg-row--bar { grid-template-columns: minmax(0, 1fr) 80px 3.2em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <a href="stand-strength-calculation.html">架台の強度計算の方法と例</a> ／
+        <span>はじめての方の読み方ガイド</span>
+      </div>
+      <h1>架台の強度計算 はじめての方の読み方ガイド</h1>
+      <p class="catch">図を動かしながら、計算例を1つずつ追います</p>
+    </div>
+  </section>
+
+  <!-- ◆本体 -->
+  <section class="section">
+    <div class="wrap">
+
+      <!-- ◆はじめに -->
+      <div class="sg-lead article-body article-rich">
+        <p>
+          「<a href="stand-strength-calculation.html">架台の強度計算の方法と例</a>」では、500kgの設備をのせる4本脚の架台を例に、梁と柱の計算をしています。このページは、その計算例を、図を動かしながら1つずつ追う読み方ガイドです。式を覚えるより先に、<strong class="mk">力がどこからどこへ流れ、どこで何を確かめているのか</strong>をつかむことをめざします。
+        </p>
+        <p>
+          数字は、すべて記事の計算例と同じです（説明用の例です）。計算は丸める前の値で行っているため、表示した数字どうしを掛けた結果と、末尾が合わないことがあります。図は、読み進めるとその章の内容に切り替わり、1回だけ動きます。もう一度見たいときは「もう一度動かす」を押してください。
+        </p>
+        <p class="sg-back"><a href="stand-strength-calculation.html">← 架台の強度計算の記事に戻る</a></p>
+      </div>
+
+      <div class="sg-main">
+        <div class="sg-text article-body article-rich">
+
+          <!-- ◆0 全体像 -->
+          <div class="sg-ch" data-state="all">
+            <h2>0. まず全体像：力はリレーで床まで流れる</h2>
+            <div class="sg-slot"></div>
+            <p>
+              架台にかかる力は、大きく2種類です。1つは、設備の重さによる下向きの力です。もう1つは、地震や、人や台車がぶつかることで生じる横向きの力です。
+            </p>
+            <p>
+              どちらの力も、上の部材から下の部材へ、バトンのように受け渡されます。最後に受け止めるのは床です。途中のどこか1か所でも耐えられなければ、そこで壊れます。強度計算は、<strong class="mk">このリレーの区間ごとに「耐えられるか」を順に確かめる作業</strong>です。
+            </p>
+            <p class="sg-relay-h">下向きの力（設備の重さ）</p>
+            <div class="sg-relay" data-kind="d">
+              <div class="r"><span class="rn"><i style="background:#6b7280"></i>設備</span><b>4,905 N</b><span class="rd">重さ</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#2f6fb8"></i>梁</span><b>1本 2,453 N</b><span class="rd">曲げられる</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#2e8b57"></i>柱</span><b>1本 1,306 N</b><span class="rd">押される</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#b08a4e"></i>床</span><b>受け止める</b><span class="rd">最後の区間</span></div>
+            </div>
+            <p class="sg-relay-h">横向きの力（地震・ぶつかる力）</p>
+            <div class="sg-relay" data-kind="h">
+              <div class="r"><span class="rn"><i style="background:#d4691a"></i>横の力</span><b>1,472 N</b><span class="rd">重さ×0.3</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#2e8b57"></i>柱</span><b>1本 368 N</b><span class="rd">横から押される</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#6d4bb3"></i>柱の根元</span><b>曲げられる</b><span class="rd">てこの働き</span></div><span class="ar" aria-hidden="true">↓</span>
+              <div class="r"><span class="rn"><i style="background:#b08a4e"></i>つなぎ目と床</span><b>別の記事</b><span class="rd">で確かめる</span></div>
+            </div>
+
+            <h3>どの区間でも、やることは同じ3ステップ</h3>
+            <div class="sg-steps">
+              <div><p class="sg-sn">① かかる力を出す</p><p>上から受け取った力を、その部材が「曲げられる」「押される」などの形に直し、1mm²あたりの力（応力）にします。</p></div>
+              <div><p class="sg-sn">② 耐えられる値を決める</p><p>材料の強さと<span class="term" tabindex="0" aria-describedby="tip1">安全率<span class="term-tip" role="tooltip" id="tip1">材料の強さに対して、どれだけ余裕を持たせるかを表す倍率です。安全率5なら、基準にした強さの5分の1を上限の目安にします。</span></span>から、「ここまでなら使ってよい」という上限（<span class="term" tabindex="0" aria-describedby="tip2">許容応力<span class="term-tip" role="tooltip" id="tip2">部材に生じてもよい応力（1mm²あたりの力）の上限です。材料の強さ、設計の基準、安全率をもとに決めます。</span></span>）を決めます。</p></div>
+              <div><p class="sg-sn">③ 割り算する</p><p>①÷②を計算します。1.0以下なら合格です。0.95なら「上限の95％まで使っている」という意味です。</p></div>
+            </div>
+          </div>
+
+          <!-- ◆1 荷重 -->
+          <div class="sg-ch" data-state="load">
+            <h2>1. 設備の重さを、力に直す</h2>
+            <div class="sg-slot"></div>
+            <p>
+              計算は、のせる物の重さを「力」に直すところから始まります。質量（kg）に9.81を掛けると、力（N：ニュートン）になります。
+            </p>
+            <p class="calc">設備の重さ　500 × 9.81 ＝ <b>4,905 N</b></p>
+            <p>
+              4本脚の架台では、設備を手前と奥の2本の梁で受けます。そのため、梁1本が受ける力は半分の2,453Nです。図では、設備を少し持ち上げて、力が2本の梁に分かれる様子を見せています。
+            </p>
+            <p class="calc">梁1本が受ける力　P ＝ 4,905 ÷ 2 ＝ <b>2,453 N</b></p>
+            <p>
+              記事の計算例では、この力が梁の真ん中に集まってかかるものとしています。全体に広がってのる場合より厳しい条件なので、のせ方が分からないときは、こちらで計算します。
+            </p>
+          </div>
+
+          <!-- ◆2 梁の曲げ -->
+          <div class="sg-ch" data-state="beam">
+            <h2>2. 梁の曲げ：曲げられても耐えられるか</h2>
+            <div class="sg-slot"></div>
+            <p>
+              真ん中に力を受けた梁は、下へ曲げられます。このとき梁の上側は縮み、下側は伸びます。梁を曲げようとする働きの大きさを<span class="term" tabindex="0" aria-describedby="tip3">曲げモーメント<span class="term-tip" role="tooltip" id="tip3">梁を曲げようとする働きの大きさです。力と、力の向きに直角に測った距離を掛けて求めます。のせ方が同じなら、スパンが長いほど大きくなります。</span></span>と呼びます。曲げモーメントは、<strong class="mk">梁の真ん中でいちばん大きく</strong>なります。
+            </p>
+            <h3>① かかる力：曲げモーメントから応力を出す</h3>
+            <p>
+              梁の両端は、柱が半分ずつ（約1,226N）支えています。曲げモーメントは「力×距離」で求めます。柱から梁の真ん中までは500mmなので、真ん中の曲げモーメントは次のとおりです。記事の式 M＝P×L÷4 と同じ計算です。
+            </p>
+            <p class="calc">
+              柱が支える力 × 真ん中までの距離　1,226 × 500 ≒ 613,125 N·mm<br>
+              梁自身の重さの分を足して　613,125 ＋ 5,518 ＝ <b>618,643 N·mm</b>
+            </p>
+            <p>
+              この曲げモーメントを<span class="term" tabindex="0" aria-describedby="tip4">断面係数<span class="term-tip" role="tooltip" id="tip4">断面の形から決まる、曲げ応力を求めるための値です。大きいほど、同じ曲げモーメントで生じる応力が小さくなります。</span></span>Zで割ると、1mm²あたりの力（曲げ応力）になります。Zは鋼材の断面性能表に載っていて、□50×50×3.2では8,160mm³です。答えの単位MPaは、1mm²あたりの力（N/mm²）と同じ意味です。
+            </p>
+            <p class="calc">曲げ応力　σ ＝ M ÷ Z ＝ 618,643 ÷ 8,160 ＝ <b>75.8 MPa</b></p>
+            <h3>② 耐えられる値：許容応力80MPa</h3>
+            <p>
+              記事の計算例では、鋼の<span class="term" tabindex="0" aria-describedby="tip5">引張強さ<span class="term-tip" role="tooltip" id="tip5">材料を引っぱる試験で、ちぎれるまでに示す最大の応力です。一般的な鋼材SS400では、規格で400〜510MPaと決まっています。</span></span>400MPaを安全率5で割った80MPaを、許容応力にしています。この値は、基準の決め方で変わります。社内基準や客先の指定がある場合は、そちらを使います。
+            </p>
+            <h3>③ 割り算：75.8 ÷ 80 ＝ 0.95</h3>
+            <p>
+              上限の95％まで使っています。合格ですが、余裕はわずかです。この架台では、この梁の曲げがいちばん厳しい確認になります。
+            </p>
+          </div>
+
+          <!-- ◆3 たわみ -->
+          <div class="sg-ch" data-state="defl">
+            <h2>3. 梁のたわみ：下がりすぎないか</h2>
+            <div class="sg-slot"></div>
+            <p>
+              曲げに耐えられても、梁が大きく下がれば、のせた設備が傾いたり、位置がずれたりします。そのため、<span class="term" tabindex="0" aria-describedby="tip6">たわみ<span class="term-tip" role="tooltip" id="tip6">力を受けた梁などが、元の位置から動く量です。大きすぎると、設備の傾きや位置ずれ、ほかの部品とのぶつかりにつながります。</span></span>（下がる量）は、強さとは別に確かめます。
+            </p>
+            <h3>① たわみの量を出す</h3>
+            <p class="calc">
+              δ ＝ P × L³ ÷（48 × E × I）＋ 自重の分<br>
+              　＝ 2,453 × 1,000³ ÷（48 × 205,000 × 204,000）＋ 自重の分 ＝ <b>1.24 mm</b>
+            </p>
+            <p>
+              Eは材料の<span class="term" tabindex="0" aria-describedby="tip7">ヤング率<span class="term-tip" role="tooltip" id="tip7">材料そのものの伸び縮みのしにくさを表す値です。鋼では一般に約205,000MPaで、鋼の種類が変わっても大きくは変わりません。</span></span>、Iは<span class="term" tabindex="0" aria-describedby="tip8">断面二次モーメント<span class="term-tip" role="tooltip" id="tip8">断面の形から決まる、曲げに対する抵抗の大きさです。同じ材料・同じのせ方なら、大きいほどたわみが小さくなります。</span></span>です。Zが「強さ」に効く値なら、Iは「かたさ」に効く値です。どちらも断面性能表に載っています。
+            </p>
+            <h3>② 目安：スパンの1/300</h3>
+            <p>
+              たわみに一律の基準はありません。記事では、建築の規準にある参考値「スパンの1/300」を目安にしています。スパン1,000mmなら3.33mmです。精度が必要な設備をのせる場合は、もっと小さい値を決めます。
+            </p>
+            <h3>③ 割り算：1.24 ÷ 3.33 ≒ 0.37</h3>
+            <p>
+              目安の4割弱で、たわみには余裕があります。ただし、<strong class="mk">たわみはスパンの3乗で増えます</strong>。スパンが2倍になると、たわみは8倍です。柱の間隔を広げるときは、たわみが先に効いてきます。
+            </p>
+          </div>
+
+          <!-- ◆4 柱 -->
+          <div class="sg-ch" data-state="col">
+            <h2>4. 柱：押されて、急に横へ曲がらないか</h2>
+            <div class="sg-slot"></div>
+            <p>
+              梁が受けた力は、柱へ渡ります。柱1本が受ける力は、設備の重さの4分の1に、梁と柱自身の重さを足したものです。
+            </p>
+            <p class="calc">柱1本の力　N ＝ 1,226 ＋ 44 ＋ 35 ＝ <b>1,306 N</b></p>
+            <p>
+              細長い柱は、押しつぶされるより先に、急に横へ曲がって力を受けられなくなります。これを<span class="term" tabindex="0" aria-describedby="tip9">座屈<span class="term-tip" role="tooltip" id="tip9">柱などを押し縮めたとき、材料がつぶれる前に、急に横へ曲がってしまう現象です。</span></span>と呼びます。柱の計算では、この座屈を確かめます。
+            </p>
+            <h3>座屈長さは、柱の高さの2倍</h3>
+            <p>
+              筋かいのない架台の柱は、根元が床に固定され、上の端は横に動けます。この柱が座屈するときの形は、<strong class="mk">2倍の長さで両端が自由に回れる柱の、上半分と同じ</strong>です。そのため、計算に使う<span class="term" tabindex="0" aria-describedby="tip10">座屈長さ<span class="term-tip" role="tooltip" id="tip10">座屈を計算するときに使う柱の長さです。両端の支え方で変わり、たとえば下端を固定して上端が横に動ける柱では、高さの2倍とします。</span></span>は、高さ800mmの2倍の1,600mmにします。図では、この「同じ形」を重ねて見せています。
+            </p>
+            <h3>① かかる力：圧縮応力</h3>
+            <p class="calc">圧縮応力　σc ＝ N ÷ A ＝ 1,306 ÷ 572.7 ＝ <b>2.3 MPa</b></p>
+            <h3>② 耐えられる値：細長比から決める</h3>
+            <p>
+              柱がどれだけ細長いかは、<span class="term" tabindex="0" aria-describedby="tip11">細長比<span class="term-tip" role="tooltip" id="tip11">柱がどれだけ細長いかを表す数です。座屈長さを断面二次半径で割って求め、大きいほど一般に座屈しやすくなります。</span></span>で表します。座屈長さを<span class="term" tabindex="0" aria-describedby="tip12">断面二次半径<span class="term-tip" role="tooltip" id="tip12">断面の形から決まる、柱の座屈しにくさに関わる値です。断面二次モーメントを断面積で割り、その平方根をとって求めます。</span></span>iで割った数で、□50×50×3.2では i＝18.9mm です。
+            </p>
+            <p class="calc">
+              細長比　λ ＝ 1,600 ÷ 18.9 ＝ 85<br>
+              許容圧縮応力　fc ＝ <b>102.6 MPa</b>（細長比85のとき）
+            </p>
+            <p>
+              細長比が大きいほど、許容圧縮応力は小さくなります。この値は、鋼構造の設計規準にある式で求めます。記事の計算ツールも、同じ式で計算しています。
+            </p>
+            <h3>③ 割り算：2.3 ÷ 102.6 ≒ 0.02</h3>
+            <p>
+              上から押される力だけなら、柱にはかなり余裕があります。ただし、筋かいのない架台では、次の章の横からの力で、柱が曲げられます。柱の本当の確認は、次の章です。
+            </p>
+          </div>
+
+          <!-- ◆5 水平力 -->
+          <div class="sg-ch" data-state="horiz">
+            <h2>5. 横からの力：柱の根元が曲げられる</h2>
+            <div class="sg-slot"></div>
+            <p>
+              地震や、人や台車がぶつかると、架台には横向きの力がかかります。記事の計算例では、重さに<span class="term" tabindex="0" aria-describedby="tip13">係数<span class="term-tip" role="tooltip" id="tip13">（ここでは水平力の係数）重さに掛けて、横からかかる力を見込むための倍率です。0.3なら、重さの30％に当たる力が横からかかるものとして計算します。</span></span>0.3を掛けた力を見込んでいます。
+            </p>
+            <p class="calc">
+              水平力　4,905 × 0.3 ＝ 1,472 N<br>
+              柱1本あたり　1,472 ÷ 4 ＝ <b>368 N</b>
+            </p>
+            <p>
+              ここでは、4本の柱が均等に分けて受け、根元が床に固定されているものと仮定しています。この仮定が成り立つかどうかは、つなぎ目と柱の根元の作りで決まります。
+            </p>
+            <h3>① かかる力：根元の曲げ</h3>
+            <p>
+              横の力は、柱の上（梁の高さ）にかかります。根元からは800mm離れているので、<strong class="mk">てこのように、根元に大きな曲げモーメントが生じます</strong>。
+            </p>
+            <p class="calc">
+              根元の曲げモーメント　M ＝ 368 × 800 ≒ 294,300 N·mm<br>
+              曲げ応力　σb ＝ 294,300 ÷ 8,160 ＝ <b>36.1 MPa</b>
+            </p>
+            <h3>② 耐えられる値：2つの上限を使う</h3>
+            <p>
+              柱は、上から押される力と、横から曲げられる力を同時に受けます。押される分は許容圧縮応力102.6MPaと、曲げられる分は許容応力80MPaと比べます。
+            </p>
+            <h3>③ 割り算：2つの割合を足す</h3>
+            <p class="calc">2.3 ÷ 102.6 ＋ 36.1 ÷ 80 ＝ 0.02 ＋ 0.45 ＝ <b>0.47</b></p>
+            <p>
+              2つの割合を足して1.0以下なら合格です。上から押される力だけなら0.02だった柱が、横の力が加わると0.47になります。横の力を忘れると、柱の確認を見誤ります。なお、梁の高さでの横ゆれは1.5mmです。
+            </p>
+          </div>
+
+          <!-- ◆6 判定 -->
+          <div class="sg-ch" data-state="judge">
+            <h2>6. 判定：いちばん余裕が小さいところを探す</h2>
+            <div class="sg-slot"></div>
+            <p>
+              4つの確認を並べます。どれか1つでも1.0を超えたら、その部材を見直します。
+            </p>
+            <table>
+              <tr><th>確認</th><th>割り算</th><th>割合</th></tr>
+              <tr><td>梁の曲げ</td><td>75.8 ÷ 80</td><td>0.95</td></tr>
+              <tr><td>梁のたわみ</td><td>1.24 ÷ 3.33</td><td>0.37</td></tr>
+              <tr><td>柱の圧縮</td><td>2.3 ÷ 102.6</td><td>0.02</td></tr>
+              <tr><td>圧縮と曲げの組合せ</td><td>0.02 ＋ 0.45</td><td>0.47</td></tr>
+            </table>
+            <p>
+              この架台では、梁の曲げがいちばん厳しく、0.95でした。直し方は2つあります。1つは、梁を太くすることです。□75×75×3.2にすると、応力は30.9MPa、たわみは0.34mmまで下がります。もう1つは、柱の位置を見直して、スパンを短くすることです。
+            </p>
+          </div>
+
+          <!-- ◆7 つなぎ目と床 -->
+          <div class="sg-ch" data-state="joint">
+            <h2>7. この先：つなぎ目と床まで、力を届ける</h2>
+            <div class="sg-slot"></div>
+            <p>
+              力のリレーは、柱の根元で終わりではありません。梁と柱のつなぎ目、柱の根元の溶接とベースプレート、床に固定するアンカー、そして床まで、最後まで力が伝わるかを確かめます。区間ごとの計算は、次の記事で解説しています。
+            </p>
+            <ul>
+              <li>梁と柱、柱とベースプレートのつなぎ目：<a href="weld-strength-calculation.html">溶接の強度計算</a>、<a href="bolt-strength-calculation.html">ボルトの強度計算</a></li>
+              <li>床への固定：<a href="anchor-bolt-calculation.html">アンカーボルトの計算</a></li>
+              <li>横の力を、設置する場所から決める：<a href="stand-seismic-calculation.html">架台の耐震計算</a></li>
+            </ul>
+            <p>
+              同じ500kgの架台を3Dモデルで解析してまとめた<a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'guide'});">強度計算書の見本（11ページ）</a>も、別のタブで見られます。
+            </p>
+          </div>
+
+        </div>
+
+        <!-- ◆右の図（PC）。スマホでは各章の頭に同じ図が入る -->
+        <aside class="sg-side" aria-label="動く図">
+          <div class="sg-fig"></div>
+          <div class="sg-legend" aria-hidden="true">
+            <span><i style="background:#6b7280"></i>設備</span>
+            <span><i style="background:#2f6fb8"></i>梁</span>
+            <span><i style="background:#2e8b57"></i>柱</span>
+            <span><i style="background:#d4691a"></i>横の力</span>
+            <span><i style="background:#6d4bb3"></i>柱の根元</span>
+            <span><i style="background:#b08a4e"></i>床</span>
+          </div>
+        </aside>
+      </div>
+
+      <!-- ◆よくある疑問・次の一歩 -->
+      <div class="sg-after article-body article-rich">
+        <h2>よくある疑問</h2>
+        <div class="sg-qa">
+          <details>
+            <summary>NとMPaは、何が違うのですか？</summary>
+            <p>Nは力の大きさ、MPaは1mm²あたりにかかる力（N/mm²）です。同じ力でも、太い部材ほど1mm²あたりの力は小さくなります。強度計算で材料の上限と比べるのは、MPaの方です。</p>
+          </details>
+          <details>
+            <summary>なぜ、力が梁の真ん中に集まる条件で計算するのですか？</summary>
+            <p>同じ重さでも、真ん中に集まってかかる方が、全体に広がってかかるより、曲げモーメントが2倍になります。のせ方が分からないときは、厳しい側で計算しておけば安全側になります。</p>
+          </details>
+          <details>
+            <summary>許容応力は、いつも80MPaでよいのですか？</summary>
+            <p>いいえ。80MPaは、記事の計算例で使った値です。たとえば、クレーン構造規格の考え方では、SS400（板厚16mm以下）の許容応力は163MPaになります。社内基準や客先の指定がある場合はそちらを優先し、採用した基準を計算書に書いておきます。</p>
+          </details>
+          <details>
+            <summary>この計算で、架台の安全が確かめられたことになりますか？</summary>
+            <p>いいえ。この計算例は、梁と柱を単純な形に置き換えて、基本の考え方を説明するものです。実際の設計では、つなぎ目、柱の根元とアンカー、床、架台全体の横の揺れやねじり、動く荷重や振動なども、使用条件と適用する規準に応じて確かめます。</p>
+          </details>
+        </div>
+
+        <h2>自分の条件で試す</h2>
+        <p>
+          流れがつかめたら、記事の計算ツールで、ご自身の設備の重さやスパンを入れてみてください。同じ式で、梁と柱の応力の割合をすぐに確かめられます。
+        </p>
+        <div class="sg-go">
+          <a class="btn btn--fill" href="stand-strength-calculation.html#tool">計算ツールで試す</a>
+          <a class="btn btn--outline" href="stand-strength-calculation.html">記事に戻る</a>
+        </div>
+
+        <div class="article-cta">
+          今回の仕様が初めての条件で、一から調べる時間がないときは、架台の強度計算から計算書の作成までお引き受けします。図面や寸法などの条件を送っていただければ、計算の前提の整理から資料づくりまで行います（オンライン・全国対応）。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E6%9E%B6%E5%8F%B0%E3%81%AE%E5%BC%B7%E5%BA%A6%E8%A8%88%E7%AE%97">架台の強度計算を依頼する</a><a href="../../price.html#design">料金の目安</a></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<!-- ◆動く図（2026-11-20）。座標は正面から見た架台：床 y=400、柱 x=200/440（高さ800mm＝186）、梁 y=214 -->
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var RM = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var C = { load: '#6b7280', beam: '#2f6fb8', col: '#2e8b57', colL: '#8cc5a3', h: '#d4691a', floor: '#b08a4e', joint: '#a3322a', base: '#6d4bb3', off: '#c9d0d8', navy: '#0d2b4e', ok: '#2e8b57' };
+
+  function mk(tag, at, parent, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in at) e.setAttribute(k, at[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function fmt(n, d) { return n.toLocaleString('ja-JP', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
+  function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function fade(e, t) { e.style.opacity = t; }
+  function hex(c) { return [parseInt(c.substr(1, 2), 16), parseInt(c.substr(3, 2), 16), parseInt(c.substr(5, 2), 16)]; }
+  function mix(a, b, t) { var x = hex(a), y = hex(b); return 'rgb(' + [0, 1, 2].map(function (i) { return Math.round(x[i] + (y[i] - x[i]) * t); }).join(',') + ')'; }
+  function relay(kind, t) {
+    document.querySelectorAll('.sg-relay[data-kind="' + kind + '"] .r').forEach(function (r, i, all) {
+      r.classList.toggle('lit', t > 0 && i < Math.ceil(t * all.length - 0.01));
+    });
+  }
+
+  /* ---------- 図1つ分 ---------- */
+  function Fig(root, mobile) {
+    var F = this;
+    F.root = root; F.mobile = mobile; F.tok = 0; F.lift = 0;
+    var svg = F.svg = mk('svg', { viewBox: '0 0 640 440', 'class': 'sg-svg', role: 'img', 'aria-label': '500kgの設備をのせた4本脚の架台を、正面から見た図' }, root);
+    var fl = mk('g', {}, svg);
+    F.floor = mk('rect', { x: 40, y: 400, width: 560, height: 14, rx: 2 }, fl);
+    for (var x = 52; x < 600; x += 18) mk('line', { x1: x, y1: 414, x2: x - 10, y2: 426, stroke: '#d3d9e0', 'stroke-width': 1.5 }, fl);
+    F.frame = mk('g', {}, svg);
+    var back = mk('g', { transform: 'translate(40,-24)', opacity: 0.45 }, F.frame);
+    F.bcolL = mk('path', { fill: 'none', 'stroke-width': 8 }, back);
+    F.bcolR = mk('path', { fill: 'none', 'stroke-width': 8 }, back);
+    F.bbeam = mk('path', { fill: 'none', 'stroke-width': 10 }, back);
+    F.colL = mk('path', { fill: 'none', 'stroke-width': 10 }, F.frame);
+    F.colR = mk('path', { fill: 'none', 'stroke-width': 10 }, F.frame);
+    F.beam = mk('path', { fill: 'none', 'stroke-width': 12 }, F.frame);
+    F.baseL = mk('rect', { x: 186, y: 396, width: 28, height: 6, rx: 1 }, F.frame);
+    F.baseR = mk('rect', { x: 426, y: 396, width: 28, height: 6, rx: 1 }, F.frame);
+    F.jL = mk('rect', { width: 14, height: 14, rx: 2 }, F.frame);
+    F.jR = mk('rect', { width: 14, height: 14, rx: 2 }, F.frame);
+    F.equip = mk('g', {}, F.frame);
+    F.eqBox = mk('rect', { x: 270, y: 146, width: 100, height: 60, rx: 4 }, F.equip);
+    F.eqTx = mk('text', { x: 320, y: 182, 'text-anchor': 'middle', 'font-size': mobile ? 20 : 16, 'font-weight': 700 }, F.equip, '設備 500kg');
+    F.ov = mk('g', {}, svg);
+
+    var rd = document.createElement('div'); rd.className = 'sg-read'; root.appendChild(rd);
+    F.now = document.createElement('p'); F.now.className = 'sg-now'; rd.appendChild(F.now);
+    F.rows = document.createElement('div'); rd.appendChild(F.rows);
+    var foot = document.createElement('div'); foot.className = 'sg-foot'; rd.appendChild(foot);
+    F.note = document.createElement('p'); F.note.className = 'sg-fnote'; foot.appendChild(F.note);
+    F.btn = document.createElement('button'); F.btn.type = 'button'; F.btn.className = 'sg-replay'; F.btn.textContent = 'もう一度動かす'; foot.appendChild(F.btn);
+    F.btn.addEventListener('click', function () { F.show(F.key, 'anim'); });
+  }
+  Fig.prototype.geom = function (sag, sway) {
+    var F = this;
+    function col(x) { return 'M' + x + ' 400 C' + x + ' 330 ' + (x + sway) + ' 284 ' + (x + sway) + ' 214'; }
+    var b = 'M' + (194 + sway) + ' 214 Q' + (320 + sway) + ' ' + (214 + 2 * sag) + ' ' + (446 + sway) + ' 214';
+    F.colL.setAttribute('d', col(200)); F.colR.setAttribute('d', col(440)); F.beam.setAttribute('d', b);
+    F.bcolL.setAttribute('d', col(200)); F.bcolR.setAttribute('d', col(440)); F.bbeam.setAttribute('d', b);
+    F.jL.setAttribute('x', 193 + sway); F.jL.setAttribute('y', 207);
+    F.jR.setAttribute('x', 433 + sway); F.jR.setAttribute('y', 207);
+    F.equip.setAttribute('transform', 'translate(' + sway + ',' + (sag - F.lift) + ')');
+  };
+  Fig.prototype.paint = function (lit) {
+    var F = this, on = function (k) { return lit.indexOf(k) >= 0; };
+    var bc = on('beam') ? C.beam : C.off, cc = on('col') ? C.col : C.off;
+    [F.beam, F.bbeam].forEach(function (e) { e.setAttribute('stroke', bc); });
+    [F.colL, F.colR, F.bcolL, F.bcolR].forEach(function (e) { e.setAttribute('stroke', cc); });
+    F.eqBox.setAttribute('fill', on('load') ? C.load : '#e6eaef');
+    F.eqTx.setAttribute('fill', on('load') ? '#fff' : '#5f6a76');
+    [F.jL, F.jR].forEach(function (e) { e.setAttribute('fill', on('joint') ? C.joint : '#aeb7c1'); });
+    [F.baseL, F.baseR].forEach(function (e) { e.setAttribute('fill', on('base') ? C.base : '#aeb7c1'); });
+    F.floor.setAttribute('fill', on('floor') ? '#ecdcbc' : '#eef1f4');
+  };
+  Fig.prototype.arrow = function (x1, y1, x2, y2, c, w, parent) {
+    var g = mk('g', {}, parent || this.ov);
+    var dx = x2 - x1, dy = y2 - y1, L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L, hs = w * 2.4 + 5;
+    var bx = x2 - ux * hs, by = y2 - uy * hs;
+    mk('line', { x1: x1, y1: y1, x2: bx, y2: by, stroke: c, 'stroke-width': w, 'stroke-linecap': 'round' }, g);
+    mk('polygon', { points: [x2, y2, bx - uy * hs * 0.6, by + ux * hs * 0.6, bx + uy * hs * 0.6, by - ux * hs * 0.6].join(' '), fill: c }, g);
+    return g;
+  };
+  Fig.prototype.label = function (x, y, txt, c, anchor, size, parent) {
+    var s = (size || 15) * (this.mobile ? 1.35 : 1.12);
+    return mk('text', { x: x, y: y, fill: c || C.navy, 'text-anchor': anchor || 'middle', 'font-size': s, 'font-weight': 700, 'class': 'lb' }, parent || this.ov, txt);
+  };
+  Fig.prototype.setRows = function (rows) {
+    var F = this; F.rowDefs = rows; F.rows.innerHTML = ''; F.rowEls = [];
+    rows.forEach(function (r) {
+      var d = document.createElement('div'); d.className = 'sg-row' + (r.f != null ? ' sg-row--bar' : '');
+      var k = document.createElement('span'); k.className = 'sg-k'; k.textContent = r.k; d.appendChild(k);
+      if (r.f != null) { var bar = document.createElement('span'); bar.className = 'sg-bar'; bar.appendChild(document.createElement('i')); d.appendChild(bar); }
+      var v = document.createElement('b'); v.className = 'sg-v'; d.appendChild(v);
+      F.rows.appendChild(d); F.rowEls.push(d);
+    });
+    rows.forEach(function (_, i) { F.row(i, 0); });
+  };
+  Fig.prototype.row = function (i, t) {
+    var r = this.rowDefs[i], d = this.rowEls[i];
+    if (!d) return;
+    var v = d.querySelector('.sg-v');
+    if (r.f != null) {
+      var bar = d.querySelector('i');
+      bar.style.width = (t > 0 ? Math.max(r.f * t * 100, 1.5) : 0) + '%';
+      bar.style.background = r.f >= 0.9 ? C.h : C.ok;
+      v.textContent = t > 0 ? (r.f * t).toFixed(2) : '–';
+    } else if (r.n != null) {
+      v.textContent = t > 0 ? fmt(r.n * t, r.d) + (r.u || '') : '–';
+    } else {
+      v.textContent = r.v;
+    }
+  };
+  Fig.prototype.show = function (key, mode) {
+    var F = this, S = SCN[key];
+    F.key = key; F.tok++;
+    F.ov.innerHTML = ''; F.frame.style.opacity = 1; F.equip.style.opacity = 1; F.lift = 0;
+    F.geom(0, 0); F.paint(S.lit);
+    F.now.textContent = S.title;
+    F.note.textContent = S.note || '';
+    F.setRows(S.rows || []);
+    var steps = S.build(F);
+    F.btn.hidden = RM || !steps.length;
+    if (mode === 'final' || RM) { steps.forEach(function (s) { s.f(1); }); return; }
+    if (mode === 'start') return;
+    var tok = F.tok, i = 0, t0 = null;
+    function fr(ts) {
+      if (tok !== F.tok) return;
+      if (t0 === null) t0 = ts;
+      var s = steps[i], t = Math.min(1, (ts - t0) / s.d);
+      s.f(s.lin ? t : ease(t));
+      if (t >= 1) { i++; t0 = null; if (i >= steps.length) return; }
+      requestAnimationFrame(fr);
+    }
+    requestAnimationFrame(fr);
+  };
+
+  /* 線を少しずつ描いて、先頭に点を走らせる（力の流れ） */
+  function route(F, pts, stroke, dots, w) {
+    var segs = [], tot = 0;
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1], L = Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
+      segs.push({ a: a, b: b, L: L, s: tot, el: mk('line', { x1: a[0], y1: a[1], x2: a[0], y2: a[1], stroke: stroke, 'stroke-width': w || 3.5, 'stroke-linecap': 'round', 'stroke-dasharray': '7 6' }, F.ov), c: dots[i] });
+      tot += L;
+    }
+    var dot = mk('circle', { r: 7, stroke: '#fff', 'stroke-width': 2, opacity: 0 }, F.ov);
+    return function (p) {
+      var d = p * tot, hx = 0, hy = 0, hc = dots[0];
+      segs.forEach(function (s) {
+        var f = Math.max(0, Math.min(1, (d - s.s) / s.L));
+        var x = s.a[0] + (s.b[0] - s.a[0]) * f, y = s.a[1] + (s.b[1] - s.a[1]) * f;
+        s.el.setAttribute('x2', x); s.el.setAttribute('y2', y);
+        if (d >= s.s && d <= s.s + s.L) { hx = x; hy = y; hc = s.c; }
+      });
+      if (p > 0 && p < 1) { dot.setAttribute('cx', hx); dot.setAttribute('cy', hy); dot.setAttribute('fill', hc); dot.setAttribute('opacity', 1); }
+      else dot.setAttribute('opacity', 0);
+    };
+  }
+
+  /* ---------- 章ごとの図 ---------- */
+  var SCN = {};
+
+  SCN.all = {
+    title: '力の流れ：上から下へ、最後は床へ',
+    lit: ['load', 'beam', 'col', 'floor', 'joint', 'base'],
+    rows: [{ k: '下向きの力（重さ）', v: '設備 → 梁 → 柱 → 床' }, { k: '横向きの力', v: '柱の上 → 柱の根元 → 床' }],
+    build: function (F) {
+      var dL = route(F, [[320, 160], [320, 214], [200, 214], [200, 400]], '#fff', [C.load, C.beam, C.col]);
+      var dR = route(F, [[320, 160], [320, 214], [440, 214], [440, 400]], '#fff', [C.load, C.beam, C.col]);
+      var hA = route(F, [[56, 214], [200, 214], [200, 400]], C.h, [C.h, C.h], 4);
+      var hB = route(F, [[200, 214], [440, 214], [440, 400]], C.h, [C.h, C.h], 4);
+      var rp = [200, 440].map(function (x) { var e = mk('ellipse', { cx: x, cy: 407, rx: 0, ry: 0, fill: 'none', stroke: C.floor, 'stroke-width': 3 }, F.ov); return e; });
+      var lbW = F.label(320, 132, '重さ 4,905N', C.load);
+      var lbH = F.label(56, 198, '横の力', C.h, 'start');
+      fade(lbW, 0); fade(lbH, 0);
+      return [
+        { d: 400, f: function (t) { fade(lbW, t); relay('d', 0); relay('h', 0); } },
+        { d: 2000, lin: true, f: function (t) { dL(t); dR(t); relay('d', t * 0.75); } },
+        { d: 500, f: function (t) { rp.forEach(function (e) { e.setAttribute('rx', 30 * t); e.setAttribute('ry', 7 * t); }); relay('d', t > 0.5 ? 1 : 0.75); } },
+        { d: 400, f: function (t) { fade(lbH, t); } },
+        { d: 1800, lin: true, f: function (t) { hA(t); hB(Math.max(0, (t - 0.3) / 0.7)); relay('h', t); } }
+      ];
+    }
+  };
+
+  SCN.load = {
+    title: '設備の重さを、力に直す',
+    lit: ['load'],
+    rows: [{ k: '設備の重さ 500kg × 9.81', n: 4905, u: ' N' }, { k: '梁1本あたり 4,905 ÷ 2', n: 2453, u: ' N' }],
+    build: function (F) {
+      var lb = F.label(320, 76, '500kg × 9.81 ＝ 0N', C.navy);
+      var aF = F.arrow(320, 160, 320, 205, C.beam, 4), aB = F.arrow(360, 160, 360, 181, C.beam, 4);
+      var lF = F.label(308, 192, '2,453N', C.beam, 'end'), lB = F.label(372, 176, '2,453N', C.beam, 'start');
+      var lS = F.label(320, 262, '2本の梁で半分ずつ', C.beam);
+      [aF, aB, lF, lB, lS].forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 1100, f: function (t) { lb.textContent = '500kg × 9.81 ＝ ' + fmt(4905 * t) + 'N'; F.row(0, t); } },
+        { d: 700, f: function (t) { F.lift = 50 * t; F.geom(0, 0); F.paint(t > 0.5 ? ['load', 'beam'] : ['load']); } },
+        { d: 800, f: function (t) { [aF, aB, lF, lB, lS].forEach(function (e) { fade(e, t); }); F.row(1, t); } }
+      ];
+    }
+  };
+
+  SCN.beam = {
+    title: '梁の曲げ',
+    lit: ['beam'],
+    note: '曲がり方は、見やすいように大きく描いています',
+    rows: [{ k: '曲げモーメント M', n: 618643, u: ' N·mm' }, { k: '曲げ応力 σ ＝ M ÷ Z', n: 75.8, d: 1, u: ' MPa' }, { k: '75.8 ÷ 許容応力80', f: 0.95 }],
+    build: function (F) {
+      F.equip.style.opacity = 0.25;
+      var aP = F.arrow(320, 132, 320, 204, C.navy, 4), lP = F.label(332, 150, '2,453N', C.navy, 'start');
+      var rL = F.arrow(178, 266, 178, 226, C.col, 3.5), rR = F.arrow(462, 266, 462, 226, C.col, 3.5);
+      var l1 = F.label(170, 286, '1,226N', C.col, 'end'), l2 = F.label(470, 286, '1,226N', C.col, 'start');
+      var md = mk('polygon', { points: '200,252 320,252 440,252', fill: 'rgba(212,105,26,.16)', stroke: C.h, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, F.ov);
+      var lM = F.label(320, 352, '曲げモーメント（真ん中が最大）', C.h, 'middle', 14);
+      var dim = mk('g', {}, F.ov);
+      mk('line', { x1: 200, y1: 376, x2: 320, y2: 376, stroke: C.navy, 'stroke-width': 1.5 }, dim);
+      mk('line', { x1: 200, y1: 369, x2: 200, y2: 383, stroke: C.navy, 'stroke-width': 1.5 }, dim);
+      mk('line', { x1: 320, y1: 369, x2: 320, y2: 383, stroke: C.navy, 'stroke-width': 1.5 }, dim);
+      F.label(260, 392, '500mm', C.navy, 'middle', 13, dim);
+      [aP, lP, rL, rR, l1, l2, md, lM, dim].forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 600, f: function (t) { fade(aP, t); fade(lP, t); } },
+        { d: 600, f: function (t) { [rL, rR, l1, l2].forEach(function (e) { fade(e, t); }); } },
+        { d: 900, f: function (t) { F.geom(16 * t, 0); aP.setAttribute('transform', 'translate(0,' + 16 * t + ')'); } },
+        { d: 1000, f: function (t) { md.setAttribute('points', '200,252 320,' + (252 + 82 * t) + ' 440,252'); fade(md, t > 0 ? 1 : 0); fade(dim, t); F.row(0, t); } },
+        { d: 400, f: function (t) { fade(lM, t); } },
+        { d: 900, f: function (t) { F.row(1, t); F.row(2, t); } }
+      ];
+    }
+  };
+
+  SCN.defl = {
+    title: '梁のたわみ',
+    lit: ['beam'],
+    note: 'たわみは、見やすいように約70倍に大きく描いています',
+    rows: [{ k: 'たわみ δ', n: 1.24, d: 2, u: ' mm' }, { k: '目安 1,000 ÷ 300', n: 3.33, d: 2, u: ' mm' }, { k: '1.24 ÷ 3.33', f: 0.37 }],
+    build: function (F) {
+      F.equip.style.opacity = 0.25;
+      mk('line', { x1: 194, y1: 214, x2: 446, y2: 214, stroke: '#8a94a0', 'stroke-width': 1.5, 'stroke-dasharray': '5 5' }, F.ov);
+      var lim = mk('path', { d: 'M194 214 Q320 322 446 214', fill: 'none', stroke: C.h, 'stroke-width': 2.5, 'stroke-dasharray': '8 6' }, F.ov);
+      var lL = F.label(320, 294, '目安 3.33mm', C.h);
+      var dl = mk('line', { x1: 320, y1: 214, x2: 320, y2: 214, stroke: C.navy, 'stroke-width': 2 }, F.ov);
+      var lD = F.label(330, 256, '0.00mm', C.beam, 'start');
+      [lim, lL, lD].forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 1300, f: function (t) { F.geom(20 * t, 0); dl.setAttribute('y2', 214 + 20 * t); fade(lD, t > 0 ? 1 : 0); lD.textContent = (1.24 * t).toFixed(2) + 'mm'; F.row(0, t); } },
+        { d: 800, f: function (t) { fade(lim, t); fade(lL, t); F.row(1, t); } },
+        { d: 800, f: function (t) { F.row(2, t); } }
+      ];
+    }
+  };
+
+  SCN.col = {
+    title: '柱の座屈',
+    lit: ['col'],
+    note: '曲がり方は、見やすいように大きく描いています',
+    rows: [{ k: '柱1本の力 N', n: 1306, u: ' N' }, { k: '座屈長さ 800 × 2', n: 1600, u: ' mm' }, { k: '細長比 1,600 ÷ 18.9', n: 85 }, { k: '2.3 ÷ 許容102.6', f: 0.02 }],
+    build: function (F) {
+      var xc = 230, xp = 470, B = 22;
+      function cant(b, dx, dy) {
+        var d = '';
+        for (var i = 0; i <= 20; i++) { var s = 186 * i / 20; d += (i ? 'L' : 'M') + (xc - b * (1 - Math.cos(Math.PI * s / 372)) + dx).toFixed(1) + ' ' + (400 - s + dy).toFixed(1); }
+        return d;
+      }
+      function pin(b) {
+        var d = '';
+        for (var i = 0; i <= 30; i++) { var s = 372 * i / 30; d += (i ? 'L' : 'M') + (xp + b * Math.sin(Math.PI * s / 372)).toFixed(1) + ' ' + (400 - s).toFixed(1); }
+        return d;
+      }
+      var g = mk('g', {}, F.ov);
+      mk('rect', { x: xc - 16, y: 396, width: 32, height: 6, rx: 1, fill: C.base }, g);
+      var pc = mk('path', { d: pin(0), fill: 'none', stroke: C.colL, 'stroke-width': 10 }, g);
+      mk('polygon', { points: [xp, 400, xp - 11, 413, xp + 11, 413].join(' '), fill: '#8a94a0' }, g);
+      mk('polygon', { points: [xp, 28, xp - 11, 15, xp + 11, 15].join(' '), fill: '#8a94a0' }, g);
+      mk('line', { x1: xp - 18, y1: 12, x2: xp + 18, y2: 12, stroke: '#8a94a0', 'stroke-width': 2 }, g);
+      var cc = mk('path', { d: cant(0, 0, 0), fill: 'none', stroke: C.col, 'stroke-width': 10 }, g);
+      F.arrow(xc, 146, xc, 206, C.navy, 3.5, g);
+      F.label(xc + 10, 166, '1,306N', C.navy, 'start', 14, g);
+      F.label(xc - 22, 300, '実際の柱', C.col, 'end', 14, g);
+      F.label(xc - 22, 320, '800mm', C.col, 'end', 14, g);
+      F.label(xp + 20, 360, '両端ピンの柱', '#3f7f5a', 'start', 14, g);
+      F.label(xp + 20, 380, '1,600mm', '#3f7f5a', 'start', 14, g);
+      var gh = mk('path', { fill: 'none', stroke: C.h, 'stroke-width': 4, 'stroke-dasharray': '7 5' }, F.ov);
+      var m1 = F.label(40, 46, '実際の柱の曲がり方は、', C.h, 'start', 15);
+      var m2 = F.label(40, 68, '1,600mmの柱の上半分と同じ形', C.h, 'start', 15);
+      [g, gh, m1, m2].forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 600, f: function (t) { F.frame.style.opacity = 1 - 0.94 * t; fade(g, t); } },
+        { d: 1100, f: function (t) { cc.setAttribute('d', cant(B * t, 0, 0)); pc.setAttribute('d', pin(B * t)); F.row(0, t); } },
+        { d: 1200, f: function (t) { fade(gh, t > 0 ? 1 : 0); gh.setAttribute('d', cant(B, (xp + B - xc) * t, -186 * t)); } },
+        { d: 500, f: function (t) { fade(m1, t); fade(m2, t); F.row(1, t); } },
+        { d: 900, f: function (t) { F.row(2, t); F.row(3, t); } }
+      ];
+    }
+  };
+
+  SCN.horiz = {
+    title: '横からの力',
+    lit: ['col', 'base'],
+    note: '横ゆれは、見やすいように約70倍に大きく描いています',
+    rows: [{ k: '水平力 4,905 × 0.3', n: 1472, u: ' N' }, { k: '柱1本 1,472 ÷ 4', n: 368, u: ' N' }, { k: '横ゆれ（梁の高さ）', n: 1.5, d: 1, u: ' mm' }, { k: '根元の曲げ応力', n: 36.1, d: 1, u: ' MPa' }, { k: '2.3÷102.6 ＋ 36.1÷80', f: 0.47 }],
+    build: function (F) {
+      var aH = F.arrow(56, 214, 184, 214, C.h, 5), lH = F.label(56, 198, '横の力 1,472N', C.h, 'start');
+      var l1 = F.label(212, 252, '368N', C.h, 'start'), l2 = F.label(452, 252, '368N', C.h, 'start');
+      var dim = mk('g', {}, F.ov);
+      mk('line', { x1: 166, y1: 222, x2: 166, y2: 400, stroke: C.navy, 'stroke-width': 1.5 }, dim);
+      mk('line', { x1: 159, y1: 400, x2: 173, y2: 400, stroke: C.navy, 'stroke-width': 1.5 }, dim);
+      F.label(158, 316, '800mm', C.navy, 'end', 13, dim);
+      var arcs = mk('g', {}, F.ov);
+      [200, 440].forEach(function (x) {
+        mk('path', { d: 'M' + (x - 20) + ' 390 A20 20 0 0 1 ' + (x + 20) + ' 390', fill: 'none', stroke: C.h, 'stroke-width': 3 }, arcs);
+        mk('polygon', { points: [x + 20, 396, x + 13, 384, x + 27, 384].join(' '), fill: C.h }, arcs);
+      });
+      var lF = F.label(320, 436, '根元が曲げられる（368N × 800mm）', C.h, 'middle', 14);
+      [aH, lH, l1, l2, dim, arcs, lF].forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 700, f: function (t) { fade(aH, t); fade(lH, t); aH.setAttribute('transform', 'translate(' + (-30 * (1 - t)) + ',0)'); F.row(0, t); } },
+        { d: 600, f: function (t) { fade(l1, t); fade(l2, t); F.row(1, t); } },
+        { d: 1100, f: function (t) { var s = 24 * t; F.geom(0, s); aH.setAttribute('transform', 'translate(' + s + ',0)'); l1.setAttribute('transform', 'translate(' + s + ',0)'); l2.setAttribute('transform', 'translate(' + s + ',0)'); F.row(2, t); } },
+        { d: 700, f: function (t) { fade(arcs, t); fade(dim, t); fade(lF, t); F.row(3, t); } },
+        { d: 900, f: function (t) { F.row(4, t); } }
+      ];
+    }
+  };
+
+  SCN.judge = {
+    title: '判定',
+    lit: ['load', 'beam', 'col'],
+    rows: [{ k: '梁の曲げ', f: 0.95 }, { k: '梁のたわみ', f: 0.37 }, { k: '柱の圧縮', f: 0.02 }, { k: '圧縮と曲げの組合せ', f: 0.47 }],
+    build: function (F) {
+      var lb = F.label(320, 126, 'いちばん余裕が小さい：梁の曲げ', C.h);
+      fade(lb, 0);
+      var st = [0, 1, 2, 3].map(function (i) { return { d: 550, f: function (t) { F.row(i, t); } }; });
+      st.push({ d: 900, f: function (t) { var c = mix(C.beam, C.h, t); F.beam.setAttribute('stroke', c); F.bbeam.setAttribute('stroke', c); fade(lb, t); } });
+      return st;
+    }
+  };
+
+  SCN.joint = {
+    title: 'この先：つなぎ目と床',
+    lit: ['joint', 'base', 'floor'],
+    rows: [{ k: '梁と柱のつなぎ目', v: '溶接・ボルト' }, { k: '柱の根元', v: '溶接・アンカー' }, { k: '床', v: '受け止められるか' }],
+    build: function (F) {
+      var rings = [[200, 214], [440, 214], [200, 399], [440, 399]].map(function (p) {
+        return mk('circle', { cx: p[0], cy: p[1], r: 10, fill: 'none', stroke: C.h, 'stroke-width': 3 }, F.ov);
+      });
+      var la = [F.label(184, 200, 'つなぎ目', C.joint, 'end'), F.label(216, 386, '柱の根元', C.base, 'start'), F.label(596, 436, '床', '#7a5a26', 'end')];
+      la.forEach(function (e) { fade(e, 0); });
+      rings.forEach(function (e) { fade(e, 0); });
+      return [
+        { d: 1000, f: function (t) { rings.forEach(function (e) { e.setAttribute('r', 10 + 18 * t); fade(e, t < 1 ? 1 - t : 0); }); la.forEach(function (e) { fade(e, t); }); } }
+      ];
+    }
+  };
+
+  /* ---------- 読み進めたら切り替える ---------- */
+  var DESK = window.matchMedia('(min-width: 960px)');
+  var chs = [].slice.call(document.querySelectorAll('.sg-ch'));
+  var sideBox = document.querySelector('.sg-side .sg-fig');
+  var PF = new Fig(sideBox, false);
+  PF.show('all', RM ? 'final' : 'start');
+  var played = {}, cur = null;
+
+  var slots = chs.map(function (ch, i) {
+    var s = ch.querySelector('.sg-slot');
+    var f = new Fig(s, true);
+    s.setAttribute('data-i', i);
+    f.show(ch.getAttribute('data-state'), RM ? 'final' : 'start');
+    return f;
+  });
+
+  function activate(ch) {
+    var k = ch.getAttribute('data-state');
+    if (k === cur) return;
+    cur = k;
+    PF.show(k, played['d' + k] ? 'final' : 'anim');
+    played['d' + k] = true;
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      if (!DESK.matches) return;
+      es.forEach(function (e) { if (e.isIntersecting) activate(e.target); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    chs.forEach(function (c) { io.observe(c); });
+
+    var io2 = new IntersectionObserver(function (es) {
+      if (DESK.matches) return;
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = +e.target.getAttribute('data-i');
+        if (played['m' + i]) return;
+        played['m' + i] = true;
+        slots[i].show(chs[i].getAttribute('data-state'), 'anim');
+      });
+    }, { threshold: 0.6 });
+    slots.forEach(function (f) { io2.observe(f.root); });
+  } else {
+    slots.forEach(function (f, i) { f.show(chs[i].getAttribute('data-state'), 'final'); });
+  }
+})();
+</script>
+<script src="../glossary.js?v=20261119" defer></script>
+<!-- ◆問い合わせへの入口の記録 -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    if (!a || typeof gtag !== 'function') return;
+    var p = a.closest('.article-cta') ? 'article_cta' : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', 'contact_click', { place: p, article: 'stand-strength-guide' });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録 -->
+<script>
+(function () {
+  var body = document.querySelector('.sg-text');
+  var end = document.querySelector('.sg-after h2');
+  if (!body) return;
+  var half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: 'stand-strength-guide' }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+</body>
+</html>
