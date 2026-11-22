@@ -310,14 +310,16 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
     <div class="media"><div class="fig"><div class="im"><div class="v3" data-v="joint"><button class="replay" type="button">もう一度動かす</button><span class="hint">ドラッグで回せます</span></div></div><div class="cap">梁と柱のつなぎ目。点線は溶接の位置（柱の上端の全周）。まわりの濃い色は目印で、計算で出した分布ではありません</div></div></div>
     <div class="ptext sm">
       <div class="baton"><span><small>受け取るもの</small>梁から下向き 1,248 N・横の力 368 N</span><i>→</i><span><small>次に渡すもの</small>柱へ（第4章）</span></div>
-      <p class="note" style="margin:0 0 1mm">記事の計算例にはない、この見本で追加した計算です。梁は両端で単純に支えられ、柱の上は横に動ける（片持ちの柱）としているため、つなぎ目は曲げを伝えず、力（せん断）だけを伝えるものとします。</p>
+      <p class="note" style="margin:0 0 1mm">記事の計算例にはない、この見本で追加した計算です。梁端を曲げを伝えないピン接合として理想化し、柱は根元固定・上端自由の片持ちの柱として扱います。実際の全周溶接は回転剛性を持つため、実物の応力状態とは異なる場合があります。</p>
       <h4><span class="sn">1</span>かかる力を出す（力 → 応力）</h4>
-      <div class="fx">τ ＝ √(V² ＋ H²) ÷ (a·ℓ)<small>サイズ 3mm の全周溶接（200mm）、のど厚 2.1mm</small></div>
+      <div class="fx">τ ＝ √(V² ＋ H²) ÷ (a·ℓ)<small>溶接部が V と H を直接伝え、力が溶接の中心を通る（偏心による追加の曲げがない）と仮定。サイズ 3mm の全周溶接、溶接線は外形 50mm×4 ＝ 200mm で近似、のど厚 2.1mm</small></div>
       <table class="v"><tr><td>下向きの力 V</td><td class="n">1,226 ＋ 22（梁の自重の半分）＝ 1,248 N</td></tr><tr><td>合わせた力</td><td class="n">√(1,248² ＋ 368²) ≒ 1,301 N</td></tr><tr><td>せん断応力 τ</td><td class="n">1,301 ÷ (2.1 × 200) ≒ 3.1 MPa</td></tr></table>
       <h4><span class="sn">2</span>耐えられる値を決める</h4>
-      <table class="v"><tr><td>溶接の許容応力</td><td class="n">75.4 MPa（クレーン構造規格の考え方の例。第5章で説明）</td></tr></table>
+      <div class="fx">τa ＝ σa ÷ √3 × 0.8<small>参考計算：クレーン構造規格の許容応力の考え方で、降伏点 245MPa・引張強さ 400MPa と仮定（σa＝min(245÷1.5, 400÷1.8)＝163.3MPa、すみ肉溶接の係数 0.8）。一般の設備架台に使える一律の許容応力ではありません</small></div>
+      <table class="v"><tr><td>溶接の許容応力（参考値）</td><td class="n">163.3 ÷ √3 × 0.8 ＝ 75.4 MPa</td></tr></table>
       <h4><span class="sn">3</span>割り算する</h4>
       <div class="res"><span class="rl">溶接</span><div class="bar"><span style="width:4%;background:var(--g)"></span></div><span>3.1 ÷ 75.4 ≒ 0.04</span><b>4%</b></div>
+      <p class="note">この割合は、ピン接合とした計算モデルでの応力比です。実物の接合部の安全性を示すものではありません。</p>
     </div>
   </div>
   <div class="pf"><span>設備架台 500kg（見本）</span><span>2026年11月</span><span class="no"></span></div>
@@ -372,11 +374,11 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
       <div class="fx">a ＝ 0.7 × S　　σ ＝ M／(a·Zw) ＋ N／(a·ℓ)<small>□50×50×3.2 をサイズ 3mm の全周溶接で止める。Zw は溶接線の断面係数（50×50 ＋ 50²÷3）</small></div>
       <table class="v"><tr><td>のど厚 a</td><td class="n">0.7 × 3 ＝ 2.1 mm</td></tr><tr><td>溶接線の長さ ℓ</td><td class="n">50 × 4 ＝ 200 mm</td></tr><tr><td>溶接線の断面係数 Zw</td><td class="n">3,333 mm²</td></tr><tr><td>曲げによる応力</td><td class="n">294,300 ÷ (2.1 × 3,333) ＝ 42.0 MPa</td></tr><tr><td>軸力による応力</td><td class="n">1,306 ÷ (2.1 × 200) ＝ 3.1 MPa</td></tr><tr><td>合わせた応力</td><td class="n">45.2 MPa</td></tr></table>
       <h4><span class="sn">2</span>耐えられる値を決める</h4>
-      <div class="fx">許容応力 ＝ σa ÷ √3 × 0.8<small>クレーン構造規格の考え方の例（SS400、σa＝163.3MPa → 許容せん断応力 94.3MPa）</small></div>
-      <table class="v"><tr><td>溶接の許容応力</td><td class="n">94.3 × 0.8 ＝ 75.4 MPa</td></tr></table>
+      <table class="v"><tr><td>溶接の許容応力（参考値）</td><td class="n">75.4 MPa（第3章と同じ）</td></tr></table>
+      <p class="note" style="margin:0">クレーン構造規格の考え方による参考値で、一般の設備架台に使える一律の許容応力ではありません。</p>
       <h4><span class="sn">3</span>割り算する</h4>
       <div class="res"><span class="rl">溶接</span><div class="bar"><span style="width:60%;background:var(--y)"></span></div><span>45.2 ÷ 75.4 ＝ 0.60</span><b>60%</b></div>
-      <p class="note">溶接線の寸法に柱の外形 50mm を使い、角の丸みは無視しています。実際の角パイプは角が丸く溶接線が少し短くなるため、応力はこれより大きくなります。横の力によるせん断（368 ÷ 420 ＝ 0.9 MPa）は小さく、合わせても値は変わりません。</p>
+      <p class="note">横の力によるせん断応力は約 0.9MPa（368 ÷ 420）です。今回は曲げ・軸力による応力に比べて小さく、組み合わせても値はほぼ変わりません（√(45.2² ＋ 3×0.9²) ≒ 45.2）。実際の設計では、垂直応力とせん断応力の組合せを考えて評価します。角パイプの角の丸みは無視し、外形 50mm の正方形の溶接線として簡略化しています。実際の有効な溶接長さや応力の分布は、溶接の形によって変わります。</p>
     </div>
   </div>
   <div class="pf"><span>設備架台 500kg（見本）</span><span>2026年11月</span><span class="no"></span></div>
@@ -389,15 +391,15 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
     <div class="ptext sm">
       <div class="baton"><span><small>受け取るもの</small>根元の曲げ 294,300 N·mm・軸力 1,306 N・横の力 368 N</span><i>→</i><span><small>次に渡すもの</small>床（第7章・範囲外）</span></div>
       <h4><span class="sn">1</span>かかる力を出す</h4>
-      <div class="fx">T ＝ (M − N × 50) ÷ (100 × 2)　　Q ＝ H ÷ 4<small>曲げで片側の2本が引き抜かれる。押す力（軸力）の分は差し引く。横の力は4本で等分</small></div>
+      <div class="fx">T ＝ (M − N × 50) ÷ (100 × 2)　　Q ＝ H ÷ 4<small>簡易計算の仮定：アンカー4本を 100mm 間隔の正方形に置き、引張側の2本が均等に負担する。軸力（押す力）の分は差し引く。ベースプレートの変形やてこ作用は考えない。横の力は4本で等分</small></div>
       <table class="v"><tr><td>引き抜き力（1本）T</td><td class="n">(294,300 − 1,306 × 50) ÷ 200 ＝ 約1,145 N</td></tr><tr><td>せん断力（1本）Q</td><td class="n">368 ÷ 4 ＝ 約92 N</td></tr></table>
       <h4><span class="sn">2</span>耐えられる値を決める</h4>
-      <div class="fx">許容引張荷重（M12、長期）<small>ある接着系アンカーの技術資料の例。製品ごとに違う</small></div>
+      <div class="fx">許容引張荷重（M12、長期）<small>参考値：ある接着系アンカー（M12・穿孔深さ 110mm）の技術資料の値。コンクリートの強さ・埋込み長さ・へりあき・アンカーの間隔などで変わる</small></div>
       <table class="v"><tr><td>許容引張荷重</td><td class="n">13.7 kN ＝ 13,700 N</td></tr></table>
       <h4><span class="sn">3</span>割り算する</h4>
       <div class="res"><span class="rl">引き抜き</span><div class="bar"><span style="width:8%;background:var(--g)"></span></div><span>1,145 ÷ 13,700 ＝ 0.08</span><b>8%</b></div>
-      <p class="note">せん断（92 N）は引き抜きよりずっと小さい値です。引き抜きとせん断が同時にかかるときの確かめ方は、使う製品の技術資料に従います。</p>
-      <p class="note"><b>参考：ベースプレートの厚さ</b>　同じ計算で必要な厚さは約3.7mm。ただし、溶接のサイズやボルトを締めたときのゆがみを考えると、実際にはもっと厚い板を選びます（判定の色は付けていません）。</p>
+      <p class="note">この割合は、アンカーの引張荷重だけを比べたものです。13.7kN は引張の値なので、せん断（1本 約92 N）はこの値では判定できません。せん断と、引張とせん断の組合せは、使う製品の技術資料に従って確かめます。</p>
+      <p class="note"><b>ベースプレートの厚さ</b>　根元の曲げ、アンカーの配置、圧縮側の反力の分布、板の変形を考えて別途検討します。この資料には計算条件を示していないため、必要な板厚の数値は載せていません。</p>
       <p class="note"><b>7. 床（範囲外）</b>　力のリレーのゴールは床です。床（スラブ）の強さは建物側の情報（厚さ・鉄筋など）が必要なため、この検証の範囲に含めていません。</p>
     </div>
   </div>
@@ -418,9 +420,9 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
       <tr><td>柱</td><td>横ゆれ（参考）</td><td class="n">1.5 mm</td><td class="n">－</td><td class="n">－</td><td>－</td></tr>
       <tr><td>柱の根元</td><td>溶接（全周）</td><td class="n">45.2 MPa</td><td class="n">75.4 MPa</td><td class="n">60%</td><td><span class="pill py">50〜80％</span></td></tr>
       <tr><td>柱の根元</td><td>アンカーボルト（引き抜き）</td><td class="n">1,145 N</td><td class="n">13,700 N</td><td class="n">8%</td><td><span class="pill pg">50％未満</span></td></tr>
-      <tr><td>柱の根元</td><td>ベースプレートの厚さ（参考）</td><td class="n">必要 約3.7 mm</td><td class="n">－</td><td class="n">－</td><td>－</td></tr>
+      <tr><td>柱の根元</td><td>ベースプレートの厚さ</td><td class="n">別途検討</td><td class="n">－</td><td class="n">－</td><td>－</td></tr>
     </table>
-    <p class="note">色の基準：50％未満 緑、50〜80％ 黄、80％以上 赤。割合は公開コラム「架台の強度計算の方法と例」「溶接の強度計算」「アンカーボルトの引き抜き計算」と同じ値で示しています。</p>
+    <p class="note">色の基準：50％未満 緑、50〜80％ 黄、80％以上 赤。割合は公開コラム「架台の強度計算の方法と例」「溶接の強度計算」「アンカーボルトの引き抜き計算」と同じ値で示しています。溶接とアンカーの割合は、単純化した計算モデルでの比で、実物の安全性を示すものではありません。</p>
   </div></div>
   <div class="pf"><span>設備架台 500kg（見本）</span><span>2026年11月</span><span class="no"></span></div>
 </section>
@@ -433,8 +435,8 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
         <li>梁の許容曲げ応力：引張強さ 400MPa ÷ 安全率 5 ＝ 80MPa（説明用の独自の値。建築の規準やクレーン構造規格の値ではありません）</li>
         <li>柱の許容圧縮応力：日本建築学会「鋼構造許容応力度設計規準」の式（F＝235MPa、長期）</li>
         <li>たわみの目安：スパン/300（決めた目安）</li>
-        <li>溶接の許容応力：75.4MPa（クレーン構造規格の考え方の例。設備の架台にそのまま当てはまる規格ではありません）</li>
-        <li>アンカーの許容引張荷重：M12 長期 13.7kN（製品の技術資料の例。製品ごとに違います）</li>
+        <li>溶接の許容応力：75.4MPa（クレーン構造規格の許容応力の考え方で、降伏点 245MPa・引張強さ 400MPa と仮定した参考値。一般の設備架台に使える一律の値ではありません）</li>
+        <li>アンカーの許容引張荷重：M12 長期 13.7kN（ある接着系アンカー・穿孔深さ 110mm の技術資料の参考値。施工条件で変わります）</li>
         <li>実案件では、用途に合った規準の値を使い、資料に明記します</li></ul></div>
       <div><h3>置いた仮定</h3><ul>
         <li>梁は両端で単純に支えられ、設備の重さは2本の梁の真ん中に集まってかかる</li>
@@ -443,10 +445,13 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
         <li>横の力は重さ × 0.3（説明用の仮定）。4本の柱で等分する</li>
         <li>設備の当たり面は各梁の中央 100×50mm（図の説明用）</li>
         <li>溶接はサイズ 3mm の全周溶接。溶接線は柱の外形で計算（角の丸みは無視）</li>
-        <li>アンカーは柱1本あたり M12 を4本・間隔 100mm</li></ul></div>
+        <li>梁と柱のつなぎ目はピン接合として理想化（曲げを伝えない）</li>
+        <li>アンカーは柱1本あたり M12 を4本・間隔 100mm。引張側の2本が均等に負担</li></ul></div>
       <div><h3>確かめていないこと</h3><ul>
         <li>溶接の品質と検査、くり返しの力による疲労</li>
-        <li>ベースプレートのてこ作用</li>
+        <li>ベースプレートの板厚・変形とてこ作用</li>
+        <li>接合部の偏心、角パイプの局部変形</li>
+        <li>アンカーの群体効果・へりあき・コンクリートの破壊、引張とせん断の組合せ</li>
         <li>床（スラブ）の強さ</li>
         <li>架台全体の横の揺れやねじり</li>
         <li>動く荷重や振動、地震</li>
@@ -456,6 +461,17 @@ body.measure .page{display:block!important;position:absolute;left:-10000mm;top:0
         <li>点線のまわりの濃い色は「ここから力が入る」目印で、計算で出した応力の分布ではありません</li>
         <li>動きは変形を大きく誇張したものです</li></ul></div>
     </div>
+  </div></div>
+  <div class="pf"><span>設備架台 500kg（見本）</span><span>2026年11月</span><span class="no"></span></div>
+</section>
+
+<section class="page slide" data-ch="10" data-n="10. " data-c="計算上の注意" data-t="計算上の注意">
+  <div class="ph"><span class="ch">10. 計算上の注意</span><span class="t">計算上の注意</span><img src="" data-logo alt=""></div>
+  <div class="pb text nomedia"><div class="ptext">
+    <p>この資料は、機械架台の強度計算の考え方を理解するための簡易計算例です。</p>
+    <p>梁と柱の接合部はピン接合として理想化し、柱は根元固定・上端自由の片持ちの柱として計算しています。実際の全周溶接の接合では、接合部の剛性や部材の配置によって、曲げモーメントや応力の分布が変わる場合があります。剛接合として評価する場合は、梁・柱・接合部を一体のフレームとして解析する必要があります。</p>
+    <p>溶接部、アンカーボルト、ベースプレートの計算は、力の伝わり方や接合の形を単純化した参考評価です。実際の設計では、溶接部の偏心、母材の局部変形、アンカーの群体効果、コンクリートの破壊、ベースプレートの変形などを確かめる必要があります。</p>
+    <p>実機に使うときは、使用条件・材料・接合方法・設置条件に基づいた詳細な強度検討を行ってください。</p>
     <div class="disc">この資料は、計算結果を部材ごとに色分けしたもので、架台の安全性を保証するものではありません。</div>
   </div></div>
   <div class="pf"><span>設備架台 500kg（見本）</span><span>2026年11月</span><span class="no"></span></div>

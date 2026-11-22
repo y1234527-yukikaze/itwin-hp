@@ -29,20 +29,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>部品図作成（図面のバラシ）の外注｜料金・納品物・ご依頼の流れ｜アイツイン</title>
-  <meta name="description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。1〜10点で50,000円〜（税別）。部品の3Dモデル（STEP形式）も参考としてお付けします。">
+  <meta name="description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。10点まで50,000円〜（税別）、11点目から1点ごとに5,000円〜。部品の3Dモデル（STEP形式）も参考としてお付けします。">
   <link rel="canonical" href="https://i-twin.co.jp/drawing-service">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
   <meta property="og:title" content="部品図作成（図面のバラシ）の外注｜料金・納品物・ご依頼の流れ">
-  <meta property="og:description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。1〜10点で50,000円〜（税別）。部品の3Dモデル（STEP形式）も参考としてお付けします。">
+  <meta property="og:description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。10点まで50,000円〜（税別）、11点目から1点ごとに5,000円〜。部品の3Dモデル（STEP形式）も参考としてお付けします。">
   <meta property="og:url" content="https://i-twin.co.jp/drawing-service">
   <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="部品図作成（図面のバラシ）の外注｜料金・納品物・ご依頼の流れ">
-  <meta name="twitter:description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。1〜10点で50,000円〜（税別）。部品の3Dモデル（STEP形式）も参考としてお付けします。">
+  <meta name="twitter:description" content="部品図作成（図面のバラシ）の外注の料金と中身です。組立図から、そのまま加工に使える各寸法入りの2D機械図面を作ります。10点まで50,000円〜（税別）、11点目から1点ごとに5,000円〜。部品の3Dモデル（STEP形式）も参考としてお付けします。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,10 +76,8 @@
     "provider": { "@id": "https://i-twin.co.jp/#organization" },
     "areaServed": { "@type": "Country", "name": "日本" },
     "offers": [
-      { "@type": "Offer", "name": "部品図作成 1〜10点", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 50000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
-      { "@type": "Offer", "name": "部品図作成 11〜15点", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 80000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
-      { "@type": "Offer", "name": "部品図作成 16〜20点", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 100000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
-      { "@type": "Offer", "name": "部品図作成 21〜30点", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 130000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
+      { "@type": "Offer", "name": "部品図作成 10点まで", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 50000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "部品図作成 11点目からの追加（1点あたり）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 5000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
     ]
   }
   </script>
@@ -89,6 +87,9 @@
     .ds-table td:first-child { font-weight: 700; color: var(--navy); width: 34%; }
     .ds-incl td:first-child { font-weight: 400; color: var(--ink); width: 62%; }
     .ds-incl td:last-child { font-weight: 700; color: var(--navy); }
+    .ds-example { background: var(--paper-soft); border-radius: 4px; padding: 14px 18px; margin: 14px 0 0; }
+    .ds-example p { margin: 0 0 6px; }
+    .ds-example-h { font-weight: 700; color: var(--navy); }
 
     /* 右側の固定欄（Q&A・問い合わせ） */
     .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
@@ -217,14 +218,23 @@
       <!-- ◆料金 -->
       <section class="price-block">
         <h2>料金</h2>
-        <p class="price-plans-h">部品図の作成（部品の点数で決まります）</p>
+        <p class="price-plans-h">部品図の作成（図面の枚数＝点数で決まります）</p>
         <div class="price-plans">
-          <div class="pp"><p class="pp-name">1〜10点</p><p class="pp-price">50,000<small>円〜</small></p></div>
-          <div class="pp"><p class="pp-name">11〜15点</p><p class="pp-price">80,000<small>円〜</small></p></div>
-          <div class="pp"><p class="pp-name">16〜20点</p><p class="pp-price">100,000<small>円〜</small></p></div>
-          <div class="pp"><p class="pp-name">21〜30点</p><p class="pp-price">130,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">10点まで</p><p class="pp-price">50,000<small>円〜</small></p></div>
+          <div class="pp"><p class="pp-name">11〜30点<br>（1点ごとに追加）</p><p class="pp-price">＋5,000<small>円〜</small></p></div>
           <div class="pp"><p class="pp-name">31点以上</p><p class="pp-price">個別見積</p></div>
         </div>
+        <div class="ds-example">
+          <p class="ds-example-h">計算例</p>
+          <p>10点まで：<b>50,000円〜</b><br>12点：50,000円 ＋ 5,000円 × 2点 ＝ <b>60,000円〜</b><br>16点：50,000円 ＋ 5,000円 × 6点 ＝ <b>80,000円〜</b></p>
+        </div>
+        <p class="price-plans-h">点数の数え方</p>
+        <table class="price-table ds-table">
+          <thead><tr><th>部品</th><th>数え方</th></tr></thead>
+          <tr><td>形・寸法・穴の位置まで同じ部品</td><td>いくつあっても<b>1点</b>（図面に数量を書きます）。例：同じ柱が4本なら1点</td></tr>
+          <tr><td>左右対称の部品（右用と左用）</td><td>別々に1点ずつ</td></tr>
+          <tr><td>形は同じでも、長さや穴の位置が違う部品</td><td>別々に1点ずつ</td></tr>
+        </table>
         <p class="price-note">組立図ではなく、ポンチ絵や現物から起こす場合は、上記に割増をいただきます。図面が残っていない部品は、3Dスキャンで形を測ってから図面にすることもできます（<a href="price.html#scan">3Dスキャンの料金</a>）。</p>
       </section>
 
@@ -259,13 +269,13 @@
       <section class="price-block">
         <h2>ご依頼の流れと納期</h2>
         <ol class="price-steps">
-          <li><b>お問い合わせ</b>：組立図と部品の点数、ご希望の納期をお送りください。</li>
-          <li><b>図面の確認・お見積り</b>：図面を確認して、お見積りと納期をご連絡します。</li>
+          <li><b>お問い合わせ</b>組立図と部品の点数、ご希望の納期をお送りください。</li>
+          <li><b>図面の確認・お見積り</b>図面を確認して、お見積りと納期をご連絡します。</li>
           <li><b>ご発注</b></li>
-          <li><b>作図</b>：読み取れない寸法などは「要確認」としてまとめてお問い合わせします。</li>
-          <li><b>納品・ご説明</b>：PDF・CADデータ・3Dモデルをお渡しします。</li>
+          <li><b>作図</b>読み取れない寸法などは「要確認」としてまとめてお問い合わせします。</li>
+          <li><b>納品・ご説明</b>PDF・CADデータ・3Dモデルをお渡しします。</li>
         </ol>
-        <p class="price-note">納期は最短で2〜3日、長くても1週間以内が目安です。点数や内容により延びる場合があります。お急ぎの場合は、ご希望の納期をお知らせください。</p>
+        <p class="price-note">納期は、最短で1週間が目安です。点数や内容により延びる場合があります。ご希望の納期がある場合は、お問い合わせのときにお知らせください。</p>
       </section>
 
       <!-- ◆ご用意いただく情報 -->
@@ -289,6 +299,7 @@
       <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
         <div class="ds-side-box">
           <p class="ds-side-h">よくあるご質問</p>
+          <details><summary>同じ部品がいくつもある場合は、どう数えますか？</summary><p>形・寸法・穴の位置まで同じ部品は、いくつあっても1点です。図面に数量を書いてお渡しします。左右対称の部品や、長さ・穴の位置が違う部品は、別の1点として数えます。</p></details>
           <details><summary>CADデータの形式は選べますか？</summary><p>ご希望の形式をお知らせください。対応できる形式かどうかを確認してから、お見積りします。</p></details>
           <details><summary>3Dモデルは、何に使えますか？</summary><p>部品の形の確認や、社内での打ち合わせの資料に使えます。加工の基準は2Dの部品図です。</p></details>
           <details><summary>図面がない部品でも頼めますか？</summary><p>はい。現物を3Dスキャンで測ってから、部品図に起こせます。料金は、3Dスキャンの料金に部品図作成の料金を加えた額が目安です。</p></details>

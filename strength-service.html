@@ -29,20 +29,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの｜アイツイン</title>
-  <meta name="description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <meta name="description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・想定する場面1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
   <link rel="canonical" href="https://i-twin.co.jp/strength-service">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
   <meta property="og:title" content="架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの">
-  <meta property="og:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <meta property="og:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・想定する場面1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
   <meta property="og:url" content="https://i-twin.co.jp/strength-service">
   <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="架台・治具の強度計算の外注｜料金・確かめる項目・お渡しするもの">
-  <meta name="twitter:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・力のかかり方1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
+  <meta name="twitter:description" content="架台・治具の強度計算（強度検証）の外注の料金と中身です。手計算は部材15本まで・想定する場面1つで50,000円〜（税別）。曲げ・たわみ・座屈・溶接・ボルトを確かめ、計算書・色付き資料・部材の3Dモデルをお渡しします。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,6 +88,23 @@
     .ds-samples { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 12px 0 0; }
     .ds-fee td:first-child { font-weight: 400; color: var(--ink); width: 64%; }
     .ds-fee td:last-child { font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .sv-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 10px; }
+    .sv-card.sv-main { grid-column: 1 / -1; }
+    .sv-main .sv-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+    .sv-main .sv-list li:nth-child(2) { border-top: 0; }
+    .sv-card { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px 14px; text-align: center; }
+    .sv-card.sv-main { border: 2px solid var(--navy); }
+    .sv-chip { display: inline-block; margin: 0 0 10px !important; padding: 4px 12px; border-radius: 4px; background: #e8edf3; color: var(--navy); font-weight: 700; font-size: 0.84rem; line-height: 1.5; }
+    .sv-main .sv-chip { background: var(--navy); color: #fff; }
+    .sv-price { font-size: 1.7rem; font-weight: 900; color: var(--navy); margin: 0 0 12px !important; line-height: 1.2; }
+    .sv-price small { font-size: 0.9rem; font-weight: 700; }
+    .sv-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .sv-list li { position: relative; padding: 5px 0 5px 24px; font-size: 0.9rem; line-height: 1.6; border-top: 1px solid var(--line); }
+    .sv-list li:first-child { border-top: 0; }
+    .sv-list li::before { content: "✓"; position: absolute; left: 4px; top: 5px; color: var(--orange-text); font-weight: 700; }
+    .sv-list li span { font-size: 0.8rem; color: var(--ink-soft); }
+    .sv-unit { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+    @media (max-width: 700px) { .sv-cards { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list li:nth-child(2) { border-top: 1px solid var(--line); } }
     .ds-example { background: var(--paper-soft); border-radius: 4px; padding: 14px 18px; margin: 14px 0 0; }
     .ds-example p { margin: 0 0 6px; }
     .ds-example-h { font-weight: 700; color: var(--navy); }
@@ -217,51 +234,43 @@
 
       <section class="price-block">
         <h2>料金</h2>
-        <div class="price-plans">
-          <div class="pp"><p class="pp-name">手計算<br>（計算書付き）</p><p class="pp-price">50,000<small>円〜</small></p><p class="pp-note">部材15本まで・力のかかり方1つ</p></div>
-          <div class="pp"><p class="pp-name">FEM解析込み<br>（組み上げた3Dモデルをいただける場合）</p><p class="pp-price">100,000<small>円〜</small></p><p class="pp-note">荷重1ケース。モデルの状態によっては、ご相談させてください</p></div>
-          <div class="pp"><p class="pp-name">FEM解析込み<br>（2D図面から）</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">荷重1ケース。部品の3D化と組立を含みます。ロボット架台など</p></div>
+        <p>手計算は、<b>基本の料金に、5つの確認項目と計算書・色付き資料・3Dモデルがすべて付きます。</b>部材が多い場合や、地震などの場面を足す場合は、オプションで追加します。</p>
+        <div class="sv-cards">
+          <div class="sv-card sv-main">
+            <p class="sv-chip">手計算（計算書付き）</p>
+            <p class="sv-price">50,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>部材15本まで</li>
+              <li>想定する場面：1つ<br><span>ふだんの状態（のせた物の重さ＋決めた横からの力）</span></li>
+              <li>確認する項目：5つ<br><span>曲げ・たわみ・座屈・溶接・ボルト</span></li>
+              <li>計算書・色付き資料・部材の3Dモデル</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">FEM解析込み<br>組み上げた3Dモデルをいただける場合</p>
+            <p class="sv-price">100,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>荷重1ケース</li>
+              <li>いただいた3Dモデルで解析</li>
+              <li>モデルの状態によっては、ご相談</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">FEM解析込み<br>2D図面から</p>
+            <p class="sv-price">150,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>荷重1ケース</li>
+              <li>部品の3D化と組立を含む</li>
+              <li>ロボット架台など</li>
+            </ul>
+          </div>
         </div>
         <p class="price-note">FEM解析は、形を細かく分けて、コンピューターで応力を計算する方法です。手計算では難しい形や、提出用に詳しく確かめたい場合に向いています。</p>
-
-        <p class="price-plans-h">手計算の料金表</p>
-        <table class="price-table ds-table ds-fee">
-          <thead><tr><th>内容</th><th>料金（税別）</th></tr></thead>
-          <tr><td>基本：部材15本まで・力のかかり方1つ（5つの項目をすべて確認）</td><td>50,000円〜</td></tr>
-          <tr><td>部材が16〜30本の場合</td><td>＋30,000円〜</td></tr>
-          <tr><td>部材が31本以上の場合</td><td>個別見積</td></tr>
-          <tr><td>力のかかり方を追加する場合（地震・非常停止など）</td><td>1つにつき ＋20,000円〜</td></tr>
-        </table>
-        <div class="ds-example">
-          <p class="ds-example-h">計算例</p>
-          <p>部材20本の架台で、ふだんの状態に「地震」を追加して確かめる場合<br>
-          50,000円（基本）＋ 30,000円（部材16〜30本）＋ 20,000円（地震）＝ <b>100,000円〜</b></p>
-          <p>櫓（やぐら）のような、柱4本と梁・つなぎの部材で組んだ形なら、多くは部材15本以内に収まり、基本の50,000円〜で承れます。</p>
-        </div>
       </section>
 
       <section class="price-block">
-        <h2>「確かめる項目」と「力のかかり方」の違い</h2>
-        <p>強度検証では、<strong class="mk">どんな場面の力で（力のかかり方）</strong>、<strong class="mk">何に対して耐えられるか（確かめる項目）</strong>を確かめます。基本の料金には、力のかかり方1つと、確かめる項目5つがすべて入っています。</p>
-        <p class="price-plans-h">力のかかり方（基本は1つ）</p>
-        <ul>
-          <li><b>基本（料金に含む）</b>：のせる物の重さがかかる、ふだんの状態。決めた大きさの横からの力（重さ×係数）も含めて確かめます</li>
-        </ul>
-        <p class="price-plans-h">追加できる力のかかり方の例（1つにつき＋20,000円〜）</p>
-        <table class="price-table ds-table">
-          <thead><tr><th>力のかかり方</th><th>どんな場面か</th></tr></thead>
-          <tr><td>地震</td><td>設置する階や建物から横の力を決めて、倒れないか・アンカーが抜けないかまで確かめる</td></tr>
-          <tr><td>ロボットの非常停止</td><td>アームが急に止まるときの、勢いによる力</td></tr>
-          <tr><td>片寄ったのせ方</td><td>設備を片側に寄せて置く、のせる位置が変わる</td></tr>
-          <tr><td>吊り上げ・移動</td><td>架台ごとクレーンで吊る、フォークリフトで運ぶ</td></tr>
-          <tr><td>ぶつかる力</td><td>台車やフォークリフトが当たる</td></tr>
-          <tr><td>人が乗る</td><td>点検のときなどに、作業者が乗る</td></tr>
-        </table>
-        <p class="price-note">追加した力のかかり方ごとに、下の5つの項目をひととおり確かめ直します。</p>
-      </section>
-
-      <section class="price-block">
-        <h2>手計算で確かめる5つの項目</h2>
+        <h2>基本の料金に含まれるもの（手計算）</h2>
+        <p class="price-plans-h">確認する項目：5つ（すべて含みます）</p>
         <table class="price-table ds-table">
           <thead><tr><th>項目</th><th>確かめること</th></tr></thead>
           <tr><td>曲げ</td><td>梁が、のせた物の重さで曲げられても耐えられるか</td></tr>
@@ -270,7 +279,44 @@
           <tr><td>溶接</td><td>部材どうしをつなぐ溶接が、かかる力に耐えられるか</td></tr>
           <tr><td>ボルト</td><td>つなぎ目や床への固定のボルトが、切れたり抜けたりしないか</td></tr>
         </table>
+        <p class="price-plans-h">想定する場面：1つ（ふだんの状態）</p>
+        <p>のせる物の重さがかかる、ふだんの状態です。決めた大きさの横からの力（重さ×係数）も含めて、上の5つの項目を確かめます。「確認する項目」は何を確かめるか、「想定する場面」はどんな場面の力で確かめるか、の違いです。</p>
         <p class="price-note">計算の考え方は、コラム「<a href="column/design/index.html">自動化設備の設計ノート</a>」で紹介しています。初めての方は、計算例を動く図で追う「<a href="column/articles/stand-strength-guide.html">架台の強度計算 はじめての方の読み方ガイド</a>」もどうぞ。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>オプション（追加料金）</h2>
+        <p>基本の料金で収まらない場合だけ、必要な分を足します。</p>
+        <div class="sv-cards">
+          <div class="sv-card">
+            <p class="sv-chip">部材の追加</p>
+            <p class="sv-price">＋2,000<small>円〜</small><span class="sv-unit">1本につき</span></p>
+            <ul class="sv-list">
+              <li>16本目から、1本ごとに追加</li>
+              <li>例：部材20本なら ＋10,000円〜</li>
+              <li>31本以上は、個別にお見積り</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">想定する場面の追加</p>
+            <p class="sv-price">＋20,000<small>円〜</small><span class="sv-unit">1場面につき</span></p>
+            <ul class="sv-list">
+              <li>地震<br><span>設置する階や建物から横の力を決め、倒れないか・アンカーが抜けないかまで</span></li>
+              <li>ロボットの非常停止<br><span>アームが急に止まるときの、勢いによる力</span></li>
+              <li>片寄ったのせ方<br><span>設備を片側に寄せて置く、のせる位置が変わる</span></li>
+              <li>吊り上げ・移動<br><span>架台ごとクレーンで吊る、フォークリフトで運ぶ</span></li>
+              <li>ぶつかる力<br><span>台車やフォークリフトが当たる</span></li>
+              <li>人が乗る<br><span>点検のときなどに、作業者が乗る</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-note">追加した場面ごとに、5つの確認項目をひととおり確かめ直します。</p>
+        <div class="ds-example">
+          <p class="ds-example-h">計算例</p>
+          <p>部材20本の架台で、ふだんの状態に「地震」を追加して確かめる場合<br>
+          50,000円（基本）＋ 2,000円 × 5本（16〜20本目）＋ 20,000円（地震）＝ <b>80,000円〜</b></p>
+          <p>櫓（やぐら）のような、柱4本と梁・つなぎの部材で組んだ形なら、多くは部材15本以内に収まり、基本の50,000円〜で承れます。</p>
+        </div>
       </section>
 
       <section class="price-block">
@@ -310,11 +356,11 @@
       <section class="price-block">
         <h2>ご依頼の流れと納期</h2>
         <ol class="price-steps">
-          <li><b>お問い合わせ</b>：図面（または寸法）と、のせる物の重さなどの条件をお送りください。</li>
-          <li><b>条件の確認・お見積り</b>：足りない条件を確認して、お見積りと納期をご連絡します。</li>
+          <li><b>お問い合わせ</b>図面（または寸法）と、のせる物の重さなどの条件をお送りください。</li>
+          <li><b>条件の確認・お見積り</b>足りない条件を確認して、お見積りと納期をご連絡します。</li>
           <li><b>ご発注</b></li>
           <li><b>計算・資料の作成</b></li>
-          <li><b>納品・ご説明</b>：計算書・色付き資料・3Dモデルをお渡しし、結果をご説明します。</li>
+          <li><b>納品・ご説明</b>計算書・色付き資料・3Dモデルをお渡しし、結果をご説明します。</li>
         </ol>
         <p class="price-note">手計算の納期は、最短で2〜3日、長くても1週間以内が目安です。内容により延びる場合があります。FEM解析は、内容をうかがってご相談します。</p>
       </section>
