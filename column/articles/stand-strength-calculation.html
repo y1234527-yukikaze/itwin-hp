@@ -1343,11 +1343,16 @@
 <script>
 (function () {
   document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href*="contact"]');
+    var a = e.target.closest && e.target.closest('a[href]');
     if (!a || typeof gtag !== 'function') return;
+    var h = a.getAttribute('href') || '';
+    // 2026-11-23：料金ページ・サービスの詳細ページへのリンクも記録する（price_click）
+    var name = h.indexOf('contact') >= 0 ? 'contact_click'
+             : /^\.\.\/\.\.\/(price|[a-z-]+-service)\.html/.test(h) ? 'price_click' : '';
+    if (!name) return;
     var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
           : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
-    gtag('event', 'contact_click', { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+    gtag('event', name, { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
   });
 })();
 </script>
