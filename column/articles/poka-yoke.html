@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：ポカヨケとは（特集「AIで作る 現場の仕組みノート」07）
+  （溶接の記事を土台に、キットの build_poka.py で組み立て・2026-11-23）
+  ポカヨケの候補を出すツール：キットの tool_pokayoke.html／本文：poka_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-poka-yoke.jpg（ナノバナナで生成して差し替え）
+  図3枚：キットの figs_poka.py で作る（-types / -examples / -choose）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ｜アイツイン コラム</title>
+  <meta name="description" content="ポカヨケとは、作業のうっかりミスを仕組みで防ぐ工夫です。本記事では、トヨタの現場で広まった意味と由来、防ぐ・知らせる・止めるの3つの種類、組立工程の5つのミスの事例、治具・センサー・カメラの選び方を解説します。ミスに合う方法の候補を出すツールつきです。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/poka-yoke">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ">
+  <meta property="og:description" content="ポカヨケとは、作業のうっかりミスを仕組みで防ぐ工夫です。本記事では、トヨタの現場で広まった意味と由来、防ぐ・知らせる・止めるの3つの種類、組立工程の5つのミスの事例、治具・センサー・カメラの選び方を解説します。ミスに合う方法の候補を出すツールつきです。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/poka-yoke">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-poka-yoke.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-23">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ">
+  <meta name="twitter:description" content="ポカヨケとは、作業のうっかりミスを仕組みで防ぐ工夫です。本記事では、トヨタの現場で広まった意味と由来、防ぐ・知らせる・止めるの3つの種類、組立工程の5つのミスの事例、治具・センサー・カメラの選び方を解説します。ミスに合う方法の候補を出すツールつきです。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-poka-yoke.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ",
+    "description": "ポカヨケとは、作業のうっかりミスを仕組みで防ぐ工夫です。本記事では、トヨタの現場で広まった意味と由来、防ぐ・知らせる・止めるの3つの種類、組立工程の5つのミスの事例、治具・センサー・カメラの選び方を解説します。ミスに合う方法の候補を出すツールつきです。",
+    "image": "https://i-twin.co.jp/img/column-poka-yoke.jpg",
+    "datePublished": "2026-11-23",
+    "dateModified": "2026-11-23",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/poka-yoke"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "AIで作る 現場の仕組みノート", "item": "https://i-twin.co.jp/column/shikumi/" },
+      { "@type": "ListItem", "position": 4, "name": "ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ", "item": "https://i-twin.co.jp/column/articles/poka-yoke" }
+    ]
+  }
+  </script>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../shikumi/index.html">AIで作る 現場の仕組みノート</a> ／
+        <span>ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ</span>
+      </div>
+      <h1>ポカヨケとは？種類と事例、ミスに合った選び方｜治具・センサー・カメラ</h1>
+      <p class="catch">公開日：2026年11月23日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../shikumi/index.html">現場の仕組みノート</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="predictive-maintenance-iot.html">‹ 前の記事：06 予知保全のIoT</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">AI・現場の仕組み</span>公開日：2026.11.23</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-poka-yoke.jpg" alt="ポカヨケのイメージ。組立の作業台で、正しい向きでしか入らない治具と、取り忘れを知らせるランプが、作業者のうっかりミスを防いでいる" width="1376" height="768">
+          <figcaption>人の注意に頼らず、ミスが起きない形や、起きたらすぐ分かる仕組みにする。</figcaption>
+        </figure>
+
+        <p>
+          「何度注意しても、同じ付け忘れが起きる」「ポカヨケを入れたいが、治具がよいのか、センサーやカメラがよいのか決められない」。ポカヨケを調べると、意味やメリットの説明、製品の紹介は多く見つかります。一方で、<b>自分の現場のミスに、どのポカヨケを選べばよいか</b>までは、あまり書かれていません。
+        </p>
+        <p>
+          本記事では、<strong class="mk">ポカヨケの意味と由来、防ぐ・知らせる・止めるの3つの種類、組立工程でよく起きる5つのミスの事例</strong>を整理したうえで、ミスに合った方法の選び方をご紹介します。後半では、治具で防ぐときのコツ、センサーやカメラで小さく試す進め方、自動車部品の工場で求められる確かめ方にも触れます。ミスの種類を選ぶと、合うポカヨケの候補が出るツールも付けました。
+        </p>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>ポカヨケの意味と、トヨタ自動車などの現場で広まった由来</li>
+            <li>防ぐ・知らせる・止めるの3つの種類と、ミスの見つけ方3つ</li>
+            <li>付け忘れ・向き違い・取り違えなど、組立工程の5つのミスの事例</li>
+            <li>ミスに合ったポカヨケの選び方と、候補を出すツール</li>
+            <li>治具で防ぐコツと、センサー・カメラで小さく試す進め方</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>ポカヨケとは｜意味と由来、フールプルーフとの違い</h2>
+
+        <h3>ポカヨケは「うっかりミスを仕組みで防ぐ」工夫</h3>
+        <p>
+          ポカヨケは、作業の中で起きるうっかりミス（ポカ）を、人の注意力に頼らず、道具や設備の仕組みで避ける工夫のことです。たとえば、正しい向きでしか部品が入らない治具や、部品を取り忘れるとランプで知らせる棚がポカヨケにあたります。<strong class="mk">「気をつける」ではなく「間違えられない」「間違えたらすぐ分かる」形にする</strong>のが、ポカヨケの考え方です。
+        </p>
+
+        <h3>トヨタ自動車などの現場で広まり、英語でもPoka-yokeと呼ばれる</h3>
+        <p>
+          ポカヨケは、日本の製造業の現場改善の中で発展した考え方で、生産改善の指導をしていた新郷重夫氏が、トヨタ自動車などの現場で実践し、体系にまとめたことで広まったとされています。はじめは「バカヨケ」と呼ばれていましたが、その言葉が作業者を傷つけるおそれがあることから、誰にでも起こりうるうっかりミスを防ぐという意味で「ポカヨケ」と呼ぶようになったと言われます。品質を後の検査で選り分けるのではなく、工程の中で作り込むための道具として、今では海外でも「Poka-yoke」のまま通じます。英語では、mistake-proofing や error-proofing とも言います。
+        </p>
+
+        <h3>フールプルーフ・フェイルセーフとの違い</h3>
+        <p>
+          よく似た言葉に、フールプルーフとフェイルセーフがあります。フールプルーフは、使う人が誤った操作をしても、事故や故障につながらないようにする設計の考え方です。ポカヨケと重なる部分が多い一方で、ポカヨケは主に工場の<b>作業ミスや品質不良</b>（付け忘れや取り違え）を防ぐ場面で使われます。フェイルセーフは、機械や仕組みに故障や異常が起きたときに、安全な状態へ移す、被害を小さく抑えるという考え方で、主に<b>安全</b>のための言葉です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ポカヨケは、うっかりミスを人の注意でなく仕組みで防ぐ工夫</li>
+            <li>新郷重夫氏がトヨタ自動車などの現場で実践して広まり、英語でもPoka-yokeと呼ばれる</li>
+            <li>フールプルーフは重なる部分が多く、フェイルセーフは主に安全のための言葉</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>ポカミスが起きる5つの理由</h2>
+        <p>
+          ポカヨケを選ぶ前に、ミスがなぜ起きるのかを分けて考えておくと、手の打ち方が見えてきます。現場でよくある理由は、次の5つです。
+        </p>
+        <h3>理由1：見落とす・見間違える</h3>
+        <p>部品が似ている、ラベルの文字が小さい、照明が暗いなど、正しく見分けられないことで起きます。</p>
+        <h3>理由2：忘れる・飛ばす</h3>
+        <p>途中で声をかけられた、手順が多いなど、作業の一部を抜かしてしまうことで起きます。</p>
+        <h3>理由3：思い込む</h3>
+        <p>前の品種と同じだと思った、いつもと同じ数だと思ったなど、確かめずに判断することで起きます。</p>
+        <h3>理由4：手がすべる・動きを間違える</h3>
+        <p>向きを逆に置いた、隣の穴に入れたなど、分かっていても動きが合わないことで起きます。</p>
+        <h3>理由5：慣れて省く</h3>
+        <p>
+          急いでいるから確認を省く、面倒な手順を自分なりに変えるなど、決まりを守らないことで起きます。ここは仕組みだけでは防ぎきれず、<b>決まりを守りやすい手順にする</b>ことも必要です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ポカミスは、見落とし・忘れ・思い込み・動きの間違い・省略の5つで起きる</li>
+            <li>理由が分かると、形で防ぐか、数や順番で見張るかを決めやすい</li>
+            <li>「慣れて省く」は、守りやすい手順づくりもセットで考える</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>ポカヨケの種類｜防ぐ・知らせる・止めるの3つ</h2>
+
+        <figure class="article-figure">
+          <img src="../../img/column-poka-yoke-types.jpg" alt="ポカヨケの3つの種類。防ぐ＝間違った形では入らない、知らせる＝ランプや音で気づかせる、止める＝異常を見つけたら作業や設備を止める。影響が大きいミスほど強い種類を選ぶ" width="1376" height="768" loading="lazy">
+          <figcaption>ミスを起こさせない「防ぐ」、気づかせる「知らせる」、異常で作業や設備を止める「止める」。</figcaption>
+        </figure>
+
+        <h3>防ぐ・知らせる・止めるの違い</h3>
+        <p>
+          新郷氏は、ポカヨケの働きを、ミスを起こさせない・止める「規制」と、ミスを知らせる「警告」の2つに大きく分けました。海外の解説では、規制をさらに分けて「停止・制御・警告」の3つで説明することもあります。本記事では分かりやすく、<b>防ぐ</b>・<b>知らせる</b>・<b>止める</b>の3つで説明します。1つ目の防ぐは、ミスが起きない形にする、不良を次の工程へ流さない形にするものです。正しい向きでしか入らない治具が代表です。2つ目の知らせるは、ミスや異常を、ランプやブザーで作業者に気づかせるものです。3つ目の止めるは、異常を見つけたときに、作業や設備を止めるものです。<strong class="mk">お客様に流れると大きな問題になるミスほど、知らせるより防ぐ・止めるを選びます。</strong>
+        </p>
+
+        <h3>ミスの見つけ方は「形・数・順番」の3つ</h3>
+        <p>
+          知らせる・止めるためには、ミスを見つける方法が要ります。新郷氏の分け方では、見つけ方は3つです。<b>形</b>で見つける方法（接触式）は、部品の形・寸法・位置の違いを、治具やセンサーで確かめます。<b>数</b>で見つける方法（定数式）は、取り出した部品の数やネジを締めた回数を数え、決まった数に足りなければ知らせます。<b>順番</b>で見つける方法（動作ステップ式）は、決まった作業や動作が、正しい順番で行われたかを見張ります。
+        </p>
+
+        <h3>ポカヨケの種類のメリット・デメリット比較一覧</h3>
+        <div class="table-scroll"><table class="table-wide">
+          <tr><th style="white-space:nowrap">種類</th><th>例</th><th>よい点</th><th>気をつけたい点</th></tr>
+          <tr><td style="white-space:nowrap">防ぐ</td><td>正しい向きでしか入らない治具、似た部品が入らない寸法の差</td><td>作業者が意識しなくても効く。壊れにくい</td><td>品種が増えると治具の作り直しが要る。形で区別できないミスには使えない</td></tr>
+          <tr><td style="white-space:nowrap">知らせる</td><td>取り忘れのランプ、ネジの本数の表示、音での警告</td><td>今の設備に後から足しやすい</td><td>鳴っても作業を続けられる。誤報が多いと無視されやすい</td></tr>
+          <tr><td style="white-space:nowrap">止める</td><td>異常を見つけたら機械が止まる、数が足りないと次の工程の治具が開かない</td><td>ミスを先へ流さない</td><td>止まったあとの戻し方を決めないと、現場が困る。設備側の改造が要ることが多い</td></tr>
+        </table></div>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ポカヨケの働きは、防ぐ・知らせる・止めるの3つ（新郷氏の分け方では規制と警告の2つ）</li>
+            <li>ミスの見つけ方は、形（接触式）・数（定数式）・順番（動作ステップ式）の3つ</li>
+            <li>流れると大きな問題になるミスほど、防ぐ・止めるを選ぶ</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>ポカヨケの事例｜組立工程の5つのミスで考える</h2>
+        <p>
+          ここでは、自動車部品のような組立工程でよく起きる5つのミスを例に、ポカヨケの事例をご紹介します。どれも、考え方の例として一般的な方法をまとめたものです。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-poka-yoke-examples.jpg" alt="組立工程の5つのミスと、合うポカヨケの例。付け忘れ・数の間違いは部品を1台分ずつ出す、向き違いは正しい向きでしか入らない治具、取り違えはコードの照合、締め忘れは締めた回数を数える、順番違いは前の作業が終わらないと次へ進めない" width="1376" height="768" loading="lazy">
+          <figcaption>ミスの種類ごとに、効きやすいポカヨケは違う（考え方の例）。</figcaption>
+        </figure>
+
+        <h3>事例1：部品の付け忘れ・数の間違い｜1台分ずつ出す</h3>
+        <p>
+          部品を箱から必要な数だけ取る作業では、取り忘れや数の間違いが起きやすくなります。1台分の部品を、仕切りのある皿に先にそろえておけば、皿に部品が残っていることで付け忘れに気づけます（<b>数</b>で見つける方法）。部品箱ごとにセンサーを付け、取り出すべき箱をランプで示し、違う箱に手を入れたら知らせる仕組みもあります。
+        </p>
+
+        <h3>事例2：向き違い・裏表の間違い｜正しい向きでしか入らない形</h3>
+        <p>
+          左右や裏表が分かりにくい部品は、治具の受けの形を部品に合わせ、<b>逆向きでは置けない</b>ようにします。部品の側に、向きを決める切り欠きや段差を設計で付けておくのも効果的です。どうしても形で区別できない場合は、センサーやカメラで向きを確かめます。
+        </p>
+
+        <h3>事例3：似た部品の取り違え｜入らない寸法の差か、コードの照合</h3>
+        <p>
+          寸法がわずかに違う部品や、色だけが違う部品は取り違えが起きやすくなります。設計を変えられるなら、取り付け穴の位置やピンの太さに差をつけ、違う部品は入らないようにします。変えられない場合は、部品と作業指示のコード（バーコードやQRコード）を読み、合っているかを照らし合わせます。読み取りの仕組みは、特集の記事「<a href="raspberry-pi-qr-code-reading.html">ラズパイでQRコードを読み取る方法</a>」でも紹介しています。
+        </p>
+
+        <h3>事例4：ネジの締め忘れ・締め不足｜締めた回数を数える</h3>
+        <p>
+          ネジが何本もある部品では、1本だけ締め忘れることがあります。締め付けの終わりを知らせる信号が出せる工具なら、その信号の回数を数え、決まった本数に足りなければ次の部品へ進ませないようにできます。締める強さの管理まで要る場合は、締め付けの力を管理できる工具と組み合わせます。
+        </p>
+
+        <h3>事例5：工程の抜け・順番違い｜前の作業が終わらないと次へ進めない</h3>
+        <p>
+          作業の順番が決まっている工程では、ひとつ飛ばしても気づきにくいことがあります。前の作業の完了を確かめてから次の治具のロックを外す、画面で次の作業を一つずつ示すなど、<b>順番</b>を見張るポカヨケが向いています。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>付け忘れは1台分ずつ出す、向き違いは形で防ぐ</li>
+            <li>取り違えは入らない寸法の差かコードの照合、締め忘れは回数を数える</li>
+            <li>順番違いは、前の作業が終わらないと次へ進めない形にする</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>ミスに合ったポカヨケの選び方</h2>
+
+        <h3>まずはここから｜ミスの種類と、流れたときの影響を書き出す</h3>
+        <p>
+          ポカヨケ選びで迷ったら、まず<b>どんなミスが、どの工程で、月に何回くらい起きているか</b>と、<b>そのミスがお客様に流れたら何が起きるか</b>を書き出します。同じ付け忘れでも、外から見えない部品で、流れると不具合につながるなら止める、次の工程ですぐ分かるなら知らせる、というように選ぶ種類が変わります。
+        </p>
+
+        <h3>選ぶ順番は「形で防ぐ → 数や順番で見張る → カメラで見る」</h3>
+        <p>
+          方法を選ぶときは、<strong class="mk">まず形で防げないかを考え、次にセンサーで数や順番を見張り、それでも難しいときにカメラを使う</strong>順番がおすすめです。形で防ぐ方法は、一度作れば電源も要らず、誤報もありません。センサーは今の設備に足しやすく、カメラは向きや有無など、いろいろなミスを見られる代わりに、照明や置き方をそろえる手間がかかります。
+        </p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-poka-yoke-choose.jpg" alt="ポカヨケの選ぶ順番。1つ目は形で防ぐ（治具・部品の形）、2つ目は数や順番を見張る（センサー・カウンタ）、3つ目はカメラで見る（向き・有無）。左ほど壊れにくく誤報が少ない" width="1376" height="768" loading="lazy">
+          <figcaption>形で防げないか → 数や順番で見張れないか → カメラで見る、の順に考える。</figcaption>
+        </figure>
+
+        <h3>ミスに合ったポカヨケの候補を出すツール</h3>
+        <div class="calc-tool" id="pk-tool">
+          <p class="calc-tool-title">ミスに合ったポカヨケの候補を出すツール｜ミスの種類と影響から、方法の候補と確かめ方を見る</p>
+          <p class="calc-tool-note">
+            いちばん困っているミスと、その条件を選ぶと、ポカヨケの種類（防ぐ・知らせる・止める）、ミスの見つけ方、方法の候補、作ったあとの確かめ方を出します。選んだ内容は、このページの中だけで使い、どこにも送りません。はじめは、ネジの締め忘れの例です。
+          </p>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">どんなミスですか</p>
+          <div class="calc-btns" data-b="mis">
+            <button type="button" data-v="miss">部品の付け忘れ・数の間違い</button>
+            <button type="button" data-v="dir">向き違い・裏表の間違い</button>
+            <button type="button" data-v="mix">似た部品の取り違え</button>
+            <button type="button" data-v="screw">ネジの締め忘れ・締め不足</button>
+            <button type="button" data-v="order">工程の抜け・順番違い</button>
+            <button type="button" data-v="out">不良品を次の工程へ流す</button>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">そのミスが流れたら</p>
+          <div class="calc-btns" data-b="imp">
+            <button type="button" data-v="big">お客様に流れ、不具合やクレームになる</button>
+            <button type="button" data-v="small">次の工程ですぐ気づける</button>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">部品や治具の形を変えられますか</p>
+          <div class="calc-btns" data-b="shape">
+            <button type="button" data-v="yes">変えられる</button>
+            <button type="button" data-v="no">変えられない</button>
+          </div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">品種の数は</p>
+          <div class="calc-btns" data-b="var">
+            <button type="button" data-v="few">少ない（数品種）</button>
+            <button type="button" data-v="many">多い・よく変わる</button>
+          </div>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out pk-out">
+            <tr><th>選ぶ種類</th><td><b data-o="kind"></b></td></tr>
+            <tr><th>ミスの見つけ方</th><td><b data-o="find"></b></td></tr>
+            <tr><th>第1候補</th><td data-o="c1"></td></tr>
+            <tr><th>第2候補</th><td data-o="c2"></td></tr>
+            <tr><th>作ったあとの確かめ方</th><td data-o="test"></td></tr>
+          </table>
+          <style>#pk-tool .pk-out th{width:28%;}</style>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="note"></p>
+          <button type="button" class="calc-reset" id="pk-reset">記事の例に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('pk-tool');
+          if (!root) return;
+          var st = {}, used = false;
+          // ミスごとの方法。shape：形で防ぐ方法、sense：センサーで見張る方法、cam：カメラ・コードで見る方法
+          var M = {
+            miss: { find: '数（取った数・残った数）', shape: '1台分の部品を、仕切りのある皿や形にくりぬいた置き場に先にそろえる（残っていれば付け忘れが分かる）',
+                    sense: '部品箱ごとのセンサーで、取るべき箱をランプで示し、違う箱や取り忘れを知らせる', cam: 'カメラで、取り付けたあとの部品の有無を確かめる',
+                    test: '部品を1つ抜いた見本や、1つ多い見本で、知らせる・止まるかを試す' },
+            dir:  { find: '形（向き・裏表）', shape: '治具の受けを部品の形に合わせ、左右で太さの違うピンなどで、正しい向きのときだけ収まる形にする',
+                    sense: '向きで当たる位置が変わるところにセンサーを付け、逆向きを知らせる', cam: 'カメラで、向きの分かる目印（切り欠き・刻印など）を確かめる',
+                    test: '逆向き・裏返しにした見本を置いて、収まらない・知らせるかを試す' },
+            mix:  { find: '形（寸法・穴の位置）か、コードの照合', shape: '取り付け穴の位置やピンの太さに差をつけ、違う部品は入らない形にする',
+                    sense: '部品の寸法の違いを、治具のセンサーで確かめる', cam: '部品と作業指示のコード（バーコード・QRコード）を読み、合っているかを照らし合わせる',
+                    test: '似た別の部品を、わざと使う見本で試す。コードの照合は、違うコードを読ませて試す' },
+            screw:{ find: '数（締めた回数）', shape: '締めたネジに印が付く、締めないと次の部品が置けない、など形で気づける工夫を足す',
+                    sense: '締め付けの終わりの信号を数え、決まった本数に足りなければ次へ進ませない（強さの管理が要るなら、締め付けの力を管理できる工具と組み合わせる）', cam: 'カメラで、ネジの頭の有無や印を確かめる',
+                    test: 'ネジを1本締めない見本で、知らせる・止まるかを試す' },
+            order:{ find: '順番（手順どおりに進んだか）', shape: '前の作業をしないと、次の部品や工具に手が届かない置き方にする',
+                    sense: '前の作業の完了を確かめてから、次の治具のロックを外す。画面で次の作業を一つずつ示す', cam: 'カメラで、作業の途中の状態（部品が付いているか）を確かめる',
+                    test: '1つの作業を飛ばして、次に進めない・知らせるかを試す' },
+            out:  { find: '形（寸法・見た目）', shape: '良品だけが通る検査治具（寸法の通り・止まり）を、次の工程の入口に置く',
+                    sense: 'センサーで寸法や有無を測り、不良は不良品の箱にしか入らないようにする', cam: 'カメラで見た目を検査する（傷・汚れなどは、外観検査のAIも候補）',
+                    test: '不良の見本を流して、必ず弾かれるかを試す' }
+          };
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function sync() {
+            ['mis', 'imp', 'shape', 'var'].forEach(function (g) {
+              root.querySelectorAll('[data-b="' + g + '"] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.v === st[g])); });
+            });
+          }
+          function calc() {
+            var m = M[st.mis];
+            var big = st.imp === 'big', shape = st.shape === 'yes', many = st.var === 'many';
+            out('kind', big ? (shape ? '防ぐ（形で）＋ 止める' : '止める（異常を見つけたら作業や設備を止める）') : (shape ? '防ぐ（形で）' : '知らせる'));
+            out('find', m.find);
+            var c1, c2;
+            if (shape && !many) { c1 = m.shape; c2 = m.sense; }
+            else if (shape && many) { c1 = m.sense; c2 = m.shape + '（品種ごとに交換できる部品にする）'; }
+            else { c1 = m.sense; c2 = m.cam; }
+            if (st.mis === 'mix' && !shape) { c1 = m.cam; c2 = m.sense; }
+            if (st.mis === 'out') { c1 = shape ? m.shape : m.sense; c2 = m.cam; }
+            out('c1', c1); out('c2', c2);
+            out('test', m.test + '。決めた頻度（例：始業時）で試し、記録を残す');
+            var note = '';
+            if (big) note += '流れると大きな問題になるミスなので、知らせるだけでなく、止める仕組みにします。止めるかどうかは、設備の制御装置の側で判断し、止まったあとの戻し方も決めておきます。';
+            else note += '次の工程で気づけるミスなので、まずは安く作れる方法で試し、効き目を見てから広げます。';
+            if (many) note += '品種が多い・よく変わる場合は、形で防ぐ治具は品種ごとに作り直しが要るため、センサーや設定で切り替えられる方法が向きます。';
+            if (!shape && st.mis !== 'mix') note += '形を変えられない場合は、センサーやカメラで見張ります。カメラは、照明と置き方をそろえる手間がかかります。';
+            out('note', note + '（結果は、選んだ条件だけから出した候補です。人の安全に関わる働きには使わず、実際の方法は部品・設備・作業の条件を確かめて決めてください。）');
+          }
+          function touch() { if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'pokayoke' }); } }
+          ['mis', 'imp', 'shape', 'var'].forEach(function (g) {
+            root.querySelectorAll('[data-b="' + g + '"] button').forEach(function (bt) {
+              bt.addEventListener('click', function () { st[g] = bt.dataset.v; sync(); calc(); touch(); });
+            });
+          });
+          function reset() { st = { mis: 'screw', imp: 'big', shape: 'no', 'var': 'few' }; sync(); calc(); }
+          document.getElementById('pk-reset').addEventListener('click', reset);
+          reset();
+        })();
+        </script>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ミスの種類・回数と、流れたときの影響を先に書き出す</li>
+            <li>形で防ぐ → 数や順番で見張る → カメラで見る、の順に考える</li>
+            <li>流れると大きな問題になるミスは、知らせるだけでなく止める</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>治具で防ぐポカヨケの作り方のコツ</h2>
+        <p>
+          形で防ぐポカヨケの中心は、治具です。治具は、作業の中で部品を決まった位置に置き、押さえるための道具です。ポカヨケとして効く治具にするには、次の4つを考えます。
+        </p>
+
+        <h3>コツ1：部品の基準を決め、そこで位置を決める</h3>
+        <p>
+          部品のどの面・どの穴を基準にするかを先に決め、治具はその基準で位置を決めます。基準があいまいだと、正しい向きでも少しずれた位置に置けてしまい、ポカヨケが効きません。
+        </p>
+
+        <h3>コツ2：左右で形を変え、逆向きでは置けないようにする</h3>
+        <p>
+          位置決めのピンを左右で太さ違いにする、片側だけ当たりを付けるなど、<b>正しい向きのときだけ収まる</b>形にします。左右対称の部品でも、どこか1か所に非対称の当たりがあれば、逆置きを防げます。
+        </p>
+
+        <h3>コツ3：置き忘れが目で分かるようにする</h3>
+        <p>
+          部品の形にくりぬいた置き場や、部品がないと見える色の印を付けておくと、置き忘れが一目で分かります。センサーを付けるときも、この置き場に付けると見張りやすくなります。
+        </p>
+
+        <h3>コツ4：作業のじゃまにならない形にする</h3>
+        <p>
+          ポカヨケのせいで部品が入れにくい、取り出しにくい治具は、使われなくなります。<strong class="mk">正しい作業がいちばん楽な形</strong>になっているかを、実際に作業する人と一緒に確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>部品の基準を決め、治具はその基準で位置を決める</li>
+            <li>左右で形を変え、正しい向きのときだけ収まるようにする</li>
+            <li>置き忘れが見える形にし、正しい作業がいちばん楽な治具にする</li>
+          </ul>
+        </div>
+
+        <!-- ◆7 -->
+        <h2>センサー・カメラ・ラズパイでポカヨケを小さく試す</h2>
+
+        <h3>いきなり装置を買わず、一つのミスに絞って試す</h3>
+        <p>
+          形で防げないミスは、センサーやカメラで見張ります。このとき、いきなり大きな装置を入れるより、<b>いちばん困っている一つのミスに絞って、小さく試す</b>のがおすすめです。小さなコンピューターのラズパイを使えば、センサーの信号を数える、ランプで知らせる、カメラで有無を見るといった仕組みを、安く試作できます。使い方の全体は、特集の記事「<a href="raspberry-pi-manufacturing.html">ラズパイの製造業での使い方</a>」で紹介しています。
+        </p>
+
+        <h3>構成例：ネジの本数と部品の取り出しを見張る</h3>
+        <p>
+          たとえば、締め付けの終わりの信号と、部品箱のセンサーの信号をラズパイで受け、1台分の本数や部品がそろったら画面を緑に、足りなければ赤にして知らせる、という構成が考えられます。次の工程に進ませないようにしたい場合は、ラズパイから設備の制御装置（PLC）へ結果を渡し、<b>止めるかどうかは制御装置の側で判断する</b>形にします。つなぎ方は、特集の記事「<a href="plc-raspberry-pi-connection.html">PLCとラズパイの接続方法</a>」をご覧ください。
+        </p>
+
+        <h3>安全に関わる働きには使わない</h3>
+        <p>
+          ラズパイなどで作る仕組みは、品質のミスを見張るためのものです。安全扉や非常停止のように、人の安全を守る働きには使いません。安全に関わる部分は、安全のために作られた機器と回路で守ります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>形で防げないミスは、一つに絞ってセンサーやカメラで小さく試す</li>
+            <li>止める判断は、設備の制御装置の側で行う</li>
+            <li>自作の仕組みは、人の安全を守る働きには使わない</li>
+          </ul>
+        </div>
+
+        <!-- ◆8 -->
+        <h2>自動車部品の工場で求められるポカヨケ</h2>
+
+        <h3>品質の規格では、ポカヨケの確かめ方まで求められる</h3>
+        <p>
+          自動車部品の工場の多くが取り組む品質の規格（IATF 16949:2016）には、「10.2.4 ポカヨケ」の項目があります。適切なポカヨケの方法を決める手順を文書にすること、使う方法を工程のリスク分析（工程FMEAなど）に記録すること、試す頻度を管理計画書に書くこと、そして<strong class="mk">ポカヨケが働くかを、故障や故障をまねた状態で試し、その記録を残すこと</strong>などが求められます。
+        </p>
+
+        <h3>わざと不良にした見本で、働くかを試す</h3>
+        <p>
+          ポカヨケが働くかを試すには、ネジを1本抜いた部品や、向きを逆にした部品など、わざと不良にした見本（チャレンジ部品）を使い、本当に知らせる・止まるかを確かめます。規格では、見本を使う場合は、見分けられるようにして管理し、確かめ、できる場合は校正することも求められます。センサーが壊れて素通りになっていても、ふだんの作業では気づけないためです。
+        </p>
+
+        <h3>働かなかったときの対応を先に決める</h3>
+        <p>
+          規格では、ポカヨケの装置が故障したときの対応の計画を決めておくことも求められます。取引先の求め（顧客固有の要求）によっては、その計画に、疑わしい製品を出さないための封じ込めを含めるよう求められることもあります。封じ込める製品の範囲は、最後に正しく働くことを確かめた時点や、製品をたどれる記録をもとに決めます。細かい求めは、規格の原文と取引先の要求を、社内の品質の担当の方に確かめてください。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>自動車部品の品質の規格（IATF 16949）には、ポカヨケの項目がある</li>
+            <li>わざと不良にした見本で、働くかを決めた頻度で試し、記録を残す</li>
+            <li>故障したときの対応の計画を先に決める。取引先によっては封じ込めも求められる</li>
+          </ul>
+        </div>
+
+        <!-- ◆9 -->
+        <h2>ポカヨケの導入でよくある失敗</h2>
+
+        <h3>失敗1：誤報が多く、電源を切られる</h3>
+        <p>
+          正しく作業しているのに鳴るポカヨケは、すぐに切られます。センサーの位置や感度を、実際の作業の動きで確かめてから使い始めます。
+        </p>
+
+        <h3>失敗2：迂回されて、効かなくなる</h3>
+        <p>
+          センサーをふさぐ、治具を外して作業するなど、ポカヨケがじゃまになると迂回されます。迂回したくなる理由（入れにくい、時間がかかる）を聞き、形を直します。
+        </p>
+
+        <h3>失敗3：壊れていても気づかない</h3>
+        <p>
+          ポカヨケは、ふだんはミスがないので鳴りません。そのため、壊れていても気づけません。始業時に不良の見本で試すなど、<b>働くかを確かめる手順</b>を決めておきます。
+        </p>
+
+        <h3>失敗4：品種が増えて合わなくなる</h3>
+        <p>
+          新しい品種が増えたときに、治具やセンサーの設定が合わないまま使われることがあります。品種を増やすときは、ポカヨケも見直す項目に入れておきます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>誤報と迂回は、作業する人の動きで確かめて直す</li>
+            <li>壊れていても鳴らないので、働くかを試す手順を決める</li>
+            <li>品種を増やすときは、ポカヨケも見直す</li>
+          </ul>
+        </div>
+
+        <!-- ◆FAQ -->
+        <h2>ポカヨケについてよくある質問</h2>
+        <h3>ポカヨケで、ミスはゼロにできますか？</h3>
+        <p>形で防ぐポカヨケは、そのミスについてはほぼ起きなくできます。ただ、すべてのミスを仕組みで防ぐのは難しいため、影響の大きいミスから順に手を打ちます。</p>
+        <h3>小さな工場でもポカヨケは作れますか？</h3>
+        <p>作れます。部品を1台分ずつ皿に出す、置き場の形を部品に合わせるなど、お金をかけずにできる方法から始められます。</p>
+        <h3>ポカヨケとダブルチェックは、どちらがよいですか？</h3>
+        <p>人のダブルチェックも、慣れると見落としが起きます。できるところは仕組みで防ぎ、人の確認は仕組みで見られない部分に絞るのがおすすめです。</p>
+
+        <!-- ◆10 -->
+        <h2>アイツインのポカヨケづくりの支援</h2>
+        <p>
+          アイツインは、設備の保全と自動化の設計、画像を使った検査の仕組みを自分で作って現場に入れてきた経験をもとに、ポカヨケづくりをお手伝いしています。
+        </p>
+
+        <h3>治具の設計から、センサー・カメラの仕組みの試作まで</h3>
+        <p>
+          形で防ぐ治具の設計（3Dモデルと部品図）と、センサーやカメラ、ラズパイを使った見張りの仕組みの試作を、どちらもお受けしています。ミスの種類をうかがい、どちらが合うかから一緒に考えます。治具の形や、センサー・カメラの置き場所は、作る前に画面の上で試すこともできます。
+        </p>
+
+        <h3>まずはお気軽にご相談ください｜困っているミスの整理から</h3>
+        <p>
+          「同じ付け忘れが何度も起きる」「治具とセンサーのどちらがよいか分からない」という段階からご相談いただけます。ご相談とお見積もりは無料です。
+        </p>
+        <div class="section-more"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91%E3%83%9D%E3%82%AB%E3%83%A8%E3%82%B1%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%9F%E3%81%84">仕組みづくりを相談する（無料）</a></div>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          ポカヨケは、うっかりミスを人の注意でなく仕組みで防ぐ工夫で、トヨタ自動車などの現場で広まりました。働き方で、防ぐ・知らせる・止めるの3つに分けられ、ミスの見つけ方には形・数・順番の3つがあります。<strong class="mk">選ぶときは、ミスと流れたときの影響を書き出し、形で防ぐ → 数や順番で見張る → カメラで見る、の順に考えます。</strong>
+        </p>
+        <p>
+          作ったあとは、誤報や迂回がないかを作業する人と確かめ、働くかを試す手順を決めておきましょう。まずは上のツールで、いちばん困っているミスを選んでみるところから始めてみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・本記事の事例は、組立工程で一般的に使われる方法を、考え方の例としてまとめたものです。ラズパイを使った構成は構成例で、筆者が同じ形で作って動かしたものではありません。<br>
+          ・ツールの結果は、選んだ条件だけから出した候補です。実際の方法は、部品・設備・作業の条件を確かめて決めてください。<br>
+          ・安全扉・非常停止など、人の安全に関わる働きは、安全のための機器と回路で、決まった手順に沿って設計してください。<br>
+          ・参考にした資料：IATF 16949:2016（自動車産業の品質マネジメントシステムの規格）の「10.2.4 ポカヨケ」と、自動車メーカーの顧客固有の要求の例／新郷重夫『源流検査とポカヨケ・システム』（日本能率協会、1985年）／Shigeo Shingo, Zero Quality Control（1986年）／ポカヨケの働き（規制・警告、停止・制御・警告）と見つけ方（接触式・定数式・動作ステップ式）を説明した大学の論文／情報処理推進機構（IPA）『組込みシステムの安全性向上の勧め（機能安全編）』（フェールセーフとフールプルーフ）
+        </p>
+
+        <div class="article-cta">
+          同じ付け忘れが何度も起きる。治具とセンサーのどちらがよいか分からない。無料相談で、困っているミスの整理から、作り方と費用の目安までを一緒に整理しませんか。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91%E3%83%9D%E3%82%AB%E3%83%A8%E3%82%B1%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%9F%E3%81%84">仕組みづくりを相談する</a><a href="../../price.html#shikumi">料金の目安</a></span>
+        </div>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../shikumi/index.html">← 仕組みノートのまとめに戻る</a></p>
+
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.14</p>
+                <h3><a href="raspberry-pi-qr-code-reading.html">ラズパイでQRコードを読み取る方法｜工場での実例と、読めないときの対策</a></h3>
+                <p class="column-excerpt">コードの照合に使える読み取りの仕組みと、読めない原因。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.11.02</p>
+                <h3><a href="assembly-line-shoujinka.html">工場の省人化の進め方｜組み立てラインで自動化しやすい工程・ラインの形・費用の考え方</a></h3>
+                <p class="column-excerpt">組立の工程で自動化しやすい作業と、費用の考え方。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="raspberry-pi-manufacturing.html">01 ラズパイの使い方</a></li><li><a href="manufacturing-genai-prompt.html">02 生成AIプロンプト</a></li><li><a href="control-panel-heat-countermeasures.html">03 制御盤の熱対策</a></li><li><a href="raspberry-pi-qr-code-reading.html">04 QRコードの読み取り</a></li><li><a href="plc-raspberry-pi-connection.html">05 PLCとの接続</a></li><li><a href="predictive-maintenance-iot.html">06 予知保全のIoT</a></li><li class="is-cur"><span>07 ポカヨケ</span></li></ol>
+            <p class="cs-pager"><a href="predictive-maintenance-iot.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../shikumi/index.html">現場の仕組みノート</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">仕組みづくりのご相談</p>
+          <p class="cs-ask-text">困っている一点の洗い出しから、試作・二重チェック・社内の方への研修までご相談いただけます（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=auto&amp;items=%E3%80%90%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A5%E3%81%8F%E3%82%8A%E3%81%AE%E7%9B%B8%E8%AB%87%E3%80%91">仕組みづくりを相談する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#shikumi">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="bolt-strength-calculation.html"><img src="../../img/thumb-column-bolt-strength.jpg" alt="" width="80" height="45"><span>ボルトの強度計算の方法</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261118" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の仕組みづくりのあるある</p>
+          <div class="aruaru" data-cat="shikumi"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || typeof gtag !== 'function') return;
+    var h = a.getAttribute('href') || '';
+    // 2026-11-23：料金ページ・サービスの詳細ページへのリンクも記録する（price_click）
+    var name = h.indexOf('contact') >= 0 ? 'contact_click'
+             : /^\.\.\/\.\.\/(price|[a-z-]+-service)\.html/.test(h) ? 'price_click' : '';
+    if (!name) return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', name, { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+<!-- ◆アイキャッチの傾き（キットの article_nav.py で入れ直す） -->
+<script src="../eye-tilt.js" defer></script>
+</body>
+</html>

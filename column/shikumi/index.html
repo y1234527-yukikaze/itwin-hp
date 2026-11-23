@@ -50,8 +50,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
   <link rel="icon" href="../../favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
@@ -87,13 +89,14 @@
         { "@type": "ListItem", "position": 3, "name": "制御盤の熱対策", "url": "https://i-twin.co.jp/column/articles/control-panel-heat-countermeasures" },
         { "@type": "ListItem", "position": 4, "name": "ラズパイでQRコードを読み取る", "url": "https://i-twin.co.jp/column/articles/raspberry-pi-qr-code-reading" },
         { "@type": "ListItem", "position": 5, "name": "PLCとラズパイの接続方法", "url": "https://i-twin.co.jp/column/articles/plc-raspberry-pi-connection" },
-        { "@type": "ListItem", "position": 6, "name": "予知保全をIoTで始める方法", "url": "https://i-twin.co.jp/column/articles/predictive-maintenance-iot" }
+        { "@type": "ListItem", "position": 6, "name": "予知保全をIoTで始める方法", "url": "https://i-twin.co.jp/column/articles/predictive-maintenance-iot" },
+        { "@type": "ListItem", "position": 7, "name": "ポカヨケとは", "url": "https://i-twin.co.jp/column/articles/poka-yoke" }
       ]
     }
   }
   </script>
 </head>
-<body>
+<body class="design-flat font-noto">
 
   <!-- ◆ヘッダー -->
   <header class="site-header">
@@ -244,16 +247,24 @@
           </div>
         </a>
 
-        <div class="industry-card ind-8 is-soon">
-          <div class="industry-head"><span class="industry-no">07</span><h2>AI外観検査を自作する前に</h2><small>教師データ・仮想空間で試す</small></div>
+        <a class="industry-card ind-8" href="../articles/poka-yoke.html" data-date="2026-11-23">
+          <div class="industry-head"><span class="industry-no">07</span><h2>ポカヨケとは</h2><small>種類と事例、ミスに合った選び方</small></div>
+          <div class="industry-body">
+            <p>防ぐ・知らせる・止めるの3つの種類と、組立工程の5つのミスの事例。形で防ぐ→数や順番で見張る→カメラの選ぶ順番、治具のコツ。候補を出すツールつき。</p>
+            <span class="industry-more">記事を読む ›</span>
+          </div>
+        </a>
+
+        <div class="industry-card ind-1 is-soon">
+          <div class="industry-head"><span class="industry-no">08</span><h2>AI外観検査を自作する前に</h2><small>教師データ・仮想空間で試す</small></div>
           <div class="industry-body">
             <p>不良品の画像が集まらない、照明や角度で結果がぶれる。教師データでつまずく理由と、仮想空間で試してから現場へ入れる方法。</p>
             <span class="industry-soon">準備中</span>
           </div>
         </div>
 
-        <div class="industry-card ind-1 is-soon">
-          <div class="industry-head"><span class="industry-no">08</span><h2>自作した仕組みを止めないために</h2><small>保守・二重チェック・教育</small></div>
+        <div class="industry-card ind-2 is-soon">
+          <div class="industry-head"><span class="industry-no">09</span><h2>自作した仕組みを止めないために</h2><small>保守・二重チェック・教育</small></div>
           <div class="industry-body">
             <p>導入して終わりではない。読み取りNGのときの手順、作った人しか直せない状態を避ける方法。</p>
             <span class="industry-soon">準備中</span>
