@@ -91,6 +91,31 @@
     .ds-fig img { width: 100%; height: auto; border-radius: 4px; }
     .ds-fig figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; }
 
+    .sv-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 10px; }
+    .sv-card.sv-main, .sv-card.sv-wide { grid-column: 1 / -1; }
+    .sv-main .sv-list, .sv-wide .sv-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+    .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 0; }
+    .sv-card { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px 14px; text-align: center; }
+    .sv-card.sv-main { border: 2px solid var(--navy); }
+    .sv-chip { display: inline-block; margin: 0 0 10px !important; padding: 4px 12px; border-radius: 4px; background: #e8edf3; color: var(--navy); font-weight: 700; font-size: 0.84rem; line-height: 1.5; }
+    .sv-main .sv-chip { background: var(--navy); color: #fff; }
+    .sv-price { font-size: 1.7rem; font-weight: 900; color: var(--navy); margin: 0 0 12px !important; line-height: 1.2; }
+    .sv-price small { font-size: 0.9rem; font-weight: 700; }
+    .sv-prices { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+    .sv-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .sv-list li { position: relative; padding: 5px 0 5px 24px; font-size: 0.9rem; line-height: 1.6; border-top: 1px solid var(--line); }
+    .sv-list li:first-child { border-top: 0; }
+    .sv-list li::before { content: "✓"; position: absolute; left: 4px; top: 5px; color: var(--orange-text); font-weight: 700; }
+    .sv-list li span { font-size: 0.8rem; color: var(--ink-soft); }
+    .sv-unit { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+    .sv-prices .sv-unit { margin: 0 0 2px; }
+    .sh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 22px 0 0; }
+    .sh-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px 6px; }
+    .sh-h { font-weight: 700; color: var(--navy); margin: 0 0 6px !important; }
+    .sh-box .price-list { margin: 0 0 10px; }
+    .sh-box .price-list li { font-size: 0.92rem; }
+    @media (max-width: 700px) { .sv-cards, .sh-grid { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list, .sv-wide .sv-list { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 1px solid var(--line); } }
+
     /* 右側の固定欄（Q&A・問い合わせ） */
     .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
     .ds-main { max-width: none; }
@@ -208,6 +233,7 @@
         <h2>こんなときにご相談ください</h2>
         <ul>
           <li>点検の数値を、毎日手で書き写している</li>
+          <li>毎回の棚卸しが大変で、なんとかしたい</li>
           <li>生産終了した読み取り機などを、高い新品に入れ替えるしかないと言われた</li>
           <li>外観検査のAIを試したいが、NG品の写真が集まらない</li>
           <li>社内に、AIを使って仕組みを作り、直せる人を育てたい</li>
@@ -216,25 +242,96 @@
 
       <section class="price-block">
         <h2>料金</h2>
-        <div class="price-plans">
-          <div class="pp"><p class="pp-name">仕組みづくりのご相談</p><p class="pp-price">無料</p><p class="pp-note">困っている一点の洗い出し</p></div>
-          <div class="pp"><p class="pp-name">試作・現場での確かめ</p><p class="pp-price">200,000<small>円〜</small></p><p class="pp-note">手順書づくりまで。機材費は実費</p></div>
-          <div class="pp"><p class="pp-name">外観検査AIの教師データ作成（お試し）</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">1品種・NGの種類2〜3・カメラの条件1パターン・100枚まで</p></div>
-          <div class="pp"><p class="pp-name">社内研修</p><p class="pp-price"><span class="pp-lbl">半日</span>100,000<small>円〜</small></p><p class="pp-price"><span class="pp-lbl">1日</span>200,000<small>円〜</small></p><p class="pp-note">AIで仕組みを作る・直せる人を育てる</p></div>
+        <p>ご相談は無料です。困っている一点をうかがってから、3つのサービスの中で合うものをご提案します。</p>
+        <div class="sv-cards">
+          <div class="sv-card sv-main">
+            <p class="sv-chip">仕組みづくりのご相談</p>
+            <p class="sv-price">無料</p>
+            <ul class="sv-list">
+              <li>困っている一点の洗い出し</li>
+              <li>仕組みにできるかどうかの見立て</li>
+              <li>オンラインでも承ります</li>
+              <li>どこに使えるか分からない段階でも大丈夫です</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">試作・現場での確かめ</p>
+            <p class="sv-price">200,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>困っている一点に絞って試作</li>
+              <li>現場で動かして確かめる</li>
+              <li>社内で使い続けるための手順書</li>
+              <li>機材費は実費<br><span>ラズパイ・センサー・カメラなど</span></li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">外観検査AIの教師データ作成<br>お試し</p>
+            <p class="sv-price">150,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>1品種・NGの種類2〜3</li>
+              <li>カメラの条件1パターン</li>
+              <li>100枚まで</li>
+              <li>カメラの位置とワークの向きが決まっている場合</li>
+            </ul>
+          </div>
+          <div class="sv-card sv-wide">
+            <p class="sv-chip">社内研修</p>
+            <div class="sv-prices">
+              <p class="sv-price"><span class="sv-unit">半日</span>100,000<small>円〜</small></p>
+              <p class="sv-price"><span class="sv-unit">1日</span>200,000<small>円〜</small></p>
+            </div>
+            <ul class="sv-list">
+              <li>AIを使って仕組みを作り、直せる人を育てる</li>
+              <li>オンラインと出張のどちらでも</li>
+            </ul>
+          </div>
         </div>
-        <p class="price-note">試作の機材費（ラズパイ・センサー・カメラなど）は、内容に応じて実費をいただきます。教師データの作成で、カメラの条件（画素数・取り付け位置など）を増やす場合は、1パターンごとに＋30,000円〜です。品種を増やす場合や、100枚を超える場合は、ご相談ください。研修は、オンラインと出張のどちらでも承ります。</p>
       </section>
 
       <section class="price-block">
-        <h2>3つのサービスの中身</h2>
-        <h3>試作・現場での確かめ</h3>
+        <h2>試作・現場での確かめ</h2>
         <p>困っている一点に絞って、ラズパイなどで仕組みを試作し、現場で動かして確かめます。使い始めのしばらくは、今までのやり方と二重にチェックしていただき、最後に、社内で使い続けるための手順書を作ります。</p>
-        <h3>外観検査AIの学習用画像（教師データ）の作成</h3>
+      </section>
+
+      <section class="price-block">
+        <h2>外観検査AIの学習用画像（教師データ）の作成</h2>
         <p>外観検査のAIに覚えさせるOK品・NG品の画像（教師データ）を、ワークの3Dモデルから作ります。<strong class="mk">カメラを取り付ける位置で撮った写真と同じ見え方になるように、色合い・光り方・照明・カメラの画素数まで合わせて、写真のような画像を作ります。</strong>NG品が少なく、学習用の写真が集まらないときにご相談ください。</p>
         <figure class="ds-fig">
           <img src="img/shikumi-teacher-data.jpg?v=20261122b" alt="部品の3Dモデルから、傷や欠けの位置、角度、照明を変えた学習用の画像を並べたイメージ" width="1200" height="523" loading="lazy">
           <figcaption>1つの3Dモデルから、不良の位置・角度・照明を変えた画像を作ります（イメージ）</figcaption>
         </figure>
+
+        <p class="price-plans-h">お試しの内容とオプション</p>
+        <div class="sv-cards">
+          <div class="sv-card sv-main">
+            <p class="sv-chip">教師データ作成（お試し）</p>
+            <p class="sv-price">150,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>1品種</li>
+              <li>NGの種類2〜3<br><span>傷・欠け・付け忘れ・向きの違いなど</span></li>
+              <li>カメラの条件1パターン<br><span>画素数・取り付け位置など</span></li>
+              <li>100枚まで<br><span>OK品の割合は目安1〜2割（ご希望で決めます）</span></li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">カメラの条件の追加</p>
+            <p class="sv-price">＋30,000<small>円〜</small><span class="sv-unit">1パターンにつき</span></p>
+            <ul class="sv-list">
+              <li>200万・500万・800万画素など、カメラが決まっていない場合</li>
+              <li>取り付け位置を増やす場合</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">品種の追加・100枚を超える場合</p>
+            <p class="sv-price">ご相談</p>
+            <ul class="sv-list">
+              <li>品種ごとに3Dモデルとマスターの写真が必要です</li>
+              <li>枚数は、NGの種類と見分けたい細かさで決めます</li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-note">すべてNG品にすると、AIがOK品を不良と見間違えやすくなるため、少しOK品を混ぜることをおすすめします。</p>
+
         <p class="price-plans-h">作る流れ</p>
         <ol class="price-steps">
           <li><b>撮影</b>外観検査のカメラを取り付ける位置を決めて、その位置からOK品の写真を何枚か撮っていただきます。取り付け位置が実際と違うと、教師データが役に立たないためです。</li>
@@ -244,28 +341,42 @@
           <li><b>OK品・NG品の画像を作る</b>向き・照明・傷や欠けの位置を変えた画像を作ります。</li>
           <li><b>確かめ</b>作った画像で見分けられるかを、実物の写真で簡単に確かめます。</li>
         </ol>
-        <p class="price-plans-h">お試しの内容</p>
-        <ul class="price-list">
-          <li>1品種・NGの種類2〜3・カメラの条件1パターン・100枚まで</li>
-          <li>OK品とNG品の割合は、ご希望に合わせて決めます（目安はOK品が1〜2割）。すべてNG品にすると、AIがOK品を不良と見間違えやすくなるため、少しOK品を混ぜることをおすすめします。</li>
-          <li>カメラの条件（画素数・取り付け位置など）を増やす場合は、1パターンごとに＋30,000円〜。品種を増やす場合や、100枚を超える場合は、ご相談ください。</li>
-        </ul>
-        <p class="price-plans-h">カメラについて</p>
-        <ul class="price-list">
-          <li>外観検査に使うカメラの型式をお知らせください。画素数・レンズ・撮影距離に合わせて作ります。</li>
-          <li>カメラがまだ決まっていない場合は、200万画素・500万画素・800万画素など、パターンに分けて作ることもできます（1パターン追加ごとに＋30,000円〜）。</li>
-          <li>見分けたい不良が小さすぎると、カメラの画素数によっては写らず、AIが見分けられません。受ける前に、不良の大きさとカメラの組み合わせで写るかを確かめます。</li>
-        </ul>
-        <p class="price-plans-h">ワークを送っていただく場合</p>
-        <ul class="price-list">
-          <li>小さいワークは、郵送で送っていただければ、当社で3Dスキャンします（交通費はかかりません）。行きの送料はお客様のご負担、お返しの送料は当社が負担します。運送中に生じた傷や破損については、責任を負いかねます。</li>
-          <li>現地で3Dスキャンを行う場合は、交通費・宿泊費（実費）が必ずかかります。</li>
-        </ul>
-        <ul class="price-list">
-          <li>NGの種類（傷・欠け・付け忘れ・向きの違いなど）と、どこまでをNGとするかは、打ち合わせで決めます。実物のNG品の写真があれば、より本物に近い傷を作れます。</li>
-          <li>AIがどれだけ見分けられるかは、ワークや照明の条件で変わります。見分ける正確さを保証するものではありません。</li>
-        </ul>
-        <h3>社内研修</h3>
+
+        <div class="sh-grid">
+          <div class="sh-box">
+            <p class="sh-h">カメラについて</p>
+            <ul class="price-list">
+              <li>外観検査に使うカメラの型式をお知らせください。画素数・レンズ・撮影距離に合わせて作ります。</li>
+              <li>見分けたい不良が小さすぎると、カメラの画素数によっては写らず、AIが見分けられません。受ける前に、不良の大きさとカメラの組み合わせで写るかを確かめます。</li>
+              <li>カメラの位置が決まっていない場合や、よく分からない場合も、お気軽にご相談ください。</li>
+            </ul>
+          </div>
+          <div class="sh-box">
+            <p class="sh-h">ワークの向きについて</p>
+            <ul class="price-list">
+              <li>お試しの料金は、カメラの位置とワークの向きが決まっている場合です。</li>
+              <li>ワークの向きがばらばらで流れてくる場合は、まず向きをそろえる工夫が先に必要になることがあります。</li>
+            </ul>
+          </div>
+          <div class="sh-box">
+            <p class="sh-h">3Dモデルがない場合（ワークの送り方）</p>
+            <ul class="price-list">
+              <li>小さいワークは、郵送で送っていただければ、当社で3Dスキャンします（交通費はかかりません）。行きの送料はお客様のご負担、お返しの送料は当社が負担します。運送中に生じた傷や破損については、責任を負いかねます。</li>
+              <li>大きくて郵送できないワークは、伺って3Dスキャンします。その場合は、交通費・宿泊費（実費）が必ずかかります。</li>
+            </ul>
+          </div>
+          <div class="sh-box">
+            <p class="sh-h">NGの決め方と、見分ける正確さ</p>
+            <ul class="price-list">
+              <li>NGの種類と、どこまでをNGとするかは、打ち合わせで決めます。実物のNG品の写真があれば、より本物に近い傷を作れます。</li>
+              <li>AIがどれだけ見分けられるかは、ワークや照明の条件で変わります。見分ける正確さを保証するものではありません。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="price-block">
+        <h2>社内研修</h2>
         <p>社内の方が、AIを使って仕組みを作り、困ったときに直せるようになるための研修です。オンラインと出張のどちらでも承ります。</p>
       </section>
 
@@ -313,16 +424,16 @@
       <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
         <div class="ds-side-box">
           <p class="ds-side-h">よくあるご質問</p>
-          <details><summary>どこに使えるか、まだ分かりません。</summary><p>それで大丈夫です。困っている一点と、今のやり方をお聞かせいただければ、使えるかどうかを一緒に考えます。ご相談は無料です。</p></details>
-          <details><summary>安全に関わる設備にも使えますか？</summary><p>非常停止など、安全に関わる働きには使いません。仕組みは、値の記録や受け渡しだけを受け持ちます。</p></details>
-          <details><summary>機材の費用はどのくらいですか？</summary><p>ラズパイ・センサー・カメラなど、内容に応じて実費をいただきます。お見積りのときに内訳をお伝えします。</p></details>
-          <details><summary>外観検査の教師データは、写真だけでも作れますか？</summary><p>3Dモデルをもとに作ります。カメラの取り付け位置で撮った写真は、同じ見え方に合わせるための基準と、できた画像の確かめに使います。CADデータがなければ、現物を送っていただいて3Dスキャンで作ります。</p></details>
-          <details><summary>外観検査のカメラが、まだ決まっていません。</summary><p>200万画素・500万画素・800万画素など、パターンに分けて作ることもできます（1パターン追加ごとに＋30,000円〜）。ただし、カメラを取り付ける位置は先に決めていただく必要があります。</p></details>
-          <details><summary>研修は、どんな人が対象ですか？</summary><p>プログラムを書いたことがない方も対象です。AIを使って仕組みを作り、困ったときに直せるようになることを目指します。</p></details>
+          <details><summary>どこに使えるか分かりません。</summary><p>それで大丈夫です。困っている一点と、今のやり方をお聞かせいただければ、使えるかどうかを一緒に考えます。ご相談は無料です。</p></details>
+          <details><summary>安全に関わる設備に使えますか？</summary><p>非常停止など、安全に関わる働きには使いません。仕組みは、値の記録や受け渡しだけを受け持ちます。</p></details>
+          <details><summary>機材の費用はいくらですか？</summary><p>ラズパイ・センサー・カメラなど、内容に応じて実費をいただきます。お見積りのときに内訳をお伝えします。</p></details>
+          <details><summary>教師データは写真だけで作れますか？</summary><p>3Dモデルをもとに作ります。カメラの取り付け位置で撮った写真は、同じ見え方に合わせるための基準と、できた画像の確かめに使います。CADデータがなければ、現物を送っていただいて3Dスキャンで作ります。</p></details>
+          <details><summary>カメラがまだ決まっていません。</summary><p>200万画素・500万画素・800万画素など、パターンに分けて作ることもできます（1パターン追加ごとに＋30,000円〜）。ただし、カメラを取り付ける位置は先に決めていただく必要があります。位置が決まっていない場合も、お気軽にご相談ください。</p></details>
+          <details><summary>研修の対象はどんな人ですか？</summary><p>プログラムを書いたことがない方も対象です。AIを使って仕組みを作り、困ったときに直せるようになることを目指します。</p></details>
         </div>
         <div class="ds-side-box ds-side-cta">
           <p class="ds-side-h">お問い合わせ</p>
-          <p>困っている一点と、今のやり方をお聞かせください。どこに使えるか分からない段階でも大丈夫です。</p>
+          <p>困っている一点と、今のやり方をお聞かせください。</p>
           <a class="btn btn--fill" href="contact-v2.html?topic=auto" onclick="if(window.gtag)gtag('event','contact_click',{place:'shikumi_service_side',article:'shikumi_service'});">仕組みづくり・研修を相談する</a>
           <p class="ds-side-sub">ご相談とお見積りは無料です。</p>
         </div>

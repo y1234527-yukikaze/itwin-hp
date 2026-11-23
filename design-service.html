@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--
+  アイツイン｜設計の外注 の詳細ページ
+  2026-11-21 新設。料金ページ（price.html）の段から「詳細はこちら」でつなぐ。
+  料金を変えるときは、price.html とイプロスの料金PDF（キットの ipros_price.py）も同時に直すこと。
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>設計の外注｜設計の代打・治具・架台・ロボット架台の設計の料金｜アイツイン</title>
+  <meta name="description" content="機械設計の外注の料金です。仕様が決まっている装置の設計の代打は1日40,000円〜、架台の設計80,000円〜、治具の設計100,000円〜、ロボット架台の設計150,000円〜（税別）。3Dモデルと部品図をお渡しし、必要なら強度検証も行います。">
+  <link rel="canonical" href="https://i-twin.co.jp/design-service">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="設計の外注｜設計の代打・治具・架台・ロボット架台の設計の料金">
+  <meta property="og:description" content="機械設計の外注の料金です。仕様が決まっている装置の設計の代打は1日40,000円〜、架台の設計80,000円〜、治具の設計100,000円〜、ロボット架台の設計150,000円〜（税別）。3Dモデルと部品図をお渡しし、必要なら強度検証も行います。">
+  <meta property="og:url" content="https://i-twin.co.jp/design-service">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="設計の外注｜設計の代打・治具・架台・ロボット架台の設計の料金">
+  <meta name="twitter:description" content="機械設計の外注の料金です。仕様が決まっている装置の設計の代打は1日40,000円〜、架台の設計80,000円〜、治具の設計100,000円〜、ロボット架台の設計150,000円〜（税別）。3Dモデルと部品図をお渡しし、必要なら強度検証も行います。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="stylesheet" href="font-noto.css?v=20261121">
+  <link rel="stylesheet" href="design-flat.css?v=20261121">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList / Service） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "料金の目安", "item": "https://i-twin.co.jp/price" },
+      { "@type": "ListItem", "position": 3, "name": "設計の外注", "item": "https://i-twin.co.jp/design-service" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "設計の外注（設計の代打・治具・架台・ロボット架台）",
+    "serviceType": "機械設計",
+    "provider": { "@id": "https://i-twin.co.jp/#organization" },
+    "areaServed": { "@type": "Country", "name": "日本" },
+    "offers": [
+      { "@type": "Offer", "name": "設計の代打（設計者1人・1日）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 40000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "架台の設計", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 80000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "治具の設計", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 100000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "ロボット架台の設計", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
+    ]
+  }
+  </script>
+  <style>
+    .ds-table td:last-child, .ds-table th:last-child { text-align: left; white-space: normal; font-weight: 400; color: var(--ink); }
+    .ds-table td:first-child { font-weight: 700; color: var(--navy); width: 30%; }
+    .ds-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 12px 0 0; }
+    .ds-fig { margin: 16px 0 6px; }
+    .ds-fig img { width: 100%; height: auto; border-radius: 4px; }
+    .ds-fig figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; }
+
+    .sv-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 10px; }
+    .sv-card.sv-main, .sv-card.sv-wide { grid-column: 1 / -1; }
+    .sv-main .sv-list, .sv-wide .sv-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+    .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 0; }
+    .sv-card { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px 14px; text-align: center; }
+    .sv-card.sv-main { border: 2px solid var(--navy); }
+    .sv-chip { display: inline-block; margin: 0 0 10px !important; padding: 4px 12px; border-radius: 4px; background: #e8edf3; color: var(--navy); font-weight: 700; font-size: 0.84rem; line-height: 1.5; }
+    .sv-main .sv-chip { background: var(--navy); color: #fff; }
+    .sv-price { font-size: 1.7rem; font-weight: 900; color: var(--navy); margin: 0 0 12px !important; line-height: 1.2; }
+    .sv-price small { font-size: 0.9rem; font-weight: 700; }
+    .sv-prices { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+    .sv-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .sv-list li { position: relative; padding: 5px 0 5px 24px; font-size: 0.9rem; line-height: 1.6; border-top: 1px solid var(--line); }
+    .sv-list li:first-child { border-top: 0; }
+    .sv-list li::before { content: "✓"; position: absolute; left: 4px; top: 5px; color: var(--orange-text); font-weight: 700; }
+    .sv-list li span { font-size: 0.8rem; color: var(--ink-soft); }
+    .sv-unit { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+    .sv-prices .sv-unit { margin: 0 0 2px; }
+    .sh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 22px 0 0; }
+    .sh-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px 6px; }
+    .sh-h { font-weight: 700; color: var(--navy); margin: 0 0 6px !important; }
+    .sh-box .price-list { margin: 0 0 10px; }
+    .sh-box .price-list li { font-size: 0.92rem; }
+    @media (max-width: 700px) { .sv-cards, .sh-grid { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list, .sv-wide .sv-list { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 1px solid var(--line); } }
+    .sv-cards.sv-cards3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ds-table td a { color: var(--navy); text-decoration: underline; }
+    .dz-ex { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px; margin: 12px 0 0; }
+    .dz-ex p { margin: 0 0 6px !important; }
+    .dz-ex p:last-child { margin: 0 !important; }
+    .dz-ex-h { font-weight: 700; color: var(--navy); }
+    .dz-ex-q { font-size: 0.95rem; }
+    .dz-ex-a { font-size: 0.9rem; color: var(--ink-soft); }
+    @media (max-width: 900px) { .sv-cards.sv-cards3 { grid-template-columns: minmax(0, 1fr); } }
+
+    /* 右側の固定欄（Q&A・問い合わせ） */
+    .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
+    .ds-main { max-width: none; }
+    .ds-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .ds-side-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px; }
+    .ds-side-h { font-weight: 700; color: var(--navy); font-size: 0.98rem; margin: 0 0 6px !important; }
+    .ds-side details { border-top: 1px solid var(--line); }
+    .ds-side details:first-of-type { border-top: 0; }
+    .ds-side summary { cursor: pointer; list-style: none; position: relative; padding: 10px 20px 10px 0; font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.6; }
+    .ds-side summary::-webkit-details-marker { display: none; }
+    .ds-side summary::after { content: "＋"; position: absolute; right: 0; top: 10px; color: var(--orange-text); font-size: 0.8rem; }
+    .ds-side details[open] summary::after { content: "−"; }
+    .ds-side details p { margin: 0 0 12px !important; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75; }
+    .ds-side-cta p { font-size: 0.86rem; margin: 0 0 12px !important; line-height: 1.75; }
+    .ds-side-cta .btn { width: 100%; padding: 12px 16px; font-size: 0.92rem; }
+    .ds-side-cta .ds-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 10px 0 0 !important; }
+    @media (max-width: 960px) {
+      .ds-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .ds-side { position: static; }
+    }
+  </style>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="price.html">料金</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <a href="price.html">料金の目安</a> ／ <span>設計の外注</span></div>
+      <h1>設計の外注（設計の代打・単品の設計）</h1>
+      <p class="catch">設計の手が足りないときに、3Dモデルと部品図までお任せください。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap ds-layout">
+      <div class="price-doc ds-main">
+
+      <p class="price-intro">
+        仕様が決まっている装置・搬送機械の設計の代打と、治具・架台・ロボット架台の単品の設計をお引き受けします。<strong class="mk">「設計の手が足りないとき」に、3Dモデルと部品図までまとめてお任せいただけます。</strong>必要な場合は、強度検証をしたうえで納品します。表示価格はすべて税別です。
+      </p>
+
+      <section class="price-block">
+        <h2>こんなときにご相談ください</h2>
+        <div class="sh-grid">
+          <div class="sh-box">
+            <p class="sh-h">設計会社さま（設計の代打）</p>
+            <ul class="price-list">
+              <li>仕様は決まっているが、設計者の手が足りない</li>
+              <li>全体の配置はできたので、一部のユニットの詳細設計を任せたい</li>
+              <li>急ぎの案件が重なり、一時的に応援がほしい</li>
+            </ul>
+          </div>
+          <div class="sh-box">
+            <p class="sh-h">工場の生産技術の方（単品の設計）</p>
+            <ul class="price-list">
+              <li>溶接・組立・検査の治具を作りたい</li>
+              <li>設備をのせる架台や、ロボット架台を作りたい</li>
+              <li>社内に設計者がいない、または本来の仕事で手一杯</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="price-block">
+        <h2>料金</h2>
+        <div class="sv-cards">
+          <div class="sv-card sv-main">
+            <p class="sv-chip">設計の代打（設計会社さま向け）</p>
+            <p class="sv-price">40,000<small>円〜</small><span class="sv-unit">設計者1人・1日（8時間）あたり</span></p>
+            <ul class="sv-list">
+              <li>仕様が決まっている装置・搬送機械の設計</li>
+              <li>3D CADで設計し、3Dモデルと部品図をお渡し</li>
+              <li>作業は当社に持ち帰って行います</li>
+              <li>長い期間のご依頼は、ご相談ください</li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-plans-h">単品の設計（工場の生産技術の方向け）</p>
+        <div class="sv-cards sv-cards3">
+          <div class="sv-card">
+            <p class="sv-chip">架台の設計</p>
+            <p class="sv-price">80,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>設備をのせる鋼製の架台</li>
+              <li>寸法・荷重・置く場所が決まっている場合</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">治具の設計</p>
+            <p class="sv-price">100,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>溶接・組立・検査の治具など</li>
+              <li>位置決め・固定・着脱のしやすさまで検討</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">ロボット架台の設計</p>
+            <p class="sv-price">150,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>ロボットの機種・置く場所が決まっている場合</li>
+              <li>動くときの力を考えた設計</li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-note">単品の設計は、3Dモデル（STEP形式）と部品図10点までを含みます。11点目からは、1点ごとに＋5,000円〜です（<a href="drawing-service.html">部品図の作成</a>と同じ数え方で、同じ部品はいくつあっても1点です）。強度検証は別料金です（<a href="strength-service.html">強度検証の料金</a>）。製作は含みません。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>お渡しするもの</h2>
+        <table class="price-table ds-table">
+          <thead><tr><th>内容</th><th>料金</th></tr></thead>
+          <tr><td>3Dモデル（STEP形式）</td><td>標準で含みます</td></tr>
+          <tr><td>部品図（2D機械図面）</td><td>標準で含みます（単品の設計は10点まで）</td></tr>
+          <tr><td>構想図・組立図・部品表</td><td>オプション（ご希望に合わせてお見積り）</td></tr>
+          <tr><td>強度計算書</td><td>オプション（<a href="strength-service.html">強度検証</a>の料金）</td></tr>
+          <tr><td>製作の手配</td><td>設計までが基本です。ご要望があれば手配します</td></tr>
+        </table>
+        <p class="price-note">省人化・省力化の構想設計からのご依頼もお受けします。その場合は、構想の検討と詳細の設計を分けて、別途お見積りします。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>図面や情報が少ないとき</h2>
+        <p>いただいた図面だけでは、今ある設備や置く場所の寸法が分からないことがあります。<strong class="mk">その場合は、こちらから3Dスキャンでの現地調査をお願いすることがあります。</strong>遠方で何度も現地に伺えない場合でも、一度スキャンしておけば、実寸のデータで設計を進められます。</p>
+        <ul class="price-list">
+          <li>単品の設計で、設計に必要な範囲のスキャンは、スキャンの料金をいただきません（設計の料金に含みます）。スキャンのデータは設計のためだけに使い、お渡しはしません。</li>
+          <li>設計の代打で現地調査に伺う場合は、調査の日も作業日として、日当で数えます。</li>
+          <li>交通費・宿泊費（実費）は、伺う前にお伝えし、ご了承をいただいてから加えます。</li>
+          <li>スキャンのデータ（点群・3Dモデル）をお受け取りになりたい場合は、<a href="scan-service.html">3Dスキャン</a>の料金をいただきます。</li>
+          <li>部品・治具など送っていただけるものは、当社で3Dスキャンすることもできます。</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>ご依頼の例</h2>
+        <p>このような形でご依頼をお受けしています。細かい進め方は、打ち合わせで一緒に決めます。</p>
+        <div class="dz-ex">
+          <p class="dz-ex-h">例1　設計会社さま：ユニットの詳細設計</p>
+          <p class="dz-ex-q">「全体の配置と仕様は2Dで決めてある。搬送部のユニットの3Dモデルと部品図をお願いしたい」</p>
+          <p class="dz-ex-a">→ 設計の代打（1日40,000円〜）。仕様書と配置図をいただき、作業日数を見積もってからお受けします。</p>
+        </div>
+        <div class="dz-ex">
+          <p class="dz-ex-h">例2　生産技術の方：溶接治具</p>
+          <p class="dz-ex-q">「ワークの図面はある。どこを押さえて溶接したいかも決まっている。治具を設計してほしい」</p>
+          <p class="dz-ex-a">→ 治具の設計（100,000円〜）。3Dモデルと部品図をお渡しします。</p>
+        </div>
+        <div class="dz-ex">
+          <p class="dz-ex-h">例3　生産技術の方：ロボット架台</p>
+          <p class="dz-ex-q">「ロボットの機種と置く場所は決まった。架台の設計と、強度も確かめてほしい」</p>
+          <p class="dz-ex-a">→ ロボット架台の設計（150,000円〜）＋<a href="strength-service.html">強度検証</a>。非常停止のときの力なども含めて確かめます。</p>
+        </div>
+        <div class="dz-ex">
+          <p class="dz-ex-h">例4　今ある設備に機構を足したいが、図面がほとんどない</p>
+          <p class="dz-ex-q">「設備に部品の受け渡しの機構を足したい。でも設備の図面がほとんど残っていない」</p>
+          <p class="dz-ex-a">→ 3Dスキャンでの現地調査をお願いし、実寸のデータをもとに設計します。設計に必要な範囲のスキャンは設計の料金に含み、交通費（実費）は事前にお伝えしてから加えます。</p>
+        </div>
+      </section>
+
+      <section class="price-block">
+        <h2>作業の進め方</h2>
+        <ul class="price-list">
+          <li>作業は、当社に持ち帰って、当社の3D CADで行います。相手先に通っての作業（常駐）はお受けしていません。</li>
+          <li>打ち合わせは、訪問またはオンラインで行います。現地での打ち合わせや調査がある場合、交通費・宿泊費は実費を別にいただきます。</li>
+          <li>途中で仕様が変わった場合は、変わった内容をうかがって、お見積りをご相談させてください。</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>ご依頼の流れ</h2>
+        <ol class="price-steps">
+          <li><b>お問い合わせ</b>作りたいものと、決まっている仕様（寸法・荷重・置く場所など）をお送りください。</li>
+          <li><b>打ち合わせ・お見積り</b>どこまでを当社が受け持つか、お渡しするものと納期を一緒に決めます。情報が足りない場合は、3Dスキャンでの現地調査をご提案することがあります。</li>
+          <li><b>ご発注</b></li>
+          <li><b>設計</b>途中で3Dモデルをお見せして、形を確かめていただきます。</li>
+          <li><b>納品</b>3Dモデルと部品図をお渡しします。強度検証をご依頼の場合は、計算書も一緒にお渡しします。</li>
+        </ol>
+      </section>
+
+      <section class="price-block">
+        <h2>ご用意いただく情報</h2>
+        <ul>
+          <li>作りたいものと、使う目的</li>
+          <li>決まっている仕様（寸法・荷重・置く場所・のせる設備やロボットの機種など）</li>
+          <li>今ある図面・ポンチ絵・写真（あるものだけでかまいません）</li>
+          <li>ご希望の納期と、お渡しするもののご希望（部品表・組立図など）</li>
+        </ul>
+        <p class="ds-links">
+          <a href="column/design/index.html">特集「自動化設備の設計ノート」を読む ›</a>
+          <a href="column/reports/stand-report-sample.html" target="_blank" rel="noopener">強度計算書の見本を見る ›</a>
+        </p>
+      </section>
+
+
+      <p class="section-more"><a class="btn btn--outline" href="price.html">料金の目安（すべてのサービス）に戻る</a></p>
+
+      </div>
+
+      <!-- ◆右側の固定欄：よくあるご質問・問い合わせ（スマホでは本文の下） -->
+      <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
+        <div class="ds-side-box">
+          <p class="ds-side-h">よくあるご質問</p>
+          <details><summary>常駐で来てもらえますか？</summary><p>作業は当社に持ち帰って行います。打ち合わせは、訪問またはオンラインで行います。</p></details>
+          <details><summary>図面が少なくても頼めますか？</summary><p>はい。必要な場合は、3Dスキャンでの現地調査をご提案します。設計に必要な範囲のスキャンは設計の料金に含み、交通費は伺う前にお伝えします。</p></details>
+          <details><summary>強度の確認もできますか？</summary><p>はい。<a href="strength-service.html">強度検証</a>（手計算50,000円〜）をしたうえで納品できます。</p></details>
+          <details><summary>製作もお願いできますか？</summary><p>設計までが基本です。ご要望があれば、製作の手配もいたします。</p></details>
+          <details><summary>構想から頼めますか？</summary><p>はい。構想の検討と詳細の設計を分けて、別途お見積りします。</p></details>
+        </div>
+        <div class="ds-side-box ds-side-cta">
+          <p class="ds-side-h">お問い合わせ</p>
+          <p>作りたいものと、決まっている仕様をお送りください。</p>
+          <a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'design_service_side',article:'design_service'});">設計を相談する</a>
+          <p class="ds-side-sub">ご相談とお見積りは無料です。</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>作りたいものと、決まっている仕様をお聞かせください。</h2>
+      <p>仕様がまだ固まっていない段階のご相談でもかまいません。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'design_service',article:'design-service'});">設計を相談する</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="price.html">料金</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  /* 「料金についてよくあるご質問」へのリンクで来たときは、収納を開いて見せる */
+  (function () {
+    function openFaq() { var d = document.querySelector('#price-faq .pf-wrap'); if (d && location.hash === '#price-faq') d.open = true; }
+    openFaq(); window.addEventListener('hashchange', openFaq);
+  })();
+</script>
+</body>
+</html>

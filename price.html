@@ -383,6 +383,8 @@
     .pf-wrap > summary .pf-n::after { content: " ＋"; color: var(--orange-text); }
     .pf-wrap[open] > summary .pf-n::after { content: " −"; }
     .pf-wrap .price-faq { margin-top: 14px; }
+    .pr-side-strong p:not(.pr-side-h) { font-size: 0.86rem; margin: 0 !important; line-height: 1.75; }
+    .pr-side-strong .pr-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 8px 0 0 !important; }
     .pr-side-cta .pr-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 10px 0 0 !important; }
     @media (max-width: 960px) {
       .pr-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
@@ -533,20 +535,22 @@
           <div class="pp"><img class="pp-img" src="img/price-3d-assembly.jpg?v=20261121" alt="角パイプで組んだ架台に箱形の装置をのせた、組み上げた3Dモデル" width="800" height="597" loading="lazy"><p class="pp-name">組み上げた3Dモデル<br>（組立）</p><p class="pp-price">別途見積</p><p class="pp-note">部品を組み上げた3Dモデルが必要な場合</p></div>
           <div class="pp"><img class="pp-img" src="img/price-3d-scan.jpg?v=20261121" alt="手に持つ3Dスキャナーで古い部品を測り、点の集まりのデータにする様子" width="800" height="597" loading="lazy"><p class="pp-name">図面がない場合</p><p class="pp-price">3Dスキャン</p><p class="pp-note">現物を3Dスキャンで測り、3Dモデル・図面に起こします（<a href="#scan">3Dスキャンの料金</a>）</p></div>
         </div>
-        <p class="price-strong">
-          <b>アイツインの強み：</b>2D図面の3Dモデル化と、3Dスキャンからの図面化（リバースエンジニアリング）です。図面が残っていない設備・架台でも、3Dスキャンで測定し、3Dモデル・図面に起こして、強度計算まで一貫してお受けします。
-        </p>
         <!-- ◆設計の料金のすぐ下の依頼の入口（2026-11-04。コラム→料金→お問い合わせの流れ用） -->
         <div class="price-ask">
           <p>初めての条件や、調べる時間がないときは、計算書の作成までお引き受けします。図面や寸法などの条件をお送りいただければ、内容を確認して、お見積りと納期をご連絡します。ご相談だけでもかまいません。</p>
           <p class="price-ask-act"><a class="btn btn--fill" href="contact-v2.html?topic=design" onclick="if(window.gtag)gtag('event','contact_click',{place:'price_design',article:'price'});">設計・強度検証を依頼・相談する</a><a href="column/reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'price'});">計算書の見本を見る</a></p>
         </div>
 
-        <h3 id="machine-design">省人化・省力化の設計、新しい機械の設計</h3>
-        <p>
-          設計者が足りないときの代打や、急な機械設計、小規模な設計にも対応します。装置・治具の新規設計も承ります。搬送の省人化、作業の省力化を目的とした機構の設計から、今ある設備に追加する機構の設計まで対応します。現場でどの作業に時間がかかっているかをつかんでから設計に入るので、「作ったが使われない」設備になりにくいと考えています。内容によって工数が大きく変わるため、ご相談のうえ個別にお見積りします。
-        </p>
-
+        <h3 id="machine-design">設計の外注（設計の代打・治具・架台の設計）</h3>
+        <p>仕様が決まっている装置・搬送機械の設計の代打と、治具・架台・ロボット架台の単品の設計をお引き受けします。3Dモデルと部品図をお渡しし、必要な場合は強度検証をしたうえで納品します。</p>
+        <div class="price-plans">
+          <div class="pp"><p class="pp-name">設計の代打<br>（設計者1人・1日）</p><p class="pp-price">40,000<small>円〜</small></p><p class="pp-note">仕様が決まっている装置・搬送機械</p></div>
+          <div class="pp"><p class="pp-name">架台の設計</p><p class="pp-price">80,000<small>円〜</small></p><p class="pp-note">3Dモデル・部品図10点まで</p></div>
+          <div class="pp"><p class="pp-name">治具の設計</p><p class="pp-price">100,000<small>円〜</small></p><p class="pp-note">3Dモデル・部品図10点まで</p></div>
+          <div class="pp"><p class="pp-name">ロボット架台の設計</p><p class="pp-price">150,000<small>円〜</small></p><p class="pp-note">3Dモデル・部品図10点まで</p></div>
+        </div>
+        <p class="price-note">強度検証は別料金です。省人化・省力化の構想設計からのご依頼は、別途お見積りします。</p>
+        <p class="section-more" style="margin-bottom:56px;"><a class="btn btn--outline" href="design-service.html">設計の外注の詳細はこちら ›</a></p>
         <p class="price-more">強度検証の前提や、ご依頼の前にご確認いただきたいことは「<a href="strength-service.html">強度検証の詳細</a>」にまとめています。計算の考え方は、コラム「<a href="column/design/index.html">自動化設備の設計ノート</a>」で紹介しています。</p>
       </section>
 
@@ -609,15 +613,7 @@
         </div>
         <p class="price-note">1クール目は、現状の把握と最初の構築があるため作業が多くなります。2クール目からは、たまったデータを使うため価格を抑えています。</p>
 
-        <h3>成果物</h3>
-        <p>
-          省人化・自動化の場合はレポートと簡易設計図、デジタルツイン化の場合はIoTセンサーの値を見られる画面をお渡しします。現場をデータにして、画面の上でレイアウト変更や自動化の案を何度でも試せるので、現場を止めずに効果と費用対効果を数字で確かめられます。
-        </p>
-        <h3>データの扱い</h3>
-        <p>
-          システムは外のネットワークから切り離した環境で動かします。IoTセンサーのデータをクラウドで解析するのは、お客様の書面でのご承諾がある場合だけです。詳しくは、下の「各サービスに共通すること」をご覧ください。
-        </p>
-        <p class="price-more">各クールの進め方は「<a href="annual-plan.html">年間計画の進め方</a>」をご覧ください。</p>
+        <p class="section-more"><a class="btn btn--outline" href="partner-service.html">伴走支援プログラムの詳細はこちら ›</a></p>
       </section>
 
       <!-- ◆共通事項 -->
@@ -627,6 +623,7 @@
           <li>表示価格は税別です。</li>
           <li>「〜」は最低価格です。実際の金額は、内容をうかがってお見積りします。</li>
           <li>現地での作業がある場合、交通費・宿泊費は実費を別にいただきます。</li>
+          <li>写真と寸法をお送りいただければ、お見積りは無料です。現地を見ないとお見積りできない場合は、伺う前に交通費の見込み額をお伝えし、ご了承をいただいてから伺います（交通費は実費をいただきます）。ご発注いただいた場合、この交通費は本体の料金に含めます（差し引きます）。</li>
           <li>工場の3Dスキャンや撮影データは、外部クラウドや第三者に一切提供せず、当社の閉域環境で処理します。IoTセンサーのデータについてのみ、お客様の書面でのご承諾がある場合に限り、クラウドでの解析を行います（ご承諾がない場合は、お客様のPCへの保存または手渡しで対応します）。</li>
         </ul>
       </section>
@@ -714,7 +711,12 @@
       </div>
 
       <!-- ◆右側の固定欄：提供できるサービスと問い合わせ（スマホでは本文の下） -->
-      <aside class="pr-side" aria-label="お問い合わせ">
+      <aside class="pr-side" aria-label="アイツインの強みとお問い合わせ">
+        <div class="pr-side-box pr-side-strong">
+          <p class="pr-side-h">アイツインの強み</p>
+          <p>部品図と一緒に、部品単体の3Dモデル（STEP形式）を、追加料金なしでお付けします。2D図面だけのご依頼でも、部品の形を立体で確かめられます。</p>
+          <p class="pr-side-sub">※組み上げた3Dモデル（組立）は別途お見積りです。</p>
+        </div>
         <div class="pr-side-box pr-side-cta">
           <p class="pr-side-h">お問い合わせ</p>
           <p>「この内容だといくらくらいか」というご質問だけでもかまいません。図面や写真があれば、お見積りが早くなります。</p>

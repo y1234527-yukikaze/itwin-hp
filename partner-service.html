@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<!--
+  アイツイン｜伴走支援プログラム の詳細ページ
+  2026-11-21 新設。料金ページ（price.html）の段から「詳細はこちら」でつなぐ。
+  料金を変えるときは、price.html とイプロスの料金PDF（キットの ipros_price.py）も同時に直すこと。
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-10-23）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伴走支援プログラム｜3ヶ月ごとの改善支援の料金と進め方｜アイツイン</title>
+  <meta name="description" content="中小製造業の改善を、3ヶ月を1クールとして一緒に進める伴走支援の料金と進め方です。1クール目600,000円〜、2クール目以降400,000円〜（税別）。人手不足・設備の故障・手間のかかる作業など、いちばん困っていることから着手します。">
+  <link rel="canonical" href="https://i-twin.co.jp/partner-service">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="伴走支援プログラム｜3ヶ月ごとの改善支援の料金と進め方">
+  <meta property="og:description" content="中小製造業の改善を、3ヶ月を1クールとして一緒に進める伴走支援の料金と進め方です。1クール目600,000円〜、2クール目以降400,000円〜（税別）。人手不足・設備の故障・手間のかかる作業など、いちばん困っていることから着手します。">
+  <meta property="og:url" content="https://i-twin.co.jp/partner-service">
+  <meta property="og:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="伴走支援プログラム｜3ヶ月ごとの改善支援の料金と進め方">
+  <meta name="twitter:description" content="中小製造業の改善を、3ヶ月を1クールとして一緒に進める伴走支援の料金と進め方です。1クール目600,000円〜、2クール目以降400,000円〜（税別）。人手不足・設備の故障・手間のかかる作業など、いちばん困っていることから着手します。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/annual-plan-steps.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-v2.css">
+  <link rel="stylesheet" href="font-noto.css?v=20261121">
+  <link rel="stylesheet" href="design-flat.css?v=20261121">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ◆構造化データ（BreadcrumbList / Service） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "料金の目安", "item": "https://i-twin.co.jp/price" },
+      { "@type": "ListItem", "position": 3, "name": "伴走支援プログラム", "item": "https://i-twin.co.jp/partner-service" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "伴走支援プログラム",
+    "serviceType": "製造業の改善支援",
+    "provider": { "@id": "https://i-twin.co.jp/#organization" },
+    "areaServed": { "@type": "Country", "name": "日本" },
+    "offers": [
+      { "@type": "Offer", "name": "伴走支援（1クール目・3ヶ月）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 600000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } },
+      { "@type": "Offer", "name": "伴走支援（2クール目以降・3ヶ月）", "priceCurrency": "JPY", "priceSpecification": { "@type": "PriceSpecification", "minPrice": 400000, "priceCurrency": "JPY", "valueAddedTaxIncluded": false } }
+    ]
+  }
+  </script>
+  <style>
+    .ds-table td:last-child, .ds-table th:last-child { text-align: left; white-space: normal; font-weight: 400; color: var(--ink); }
+    .ds-table td:first-child { font-weight: 700; color: var(--navy); width: 30%; }
+    .ds-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 12px 0 0; }
+    .ds-fig { margin: 16px 0 6px; }
+    .ds-fig img { width: 100%; height: auto; border-radius: 4px; }
+    .ds-fig figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; }
+
+    .sv-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 10px; }
+    .sv-card.sv-main, .sv-card.sv-wide { grid-column: 1 / -1; }
+    .sv-main .sv-list, .sv-wide .sv-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+    .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 0; }
+    .sv-card { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 18px 16px 14px; text-align: center; }
+    .sv-card.sv-main { border: 2px solid var(--navy); }
+    .sv-chip { display: inline-block; margin: 0 0 10px !important; padding: 4px 12px; border-radius: 4px; background: #e8edf3; color: var(--navy); font-weight: 700; font-size: 0.84rem; line-height: 1.5; }
+    .sv-main .sv-chip { background: var(--navy); color: #fff; }
+    .sv-price { font-size: 1.7rem; font-weight: 900; color: var(--navy); margin: 0 0 12px !important; line-height: 1.2; }
+    .sv-price small { font-size: 0.9rem; font-weight: 700; }
+    .sv-prices { display: flex; justify-content: center; gap: 36px; flex-wrap: wrap; }
+    .sv-list { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .sv-list li { position: relative; padding: 5px 0 5px 24px; font-size: 0.9rem; line-height: 1.6; border-top: 1px solid var(--line); }
+    .sv-list li:first-child { border-top: 0; }
+    .sv-list li::before { content: "✓"; position: absolute; left: 4px; top: 5px; color: var(--orange-text); font-weight: 700; }
+    .sv-list li span { font-size: 0.8rem; color: var(--ink-soft); }
+    .sv-unit { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-top: 2px; }
+    .sv-prices .sv-unit { margin: 0 0 2px; }
+    .sh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 22px 0 0; }
+    .sh-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px 6px; }
+    .sh-h { font-weight: 700; color: var(--navy); margin: 0 0 6px !important; }
+    .sh-box .price-list { margin: 0 0 10px; }
+    .sh-box .price-list li { font-size: 0.92rem; }
+    @media (max-width: 700px) { .sv-cards, .sh-grid { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list, .sv-wide .sv-list { grid-template-columns: minmax(0, 1fr); } .sv-main .sv-list li:nth-child(2), .sv-wide .sv-list li:nth-child(2) { border-top: 1px solid var(--line); } }
+    .pt-table td:first-child { width: 42%; }
+    .pt-table td a { color: var(--navy); text-decoration: underline; }
+    .pt-goal { background: var(--paper-soft); border-radius: 4px; padding: 18px 20px; margin: 16px 0 0; }
+    .pt-goal p { margin: 0 !important; }
+
+    /* 右側の固定欄（Q&A・問い合わせ） */
+    .ds-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; align-items: start; }
+    .ds-main { max-width: none; }
+    .ds-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .ds-side-box { background: var(--paper-soft); border-radius: 4px; padding: 16px 18px; }
+    .ds-side-h { font-weight: 700; color: var(--navy); font-size: 0.98rem; margin: 0 0 6px !important; }
+    .ds-side details { border-top: 1px solid var(--line); }
+    .ds-side details:first-of-type { border-top: 0; }
+    .ds-side summary { cursor: pointer; list-style: none; position: relative; padding: 10px 20px 10px 0; font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.6; }
+    .ds-side summary::-webkit-details-marker { display: none; }
+    .ds-side summary::after { content: "＋"; position: absolute; right: 0; top: 10px; color: var(--orange-text); font-size: 0.8rem; }
+    .ds-side details[open] summary::after { content: "−"; }
+    .ds-side details p { margin: 0 0 12px !important; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75; }
+    .ds-side-cta p { font-size: 0.86rem; margin: 0 0 12px !important; line-height: 1.75; }
+    .ds-side-cta .btn { width: 100%; padding: 12px 16px; font-size: 0.92rem; }
+    .ds-side-cta .ds-side-sub { font-size: 0.8rem; color: var(--ink-soft); margin: 10px 0 0 !important; }
+    @media (max-width: 960px) {
+      .ds-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .ds-side { position: static; }
+    }
+  </style>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="index.html"><img src="itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="index.html#issues">課題</a>
+            <a href="index.html#flow">進め方</a>
+            <a href="index.html#goal">めざす姿</a>
+            <a href="company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="digital-twin.html">デジタルツインとは</a>
+            <a href="column/industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="checklist.html">お悩みチェックリスト</a>
+            <a href="simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="column/index.html">コラム</a>
+        <a href="price.html">料金</a>
+        <a class="btn btn--fill" href="contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="index.html">ホーム</a> ／ <a href="price.html">料金の目安</a> ／ <span>伴走支援プログラム</span></div>
+      <h1>伴走支援プログラム</h1>
+      <p class="catch">いちばん困っていることから、3ヶ月ずつ一緒に改善します。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap ds-layout">
+      <div class="price-doc ds-main">
+
+      <p class="price-intro">
+        「人が足りない」「修理の費用がかさむ」「手間のかかる作業が多い」。<strong class="mk">いちばん困っていることから着手して、3ヶ月ずつ、改善の実行と定着まで一緒に進めます。</strong>省人化、設備の見える化、仕組みづくり、3Dスキャンなど、当社のサービスを御社の課題に合わせて組み合わせます。表示価格はすべて税別です。
+      </p>
+
+      <section class="price-block">
+        <h2>こんなときにご相談ください</h2>
+        <ul>
+          <li>課題はいくつもあるが、何から手をつければよいか分からない</li>
+          <li>単発の依頼ではなく、改善を続けられる相手がほしい</li>
+          <li>社内に、改善を進める専任の担当者を置けない</li>
+          <li>使うか分からない顧問料を、毎月払うのは避けたい</li>
+        </ul>
+      </section>
+
+      <section class="price-block">
+        <h2>料金</h2>
+        <p>3ヶ月を1クールとして、クールの終わりに成果物をお渡しします。<b>続けるかどうかは、クールごとにご判断いただけます。</b></p>
+        <div class="sv-cards">
+          <div class="sv-card">
+            <p class="sv-chip">1クール目（3ヶ月）</p>
+            <p class="sv-price">600,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>解決したい問題と、1年後の目標のヒアリング</li>
+              <li>3ヶ月ごとの実行計画</li>
+              <li>現場での対応と、最初の構築</li>
+              <li>月ごとのレポートと、最終報告会での成果物</li>
+            </ul>
+          </div>
+          <div class="sv-card">
+            <p class="sv-chip">2クール目以降（3ヶ月）</p>
+            <p class="sv-price">400,000<small>円〜</small></p>
+            <ul class="sv-list">
+              <li>たまったデータを使って改善</li>
+              <li>前のクールの続き、または次の課題へ</li>
+              <li>月ごとのレポートと、最終報告会での成果物</li>
+              <li>続けるかどうかは、クールごとにご判断</li>
+            </ul>
+          </div>
+        </div>
+        <p class="price-note">1クール目は、現状の把握と最初の構築があるため作業が多くなります。2クール目からは、たまったデータを使うため価格を抑えています。現地での作業がある場合、交通費・宿泊費は実費を別にいただきます。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>お困りごとから入る</h2>
+        <p>決まったメニューを順番に進めるのではなく、御社がいちばん困っていることから着手します。</p>
+        <table class="price-table ds-table pt-table">
+          <thead><tr><th>お困りごと</th><th>入口になるサービス</th></tr></thead>
+          <tr><td>人件費が重い・人が足りない</td><td>作業の省人化・省力化。どの作業に時間がかかっているかを数字でつかみ、自動化の案と費用対効果を示します</td></tr>
+          <tr><td>設備の故障や修理の費用がかさむ</td><td>センサーで設備の状態を見える化し、止まる前に気づける形にします。工場のデジタルツインの第一歩になります</td></tr>
+          <tr><td>手書き・転記・棚卸しなどの手間が多い</td><td><a href="shikumi-service.html">仕組みづくり・AI</a>。ツールづくりの支援や、ラズパイでの仕組みの試作をします</td></tr>
+          <tr><td>図面が残っていない・設備の入れ替えが不安</td><td><a href="scan-service.html">3Dスキャン</a>。設備や部品を実寸のデータにします</td></tr>
+          <tr><td>何から始めればよいか分からない</td><td>ヒアリングで、解決したい問題を一緒に整理するところから始めます</td></tr>
+        </table>
+        <p class="ds-links"><a href="checklist.html">お悩みチェックリストで、当てはまるものを確かめる ›</a></p>
+      </section>
+
+      <section class="price-block">
+        <h2>1クール（3ヶ月）の進め方</h2>
+        <ol class="price-steps">
+          <li><b>ヒアリング</b>解決したい問題と、工場が1年後にどうなっていたいかをうかがいます。</li>
+          <li><b>実行計画</b>目標を3ヶ月ごとに分けて、このクールで取り組むことを決めます。</li>
+          <li><b>現場での対応</b>計画に沿って、作業の数値化、3Dスキャン、センサーの取り付け、仕組みの試作などを進めます。</li>
+          <li><b>月ごとのレポート</b>進み具合と、わかったことをご報告します。</li>
+          <li><b>最終報告会</b>3ヶ月目に成果物をお渡しし、次のクールに進むかどうかをご判断いただきます。</li>
+        </ol>
+        <p class="price-note">各クールの内容や順番は決めつけません。「この工程から先に進めたい」といったご要望にも合わせます。1年間（4クール）の流れは「<a href="annual-plan.html">年間計画の進め方</a>」をご覧ください。</p>
+      </section>
+
+      <section class="price-block">
+        <h2>お渡しするもの（成果物）</h2>
+        <table class="price-table ds-table">
+          <thead><tr><th>取り組み</th><th>成果物</th></tr></thead>
+          <tr><td>省人化・自動化</td><td>レポートと簡易設計図。効果と費用対効果を数字でお示しします</td></tr>
+          <tr><td>設備の見える化・デジタルツイン</td><td>センサーの値を見られる画面</td></tr>
+          <tr><td>仕組みづくり・3Dスキャン</td><td>試作した仕組みと手順書、3Dスキャンのデータなど、着手した内容の成果物</td></tr>
+        </table>
+      </section>
+
+      <section class="price-block">
+        <h2>めざすところ</h2>
+        <div class="pt-goal">
+          <p>1つの困りごとから始めても、クールを重ねるごとに、工場のデータは積み上がっていきます。<strong class="mk">私たちは最終的に、御社の工場全体のデジタルツインを完成させるところまで、ご一緒したいと考えています。</strong>画面の上でレイアウトの変更や自動化の案を何度でも試せるようになれば、現場を止めずに、次の改善を数字で決められるようになります。</p>
+        </div>
+      </section>
+
+      <section class="price-block">
+        <h2>ご依頼いただく前に</h2>
+        <ul class="price-list">
+          <li>センサーは、レンタルか、御社でご用意いただく形からお選びいただけます。レンタルの料金はクールの期間中は無料で、クールの契約が終わったあとは月額の契約に切り替わります。レンタルの場合は、契約の終了時に回収します。</li>
+          <li>システムは、外のネットワークから切り離した環境で動かします。センサーのデータをクラウドで解析するのは、御社の書面でのご承諾がある場合だけです。</li>
+          <li>現地での作業がある場合、交通費・宿泊費は実費を別にいただきます。</li>
+        </ul>
+      </section>
+
+
+      <p class="section-more"><a class="btn btn--outline" href="price.html">料金の目安（すべてのサービス）に戻る</a></p>
+
+      </div>
+
+      <!-- ◆右側の固定欄：よくあるご質問・問い合わせ（スマホでは本文の下） -->
+      <aside class="ds-side" aria-label="よくあるご質問とお問い合わせ">
+        <div class="ds-side-box">
+          <p class="ds-side-h">よくあるご質問</p>
+          <details><summary>何から始めればいいか分かりません。</summary><p>それで大丈夫です。無料のヒアリングで、困っていることと今のやり方をうかがい、どこから着手するかを一緒に決めます。</p></details>
+          <details><summary>1クールだけでも頼めますか？</summary><p>はい。続けるかどうかは、クールの終わりの最終報告会のあとにご判断いただけます。</p></details>
+          <details><summary>料金には何が含まれますか？</summary><p>ヒアリング、実行計画、現場での対応、月ごとのレポート、最終報告会と成果物です。取り組む内容は課題に合わせて決め、お見積りでお伝えします。現地作業の交通費・宿泊費は別にいただきます。</p></details>
+          <details><summary>センサーは買う必要がありますか？</summary><p>レンタルもお選びいただけます。クールの期間中は無料で、契約が終わったあとは月額の契約に切り替わります。</p></details>
+          <details><summary>遠方でも頼めますか？</summary><p>はい。打ち合わせやレポートはオンラインでも行います。現地での作業がある場合は、交通費・宿泊費を実費でいただきます。</p></details>
+        </div>
+        <div class="ds-side-box ds-side-cta">
+          <p class="ds-side-h">お問い合わせ</p>
+          <p>困っていることと、今のやり方をお聞かせください。</p>
+          <a class="btn btn--fill" href="contact-v2.html?topic=hearing" onclick="if(window.gtag)gtag('event','contact_click',{place:'partner_service_side',article:'partner_service'});">無料ヒアリングを申し込む</a>
+          <p class="ds-side-sub">ご相談とお見積りは無料です。</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ◆CTAバンド -->
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>まずは、無料のヒアリングから。</h2>
+      <p>「何から始めればいいか分からない」という段階でも大丈夫です。</p>
+      <a class="btn btn--fill" href="contact-v2.html?topic=hearing" onclick="if(window.gtag)gtag('event','contact_click',{place:'partner_service',article:'partner-service'});">無料ヒアリングを申し込む</a>
+    </div>
+  </section>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="index.html#issues">課題</a></li>
+              <li><a href="index.html#flow">進め方</a></li>
+              <li><a href="annual-plan.html">年間計画の進め方</a></li>
+              <li><a href="index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="index.html#trial">無料相談</a></li>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="price.html">料金</a></li>
+              <li><a href="column/index.html">コラム</a></li>
+              <li><a href="contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="privacy-policy.html">プライバシーポリシー</a>　<a href="terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  /* 「料金についてよくあるご質問」へのリンクで来たときは、収納を開いて見せる */
+  (function () {
+    function openFaq() { var d = document.querySelector('#price-faq .pf-wrap'); if (d && location.hash === '#price-faq') d.open = true; }
+    openFaq(); window.addEventListener('hashchange', openFaq);
+  })();
+</script>
+</body>
+</html>
