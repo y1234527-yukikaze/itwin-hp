@@ -245,6 +245,7 @@
                 <option value="simulator">概算シミュレーション結果について</option>
                 <option value="auto">自動化の相談</option>
                 <option value="design">強度計算・図面・設計のご依頼</option>
+                <option value="design-partner">設計の継続委託のご相談（設計会社さま）</option>
                 <option value="scan">3Dスキャン・現状データ化の相談</option>
                 <option value="other">その他</option>
               </select>
@@ -495,6 +496,8 @@
         if (dqTitle) dqTitle.textContent = (what.length === 1 ? what[0].replace("その他・まだ決まっていない", "計算・設計") : "計算・設計") + "の見積もり（無料）";
       } else if (t === "auto") {
         html += row("仕組みづくりのご相談", "無料") + row("試作・確かめ・手順書づくり", "200,000円〜");
+      } else if (t === "design-partner") {
+        html += row("月ごとの稼働枠でのご契約", "資料をお送りします");
       } else if (t === "scan") {
         html += row("部品・治具のスキャン", "30,000円〜") + row("設備単体のスキャン", "150,000円〜");
       }
