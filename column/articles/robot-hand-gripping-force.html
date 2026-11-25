@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  アイツイン｜コラム記事：把持力とロボットハンドの種類（特集「自動化設備の設計ノート」11）
+  （溶接の記事を土台に、キットの build_grip.py で組み立て・2026-11-25）
+  計算ツール：キットの tool_grip.html／本文：grip_body.html
+  ------------------------------------------------------------
+  ★ 画像 ★
+  アイキャッチ：img/column-gripping-force.jpg（ナノバナナで生成して差し替え）
+  図：img/column-gripping-hold.jpg / -types.jpg / -jaws.jpg / -flow.jpg（figs_grip.py で作成）
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56E7E0M452"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // アクセス解析：公開サイト以外（手元の確認）と、「?no_ga=1」で印を付けたブラウザからは送らない（2026-11-25）
+  (function () {
+    var off = !/^(www\.)?i-twin\.co\.jp$/.test(location.hostname);
+    try {
+      var m = location.search.match(/[?&]no_ga=([01])/);
+      if (m) { if (m[1] === '1') localStorage.setItem('itwin_no_ga', '1'); else localStorage.removeItem('itwin_no_ga'); }
+      if (localStorage.getItem('itwin_no_ga') === '1') off = true;
+    } catch (e) {}
+    if (off) window['ga-disable-G-56E7E0M452'] = true;
+  })();
+  gtag('js', new Date());
+
+  gtag('config', 'G-56E7E0M452');
+</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>把持力とは？計算方法とロボットハンドの種類・選び方｜アイツイン コラム</title>
+  <meta name="description" content="把持力とは、ロボットハンドがワークを落とさずに持つ力です。本記事では、挟むハンドの把持力の計算方法を例題で解説し、2爪・3爪・真空・磁石・ソフトハンドなどロボットハンドの種類と得意なワーク、選び方を比較表にまとめます。計算ツールつき。">
+  <link rel="canonical" href="https://i-twin.co.jp/column/articles/robot-hand-gripping-force">
+
+  <!-- ◆OGP / Twitter Card -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="アイツイン（i-TWIN）">
+  <meta property="og:title" content="把持力とは？計算方法とロボットハンドの種類・選び方">
+  <meta property="og:description" content="把持力とは、ロボットハンドがワークを落とさずに持つ力です。本記事では、挟むハンドの把持力の計算方法を例題で解説し、2爪・3爪・真空・磁石・ソフトハンドなどロボットハンドの種類と得意なワーク、選び方を比較表にまとめます。計算ツールつき。">
+  <meta property="og:url" content="https://i-twin.co.jp/column/articles/robot-hand-gripping-force">
+  <meta property="og:image" content="https://i-twin.co.jp/img/column-gripping-force.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="article:published_time" content="2026-11-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="把持力とは？計算方法とロボットハンドの種類・選び方">
+  <meta name="twitter:description" content="把持力とは、ロボットハンドがワークを落とさずに持つ力です。本記事では、挟むハンドの把持力の計算方法を例題で解説し、2爪・3爪・真空・磁石・ソフトハンドなどロボットハンドの種類と得意なワーク、選び方を比較表にまとめます。計算ツールつき。">
+  <meta name="twitter:image" content="https://i-twin.co.jp/img/column-gripping-force.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style-v2.css">
+  <link rel="stylesheet" href="../../font-noto.css?v=20261121">
+  <link rel="stylesheet" href="../../design-flat.css?v=20261121">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="../../favicon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <!-- ◆構造化データ（Article / JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "把持力とは？計算方法とロボットハンドの種類・選び方",
+    "description": "把持力とは、ロボットハンドがワークを落とさずに持つ力です。本記事では、挟むハンドの把持力の計算方法を例題で解説し、2爪・3爪・真空・磁石・ソフトハンドなどロボットハンドの種類と得意なワーク、選び方を比較表にまとめます。計算ツールつき。",
+    "image": "https://i-twin.co.jp/img/column-gripping-force.jpg",
+    "datePublished": "2026-11-25",
+    "dateModified": "2026-11-25",
+    "inLanguage": "ja",
+    "author": {
+      "@type": "Person",
+      "name": "加瀬部 裕紀",
+      "jobTitle": "代表",
+      "url": "https://i-twin.co.jp/company",
+      "worksFor": { "@type": "Organization", "name": "株式会社アイツイン" }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "アイツイン（i-TWIN）",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i-twin.co.jp/itwin-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://i-twin.co.jp/column/articles/robot-hand-gripping-force"
+    }
+  }
+  </script>
+
+  <!-- ◆構造化データ（BreadcrumbList） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
+      { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
+      { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
+      { "@type": "ListItem", "position": 4, "name": "把持力とは？計算方法とロボットハンドの種類・選び方", "item": "https://i-twin.co.jp/column/articles/robot-hand-gripping-force" }
+    ]
+  }
+  </script>
+</head>
+<body class="design-flat font-noto">
+
+  <!-- ◆ヘッダー -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand-wrap">
+        <a class="brand" href="../../index.html"><img src="../../itwin-logo.png" alt="アイツイン"></a>
+      </div>
+      <button class="nav-toggle" aria-label="メニュー" onclick="document.querySelector('.nav').classList.toggle('open')"><span></span></button>
+      <nav class="nav">
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">アイツインについて<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../index.html#issues">課題</a>
+            <a href="../../index.html#flow">進め方</a>
+            <a href="../../index.html#goal">めざす姿</a>
+            <a href="../../company.html">会社概要</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">デジタルツイン<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../digital-twin.html">デジタルツインとは</a>
+            <a href="../industries/index.html">業種別活用事例</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">診断ツール<i class="nav-caret" aria-hidden="true"></i></button>
+          <div class="nav-menu">
+            <a href="../../checklist.html">お悩みチェックリスト</a>
+            <a href="../../simulator.html">概算シミュレーション</a>
+          </div>
+        </div>
+        <a class="nav-column" href="../index.html">コラム</a>
+        <a href="../../price.html">料金</a>
+        <a class="btn btn--fill" href="../../contact-v2.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ナビ：スマホは大分類をタップで開閉／リンクを押したらメニューを閉じる -->
+  <script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var groups = Array.prototype.slice.call(nav.querySelectorAll('.nav-group'));
+    function closeAll() {
+      groups.forEach(function (g) {
+        g.classList.remove('open');
+        var t = g.querySelector('.nav-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    // 900px以下はホバーが存在しないため、タップで開閉する
+    groups.forEach(function (g) {
+      var trigger = g.querySelector('.nav-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        if (window.innerWidth > 900) { trigger.blur(); return; }   // PC幅はホバーに任せ、クリックで残るフォーカスを外す
+        var wasOpen = g.classList.contains('open');
+        closeAll();
+        if (!wasOpen) { g.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      // マウスがグループから離れたら、クリックで残ったフォーカスも解除する（:focus-within の張り付き防止）
+      g.addEventListener('mouseleave', function () {
+        if (window.innerWidth > 900 && document.activeElement === trigger) trigger.blur();
+      });
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); closeAll(); });
+    });
+  })();
+  </script>
+
+  <!-- ◆下層ヒーロー -->
+  <section class="subhero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="../../index.html">ホーム</a> ／
+        <a href="../index.html">コラム</a> ／
+        <a href="../design/index.html">自動化設備の設計ノート</a> ／
+        <span>把持力とは？計算方法とロボットハンドの種類・選び方</span>
+      </div>
+      <h1>把持力とは？計算方法とロボットハンドの種類・選び方</h1>
+      <p class="catch">公開日：2026年11月25日</p>
+    </div>
+  </section>
+
+  <!-- ◆本体：記事 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="article-layout"><!-- 本文と右の欄（キットの article_nav.py で入れ直す） -->
+      <div class="article-body article-rich">
+
+        <!-- ◆記事の行き来（一覧・特集・前後の記事。キットの article_nav.py で入れ直す） -->
+        <nav class="article-nav-top" aria-label="記事の行き来">
+          <span class="ant-lists"><a href="../index.html">コラム一覧</a><a href="../design/index.html">設計の計算で探す</a></span>
+          <span class="ant-pager"><a class="ant-prev" href="bolt-strength-calculation.html">‹ 前の記事：10 ボルト</a></span>
+        </nav>
+
+        <p class="article-meta"><span class="article-category">設備設計・自動化</span>公開日：2026.11.25</p>
+
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-force.jpg" alt="把持力とロボットハンドの種類。2爪・3爪のハンドと、真空パッドのハンドが、形の違うワークをつかむイメージ" width="1376" height="768">
+          <figcaption>ワークを落とさずに持つ力が「把持力」。持ち方は、ワークの形と置かれ方で選ぶ。</figcaption>
+        </figure>
+
+        <p>
+          「このワーク、どのハンドでつかめばいいのだろう」「カタログの把持力は、どれくらいあれば足りるのか」。ロボットや自動機でワークを運ぶ設備を考えると、最初にこの2つで迷います。ハンドの種類は多く、同じワークでも、挟む・吸う・下から受けるなど、持ち方はいくつも考えられます。
+        </p>
+        <p>
+          本記事では、<strong class="mk">把持力とは何か</strong>を整理したうえで、2爪・3爪・真空・磁石・ソフトハンドなど<strong>ロボットハンドの種類と得意なワーク</strong>を比較表にまとめます。研究から生まれた世界の変わったハンドも紹介します。後半では、挟むハンドに必要な把持力の計算方法を例題で解説し、設備の設計で筆者が使ってきた、2爪と3爪、エアと電動の選び方を紹介します。条件を入れて試せる計算ツールつきです。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">計算例の適用範囲</p>
+          <ul>
+            <li>本記事は、挟むハンドの把持力の考え方を、単純な仮定（どの爪も同じ力で押す、摩擦係数は一定）で説明するものです。計算したハンドで安全に持てることを保証するものではありません</li>
+            <li>摩擦係数や加速度は、説明のための仮の値です。実際の値は、ワークと爪の材料・表面、ハンドとロボットの仕様で確かめます</li>
+            <li>人の安全に関わる対策（落下の防止、安全柵、非常停止）は、適用する規格と、機械の危険の見積もりにもとづいて決めます</li>
+          </ul>
+        </div>
+
+        <div class="chapter-sum chapter-sum--navy">
+          <p class="chapter-sum-title">この記事でわかること</p>
+          <ul>
+            <li>把持力の意味と、握力・保持力との違い。「こすれる力」と「形」の2つの持ち方</li>
+            <li>ロボットハンドの種類（挟む・吸う・くっつける・包む・人の手のような）と得意なワーク</li>
+            <li>研究から生まれた、世界のロボットハンドの変わった持ち方</li>
+            <li>挟むハンドの把持力の計算方法と例題（外径把持・内径把持）</li>
+            <li>2爪と3爪、エアと電動の選び方と、ロボットハンドを選ぶ4つの順番</li>
+          </ul>
+        </div>
+
+        <!-- ◆目次（本文中の h2 と h3 から自動生成されます） -->
+        <nav class="article-toc" aria-label="目次">
+          <h2>目次</h2>
+          <ol id="toc-list"></ol>
+        </nav>
+
+        <!-- ◆1 -->
+        <h2>把持力とは｜ロボットハンドがワークを落とさずに持つ力</h2>
+
+        <h3>把持力の意味と読み方</h3>
+        <p>
+          把持力（はじりょく）は、ロボットハンドがワークをつかんで、落とさずに持つための力です。「把持」は、手でしっかりつかんで持つことを表す言葉です。設備の仕様では、挟むハンド（グリッパ、チャック）が<strong>爪でワークを押す力</strong>を指すことが多く、カタログにも「把持力」として載っています。
+        </p>
+        <p>
+          ワークを持って動かすと、重さに加えて、速さを変えるときの力（慣性の力）もかかります。把持力は、この2つに負けずにワークを持ち続けられるだけの大きさが必要です。急に止まったときや、ワークに油が付いているときは、必要な把持力が大きくなります。
+        </p>
+
+        <h3>把持力と握力・保持力の違い</h3>
+        <p>
+          握力は、人が手を握る力のことで、主に人の体力の目安として使われます。ロボットハンドの把持力は、ワークをつかむためにハンドが加える力を指すことが多いのですが、爪1本あたりの力か、全部の爪の合計かは、メーカーによって違います。保持力は、つかんだワークを保持する能力を表すときなどに使われ、真空のハンドでは「吸着力」とも書かれます。カタログの数字を比べるときは、<strong>その数字が何の力か</strong>を、仕様の定義で確かめます。
+        </p>
+
+        <h3>ワークの持ち方は「こすれる力」と「形」の2つ</h3>
+        <p>
+          ハンドがワークを持つ方法は、大きく2つに分けられます。1つは、爪でワークを両側から押し、爪とワークの間の摩擦（こすれる力）で持つ方法です。平らな面を挟むハンドは、ほとんどがこの持ち方です。もう1つは、爪や受けの形で、ワークの下や段、穴を受けて持つ方法です。重さを形で受けるので、摩擦に頼る量が少なくてすみます。
+        </p>
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-hold.jpg" alt="ワークの2つの持ち方。左はこすれる力で持つ方法で、爪で両側から押し、摩擦で重さを支える。右は形で受けて持つ方法で、爪でワークの下を受けて重さを支える。重くて薄い袋は、下からすくって受け、上から軽く押さえる" width="1376" height="768">
+          <figcaption>摩擦に頼る持ち方と、形で受ける持ち方。重くて形の変わる物ほど、形で受ける。</figcaption>
+        </figure>
+        <p>
+          たとえば、粉の入った重い紙袋のように、重くて形が変わりやすく、表面の弱いワークを考えます。横から挟むだけでは、中の粉が動いて袋の形が変わり、押す力が逃げます。強く挟めば、薄い袋が破れます。こうしたワークは、<strong class="mk">袋の下にフォークや板の形の受けを差し入れて重さを面で支え、必要に応じて上から押さえたり、横をガイドしたりする</strong>持ち方が向いています。袋を積み上げる工程では、この形のハンドがよく使われています。袋の材質や中身、運ぶ速さに合わせて、落下や破れを防ぐ形を決めます。実際には、形で受けながら摩擦でも押さえるなど、2つを組み合わせて持つことも多くあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>把持力は、ロボットハンドがワークを落とさずに持つ力。重さと、動かすときの力の両方に耐える大きさが要る</li>
+            <li>握力・保持力・吸着力など、似た言葉は資料ごとに意味が違うので、仕様の定義で確かめる</li>
+            <li>持ち方は「こすれる力で持つ」と「形で受けて持つ」の2つ。重くて形の変わる物は形で受ける</li>
+          </ul>
+        </div>
+
+        <!-- ◆2 -->
+        <h2>ロボットハンドの種類｜持ち方で5つに分ける</h2>
+        <p>
+          ロボットハンドの種類は、ワークをどう持つかで、挟む・吸う・くっつける・包む・人の手のような、の5つに分けると整理しやすくなります。まずは種類ごとの持ち方と、得意なワークを見ていきます。
+        </p>
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-types.jpg" alt="ロボットハンドの5つの種類と得意なワーク。挟むハンドは加工した部品や丸い物、吸うハンドは板や段ボール、くっつけるハンドは鉄の板、包むハンドは食品や形がばらばらな物、人の手のようなハンドは決まった形のない物" width="1376" height="768">
+          <figcaption>ロボットハンドの種類は、持ち方で5つに分けると選びやすい。</figcaption>
+        </figure>
+
+        <h3>挟むハンド｜2爪・3爪、外径把持と内径把持</h3>
+        <p>
+          爪でワークを挟む、いちばん多いハンドです。2本の爪が平行に開閉する2爪と、3本の爪が中心に向かって同時に動く3爪がよく使われます。外から閉じてつかむ<strong>外径把持</strong>のほか、穴やパイプの内側に爪を入れ、開いて内側から張る<strong>内径把持</strong>もできます。内径把持は、外側に傷を付けたくない部品や、外からは爪が入らない部品に使います。爪を動かす力は、空気（エア）か、モーター（電動）で作ります。
+        </p>
+
+        <h3>吸うハンド｜真空パッド</h3>
+        <p>
+          ゴムなどのパッドをワークに当て、中の空気を抜いて吸い付けます。板、段ボール、ガラスなど、平らな面のあるワークが得意です。挟むための爪の動きがいらず、ワークの上からつかめます。空気を通すワーク、穴の多いワーク、凸凹の大きい面は苦手です。計算の方法は「<a href="vacuum-pad-selection.html">真空パッドの吸着力の計算</a>」の記事で詳しく解説しています。
+        </p>
+
+        <h3>くっつけるハンド｜磁石</h3>
+        <p>
+          磁石の力で、鉄などの磁石に付くワークをくっつけます。鉄の板や鋼材、穴の多い鉄の部品など、吸うハンドでは空気が漏れるワークにも使えます。磁石には、電気を流したときだけ働くものと、いつも働く磁石を機構で切り替えるものがあります。アルミなど磁石に付かない材料には、基本的に使えません。ステンレスは、種類や加工の状態で磁石への付きやすさが違うため、実際の材料で確かめます。
+        </p>
+
+        <h3>包むハンド｜ソフトハンド</h3>
+        <p>
+          ゴムなどのやわらかい指や材料を変形させ、ワークの形に合わせて包み込むように持つハンドです。空気で指を曲げるもののほか、ワイヤーで引くもの、機構で曲げるものなど、動かし方はいろいろあり、風船のように膨らんで包むものもあります。食品や、形と大きさがばらばらな物、傷を付けたくない物が得意です。持てる重さや位置の正確さは構造によって違いますが、一般に、重い物や正確な位置で持ちたい物は苦手です。
+        </p>
+
+        <h3>人の手のようなハンド｜多関節の指で持ち替える</h3>
+        <p>
+          人の指のように関節がいくつもあるハンドです。関節ごとにモーターを持つものや、少ないモーターでワイヤーなどを使って動かすものがあります。さまざまな形の物をつかんだり、持ち替えたりすることを目指していますが、人のように扱うには、構造だけでなく、センサーや制御、物を見分ける仕組みも要ります。構造と制御が複雑で高価になりやすく、工場の決まった作業では、主に研究や特別な用途で使われています。
+        </p>
+
+        <h3>ロボットハンドの種類のメリット・デメリット比較一覧</h3>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>種類</th><th>得意なワーク</th><th>メリット</th><th>デメリット</th></tr>
+            <tr><td>挟む（2爪・3爪）</td><td>加工した部品、丸い物、ブロック、穴のある部品（内径把持）</td><td>種類が多く選びやすい。位置を決めてつかめる</td><td>爪をワークの形に合わせて作る必要がある。爪が入るすき間が要る</td></tr>
+            <tr><td>吸う（真空）</td><td>板、段ボール、ガラス、平らな面のある物</td><td>上からつかめる。大きく薄い物も持てる</td><td>空気を通す物や凸凹の大きい面は吸い付きにくい。真空が止まると落ちるおそれがあり、真空の保持や監視などの対策をする</td></tr>
+            <tr><td>くっつける（磁石）</td><td>鉄の板、鋼材、穴の多い鉄の部品</td><td>穴があっても持てる。構造がかんたん</td><td>磁石に付かない材料には使えない。すき間や塗装で力が下がる</td></tr>
+            <tr><td>包む（ソフトハンド）</td><td>食品、形がばらばらな物、やわらかい物</td><td>形が違っても持てる。傷を付けにくい</td><td>重い物が苦手。持つ位置がばらつきやすい</td></tr>
+            <tr><td>人の手のような多関節</td><td>決まった形のない物</td><td>持ち替えなど、人に近い動きができる</td><td>構造と制御が複雑で高価になりやすい</td></tr>
+          </table>
+        </div>
+
+        <h3>世界のロボットハンド｜研究・開発で生まれた特殊な持ち方</h3>
+        <p>
+          世界では、ほかにもさまざまな持ち方が研究され、一部は製品にもなっています。工場の定番ではありませんが、「この持ち方なら、あのワークを持てるかもしれない」という発想のヒントになります。
+        </p>
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-world.jpg" alt="研究・開発で生まれた特殊なロボットハンド8種類。粉を詰めた袋、魚のひれの形の指、リンクで動く3本指、形に倣うピン配列、静電気でくっつける、ヤモリの足をまねる、空気の流れで持つ、針で刺して持つ" width="1376" height="768">
+          <figcaption>研究・開発で生まれた特殊なロボットハンドの例（番号は下の表と同じ）。</figcaption>
+        </figure>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th>持ち方</th><th>仕組み</th><th>向いているもの</th></tr>
+            <tr><td>① 粉を詰めた袋を固める</td><td>粉や粒をやわらかい膜の袋に詰め、ワークに押し当てて形をなじませてから、中の空気を抜いて粒どうしを固めて持つ（粒子ジャミング）</td><td>形が複雑な小物</td></tr>
+            <tr><td>② 魚のひれの形の指</td><td>やわらかい骨組みの変形を使い、ワークの形に沿って曲がる指。形と動かし方によって、巻き付くように持つものもある</td><td>果物や形の違う物</td></tr>
+            <tr><td>③ リンクで動く3本指</td><td>リンクなどの機構で指の関節を連動させ、少ないモーターで、ワークの形に合わせて指を曲げる</td><td>形がいろいろな部品</td></tr>
+            <tr><td>④ 形に倣うピン配列</td><td>細いピンをたくさん並べ、ワークに押し当てて形に合わせてから、ピンを固定して持つ</td><td>凸凹のある物（ピンの間隔より細かい形は苦手）</td></tr>
+            <tr><td>⑤ 静電気でくっつける</td><td>電極に電圧をかけ、静電気の力で薄い物や軽い物をくっつける。材質、表面、湿度で力が変わる</td><td>布、紙、薄いフィルム</td></tr>
+            <tr><td>⑥ ヤモリの足をまねる</td><td>ヤモリの足の裏のような細かい構造で、表面にぴたりと付く力を使う。面の状態や向き、汚れで力が変わる</td><td>ガラスなどのなめらかで、きれいな面</td></tr>
+            <tr><td>⑦ 空気の流れで持つ</td><td>ワークとの間に空気を流して圧力の差を作り、ほとんど触れずに持つ。空気の流れの設計と、ワークとの距離が大切</td><td>薄くて割れやすい板、傷を付けたくない物</td></tr>
+            <tr><td>⑧ 針で刺して持つ</td><td>細い針を刺したり引っかけたりして持つ。ワークに穴が開くことや、針が折れることに注意する</td><td>布、断熱材、発泡材など</td></tr>
+          </table>
+        </div>
+        <p>
+          どの持ち方にも、持てる重さや、表面の状態による向き不向きがあります。実際に使うときは、ワークで試して確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ロボットハンドの種類は、挟む・吸う・くっつける・包む・人の手のような、の5つに分けると選びやすい</li>
+            <li>挟むハンドには、外から閉じる外径把持と、内側から張る内径把持がある</li>
+            <li>研究から生まれた変わった持ち方も多く、苦手なワークを持つヒントになる</li>
+          </ul>
+        </div>
+
+        <!-- ◆3 -->
+        <h2>把持力の計算方法｜挟むハンドの式と例題</h2>
+        <p>
+          ここからは、いちばん多い挟むハンドで、必要な把持力を計算します。こすれる力（摩擦）で持つ場合の式です。
+        </p>
+
+        <h3>必要な把持力の式</h3>
+        <p class="calc">
+          <b>爪1本あたりの押す力　F ＝ m ×（g ＋ a）× S ÷（μ × n）</b><br>
+          m：ワークの質量（kg）、g：重力の加速度（9.81m/s²）、a：持ち上げるときの加速度（m/s²）、S：安全率、μ：爪とワークの摩擦係数、n：ワークに触れて摩擦を生む爪の本数
+        </p>
+        <p>
+          ワークの重さと、持ち上げるときの加速による力を、爪の摩擦で支える式です。どの爪も同じ力で押し、摩擦係数も同じと仮定しています。この式は、上に持ち上げるなど、加速の向きと重力の向きがそろう場合の基本の式です。爪の面に沿って横に動かす場合は、重力と横の加速は向きが直角なので、足すのではなく、g ＋ a の代わりに √（g² ＋ a²）で見ます。爪の面に直角な向きに動かす場合は、片側の爪の押す力が減るので、別に確かめます。摩擦係数は、爪とワークの材料、表面の仕上げ、油の有無で大きく変わるため、低めに見ておきます。
+        </p>
+
+        <h3>安全率の考え方は、メーカーによって違う</h3>
+        <p>
+          式の安全率 S をいくつにするかには、決まった値がありません。筆者が以前、把持に掛ける安全率を調べたときも、シリンダやハンドのメーカーによって、考えている安全率が違いました。安全率を何倍にするか、加速や衝撃の分をどこまで安全率に含めるかは、メーカーごとに考え方が違うことがあります。<strong class="mk">安全率はメーカーによって考え方が違う</strong>ことを前提に、使うハンドのメーカーの選定方法と、そのメーカーが示す安全率の決め方に合わせて計算します。本記事の計算例と計算ツールの安全率は、説明のための仮の値です。
+        </p>
+
+        <h3>計算例：2kgのアルミのブロックを、2爪で挟んで持ち上げる</h3>
+        <p>
+          2kgのアルミのブロックを、2爪のハンドで挟み、加速度5m/s²で持ち上げる例です。安全率は2、爪とワークの摩擦係数は0.2と仮定します<span class="need-check">（仮の値・要確認）</span>。
+        </p>
+        <p class="calc">
+          F ＝ 2.0 ×（9.81 ＋ 5）× 2 ÷（0.2 × 2）＝ <b>148 N</b>（爪1本あたり。ワークの重さ19.6Nの約7.5倍）<br>
+          急に止まるとき（a ＝ 10）なら　198 N（約10倍）<br>
+          3爪で挟むなら（a ＝ 5）　99 N（約5倍）
+        </p>
+        <p>
+          2kgのワークでも、爪1本あたりで重さの7〜10倍の押す力が要ります。<strong class="mk">摩擦で持つハンドは、ワークの重さよりずっと大きな把持力が必要</strong>になる、と覚えておくと、ハンドの選び違いを防げます。3爪にすると1本あたりの力は下がりますが、ワークの形や寸法のばらつきで、3本の負担が均等にならないことがあります。
+        </p>
+        <p>
+          なお、この計算は「滑らないか」を見る簡単な確かめです。ワークが爪の中で回らないか（重心の位置）、爪や取り付け部の強さ、止まったときにワークを保てるかは、別に確かめます。
+        </p>
+
+        <h3>内径把持も同じ式で求める</h3>
+        <p>
+          穴の内側から張る内径把持も、こすれる力で持つ点は同じなので、同じ式で必要な力を求めます。気をつけたいのは、ワークの側です。薄い筒や樹脂の部品は、内側から張る力で広がって変形することがあります。必要な把持力に対して、ワークが変形しないかも確かめます。爪の当たる面の幅を広くすると、ワークを押す力の集中を減らせます。
+        </p>
+
+        <h3>カタログの把持力を確かめるときの注意</h3>
+        <p>
+          ハンドのカタログの「把持力」は、爪1本あたりの力のことも、全部の爪の合計のこともあります。また、取り付け面から掴む点までの距離が長いほど、把持力は小さくなるのが一般的です。エアのハンドでは、使う空気の圧力でも把持力が変わります。計算で求めた力と、カタログの値の定義、掴む点の距離、使う圧力をそろえて比べます<span class="need-check">（カタログで確かめる）</span>。
+        </p>
+
+        <h3>吸う・くっつける・包むハンドの力の決め方</h3>
+        <p>
+          吸うハンドは、真空の圧力とパッドの面積から吸着力を求めます。詳しくは「<a href="vacuum-pad-selection.html">真空パッドの吸着力の計算</a>」で解説しています。磁石のハンドは、ワークとのすき間、ワークの板の厚さ、塗装や油で力が大きく下がるため、メーカーの値をもとに、実際のワークで試して決めます。包むハンドも、ワークの形とやわらかさで持てる力が変わるため、実際のワークでの試験が基本です。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>挟むハンドの爪1本の押す力 ＝ 質量×（g＋a）×安全率÷（摩擦係数×爪の本数）</li>
+            <li>安全率の考え方はメーカーによって違う。使うハンドのメーカーの選定方法で計算する</li>
+            <li>計算例では、2kgのワークでも爪1本で重さの約7.5〜10倍。内径把持も同じ式で、ワークの変形も確かめる</li>
+            <li>カタログの把持力は、定義・掴む点の距離・圧力をそろえて比べる。磁石と包むハンドは試験で決める</li>
+          </ul>
+        </div>
+
+        <!-- ◆4 -->
+        <h2>2爪と3爪の選び方｜位置決めの精度で決める</h2>
+        <p>
+          挟むハンドで最初に迷うのが、2爪にするか3爪にするかです。まずは、それぞれの特徴を比べます。
+        </p>
+
+        <h3>2爪と3爪の特徴の違い</h3>
+        <p>
+          2爪は、構造がシンプルで価格が手ごろな製品が多く、使われてきた実績も豊富です。ワークの形と置かれる位置が決まっていれば、爪の形をワークに合わせて作り、<strong>速く、安定した作業</strong>ができます。3爪は、3本の爪が中心へ同時に動く形が多く、球や円筒の形のワークを掴むのに向いています。<strong>多少の形や位置のばらつきがあっても、ワークを中心に寄せて掴みやすい</strong>のが特徴で、3点で押さえるため、爪の形しだいで、変形しやすいワークの負担を分けられる場合もあります。爪の位置を読み取れる機種やセンサーと組み合わせれば、掴んだ爪の位置から、ワークの大きさを判定することもできます。測定に使う場合は、必要な精度で測れるかを確かめます。
+        </p>
+        <div class="table-scroll">
+          <table class="table-wide">
+            <tr><th></th><th>2爪</th><th>3爪</th></tr>
+            <tr><td>得意なワーク</td><td>形と置かれる位置が決まったワーク、平行な2つの面があるワーク</td><td>球や円筒の形のワーク、多少の形や位置のばらつきがあるワーク</td></tr>
+            <tr><td>強み</td><td>構造がシンプルで価格が手ごろ。実績が豊富。速く安定した作業が得意</td><td>掴むと中心の位置がそろいやすい。爪の位置からワークの大きさの判定もできる</td></tr>
+            <tr><td>気をつけること</td><td>ワークの位置がずれると、掴む位置もずれる</td><td>中心はそろっても、向きまでそろうとは限らない。形が大きく違うワークや、平らな面のワークは掴みにくいことがある</td></tr>
+          </table>
+        </div>
+        <p>
+          筆者は設備の設計で、この特徴に加えて、ワークの置かれ方を判断の目安にしていました。
+        </p>
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-jaws.jpg" alt="2爪と3爪の選び方。ワークの位置決めがよく、基準が毎回同じ所に来るなら2爪でしっかり掴む。位置決めがよくないなら3爪で、ワークを中心に寄せて掴む" width="1376" height="768">
+          <figcaption>ワークの基準が、毎回同じ所に来るかどうかで、2爪と3爪を選ぶ。</figcaption>
+        </figure>
+
+        <h3>目安は「ワークの基準が、毎回同じ所に来るか」</h3>
+        <p>
+          ハンドでワークを掴んだとき、ワークの基準（位置を決める面や中心）が、毎回同じ所に来るかどうか。筆者は、これを2爪と3爪を選ぶ1つの目安にしていました。掴んだあとに、ワークを決まった位置へ入れる、ほかの部品と組み合わせる、といった作業では、掴んだ位置のばらつきが、そのまま次の作業のずれになるからです。これは筆者の経験からの目安で、実際には、ワークの形、置かれる位置、爪の形、位置決めの精度を合わせて判断します。
+        </p>
+
+        <h3>位置決めがよいなら、2爪でしっかり掴む</h3>
+        <p>
+          前の工程でワークの位置がよく決まっていて、いつも同じ所に置かれるなら、2爪で掴みます。2爪は、爪の形をワークの面に合わせやすく、平行な2つの面を広く押さえられます。<strong class="mk">位置決めの精度がよいときは、2爪で把持力を高めて、しっかり掴む</strong>のが、筆者の使い方でした。
+        </p>
+
+        <h3>位置決めがよくないなら、3爪で中心を掴む</h3>
+        <p>
+          ワークの置かれ方がばらつく場合は、3爪にします。3本の爪が中心に向かって同時に動くので、丸い物や筒の形のワークは、掴むと自然に中心へ寄ります。置かれた位置が少しずれていても、爪の開く範囲に入っていれば、掴んだあとのワークの中心は、ほぼ同じ所に来ます。位置決めをハンドに任せられる分、前の工程の精度を緩められることもあります。ただし、ワークの形や置かれた向き、ハンドの精度によっては、中心がそろわないこともあります。前の工程の位置決めがよくない場合でも、カメラで位置を読み取ってから2爪で掴む方法もあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>2爪はシンプル・手ごろ・実績豊富で、形の決まったワークを速く安定して掴む。3爪は球や円筒のワークに強く、掴むと中心の位置がそろいやすい</li>
+            <li>2爪と3爪は、掴んだときにワークの基準が毎回同じ所に来るかで選ぶ</li>
+            <li>位置決めがよいなら2爪でしっかり掴み、よくないなら3爪で中心に寄せて掴む</li>
+          </ul>
+        </div>
+
+        <!-- ◆5 -->
+        <h2>エアと電動の選び方｜大きく軽いワークは電動も</h2>
+        <p>
+          挟むハンドは、爪を動かす力を空気（エア）で作るか、モーター（電動）で作るかでも分けられます。どちらにも向く場面があります。
+        </p>
+
+        <h3>エアのハンドが向く場面</h3>
+        <p>
+          エアのハンドは、構造がかんたんで、比較的安く、開け閉めが速いのが特徴です。工場に空気の配管があり、爪の位置が「開く・閉じる」の2つで足りる作業に向いています。一方、空気の圧力が下がると把持力も下がるため、圧力の管理が要ります。空気が止まったときに爪が開かないよう、ばねで閉じる力を保つ仕組みや、空気を閉じ込める弁を使うこともあります。
+        </p>
+
+        <h3>電動のハンドが向く場面</h3>
+        <p>
+          電動のハンドは、爪の位置や掴む力を細かく決められるのが特徴です。大きさの違うワークを1つのハンドで掴み分けたい、爪を大きく開きたい、掴む力を弱めに調整したい、工場に空気の配管がない、といった場面に向いています。電源が切れたときに爪がどうなるか（力が抜けるか、保たれるか）は、機種によって違うため、仕様で確かめます。エアでも電動でも、止まったときにワークを保つ仕組みが故障することもあるため、落ちると危ないワークは、保つ仕組みだけに頼らず、落下を防ぐ受けなどの対策も考えます。
+        </p>
+
+        <h3>実例：大きいアルミのワークに、ボールねじ入りのアクチュエータを選んだ</h3>
+        <p>
+          筆者が担当した設備に、アルミ製の大きいワークを掴むものがありました。重さはそれほどなかったのですが、サイズが大きかったため、エアのチャックにはせず、モーター付きのアクチュエータを選びました。ボールねじが組み込まれた仕様のもので、モーターの回転をボールねじで直線の動きに変え、爪を動かします。大きいワークでは、重さよりも、<strong>爪をどれだけ開くか（ストローク）や、どの位置で止めるか</strong>が、ハンドを決める条件になることがあります。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>エアは、かんたん・安い・速い。開く・閉じるの2つで足りる作業に向く</li>
+            <li>電動は、爪の位置や力を細かく決められる。大きさの違うワークや、大きく開く作業に向く</li>
+            <li>大きく軽いワークは、重さより、爪の開きと止める位置でハンドが決まることがある</li>
+          </ul>
+        </div>
+
+        <!-- ◆6 -->
+        <h2>ロボットハンドの選び方｜4つの順番で決める</h2>
+        <p>
+          ここまでの内容を、ロボットハンドを選ぶ順番にまとめます。
+        </p>
+        <figure class="article-figure">
+          <img src="../../img/column-gripping-flow.jpg" alt="ロボットハンドの選び方の4つの順番。STEP1でワークの重さ・形・材質・表面を書き出し、STEP2で置かれ方と位置決めの精度を確かめ、STEP3で動かし方と止まったときを考え、STEP4で実際のワークで試す" width="1376" height="768">
+          <figcaption>ワーク、置かれ方、動かし方、試験の順で決める。</figcaption>
+        </figure>
+
+        <h3>STEP1：ワークの重さ・形・材質・表面を書き出す</h3>
+        <p>
+          重さ、大きさ、形、材質（磁石に付くか）、表面（平らな面があるか、油が付くか、傷を付けてよいか）を書き出します。比較一覧の表の「得意なワーク」と見比べると、候補の種類が2〜3つに絞れます。
+        </p>
+
+        <h3>STEP2：置かれ方と、位置決めの精度を確かめる</h3>
+        <p>
+          ワークがどんな向きで、どれくらいの精度で置かれるかを確かめます。位置のばらつきが大きいなら、3爪や、ワークを中心に寄せる形の爪を考えます。カメラで位置を読み取ってから掴む方法もあります。
+        </p>
+
+        <h3>STEP3：動かし方と、止まったときを考える</h3>
+        <p>
+          どれくらいの速さで動かし、どこで急に止まるかを決めて、必要な把持力を計算します。あわせて、非常停止のとき、空気や電気が止まったときに、ワークがどうなるかを考えます。落ちると危ないワークは、落下を防ぐ仕組みや、落ちても人に当たらない配置を、機械の危険の見積もりにもとづいて決めます。ハンドとワークの重さが、ロボットの運べる重さに収まるかも確かめます。
+        </p>
+
+        <h3>STEP4：実際のワークで試す</h3>
+        <p>
+          計算とカタログで候補を決めたら、実際のワークで試します。特に、摩擦係数、磁石の力、包むハンドの持てる力は、計算だけでは決めきれません。ワークの表面のばらつきや、油・粉の付き方も含めて、本番に近い条件で確かめます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>ワークを書き出し、比較一覧の表で候補の種類を2〜3つに絞る</li>
+            <li>置かれ方と動かし方から、爪の本数と必要な把持力を決める</li>
+            <li>止まったときのワークの動きを考え、最後は実際のワークで試す</li>
+          </ul>
+        </div>
+
+        <!-- ◆計算ツール（利用者が自分で数値を動かす欄。式は本文の計算例と同じ。爪の本数と掴み方で図が切り替わる） -->
+        <h2>自分の条件で試す｜把持力の計算ツール（概算）</h2>
+        <p>
+          ここまでの計算を、ご自身の条件に置き換えて試せます。爪の本数と掴み方、動かす向きを選び、ワークの質量、摩擦係数、加速度、安全率を入れると、爪1本あたりに必要な把持力が、その場で変わります。使う予定のハンドの把持力（カタログの値）を入れると、足りるかどうかも表示します。初期値は、本記事の計算例（2kgのアルミのブロックを2爪で挟む）と同じです。
+        </p>
+
+        <div class="calc-tool" id="gf-tool">
+          <p class="calc-tool-title">把持力の計算（概算）</p>
+          <p class="calc-tool-note">
+            本記事と同じ単純化（爪でワークを挟み、こすれる力だけで持つ。どの爪も同じ力で押し、摩擦係数は一定。上に持ち上げるときは g＋a、爪の面に沿って横に動かすときは √（g²＋a²) で見る）による、滑らないかの概算です。爪の面に直角な向きに動かす場合、ワークの回転、爪の形でワークを受ける場合の効果、爪の剛性、掴む点の距離による把持力の低下、ワークの変形は計算に含みません。<strong>計算の結果は、あくまで参考の値です。ワークを落とさずに持てることを保証するものではありません。</strong>安全率の考え方はメーカーによって違うため、使うハンドのメーカーの選定方法でも確かめてください。実際の選定では、ハンドの仕様と、実際のワークでの試験にもとづいて判断してください。
+          </p>
+
+          <div class="calc-fig">
+            <svg viewBox="0 0 640 260" role="img" aria-label="選んだ爪の本数と掴み方の図（上から見た図）">
+              <defs>
+                <marker id="gf-ao" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#d4691a"/></marker>
+              </defs>
+              <!-- 外径把持：ワークは丸い部品、爪は外から押す -->
+              <g data-g="w-out">
+                <circle cx="320" cy="130" r="62" fill="#ebedf0" stroke="#0d2b4e" stroke-width="3"/>
+                <text x="320" y="137" font-size="17" fill="#0d2b4e" text-anchor="middle">ワーク</text>
+              </g>
+              <!-- 内径把持：穴のあるワーク、爪は内側から押す -->
+              <g data-g="w-in">
+                <circle cx="320" cy="130" r="92" fill="#ebedf0" stroke="#0d2b4e" stroke-width="3"/>
+                <circle cx="320" cy="130" r="56" fill="#f8f9fb" stroke="#0d2b4e" stroke-width="3"/>
+                <text x="320" y="240" font-size="16" fill="#0d2b4e" text-anchor="middle">穴のあるワーク（内側から張る）</text>
+              </g>
+              <!-- 2爪・外径 -->
+              <g data-g="j2-out">
+                <rect x="198" y="100" width="56" height="60" fill="#0d2b4e"/><rect x="386" y="100" width="56" height="60" fill="#0d2b4e"/>
+                <line x1="150" y1="130" x2="192" y2="130" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+                <line x1="490" y1="130" x2="448" y2="130" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+              </g>
+              <!-- 3爪・外径 -->
+              <g data-g="j3-out">
+                <rect x="296" y="30" width="48" height="40" fill="#0d2b4e"/>
+                <rect x="232" y="164" width="48" height="40" fill="#0d2b4e" transform="rotate(-60 256 184)"/>
+                <rect x="360" y="164" width="48" height="40" fill="#0d2b4e" transform="rotate(60 384 184)"/>
+                <line x1="320" y1="4" x2="320" y2="24" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+                <line x1="214" y1="222" x2="232" y2="210" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+                <line x1="426" y1="222" x2="408" y2="210" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+              </g>
+              <!-- 2爪・内径 -->
+              <g data-g="j2-in">
+                <rect x="270" y="112" width="26" height="36" fill="#0d2b4e"/><rect x="344" y="112" width="26" height="36" fill="#0d2b4e"/>
+                <line x1="300" y1="130" x2="264" y2="130" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+                <line x1="340" y1="130" x2="376" y2="130" stroke="#d4691a" stroke-width="6" marker-end="url(#gf-ao)"/>
+              </g>
+              <!-- 3爪・内径 -->
+              <g data-g="j3-in">
+                <rect x="308" y="78" width="24" height="26" fill="#0d2b4e"/>
+                <rect x="268" y="148" width="24" height="26" fill="#0d2b4e" transform="rotate(-60 280 161)"/>
+                <rect x="348" y="148" width="24" height="26" fill="#0d2b4e" transform="rotate(60 360 161)"/>
+                <line x1="320" y1="110" x2="320" y2="84" stroke="#d4691a" stroke-width="5" marker-end="url(#gf-ao)"/>
+                <line x1="296" y1="150" x2="276" y2="162" stroke="#d4691a" stroke-width="5" marker-end="url(#gf-ao)"/>
+                <line x1="344" y1="150" x2="364" y2="162" stroke="#d4691a" stroke-width="5" marker-end="url(#gf-ao)"/>
+              </g>
+              <text x="24" y="30" font-size="15" fill="#5a6b7d">上から見た図</text>
+            </svg>
+            <p class="calc-fig-note" data-o="fignote"></p>
+          </div>
+
+          <p class="calc-h">爪と掴み方</p>
+          <div class="calc-btns" data-b="n"><button type="button" data-v="2">2爪</button><button type="button" data-v="3">3爪</button></div>
+          <div class="calc-btns" data-b="way" style="margin-top:8px"><button type="button" data-v="out">外径把持（外から閉じる）</button><button type="button" data-v="in">内径把持（内側から張る）</button></div>
+
+          <p class="calc-h">ワークと動かし方</p>
+          <div class="calc-in">
+            <label>ワークの質量 m<span class="row"><input type="range" data-k="m" min="0.1" max="30" step="0.1"><input type="number" data-k="m" min="0.1" max="30" step="0.1"><span class="unit">kg</span></span></label>
+            <label>爪とワークの摩擦係数 μ<span class="row"><input type="range" data-k="mu" min="0.05" max="0.8" step="0.01"><input type="number" data-k="mu" min="0.05" max="0.8" step="0.01"><span class="unit"></span></span></label>
+          </div>
+          <div class="calc-btns" data-b="mup"><button type="button" data-v="0.1">油が付いた金属の例（0.1）</button><button type="button" data-v="0.2">乾いた金属の例（0.2）</button></div>
+          <p style="font-size:0.86rem;margin:10px 0 0 !important;">動かす向き</p>
+          <div class="calc-btns" data-b="dir"><button type="button" data-v="up">上に持ち上げる</button><button type="button" data-v="side">爪の面に沿って横に動かす</button></div>
+          <div class="calc-in">
+            <label>動かすときの加速度 a<span class="row"><input type="range" data-k="a" min="0" max="30" step="0.5"><input type="number" data-k="a" min="0" max="30" step="0.5"><span class="unit">m/s²</span></span></label>
+          </div>
+          <div class="calc-btns" data-b="ap"><button type="button" data-v="2">ゆっくり（2）</button><button type="button" data-v="5">ふつう（5）</button><button type="button" data-v="10">急に止まる（10）</button></div>
+          <div class="calc-in">
+            <label>安全率 S（考え方はメーカーによって違う。ここでは仮の値）<span class="row"><input type="range" data-k="S" min="1" max="5" step="0.1"><input type="number" data-k="S" min="1" max="5" step="0.1"><span class="unit"></span></span></label>
+            <label>使う予定のハンドの把持力（爪1本あたり・カタログの値。0なら比べない）<span class="row"><input type="range" data-k="cat" min="0" max="2000" step="10"><input type="number" data-k="cat" min="0" max="2000" step="10"><span class="unit">N</span></span></label>
+          </div>
+
+          <p class="calc-h">結果</p>
+          <table class="calc-out">
+            <tr><th>ワークの重さ m × g</th><td><b data-o="W"></b> N</td></tr>
+            <tr><th data-o="Rh"></th><td><b data-o="R"></b> N</td></tr>
+            <tr><th>爪1本あたりに必要な把持力 F ＝ 支える力 ÷（μ × n）</th><td><b data-o="F"></b> N</td></tr>
+            <tr><th>重さの何倍か</th><td><b data-o="x"></b> 倍</td></tr>
+            <tr><th>全部の爪の合計（カタログが合計の値のとき）</th><td><b data-o="Ft"></b> N</td></tr>
+            <tr data-j="cat"><th>使う予定のハンドとの比べ</th><td><b data-o="cmp"></b><span class="judge" data-o="jcat"></span></td></tr>
+          </table>
+          <p class="calc-tool-note" style="margin:10px 0 0 !important;" data-o="eq"></p>
+          <button type="button" class="calc-reset" id="gf-reset">記事の条件に戻す</button>
+        </div>
+
+        <script>
+        (function () {
+          var root = document.getElementById('gf-tool');
+          if (!root) return;
+          var G = 9.81;
+          var DEF = { n: '2', way: 'out', dir: 'up', m: 2, mu: 0.2, a: 5, S: 2, cat: 0 };
+          var S = {}, used = false;
+          function fmt(x, n) { return x.toLocaleString('ja-JP', { minimumFractionDigits: n || 0, maximumFractionDigits: n || 0 }); }
+          function out(k, v) { root.querySelectorAll('[data-o="' + k + '"]').forEach(function (e) { e.textContent = v; }); }
+          function show(k, on) { root.querySelectorAll('[data-g="' + k + '"]').forEach(function (e) { e.style.display = on ? '' : 'none'; }); }
+          function sync() {
+            root.querySelectorAll('input[data-k]').forEach(function (e) { if (document.activeElement !== e) e.value = S[e.dataset.k]; });
+            [['n', S.n], ['way', S.way], ['dir', S.dir], ['mup', String(S.mu)], ['ap', String(S.a)]].forEach(function (p) {
+              root.querySelectorAll('[data-b="' + p[0] + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.v) === Number(p[1]) || b.dataset.v === p[1]); });
+            });
+            show('w-out', S.way === 'out'); show('w-in', S.way === 'in');
+            ['j2-out', 'j3-out', 'j2-in', 'j3-in'].forEach(function (k) { show(k, k === 'j' + S.n + '-' + S.way); });
+          }
+          function calc() {
+            var n = Number(S.n), W = S.m * G, acc = S.dir === 'up' ? G + S.a : Math.sqrt(G * G + S.a * S.a), R = S.m * acc * S.S, F = R / (S.mu * n);
+            out('Rh', S.dir === 'up' ? '支える力 m ×（g ＋ a）× S' : '支える力 m × √（g² ＋ a²）× S');
+            out('W', fmt(W, 1)); out('R', fmt(R, 1)); out('F', fmt(F)); out('x', fmt(F / W, 1)); out('Ft', fmt(F * n));
+            var row = root.querySelector('[data-j="cat"]');
+            if (S.cat > 0) {
+              var ok = S.cat >= F;
+              out('cmp', fmt(S.cat) + ' N ÷ ' + fmt(F) + ' N ＝ ' + fmt(S.cat / F, 2) + ' 倍');
+              out('jcat', ok ? '足りている（掴む点の距離・圧力の条件を確かめる）' : '足りない');
+              row.classList.toggle('over', !ok);
+            } else {
+              out('cmp', '比べていません'); out('jcat', ''); row.classList.remove('over');
+            }
+            out('fignote', S.way === 'out'
+              ? (S.n === '2' ? '2爪の外径把持。平行な2つの面を押さえて掴みます。位置決めがよいワーク向きです。' : '3爪の外径把持。3本の爪が中心へ同時に動き、丸い物は掴むと中心へ寄ります。')
+              : (S.n === '2' ? '2爪の内径把持。穴の内側から張って掴みます。薄い筒は、張る力で広がらないかを確かめます。' : '3爪の内径把持。穴の内側から3方向に張り、穴の中心が出やすい掴み方です。薄い筒の変形に注意します。'));
+            out('eq', (S.dir === 'up' ? '上に持ち上げるときは、重力と加速の向きがそろうので g＋a で見ます。' : '爪の面に沿って横に動かすときは、重力と横の加速の向きが直角なので √（g²＋a²）で見ます。爪の面に直角な向きに動かすときは、片側の爪の押す力が減るので別に確かめます。') + '摩擦係数は、爪とワークの材料・表面・油の有無で大きく変わります（ボタンの値は説明用の例）。');
+          }
+          function set(k, v) {
+            S[k] = v; sync(); calc();
+            if (!used && typeof gtag === 'function') { used = true; gtag('event', 'calc_use', { tool: 'grip' }); }
+          }
+          root.querySelectorAll('input[data-k]').forEach(function (e) {
+            e.addEventListener('input', function () {
+              var v = parseFloat(e.value);
+              if (isNaN(v)) return;
+              set(e.dataset.k, Math.min(Math.max(v, parseFloat(e.min)), parseFloat(e.max)));
+            });
+            e.addEventListener('blur', sync);
+          });
+          ['n', 'way', 'dir'].forEach(function (k) {
+            root.querySelectorAll('[data-b="' + k + '"] button').forEach(function (b) { b.addEventListener('click', function () { set(k, b.dataset.v); }); });
+          });
+          root.querySelectorAll('[data-b="mup"] button').forEach(function (b) { b.addEventListener('click', function () { set('mu', Number(b.dataset.v)); }); });
+          root.querySelectorAll('[data-b="ap"] button').forEach(function (b) { b.addEventListener('click', function () { set('a', Number(b.dataset.v)); }); });
+          document.getElementById('gf-reset').addEventListener('click', function () { for (var k in DEF) S[k] = DEF[k]; sync(); calc(); });
+          for (var k in DEF) S[k] = DEF[k];
+          sync(); calc();
+        })();
+        </script>
+
+        <!-- ◆依頼の案内（計算ツールのすぐ下。キットの article_nav.py で入れ直す） -->
+        <div class="tool-cta tool-cta--box">
+          <p class="tc-lead">初めての条件や、調べる時間がないときは</p>
+          <p class="tc-text">図面や寸法などの条件を送っていただければ、ロボットハンドの選定と把持力の計算から計算書の作成までお引き受けします。客先にそのまま出せる資料にまとめます（オンライン・全国対応）。図面がなくても、寸法と重さが分かれば概算をお返しします。</p>
+          <p class="tc-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%83%8F%E3%83%B3%E3%83%89%E3%81%AE%E9%81%B8%E5%AE%9A%E3%81%A8%E6%8A%8A%E6%8C%81%E5%8A%9B%E3%81%AE%E8%A8%88%E7%AE%97">いくらで何日？ 見積もりだけ聞く（無料）</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'tool_cta'});">計算書の見本</a></p>
+        </div>
+
+        <!-- ◆ツールの後 -->
+        <!-- ◆8 -->
+        <h2>把持力でよくある失敗</h2>
+
+        <h3>摩擦係数を高く見積もる</h3>
+        <p>
+          乾いたきれいな面の値で計算し、実際には油や粉が付いていて、ワークが滑る失敗です。摩擦係数が半分になれば、必要な把持力は2倍になります。現場で付く油や粉を考え、低めの値で計算します。
+        </p>
+
+        <h3>掴む点の距離を見ないで、カタログの値と比べる</h3>
+        <p>
+          カタログの把持力は、決まった掴む点の距離での値です。長い爪を付けて先の方で掴むと、カタログの値より力が下がります。爪の長さと、掴む点の距離での値を確かめます。
+        </p>
+
+        <h3>空気や電気が止まったときを考えていない</h3>
+        <p>
+          停電や空気の配管の外れで、ハンドの力が抜け、ワークが落ちる失敗です。止まったときに爪がどうなるかを仕様で確かめ、必要なら、力を保つ仕組みや落下を防ぐ受けを付けます。
+        </p>
+
+        <!-- ◆9 -->
+        <h2>把持力でよくある質問</h2>
+
+        <h3>把持力と握力の違いは何ですか</h3>
+        <p>
+          握力は人が手を握る力のことで、主に体力の目安です。把持力は、人の手でもロボットハンドでも、物をつかんで持つ力として使われます。設備では、ハンドの爪がワークを押す力を指すことが多く、カタログの数字が何の力かは定義で確かめます。
+        </p>
+
+        <h3>グリッパの把持力は、どれくらい必要ですか</h3>
+        <p>
+          摩擦で持つ場合は、本記事の式で求めます。計算例では、2kgのワークで、爪1本あたり重さの約7.5〜10倍でした。必要な力は、摩擦係数、加速度、爪の本数、安全率で大きく変わるので、自分の条件で計算します。
+        </p>
+
+        <h3>重くて薄い袋は、どう掴めばよいですか</h3>
+        <p>
+          横から挟むだけでは、袋の形が変わって力が逃げたり、袋が破れたりします。袋の下にフォークや板の形の受けを差し入れて重さを支え、必要に応じて上から押さえたり、横をガイドしたりする、形で受ける持ち方が向いています。
+        </p>
+
+        <h3>外径把持と内径把持は、どちらがよいですか</h3>
+        <p>
+          ワークで決まります。外側に爪の入るすき間があり、外側に傷が付いてもよいなら外径把持、外側に傷を付けたくない、または外から爪が入らないなら、穴を使った内径把持を考えます。内径把持では、薄い筒が広がらないかを確かめます。
+        </p>
+
+        <!-- ◆まとめ -->
+        <h2>まとめ</h2>
+        <p>
+          把持力は、ロボットハンドがワークを落とさずに持つ力です。ハンドの種類は、挟む・吸う・くっつける・包む・人の手のような、の5つに分けると整理しやすく、ワークの重さ・形・材質・表面で候補が絞れます。重くて形の変わる物は、摩擦ではなく<strong class="mk">形で受けて持つ</strong>ことも考えます。
+        </p>
+        <p>
+          挟むハンドの把持力は、質量×（g＋a）×安全率÷（摩擦係数×爪の本数）で求められ、ワークの重さよりずっと大きな力が必要になります。2爪と3爪は位置決めの精度で、エアと電動はワークの大きさや動かし方で選びます。まずは上の計算ツールで、ご自身のワークに必要な把持力を試してみてください。
+        </p>
+
+        <p style="font-size:0.85rem;color:var(--ink-soft);">
+          参考<br>
+          ・本記事の計算例は、説明のための仮想の条件です。摩擦係数・加速度・安全率は、実際のワークと設備の条件で決めてください<br>
+          ・「2爪と3爪の選び方」「エアと電動の選び方」の実例は、筆者が設備の設計で経験したものです<br>
+          ・世界のロボットハンドの持ち方は、ロボットハンドやソフトグリッパの研究の総説（グリッパの種類と仕組みをまとめた論文）を参考に、一般的な仕組みとしてまとめたものです<br>
+          ・グリッパのメーカーの取扱説明書・技術資料（把持力の選定式、把持力の定義、掴む点の距離による把持力の変化）<br>
+          ・JIS B 8433-1:2015（ロボット及びロボティックデバイス－産業用ロボットのための安全要求事項－第1部：ロボット）。ロボットの安全の参考で、把持力の計算式の出典ではありません
+        </p>
+
+        <div class="article-cta"><!-- ◆記事下の依頼の案内（キットの article_nav.py で入れ直す） -->
+          今回の仕様が初めての条件で、一から調べる時間がないときは、ロボットハンドの選定と把持力の計算から計算書の作成までお引き受けします。図面や寸法などの条件を送っていただければ、計算の前提の整理から資料づくりまで行います（オンライン・全国対応）。
+          <span class="ac-act"><a class="btn btn--fill" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%83%8F%E3%83%B3%E3%83%89%E3%81%AE%E9%81%B8%E5%AE%9A%E3%81%A8%E6%8A%8A%E6%8C%81%E5%8A%9B%E3%81%AE%E8%A8%88%E7%AE%97">ロボットハンドの選定と把持力の計算を依頼する</a><a href="../../price.html#design">料金の目安</a><a href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'article_cta'});">計算書の見本</a></span>
+        </div>
+
+        <!-- ◆サービスの詳細ページへ（キットの article_nav.py で入れ直す） -->
+        <p class="svc-line">ロボットハンドまわりの設計をご依頼いただけます。<a href="../../design-service.html">設計の外注（設計の代打・治具・架台）の料金を見る ›</a></p>
+
+        <!-- ◆記事下部：一覧に戻る＋関連記事 -->
+        <div class="article-footer-nav">
+          <p><a class="btn btn--outline" href="../design/index.html">← 設計ノートのまとめページに戻る</a></p>
+
+          <!-- ◆この記事を書いた人（キットの article_nav.py で入れ直す） -->
+          <div class="author-box">
+            <img src="../../profile.jpg" alt="加瀬部 裕紀" width="72" height="72" loading="lazy">
+            <div>
+              <p class="ab-h">この記事を書いた人</p>
+              <p class="ab-name">株式会社アイツイン 代表　加瀬部 裕紀</p>
+              <p class="ab-text">製造業に15年在籍し、設備の保全と設計の両方を経験。現場と同じ目線で、計算・設計のお手伝いや、省力化・デジタルツインの導入を支援しています。</p>
+              <p class="ab-link"><a href="../../company.html">会社概要・代表メッセージ ›</a></p>
+            </div>
+          </div>
+
+          <h3 style="margin-top:36px;">関連記事</h3>
+          <div class="related-articles">
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.23</p>
+                <h3><a href="vacuum-pad-selection.html">真空パッドの吸着力の計算と選定｜パッド径・安全率を例題とツールで解説</a></h3>
+                <p class="column-excerpt">吸い方と動かし方で変わる必要な吸着力、パッド径と安全率、非常停止のときまで。計算ツールつき。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.21</p>
+                <h3><a href="air-cylinder-selection.html">エアシリンダの推力計算｜押す力・引く力の式とボア径別の早見表、選定ツールつき</a></h3>
+                <p class="column-excerpt">エアのハンドも、中のピストンの力で爪を押す。推力の式と、ボア径の選び方。</p>
+              </div>
+            </div>
+            <div class="column-card">
+              <div class="column-card-body">
+                <p class="column-date">2026.10.12</p>
+                <h3><a href="robot-stand-strength-calculation.html">ロボット架台の設計と強度計算｜非常停止の慣性力・たわみ・アンカーを例題で確認</a></h3>
+                <p class="column-excerpt">非常停止のときに架台へ入る力と、柱と梁の応力、たわみ、アンカーの確認。計算ツールつき。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <aside class="col-side" aria-label="記事の案内">
+        <div class="cs-box">
+          <p class="cs-h">この特集の記事</p>
+          <div class="cs-card">
+            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li><a href="takt-time-calculation.html">08 タクトタイム</a></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li><li><a href="bolt-strength-calculation.html">10 ボルト</a></li><li class="is-cur"><span>11 把持力</span></li></ol>
+            <p class="cs-pager"><a href="bolt-strength-calculation.html">‹ 前の記事</a></p>
+          </div>
+          <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
+        </div>
+        <div class="cs-box cs-ask">
+          <p class="cs-h">計算・選定のご依頼</p>
+          <p class="cs-ask-text">初めての条件や、調べる時間がないときは、ロボットハンドの選定と把持力の計算から計算書の作成までお引き受けします（オンライン・全国対応）。</p>
+          <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E3%83%8F%E3%83%B3%E3%83%89%E3%81%AE%E9%81%B8%E5%AE%9A%E3%81%A8%E6%8A%8A%E6%8C%81%E5%8A%9B%E3%81%AE%E8%A8%88%E7%AE%97">計算を依頼する</a>
+          <p class="cs-ask-sub"><a href="../../price.html#design">料金の目安 ›</a></p>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">新着のコラム</p>
+          <ul class="cs-rank cs-pick"><li><a href="poka-yoke.html"><img src="../../img/thumb-column-poka-yoke.jpg" alt="" width="80" height="45"><span>ポカヨケとは？種類と事例、ミスに合った選び方</span></a></li></ul>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日のおすすめコラム</p>
+          <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
+          <script src="../col-list.js?v=20261125" defer></script>
+        </div>
+        <div class="cs-box">
+          <p class="cs-h">今日の設計のあるある</p>
+          <div class="aruaru" data-cat="design"></div>
+          <script src="../aruaru.js?v=20261117" defer></script>
+        </div>
+        <script>
+        (function () {
+          var s = document.currentScript.parentNode;
+          s.addEventListener('click', function (e) {
+            var a = e.target.closest('a');
+            if (a && typeof gtag === 'function') gtag('event', 'side_click', { link: a.getAttribute('href') });
+          });
+          // 欄が画面より高いときは、欄の下の端が画面の下に来たところで止める
+          function fit() { s.style.top = Math.min(92, window.innerHeight - s.offsetHeight - 16) + 'px'; }
+          window.addEventListener('resize', fit); window.addEventListener('load', fit); fit();
+        })();
+        </script>
+      </aside>
+      </div><!-- /article-layout -->
+    </div>
+  </section>
+
+  <!-- 目次の自動生成（本文中の h2 と h3 を拾ってリンクを作る。h3 は直前の h2 の下に入れ子で並べる） -->
+  <script>
+  (function () {
+    var body = document.querySelector('.article-body');
+    var tocList = document.getElementById('toc-list');
+    if (!body || !tocList) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3')).filter(function (h) {
+      return !h.closest('.article-toc') && !h.closest('.article-footer-nav'); // 目次自身と関連記事の見出しは除外
+    });
+    var currentSub = null;
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'section-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      if (h.tagName === 'H2') {
+        tocList.appendChild(li);
+        currentSub = document.createElement('ol');
+        li.appendChild(currentSub);
+      } else if (currentSub) {
+        currentSub.appendChild(li);
+      }
+    });
+    // h3 を持たない h2 の空の入れ子を片付ける
+    Array.prototype.slice.call(tocList.querySelectorAll('ol')).forEach(function (ol) {
+      if (!ol.children.length) ol.parentNode.removeChild(ol);
+    });
+  })();
+  </script>
+
+  <!-- ◆フッター -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-name">アイツイン</p>
+          <p>デジタルツインで、工場を変える。<br>人手不足を、今いる人で乗り越える。</p>
+        </div>
+        <div class="footer-nav">
+          <div>
+            <h4>サイトメニュー</h4>
+            <ul>
+              <li><a href="../../index.html#issues">課題</a></li>
+              <li><a href="../../index.html#flow">進め方</a></li>
+              <li><a href="../../index.html#steps">続けるほど強くなる</a></li>
+              <li><a href="../../index.html#goal">めざす姿</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>ご案内</h4>
+            <ul>
+              <li><a href="../../index.html#trial">無料相談</a></li>
+              <li><a href="../../company.html">会社概要</a></li>
+              <li><a href="../../price.html">料金</a></li>
+              <li><a href="../index.html">コラム</a></li>
+              <li><a href="../../contact-v2.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <ul>
+              <li>山口県山口市小郡令和１丁目１番１号 維新ホール１F Megriba</li>
+              <li>お問い合わせは<a class="footer-inline-link" href="../../contact-v2.html">お問い合わせフォーム</a>から承ります（お急ぎの方には、お電話で折り返しご連絡します）</li>
+              <li>返信：平日 9:00–17:00</li>
+            </ul>
+          </div>
+          <div class="footer-line">
+            <h4>公式LINE</h4>
+            <a class="footer-line-qr" href="https://line-transport-diagnosis.y1234527.workers.dev/go/hp-footer" target="_blank" rel="noopener">
+              <img src="../../img/line-qr-footer.png" alt="アイツイン公式LINEアカウント 友だち追加QRコード" width="152" height="152">
+            </a>
+            <p class="footer-line-caption">「アイツイン現場シミュレーション」<br>を友だち追加</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="data-note">※ 取得・生成したデータの取り扱いは、契約時に双方で取り決めます。</p>
+        © 2026 株式会社アイツイン（アイツイン / i-TWIN）
+        <p class="legal-links"><a href="../../privacy-policy.html">プライバシーポリシー</a>　<a href="../../terms.html">利用規約</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 計算ツールのスライダー：つまみの左側の緑の幅を、値に合わせて変える（2026-10-23） -->
+  <script>
+  (function () {
+    function upd() {
+      document.querySelectorAll('.calc-tool input[type="range"]').forEach(function (r) {
+        var p = (r.value - r.min) / (r.max - r.min) * 100;
+        r.style.setProperty('--p', p + '%');
+      });
+    }
+    document.addEventListener('input', upd);
+    document.addEventListener('click', function () { setTimeout(upd, 0); });
+    upd();
+  })();
+  </script>
+<!-- ◆問い合わせへの入口の記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || typeof gtag !== 'function') return;
+    var h = a.getAttribute('href') || '';
+    // 2026-11-23：料金ページ・サービスの詳細ページへのリンクも記録する（price_click）
+    var name = h.indexOf('contact') >= 0 ? 'contact_click'
+             : /^\.\.\/\.\.\/(price|[a-z-]+-service)\.html/.test(h) ? 'price_click' : '';
+    if (!name) return;
+    var p = a.closest('.tool-cta') ? 'tool_cta' : a.closest('.col-side') ? 'side' : a.closest('.article-cta') ? 'article_cta'
+          : a.closest('.site-header') ? 'header' : a.closest('.site-footer') ? 'footer' : 'body';
+    gtag('event', name, { place: p, article: location.pathname.split('/').pop().replace('.html', '') });
+  });
+})();
+</script>
+<!-- ◆読んだところの記録（キットの article_nav.py で入れ直す） -->
+<script>
+(function () {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var hs = body.querySelectorAll('h2'), end = hs[hs.length - 1];
+  hs.forEach(function (h) { if (h.textContent.trim().indexOf('まとめ') === 0) end = h; });
+  var art = location.pathname.split('/').pop().replace('.html', ''), half = false, done = false;
+  function send(name) { if (typeof gtag === 'function') gtag('event', name, { article: art }); }
+  function check() {
+    var vh = window.innerHeight, r = body.getBoundingClientRect();
+    if (!half && vh - r.top >= r.height / 2) { half = true; send('read_half'); }
+    if (!done && end && end.getBoundingClientRect().top < vh) { done = true; send('read_end'); }
+    if (half && done) window.removeEventListener('scroll', check);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+</script>
+<!-- ◆アイキャッチの傾き（キットの article_nav.py で入れ直す） -->
+<script src="../eye-tilt.js" defer></script>
+</body>
+</html>

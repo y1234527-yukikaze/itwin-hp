@@ -71,7 +71,7 @@
     "description": "タクトタイムの計算方法を、計算例つきで解説します。計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、改善の進め方、設備の目標サイクルタイムと動作ごとの割り振りまで。計算ツールとゲームつきです。",
     "image": "https://i-twin.co.jp/img/column-takt-time.jpg",
     "datePublished": "2026-10-25",
-    "dateModified": "2026-10-25",
+    "dateModified": "2026-11-25",
     "inLanguage": "ja",
     "author": {
       "@type": "Person",
@@ -520,6 +520,24 @@
           なお、トヨタ生産方式の考え方では、設備を動かしたいときに正常に動かせる状態を表す「可動率（べきどうりつ）」と、需要に応じて設備をどれだけ使ったかを表す「稼働率」を区別して扱います。本記事の時間稼働率は、前者に近い意味です。用語や計算の仕方は文献や会社によって違うことがあるので、社内で定義をそろえてから数字を決めます。
         </p>
 
+        <h3>実行タクトタイムとは｜目標サイクルタイムとの関係</h3>
+        <p>
+          設備が止まる分を見込んで短くした目標を、現場や会社によっては<strong class="mk">実行タクトタイム</strong>と呼ぶことがあります。ただし、文献や会社で共通した決まった定義はなく、何の率を掛けるかもまちまちです。本記事では、この考え方を「設備の目標サイクルタイム」として扱います。
+        </p>
+        <p>
+          たとえば、止まる分だけを見込み、タクトタイム48秒に時間稼働率85％を掛けると、48秒 × 0.85 ＝ <b>40.8秒</b>です。ここに良品率98％も掛けると、前の計算の<b>約40秒</b>になります。同じ「短くした目標」でも、見込んだロスの種類によって数字が変わります。
+        </p>
+        <p class="calc">
+          <b>止まる分だけを見込む：48 × 0.85 ＝ 40.8秒</b><br>
+          止まる分と不良の分を見込む：48 × 0.85 × 0.98 ＝ 約40秒
+        </p>
+        <p>
+          良品率を計算に入れるかどうかは、計算の目的と、使う指標の決め方によって変わります。必要な良品の数を確実に作れる設備にしたいなら、不良の分も見込みます。また、「実行タクトタイム」と書かれた資料を読むときは、稼働率なのか可動率なのか、何のロスを含めた率なのかを確かめます。
+        </p>
+        <p>
+          使い分けは、次のように考えると混乱しにくくなります。タクトタイムは、必要な数から決まる生産のペースで、人の作業の割り振りも、設備の検討も、ここが基準です。設備の仕様は、タクトタイムから見込んだ目標サイクルタイムと、実際の動作時間や停止の実績とを照らし合わせて決めます。
+        </p>
+
         <h3>同じ停止を二重に引かない</h3>
         <p>
           計画した段取り替えを稼働時間から引いたなら、その時間は時間稼働率には入れません。たとえば、1直30分の段取り替えを稼働時間から引き、さらに時間稼働率の中にも含めて計算すると、目標は約37.3秒になり、40秒より2.7秒厳しくなります。厳しすぎる目標は、装置を必要以上に速く、高くします。<strong>何を稼働時間で引き、何を時間稼働率で見込んだか</strong>を、計算書に書いておきます。
@@ -530,6 +548,7 @@
           <ul>
             <li>設備の目標サイクルタイム ＝ タクトタイム × 時間稼働率 × 良品率（性能のロスを別に見込むなら性能稼働率も掛ける）</li>
             <li>計算例では、48秒が約40秒になる。設備の仕様は、余裕を持たせて決める</li>
+            <li>止まる分を見込んだ目標を「実行タクトタイム」と呼ぶこともあるが、決まった定義はない。何のロスを見込んだ値かを確かめる</li>
             <li>計画した停止は、稼働時間か時間稼働率のどちらか一方でだけ扱う</li>
           </ul>
         </div>
@@ -1062,7 +1081,7 @@
         <div class="cs-box">
           <p class="cs-h">この特集の記事</p>
           <div class="cs-card">
-            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li class="is-cur"><span>08 タクトタイム</span></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li><li><a href="bolt-strength-calculation.html">10 ボルト</a></li></ol>
+            <ol class="cs-series"><li><a href="stand-strength-calculation.html">01 架台</a></li><li><a href="robot-stand-strength-calculation.html">02 ロボット架台</a></li><li><a href="weld-strength-calculation.html">03 溶接</a></li><li><a href="anchor-bolt-calculation.html">04 アンカー</a></li><li><a href="air-cylinder-selection.html">05 シリンダ</a></li><li><a href="conveyor-motor-selection.html">06 コンベア</a></li><li><a href="vacuum-pad-selection.html">07 真空パッド</a></li><li class="is-cur"><span>08 タクトタイム</span></li><li><a href="stand-seismic-calculation.html">09 架台の耐震</a></li><li><a href="bolt-strength-calculation.html">10 ボルト</a></li><li><a href="robot-hand-gripping-force.html">11 把持力</a></li></ol>
             <p class="cs-pager"><a href="vacuum-pad-selection.html">‹ 前の記事</a><a class="cs-next" href="stand-seismic-calculation.html">次の記事 ›</a></p>
           </div>
           <p class="cs-more"><a class="cs-sub" href="../design/index.html">設計の計算で探す</a><a class="cs-sub" href="../index.html">コラム一覧</a></p>
@@ -1075,12 +1094,12 @@
         </div>
         <div class="cs-box">
           <p class="cs-h">新着のコラム</p>
-          <ul class="cs-rank cs-pick"><li><a href="poka-yoke.html"><img src="../../img/thumb-column-poka-yoke.jpg" alt="" width="80" height="45"><span>ポカヨケとは？種類と事例、ミスに合った選び方</span></a></li></ul>
+          <ul class="cs-rank cs-pick"><li><a href="robot-hand-gripping-force.html"><img src="../../img/thumb-column-gripping-force.jpg" alt="" width="80" height="45"><span>把持力とは？計算方法とロボットハンドの種類・選び方</span></a></li></ul>
         </div>
         <div class="cs-box">
           <p class="cs-h">今日のおすすめコラム</p>
           <ul class="cs-rank cs-pick" data-today-pick><li><a href="raspberry-pi-manufacturing.html"><img src="../../img/thumb-column-raspberry-pi.jpg" alt="" width="80" height="45"><span>ラズパイの製造業での使い方</span></a></li></ul>
-          <script src="../col-list.js?v=20261118" defer></script>
+          <script src="../col-list.js?v=20261125" defer></script>
         </div>
         <div class="cs-box">
           <p class="cs-h">今日の設計のあるある</p>

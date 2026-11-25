@@ -31,10 +31,11 @@
 - [アンカーボルトの引き抜き計算の方法と例](https://i-twin.co.jp/column/articles/anchor-bolt-calculation): 柱の根元の曲げと設備の転倒から求める引き抜き力、あと施工アンカーの3つの壊れ方と許容荷重、ベースプレートの厚さ
 - [エアシリンダの推力計算](https://i-twin.co.jp/column/articles/air-cylinder-selection): 押す力と引く力、負荷率からのボア径の選び方、ストロークの終わりの運動エネルギーとクッション、空気の消費量
 - [コンベアのモーター選定の計算方法と例](https://i-twin.co.jp/column/articles/conveyor-motor-selection): ほしい速さからの減速比、ベルトを引く力からのトルクとモーター容量、傾きと50Hz・60Hzの違い、起動のトルク
-- [真空パッドの選定計算と把持力の求め方](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
+- [真空パッドの吸着力の計算と選定](https://i-twin.co.jp/column/articles/vacuum-pad-selection): 吸着力の求め方、吸い方と動かし方で変わる必要な力、パッドの大きさと数、表面の状態と非常停止、爪で挟むハンドの把持力
 - [タクトタイムとは？計算方法と計算例](https://i-twin.co.jp/column/articles/takt-time-calculation): 計算式と稼働時間の取り方、サイクルタイム・リードタイムとの違い、必要な人数とバランス率、稼働率と良品率からの設備の目標サイクルタイム、動作ごとの時間の割り振り
 - [架台の耐震計算の方法と例](https://i-twin.co.jp/column/articles/stand-seismic-calculation): 局部震度法の設計用水平震度（設置する階・耐震クラス・地域係数）、地震の力から柱の応力とアンカーの引き抜き、重心の高さ、耐震計算書の項目
 - [ボルトの強度計算の方法](https://i-twin.co.jp/column/articles/bolt-strength-calculation): 引張・せん断・モーメントの式、有効断面積と強度区分、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例
+- [把持力とは？計算方法とロボットハンドの種類・選び方](https://i-twin.co.jp/column/articles/robot-hand-gripping-force): 把持力の意味、ロボットハンドの種類と得意なワーク、世界の変わったハンド、挟むハンドの把持力の計算、2爪と3爪・エアと電動の選び方
 - [特集：AIで作る 現場の仕組みノート](https://i-twin.co.jp/column/shikumi/): ラズパイとPython、AIで製造現場の困りごとを安く解決する実例と考え方のまとめ（事例集つき）
 - [ラズパイの製造業での使い方](https://i-twin.co.jp/column/articles/raspberry-pi-manufacturing): 使い方6つ、「困っている一点」から考える捉え方、生産終了のQRリーダーを約5万円で置き換えた事例、市販品との費用の比べ方、注意点、AIで作る進め方
 - [製造業の生成AIプロンプト例10選](https://i-twin.co.jp/column/articles/manufacturing-genai-prompt): 白書で見る生成AIの使われ方、伝わるプロンプトの型（5つの要素）と悪い例・良い例、点検・不良・保全・手順書のプロンプト例、記録や転記の仕組みをAIに作ってもらう頼み方と4つの段階、プロンプト作成ツール
