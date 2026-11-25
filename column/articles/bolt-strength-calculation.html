@@ -34,22 +34,22 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表｜アイツイン コラム</title>
-  <meta name="description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <title>ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式｜アイツイン コラム</title>
+  <meta name="description" content="M6〜M24のボルトの耐荷重を、引張・せん断ごとに一覧にしました（強度区分4.6・8.8）。ボルトの強度計算の式と、ブラケットの計算例、条件を入れて試せる計算ツールつきです。">
   <link rel="canonical" href="https://i-twin.co.jp/column/articles/bolt-strength-calculation">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
-  <meta property="og:title" content="ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表">
-  <meta property="og:description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <meta property="og:title" content="ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式">
+  <meta property="og:description" content="M6〜M24のボルトの耐荷重を、引張・せん断ごとに一覧にしました（強度区分4.6・8.8）。ボルトの強度計算の式と、ブラケットの計算例、条件を入れて試せる計算ツールつきです。">
   <meta property="og:url" content="https://i-twin.co.jp/column/articles/bolt-strength-calculation">
   <meta property="og:image" content="https://i-twin.co.jp/img/column-bolt-strength.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta property="article:published_time" content="2026-11-18">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表">
-  <meta name="twitter:description" content="ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。">
+  <meta name="twitter:title" content="ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式">
+  <meta name="twitter:description" content="M6〜M24のボルトの耐荷重を、引張・せん断ごとに一覧にしました（強度区分4.6・8.8）。ボルトの強度計算の式と、ブラケットの計算例、条件を入れて試せる計算ツールつきです。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/column-bolt-strength.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,8 +67,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表",
-    "description": "ボルトの強度計算の方法を、引張・せん断・モーメントの3つの力に分けて解説します。有効断面積と強度区分（4.6・8.8・10.9・12.9）の読み方、許容応力の決め方、M6〜M24の許容荷重表、ブラケットのボルトの計算例まで。条件を入れて試せる計算ツールつきです。",
+    "headline": "ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式",
+    "description": "M6〜M24のボルトの耐荷重を、引張・せん断ごとに一覧にしました（強度区分4.6・8.8）。ボルトの強度計算の式と、ブラケットの計算例、条件を入れて試せる計算ツールつきです。",
     "image": "https://i-twin.co.jp/img/column-bolt-strength.jpg",
     "datePublished": "2026-11-18",
     "dateModified": "2026-11-18",
@@ -104,7 +104,7 @@
       { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
       { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
       { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
-      { "@type": "ListItem", "position": 4, "name": "ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表", "item": "https://i-twin.co.jp/column/articles/bolt-strength-calculation" }
+      { "@type": "ListItem", "position": 4, "name": "ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式", "item": "https://i-twin.co.jp/column/articles/bolt-strength-calculation" }
     ]
   }
   </script>
@@ -190,9 +190,9 @@
         <a href="../../index.html">ホーム</a> ／
         <a href="../index.html">コラム</a> ／
         <a href="../design/index.html">自動化設備の設計ノート</a> ／
-        <span>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表</span>
+        <span>ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式</span>
       </div>
-      <h1>ボルトの強度計算の方法｜引張・せん断・モーメントの式とM6〜M24の許容荷重表</h1>
+      <h1>ボルトの強度計算の方法｜M6〜M24の耐荷重（引張・せん断）一覧と計算式</h1>
       <p class="catch">公開日：2026年11月18日</p>
     </div>
   </section>
@@ -372,7 +372,7 @@
           ブラケットのように、引張とせん断を一緒に受けるボルトは、それぞれの割合を2乗して足し、1.0以下かどうかで見ます。許容せん断応力を許容引張応力÷√3とした場合、この式はミーゼスの考え方による評価（σ²＋3τ²≦σa²）と同じになります。本記事では、この式を簡易な一次評価として使います。締め付けの力、接合面の摩擦、疲労、こじる力は別に確かめます。適用する規準によっては、組み合わせの専用の式が定められている場合があります。
         </p>
 
-        <h3>M6〜M24のボルトの許容荷重表（1本あたり）</h3>
+        <h3>M6〜M24のボルトの耐荷重一覧（引張・せん断・1本あたり）</h3>
         <p>
           有効断面積に許容応力を掛けると、1本で受けられる力の目安が出ます。静かな力（引張強さ÷3）の場合です。くり返しの力では、およそ6割になります。
         </p>
