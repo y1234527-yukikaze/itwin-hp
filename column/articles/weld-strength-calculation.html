@@ -34,22 +34,22 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで｜アイツイン コラム</title>
-  <meta name="description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。溶接サイズ（脚長）とのど厚の決め方、溶接1cmあたりの強さの目安、許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順まで。条件を入れて試せる計算ツールつきです。">
+  <title>すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき｜アイツイン コラム</title>
+  <meta name="description" content="すみ肉溶接の強度計算の方法を、計算式と例題で解説します。のど厚と有効長さの求め方、脚長（溶接サイズ）の決め方、溶接1cmあたりの強さの目安、曲げを受ける溶接の計算まで。条件を入れて試せる計算ツールつきです。">
   <link rel="canonical" href="https://i-twin.co.jp/column/articles/weld-strength-calculation">
 
   <!-- ◆OGP / Twitter Card -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="アイツイン（i-TWIN）">
-  <meta property="og:title" content="溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで">
-  <meta property="og:description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。溶接サイズ（脚長）とのど厚の決め方、溶接1cmあたりの強さの目安、許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順まで。条件を入れて試せる計算ツールつきです。">
+  <meta property="og:title" content="すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき">
+  <meta property="og:description" content="すみ肉溶接の強度計算の方法を、計算式と例題で解説します。のど厚と有効長さの求め方、脚長（溶接サイズ）の決め方、溶接1cmあたりの強さの目安、曲げを受ける溶接の計算まで。条件を入れて試せる計算ツールつきです。">
   <meta property="og:url" content="https://i-twin.co.jp/column/articles/weld-strength-calculation">
   <meta property="og:image" content="https://i-twin.co.jp/img/column-weld-strength.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta property="article:published_time" content="2026-10-14">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで">
-  <meta name="twitter:description" content="溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。溶接サイズ（脚長）とのど厚の決め方、溶接1cmあたりの強さの目安、許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順まで。条件を入れて試せる計算ツールつきです。">
+  <meta name="twitter:title" content="すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき">
+  <meta name="twitter:description" content="すみ肉溶接の強度計算の方法を、計算式と例題で解説します。のど厚と有効長さの求め方、脚長（溶接サイズ）の決め方、溶接1cmあたりの強さの目安、曲げを受ける溶接の計算まで。条件を入れて試せる計算ツールつきです。">
   <meta name="twitter:image" content="https://i-twin.co.jp/img/column-weld-strength.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,11 +67,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで",
-    "description": "溶接の強度計算の方法を、すみ肉溶接の計算例で解説します。溶接サイズ（脚長）とのど厚の決め方、溶接1cmあたりの強さの目安、許容応力の決め方、ずらす力と曲げを受ける溶接の計算手順まで。条件を入れて試せる計算ツールつきです。",
+    "headline": "すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき",
+    "description": "すみ肉溶接の強度計算の方法を、計算式と例題で解説します。のど厚と有効長さの求め方、脚長（溶接サイズ）の決め方、溶接1cmあたりの強さの目安、曲げを受ける溶接の計算まで。条件を入れて試せる計算ツールつきです。",
     "image": "https://i-twin.co.jp/img/column-weld-strength.jpg",
     "datePublished": "2026-10-14",
-    "dateModified": "2026-10-28",
+    "dateModified": "2026-11-27",
     "inLanguage": "ja",
     "author": {
       "@type": "Person",
@@ -104,7 +104,7 @@
       { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://i-twin.co.jp/" },
       { "@type": "ListItem", "position": 2, "name": "コラム", "item": "https://i-twin.co.jp/column/" },
       { "@type": "ListItem", "position": 3, "name": "自動化設備の設計ノート", "item": "https://i-twin.co.jp/column/design/" },
-      { "@type": "ListItem", "position": 4, "name": "溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで", "item": "https://i-twin.co.jp/column/articles/weld-strength-calculation" }
+      { "@type": "ListItem", "position": 4, "name": "すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき", "item": "https://i-twin.co.jp/column/articles/weld-strength-calculation" }
     ]
   }
   </script>
@@ -190,9 +190,9 @@
         <a href="../../index.html">ホーム</a> ／
         <a href="../index.html">コラム</a> ／
         <a href="../design/index.html">自動化設備の設計ノート</a> ／
-        <span>溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで</span>
+        <span>すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき</span>
       </div>
-      <h1>溶接の強度計算の方法と例｜溶接サイズの決め方・1cmあたりの強さから計算ツールまで</h1>
+      <h1>すみ肉溶接の強度計算｜式と例題、脚長の決め方・1cmあたりの強さ・ツールつき</h1>
       <p class="catch">公開日：2026年10月14日</p>
     </div>
   </section>
@@ -369,7 +369,7 @@
         </div>
 
         <!-- ◆3 -->
-        <h2>溶接の強度計算の方法｜基本の式と計算例1</h2>
+        <h2>すみ肉溶接の強度計算式｜基本の式と計算例1</h2>
         <p class="calc">
           のど厚 a ＝ 0.7 × S<br>
           のど断面の面積 A ＝ a × 有効長さ × 本数<br>
