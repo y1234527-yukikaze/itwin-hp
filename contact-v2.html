@@ -497,9 +497,13 @@
       } else if (t === "auto") {
         html += row("仕組みづくりのご相談", "無料") + row("試作・確かめ・手順書づくり", "200,000円〜");
       } else if (t === "design-partner") {
-        html += row("月ごとの稼働枠でのご契約", "資料をお送りします");
+        html += row("基本契約による時間単価でのご依頼", "資料をお送りします");
       } else if (t === "scan") {
         html += row("部品・治具のスキャン", "30,000円〜") + row("設備単体のスキャン", "150,000円〜");
+      }
+      // 2026-11-28：種類が決まっていない入口（ヘッダーの「お問い合わせ」など）でも、主な料金を出す
+      if (!html && (t === "hearing" || t === "issues" || t === "simulator" || t === "other")) {
+        html += row("強度計算（手計算・計算書付き）", "50,000円〜") + row("部品図の作成（10点まで）", "50,000円〜") + row("部品・治具の3Dスキャン", "30,000円〜");
       }
       priceBody.innerHTML = html + '<p class="cf-price-main">ご相談・お見積もりは無料です。</p>';
       if (leadLi) leadLi.hidden = t !== "design";
