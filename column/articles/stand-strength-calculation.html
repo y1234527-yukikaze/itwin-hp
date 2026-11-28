@@ -496,6 +496,48 @@
           </ul>
         </div>
 
+        <!-- ◆4-2 手計算とFEMの使い分け（2026-11-28 追加） -->
+        <h2>手計算とFEMの使い分け｜架台の強度計算で解析が必要になる場面</h2>
+        <p>
+          ここまでの計算は手計算です。梁と柱で組んだ、形の素直な架台なら、手計算で十分に確かめられます。一方で、前の章の「確認していないもの」には、手計算では精度よく求めにくいものも含まれます。そのときは、3Dモデルを細かく分けて、コンピューターで応力を求める方法（FEM解析）を使います。
+        </p>
+        <table>
+          <tr><th>架台の条件</th><th>向いている方法</th></tr>
+          <tr><td>梁と柱で組んだ、形の素直な架台</td><td>手計算</td></tr>
+          <tr><td>止まっている設備をのせる</td><td>手計算</td></tr>
+          <tr><td>穴・切り欠き・補強板が多く、力の流れが読みにくい</td><td>FEM解析</td></tr>
+          <tr><td>ベースプレートや接合部など、力が一か所に集まる部分を見たい</td><td>FEM解析</td></tr>
+          <tr><td>ロボットなど、動く力がかかる設備をのせる</td><td>FEM解析</td></tr>
+          <tr><td>客先への提出用に、応力の分布を図で示したい</td><td>FEM解析</td></tr>
+        </table>
+        <p>
+          どちらの方法でも、最初にすることは同じです。のせる物の重さ、力の向き、固定の条件を整理します。<strong class="mk">まず手計算で部材の当たりをつけ、気になる部分だけをFEMで確かめる</strong>進め方もあります。
+        </p>
+        <p>
+          この記事の計算例と同じ500kgの架台を、FEMで解析した計算書の見本があります。当社の料金は、FEM解析込みで100,000円〜（組み上げた3Dモデルをいただける場合）、150,000円〜（2D図面から）です。
+        </p>
+        <p class="sample-btns" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+          <a class="btn btn--outline" href="../reports/stand-report-sample.html" target="_blank" rel="noopener" onclick="if(window.gtag)gtag('event','report_open',{report:'stand',place:'fem_section'});">FEM解析の計算書の見本</a>
+          <a class="btn btn--outline" href="../../strength-service.html">FEM解析の料金を見る</a>
+        </p>
+
+        <h3>図面がない今の架台に、設備を足したいとき</h3>
+        <p>
+          強度計算には、部材の寸法と組み方が分かる図面が必要です。古い架台で図面が残っていない場合は、まず現物から形を取ります。現物を測るか、<a href="../../scan-service.html">3Dスキャン</a>で形を取り、図面にしてから計算します。組立図はあっても部品ごとの図面がない場合は、<a href="../../drawing-service.html">部品図の作成（図面のバラシ）</a>から始めます。
+        </p>
+        <p>
+          当社では、形を取るところから図面づくり、強度計算まで、続けてお引き受けできます。
+        </p>
+
+        <div class="chapter-sum">
+          <p class="chapter-sum-title">この章のまとめ</p>
+          <ul>
+            <li>形の素直な架台や、止まっている設備なら、手計算で十分に確かめられる</li>
+            <li>穴の多い形、力が集まる部分、動く力、提出用の図が要るときはFEM解析</li>
+            <li>図面がない架台は、現物や3Dスキャンで形を取ってから計算する</li>
+          </ul>
+        </div>
+
         <!-- ◆5 -->
         <h2>角パイプ・アングル・溝形鋼で比べる｜同じ重さでも強さは違う</h2>
         <p>
@@ -1210,6 +1252,7 @@
           <p class="cs-ask-text">初めての条件や、調べる時間がないときは、架台の強度計算から計算書の作成までお引き受けします（オンライン・全国対応）。</p>
           <style>.cs-ask .cs-price{margin:0 0 8px!important;padding:8px 12px;background:#eef1f5;border-radius:4px;font-size:.82rem;line-height:1.5}.cs-ask .cs-price span{display:block}.cs-ask .cs-price small{font-size:.76rem;color:#5a6270}.cs-ask .cs-price b{display:block;text-align:right;color:var(--navy);font-size:1.1rem}.col-side .cs-price-btn{display:block;text-align:center;padding:8px 10px;font-size:.88rem;margin:0 0 8px;white-space:normal}</style>
           <p class="cs-price"><span>手計算の強度計算<small>（計算書付き）</small></span><b>50,000円〜</b></p>
+          <p class="cs-price"><span>FEM解析込み<small>（3Dモデルをいただける場合）</small></span><b>100,000円〜</b></p>
           <a class="btn btn--outline cs-price-btn" href="../../strength-service.html">料金の詳細を見る</a>
           <a class="btn btn--fill cs-cta" href="../../contact-v2.html?topic=design&amp;items=%E3%80%90%E8%A8%88%E7%AE%97%E3%81%AE%E4%BE%9D%E9%A0%BC%E3%80%91%E6%9E%B6%E5%8F%B0%E3%81%AE%E5%BC%B7%E5%BA%A6%E8%A8%88%E7%AE%97">計算を依頼する</a>
         </div>
